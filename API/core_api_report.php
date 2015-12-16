@@ -4223,8 +4223,8 @@ class core_api_report extends DB {
         </head>
         <body>
         <div id="frame_header">
-                <div id="header"></div>
-        </div>
+                <div id="header"><img src="<?=$this->url_rewrite?>/css/img_stat/logo_header.png" width="100%"></div>
+       </div>
         <div id="list_header">
            
         </div>
@@ -4266,8 +4266,8 @@ class core_api_report extends DB {
         </head>
         <body>
         <div id="frame_header">
-                <div id="header"></div>
-        </div>
+                 <div id="header"><img src="<?=$this->url_rewrite?>/css/img_stat/logo_header.png" width="100%"></div>
+       </div>
         <div id="list_header">
            
         </div>
@@ -4305,8 +4305,8 @@ class core_api_report extends DB {
         </head>
         <body>
         <div id="frame_header">
-                <div id="header"></div>
-        </div>
+                <div id="header"><img src="<?=$this->url_rewrite?>/css/img_stat/logo_header.png" width="100%"></div>
+       </div>
         <!-- <div id="list_header"> 
            
         </div>-->
@@ -4352,7 +4352,7 @@ class core_api_report extends DB {
         </head>
         <body>
         <div id="frame_header">
-                <div id="header"></div>
+                <div id="header"><img src="<?=$this->url_rewrite?>/css/img_stat/logo_header.png" width="100%"></div>
         </div>
         <!-- <div id="list_header"> 
            

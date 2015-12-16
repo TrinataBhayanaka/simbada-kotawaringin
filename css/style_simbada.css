@@ -611,7 +611,7 @@ nav ul{
 	list-style:none;
 }
 nav li h3{
-	background-color:#0F3E21;
+	background-color:#001e0b;
 	color:#FFFFFF;
 	padding:0px 20px;
 	margin-bottom:0px;
@@ -622,11 +622,11 @@ nav li h3{
 }
 nav li li{
 
-	background-color:#0A6E39;
-	border-top:1px solid #0D8647;
-	border-bottom:1px solid #0D8647;
-	border-left:2px solid #0D8647;
-	border-right:2px solid #0D8647;
+	background-color:#003815;
+	border-top:1px solid #003313;
+	border-bottom:1px solid #003313;
+	border-left:2px solid #003313;
+	border-right:2px solid #003313;
 	font-size:14px;
 	padding:5px 20px;
 }
@@ -634,7 +634,7 @@ nav li li table{
 	color:#fff;
 }
 nav li li table a{
-	background-color:#0A6E39;
+	background-color:#003815;
 
 }
 nav li a{
@@ -679,7 +679,7 @@ aside{
 }
 footer{
 	margin-top:30px;
-	background-color:#0A6E39;
+	background-color:#003815;
 	height:50px;
 	clear:both;
 }
