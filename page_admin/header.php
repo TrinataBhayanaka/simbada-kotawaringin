@@ -9,7 +9,7 @@
     <script type="text/javascript" src="<?php echo "$url_rewrite/js/tabel.js"?>"></script>
     <script type="text/javascript" src="<?php echo "$url_rewrite/js/whizzywig63.js"?>"></script>
     <script type="text/javascript" src="<?php echo "$url_rewrite/js/ckeditor/ckeditor.js"?>"></script>
-	<link rel="shortcut icon" href="<?php echo "$url_rewrite/"; ?>favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="<?php echo "$url_rewrite/"; ?>faviconsimbada.png" type="image/x-icon" />
     <script type="text/javascript">
     jQuery(function(){
             jQuery('ul.menu').superfish({
