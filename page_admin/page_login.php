@@ -52,7 +52,7 @@ $data_admin = $RETRIEVE_ADMIN->admin_retrieve_app_conf($NAMA_KABUPATEN);
                                                             <b>Halaman Admin</b>
                                                         </td>
                                                         <td>&nbsp;</td>
-                                                        <td><img src="css/logo_aplikasi.jpg" height="75px"/></td>
+                                                        <td><img src="css/logo_aplikasi.png" height="75px"/></td>
                                                 </tr>
                                             
                                         </table>
