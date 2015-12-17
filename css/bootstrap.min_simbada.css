@@ -202,10 +202,14 @@ body {
 }
 
 a {
+    color: #087;
+    text-decoration: none;
+}
+ul.breadcrumb li a{
+
     color: #fff;
     text-decoration: none;
 }
-
 a:hover,a:focus {
     color: #005580;
     text-decoration: underline;
