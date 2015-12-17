@@ -15,6 +15,9 @@ $menuPath = $USERAUTH->FrontEnd_show_menu($SessionUser);
 	
 		<nav>
 			<ul>
+				<?php
+				if(isset($_SESSION['ses_utoken'])){
+				?>
 				<li  align="center">
 					<ul>
 						<a href="<?php echo "$url_rewrite";?>" class="iconHOme">
@@ -22,9 +25,6 @@ $menuPath = $USERAUTH->FrontEnd_show_menu($SessionUser);
 						</a>
 					</ul>
 				</li>
-				<?php
-				if(isset($_SESSION['ses_utoken'])){
-				?>
 				<li  align="center">
 					<ul>
 							<li class="home">
@@ -46,6 +46,18 @@ $menuPath = $USERAUTH->FrontEnd_show_menu($SessionUser);
 					</ul>
 				</li>
 				<?php 
+				}else{
+					?>
+
+				<li  align="center">
+					<ul>
+						<a href="<?php echo "$url_rewrite";?>" class="iconHOme">
+						<li class="icohome" style="border-bottom-color:#fff"><i class="fa fa-home fa-fw fa-3x"></i></li>
+						</a>
+					</ul>
+				</li>
+					<?php
+
 				}
 					$i = 0;
 
