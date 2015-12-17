@@ -3544,10 +3544,11 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
     padding-top: 8px;
     padding-bottom: 8px;
     line-height: 20px;
-    border: 1px solid transparent;
+    border: 1px solid #eee;
     -webkit-border-radius: 4px 4px 0 0;
     -moz-border-radius: 4px 4px 0 0;
     border-radius: 4px 4px 0 0;
+    color:#555;
 }
 
 .nav-tabs>li>a:hover,.nav-tabs>li>a:focus {
