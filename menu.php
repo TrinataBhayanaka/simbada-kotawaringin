@@ -17,7 +17,9 @@ $menuPath = $USERAUTH->FrontEnd_show_menu($SessionUser);
 			<ul>
 				<li  align="center">
 					<ul>
-						<a href="<?php echo "$url_rewrite";?>" class="iconHOme"><li class="home"><i class="fa fa-home fa-fw fa-3x"></i></li></a>
+						<a href="<?php echo "$url_rewrite";?>" class="iconHOme">
+						<li class="icohome"><i class="fa fa-home fa-fw fa-3x"></i></li>
+						</a>
 					</ul>
 				</li>
 				<?php
@@ -35,7 +37,7 @@ $menuPath = $USERAUTH->FrontEnd_show_menu($SessionUser);
 											<?php echo $_SESSION['ses_uname'];?><br/>
 											Welcome Back
 
-											 <a data-toggle="modal" href="#chgpass" class="btn btn-small btn-danger ahover">Ubah Password</a>
+											 <a data-toggle="modal" href="#chgpass" class="btn btn-small btn-primary ahover">Ubah Password</a>
 
 										</td>
 									</tr>

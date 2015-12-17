@@ -72,6 +72,19 @@ header{
 	padding-top:0px;
 	padding-bottom:0px;
 }
+.icohome{
+	padding-top:0px;
+	padding-bottom:0px;
+	background-color: #003c1d;
+}
+li.icohome{
+	padding-top:0px;
+	padding-bottom:0px;
+	background-color: #003c1d;
+	border-right-color: #003C1E;
+	border-left-color: #003C1E;
+	border-top-color: #003C1E;
+}
 #breadcrumb{
 	/*margin-top:5px;
 	padding-top:7px;
@@ -611,7 +624,7 @@ nav ul{
 	list-style:none;
 }
 nav li h3{
-	background-color:#001e0b;
+	background-color:#003C1D;
 	color:#FFFFFF;
 	padding:0px 20px;
 	margin-bottom:0px;
@@ -622,19 +635,20 @@ nav li h3{
 }
 nav li li{
 
-	background-color:#003815;
-	border-top:1px solid #003313;
-	border-bottom:1px solid #003313;
-	border-left:2px solid #003313;
-	border-right:2px solid #003313;
+	background-color:#0A6838;
+	border-top:1px solid #006e36;
+	border-bottom:1px solid #006e36;
+	border-left:2px solid #006e36;
+	border-right:2px solid #006e36;
 	font-size:14px;
 	padding:5px 20px;
 }
+
 nav li li table{
 	color:#fff;
 }
 nav li li table a{
-	background-color:#003815;
+	background-color:#0A6838;
 
 }
 nav li a{
@@ -679,7 +693,7 @@ aside{
 }
 footer{
 	margin-top:30px;
-	background-color:#003815;
+	background-color:#0A6838;
 	height:50px;
 	clear:both;
 }
