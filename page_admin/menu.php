@@ -16,7 +16,7 @@ $data_admin = $RETRIEVE_ADMIN->admin_retrieve_app_conf($NAMA_KABUPATEN);
                                                         <div class="titlepage"><?php echo "$data_admin->app_admin_title"?></div>
                                                         <b>Halaman Admin</b>
                                                     </td>
-                                                    <td><img src="css/brr.gif" /></td>
+                                                    <td>&nbsp;</td>
                                                     <td><img src="css/logo_aplikasi.png" height="75px"/></td>
                                             </tr>
                                         </tbody>
