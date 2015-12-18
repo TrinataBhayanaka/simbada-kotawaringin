@@ -51,7 +51,7 @@ $data_admin = $RETRIEVE_ADMIN->admin_retrieve_app_conf($NAMA_KABUPATEN);
                                                             <div class="titlepage">Sistem Informasi Manajemen Barang Daerah</div>
                                                             <b>Halaman Admin</b>
                                                         </td>
-                                                        <td><img src="css/brr.gif" /></td>
+                                                        <td>&nsbp;</td>
                                                         <td><img src="css/logo_aplikasi.jpg" height="75px"/></td>
                                                 </tr>
                                             
