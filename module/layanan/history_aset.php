@@ -84,7 +84,8 @@ $LAYANAN = new RETRIEVE_LAYANAN;
 				<thead>
 					<tr>
 						<th>No</th>
-						<th>Tanggal</th>
+						<th>Tanggal Kejadian</th>
+						<th>Tanggal Pencatatan(Pelaporan)</th>
 						<th>Keterangan</th>
 						<th>SKPD</th>
 						<th>Status</th>
@@ -101,7 +102,9 @@ $LAYANAN = new RETRIEVE_LAYANAN;
 					<tr class="gradeA">
 						<td><?=$i?></td>
 						<td><?=$value['changeDate']?></td>
+						<td><?=$value['TglPerubahan']?></td>
 						<td><?=$value['Nm_Riwayat']?></td>
+						
 						<td class="center"><?=$value['NamaSatker'][0]['NamaSatker']?></td>
 						<td class="center">
 						<?php
