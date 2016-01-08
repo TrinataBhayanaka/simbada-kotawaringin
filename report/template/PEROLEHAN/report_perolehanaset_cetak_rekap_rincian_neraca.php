@@ -7,17 +7,13 @@
 #This code provided by:
 #Andreas Hadiyono (andre.hadiyono@gmail.com)
 #Gunadarma University
-
 ob_start();
 require_once('../../../config/config.php');
-
 define("_JPGRAPH_PATH", "$path/function/mpdf/jpgraph/src/"); // must define this before including mpdf.php file
 $JpgUseSVGFormat = true;
 define('_MPDF_URI',"$url_rewrite/function/mpdf/"); 	// must be  a relative or absolute URI - not a file system path
-
 include "../../report_engine.php";
 require ('../../../function/mpdf/mpdf.php');
-
 $modul = $_GET['menuID'];
 $mode = $_GET['mode'];
 $tab = $_GET['tab'];
@@ -38,8 +34,6 @@ $tipe=$_GET['tipe_file'];
 $ex = explode('-',$tglakhirperolehan);
 $tahun_neraca = $ex[0];
 $REPORT=new report_engine();
-
-
 $data=array(
     "modul"=>$modul,
     "mode"=>$mode,
@@ -48,24 +42,19 @@ $data=array(
     "skpd_id"=>$skpd_id,
 	"tab"=>$tab
 );
-
 $REPORT->set_data($data);
 $nama_kab = $NAMA_KABUPATEN;
 $nama_prov = $NAMA_PROVINSI;
 $gambar = $FILE_GAMBAR_KABUPATEN;
-
 if($tipe == 1){
 	$gmbr = "<img style=\"width: 80px; height: 85px;\" src=\"$gambar\">";
 }else{
 	$gmbr ="";
 }
-
-
 $hit = 2;
 $flag = '';
 $TypeRprtr = 'intra';
 $Info = '';
-
 $exeTempTable = $REPORT->TempTable($hit,$flag,$TypeRprtr,$Info,$tglawalperolehan,$tglakhirperolehan,
 $skpd_id);
 // exit;
@@ -78,8 +67,6 @@ $NoBidang = $detailSatker[0];
 $NoUnitOrganisasi = $detailSatker[1];
 $NoSubUnitOrganisasi = $detailSatker[2];
 $NoUPB = $detailSatker[3];
-
-
 if($NoBidang !=""){
 	$paramKodeLokasi = $NoBidang;
 }
@@ -99,7 +86,6 @@ $UPB = $detailSatker[4][3];
    
 $ex = explode('.',$skpd_id);
 $hit = count($ex);
-
 if($hit == 1){
 	$header = "<tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
@@ -156,8 +142,6 @@ if($hit == 1){
           <td style=\"width: 873px; font-weight: bold;\">$UPB</td>
         </tr>";
 }
-
-
 // echo $head;
 // exit;
 //start
@@ -176,7 +160,6 @@ if($tipeAset == 'all'){
 }elseif($tipeAset == 'kdp'){
 	$data = array('kdp_ori');
 }
-
 $hit_loop = count($data);
 $i = 0;
 $head ="<head>
@@ -237,7 +220,6 @@ $head.=" <table style=\"width: 100%; text-align: left; margin-left: auto; margin
 		   <td style=\" text-align: center; font-weight: bold; width: \">11</td>
 	</tr>";	
 foreach ($data as $gol) {
-
 // $param_satker = "50.01.08.01";
 $param_satker = $skpd_id;
 $splitKodeSatker = explode ('.',$param_satker);
@@ -248,11 +230,10 @@ $splitKodeSatker = explode ('.',$param_satker);
 	}
 // $param_tgl = "2015-01-01";
 $param_tgl = $tglakhirperolehan ;
-
 	if($gol == 'mesin_ori'){
 		$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
-						( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' or kodeKa=1) or 
-						(TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and NilaiPerolehan >=300000) or kodeKa=1)
+						( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
+						(TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=300000 or kodeKa=1)))
 						and $paramSatker";
 	 
 		$sql = "select SUBSTRING_INDEX(kodeKelompok,'.',1) as Golongan,
@@ -264,8 +245,8 @@ $param_tgl = $tglakhirperolehan ;
 				group by golongan";
 	}elseif($gol == 'bangunan_ori'){
 		$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
-						( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' or kodeKa=1) or 
-						(TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and NilaiPerolehan >=10000000 ) or kodeKa=1)
+						( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
+						(TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=10000000  or kodeKa=1)))
 						and $paramSatker";
 		 
 		$sql = "select SUBSTRING_INDEX(kodeKelompok,'.',1) as Golongan,
@@ -279,7 +260,8 @@ $param_tgl = $tglakhirperolehan ;
 		$param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
-					 and kodeLokasi like '12%'
+					 and kodeLokasi like '12%' 
+					 and kondisi != '3'					 
 					 and $paramSatker";
 		 
 		 if($gol == 'jaringan_ori'){
@@ -298,14 +280,12 @@ $param_tgl = $tglakhirperolehan ;
 					where $param_where
 					group by golongan";
 		 }
-
 	}
 // pr($sql);
 $resultparentGol = mysql_query($sql) or die(mysql_error());
 $data=array();
 //golongan
      while ($data_gol = mysql_fetch_array($resultparentGol)) {
-
 		$kode_golongan = $data_gol[Golongan];
 		$ps = $param_satker;
 		$pt =$param_tgl;
@@ -451,8 +431,8 @@ if(count($splitKodeSatker) == 4){
 $param_tgl = $pt;
 if($gol == 'mesin_ori'){
 	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
-					( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' or kodeKa=1) or 
-					(TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and NilaiPerolehan >=300000) or kodeKa=1)
+					( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
+					(TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=300000 or kodeKa=1)))
 					and $paramSatker";
  
 	$sql = "select  SUBSTRING_INDEX(kodeKelompok,'.',2) as Bidang,
@@ -467,8 +447,8 @@ if($gol == 'mesin_ori'){
 		   group by bidang";
 }elseif($gol == 'bangunan_ori'){
 	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
-					( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' or kodeKa=1) or 
-					(TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and NilaiPerolehan >=10000000 ) or kodeKa=1)
+					( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
+					(TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=10000000  or kodeKa=1)))
 					and $paramSatker";
 	 
 	$sql = "select  SUBSTRING_INDEX(kodeKelompok,'.',2) as Bidang,
@@ -486,6 +466,7 @@ if($gol == 'mesin_ori'){
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%'
+					 and kondisi != '3'
 					 and $paramSatker";
 	 
 	 if($gol == 'jaringan_ori'){
@@ -510,11 +491,10 @@ if($gol == 'mesin_ori'){
 				 $param_where    
 			   group by bidang";
 	 }
-
 }
-// echo "<pre>";
-// print_r($sql); 
-// echo "</pre>";
+ /*echo "<pre>";
+ print_r($sql); 
+ echo "</pre>";*/
 $data=array();
 $a=0;
 $resultparentBidang = mysql_query($sql) or die(mysql_error());
@@ -542,8 +522,8 @@ if(count($splitKodeSatker) == 4){
 $param_tgl = $pt;
 if($gol == 'mesin_ori'){
 	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
-					( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' or kodeKa=1) or 
-					(TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and NilaiPerolehan >=300000) or kodeKa=1)
+					( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
+					(TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=300000 or kodeKa=1)))
 					and $paramSatker";
  
 	$sql = "select  SUBSTRING_INDEX(kodeKelompok,'.',3) as kelompok,
@@ -558,8 +538,8 @@ if($gol == 'mesin_ori'){
 			 group by kelompok";
 }elseif($gol == 'bangunan_ori'){
 	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
-				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' or kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and NilaiPerolehan >=10000000 ) or kodeKa=1)
+				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
+				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=10000000  or kodeKa=1)))
 				 and $paramSatker";
 	 
 	$sql = "select  SUBSTRING_INDEX(kodeKelompok,'.',3) as kelompok,
@@ -573,11 +553,11 @@ if($gol == 'mesin_ori'){
 			   $param_where    
 			 group by kelompok";
 }else{
-
 	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%'
+					 and kondisi != '3'
 					 and $paramSatker";
 	 
 	 if($gol == 'jaringan_ori'){
@@ -602,7 +582,6 @@ if($gol == 'mesin_ori'){
 				   $param_where    
 				 group by kelompok";
 	 }
-
 }
 // echo "<pre>";
 // print_r($sql); 
@@ -634,11 +613,10 @@ if(count($splitKodeSatker) == 4){
 	$paramSatker = "kodeSatker like '$param_satker%'";
 }
 $param_tgl = $pt;
-
 if($gol == 'mesin_ori'){
 	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
-					( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' or kodeKa=1) or 
-					  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and NilaiPerolehan >=300000) or kodeKa=1)
+					( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
+					  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=300000 or kodeKa=1)))
 					 and $paramSatker";
  
 	$sql = "select  SUBSTRING_INDEX(kodeKelompok,'.',4) as sub,
@@ -653,8 +631,8 @@ if($gol == 'mesin_ori'){
 			group by sub";
 }elseif($gol == 'bangunan_ori'){
 	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
-				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' or kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and NilaiPerolehan >=10000000 ) or kodeKa=1)
+				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
+				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=10000000  or kodeKa=1)))
 				 and $paramSatker";
 	 
 	$sql = "select  SUBSTRING_INDEX(kodeKelompok,'.',4) as sub,
@@ -668,11 +646,11 @@ if($gol == 'mesin_ori'){
 			 $param_where     
 			group by sub";
 }else{
-
 	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
 				 and TglPerolehan <= '$param_tgl' 
 				 and TglPembukuan <='$param_tgl' 
 				 and kodeLokasi like '12%'
+				 and kondisi != '3'
 				 and $paramSatker";
 				 
 	 if($gol == 'jaringan_ori'){
@@ -697,7 +675,6 @@ if($gol == 'mesin_ori'){
 				 $param_where     
 				group by sub";
 	 }
-
 }
 // echo "<pre>";
 // print_r($sql); 
@@ -706,7 +683,6 @@ $data=array();
 $c=0;
 $resultparentSub = mysql_query($sql) or die(mysql_error());
 	 while ($data_sub = mysql_fetch_array($resultparentSub)) {
-
 		$kode_sub = $data_sub[sub];
 		$data[$c]=$data_sub;
 		$paramLevelSub = $paramLevelKelompok;
@@ -729,8 +705,8 @@ if(count($splitKodeSatker) == 4){
 $param_tgl = $pt;   
 if($gol == 'mesin_ori'){
 	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
-				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' or kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and NilaiPerolehan >=300000) or kodeKa=1)
+				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
+				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=300000 or kodeKa=1)))
 				 and $paramSatker";
  
       $sql = "select  SUBSTRING_INDEX(kodeKelompok,'.',5) as subsub,
@@ -745,8 +721,8 @@ if($gol == 'mesin_ori'){
                group by subsub";
 }elseif($gol == 'bangunan_ori'){
 	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
-				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' or kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and NilaiPerolehan >=10000000 ) or kodeKa=1)
+				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
+				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=10000000  or kodeKa=1)))
 				 and $paramSatker";
 	 
 	$sql = "select  SUBSTRING_INDEX(kodeKelompok,'.',5) as subsub,
@@ -760,11 +736,11 @@ if($gol == 'mesin_ori'){
                  $param_where    
                group by subsub";
 }else{
-
 	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%'
+					 and kondisi != '3'
 					 and $paramSatker";
 	 
 	 if($gol == 'jaringan_ori'){
@@ -789,7 +765,6 @@ if($gol == 'mesin_ori'){
                  $param_where    
                group by subsub";
 	 }
-
 }
 // echo "<pre>";
 // print_r($sql); 
@@ -798,22 +773,17 @@ if($gol == 'mesin_ori'){
      $resultparentSubSub = mysql_query($sql) or die(mysql_error());
      $data = array();
      while ($data_subsub = mysql_fetch_array($resultparentSubSub)) {
-
           $data[] = $data_subsub;
      }
      return $data;
 }
-
 // pr($resultParamGol);
 // exit;	
-
 //untuk web service
 // $serviceJson=json_encode($html);
-
 //untuk print output html
 // echo $html; 
 // exit;
-
 if($tipe=="3"){
 	echo $serviceJson;
 	exit;
@@ -831,7 +801,6 @@ $mpdf->hyphenate = true;
 //print output pdf
 $mpdf->WriteHTML($html);
 $count = count($html);
-
 	for ($i = 0; $i < $count; $i++) {
 		 if($i==0)
 			  $mpdf->WriteHTML($html[$i]);
@@ -842,7 +811,6 @@ $count = count($html);
 			   
 		 }
 	}
-
 $waktu=date("d-m-y_h-i-s");
 $namafile="$path/report/output/Rekapitulasi Rincian Barang Ke Neraca_$waktu.pdf";
 $mpdf->Output("$namafile",'F');
@@ -857,8 +825,5 @@ else
 	header('Content-type: application/ms-excel');
 	header('Content-Disposition: attachment; filename='.$filename);
 	echo $html; 
-
 }
-
-
 ?>
