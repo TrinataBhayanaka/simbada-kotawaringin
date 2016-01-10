@@ -615,7 +615,21 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
                                                   $QueryAset	  = "UPDATE aset  NilaiBuku = '$NilaiPerolehan',
                                                                                             WHERE Aset_ID = '$Aset_ID'";
                                                   $ExeQueryAset = $DBVAR->query($QueryAset);
-                                                  //untuk log txt
+                                                  
+                                             if ($Data['TipeAset'] == 'B') {
+                                                                 $tableKib = 'mesin';
+                                                                 $tableLog = 'log_mesin';
+                                                            } elseif ($Data['TipeAset'] == 'C') {
+                                                                 $tableKib = 'bangunan';
+                                                                 $tableLog = 'log_bangunan';
+                                                            } elseif ($Data['TipeAset'] == 'D') {
+                                                                 $tableKib = 'jaringan';
+                                                                 $tableLog = 'log_jaringan';
+                                                            }
+                                                       $QueryAset	  = "UPDATE $tableKib  NilaiBuku = '$NilaiPerolehan',
+                                                                                            WHERE Aset_ID = '$Aset_ID'";
+                                                  $ExeQueryAset = $DBVAR->query($QueryAset);
+          //untuk log txt
                                                   echo "--> $Aset_ID \t $kodeKelompok \t $NilaiPerolehan \t NULL \t NULL \t NULL \t $NilaiPerolehan  \t NULL \n";
                               }
 	}	
