@@ -610,6 +610,14 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 					}
 					
 		}
+                              else{
+                    //update AkumulasiPenyusutan,penyusutan_per_tahun,MasaManfaat
+                                                  $QueryAset	  = "UPDATE aset  NilaiBuku = '$NilaiPerolehan',
+                                                                                            WHERE Aset_ID = '$Aset_ID'";
+                                                  $ExeQueryAset = $DBVAR->query($QueryAset);
+                                                  //untuk log txt
+                                                  echo "--> $Aset_ID \t $kodeKelompok \t $NilaiPerolehan \t NULL \t NULL \t NULL \t $NilaiPerolehan  \t NULL \n";
+                              }
 	}	
 	//update table status untuk penyusutan
      $query="update penyusutan_tahun  set StatusRunning=2 where id=$id";
