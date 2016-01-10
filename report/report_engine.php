@@ -37493,7 +37493,7 @@ return $hasil_html;
 						WHERE kodeSatker = '$satker_id'  
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
-						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'";
+						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' and kondisi !='3'";
 		}elseif($gol == '02'){
 			if($thnFix < $thnDefault){
 				$query = "SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml,
@@ -37716,7 +37716,7 @@ return $hasil_html;
 						WHERE $kodeKelompok $paramSatker  
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
-						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'
+						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' and kondisi !='3'
 						";
 		}elseif($gol == '02'){
 			if($thnFix < $thnDefault){
