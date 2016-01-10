@@ -612,7 +612,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 		}
                               else{
                     //update AkumulasiPenyusutan,penyusutan_per_tahun,MasaManfaat
-                                                  $QueryAset	  = "UPDATE aset  NilaiBuku = '$NilaiPerolehan'
+                                                  $QueryAset	  = "UPDATE aset set  NilaiBuku = '$NilaiPerolehan'
                                                                                             WHERE Aset_ID = '$Aset_ID'";
                                                   $ExeQueryAset = $DBVAR->query($QueryAset);
                                                   
@@ -626,7 +626,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
                                                                  $tableKib = 'jaringan';
                                                                  $tableLog = 'log_jaringan';
                                                             }
-                                                       $QueryAset	  = "UPDATE $tableKib  NilaiBuku = '$NilaiPerolehan'
+                                                       $QueryAset	  = "UPDATE $tableKib  set NilaiBuku = '$NilaiPerolehan'
                                                                                             WHERE Aset_ID = '$Aset_ID'";
                                                   $ExeQueryAset = $DBVAR->query($QueryAset);
           //untuk log txt
