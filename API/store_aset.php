@@ -2323,7 +2323,10 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
         $tblAset['Alamat'] = $data['Alamat'];
         $tblAset['UserNm'] = $data['UserNm'];
         $tblAset['TipeAset'] = $data['TipeAset'];
-        if($data['TipeAset'] == 'G')$tblAset['kondisi'] = 3;
+        if($data['TipeAset'] == 'G'){
+            $tblAset['kondisi'] = 3;
+            $tblAset['Status_Validasi_Barang'] = 1;
+        }
         
         // if(intval($tblAset['Tahun']) < 2008){
         //     $tblAset['kodeKA'] = 1;
