@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -610,6 +610,28 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 					}
 					
 		}
+                              else{
+                    //update AkumulasiPenyusutan,penyusutan_per_tahun,MasaManfaat
+                                                  $QueryAset	  = "UPDATE aset set  NilaiBuku = '$NilaiPerolehan'
+                                                                                            WHERE Aset_ID = '$Aset_ID'";
+                                                  $ExeQueryAset = $DBVAR->query($QueryAset);
+                                                  
+                                             if ($Data['TipeAset'] == 'B') {
+                                                                 $tableKib = 'mesin';
+                                                                 $tableLog = 'log_mesin';
+                                                            } elseif ($Data['TipeAset'] == 'C') {
+                                                                 $tableKib = 'bangunan';
+                                                                 $tableLog = 'log_bangunan';
+                                                            } elseif ($Data['TipeAset'] == 'D') {
+                                                                 $tableKib = 'jaringan';
+                                                                 $tableLog = 'log_jaringan';
+                                                            }
+                                                       $QueryAset	  = "UPDATE $tableKib  set NilaiBuku = '$NilaiPerolehan'
+                                                                                            WHERE Aset_ID = '$Aset_ID'";
+                                                  $ExeQueryAset = $DBVAR->query($QueryAset);
+          //untuk log txt
+                                                  echo "--> $Aset_ID \t $kodeKelompok \t $NilaiPerolehan \t NULL \t NULL \t NULL \t $NilaiPerolehan  \t NULL \n";
+                              }
 	}	
 	//update table status untuk penyusutan
      $query="update penyusutan_tahun  set StatusRunning=2 where id=$id";
