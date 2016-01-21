@@ -55,8 +55,9 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
 						<option value="mesin">Mesin</option>
 						<option value="bangunan">Bangunan</option>
 						<option value="jaringan">Jaringan</option>
-						<option value="asetlain">Aset Lain</option>
+						<option value="asetlain">Aset Tetap Lainnya</option>
 						<option value="kdp">KDP</option>
+						<option value="aset">Aset Lain</option>
 					</select>
 				</li>
 				<li>&nbsp;</li>

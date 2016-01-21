@@ -2705,8 +2705,11 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                         $result=  $this->query($delsql) or die($this->error());
                     }
                 }
-                echo "<meta http-equiv=\"Refresh\" content=\"0; url={$url_rewrite}/module/koreksi/koreksi_data_aset.php\">";
-                exit;
+                $tabel = "aset";
+                $logtabel = "log_aset";
+                $idkey = "Aset_ID";
+                // echo "<meta http-equiv=\"Refresh\" content=\"0; url={$url_rewrite}/module/koreksi/koreksi_data_aset.php\">";
+                // exit;
             } elseif ($data['TipeAset']=="H") {
                 if(isset($data['kodeKelompok'])){
                     $newkelompok = explode(".", $data['kodeKelompok']);
@@ -2727,14 +2730,14 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                 $tblKib['kodeKelompok'] = $data['kodeKelompok'];
                 $tblKib['StatusValidasi'] = 1;
                 $tblKib['Status_Validasi_Barang'] = 1;
-                $tblKib['StatusTampil'] = 1;               
+                if($tabel != 'aset') $tblKib['StatusTampil'] = 1;               
             }
             if(isset($data['kodeSatker'])) $tblKib['kodeSatker'] = $data['kodeSatker'];
             if(isset($data['kodepemilik'])) $tblKib['kodeLokasi'] = $tblAset['kodeLokasi'];
             if(isset($tblAset['TglPerolehan'])) $tblKib['TglPerolehan'] = $tblAset['TglPerolehan'];
             if(isset($tblAset['TglPembukuan'])) $tblKib['TglPembukuan'] = $tblAset['TglPembukuan'];
             if(isset($data['Satuan'])) $tblKib['NilaiPerolehan'] = $data['Satuan'];
-            $tblKib['StatusTampil'] = 1;
+            if($tabel != 'aset'){$tblKib['StatusTampil'] = 1;}
             if(isset($data['kondisi'])) $tblKib['kondisi'] = $data['kondisi'];
             if(isset($data['asalusul'])) $tblKib['AsalUsul'] = $data['asalusul'];
             if(isset($data['Info'])) $tblKib['Info'] = $data['Info'];
@@ -2812,6 +2815,15 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
               while ($dataAset = mysql_fetch_assoc($sqlquery)){
                       $kib = $dataAset;
                   }
+
+                  if($tabel == 'aset'){
+                    unset($kib['NilaiBuku']);
+                    unset($kib['UmurEkonomis']);
+                    unset($kib['TahunPenyusutan']);
+                    unset($kib['AkumulasiPenyusutan']);
+                    unset($kib['PenyusutanPertaun']);
+                  }
+
               $kib['tglPerubahan'] = $data['tglPerubahan'];          
               $kib['changeDate'] = date("Y-m-d");
               $kib['action'] = 'koreksi';
@@ -2841,7 +2853,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                     $dataImp = implode(',', $tmpValue);
 
                     $sql = "INSERT INTO log_{$tabel} ({$fileldImp}) VALUES ({$dataImp})";
-                    // pr($sql);exit;
+                    // pr($kib);exit;
                     logFile($sql);
                     if ($debug){
                         pr($sql); exit;
