@@ -6045,30 +6045,24 @@ class core_api_report extends DB {
 		*/
 		$paramLogTransferKapitalisasiKurang =  "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
 						   AND l.Kd_Riwayat = '28' and l.$paramSatker 
-						   and l.Aset_ID_Penambahan = '0' and mt.Status = 1 order by l.Aset_ID ASC";
+						   and l.Aset_ID_Penambahan = '0' order by l.Aset_ID ASC";
 						   
 		$log_tanah_tr_kp="select l.* from log_tanah as l 
-					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID_Tujuan
 					where $paramLogTransferKapitalisasiKurang ";
 		
 		$log_mesin_tr_kp="select l.* from log_mesin as l 
-					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID_Tujuan
 					where $paramLogTransferKapitalisasiKurang ";
 		
 		$log_bangunan_tr_kp="select l.*  from log_bangunan as l 
-					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID_Tujuan
 					where $paramLogTransferKapitalisasiKurang";
 		
 		$log_jaringan_tr_kp="select l.* from log_jaringan as l 
-					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID_Tujuan
 					where $paramLogTransferKapitalisasiKurang";	
 			
 		$log_asetlain_tr_kp="select l.* from log_asetlain as l 
-					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID_Tujuan
 					where $paramLogTransferKapitalisasiKurang";
 		
 		$log_kdp_tr_kp="select l.* from log_kdp as l 
-					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID_Tujuan
 					where $paramLogTransferKapitalisasiKurang";			
 		//======================================================================================				   
 		/*
@@ -6077,31 +6071,25 @@ class core_api_report extends DB {
 		*/
 		$paramLogTransferKapitalisasiTambah =  "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
 						   AND l.Kd_Riwayat = '28' and l.$paramSatker 
-						   and l.Aset_ID_Penambahan != '0' and mt.Status = 1 order by l.Aset_ID ASC";
+						   and l.Aset_ID_Penambahan != '0' order by l.Aset_ID ASC";
 		
 		
 		$log_tanah_rc_kp="select l.* from log_tanah as l 
-					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID
 					where $paramLogTransferKapitalisasiTambah ";
 		
 		$log_mesin_rc_kp="select l.* from log_mesin as l 
-					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID
 					where $paramLogTransferKapitalisasiTambah ";
 		
 		$log_bangunan_rc_kp="select l.*  from log_bangunan as l 
-					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID
 					where $paramLogTransferKapitalisasiTambah";
 		
 		$log_jaringan_rc_kp="select l.* from log_jaringan as l 
-					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID
 					where $paramLogTransferKapitalisasiTambah";	
 			
 		$log_asetlain_rc_kp="select l.* from log_asetlain as l 
-					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID
 					where $paramLogTransferKapitalisasiTambah";
 		
 		$log_kdp_rc_kp="select l.* from log_kdp as l 
-					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID
 					where $paramLogTransferKapitalisasiTambah";	
 		
 		
