@@ -5936,7 +5936,7 @@ class core_api_report extends DB {
 		//parameter dengan SatkerAwal(view mutasi) untuk barang berkurang
 		// l.TglPembukuan >='$tglawalperolehan' AND l.TglPembukuan <='$tglakhirperolehan' AND
 		$paramLog_mts_tr = "l.TglPerubahan >'$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
-						   AND l.Kd_Riwayat in (3,28) and l.Kd_Riwayat != 77 and mt.$paramSatker_mts_tr ";
+						   AND l.Kd_Riwayat in (3) and l.Kd_Riwayat != 77 and mt.$paramSatker_mts_tr ";
 		
 		/*
 		Kode Riwayat
@@ -5946,7 +5946,7 @@ class core_api_report extends DB {
 		//parameter dengan SatkerTujuan(view mutasi) untuk barang bertambah
 		//l.TglPembukuan >='$tglawalperolehan' AND l.TglPembukuan <='$tglakhirperolehan'  AND 
 		$paramLog_mts_rc =  "l.TglPerubahan >'$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
-						   AND l.Kd_Riwayat in (3,28) and l.Kd_Riwayat != 77 and mt.$paramSatker_mts_rc";
+						   AND l.Kd_Riwayat in (3) and l.Kd_Riwayat != 77 and mt.$paramSatker_mts_rc";
 		
 		//begin
 		/*
@@ -6038,9 +6038,80 @@ class core_api_report extends DB {
 					inner join view_mutasi_kdp as mt on l.Aset_ID = mt.Aset_ID 
 					where $paramLog_mts_rc group by l.Aset_ID order by l.Aset_ID ASC";	
 		
+		//transfer kapitalisasi
+		/*
+		Kode Riwayat
+		28 = Transfer Kapitalisasi (-) jika Aset_ID_Penambahan 0
+		*/
+		$paramLogTransferKapitalisasiKurang =  "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
+						   AND l.Kd_Riwayat = '28' and l.$paramSatker 
+						   and l.Aset_ID_Penambahan = '0' and mt.Status = 1 order by l.Aset_ID ASC";
+						   
+		$log_tanah_tr_kp="select l.* from log_tanah as l 
+					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID_Tujuan
+					where $paramLogTransferKapitalisasiKurang ";
+		
+		$log_mesin_tr_kp="select l.* from log_mesin as l 
+					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID_Tujuan
+					where $paramLogTransferKapitalisasiKurang ";
+		
+		$log_bangunan_tr_kp="select l.*  from log_bangunan as l 
+					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID_Tujuan
+					where $paramLogTransferKapitalisasiKurang";
+		
+		$log_jaringan_tr_kp="select l.* from log_jaringan as l 
+					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID_Tujuan
+					where $paramLogTransferKapitalisasiKurang";	
+			
+		$log_asetlain_tr_kp="select l.* from log_asetlain as l 
+					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID_Tujuan
+					where $paramLogTransferKapitalisasiKurang";
+		
+		$log_kdp_tr_kp="select l.* from log_kdp as l 
+					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID_Tujuan
+					where $paramLogTransferKapitalisasiKurang";			
+		//======================================================================================				   
+		/*
+		Kode Riwayat
+		28 = Transfer Kapitalisasi (+) jika Aset_ID_Penambahan !=0
+		*/
+		$paramLogTransferKapitalisasiTambah =  "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
+						   AND l.Kd_Riwayat = '28' and l.$paramSatker 
+						   and l.Aset_ID_Penambahan != '0' and mt.Status = 1 order by l.Aset_ID ASC";
+		
+		
+		$log_tanah_rc_kp="select l.* from log_tanah as l 
+					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID
+					where $paramLogTransferKapitalisasiTambah ";
+		
+		$log_mesin_rc_kp="select l.* from log_mesin as l 
+					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID
+					where $paramLogTransferKapitalisasiTambah ";
+		
+		$log_bangunan_rc_kp="select l.*  from log_bangunan as l 
+					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID
+					where $paramLogTransferKapitalisasiTambah";
+		
+		$log_jaringan_rc_kp="select l.* from log_jaringan as l 
+					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID
+					where $paramLogTransferKapitalisasiTambah";	
+			
+		$log_asetlain_rc_kp="select l.* from log_asetlain as l 
+					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID
+					where $paramLogTransferKapitalisasiTambah";
+		
+		$log_kdp_rc_kp="select l.* from log_kdp as l 
+					inner join mutasiaset as mt on l.Aset_ID = mt.Aset_ID
+					where $paramLogTransferKapitalisasiTambah";	
+		
+		
+		
 		$queryALL = array($log_tanah,$log_mesin,$log_bangunan,$log_jaringan,$log_asetlain,$log_kdp,
 						  $log_tanah_tr,$log_mesin_tr,$log_bangunan_tr,$log_jaringan_tr,$log_asetlain_tr,$log_kdp_tr,
-						  $log_tanah_rc,$log_mesin_rc,$log_bangunan_rc,$log_jaringan_rc,$log_asetlain_rc,$log_kdp_rc);
+						  $log_tanah_rc,$log_mesin_rc,$log_bangunan_rc,$log_jaringan_rc,$log_asetlain_rc,$log_kdp_rc,
+						  $log_tanah_tr_kp,$log_mesin_tr_kp,$log_bangunan_tr_kp,$log_jaringan_tr_kp,$log_asetlain_tr_kp,$log_asetlain_tr_kp,$log_kdp_tr_kp,
+						  $log_tanah_rc_kp,$log_mesin_rc_kp,$log_bangunan_rc_kp,$log_jaringan_rc_kp,$log_asetlain_rc_kp,$log_kdp_rc_kp
+						  );
 		
 		// $queryALL = array($log_tanah_tr,$log_mesin_tr,$log_bangunan_tr,$log_jaringan_tr,$log_asetlain_tr,$log_kdp_tr);
 		// $queryALL = array($log_tanah_rc,$log_mesin_rc,$log_bangunan_rc,$log_jaringan_rc,$log_asetlain_rc,$log_kdp_rc);
