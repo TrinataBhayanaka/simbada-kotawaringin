@@ -57,7 +57,7 @@ class report_engine_daftar extends report_engine {
                <td style=\"width: 10%;\"><img style=\"width: 80px;\" alt=\"\" src=\"$gambar\"></td>
                <td colspan=\"2\" style=\";width: 70%; text-align: center;\">
                     <h3>LAMPIRAN {$TitleSk}</h3>
-                    <h3>PEMERINTAH KOTA PEKALONGAN</h3>
+                    <h3>PEMERINTAH KABUPATEN KOTAWARINGIN TIMUR</h3>
                </td>
           </tr>
           <tr>
