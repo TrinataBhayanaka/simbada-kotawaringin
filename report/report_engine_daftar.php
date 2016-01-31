@@ -193,7 +193,7 @@ $head = "
                     $footer="<br/><br/><table>
                                         <tr>
                                         <td style='width:70%;'></td>
-                                        <td style='text-align:center'>Kota Pekalongan, $tglcetak</td>
+                                        <td style='text-align:center'>Sampit, $tglcetak</td>
                                         </tr>
                                         
                                         <tr>
@@ -246,12 +246,12 @@ $head = "
                                              </tr>
                                              <tr>
                                                        <td colspan='2' style=\"width: 10%;text-align:left\">Kab/Kota</td>
-                                                            <td style=\"width: 90%;text-align:left\">: Pekalongan</td>
+                                                            <td style=\"width: 90%;text-align:left\">: Kotawaringin Timur</td>
 
                                              </tr>
                                               <tr>
                                                        <td colspan='2' style=\"width: 10%;text-align:left\">Provinsi</td>
-                                                            <td style=\"width: 90%;text-align:left\">: Jawa Tengah</td>
+                                                            <td style=\"width: 90%;text-align:left\">: Kalimantan Tengah</td>
 
                                              </tr>
                                         </table>";
