@@ -1705,6 +1705,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
 
             if(substr($tblKib['kodeKelompok'], 0, 5) == "07.24")
             {
+            	$tblKib['TglPembukuan'] = $data['TglPerolehan'];
             	$tblKib['StatusValidasi'] = 1;
                 $tblKib['Status_Validasi_Barang'] = 1;
                 $tblKib['kondisi'] = 3;
