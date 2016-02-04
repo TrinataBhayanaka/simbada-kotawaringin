@@ -31,7 +31,7 @@ class DB
 	{
 		
 		$this->query = mysql_query($data);// or die (mysql_error());
-		//logFile($data,'Log-query '.date('Y-m-d'));
+		logFile($data,'Log-query-'.date('Y-m-d'));
 		return $this->query;
 	}
 	
@@ -376,8 +376,8 @@ class DB
 	        			$insert_id = $this->insert_id();
 
 	        			$sqlu = "UPDATE log_{$value} SET TglPembukuan = '{$tglProses}' WHERE log_id = {$insert_id} LIMIT 1";
-	        			logFile($sqlu);
-	        			$result = $this->query($sqlu);
+	        			//logFile($sqlu);
+	        			//$result = $this->query($sqlu);
 	        		}
 	        		usleep(100);
 	        		if ($action==28){
@@ -429,6 +429,12 @@ class DB
 	        if ($mergeField){
 	        	foreach ($mergeField as $key => $val) {
 	        		$tmpField[] = $key;
+                                if($key=="StatusValidasi")
+                                    $val="1";
+                                elseif($key=="Status_Validasi_Barang")
+                                    $val="1";
+                                elseif($key=="StatusTampil")
+                                    $val="1";
 	        		$tmpValue[] = "'".$val."'";
 
 	        		// if ($key == 'NilaiPerolehan') $NilaiPerolehan_Awal = "'".$val."'";
@@ -660,6 +666,22 @@ class DB
 		$sql['field'] = "COUNT(1) AS total";		
 		$res = $this->lazyQuery($sql,$debug);
 		return $res;
+	}
+
+	function log($activity_id=1, $desc=array(), $debug=false)
+	{	
+		$activity_desc = "";
+		if ($desc) $activity_desc = serialize($desc);
+		$user_id = $_SESSION['ses_uoperatorid'];
+		$datetimes = date('Y-m-d H:i:s'); 
+        $source = $_SERVER['REMOTE_ADDR'];
+
+		$sql = array(
+	            'table'=>'activity_log',
+	            'field'=>"user_id, activity_id, activity_desc, source, datetimes",
+	            'value' => "{$user_id}, '{$activity_id}','{$activity_desc}', '{$source}', '{$datetimes}'",
+	            );
+        $res = $this->lazyQuery($sql,$debug,1);
 	}
 }
 ?>
