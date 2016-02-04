@@ -57,7 +57,7 @@ class report_engine_daftar extends report_engine {
                <td style=\"width: 10%;\"><img style=\"width: 80px;\" alt=\"\" src=\"$gambar\"></td>
                <td colspan=\"2\" style=\";width: 70%; text-align: center;\">
                     <h3>LAMPIRAN {$TitleSk}</h3>
-                    <h3>PEMERINTAH KOTA PEKALONGAN</h3>
+                    <h3>PEMERINTAH KABUPATEN KOTAWARINGIN TIMUR</h3>
                </td>
           </tr>
           <tr>
@@ -193,7 +193,7 @@ $head = "
                     $footer="<br/><br/><table>
                                         <tr>
                                         <td style='width:70%;'></td>
-                                        <td style='text-align:center'>Kota Pekalongan, $tglcetak</td>
+                                        <td style='text-align:center'>Sampit, $tglcetak</td>
                                         </tr>
                                         
                                         <tr>
@@ -246,12 +246,12 @@ $head = "
                                              </tr>
                                              <tr>
                                                        <td colspan='2' style=\"width: 10%;text-align:left\">Kab/Kota</td>
-                                                            <td style=\"width: 90%;text-align:left\">: Pekalongan</td>
+                                                            <td style=\"width: 90%;text-align:left\">: Kotawaringin Timur</td>
 
                                              </tr>
                                               <tr>
                                                        <td colspan='2' style=\"width: 10%;text-align:left\">Provinsi</td>
-                                                            <td style=\"width: 90%;text-align:left\">: Jawa Tengah</td>
+                                                            <td style=\"width: 90%;text-align:left\">: Kalimantan Tengah</td>
 
                                              </tr>
                                         </table>";
@@ -261,8 +261,8 @@ $head = "
                                                   <tr style=\"text-align:center;font-weight:bold;\">
                                                             <td rowspan='2' style=\"width:5%;text-align:center;font-weight:bold;\">No<br/> Urut </td>
                                                             <td rowspan='2' style=\"width:10%;text-align:center;font-weight:bold;\">Nama / Jenis Barang yang dibeli</td>
-                                                            <td colspan='2' style=\"width:30%;text-align:center;font-weight:bold;\">SPK/PERJANJiAN KONTRAK</td>
-                                                            <td colspan='2'  style=\"width:20%;text-align:center;font-weight:bold;\">DPA/SPM/KWITANSI</td>
+                                                            <td colspan='2' style=\"width:30%;text-align:center;font-weight:bold;\">Kuitansi/Kontrak</td>
+                                                            <td colspan='2'  style=\"width:20%;text-align:center;font-weight:bold;\">SP2D</td>
                                                             <td colspan='2'  style=\"width:20%;text-align:center;font-weight:bold;\">Jumlah</td>
                                                             <td rowspan='2' style=\"width:10%;text-align:center;font-weight:bold;\">Digunakaan pada unit</td>
                                                             <td rowspan='2' style=\"width:5%;text-align:center;font-weight:bold;\">Ket</td>
@@ -313,12 +313,12 @@ $head = "
                                              </tr>
                                              <tr>
                                                        <td colspan='2' style=\"width: 10%;text-align:left\">Kab/Kota</td>
-                                                            <td style=\"width: 90%;text-align:left\">: Pekalongan</td>
+                                                            <td style=\"width: 90%;text-align:left\">: Kotawaringin Timur</td>
 
                                              </tr>
                                               <tr>
                                                        <td colspan='2' style=\"width: 10%;text-align:left\">Provinsi</td>
-                                                            <td style=\"width: 90%;text-align:left\">: Jawa Tengah</td>
+                                                            <td style=\"width: 90%;text-align:left\">: Kalimantan Tengah</td>
 
                                              </tr>
                                         </table>
