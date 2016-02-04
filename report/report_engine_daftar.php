@@ -261,8 +261,8 @@ $head = "
                                                   <tr style=\"text-align:center;font-weight:bold;\">
                                                             <td rowspan='2' style=\"width:5%;text-align:center;font-weight:bold;\">No<br/> Urut </td>
                                                             <td rowspan='2' style=\"width:10%;text-align:center;font-weight:bold;\">Nama / Jenis Barang yang dibeli</td>
-                                                            <td colspan='2' style=\"width:30%;text-align:center;font-weight:bold;\">SPK/PERJANJiAN KONTRAK</td>
-                                                            <td colspan='2'  style=\"width:20%;text-align:center;font-weight:bold;\">DPA/SPM/KWITANSI</td>
+                                                            <td colspan='2' style=\"width:30%;text-align:center;font-weight:bold;\">Kuitansi/Kontrak</td>
+                                                            <td colspan='2'  style=\"width:20%;text-align:center;font-weight:bold;\">SP2D</td>
                                                             <td colspan='2'  style=\"width:20%;text-align:center;font-weight:bold;\">Jumlah</td>
                                                             <td rowspan='2' style=\"width:10%;text-align:center;font-weight:bold;\">Digunakaan pada unit</td>
                                                             <td rowspan='2' style=\"width:5%;text-align:center;font-weight:bold;\">Ket</td>
