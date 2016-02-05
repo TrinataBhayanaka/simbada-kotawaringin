@@ -1,4 +1,5 @@
 admin/css/*
+config/*
 config/database.php
 config/path_system.php
 doc/*
