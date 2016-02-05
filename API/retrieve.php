@@ -9787,7 +9787,7 @@ $offset = @$_POST['record'];
     {
         $table = $data['tipeAset']; unset($data['tipeAset']);
         // pr(array_filter($data));exit;
-
+        
         $dataclean = array_filter($data);
 
         foreach ($dataclean as $key => $val) {
@@ -9796,7 +9796,8 @@ $offset = @$_POST['record'];
         $setval = implode(' AND ', $tmpsetval);
 
         if($setval) $setval = $setval." AND ";
-        $sql = mysql_query("SELECT kodeKelompok,kodeSatker,kodeLokasi,Tahun,COUNT(*) as kuantitas,MIN(CAST(noRegister AS SIGNED)) as min,MAX(CAST(noRegister AS SIGNED)) as max FROM {$table} WHERE {$setval} kodeSatker LIKE '{$kodesatker}%' AND StatusTampil='1' AND Status_Validasi_Barang = '1' GROUP BY  kodeKelompok ,  kodeLokasi");
+        if($table != 'aset') $sts = "AND StatusTampil='1'"; else $sts=""; 
+        $sql = mysql_query("SELECT kodeKelompok,kodeSatker,kodeLokasi,Tahun,COUNT(*) as kuantitas,MIN(CAST(noRegister AS SIGNED)) as min,MAX(CAST(noRegister AS SIGNED)) as max FROM {$table} WHERE {$setval} kodeSatker LIKE '{$kodesatker}%' {$sts} AND Status_Validasi_Barang = '1' GROUP BY  kodeKelompok ,  kodeLokasi");
         while ($dataAset = mysql_fetch_assoc($sql)){
                     $aset[] = $dataAset;
                 }

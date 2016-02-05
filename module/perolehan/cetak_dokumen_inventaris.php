@@ -114,7 +114,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id,$SessionUser);
 							<li>
 								<span class="span2">Kode Pemilik</span>
 								<select name = "pemilik" class="" id="sel1">
-									<option value="12" selected>12 - Pemerintah Kota</option>
+									<option value="12" selected>12 - Pemerintah Kabupaten/Kota</option>
 									<option value="11">11 - Pemerintah Provinsi</option>
 									<option value="00">00 - Kementrian Lembaga</option>
 							  </select>
@@ -171,7 +171,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id,$SessionUser);
 							<li>
 								<span class="span2">Kode Pemilik</span>
 								<select name = "pemilik" class="" id="sel1">
-									<option value="12" selected>12 - Pemerintah Kota</option>
+									<option value="12" selected>12 - Pemerintah Kabupaten/Kota</option>
 									<option value="11">11 - Pemerintah Provinsi</option>
 									<option value="00">00 - Kementrian Lembaga</option>
 							  </select>
@@ -227,7 +227,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id,$SessionUser);
 							<li>
 								<span class="span2">Kode Pemilik</span>
 								<select name = "pemilik" class="" id="sel1">
-									<option value="12" selected>12 - Pemerintah Kota</option>
+									<option value="12" selected>12 - Pemerintah Kabupaten/Kota</option>
 									<option value="11">11 - Pemerintah Provinsi</option>
 									<option value="00">00 - Kementrian Lembaga</option>
 							  </select>
@@ -284,7 +284,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id,$SessionUser);
 							<li>
 								<span class="span2">Kode Pemilik</span>
 								<select name = "pemilik" class="" id="sel1">
-									<option value="12" selected>12 - Pemerintah Kota</option>
+									<option value="12" selected>12 - Pemerintah Kabupaten/Kota</option>
 									<option value="11">11 - Pemerintah Provinsi</option>
 									<option value="00">00 - Kementrian Lembaga</option>
 							  </select>
@@ -336,7 +336,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id,$SessionUser);
 							<li>
 								<span class="span2">Kode Pemilik</span>
 								<select name = "pemilik" class="" id="sel1">
-									<option value="12" selected>12 - Pemerintah Kota</option>
+									<option value="12" selected>12 - Pemerintah Kabupaten/Kota</option>
 									<option value="11">11 - Pemerintah Provinsi</option>
 									<option value="00">00 - Kementrian Lembaga</option>
 							  </select>
@@ -492,7 +492,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id,$SessionUser);
 							<li>
 								<span class="span2">Kode Pemilik</span>
 								<select name = "pemilik" class="" id="sel1">
-									<option value="12" selected>12 - Pemerintah Kota</option>
+									<option value="12" selected>12 - Pemerintah Kabupaten/Kota</option>
 									<option value="11">11 - Pemerintah Provinsi</option>
 									<option value="00">00 - Kementrian Lembaga</option>
 							  </select>

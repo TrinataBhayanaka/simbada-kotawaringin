@@ -4381,20 +4381,30 @@ if($skpd_id != ''){
 			//tanah
 			$ex_nilai_tanah = explode('_',$value[0]);
 			$nilai_tanah =$ex_nilai_tanah[0];
+			$nilai_tanah_NB = $ex_nilai_tanah[0];
 			
 			//mesin <2008
 			$ex_nilai_mesin_1 = explode('_',$value[1]);
 			$nilai_mesin_1 = $ex_nilai_mesin_1[0];
 			$nilai_mesin_PP_1 = $ex_nilai_mesin_1[1];
 			$nilai_mesin_AP_1 = $ex_nilai_mesin_1[2];
-			$nilai_mesin_NB_1 = $ex_nilai_mesin_1[3];
+			if($nilai_mesin_AP_1 != 0){
+				$nilai_mesin_NB_1 = $ex_nilai_mesin_1[3];
+			}else{
+				$nilai_mesin_NB_1 = $ex_nilai_mesin_1[0];
+			}
 			
 			//mesin >2008
 			$ex_nilai_mesin_2 = explode('_',$value[2]);
 			$nilai_mesin_2 = $ex_nilai_mesin_2[0];
 			$nilai_mesin_PP_2 = $ex_nilai_mesin_2[1];
 			$nilai_mesin_AP_2 = $ex_nilai_mesin_2[2];
-			$nilai_mesin_NB_2 = $ex_nilai_mesin_2[3];
+			if($nilai_mesin_AP_2 != 0){
+				$nilai_mesin_NB_2 = $ex_nilai_mesin_2[3];
+			}else{
+				$nilai_mesin_NB_2 = $ex_nilai_mesin_2[0];
+			}
+			
 			
 			$nilai_mesin =$nilai_mesin_1 + $nilai_mesin_2;
 			
@@ -4403,14 +4413,22 @@ if($skpd_id != ''){
 			$nilai_bangunan_1 	 = $ex_nilai_bangunan_1[0];
 			$nilai_bangunan_PP_1 = $ex_nilai_bangunan_1[1];
 			$nilai_bangunan_AP_1 = $ex_nilai_bangunan_1[2];
-			$nilai_bangunan_NB_1 = $ex_nilai_bangunan_1[3];
+			if($nilai_bangunan_AP_1 != 0){
+				$nilai_bangunan_NB_1 = $ex_nilai_bangunan_1[3];
+			}else{
+				$nilai_bangunan_NB_1 = $ex_nilai_bangunan_1[0];
+			}
 			
 			//bangunan >2008
 			$ex_nilai_bangunan_2 = explode('_',$value[4]);
 			$nilai_bangunan_2 	 = $ex_nilai_bangunan_2[0];
 			$nilai_bangunan_PP_2 = $ex_nilai_bangunan_2[1];
 			$nilai_bangunan_AP_2 = $ex_nilai_bangunan_2[2];
-			$nilai_bangunan_NB_2 = $ex_nilai_bangunan_2[3];
+			if($nilai_bangunan_AP_2 != 0){
+				$nilai_bangunan_NB_2 = $ex_nilai_bangunan_2[3];
+			}else{
+				$nilai_bangunan_NB_2 = $ex_nilai_bangunan_2[0];
+			}
 			
 			$nilai_bangunan =$nilai_bangunan_1 + $nilai_bangunan_2;
 			
@@ -4419,23 +4437,23 @@ if($skpd_id != ''){
 			$nilai_jarngn 	=$ex_nilai_jaringan[0];
 			$nilai_jaringan_PP =$ex_nilai_jaringan[1];
 			$nilai_jaringan_AP =$ex_nilai_jaringan[2];
-			$nilai_jaringan_NB =$ex_nilai_jaringan[3];
+			if($nilai_jaringan_AP != 0){
+				$nilai_jaringan_NB =$ex_nilai_jaringan[3];
+			}else{
+				$nilai_jaringan_NB =$ex_nilai_jaringan[0];
+			}
 			$nilai_jaringan	= $nilai_jarngn;
 			
-			//TOTAL ALL PENYUSUTAN
-			$penyusutanPP = $nilai_mesin_PP_1 + $nilai_mesin_PP_2 + $nilai_bangunan_PP_1 + $nilai_bangunan_PP_2 +$nilai_jaringan_PP ; 
-			
-			$penyusutanAP = $nilai_mesin_AP_1 + $nilai_mesin_AP_2 + $nilai_bangunan_AP_1 + $nilai_bangunan_AP_2 +$nilai_jaringan_AP;
-			
-			$penyusutanNB = $nilai_mesin_NB_1 + $nilai_mesin_NB_2 + $nilai_bangunan_NB_1 + $nilai_bangunan_NB_2	+ $nilai_jaringan_NB;			  
 			
 			//aset tetap lain
 			$ex_nilai_aset_tetap_lain = explode('_',$value[6]);
 			$nilai_asettetaplain =$ex_nilai_aset_tetap_lain[0];
+			$nilai_asettetaplain_NB =$ex_nilai_aset_tetap_lain[0];
 			
 			//kdp
 			$ex_nilai_kdp = explode('_',$value[7]);
 			$nilai_kdp =$ex_nilai_kdp[0];
+			$nilai_kdp_NB =$ex_nilai_kdp[0];
 			
 			//aset lain
 			$ex_nilai_aset_lain = explode('_',$value[8]);
@@ -4449,6 +4467,19 @@ if($skpd_id != ''){
 			$nonAset_2 = $ex_nilai_non_aset_2[0];
 			
 			$nonAset = $nonAset_1 + $nonAset_2;
+			
+			//TOTAL ALL PENYUSUTAN
+			$penyusutanPP = $nilai_mesin_PP_1 + $nilai_mesin_PP_2 + $nilai_bangunan_PP_1 + $nilai_bangunan_PP_2 +$nilai_jaringan_PP ; 
+			
+			$penyusutanAP = $nilai_mesin_AP_1 + $nilai_mesin_AP_2 + $nilai_bangunan_AP_1 + $nilai_bangunan_AP_2 +$nilai_jaringan_AP;
+			
+			$penyusutanNB = $nilai_tanah_NB +
+							$nilai_mesin_NB_1 + $nilai_mesin_NB_2 + 
+							$nilai_bangunan_NB_1 + $nilai_bangunan_NB_2	+ 
+							$nilai_jaringan_NB + 
+							$nilai_asettetaplain_NB +
+							$nilai_kdp_NB;			  
+			
 			
 			$total = $nilai_tanah + $nilai_mesin + $nilai_bangunan + $nilai_jaringan
                      + $nilai_asettetaplain + $nilai_kdp + $nilai_asetlain + $nonAset + $penyusutanPP + $penyusutanAP + $penyusutanNB;
@@ -4473,13 +4504,18 @@ if($skpd_id != ''){
 			//tanah
 			$ex_nilai_tanah = explode('_',$value[0]);
 			$nilai_tanah =$ex_nilai_tanah[0];
+			$nilai_tanah_NB = $ex_nilai_tanah[0];
 			
 			//mesin
 			$ex_nilai_mesin_1 = explode('_',$value[1]);
 			$nilai_mesin_1 = $ex_nilai_mesin_1[0];
 			$nilai_mesin_PP_1 = $ex_nilai_mesin_1[1];
 			$nilai_mesin_AP_1 = $ex_nilai_mesin_1[2];
-			$nilai_mesin_NB_1 = $ex_nilai_mesin_1[3];
+			if($nilai_mesin_AP_1 != 0){
+				$nilai_mesin_NB_1 = $ex_nilai_mesin_1[3];
+			}else{
+				$nilai_mesin_NB_1 = $ex_nilai_mesin_1[0];
+			}
 			$nilai_mesin = $nilai_mesin_1;
 			
 			//bangunan
@@ -4487,7 +4523,11 @@ if($skpd_id != ''){
 			$nilai_bangunan_1 	 = $ex_nilai_bangunan_1[0];
 			$nilai_bangunan_PP_1 = $ex_nilai_bangunan_1[1];
 			$nilai_bangunan_AP_1 = $ex_nilai_bangunan_1[2];
-			$nilai_bangunan_NB_1 = $ex_nilai_bangunan_1[3];
+			if($nilai_bangunan_AP_1 != 0){
+				$nilai_bangunan_NB_1 = $ex_nilai_bangunan_1[3];
+			}else{
+				$nilai_bangunan_NB_1 = $ex_nilai_bangunan_1[0];
+			}
 			$nilai_bangunan =$nilai_bangunan_1;
 			
 			//jaringan
@@ -4495,23 +4535,24 @@ if($skpd_id != ''){
 			$nilai_jarngn 	=$ex_nilai_jaringan[0];
 			$nilai_jaringan_PP =$ex_nilai_jaringan[1];
 			$nilai_jaringan_AP =$ex_nilai_jaringan[2];
-			$nilai_jaringan_NB =$ex_nilai_jaringan[3];
+			if($nilai_jaringan_AP != 0){
+				$nilai_jaringan_NB =$ex_nilai_jaringan[3];
+			}else{
+				$nilai_jaringan_NB =$ex_nilai_jaringan[0];
+			}
 			$nilai_jaringan =$nilai_jarngn;
 			
-			//TOTAL ALL PENYUSUTAN
-			$penyusutanPP = $nilai_mesin_PP_1 + $nilai_bangunan_PP_1 + $nilai_jaringan_PP ; 
 			
-			$penyusutanAP = $nilai_mesin_AP_1 + $nilai_bangunan_AP_1 + $nilai_jaringan_AP;
-			
-			$penyusutanNB = $nilai_mesin_NB_1 + $nilai_bangunan_NB_1 +	$nilai_jaringan_NB;
 			
 			//aset tetap lain
 			$ex_nilai_aset_tetap_lain = explode('_',$value[4]);
-			$nilai_asettetaplain =$ex_nilai_aset_tetap_lain[0];
+			$nilai_asettetaplain = $ex_nilai_aset_tetap_lain[0];
+			$nilai_asettetaplain_NB = $ex_nilai_aset_tetap_lain[0];
 			
 			//kdp
 			$ex_nilai_kdp = explode('_',$value[5]);
 			$nilai_kdp =$ex_nilai_kdp[0];
+			$nilai_kdp_NB = $ex_nilai_kdp[0];
 			
 			//aset lain
 			$ex_nilai_aset_lain = explode('_',$value[6]);
@@ -4525,6 +4566,18 @@ if($skpd_id != ''){
 			$nonAset_2 = $ex_nilai_non_aset_2[0];
 			
 			$nonAset = $nonAset_1 + $nonAset_2;	
+			
+			//TOTAL ALL PENYUSUTAN
+			$penyusutanPP = $nilai_mesin_PP_1 + $nilai_bangunan_PP_1 + $nilai_jaringan_PP ; 
+			
+			$penyusutanAP = $nilai_mesin_AP_1 + $nilai_bangunan_AP_1 + $nilai_jaringan_AP;
+			
+			$penyusutanNB = $nilai_tanah_NB +
+							$nilai_mesin_NB_1 + 
+							$nilai_bangunan_NB_1 +	
+							$nilai_jaringan_NB +
+							$nilai_asettetaplain_NB +
+							$nilai_kdp_NB;
 			
 			$total = $nilai_tanah + $nilai_mesin + $nilai_bangunan + $nilai_jaringan
                      + $nilai_asettetaplain + $nilai_kdp + $nilai_asetlain + $nonAset + $penyusutanPP + $penyusutanAP + $penyusutanNB;
@@ -4740,22 +4793,33 @@ if($skpd_id != ''){
 		if($cekjmlArray == 11){
 			//tanah
 			$ex_nilai_tanah = explode('_',$value[0]);
-			$nilai_tanah =$ex_nilai_tanah[0];
+			$nilai_tanah = $ex_nilai_tanah[0];
+			//nilai buku tanah didapat dari nilai perolehan
+			$nilai_tanah_NB = $ex_nilai_tanah[0];
 			
 			//mesin <2008
 			$ex_nilai_mesin_1 = explode('_',$value[1]);
 			$nilai_mesin_1 = $ex_nilai_mesin_1[0];
 			$nilai_mesin_PP_1 = $ex_nilai_mesin_1[1];
 			$nilai_mesin_AP_1 = $ex_nilai_mesin_1[2];
-			$nilai_mesin_NB_1 = $ex_nilai_mesin_1[3];
+			
+			if($nilai_mesin_AP_1 !=0){
+				$nilai_mesin_NB_1 = $ex_nilai_mesin_1[3];
+			}else{
+				$nilai_mesin_NB_1 = $ex_nilai_mesin_1[0];
+			}
 			
 			//mesin >2008
 			$ex_nilai_mesin_2 = explode('_',$value[2]);
 			$nilai_mesin_2 = $ex_nilai_mesin_2[0];
 			$nilai_mesin_PP_2 = $ex_nilai_mesin_2[1];
 			$nilai_mesin_AP_2 = $ex_nilai_mesin_2[2];
-			$nilai_mesin_NB_2 = $ex_nilai_mesin_2[3];
 			
+			if($nilai_mesin_AP_2 !=0){
+				$nilai_mesin_NB_2 = $ex_nilai_mesin_2[3];
+			}else{
+				$nilai_mesin_NB_2 = $ex_nilai_mesin_2[0];
+			}
 			$nilai_mesin =$nilai_mesin_1 + $nilai_mesin_2;
 			
 			//bangunan < 2008
@@ -4763,14 +4827,24 @@ if($skpd_id != ''){
 			$nilai_bangunan_1 	 = $ex_nilai_bangunan_1[0];
 			$nilai_bangunan_PP_1 = $ex_nilai_bangunan_1[1];
 			$nilai_bangunan_AP_1 = $ex_nilai_bangunan_1[2];
-			$nilai_bangunan_NB_1 = $ex_nilai_bangunan_1[3];
+			
+			if($nilai_bangunan_AP_1 != 0){
+				$nilai_bangunan_NB_1 = $ex_nilai_bangunan_1[3];
+			}else{
+				$nilai_bangunan_NB_1 = $ex_nilai_bangunan_1[0];
+			}
 			
 			//bangunan >2008
 			$ex_nilai_bangunan_2 = explode('_',$value[4]);
 			$nilai_bangunan_2 	 = $ex_nilai_bangunan_2[0];
 			$nilai_bangunan_PP_2 = $ex_nilai_bangunan_2[1];
 			$nilai_bangunan_AP_2 = $ex_nilai_bangunan_2[2];
-			$nilai_bangunan_NB_2 = $ex_nilai_bangunan_2[3];
+			
+			if($nilai_bangunan_AP_2 != 0){
+				$nilai_bangunan_NB_2 = $ex_nilai_bangunan_2[3];
+			}else{
+				$nilai_bangunan_NB_2 = $ex_nilai_bangunan_2[0];
+			}
 			
 			$nilai_bangunan =$nilai_bangunan_1 + $nilai_bangunan_2;
 			
@@ -4779,23 +4853,27 @@ if($skpd_id != ''){
 			$nilai_jarngn 	=$ex_nilai_jaringan[0];
 			$nilai_jaringan_PP =$ex_nilai_jaringan[1];
 			$nilai_jaringan_AP =$ex_nilai_jaringan[2];
-			$nilai_jaringan_NB =$ex_nilai_jaringan[3];
+			
+			if($nilai_jaringan_AP != 0){
+				$nilai_jaringan_NB =$ex_nilai_jaringan[3];
+			}else{
+				$nilai_jaringan_NB =$ex_nilai_jaringan[0];
+			}
+			
 			$nilai_jaringan	= $nilai_jarngn;
 			
-			//TOTAL ALL PENYUSUTAN
-			$penyusutanPP = $nilai_mesin_PP_1 + $nilai_mesin_PP_2 + $nilai_bangunan_PP_1 + $nilai_bangunan_PP_2 +$nilai_jaringan_PP ; 
-			
-			$penyusutanAP = $nilai_mesin_AP_1 + $nilai_mesin_AP_2 + $nilai_bangunan_AP_1 + $nilai_bangunan_AP_2 +$nilai_jaringan_AP;
-			
-			$penyusutanNB = $nilai_mesin_NB_1 + $nilai_mesin_NB_2 + $nilai_bangunan_NB_1 + $nilai_bangunan_NB_2	+ $nilai_jaringan_NB;			  
 			
 			//aset tetap lain
 			$ex_nilai_aset_tetap_lain = explode('_',$value[6]);
 			$nilai_asettetaplain =$ex_nilai_aset_tetap_lain[0];
+			//nilai buku aset lain didapat dari nilai perolehan
+			$nilai_asettetaplain_NB =$ex_nilai_aset_tetap_lain[0];
 			
 			//kdp
 			$ex_nilai_kdp = explode('_',$value[7]);
 			$nilai_kdp =$ex_nilai_kdp[0];
+			//nilai buku kdp didapat dari nilai perolehan
+			$nilai_kdp_NB =$ex_nilai_kdp[0];
 			
 			//aset lain
 			$ex_nilai_aset_lain = explode('_',$value[8]);
@@ -4810,6 +4888,19 @@ if($skpd_id != ''){
 			
 			$nonAset = $nonAset_1 + $nonAset_2;
 			
+			//TOTAL ALL PENYUSUTAN
+			$penyusutanPP = $nilai_mesin_PP_1 + $nilai_mesin_PP_2 + $nilai_bangunan_PP_1 + $nilai_bangunan_PP_2 +$nilai_jaringan_PP ; 
+			
+			$penyusutanAP = $nilai_mesin_AP_1 + $nilai_mesin_AP_2 + $nilai_bangunan_AP_1 + $nilai_bangunan_AP_2 +$nilai_jaringan_AP;
+			
+			$penyusutanNB = $nilai_tanah_NB +
+							$nilai_mesin_NB_1 + $nilai_mesin_NB_2 + 
+							$nilai_bangunan_NB_1 + $nilai_bangunan_NB_2	+ 
+							$nilai_jaringan_NB +
+							$nilai_asettetaplain_NB +
+							$nilai_kdp_NB;			  
+			
+			
 			$total = $nilai_tanah + $nilai_mesin + $nilai_bangunan + $nilai_jaringan
                      + $nilai_asettetaplain + $nilai_kdp + $nilai_asetlain + $nonAset + $penyusutanPP + $penyusutanAP + $penyusutanNB;
 					 
@@ -4820,13 +4911,20 @@ if($skpd_id != ''){
 			//tanah
 			$ex_nilai_tanah = explode('_',$value[0]);
 			$nilai_tanah =$ex_nilai_tanah[0];
+			//nilai buku dari nilai perolehan
+			$nilai_tanah_NB = $ex_nilai_tanah[0];
 			
 			//mesin
 			$ex_nilai_mesin_1 = explode('_',$value[1]);
 			$nilai_mesin_1 = $ex_nilai_mesin_1[0];
 			$nilai_mesin_PP_1 = $ex_nilai_mesin_1[1];
 			$nilai_mesin_AP_1 = $ex_nilai_mesin_1[2];
-			$nilai_mesin_NB_1 = $ex_nilai_mesin_1[3];
+			
+			if($nilai_mesin_AP_1 != 0){
+				$nilai_mesin_NB_1 = $ex_nilai_mesin_1[3];
+			}else{
+				$nilai_mesin_NB_1 = $ex_nilai_mesin_1[0];
+			}
 			$nilai_mesin = $nilai_mesin_1;
 			
 			//bangunan
@@ -4834,7 +4932,12 @@ if($skpd_id != ''){
 			$nilai_bangunan_1 	 = $ex_nilai_bangunan_1[0];
 			$nilai_bangunan_PP_1 = $ex_nilai_bangunan_1[1];
 			$nilai_bangunan_AP_1 = $ex_nilai_bangunan_1[2];
-			$nilai_bangunan_NB_1 = $ex_nilai_bangunan_1[3];
+			
+			if($nilai_bangunan_AP_1 != 0){
+				$nilai_bangunan_NB_1 = $ex_nilai_bangunan_1[3];
+			}else{
+				$nilai_bangunan_NB_1 = $ex_nilai_bangunan_1[0];
+			}
 			$nilai_bangunan =$nilai_bangunan_1;
 			
 			//jaringan
@@ -4842,23 +4945,26 @@ if($skpd_id != ''){
 			$nilai_jarngn 	=$ex_nilai_jaringan[0];
 			$nilai_jaringan_PP =$ex_nilai_jaringan[1];
 			$nilai_jaringan_AP =$ex_nilai_jaringan[2];
-			$nilai_jaringan_NB =$ex_nilai_jaringan[3];
+			if($nilai_jaringan_AP != 0){
+				$nilai_jaringan_NB =$ex_nilai_jaringan[3];
+			}else{
+				$nilai_jaringan_NB =$ex_nilai_jaringan[0];
+			}
 			$nilai_jaringan =$nilai_jarngn;
 			
-			//TOTAL ALL PENYUSUTAN
-			$penyusutanPP = $nilai_mesin_PP_1 + $nilai_bangunan_PP_1 + $nilai_jaringan_PP ; 
 			
-			$penyusutanAP = $nilai_mesin_AP_1 + $nilai_bangunan_AP_1 + $nilai_jaringan_AP;
-			
-			$penyusutanNB = $nilai_mesin_NB_1 + $nilai_bangunan_NB_1 +	$nilai_jaringan_NB;
 			
 			//aset tetap lain
 			$ex_nilai_aset_tetap_lain = explode('_',$value[4]);
-			$nilai_asettetaplain =$ex_nilai_aset_tetap_lain[0];
+			$nilai_asettetaplain = $ex_nilai_aset_tetap_lain[0];
+			//nilai buku aset tetap lain didapat dari nilai perolehan
+			$nilai_asettetaplain_NB = $ex_nilai_aset_tetap_lain[0];
 			
 			//kdp
 			$ex_nilai_kdp = explode('_',$value[5]);
 			$nilai_kdp =$ex_nilai_kdp[0];
+			//nilai buku kdp didapat dari nilai perolehan
+			$nilai_kdp_NB = $ex_nilai_kdp[0];
 			
 			//aset lain
 			$ex_nilai_aset_lain = explode('_',$value[6]);
@@ -4881,6 +4987,18 @@ if($skpd_id != ''){
 			$nilai_kdp =$value[5];
 			$nilai_asetlain =$value[6];
 			$nonAset = $value[7] + $value[8];*/
+			
+			//TOTAL ALL PENYUSUTAN
+			$penyusutanPP = $nilai_mesin_PP_1 + $nilai_bangunan_PP_1 + $nilai_jaringan_PP ; 
+			
+			$penyusutanAP = $nilai_mesin_AP_1 + $nilai_bangunan_AP_1 + $nilai_jaringan_AP;
+			
+			$penyusutanNB = $nilai_tanah_NB +
+							$nilai_mesin_NB_1 + 
+							$nilai_bangunan_NB_1 +	
+							$nilai_jaringan_NB +
+							$nilai_asettetaplain_NB +
+							$nilai_kdp_NB;
 			
 			$total = $nilai_tanah + $nilai_mesin + $nilai_bangunan + $nilai_jaringan
                      + $nilai_asettetaplain + $nilai_kdp + $nilai_asetlain + $nonAset + $penyusutanPP + $penyusutanAP + $penyusutanNB;
@@ -5115,7 +5233,7 @@ foreach ($dataArr as $satker_id => $value)
 			$TotalNilaiPPFix=number_format($TotalNilai[2],2,",",".");
 			//nilai akumulasi penyusutan
 			$TotalNilaiAPFix=number_format($TotalNilai[3],2,",",".");
-			if($TotalNilai[4] != 0 || $TotalNilai[4] != ''){
+			if($TotalNilai[4] != 0 || $TotalNilai[4] != ''||$TotalNilai[3]!=""||$TotalNilai[3]!=0){
 				$TotalNilaiNilaiBukuFix=number_format($TotalNilai[4],2,",",".");
 			}else{
 				$TotalNilaiNilaiBukuFix=number_format($TotalNilai[0],2,",",".");
@@ -5144,7 +5262,7 @@ foreach ($dataArr as $satker_id => $value)
 			$totalALLPP = $totalALLPP + $TotalNilai[2];
 			$totalALLAP = $totalALLAP + $TotalNilai[3];
 			//cek jika nilai buku 0 diganti sama nilai perolehan
-			if($TotalNilai[4] != 0 || $TotalNilai[4] != ''){
+			if($TotalNilai[4] != 0 || $TotalNilai[4] != ''||$TotalNilai[3]!=""||$TotalNilai[3]!=0){
 				$totalALLNilaiBuku = $totalALLNilaiBuku + $TotalNilai[4];
 			}else{
 				$totalALLNilaiBuku = $totalALLNilaiBuku + $TotalNilai[0];
@@ -5248,9 +5366,16 @@ foreach ($dataArr as $satker_id => $value)
 			
 			//cek jika nilai buku 0 diganti sama nilai perolehan
 			if($kode_1_child != '07.01' || $kode_1_child != '07.21' || $kode_1_child != '07.22' || $kode_1_child != '07.23' || $kode_1_child != '07.24'){
-				if($nilaiNB_1 != 0 || $nilaiNB_2 != 0){
+				if($nilaiNB_1 != 0 && $nilaiNB_2 != 0){
+					$nilaiNBFix = ($nilaiNB_1) + ($nilaiNB_2);
+				}elseif($nilaiNB_1 != 0 && $nilaiNB_2 == 0){
+					$nilaiNBFix = ($nilaiNB_1) + ($nilaiNB_2);
+				}elseif($nilaiNB_1 == 0 && $nilaiNB_2 != 0){
 					$nilaiNBFix = ($nilaiNB_1) + ($nilaiNB_2);
 				}else{
+                                                                 if($nilaiAPFix!=0)
+                                                                      $nilaiNBFix = ($nilaiNB_1) + ($nilaiNB_2);
+                                                                 else
 					$nilaiNBFix = ($nilai_1) + ($nilai_2);
 				}	
 			}else{
@@ -5277,7 +5402,7 @@ foreach ($dataArr as $satker_id => $value)
 			if($kode_1_child == '07.01' || $kode_1_child == '07.21' || $kode_1_child == '07.22' || $kode_1_child == '07.23' || $kode_1_child == '07.24'){
 				$nilaiNBFix = 0;
 			}else{
-				if($nilaiNB_1 != 0){
+				if($nilaiNB_1 != 0 || $nilaiAPFix!=0){
 					$nilaiNBFix = $nilaiNB_1;
 				}else{
 					$nilaiNBFix = $nilai_1;
@@ -6097,11 +6222,17 @@ foreach ($dataArr as $satker_id => $value)
 	//nilai perolehan
 	$TotalNilaiFix=number_format($TotalNilai[0],2,",",".");
 	//nilai buku
-	if($TotalNilai[4]){
+	/*if($TotalNilai[4]){
+		$TotalNilaiFixNB=number_format($TotalNilai[4],2,",",".");
+	}else{
+		$TotalNilaiFixNB=number_format($TotalNilai[0],2,",",".");
+	}*/
+	if($TotalNilai[3] != 0){
 		$TotalNilaiFixNB=number_format($TotalNilai[4],2,",",".");
 	}else{
 		$TotalNilaiFixNB=number_format($TotalNilai[0],2,",",".");
 	}
+	
 	//penyusutan pertahun
 	$TotalNilaiFixPP=number_format($TotalNilai[2],2,",",".");
 	//akumulasi penyusutan
@@ -6137,7 +6268,13 @@ foreach ($dataArr as $satker_id => $value)
 			// echo $value[0]->kodeKelompok;
 			// echo $value->kodeKelompok;
 			foreach($val as $vl=>$value){
-				if($value->NilaiBuku){
+				/*if($value->NilaiBuku){
+					$NilaiBuku = $value->NilaiBuku;
+				}else{
+					$NilaiBuku = $value->Nilai;
+				}*/
+				
+				if($value->NilaiAP != 0 || $value->NilaiAP != ''){
 					$NilaiBuku = $value->NilaiBuku;
 				}else{
 					$NilaiBuku = $value->Nilai;
@@ -6375,7 +6512,12 @@ foreach ($dataArr as $satker_id => $value)
 	//nilai perolehan
 	$TotalNilaiFix=number_format($TotalNilai[0],2,",",".");
 	//nilai buku
-	if($TotalNilai[4]){
+	/*if($TotalNilai[4]){
+		$TotalNilaiFixNB=number_format($TotalNilai[4],2,",",".");
+	}else{
+		$TotalNilaiFixNB=number_format($TotalNilai[0],2,",",".");
+	}*/
+	if($TotalNilai[3] != 0){
 		$TotalNilaiFixNB=number_format($TotalNilai[4],2,",",".");
 	}else{
 		$TotalNilaiFixNB=number_format($TotalNilai[0],2,",",".");
@@ -6412,11 +6554,16 @@ foreach ($dataArr as $satker_id => $value)
         
         foreach ($data as $index => $value)
         {		
-				if($value->NilaiBuku){
+				/*if($value->NilaiBuku){
 					$NilaiBuku = $value->NilaiBuku;
 				}else{
 					$NilaiBuku = $value->NilaiPerolehan;
-				}
+				}*/
+				if($value->AkumulasiPenyusutan != 0 || $value->AkumulasiPenyusutan != ''){
+					$NilaiBuku = $value->NilaiBuku;
+				}else{
+					$NilaiBuku = $value->NilaiPerolehan;
+				}	
                 $html .= "<tr>
 						<td style=\"text-align: ;\">&nbsp;</td>
                         <td style=\"text-align: ;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $value->Uraian</td>
@@ -6642,11 +6789,18 @@ foreach ($dataArr as $satker_id => $value)
 	//nilai perolehan
 	$TotalNilaiFix=number_format($TotalNilai[0],2,",",".");
 	//nilai buku
-	if($TotalNilai[4]){
+	/*if($TotalNilai[4]){
+		$TotalNilaiFixNB=number_format($TotalNilai[4],2,",",".");
+	}else{
+		$TotalNilaiFixNB=number_format($TotalNilai[0],2,",",".");
+	}*/
+	
+	if($TotalNilai[3] != 0){
 		$TotalNilaiFixNB=number_format($TotalNilai[4],2,",",".");
 	}else{
 		$TotalNilaiFixNB=number_format($TotalNilai[0],2,",",".");
 	}
+	
 	//penyusutan pertahun
 	$TotalNilaiFixPP=number_format($TotalNilai[2],2,",",".");
 	//akumulasi penyusutan
@@ -6677,11 +6831,17 @@ foreach ($dataArr as $satker_id => $value)
         
         foreach ($data as $index => $value)
         {
-				if($value->NilaiBuku){
+				/*if($value->NilaiBuku){
 					$NilaiBuku = $value->NilaiBuku;
 				}else{
 					$NilaiBuku = $value->NilaiPerolehan;
-				}
+				}*/
+				
+				if($value->AkumulasiPenyusutan != 0 || $value->AkumulasiPenyusutan != ''){
+					$NilaiBuku = $value->NilaiBuku;
+				}else{
+					$NilaiBuku = $value->NilaiPerolehan;
+				}	
                 $html .= "<tr>
 						<td style=\"text-align: ;\">&nbsp;</td>
                         <td style=\"text-align: ;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $value->Uraian</td>
@@ -24023,15 +24183,20 @@ $footer ="
 					
 					$AkumulasiPenyusutan = $row->Ap;
 					$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
-					
-					if($row->Nb){
-						// echo "NilaiBuku";
-						$NilaiBuku = $row->Nb;
-						$NilaiBukuFix = number_format($row->Nb,2,",",".");
+					if ($kondisi == '1' ||  $kondisi == '2') {
+						if($row->Nb){
+							// echo "NilaiBuku";
+							$NilaiBuku = $row->Nb;
+							$NilaiBukuFix = number_format($row->Nb,2,",",".");
+						}else{
+							// echo "nilai perolehan";
+							$NilaiBuku = $row->Nilai;
+							$NilaiBukuFix = number_format($row->Nilai,2,",",".");
+						}
 					}else{
-						// echo "nilai perolehan";
-						$NilaiBuku = $row->Nilai;
-						$NilaiBukuFix = number_format($row->Nilai,2,",",".");
+						$NilaiBuku = 0;
+						$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+					
 					}
 					
 					$noReg=$row->noRegister;
@@ -28175,7 +28340,7 @@ $body="
 						
 						
 					}elseif($row->Kd_Riwayat == '28'){
-						$LastSatker = $row->SatkerTujuan;
+						/*$LastSatker = $row->SatkerTujuan;
 						$FirstSatker = $skpdfiltr;
 						
 						$kuantitas = 1;
@@ -28206,8 +28371,41 @@ $body="
 							$jmlHasilMutasi = 0;	
 							$nilaiPerolehanHasilMutasi = 0;
 							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+						}*/
+						$kuantitas = 1;
+						$nilaiAwalPrlhn = $row->NilaiPerolehan_Awal;
+						$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
+						if($Aset_ID_Penambahan == 0){
+						//berkurang
+							$jmlTambah = 0;
+							$nilaiPrlhnMutasiTambah = 0;
+							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+							//kurang
+							$jmlKurang = 1;
+							$nilaiPrlhnMutasiKurang = $row->NilaiPerolehan;
+							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+							
+							$jmlHasilMutasi = 0;	
+							$nilaiPerolehanHasilMutasi = 0;
+							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+							
+						}elseif($Aset_ID_Penambahan != 0){
+						//bertambah
+							$jmlTambah = 1;
+							$nilaiPrlhnMutasiTambah = $row->NilaiPerolehan;
+							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+							//kurang
+							$jmlKurang = 0;
+							$nilaiPrlhnMutasiKurang = 0;
+							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+							
+							//get value nilaiperolehan from Aset_ID_Penambahan
+							$addValueKptls = $this->get_NP_Aset_ID_Penambahan($row->Aset_ID_Penambahan);
+							
+							$jmlHasilMutasi = 1;	
+							$nilaiPerolehanHasilMutasi = $nilaiPrlhnMutasiKurang + $addValueKptls + $nilaiPrlhnMutasiTambah;
+							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");	
 						}
-						
 						
 					}elseif($row->Kd_Riwayat == '26'){
 						// echo "MASUK PEMUSNAHAN PENGHAPUSAN";
@@ -37328,7 +37526,7 @@ return $hasil_html;
 						WHERE kodeSatker = '$satker_id'  
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
-						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'";
+						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' and kondisi !='3'";
 		}elseif($gol == '02'){
 			if($thnFix < $thnDefault){
 				$query = "SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml,
@@ -37551,7 +37749,7 @@ return $hasil_html;
 						WHERE $kodeKelompok $paramSatker  
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
-						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'
+						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' and kondisi !='3'
 						";
 		}elseif($gol == '02'){
 			if($thnFix < $thnDefault){
@@ -37891,6 +38089,19 @@ return $hasil_html;
 			}
 		}
 		return $NamaRwyt;
+	}
+	
+		//buat kapitalisasi
+	public function get_NP_Aset_ID_Penambahan($Aset_ID_Penambahan){
+		$queryNpKp = "select NilaiPerolehan from aset where Aset_ID ='$Aset_ID_Penambahan' ";
+		
+		$resulNpKp=$this->retrieve_query($queryNpKp);
+		if($resulNpKp!=""){
+			foreach($resulNpKp as $valueNpKp){
+				$NPKptls=$valueNpKp->NilaiPerolehan;
+			}
+		}
+	return $NPKptls;
 	}
      
 	public function format_tanggal_db3($tgl){

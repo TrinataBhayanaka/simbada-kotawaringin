@@ -90,7 +90,7 @@ $(document).ready(function() {
 			&nbsp; --></p>	
                   <form name="lda_filter" action="<?php echo "$url_rewrite/module/penyusutan/proses_daftar_custome.php"; ?>" method="post" >
                        <ul>
-					   <?=selectSatker('kodeSatker',$width='205',$br=true,false);?>
+					   <?=selectAllSatker('kodeSatker','255',true,false,false,true);//selectSatker('kodeSatker',$width='205',$br=true,false);?>
 						<li>&nbsp;</li>
 						<li>
 							<span class="span2">Tipe Aset</span>
@@ -122,8 +122,8 @@ $(document).ready(function() {
 							<!--<input type="text" name="tahun" id = "tahun" readonly value="<?=date('Y')?>">-->
 							<select name="tahun"  required="1" id="tahun">
 								 <option value="">Pilih Tahun</option>
-								 <option value="2014">2014</option>
-								 <option value="<?=date('Y')?>">2015</option>
+								 <option value="2014">2014(Restatement)</option>
+								<!-- <option value="<?=date('Y')?>">2015</option>-->
 								
 							</select>
 							<input type="hidden" name="UserNm"  value="<?=$Session['ses_satkerid']?>">

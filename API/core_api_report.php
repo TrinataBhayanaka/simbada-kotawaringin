@@ -2454,7 +2454,7 @@ class core_api_report extends DB {
 													//Buku Inventaris Gabungan SKPD
 													
 													if($parameter_sql!="" ){
-														pr($parameter_sql);
+														// pr($parameter_sql);
 														$kel = explode('like ',$query_kelompok_fix);
 														$temp_kel = str_replace("'", "", $kel[1]);
 														$temp_kel = str_replace("%", "", $temp_kel);
@@ -2468,7 +2468,7 @@ class core_api_report extends DB {
 																$param[]="T.".$pecah[$q];
 															}
 															$newparameter_sql = implode('AND ', $param);
-															$query = "select SUM(T.NilaiPerolehan) as Nilai, GROUP_CONCAT(T.noRegister) as noReg,T.kodeSatker,T.kodeKelompok,T.Tahun,T.NilaiPerolehan, T.AsalUsul,T.Info, T.TglPerolehan,T.TglPembukuan,T.Alamat,T.LuasTotal,T.HakTanah, T.NoSertifikat, T.TglSertifikat, T.Penggunaan,T.kodeRuangan,T.kodeLokasi,
+															$query = "select SUM(T.NilaiPerolehan) as Nilai, GROUP_CONCAT(T.noRegister) as noReg,T.kodeSatker,T.kodeKelompok,T.Tahun,T.NilaiPerolehan, T.AsalUsul,T.Info, T.TglPerolehan,T.TglPembukuan,T.Alamat,T.LuasTotal,T.HakTanah, T.NoSertifikat, T.TglSertifikat, T.Penggunaan,T.kodeRuangan,T.kodeLokasi,T.kondisi,
 																			K.Kode, K.Uraian
 																		from 
 																			tanahView as T,kelompok as K
@@ -2491,7 +2491,7 @@ class core_api_report extends DB {
 															$newparameter_sql = implode('AND ', $param);
 															$query = "select SUM(M.NilaiPerolehan) as Nilai, GROUP_CONCAT(M.noRegister) as noReg,M.kodeSatker,M.kodeKelompok,M.NilaiPerolehan, M.AsalUsul, M.Info, M.TglPerolehan,M.TglPembukuan,
 																			M.Tahun,M.Alamat, M.Merk,M.Ukuran,M.Material,M.NoSeri, M.NoRangka,M.NoMesin,M.NoSTNK,M.NoBPKB,
-																			M.Silinder,M.kodeLokasi, K.Kode, K.Uraian
+																			M.Silinder,M.kodeLokasi, M.kondisi,K.Kode, K.Uraian
 																		from 
 																			mesin_ori as M,kelompok as K 
 																		where 
@@ -2816,7 +2816,7 @@ class core_api_report extends DB {
 																		from 
 																			tanahView as T,kelompok as K
 																		where
-																			T.kodeKelompok=K.Kode  and T.Status_Validasi_Barang =1 and T.StatusTampil =1  AND T.kodeLokasi like '12%'
+																			T.kodeKelompok=K.Kode  and T.Status_Validasi_Barang =1 and T.StatusTampil =1  AND T.kodeLokasi like '12%' and T.kondisi !='3'
 																			and $newparameter_sql_01
 																		group by 
 																			T.kodeKelompok, T.kodeSatker,T.Tahun,T.NilaiPerolehan, T.AsalUsul,T.Info, T.TglPerolehan,T.TglPembukuan,T.Alamat,T.LuasTotal,T.HakTanah, T.NoSertifikat, T.TglSertifikat, T.Penggunaan,T.kodeRuangan,T.kodeLokasi,T.kondisi,
@@ -2987,7 +2987,7 @@ class core_api_report extends DB {
 																		from 
 																			tanahView as T,kelompok as K
 																		where
-																			T.kodeKelompok=K.Kode  and T.Status_Validasi_Barang =1 and T.StatusTampil =1 AND T.kodeLokasi like '12%'
+																			T.kodeKelompok=K.Kode  and T.Status_Validasi_Barang =1 and T.StatusTampil =1 AND T.kodeLokasi like '12%' and T.kondisi !='3'
 																			and $newparameter_sql_01 $extQuery_A_default
 																		group by 
 																			T.kodeKelompok, T.kodeSatker,T.Tahun,T.NilaiPerolehan, T.AsalUsul,T.Info, T.TglPerolehan,T.TglPembukuan,T.Alamat,T.LuasTotal,T.HakTanah, T.NoSertifikat, T.TglSertifikat, T.Penggunaan,T.kodeRuangan,T.kodeLokasi,T.kondisi,
@@ -4823,7 +4823,7 @@ class core_api_report extends DB {
 						if($paramGol == 01 ){
 							$queryok ="SELECT k.Uraian, t.Alamat, t.LuasTotal, t.NilaiPerolehan 
 										FROM tanahView as t, kelompok as k 
-										WHERE t.kodeKelompok =k.Kode and t.kodeSatker = '$Satker_ID' and t.TglPerolehan >= '$tglAwalDefault' and t.TglPerolehan <= '$tglAkhirDefault' and t.TglPembukuan >= '$tglAwalDefault' and t.TglPembukuan <= '$tglAkhirDefault' and t.Status_Validasi_Barang =1 and t.StatusTampil = 1 and t.kodeLokasi like '12%'
+										WHERE t.kodeKelompok =k.Kode and t.kodeSatker = '$Satker_ID' and t.TglPerolehan >= '$tglAwalDefault' and t.TglPerolehan <= '$tglAkhirDefault' and t.TglPembukuan >= '$tglAwalDefault' and t.TglPembukuan <= '$tglAkhirDefault' and t.Status_Validasi_Barang =1 and t.StatusTampil = 1 and t.kodeLokasi like '12%' and kondisi !='3'
 										$KodeKa_t order by t.kodeSatker,t.kodeKelompok";
 						}elseif($paramGol == 02){
 							
@@ -5057,7 +5057,7 @@ class core_api_report extends DB {
 							$datafix =array();
 							if($thnFix  < $thnDefault){
 								if($data2 == '01.01'){
-									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM tanahView WHERE kodeKelompok like '$data2%' and $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1";
+									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM tanahView WHERE kodeKelompok like '$data2%' and $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1 and kondisi !='3'";
 								}elseif($data2 == '02.02' || $data2 == '02.03' || $data2 == '02.04' || $data2 == '02.05' || $data2 == '02.06' || $data2 == '02.07' || $data2 == '02.08' || $data2 == '02.09' || $data2 == '02.10' || $data2 == '02.11'){
 									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah,
 												   sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
@@ -5087,7 +5087,7 @@ class core_api_report extends DB {
 								}
 							}elseif($thnceck >= $thnDefault){
 								if($data2 == '01.01'){
-									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM tanahView WHERE kodeKelompok like '$data2%' and $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1";
+									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM tanahView WHERE kodeKelompok like '$data2%' and $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1 and kondisi !='3'";
 								}elseif($data2 == '02.02' || $data2 == '02.03' || $data2 == '02.04' || $data2 == '02.05' || $data2 == '02.06' || $data2 == '02.07' || $data2 == '02.08' || $data2 == '02.09' || $data2 == '02.10' || $data2 == '02.11'){
 									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah,
 													sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
@@ -5118,7 +5118,7 @@ class core_api_report extends DB {
 							else{
 								//add and kodeKA != 0
 								if($data2 == '01.01'){
-									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM tanahView WHERE kodeKelompok like '$data2%' and $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1";
+									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM tanahView WHERE kodeKelompok like '$data2%' and $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1 and kondisi !='3'";
 								}elseif($data2 == '02.02' || $data2 == '02.03' || $data2 == '02.04' || $data2 == '02.05' || $data2 == '02.06' || $data2 == '02.07' || $data2 == '02.08' || $data2 == '02.09' || $data2 == '02.10' || $data2 == '02.11'){
 									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah,
 													sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
@@ -5237,7 +5237,7 @@ class core_api_report extends DB {
 							$datafix =array();
 							if($thnFix  < $thnDefault){
 								if($data2 == '01.01'){
-									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM tanahView WHERE kodeKelompok like '$data2%' and kodeSatker like '$Satker_ID%' and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1";
+									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM tanahView WHERE kodeKelompok like '$data2%' and kodeSatker like '$Satker_ID%' and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1 and kondisi !='3'";
 								}elseif($data2 == '02.02' || $data2 == '02.03' || $data2 == '02.04' || $data2 == '02.05' || $data2 == '02.06' || $data2 == '02.07' || $data2 == '02.08' || $data2 == '02.09' || $data2 == '02.10' || $data2 == '02.11'){
 									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah,
 													sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku 
@@ -5265,7 +5265,7 @@ class core_api_report extends DB {
 								}
 							}elseif($thnceck >= $thnDefault){
 								if($data2 == '01.01'){
-									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM tanahView WHERE kodeKelompok like '$data2%' and kodeSatker like '$Satker_ID%' and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1";
+									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM tanahView WHERE kodeKelompok like '$data2%' and kodeSatker like '$Satker_ID%' and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1 and kondisi !='3'";
 								}elseif($data2 == '02.02' || $data2 == '02.03' || $data2 == '02.04' || $data2 == '02.05' || $data2 == '02.06' || $data2 == '02.07' || $data2 == '02.08' || $data2 == '02.09' || $data2 == '02.10' || $data2 == '02.11'){
 									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah,
 													sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku 
@@ -5295,7 +5295,7 @@ class core_api_report extends DB {
 							else{
 								//add and kodeKA != 0
 								if($data2 == '01.01'){
-									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM tanahView WHERE kodeKelompok like '$data2%' and kodeSatker like '$Satker_ID%' and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1";
+									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM tanahView WHERE kodeKelompok like '$data2%' and kodeSatker like '$Satker_ID%' and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1 and kondisi !='3'";
 								}elseif($data2 == '02.02' || $data2 == '02.03' || $data2 == '02.04' || $data2 == '02.05' || $data2 == '02.06' || $data2 == '02.07' || $data2 == '02.08' || $data2 == '02.09' || $data2 == '02.10' || $data2 == '02.11'){
 									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah,
 													sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku 
@@ -5335,8 +5335,8 @@ class core_api_report extends DB {
 								}
 							}
 							// echo "<br>";
-							 echo $queryresult;
-							 echo "<br>";
+							 // echo $queryresult;
+							 // echo "<br>";
 							$resultfix = $this->query($queryresult) or die ($this->error('error'));	
 							if($resultfix){
 								while ($data3 = $this->fetch_object($resultfix))
@@ -5451,7 +5451,7 @@ class core_api_report extends DB {
 							WHERE $paramSatkr  
 							and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
 							and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
-							and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'
+							and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' and kondisi !='3'
 							";
 			$query_02_default = "SELECT sum(NilaiPerolehan) as nilai,
 							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku 
@@ -5695,10 +5695,10 @@ class core_api_report extends DB {
 							WHERE kodeSatker = '$satker_id'  
 							and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
 							and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
-							and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'
+							and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' and kondisi !='3'
 							";
 			$query_02_default = "SELECT sum(NilaiPerolehan) as nilai,
-							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku 
+							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 							FROM mesin_ori
 							WHERE kodeSatker = '$satker_id'  
 							and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
@@ -5708,7 +5708,7 @@ class core_api_report extends DB {
 							$KodeKaCondt1";
 							
 			$query_02_condt_1 = "SELECT sum(NilaiPerolehan) as nilai,
-							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku 
+							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 							FROM mesin_ori
 							WHERE kodeSatker = '$satker_id'  
 							and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
@@ -5718,7 +5718,7 @@ class core_api_report extends DB {
 			
 			//modif			
 			$query_02_condt_2 = "SELECT sum(NilaiPerolehan) as nilai,
-							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku 
+							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 							FROM mesin_ori
 							WHERE kodeSatker = '$satker_id' 
 							and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan < '$tglDefault' 
@@ -5728,7 +5728,7 @@ class core_api_report extends DB {
 							$KodeKaCondt1
 							union all 
 							SELECT sum(NilaiPerolehan) as Nilai,
-							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku 
+							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 							FROM mesin_Rplctn
 							WHERE kodeSatker = '$satker_id'  
 							and TglPerolehan >= '$tglDefault' AND TglPerolehan <='$tglakhirperolehan' 
@@ -5738,7 +5738,7 @@ class core_api_report extends DB {
 							and (NilaiPerolehan >= 0 $KodeKa) and kondisi != 3";
 			
 			$query_03_default = "SELECT sum(NilaiPerolehan) as nilai,
-							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku 
+							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 							FROM bangunan_ori
 							WHERE kodeSatker = '$satker_id' 
 							and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
@@ -5747,7 +5747,7 @@ class core_api_report extends DB {
 							$KodeKaCondt1 and kondisi != 3";
 							
 			$query_03_condt_1 = "SELECT sum(NilaiPerolehan) as nilai,
-						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku 
+						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 						FROM bangunan_ori
 						WHERE $kodeKelompok kodeSatker = '$satker_id'  
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
@@ -5756,7 +5756,7 @@ class core_api_report extends DB {
 						and (NilaiPerolehan >= 0 $KodeKa) and kondisi != 3";
 			//modif				
 			$query_03_condt_2 = "SELECT sum(NilaiPerolehan) as nilai,
-							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku 
+							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 							FROM bangunan_ori
 							WHERE kodeSatker = '$satker_id' 
 							and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan < '$tglDefault' 
@@ -5766,7 +5766,7 @@ class core_api_report extends DB {
 							$KodeKaCondt1
 							union all 
 							SELECT sum(NilaiPerolehan) as Nilai,
-							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku 
+							sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 							FROM bangunan_Rplctn
 							WHERE kodeSatker = '$satker_id' 
 							and TglPerolehan >= '$tglDefault' AND TglPerolehan <='$tglAkhirDefault'
@@ -5776,7 +5776,7 @@ class core_api_report extends DB {
 							and (NilaiPerolehan >= 0 $KodeKa) and kondisi != 3";	
 							
 			$query_04 = "SELECT sum(NilaiPerolehan) as nilai,
-				sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku 
+				sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 				FROM jaringan_ori
 				WHERE kodeSatker = '$satker_id'  
 				and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault'
@@ -5877,10 +5877,10 @@ class core_api_report extends DB {
 							$nilaiAP = $dataAll->NilaiAP;
 						}
 						
-						if($dataAll->NilaiBuku == NULL || $dataAll->NilaiBuku == ''){
+						if($dataAll->NB == NULL || $dataAll->NB == ''){
 							$nilaiBK = 0;
 						}else{
-							$nilaiBK = $dataAll->NilaiBuku;
+							$nilaiBK = $dataAll->NB;
 						}
 						
 						
@@ -5936,7 +5936,7 @@ class core_api_report extends DB {
 		//parameter dengan SatkerAwal(view mutasi) untuk barang berkurang
 		// l.TglPembukuan >='$tglawalperolehan' AND l.TglPembukuan <='$tglakhirperolehan' AND
 		$paramLog_mts_tr = "l.TglPerubahan >'$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
-						   AND l.Kd_Riwayat in (3,28) and l.Kd_Riwayat != 77 and mt.$paramSatker_mts_tr ";
+						   AND l.Kd_Riwayat in (3) and l.Kd_Riwayat != 77 and mt.$paramSatker_mts_tr ";
 		
 		/*
 		Kode Riwayat
@@ -5946,7 +5946,7 @@ class core_api_report extends DB {
 		//parameter dengan SatkerTujuan(view mutasi) untuk barang bertambah
 		//l.TglPembukuan >='$tglawalperolehan' AND l.TglPembukuan <='$tglakhirperolehan'  AND 
 		$paramLog_mts_rc =  "l.TglPerubahan >'$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
-						   AND l.Kd_Riwayat in (3,28) and l.Kd_Riwayat != 77 and mt.$paramSatker_mts_rc";
+						   AND l.Kd_Riwayat in (3) and l.Kd_Riwayat != 77 and mt.$paramSatker_mts_rc";
 		
 		//begin
 		/*
@@ -6038,9 +6038,68 @@ class core_api_report extends DB {
 					inner join view_mutasi_kdp as mt on l.Aset_ID = mt.Aset_ID 
 					where $paramLog_mts_rc group by l.Aset_ID order by l.Aset_ID ASC";	
 		
+		//transfer kapitalisasi
+		/*
+		Kode Riwayat
+		28 = Transfer Kapitalisasi (-) jika Aset_ID_Penambahan 0
+		*/
+		$paramLogTransferKapitalisasiKurang =  "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
+						   AND l.Kd_Riwayat = '28' and l.$paramSatker 
+						   and l.Aset_ID_Penambahan = '0' order by l.Aset_ID ASC";
+						   
+		$log_tanah_tr_kp="select l.* from log_tanah as l 
+					where $paramLogTransferKapitalisasiKurang ";
+		
+		$log_mesin_tr_kp="select l.* from log_mesin as l 
+					where $paramLogTransferKapitalisasiKurang ";
+		
+		$log_bangunan_tr_kp="select l.*  from log_bangunan as l 
+					where $paramLogTransferKapitalisasiKurang";
+		
+		$log_jaringan_tr_kp="select l.* from log_jaringan as l 
+					where $paramLogTransferKapitalisasiKurang";	
+			
+		$log_asetlain_tr_kp="select l.* from log_asetlain as l 
+					where $paramLogTransferKapitalisasiKurang";
+		
+		$log_kdp_tr_kp="select l.* from log_kdp as l 
+					where $paramLogTransferKapitalisasiKurang";			
+		//======================================================================================				   
+		/*
+		Kode Riwayat
+		28 = Transfer Kapitalisasi (+) jika Aset_ID_Penambahan !=0
+		*/
+		$paramLogTransferKapitalisasiTambah =  "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
+						   AND l.Kd_Riwayat = '28' and l.$paramSatker 
+						   and l.Aset_ID_Penambahan != '0' order by l.Aset_ID ASC";
+		
+		
+		$log_tanah_rc_kp="select l.* from log_tanah as l 
+					where $paramLogTransferKapitalisasiTambah ";
+		
+		$log_mesin_rc_kp="select l.* from log_mesin as l 
+					where $paramLogTransferKapitalisasiTambah ";
+		
+		$log_bangunan_rc_kp="select l.*  from log_bangunan as l 
+					where $paramLogTransferKapitalisasiTambah";
+		
+		$log_jaringan_rc_kp="select l.* from log_jaringan as l 
+					where $paramLogTransferKapitalisasiTambah";	
+			
+		$log_asetlain_rc_kp="select l.* from log_asetlain as l 
+					where $paramLogTransferKapitalisasiTambah";
+		
+		$log_kdp_rc_kp="select l.* from log_kdp as l 
+					where $paramLogTransferKapitalisasiTambah";	
+		
+		
+		
 		$queryALL = array($log_tanah,$log_mesin,$log_bangunan,$log_jaringan,$log_asetlain,$log_kdp,
 						  $log_tanah_tr,$log_mesin_tr,$log_bangunan_tr,$log_jaringan_tr,$log_asetlain_tr,$log_kdp_tr,
-						  $log_tanah_rc,$log_mesin_rc,$log_bangunan_rc,$log_jaringan_rc,$log_asetlain_rc,$log_kdp_rc);
+						  $log_tanah_rc,$log_mesin_rc,$log_bangunan_rc,$log_jaringan_rc,$log_asetlain_rc,$log_kdp_rc,
+						  $log_tanah_tr_kp,$log_mesin_tr_kp,$log_bangunan_tr_kp,$log_jaringan_tr_kp,$log_asetlain_tr_kp,$log_asetlain_tr_kp,$log_kdp_tr_kp,
+						  $log_tanah_rc_kp,$log_mesin_rc_kp,$log_bangunan_rc_kp,$log_jaringan_rc_kp,$log_asetlain_rc_kp,$log_kdp_rc_kp
+						  );
 		
 		// $queryALL = array($log_tanah_tr,$log_mesin_tr,$log_bangunan_tr,$log_jaringan_tr,$log_asetlain_tr,$log_kdp_tr);
 		// $queryALL = array($log_tanah_rc,$log_mesin_rc,$log_bangunan_rc,$log_jaringan_rc,$log_asetlain_rc,$log_kdp_rc);
@@ -6398,7 +6457,7 @@ class core_api_report extends DB {
 										a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran, a.Silinder, a.MerkMesin, a.JumlahMesin,a.Material, a.NoSeri,
 										a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar, 
 										a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, 
-										if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 
+										if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000  ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 
 									from log_mesin a
 									inner join mesin t on t.Aset_ID=a.Aset_ID
 									inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -6458,7 +6517,7 @@ class core_api_report extends DB {
 										a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran,a. Silinder, a.MerkMesin, a.JumlahMesin, a.Material, a.NoSeri,
 										a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar, 
 										a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, 
-										if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 
+										if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 
 									from log_mesin a
 									inner join mesin t on t.Aset_ID=a.Aset_ID 
 									inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -6573,7 +6632,7 @@ class core_api_report extends DB {
 										a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, 
 										a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas, 
 										a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, 
-										if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun)  
+										if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun)  
 									from log_bangunan a
 									inner join bangunan t on t.Aset_ID=a.Aset_ID
 									inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -6631,7 +6690,7 @@ class core_api_report extends DB {
 										a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, 
 										a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas, 
 										a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, 
-										if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun)  
+										if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun)  
 									from log_bangunan a
 									inner join bangunan t on t.Aset_ID=a.Aset_ID
 									inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -6742,7 +6801,7 @@ class core_api_report extends DB {
 									a.kodeKA, a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, if(a.NilaiPerolehan_Awal!=0,a.NilaiPerolehan_Awal,a.NilaiPerolehan), a.Alamat, a.Info, 
 									a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Konstruksi, a.Panjang, a.Lebar, a.NoDokumen, a.TglDokumen, a.StatusTanah, 
 									a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.KelompokTanah_ID, a.GUID, a.TanggalPemakaian, a.LuasJaringan, a.MasaManfaat, 
-									if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun)  
+									if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun)  
 								from log_jaringan a
 								inner join jaringan t on t.Aset_ID=a.Aset_ID
 								inner join jaringan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -7722,7 +7781,7 @@ class core_api_report extends DB {
 									a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran, a.Silinder, a.MerkMesin, a.JumlahMesin,a.Material, a.NoSeri,
 									a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar, 
 									a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, 
-									if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		  
+									if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		  
 								from log_mesin a
 								inner join mesin t on t.Aset_ID=a.Aset_ID 
 								inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -7780,7 +7839,7 @@ class core_api_report extends DB {
 									a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, 
 									a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas, 
 									a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, 
-									if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
+									if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
 								from log_bangunan a
 								inner join bangunan t on t.Aset_ID=a.Aset_ID
 								inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -7837,7 +7896,7 @@ class core_api_report extends DB {
 									a.kodeKA, a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, if(a.NilaiPerolehan_Awal!=0,a.NilaiPerolehan_Awal,a.NilaiPerolehan), a.Alamat, a.Info, 
 									a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Konstruksi, a.Panjang, a.Lebar, a.NoDokumen, a.TglDokumen, a.StatusTanah, 
 									a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.KelompokTanah_ID, a.GUID, a.TanggalPemakaian, a.LuasJaringan, a.MasaManfaat, 
-									if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
+									if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
 								from log_jaringan a
 								inner join jaringan t on t.Aset_ID=a.Aset_ID
 								inner join jaringan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -8127,7 +8186,7 @@ class core_api_report extends DB {
 									a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran, a.Silinder, a.MerkMesin, a.JumlahMesin,a.Material, a.NoSeri,
 									a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar, 
 									a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, 
-									if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		   
+									if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		   
 								from log_mesin a
 								inner join mesin t on t.Aset_ID=a.Aset_ID
 								inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -8190,7 +8249,7 @@ class core_api_report extends DB {
 									a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran,a. Silinder, a.MerkMesin, a.JumlahMesin, a.Material, a.NoSeri,
 									a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar, 
 									a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, 
-									if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		   
+									if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		   
 								from log_mesin a
 								inner join mesin t on t.Aset_ID=a.Aset_ID 
 								inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -8248,7 +8307,7 @@ class core_api_report extends DB {
 									a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, 
 									a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas, 
 									a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, 
-									if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
+									if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
 								from log_bangunan a
 								inner join bangunan t on t.Aset_ID=a.Aset_ID
 								inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -8309,7 +8368,7 @@ class core_api_report extends DB {
 									a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, 
 									a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas, 
 									a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, 
-									if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
+									if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
 								from log_bangunan a
 								inner join bangunan t on t.Aset_ID=a.Aset_ID
 								inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -8366,7 +8425,7 @@ class core_api_report extends DB {
 									a.kodeKA, a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, if(a.NilaiPerolehan_Awal!=0,a.NilaiPerolehan_Awal,a.NilaiPerolehan), a.Alamat, a.Info, 
 									a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Konstruksi, a.Panjang, a.Lebar, a.NoDokumen, a.TglDokumen, a.StatusTanah, 
 									a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.KelompokTanah_ID, a.GUID, a.TanggalPemakaian, a.LuasJaringan, a.MasaManfaat, 
-									if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
+									if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
 								from log_jaringan a
 								inner join jaringan t on t.Aset_ID=a.Aset_ID
 								inner join jaringan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -8641,7 +8700,7 @@ class core_api_report extends DB {
 									a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran, a.Silinder, a.MerkMesin, a.JumlahMesin,a.Material, a.NoSeri,
 									a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar, 
 									a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, 
-									if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		   
+									if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		   
 								from log_mesin a
 								inner join mesin t on t.Aset_ID=a.Aset_ID
 								inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -8704,7 +8763,7 @@ class core_api_report extends DB {
 									a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran,a. Silinder, a.MerkMesin, a.JumlahMesin, a.Material, a.NoSeri,
 									a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar, 
 									a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, 
-									if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		   
+									if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		   
 								from log_mesin a
 								inner join mesin t on t.Aset_ID=a.Aset_ID 
 								inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -8762,7 +8821,7 @@ class core_api_report extends DB {
 									a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, 
 									a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas, 
 									a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, 
-									if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
+									if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
 								from log_bangunan a
 								inner join bangunan t on t.Aset_ID=a.Aset_ID
 								inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -8823,7 +8882,7 @@ class core_api_report extends DB {
 									a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, 
 									a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas, 
 									a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, 
-									if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
+									if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
 								from log_bangunan a
 								inner join bangunan t on t.Aset_ID=a.Aset_ID
 								inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -8880,7 +8939,7 @@ class core_api_report extends DB {
 									a.kodeKA, a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, if(a.NilaiPerolehan_Awal!=0,a.NilaiPerolehan_Awal,a.NilaiPerolehan), a.Alamat, a.Info, 
 									a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Konstruksi, a.Panjang, a.Lebar, a.NoDokumen, a.TglDokumen, a.StatusTanah, 
 									a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.KelompokTanah_ID, a.GUID, a.TanggalPemakaian, a.LuasJaringan, a.MasaManfaat, 
-									if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
+									if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0.0000 ,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0.0000 ,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0.0000,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun) 		    
 								from log_jaringan a
 								inner join jaringan t on t.Aset_ID=a.Aset_ID
 								inner join jaringan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -9232,9 +9291,9 @@ class core_api_report extends DB {
 			
 				for ($i = 0; $i < count($AllTableTemp); $i++)
 				{
-					/*echo "query_$i =".$AllTableTemp[$i];
-					echo "<br>";
-					echo "<br>";*/
+					// echo "query_$i =".$AllTableTemp[$i];
+					// echo "<br>";
+					// echo "<br>";
 					// exit;
 					$resultQuery = $this->query($AllTableTemp[$i]) or die ($this->error('error dataQuery'));
 				}
