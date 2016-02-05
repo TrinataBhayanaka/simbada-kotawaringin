@@ -315,10 +315,10 @@ $data=array();
 					<td>&nbsp;</td>
 					<td style=\"font-weight: bold;\">{$gol[Uraian]}</td>
 					<td style=\"text-align: center; font-weight: bold;\">{$gol[jml]}</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nilai],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[PP],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[AP],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[NB],2,",",".")."</td>                                         
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nilai],0,",",".")."</td>
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[PP],0,",",".")."</td>
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[AP],0,",",".")."</td>
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[NB],0,",",".")."</td>                                         
 				</tr>";	
 				
 			foreach($gol['Bidang'] as $bidang)
@@ -333,10 +333,10 @@ $data=array();
 								<td>&nbsp;</td>
 								<td style=\"font-weight: bold;\">{$bidang[Uraian]}</td>
                                 <td style=\"text-align: center; font-weight: bold;\">{$bidang[jml]}</td>
-                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nilai],2,",",".")."</td>
-                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[PP],2,",",".")."</td>
-                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[AP],2,",",".")."</td>
-                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[NB],2,",",".")."</td>
+                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nilai],0,",",".")."</td>
+                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[PP],0,",",".")."</td>
+                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[AP],0,",",".")."</td>
+                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[NB],0,",",".")."</td>
 							</tr>";	
 				foreach($bidang['Kelompok'] as $Kelompok)
 				{	
@@ -350,10 +350,10 @@ $data=array();
 								<td>&nbsp;</td>
 								<td>{$Kelompok[Uraian]}</td>
                                 <td style=\"text-align: center;\">{$Kelompok[jml]}</td>
-								<td style=\"text-align: right;\">".number_format($Kelompok[nilai],2,",",".")."</td>
-								<td style=\"text-align: right;\">".number_format($Kelompok[PP],2,",",".")."</td>
-								<td style=\"text-align: right;\">".number_format($Kelompok[AP],2,",",".")."</td>
-								<td style=\"text-align: right;\">".number_format($Kelompok[NB],2,",",".")."</td>
+								<td style=\"text-align: right;\">".number_format($Kelompok[nilai],0,",",".")."</td>
+								<td style=\"text-align: right;\">".number_format($Kelompok[PP],0,",",".")."</td>
+								<td style=\"text-align: right;\">".number_format($Kelompok[AP],0,",",".")."</td>
+								<td style=\"text-align: right;\">".number_format($Kelompok[NB],0,",",".")."</td>
 							</tr>";
 					foreach($Kelompok['Sub'] as $Sub)
 					{	
@@ -367,10 +367,10 @@ $data=array();
 										<td>&nbsp;</td>
 										<td>{$Sub[Uraian]}</td>
 										<td style=\"text-align: center;\">{$Sub[jml]}</td>
-										<td style=\"text-align: right;\">".number_format($Sub[nilai],2,",",".")."</td>
-										<td style=\"text-align: right;\">".number_format($Sub[PP],2,",",".")."</td>
-										<td style=\"text-align: right;\">".number_format($Sub[AP],2,",",".")."</td>
-										<td style=\"text-align: right;\">".number_format($Sub[NB],2,",",".")."</td>
+										<td style=\"text-align: right;\">".number_format($Sub[nilai],0,",",".")."</td>
+										<td style=\"text-align: right;\">".number_format($Sub[PP],0,",",".")."</td>
+										<td style=\"text-align: right;\">".number_format($Sub[AP],0,",",".")."</td>
+										<td style=\"text-align: right;\">".number_format($Sub[NB],0,",",".")."</td>
 									</tr>";
 						foreach($Sub['SubSub'] as $SubSub)
 						{	 
@@ -384,10 +384,10 @@ $data=array();
 											<td>{$SubSub[subsub]}</td>
 											<td>{$SubSub[Uraian]}</td>
                                             <td style=\"text-align: center;\">{$SubSub[jml]}</td>
-											<td style=\"text-align: right;\">".number_format($SubSub[nilai],2,",",".")."</td>
-											<td style=\"text-align: right;\">".number_format($SubSub[PP],2,",",".")."</td>
-											<td style=\"text-align: right;\">".number_format($SubSub[AP],2,",",".")."</td>
-											<td style=\"text-align: right;\">".number_format($SubSub[NB],2,",",".")."</td>
+											<td style=\"text-align: right;\">".number_format($SubSub[nilai],0,",",".")."</td>
+											<td style=\"text-align: right;\">".number_format($SubSub[PP],0,",",".")."</td>
+											<td style=\"text-align: right;\">".number_format($SubSub[AP],0,",",".")."</td>
+											<td style=\"text-align: right;\">".number_format($SubSub[NB],0,",",".")."</td>
 										</tr>";
 						}
 					}
@@ -406,10 +406,10 @@ $data=array();
 		$foot="<tr>
 				<td colspan = \"6\" style=\"text-align: center; font-weight: bold;\">Total</td>
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($jml_total,0,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($np_total,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($pp_total,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($ap_total,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($nb_total,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($np_total,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($pp_total,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($ap_total,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($nb_total,0,",",".")."</td>
 			</tr>
 		</table>";
 	}else{
