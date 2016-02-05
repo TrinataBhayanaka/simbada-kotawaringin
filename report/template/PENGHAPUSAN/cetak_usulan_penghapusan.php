@@ -14,6 +14,7 @@ require_once('../../../function/mpdf/mpdf.php');
 $id = $_GET['idusulan'];
 $sk = $_GET['noUsul'];
 $tglHapus = $_GET['tglHapus'];
+// $tglHapus = $_GET['tglHapus'];
 $tipe=$_GET['tipe_file'];
 //mendeklarasikan report_engine. FILE utama untuk reporting
 $REPORT_DAFTAR = new report_engine_daftar();
