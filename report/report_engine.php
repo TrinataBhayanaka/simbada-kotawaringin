@@ -283,7 +283,7 @@ public function retrieve_html_liat_dftr_aset($dataArr,$skpd_id,$gambar,$tipe){
 					$no = 1;			  
 					foreach ($dataArr as $val => $data)
 					{
-								$perolehan = number_format($data->NilaiPerolehan,2,",",".");
+								$perolehan = number_format($data->NilaiPerolehan,0,",",".");
 								//$perolehanTotal = $perolehanTotal + $data->NilaiPerolehan;
 								$NamaKelompok = $this->get_NamaKelompok($data->kodeKelompok);
 								
@@ -442,7 +442,7 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"width: ; text-align: ;\">$row->NoSertifikat&nbsp;</td>
 						  <td style=\"width: ; text-align: right;\">$row->LuasTotal&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$info</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($row->NilaiPerolehan,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($row->NilaiPerolehan,0,",",".")."&nbsp;</td>
 						</tr>"; 
 				
 			$html.="</table>";
@@ -515,8 +515,8 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"text-align: center;width: ;\">$datakrksNilai->TglPerubahan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->No_Dokumen&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->GUID&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan,2,",",".")."&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan_Awal,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan,0,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan_Awal,0,",",".")."&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$Inforwyt&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->MasaManfaat&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->NilaiBuku &nbsp;</td>
@@ -603,8 +603,8 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"text-align: center;width: ;\">$dataKap->TglPerubahan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->No_Dokumen&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->GUID&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan,2,",",".")."&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan_Awal,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan,0,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan_Awal,0,",",".")."&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$Inforwyt&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->MasaManfaat&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->NilaiBuku&nbsp;</td>
@@ -1060,7 +1060,7 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"width: ; text-align: center;\">$no</td>
 						  <td style=\"text-align: center;width: ;\">$row->TglPerolehan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$info&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($row->NilaiPerolehan,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($row->NilaiPerolehan,0,",",".")."&nbsp;</td>
 						</tr>"; 
 				
 			$html.="</table>";
@@ -1129,8 +1129,8 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"text-align: center;width: ;\">$datakrksNilai->TglPerubahan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->No_Dokumen&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->GUID&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan,2,",",".")."&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan_Awal,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan,0,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan_Awal,0,",",".")."&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$Inforwyt&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->MasaManfaat&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->NilaiBuku &nbsp;</td>
@@ -1217,8 +1217,8 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"text-align: center;width: ;\">$dataKap->TglPerubahan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->No_Dokumen&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->GUID&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan,2,",",".")."&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan_Awal,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan,0,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan_Awal,0,",",".")."&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$Inforwyt&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->MasaManfaat&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->NilaiBuku&nbsp;</td>
@@ -1702,7 +1702,7 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"width: ; text-align: center;\">$no</td>
 						  <td style=\"text-align: center;width: ;\">$row->TglPerolehan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$info&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($row->NilaiPerolehan,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($row->NilaiPerolehan,0,",",".")."&nbsp;</td>
 						</tr>"; 
 				
 			$html.="</table>";
@@ -1771,8 +1771,8 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"text-align: center;width: ;\">$datakrksNilai->TglPerubahan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->No_Dokumen&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->GUID&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan,2,",",".")."&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan_Awal,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan,0,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan_Awal,0,",",".")."&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$Inforwyt&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->MasaManfaat&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->NilaiBuku &nbsp;</td>
@@ -1859,8 +1859,8 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"text-align: center;width: ;\">$dataKap->TglPerubahan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->No_Dokumen&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->GUID&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan,2,",",".")."&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan_Awal,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan,0,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan_Awal,0,",",".")."&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$Inforwyt&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->MasaManfaat&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->NilaiBuku&nbsp;</td>
@@ -2347,7 +2347,7 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"width: ; text-align: center;\">$no</td>
 						  <td style=\"text-align: center;width: ;\">$row->TglPerolehan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$info&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($row->NilaiPerolehan,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($row->NilaiPerolehan,0,",",".")."&nbsp;</td>
 						</tr>"; 
 				
 			$html.="</table>";
@@ -2415,8 +2415,8 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"text-align: center;width: ;\">$datakrksNilai->TglPerubahan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->No_Dokumen&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->GUID&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan,2,",",".")."&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan_Awal,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan,0,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan_Awal,0,",",".")."&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$Inforwyt&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->MasaManfaat&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->NilaiBuku &nbsp;</td>
@@ -2503,8 +2503,8 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"text-align: center;width: ;\">$dataKap->TglPerubahan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->No_Dokumen&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->GUID&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan,2,",",".")."&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan_Awal,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan,0,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan_Awal,0,",",".")."&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$Inforwyt&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->MasaManfaat&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->NilaiBuku&nbsp;</td>
@@ -2997,7 +2997,7 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"width: ; text-align: center;\">$no</td>
 						  <td style=\"text-align: center;width: ;\">$row->TglPerolehan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$info&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($row->NilaiPerolehan,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($row->NilaiPerolehan,0,",",".")."&nbsp;</td>
 						</tr>"; 
 				
 			$html.="</table>";
@@ -3065,8 +3065,8 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"text-align: center;width: ;\">$datakrksNilai->TglPerubahan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->No_Dokumen&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->GUID&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan,2,",",".")."&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan_Awal,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan,0,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan_Awal,0,",",".")."&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$Inforwyt&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->MasaManfaat&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->NilaiBuku &nbsp;</td>
@@ -3153,8 +3153,8 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"text-align: center;width: ;\">$dataKap->TglPerubahan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->No_Dokumen&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->GUID&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan,2,",",".")."&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan_Awal,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan,0,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan_Awal,0,",",".")."&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$Inforwyt&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->MasaManfaat&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->NilaiBuku&nbsp;</td>
@@ -3670,7 +3670,7 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"width: ; text-align: center;\">$no</td>
 						  <td style=\"text-align: center;width: ;\">$row->TglPerolehan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$info&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($row->NilaiPerolehan,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($row->NilaiPerolehan,0,",",".")."&nbsp;</td>
 						</tr>"; 
 				
 			$html.="</table>";
@@ -3739,8 +3739,8 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"text-align: center;width: ;\">$datakrksNilai->TglPerubahan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->No_Dokumen&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->GUID&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan,2,",",".")."&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan_Awal,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan,0,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($datakrksNilai->NilaiPerolehan_Awal,0,",",".")."&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$Inforwyt&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->MasaManfaat&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$datakrksNilai->NilaiBuku &nbsp;</td>
@@ -3827,8 +3827,8 @@ foreach ($dataArr as $asetID => $value)
 						  <td style=\"text-align: center;width: ;\">$dataKap->TglPerubahan&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->No_Dokumen&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->GUID&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan,2,",",".")."&nbsp;</td>
-						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan_Awal,2,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan,0,",",".")."&nbsp;</td>
+						  <td style=\"width: ; text-align: right;\">".number_format($dataKap->NilaiPerolehan_Awal,0,",",".")."&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$Inforwyt&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->MasaManfaat&nbsp;</td>
 						  <td style=\"width: ; text-align: ;\">$dataKap->NilaiBuku&nbsp;</td>
@@ -4588,18 +4588,18 @@ if($skpd_id != ''){
 		$html.="<tr>
 					<td style=\" text-align: center;\">$kodeSatker</td>
 					<td style=\"width: 300px; text-align: left;\">$namaSatker</td>
-					<td style=\"text-align: right; \">".number_format($nilai_tanah,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($nilai_mesin,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($nilai_bangunan,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($nilai_jaringan,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($nilai_asettetaplain,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($nilai_kdp,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($nilai_asetlain,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($nonAset,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($penyusutanPP,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($penyusutanAP,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($penyusutanNB,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($total,2,",",".")."</td>
+					<td style=\"text-align: right; \">".number_format($nilai_tanah,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($nilai_mesin,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($nilai_bangunan,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($nilai_jaringan,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($nilai_asettetaplain,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($nilai_kdp,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($nilai_asetlain,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($nonAset,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($penyusutanPP,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($penyusutanAP,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($penyusutanNB,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($total,0,",",".")."</td>
 				</tr>
 			";
 		$total = 0;
@@ -4619,18 +4619,18 @@ if($skpd_id != ''){
 	}
 	$html.="<tr>
 				<td colspan =\"2\" style=\"text-align: center; \">JUMLAH</td>
-				<td style=\"text-align: right; \">".number_format($totalTanah,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalMesin,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalBangunan,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalJaringan,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalAsetTetap,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalKdp,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalAsetLain,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalNonAset,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalPP,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalAP,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalNB,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($TotAllFix,2,",",".")."</td>
+				<td style=\"text-align: right; \">".number_format($totalTanah,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalMesin,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalBangunan,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalJaringan,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalAsetTetap,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalKdp,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalAsetLain,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalNonAset,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalPP,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalAP,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalNB,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($TotAllFix,0,",",".")."</td>
 			</tr>";
 	$html.="</table></body></html>";
 	 $hasil_html[]=$html;
@@ -5009,18 +5009,18 @@ if($skpd_id != ''){
 		$html.="<tr>
 					<td style=\" text-align: center;\">$kodeSatker</td>
 					<td style=\"width: 300px; text-align: left;\">$namaSatker</td>
-					<td style=\"text-align: right; \">".number_format($nilai_tanah,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($nilai_mesin,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($nilai_bangunan,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($nilai_jaringan,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($nilai_asettetaplain,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($nilai_kdp,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($nilai_asetlain,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($nonAset,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($penyusutanPP,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($penyusutanAP,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($penyusutanNB,2,",",".")."</td>
-					<td style=\"text-align: right;\">".number_format($total,2,",",".")."</td>
+					<td style=\"text-align: right; \">".number_format($nilai_tanah,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($nilai_mesin,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($nilai_bangunan,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($nilai_jaringan,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($nilai_asettetaplain,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($nilai_kdp,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($nilai_asetlain,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($nonAset,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($penyusutanPP,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($penyusutanAP,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($penyusutanNB,0,",",".")."</td>
+					<td style=\"text-align: right;\">".number_format($total,0,",",".")."</td>
 				</tr>
 			";
 		$total = 0;
@@ -5040,18 +5040,18 @@ if($skpd_id != ''){
 	}
 	$html.="<tr>
 				<td colspan =\"2\" style=\"text-align: center; \">JUMLAH</td>
-				<td style=\"text-align: right; \">".number_format($totalTanah,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalMesin,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalBangunan,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalJaringan,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalAsetTetap,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalKdp,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalAsetLain,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalNonAset,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalPP,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalAP,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($totalNB,2,",",".")."</td>
-				<td style=\"text-align: right;\">".number_format($TotAllFix,2,",",".")."</td>
+				<td style=\"text-align: right; \">".number_format($totalTanah,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalMesin,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalBangunan,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalJaringan,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalAsetTetap,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalKdp,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalAsetLain,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalNonAset,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalPP,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalAP,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($totalNB,0,",",".")."</td>
+				<td style=\"text-align: right;\">".number_format($TotAllFix,0,",",".")."</td>
 			</tr>";
 	$html.="</table></body></html>";
 	 $hasil_html[]=$html;
@@ -5224,34 +5224,34 @@ foreach ($dataArr as $satker_id => $value)
 			
 			$TotalNilai = $this->get_TotalNilaiNeraca($skpd_id,$kode_1_parent,$tglawalperolehan,$tglakhirperolehan);
 			//nilai perolehan
-			$TotalNilaiFix=number_format($TotalNilai[0],2,",",".");
+			$TotalNilaiFix=number_format($TotalNilai[0],0,",",".");
 			//jumlah barang
 			$TotalJmlFix=number_format($TotalNilai[1],0,",",".");
 			
 			//tambah penyusutan
 			//nilai penyusutan pertahun
-			$TotalNilaiPPFix=number_format($TotalNilai[2],2,",",".");
+			$TotalNilaiPPFix=number_format($TotalNilai[2],0,",",".");
 			//nilai akumulasi penyusutan
-			$TotalNilaiAPFix=number_format($TotalNilai[3],2,",",".");
+			$TotalNilaiAPFix=number_format($TotalNilai[3],0,",",".");
 			if($TotalNilai[4] != 0 || $TotalNilai[4] != ''||$TotalNilai[3]!=""||$TotalNilai[3]!=0){
-				$TotalNilaiNilaiBukuFix=number_format($TotalNilai[4],2,",",".");
+				$TotalNilaiNilaiBukuFix=number_format($TotalNilai[4],0,",",".");
 			}else{
-				$TotalNilaiNilaiBukuFix=number_format($TotalNilai[0],2,",",".");
+				$TotalNilaiNilaiBukuFix=number_format($TotalNilai[0],0,",",".");
 			}
 			
 		}else{
 			$TotalNilai = $this->get_TotalNilaiNeraca($skpd_id,$kode_1_parent,$tglawalperolehan,$tglakhirperolehan);
-			$TotalNilaiFix=number_format($TotalNilai[0],2,",",".");
+			$TotalNilaiFix=number_format($TotalNilai[0],0,",",".");
 			//jumlah barang
 			$TotalJmlFix=number_format($TotalNilai[1],0,",",".");
 			
 			//tambah penyusutan
 			//nilai penyusutan pertahun
-			$TotalNilaiPPFix=number_format(0,2,",",".");
+			$TotalNilaiPPFix=number_format(0,0,",",".");
 			//nilai akumulasi penyusutan
-			$TotalNilaiAPFix=number_format(0,2,",",".");
+			$TotalNilaiAPFix=number_format(0,0,",",".");
 			
-			$TotalNilaiNilaiBukuFix=number_format(0,2,",",".");
+			$TotalNilaiNilaiBukuFix=number_format(0,0,",",".");
 			
 		}
 		
@@ -5274,11 +5274,11 @@ foreach ($dataArr as $satker_id => $value)
 			$header="
 			<tr>
 				<td colspan = \"2\" align=\"center\" style=\"font-weight: bold;\">TOTAL ASET TETAP</td>
-				<td align=\"right\" style=\"font-weight: bold;\">".number_format($jmlALL,2,",",".")."</td>
-				<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALL,2,",",".")."</td>
-				<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALLPP,2,",",".")."</td>
-				<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALLAP,2,",",".")."</td>
-				<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALLNilaiBuku,2,",",".")."</td>
+				<td align=\"right\" style=\"font-weight: bold;\">".number_format($jmlALL,0,",",".")."</td>
+				<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALL,0,",",".")."</td>
+				<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALLPP,0,",",".")."</td>
+				<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALLAP,0,",",".")."</td>
+				<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALLNilaiBuku,0,",",".")."</td>
 			</tr>";
 			  $totalALL = $TotalNilai[0];
 			  $jmlALL = $TotalNilai[1];
@@ -5420,19 +5420,19 @@ foreach ($dataArr as $satker_id => $value)
 						<td style=\"text-align: right;\">$kode_1_child</td>
                         <td style=\"text-align: ;\">$kode_2_child</td>
                         <td style=\"text-align: center;\">".number_format($jmlFix,0,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($nilaiFix,2,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($nilaiPPFix,2,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($nilaiAPFix,2,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($nilaiNBFix,2,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($nilaiFix,0,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($nilaiPPFix,0,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($nilaiAPFix,0,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($nilaiNBFix,0,",",".")."</td>
                       </tr>";
 				 if($kode_1_child == '07.24'){
 					$html .="<tr>
 								<td colspan = \"2\" align=\"center\" style=\"font-weight: bold;\">TOTAL ASET LAINNYA</td>
-								<td align=\"right\" style=\"font-weight: bold;\">".number_format($jmlALL,2,",",".")."</td>
-								<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALL,2,",",".")."</td>
-								<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALLPP,2,",",".")."</td>
-								<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALLAP,2,",",".")."</td>
-								<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALLNilaiBuku,2,",",".")."</td>
+								<td align=\"right\" style=\"font-weight: bold;\">".number_format($jmlALL,0,",",".")."</td>
+								<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALL,0,",",".")."</td>
+								<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALLPP,0,",",".")."</td>
+								<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALLAP,0,",",".")."</td>
+								<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALLNilaiBuku,0,",",".")."</td>
 							</tr>
 							</table>
 							</tbody>
@@ -5639,13 +5639,13 @@ foreach ($dataArr as $satker_id => $value)
 		$kode_2_parent = end($exp);
 		//tahun aktif - 1
 		$TotalNilai = $this->get_TotalNilaiNeraca($skpd_id,$kode_1_parent,$tglawalperolehan,$tglAkhirMutasiAwal);
-		$TotalNilaiFix=number_format($TotalNilai[0],2,",",".");
+		$TotalNilaiFix=number_format($TotalNilai[0],0,",",".");
 		$TotalJmlFix=number_format($TotalNilai[1],0,",",".");
 		
 		//tahun aktif
 		$exeTempTable_getTotal = $this->tempTableMutasi($skpd_id,$kode_1_parent,$tglawalperolehan,$tglakhirperolehan);
 		$TotalNilai_Mutasi = $this->get_TotalNilaiNeraca($skpd_id,$kode_1_parent,$tglawalperolehan,$tglakhirperolehan);
-		$TotalNilaiFix_Mutasi =number_format($TotalNilai_Mutasi[0],2,",",".");
+		$TotalNilaiFix_Mutasi =number_format($TotalNilai_Mutasi[0],0,",",".");
 		$TotalJmlFix_Mutasi=number_format($TotalNilai_Mutasi[1],0,",",".");
 		
 		if($keys != '07_Aset Lainnya'){
@@ -5657,8 +5657,8 @@ foreach ($dataArr as $satker_id => $value)
 			$header="
 			<tr>
 				<td colspan = \"2\" align=\"center\" style=\"font-weight: bold;\">TOTAL ASET TETAP</td>
-				<td align=\"right\" style=\"font-weight: bold;\">".number_format($jmlALL,2,",",".")."</td>
-				<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALL,2,",",".")."</td>
+				<td align=\"right\" style=\"font-weight: bold;\">".number_format($jmlALL,0,",",".")."</td>
+				<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALL,0,",",".")."</td>
 				<td align=\"right\" style=\"font-weight: bold;\">-</td>
 				<td align=\"right\" style=\"font-weight: bold;\">-</td>
 				<td align=\"right\" style=\"font-weight: bold;\">-</td>
@@ -5764,7 +5764,7 @@ foreach ($dataArr as $satker_id => $value)
 				$jmlFixMutasi = $TotalNilaiMutasi[1];
 				
 				$jmlFix_final=number_format($jmlFixMutasi,0,",",".");
-				$nilaiFix_final=number_format($nilaiFixMutasi,2,",",".");
+				$nilaiFix_final=number_format($nilaiFixMutasi,0,",",".");
 				
 				if($nilaiFixMutasi > $nilaiFix){
 					//bertambah
@@ -5806,13 +5806,13 @@ foreach ($dataArr as $satker_id => $value)
                         <td style=\"text-align: ;\">$kode_2_child</td>
 						
                         <td style=\"text-align: center;\">".number_format($jmlFix,0,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($nilaiFix,2,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($nilaiFix,0,",",".")."</td>
 						
 						<td style=\"text-align: center;\">".number_format($jmlFix_berkurang,0,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($nilaiFix_berkurang,2,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($nilaiFix_berkurang,0,",",".")."</td>
 						
 						<td style=\"text-align: center;\">".number_format($jmlFix_bertambah,0,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($nilaiFix_bertambah,2,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($nilaiFix_bertambah,0,",",".")."</td>
 						
 						<td style=\"text-align: center;\">$jmlFix_final</td>
                         <td style=\"text-align: right;\">$nilaiFix_final</td>
@@ -5820,8 +5820,8 @@ foreach ($dataArr as $satker_id => $value)
 				 if($kode_1_child == '07.24'){
 					$html .="<tr>
 								<td colspan = \"2\" align=\"center\" style=\"font-weight: bold;\">TOTAL ASET LAINNYA</td>
-								<td align=\"right\" style=\"font-weight: bold;\">".number_format($jmlALL,2,",",".")."</td>
-								<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALL,2,",",".")."</td>
+								<td align=\"right\" style=\"font-weight: bold;\">".number_format($jmlALL,0,",",".")."</td>
+								<td align=\"right\" style=\"font-weight: bold;\">".number_format($totalALL,0,",",".")."</td>
 								<td align=\"right\" style=\"font-weight: bold;\">-</td>
 								<td align=\"right\" style=\"font-weight: bold;\">-</td>
 								<td align=\"right\" style=\"font-weight: bold;\">-</td>
@@ -6010,7 +6010,7 @@ foreach ($dataArr as $satker_id => $value)
 	$NamaSatker = $this->get_NamaSatker($satker_id);
 	$gol= '01';
 	$TotalNilai = $this->get_TotalNilai($satker_id,$gol,$tglawalperolehan,$tglakhirperolehan);
-	$TotalNilaiFix=number_format($TotalNilai[0],2,",",".");
+	$TotalNilaiFix=number_format($TotalNilai[0],0,",",".");
 	$TotalJmlFix=number_format($TotalNilai[1],0,",",".");
     foreach ($value as $keys => $data)
     {	
@@ -6036,7 +6036,7 @@ foreach ($dataArr as $satker_id => $value)
                         <td style=\"text-align: ;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $value->Uraian</td>
                         <td style=\"text-align: ;\">&nbsp;$value->Alamat</td>
                         <td style=\"text-align: right;\">".number_format($value->LuasTotal,0,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($value->NilaiPerolehan,2,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($value->NilaiPerolehan,0,",",".")."</td>
                       </tr>";
                 $total_perolehan += ($value->NilaiPerolehan);
                 $total_perolehan_kel += ($value->NilaiPerolehan);
@@ -6046,7 +6046,7 @@ foreach ($dataArr as $satker_id => $value)
 				<td style=\"text-align: left; font-weight: bold;\">&nbsp;&nbsp;&nbsp;Jumlah</td>
 				<td></td>
 				<td></td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,0,",",".")."</td>
 			</tr>";
 		$total_perolehan_kel= 0;
     } 
@@ -6057,7 +6057,7 @@ $html .="
 			
 			<tr>
 				<td colspan = \"4\" style=\"text-align: center; font-weight: bold;\">TOTAL</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,0,",",".")."</td>
 			</tr>
 			</table>
 			</tbody>
@@ -6220,7 +6220,7 @@ foreach ($dataArr as $satker_id => $value)
 	//jumlah
 	$TotalJmlFix=number_format($TotalNilai[1],0,",",".");
 	//nilai perolehan
-	$TotalNilaiFix=number_format($TotalNilai[0],2,",",".");
+	$TotalNilaiFix=number_format($TotalNilai[0],0,",",".");
 	//nilai buku
 	/*if($TotalNilai[4]){
 		$TotalNilaiFixNB=number_format($TotalNilai[4],2,",",".");
@@ -6228,15 +6228,15 @@ foreach ($dataArr as $satker_id => $value)
 		$TotalNilaiFixNB=number_format($TotalNilai[0],2,",",".");
 	}*/
 	if($TotalNilai[3] != 0){
-		$TotalNilaiFixNB=number_format($TotalNilai[4],2,",",".");
+		$TotalNilaiFixNB=number_format($TotalNilai[4],0,",",".");
 	}else{
-		$TotalNilaiFixNB=number_format($TotalNilai[0],2,",",".");
+		$TotalNilaiFixNB=number_format($TotalNilai[0],0,",",".");
 	}
 	
 	//penyusutan pertahun
-	$TotalNilaiFixPP=number_format($TotalNilai[2],2,",",".");
+	$TotalNilaiFixPP=number_format($TotalNilai[2],0,",",".");
 	//akumulasi penyusutan
-	$TotalNilaiFixAP=number_format($TotalNilai[3],2,",",".");
+	$TotalNilaiFixAP=number_format($TotalNilai[3],0,",",".");
 	
 	$html.="<tr>
 				<td style=\"text-align: center; font-weight: bold;\">$no</td>
@@ -6283,10 +6283,10 @@ foreach ($dataArr as $satker_id => $value)
 						<td style=\"text-align: ;\">&nbsp;</td>
                         <td style=\"text-align: ;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $value->Uraian</td>
                         <td style=\"text-align: center;\">&nbsp;$value->jumlah</td>
-                        <td style=\"text-align: right;\">".number_format($value->Nilai,2,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($value->NilaiPP,2,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($value->NilaiAP,2,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($NilaiBuku,2,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($value->Nilai,0,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($value->NilaiPP,0,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($value->NilaiAP,0,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($NilaiBuku,0,",",".")."</td>
                       </tr>";
                 $total += ($value->jumlah);
                 $total_perolehan += ($value->Nilai);
@@ -6311,10 +6311,10 @@ foreach ($dataArr as $satker_id => $value)
 				<td></td>
 				<td style=\"text-align: left; font-weight: bold;\">&nbsp;&nbsp;&nbsp;Jumlah</td>
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($total_kel,0,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_PP,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_AP,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_NB,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_PP,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_AP,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_NB,0,",",".")."</td>
 			</tr>";
 		$total_kel = 0;
 		$total_perolehan_kel= 0;	
@@ -6330,10 +6330,10 @@ $html .="
 			<tr>
 				<td colspan = \"2\" style=\"text-align: center; font-weight: bold;\">TOTAL</td>
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($total,0,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_PP,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_AP,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_NB,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_PP,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_AP,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_NB,0,",",".")."</td>
 			</tr>
 			</table>
 			</tbody>
@@ -6510,7 +6510,7 @@ foreach ($dataArr as $satker_id => $value)
 	//jumlah
 	$TotalJmlFix=number_format($TotalNilai[1],0,",",".");
 	//nilai perolehan
-	$TotalNilaiFix=number_format($TotalNilai[0],2,",",".");
+	$TotalNilaiFix=number_format($TotalNilai[0],0,",",".");
 	//nilai buku
 	/*if($TotalNilai[4]){
 		$TotalNilaiFixNB=number_format($TotalNilai[4],2,",",".");
@@ -6518,14 +6518,14 @@ foreach ($dataArr as $satker_id => $value)
 		$TotalNilaiFixNB=number_format($TotalNilai[0],2,",",".");
 	}*/
 	if($TotalNilai[3] != 0){
-		$TotalNilaiFixNB=number_format($TotalNilai[4],2,",",".");
+		$TotalNilaiFixNB=number_format($TotalNilai[4],0,",",".");
 	}else{
-		$TotalNilaiFixNB=number_format($TotalNilai[0],2,",",".");
+		$TotalNilaiFixNB=number_format($TotalNilai[0],0,",",".");
 	}
 	//penyusutan pertahun
-	$TotalNilaiFixPP=number_format($TotalNilai[2],2,",",".");
+	$TotalNilaiFixPP=number_format($TotalNilai[2],0,",",".");
 	//akumulasi penyusutan
-	$TotalNilaiFixAP=number_format($TotalNilai[3],2,",",".");
+	$TotalNilaiFixAP=number_format($TotalNilai[3],0,",",".");
 	
 	// $TotalJmlFix=number_format($TotalNilai[1],0,",",".");
 		$html.="<tr>
@@ -6569,10 +6569,10 @@ foreach ($dataArr as $satker_id => $value)
                         <td style=\"text-align: ;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $value->Uraian</td>
                         <td style=\"text-align: ;\">&nbsp;$value->Alamat</td>
                         <td style=\"text-align: right;\">".number_format($value->LuasLantai,0,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($value->NilaiPerolehan,2,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($value->PenyusutanPerTahun,2,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($value->AkumulasiPenyusutan,2,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($NilaiBuku,2,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($value->NilaiPerolehan,0,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($value->PenyusutanPerTahun,0,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($value->AkumulasiPenyusutan,0,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($NilaiBuku,0,",",".")."</td>
                       </tr>";
                 $total_perolehan += ($value->NilaiPerolehan);
                 $total_perolehan_kel += ($value->NilaiPerolehan);
@@ -6593,10 +6593,10 @@ foreach ($dataArr as $satker_id => $value)
 				<td style=\"text-align: left; font-weight: bold;\">&nbsp;&nbsp;&nbsp;Jumlah</td>
 				<td></td>
 				<td></td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_PP,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_AP,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_NB,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_PP,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_AP,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_NB,0,",",".")."</td>
 			</tr>";
 		$total_perolehan_kel= 0;
 		$total_perolehan_kel_PP = 0;
@@ -6611,10 +6611,10 @@ $html .="
 			
 			<tr>
 				<td colspan = \"4\" style=\"text-align: center; font-weight: bold;\">TOTAL</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_PP,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_AP,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_NB,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_PP,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_AP,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_NB,0,",",".")."</td>
 			</tr>
 			</table>
 			</tbody>
@@ -6787,7 +6787,7 @@ foreach ($dataArr as $satker_id => $value)
 	//jumlah
 	$TotalJmlFix=number_format($TotalNilai[1],0,",",".");
 	//nilai perolehan
-	$TotalNilaiFix=number_format($TotalNilai[0],2,",",".");
+	$TotalNilaiFix=number_format($TotalNilai[0],0,",",".");
 	//nilai buku
 	/*if($TotalNilai[4]){
 		$TotalNilaiFixNB=number_format($TotalNilai[4],2,",",".");
@@ -6796,15 +6796,15 @@ foreach ($dataArr as $satker_id => $value)
 	}*/
 	
 	if($TotalNilai[3] != 0){
-		$TotalNilaiFixNB=number_format($TotalNilai[4],2,",",".");
+		$TotalNilaiFixNB=number_format($TotalNilai[4],0,",",".");
 	}else{
-		$TotalNilaiFixNB=number_format($TotalNilai[0],2,",",".");
+		$TotalNilaiFixNB=number_format($TotalNilai[0],0,",",".");
 	}
 	
 	//penyusutan pertahun
-	$TotalNilaiFixPP=number_format($TotalNilai[2],2,",",".");
+	$TotalNilaiFixPP=number_format($TotalNilai[2],0,",",".");
 	//akumulasi penyusutan
-	$TotalNilaiFixAP=number_format($TotalNilai[3],2,",",".");
+	$TotalNilaiFixAP=number_format($TotalNilai[3],0,",",".");
 	
     $html.="<tr>
 				<td style=\"text-align: center; font-weight: bold;\">$no</td>
@@ -6847,10 +6847,10 @@ foreach ($dataArr as $satker_id => $value)
                         <td style=\"text-align: ;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $value->Uraian</td>
                         <td style=\"text-align: ;\">&nbsp;$value->Alamat</td>
                         <td style=\"text-align: right;\">".number_format($value->LuasJaringan,0,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($value->NilaiPerolehan,2,",",".")."</td>
-						<td style=\"text-align: right;\">".number_format($value->PenyusutanPerTahun,2,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($value->AkumulasiPenyusutan,2,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($NilaiBuku,2,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($value->NilaiPerolehan,0,",",".")."</td>
+						<td style=\"text-align: right;\">".number_format($value->PenyusutanPerTahun,0,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($value->AkumulasiPenyusutan,0,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($NilaiBuku,0,",",".")."</td>
                       
                       </tr>";
                 $total_perolehan += ($value->NilaiPerolehan);
@@ -6873,10 +6873,10 @@ foreach ($dataArr as $satker_id => $value)
 				<td style=\"text-align: left; font-weight: bold;\">&nbsp;&nbsp;&nbsp;Jumlah</td>
 				<td></td>
 				<td></td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_PP,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_AP,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_NB,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_PP,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_AP,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel_NB,0,",",".")."</td>
 			</tr>";
 		$total_perolehan_kel= 0;
 		$total_perolehan_kel_PP = 0;
@@ -6890,10 +6890,10 @@ $html .="
 			
 			<tr>
 				<td colspan = \"4\" style=\"text-align: center; font-weight: bold;\">TOTAL</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_PP,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_AP,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_NB,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_PP,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_AP,0,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_NB,0,",",".")."</td>
 			</tr>
 			</table>
 			</tbody>
@@ -7050,7 +7050,7 @@ foreach ($dataArr as $satker_id => $value)
 	$NamaSatker = $this->get_NamaSatker($satker_id);
 	$gol= '05';
 	$TotalNilai = $this->get_TotalNilai($satker_id,$gol,$tglawalperolehan,$tglakhirperolehan);
-	$TotalNilaiFix=number_format($TotalNilai[0],2,",",".");
+	$TotalNilaiFix=number_format($TotalNilai[0],0,",",".");
 	$TotalJmlFix=number_format($TotalNilai[1],0,",",".");
 	$html.="<tr>
 				<td style=\"text-align: center; font-weight: bold;\">$no</td>
@@ -7075,7 +7075,7 @@ foreach ($dataArr as $satker_id => $value)
 						<td style=\"text-align: ;\">&nbsp;</td>
                         <td style=\"text-align: ;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $value->Uraian</td>
                         <td style=\"text-align: center;\">&nbsp;$value->jumlah</td>
-                        <td style=\"text-align: right;\">".number_format($value->Nilai,2,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($value->Nilai,0,",",".")."</td>
                       </tr>";
                 $total += ($value->jumlah);
                 $total_perolehan += ($value->Nilai);
@@ -7088,7 +7088,7 @@ foreach ($dataArr as $satker_id => $value)
 				<td></td>
 				<td style=\"text-align: left; font-weight: bold;\">&nbsp;&nbsp;&nbsp;Jumlah</td>
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($total_kel,0,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,0,",",".")."</td>
 			</tr>";
 		$total_kel = 0;
 		$total_perolehan_kel= 0;	
@@ -7101,7 +7101,7 @@ $html .="
 			<tr>
 				<td colspan = \"2\" style=\"text-align: center; font-weight: bold;\">TOTAL</td>
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($total,0,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,0,",",".")."</td>
 			</tr>
 			</table>
 			</tbody>
@@ -7263,7 +7263,7 @@ foreach ($dataArr as $satker_id => $value)
 	$NamaSatker = $this->get_NamaSatker($satker_id);
 	$gol= '06';
 	$TotalNilai = $this->get_TotalNilai($satker_id,$gol,$tglawalperolehan,$tglakhirperolehan);
-	$TotalNilaiFix=number_format($TotalNilai[0],2,",",".");
+	$TotalNilaiFix=number_format($TotalNilai[0],0,",",".");
 	// $TotalJmlFix=number_format($TotalNilai[1],0,",",".");
 	$html.="<tr>
 				<td style=\"text-align: center; font-weight: bold;\">$no</td>
@@ -7289,7 +7289,7 @@ foreach ($dataArr as $satker_id => $value)
                         <td style=\"text-align: ;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $value->Uraian</td>
                         <td style=\"text-align: ;\">&nbsp;$value->Alamat</td>
                         <td style=\"text-align: right;\">".number_format($value->LuasLantai,0,",",".")."</td>
-                        <td style=\"text-align: right;\">".number_format($value->NilaiPerolehan,2,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($value->NilaiPerolehan,0,",",".")."</td>
                       </tr>";
                 $total_perolehan += ($value->NilaiPerolehan);
                 $total_perolehan_kel += ($value->NilaiPerolehan);
@@ -7299,7 +7299,7 @@ foreach ($dataArr as $satker_id => $value)
 				<td style=\"text-align: left; font-weight: bold;\">&nbsp;&nbsp;&nbsp;Jumlah</td>
 				<td></td>
 				<td></td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,0,",",".")."</td>
 			</tr>";
 		$total_perolehan_kel= 0;
     } 
@@ -7310,7 +7310,7 @@ $html .="
 			
 			<tr>
 				<td colspan = \"4\" style=\"text-align: center; font-weight: bold;\">TOTAL</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,0,",",".")."</td>
 			</tr>
 			</table>
 			</tbody>
@@ -7464,7 +7464,7 @@ foreach ($dataArr as $satker_id => $value)
 	$NamaSatker = $this->get_NamaSatker($satker_id);
 	$gol= ' ';
 	$TotalNilai = $this->get_TotalNilai($satker_id,$gol,$tglawalperolehan,$tglakhirperolehan);
-	$TotalNilaiFix=number_format($TotalNilai[0],2,",",".");
+	$TotalNilaiFix=number_format($TotalNilai[0],0,",",".");
 	$TotalJmlFix=number_format($TotalNilai[1],0,",",".");
 	$html.="<tr>
 				<td style=\"text-align: center; font-weight: bold;\">$no</td>
@@ -7488,7 +7488,7 @@ foreach ($dataArr as $satker_id => $value)
 						<td style=\"text-align: ;\">&nbsp;</td>
                         <td style=\"text-align: ;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $value->Uraian</td>
                         <td style=\"text-align: center;\">&nbsp;$value->jml</td>
-                        <td style=\"text-align: right;\">".number_format($value->Nilai,2,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($value->Nilai,0,",",".")."</td>
                       </tr>";
                 $total += ($value->jml);
                 $total_perolehan += ($value->Nilai);
@@ -7500,7 +7500,7 @@ foreach ($dataArr as $satker_id => $value)
 				<td></td>
 				<td style=\"text-align: left; font-weight: bold;\">&nbsp;&nbsp;&nbsp;Jumlah</td>
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($total_kel,0,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,0,",",".")."</td>
 			</tr>";
 		$total_kel = 0;
 		$total_perolehan_kel= 0;	
@@ -7513,7 +7513,7 @@ $html .="
 			<tr>
 				<td colspan = \"2\" style=\"text-align: center; font-weight: bold;\">TOTAL</td>
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($total,0,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,0,",",".")."</td>
 			</tr>
 			</table>
 			</tbody>
@@ -7668,7 +7668,7 @@ foreach ($dataArr as $satker_id => $value)
 	$NamaSatker = $this->get_NamaSatker($satker_id);
 	$gol= 'NonAset';
 	$TotalNilai = $this->get_TotalNilai($satker_id,$gol,$tglawalperolehan,$tglakhirperolehan);
-	$TotalNilaiFix=number_format($TotalNilai[0],2,",",".");
+	$TotalNilaiFix=number_format($TotalNilai[0],0,",",".");
 	$TotalJmlFix=number_format($TotalNilai[1],0,",",".");
 	$html.="<tr>
 				<td style=\"text-align: center; font-weight: bold;\">$no</td>
@@ -7692,7 +7692,7 @@ foreach ($dataArr as $satker_id => $value)
 						<td style=\"text-align: ;\">&nbsp;</td>
                         <td style=\"text-align: ;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $value->Uraian</td>
                         <td style=\"text-align: center;\">&nbsp;$value->jml</td>
-                        <td style=\"text-align: right;\">".number_format($value->Nilai,2,",",".")."</td>
+                        <td style=\"text-align: right;\">".number_format($value->Nilai,0,",",".")."</td>
                       </tr>";
                 $total += ($value->jml);
                 $total_perolehan += ($value->Nilai);
@@ -7704,7 +7704,7 @@ foreach ($dataArr as $satker_id => $value)
 				<td></td>
 				<td style=\"text-align: left; font-weight: bold;\">&nbsp;&nbsp;&nbsp;Jumlah</td>
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($total_kel,0,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan_kel,0,",",".")."</td>
 			</tr>";
 		$total_kel = 0;
 		$total_perolehan_kel= 0;	
@@ -7717,7 +7717,7 @@ $html .="
 			<tr>
 				<td colspan = \"2\" style=\"text-align: center; font-weight: bold;\">TOTAL</td>
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($total,0,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($total_perolehan,0,",",".")."</td>
 			</tr>
 			</table>
 			</tbody>
@@ -7974,9 +7974,9 @@ public function retrieve_html_rencana_pengadaan_barang($dataArr,$gambar,$skpd_id
 							{	
 									
 								$Kuantitas = $data->Kuantitas;
-								$HargaSatuan = number_format($data->Harga_Satuan,2,",",".");
+								$HargaSatuan = number_format($data->Harga_Satuan,0,",",".");
 								$jmlBiaya = $Kuantitas * $data->Harga_Satuan;
-								$jmlBiayaFix = number_format($jmlBiaya,2,",",".");
+								$jmlBiayaFix = number_format($jmlBiaya,0,",",".");
 								$perolehanTotal = $perolehanTotal + $jmlBiaya;
 								$noReg = sprintf("%04s", $data->noRegister);
 								if($data->TglSertifikat == ''){
@@ -8003,7 +8003,7 @@ public function retrieve_html_rencana_pengadaan_barang($dataArr,$gambar,$skpd_id
 							}	
 					}
                                          
-						$printperolehanTotal=number_format($perolehanTotal,2,",",".");
+						$printperolehanTotal=number_format($perolehanTotal,0,",",".");
 						$html.=" 
 									<tr>
 										 <td style=\"text-align: center; font-weight: bold;\" colspan=\"5\">Total Harga</td>
@@ -8327,8 +8327,8 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 							{	
 									
 								$Kuantitas = 1;
-								$HargaSatuan = number_format($data->NilaiPerolehan,2,",",".");
-								$HargaPemeliharaan = number_format($data->HargaSatuan,2,",",".");
+								$HargaSatuan = number_format($data->NilaiPerolehan,0,",",".");
+								$HargaPemeliharaan = number_format($data->HargaSatuan,0,",",".");
 								$html.="
 								<tr>
 									 <td style=\"text-align: center; width: 30px;font-weight: \">$no</td>
@@ -8654,8 +8654,8 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 							
 							foreach ($value as $keys => $data)
 							{	
-								$perolehan = number_format($data->NilaiPerolehan,2,",",".");
-								$luas = number_format($data->LuasTotal,2,",",".");
+								$perolehan = number_format($data->NilaiPerolehan,0,",",".");
+								$luas = number_format($data->LuasTotal,0,",",".");
 								$luasTotal = $luasTotal + $data->LuasTotal;
 								$perolehanTotal = $perolehanTotal + $data->NilaiPerolehan;
 								$noReg = sprintf("%04s", $data->noRegister);
@@ -8688,7 +8688,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 							}	
 					}
                                          
-						$printperolehanTotal=number_format($perolehanTotal,2,",",".");
+						$printperolehanTotal=number_format($perolehanTotal,0,",",".");
 						$html.=" 
 									<tr>
 										 <td style=\"text-align: center; font-weight: bold;\" colspan=\"12\">Total Harga</td>
@@ -9014,7 +9014,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 							// }
 							// $perolehanTotal = $perolehanTotal + $nilaiPerolehan;
 							// $noReg=$row->noRegister;
-							$nilaiPrlhnFix = number_format($row->Nilai,2,",",".");
+							$nilaiPrlhnFix = number_format($row->Nilai,0,",",".");
 							$nilaiPerolehan = $row->Nilai;
 							$perolehanTotal = $perolehanTotal + $nilaiPerolehan;
 							$noReg=$row->noRegister;
@@ -9046,7 +9046,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 							 
 						 }
 						 
-						 $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+						 $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 						 $html.="
 								<tr>
 									<td style=\"text-align: center;\" colspan=\"15\">Total Harga</td>
@@ -9300,9 +9300,9 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 								$bertingkat = $this->get_bertingkat($data->JumlahLantai);
 								$beton = $this->get_beton($data->Beton);
 								
-								$perolehan = number_format($data->NilaiPerolehan,2,",",".");
-								$luas = number_format($data->LuasTotal,2,",",".");
-								$luaslantai= number_format($data->LuasLantai,2,",",".");
+								$perolehan = number_format($data->NilaiPerolehan,0,",",".");
+								$luas = number_format($data->LuasTotal,0,",",".");
+								$luaslantai= number_format($data->LuasLantai,0,",",".");
 								$total_luaslantai= $total_luaslantai + $data->LuasLantai;
 								$luasTotal = $luasTotal + $data->LuasTotal;
 								$perolehanTotal = $perolehanTotal + $data->NilaiPerolehan;
@@ -9356,7 +9356,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 							}	
 					}
                                          
-						$printperolehanTotal=number_format($perolehanTotal,2,",",".");
+						$printperolehanTotal=number_format($perolehanTotal,0,",",".");
 						$html.=" 
 									<tr>
 										 <td style=\"text-align: center; font-weight: bold;\" colspan=\"15\">Total Harga</td>
@@ -9621,7 +9621,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 								$panjangTotal = $panjangTotal + $row->Panjang;
 								$perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;
 								
-								$perolehan = number_format($row->NilaiPerolehan,2,",",".");
+								$perolehan = number_format($row->NilaiPerolehan,0,",",".");
 								$panjang = number_format($row->Panjang,0,",",".");
 								$luas = number_format($row->LuasJaringan,0,",",".");
 								$lebar = number_format($row->Lebar,0,",",".");
@@ -9669,7 +9669,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 							}	
 					}
                                          
-						$printperolehanTotal=number_format($perolehanTotal,2,",",".");
+						$printperolehanTotal=number_format($perolehanTotal,0,",",".");
 						$html.=" 
 									<tr>
 										 <td style=\"text-align: center; font-weight: bold;\" colspan=\"14\">Total Harga</td>
@@ -9870,10 +9870,10 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 						// $konstruksi_tanah= $this->get_konstruksi($row->Konstruksi);
 						
 						$luasTotal = $luasTotal + $row->LuasLantai;
-						$luas = number_format($row->LuasLantai);
+						$luas = number_format($row->LuasLantai,0,",",".");
 						//$panjangTotal = $panjangTotal + $row->Panjang;
 						$perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;
-						$perolehan = number_format($row->NilaiPerolehan);
+						$perolehan = number_format($row->NilaiPerolehan,0,",",".");
 						// $noReg=substr($row->NomorReg,18);
 						// $temp=explode('.',$row->NomorReg);
 						// $noReg=end($temp);
@@ -9906,7 +9906,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 								
 				 }
 				// $printluas=  number_format($luasTotal);
-				 $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+				 $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 				 $html.="
 					<tr align=\"center\">
 						<td colspan=\"13\">Jumlah Harga</td>
@@ -10268,7 +10268,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 					$mix = $row->Ukuran."&nbsp;".$row->Material;
 					
 					$nilaiPerolehan = $row->Nilai;
-					$nilaiPrlhnFix = number_format($row->Nilai,2,",",".");
+					$nilaiPrlhnFix = number_format($row->Nilai,0,",",".");
 					$perolehanTotal = $perolehanTotal + $nilaiPerolehan;
 					
 					$noReg=$row->noRegister;
@@ -10299,7 +10299,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 							$no++;				
                 }
 					// $printjumlahTotal= number_format($jumlahTotal);
-					$printperolehanTotal=  number_format($perolehanTotal,2,",",".");	
+					$printperolehanTotal=  number_format($perolehanTotal,0,",",".");	
 					
 					$html.="
 							<tr>
@@ -10588,7 +10588,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 				//uda dites footer disini
 			 if ($skpdeh != $row->kodeSatker && $no>1){
 			 // $printluas=  number_format($luasTotal);
-			 $printperolehanTotal=number_format($perolehanTotal,2,",",".");
+			 $printperolehanTotal=number_format($perolehanTotal,0,",",".");
 			 $tabletotal="
 							<tr>
 								 <td style=\"text-align: center;\" colspan=\"12\">Jumlah Harga</td>
@@ -10900,8 +10900,8 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              //udah dites
                                                        // $hak_tanah =$this->get_hak_pakai($row->HakTanah);
                                                        //$perolehan = number_format($row->NilaiPerolehan);
-													   $perolehan = number_format($row->NilaiPerolehan,2,",",".");
-                                                       $luas = number_format($row->LuasTotal,2,",",".");
+													   $perolehan = number_format($row->NilaiPerolehan,0,",",".");
+                                                       $luas = number_format($row->LuasTotal,0,",",".");
                                                        $luasTotal = $luasTotal + $row->LuasTotal;
                                                        $perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;
                                                        // $length = strlen($row->noRegister);
@@ -10943,7 +10943,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              //udah dicoba ga muncul
                                              
                                              // $printluas=  number_format($luasTotal);
-                                             $printperolehanTotal=number_format($perolehanTotal,2,",",".");
+                                             $printperolehanTotal=number_format($perolehanTotal,0,",",".");
 											 $tabletotal=" 
 														<tr>
 															 <td style=\"text-align: center;\" colspan=\"12\">Jumlah Harga</td>
@@ -11286,7 +11286,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												//uda dites footer disini
                                              if ($skpdeh != $row->kodeSatker && $no>1){
 												// $printperolehanTotal=  number_format($perolehanTotal);
-                                             	$printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                                             	$printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 												$tabletotal="
 													<tr>
 														<td style=\"text-align: center;\" colspan=\"15\">Jumlah Harga</td>
@@ -11586,7 +11586,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												// $split = explode("-", $row->noRegister);
 												// if (count($split) == 1){
 													// $hasil = 1;
-													$nilaiPrlhnFix = number_format($row->Nilai,2,",",".");
+													$nilaiPrlhnFix = number_format($row->Nilai,0,",",".");
 													$nilaiPerolehan = $row->Nilai;
 												// }else{
 													// $awal = $split[0];
@@ -11628,7 +11628,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              }
                                              //udah dicoba ga muncul
                                              
-                                             $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                                             $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
                                              // $printperolehanTotal=  number_format($perolehanTotal);
                                              $tabletotal="
 													<tr>
@@ -11978,7 +11978,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												// $string_sub= substr($row->kodeLokasi,0,2);
 												// $print_luas_lantai=number_format($total_luaslantai);
 												// $printluas=  number_format($luasTotal);
-												$printperolehanTotal=  number_format($perolehanTotal,2,",",".");	
+												$printperolehanTotal=  number_format($perolehanTotal,0,",",".");	
 												$tabletotal="
 														<tr>
 															<td colspan=\"15\" style=\"text-align: center;\">Jumlah Harga</td>
@@ -12282,9 +12282,9 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												$bertingkat = $this->get_bertingkat($row->JumlahLantai);
 												$beton = $this->get_beton($row->Beton);
 												
-												$perolehan = number_format($row->NilaiPerolehan,2,",",".");
-												$luas = number_format($row->LuasTotal,2,",",".");
-												$luaslantai= number_format($row->LuasLantai,2,",",".");
+												$perolehan = number_format($row->NilaiPerolehan,0,",",".");
+												$luas = number_format($row->LuasTotal,0,",",".");
+												$luaslantai= number_format($row->LuasLantai,0,",",".");
 												$total_luaslantai= $total_luaslantai + $row->LuasLantai;
 												$luasTotal = $luasTotal + $row->LuasTotal;
 												$perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;
@@ -12343,7 +12343,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              // $printperolehanTotal=  number_format($perolehanTotal);
                                              // $print_luas_lantai=number_format($total_luaslantai);
 											 // $printluas=  number_format($luasTotal);
-											 $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+											 $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 											 
 											      $tabletotal="
 													<tr>
@@ -12706,7 +12706,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												
 												// $printluas=  number_format($luasTotal);
 												// $printpanjang= number_format($panjangTotal);
-												$printperolehanTotal=  number_format($perolehanTotal,2,",",".");	
+												$printperolehanTotal=  number_format($perolehanTotal,0,",",".");	
 												
 													   $tabletotal="
 															<tr>
@@ -13030,7 +13030,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 													$panjangTotal = $panjangTotal + $row->Panjang;
 													$perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;
 													
-													$perolehan = number_format($row->NilaiPerolehan,2,",",".");
+													$perolehan = number_format($row->NilaiPerolehan,0,",",".");
 													$panjang = number_format($row->Panjang,0,",",".");
 													$luas = number_format($row->LuasJaringan,0,",",".");
 													$lebar = number_format($row->Lebar,0,",",".");
@@ -13092,9 +13092,9 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                  
                                              }
 												
-												   $printluas=  number_format($luasTotal);
-													$printpanjang= number_format($panjangTotal);
-													$printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+												   $printluas=  number_format($luasTotal,0,",",".");
+													$printpanjang= number_format($panjangTotal,0,",",".");
+													$printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 													$tabletotal="
 														<tr>
 															<td style=\"text-align: center;\" colspan=\"14\">Total</td>
@@ -13449,7 +13449,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              if ($skpdeh != $row->kodeSatker && $no>1){
 												
 												// $printjumlahTotal= number_format($jumlahTotal);
-												$printperolehanTotal=  number_format($perolehanTotal,2,",",".");	
+												$printperolehanTotal=  number_format($perolehanTotal,0,",",".");	
 												
 														$tabletotal="
 															<tr>
@@ -13803,7 +13803,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 													
 													
 													$nilaiPerolehan = $row->Nilai;
-													$nilaiPrlhnFix = number_format($row->Nilai,2,",",".");
+													$nilaiPrlhnFix = number_format($row->Nilai,0,",",".");
 													$perolehanTotal = $perolehanTotal + $nilaiPerolehan;
 
 													$noReg=$row->noRegister;
@@ -13837,7 +13837,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                  
                                              }
 												    // $printjumlahTotal= number_format($jumlahTotal);
-													$printperolehanTotal=  number_format($perolehanTotal,2,",",".");	
+													$printperolehanTotal=  number_format($perolehanTotal,0,",",".");	
 												
 													$tabletotal="
 															<tr>
@@ -14193,7 +14193,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              if ($skpdeh != $row->kodeSatker  && $no>1){
 												
 												 // $printluas=  number_format($luasTotal);
-													 $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+													 $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 													 $tabletotal="
 														<tr align=\"center\">
 															<td colspan=\"13\">Jumlah Harga</td>
@@ -14511,10 +14511,10 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 													// $konstruksi_tanah= $this->get_konstruksi($row->Konstruksi);
 													
 													$luasTotal = $luasTotal + $row->LuasLantai;
-													$luas = number_format($row->LuasLantai);
+													$luas = number_format($row->LuasLantai,0,",",".");
 													//$panjangTotal = $panjangTotal + $row->Panjang;
 													$perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;
-													$perolehan = number_format($row->NilaiPerolehan);
+													$perolehan = number_format($row->NilaiPerolehan,0,",",".");
 													// $noReg=substr($row->NomorReg,18);
 													// $temp=explode('.',$row->NomorReg);
 													// $noReg=end($temp);
@@ -14550,7 +14550,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                  
                                              }
 												    // $printluas=  number_format($luasTotal);
-													 $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+													 $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 													 $tabletotal="
 														<tr align=\"center\">
 															<td colspan=\"13\">Jumlah Harga</td>
@@ -14910,7 +14910,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 				//uda dites footer disini
 			 if ($skpdeh != $row->kodeSatker && $no>1){
 			 // $printluas=  number_format($luasTotal);
-			 $printperolehanTotal=number_format($perolehanTotal,2,",",".");
+			 $printperolehanTotal=number_format($perolehanTotal,0,",",".");
 			 $tabletotal="
 							<tr>
 								 <td style=\"text-align: center;\" colspan=\"13\">Jumlah Harga</td>
@@ -15237,8 +15237,8 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              //udah dites
                                                        // $hak_tanah =$this->get_hak_pakai($row->HakTanah);
                                                        //$perolehan = number_format($row->NilaiPerolehan);
-													   $perolehan = number_format($row->NilaiPerolehan,2,",",".");
-                                                       $luas = number_format($row->LuasTotal,2,",",".");
+													   $perolehan = number_format($row->NilaiPerolehan,0,",",".");
+                                                       $luas = number_format($row->LuasTotal,0,",",".");
                                                        $luasTotal = $luasTotal + $row->LuasTotal;
                                                        $perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;
                                                        // $length = strlen($row->noRegister);
@@ -15290,7 +15290,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              //udah dicoba ga muncul
                                              
                                              // $printluas=  number_format($luasTotal);
-                                             $printperolehanTotal=number_format($perolehanTotal,2,",",".");
+                                             $printperolehanTotal=number_format($perolehanTotal,0,",",".");
 											 $tabletotal=" 
 														<tr>
 															 <td style=\"text-align: center;\" colspan=\"13\">Jumlah Harga</td>
@@ -15645,7 +15645,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												//uda dites footer disini
                                              if ($skpdeh != $row->kodeSatker && $no>1){
 
-                                             	$printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                                             	$printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 												$tabletotal="
 													<tr>
 														<td style=\"text-align: center;\" colspan=\"15\">Jumlah Harga</td>
@@ -15964,7 +15964,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 													$nilaiPerolehan = $nilaiPrlhn ; 
 													$nilaiPrlhnFix = number_format($nilaiPrlhn,2,",",".");
 												}*/
-												$nilaiPrlhnFix = number_format($row->NilaiPerolehan,2,",",".");
+												$nilaiPrlhnFix = number_format($row->NilaiPerolehan,0,",",".");
 												$nilaiPerolehan = $row->NilaiPerolehan;
 												$perolehanTotal = $perolehanTotal + $nilaiPerolehan;
 												// $noReg=$this->sortirNoReg($row->noRegister);
@@ -16006,7 +16006,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              }
                                              //udah dicoba ga muncul
                                              
-                                             $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                                             $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
                                              $tabletotal="
 													<tr>
 														<td style=\"text-align: center;\" colspan=\"15\">Jumlah Harga</td>
@@ -16369,7 +16369,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												// $string_sub= substr($row->kodeLokasi,0,2);
 												// $print_luas_lantai=number_format($total_luaslantai);
 												// $printluas=  number_format($luasTotal);
-												$printperolehanTotal=  number_format($perolehanTotal,2,",",".");	
+												$printperolehanTotal=  number_format($perolehanTotal,0,",",".");	
 												$tabletotal="
 														<tr>
 															<td colspan=\"16\" style=\"text-align: center;\">Jumlah Harga</td>
@@ -16687,9 +16687,9 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												$bertingkat = $this->get_bertingkat($row->JumlahLantai);
 												$beton = $this->get_beton($row->Beton);
 												
-												$perolehan = number_format($row->NilaiPerolehan,2,",",".");
-												$luas = number_format($row->LuasTotal,2,",",".");
-												$luaslantai= number_format($row->LuasLantai,2,",",".");
+												$perolehan = number_format($row->NilaiPerolehan,0,",",".");
+												$luas = number_format($row->LuasTotal,0,",",".");
+												$luaslantai= number_format($row->LuasLantai,0,",",".");
 												$total_luaslantai= $total_luaslantai + $row->LuasLantai;
 												$luasTotal = $luasTotal + $row->LuasTotal;
 												$perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;
@@ -16759,7 +16759,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              // $printperolehanTotal=  number_format($perolehanTotal);
                                              // $print_luas_lantai=number_format($total_luaslantai);
 											 // $printluas=  number_format($luasTotal);
-											 $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+											 $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 											 
 											      $tabletotal="
 													<tr>
@@ -17131,7 +17131,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												
 												// $printluas=  number_format($luasTotal);
 												// $printpanjang= number_format($panjangTotal);
-												$printperolehanTotal=  number_format($perolehanTotal,2,",",".");	
+												$printperolehanTotal=  number_format($perolehanTotal,0,",",".");	
 												
 													   $tabletotal="
 															<tr>
@@ -17470,7 +17470,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 													$panjangTotal = $panjangTotal + $row->Panjang;
 													$perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;
 													
-													$perolehan = number_format($row->NilaiPerolehan,2,",",".");
+													$perolehan = number_format($row->NilaiPerolehan,0,",",".");
 													$panjang = number_format($row->Panjang,0,",",".");
 													$luas = number_format($row->LuasJaringan,0,",",".");
 													$lebar = number_format($row->Lebar,0,",",".");
@@ -17543,9 +17543,9 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                  
                                              }
 												
-												   $printluas=  number_format($luasTotal);
-													$printpanjang= number_format($panjangTotal);
-													$printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+												   $printluas=  number_format($luasTotal,0,",",".");
+													$printpanjang= number_format($panjangTotal,0,",",".");
+													$printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 													$tabletotal="
 														<tr>
 															<td style=\"text-align: center;\" colspan=\"15\">Total</td>
@@ -17915,7 +17915,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              if ($skpdeh != $row->kodeSatker && $no>1){
 												
 												// $printjumlahTotal= number_format($jumlahTotal);
-												$printperolehanTotal=  number_format($perolehanTotal,2,",",".");	
+												$printperolehanTotal=  number_format($perolehanTotal,0,",",".");	
 												
 														$tabletotal="
 															<tr>
@@ -18263,7 +18263,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														$nilaiPrlhnFix = number_format($nilaiPrlhn,2,",",".");
 													}*/
 													$noReg = sprintf("%04s", $row->noRegister);
-													$nilaiPrlhnFix = number_format($row->NilaiPerolehan,2,",",".");
+													$nilaiPrlhnFix = number_format($row->NilaiPerolehan,0,",",".");
 													$nilaiPerolehan= $row->NilaiPerolehan;
 													// $perolehan = number_format($row->NilaiPerolehan,2,",",".");
 													
@@ -18315,7 +18315,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                  
                                              }
 												    // $printjumlahTotal= number_format($jumlahTotal);
-													$printperolehanTotal=  number_format($perolehanTotal,2,",",".");	
+													$printperolehanTotal=  number_format($perolehanTotal,0,",",".");	
 												
 													$tabletotal="
 															<tr>
@@ -18683,7 +18683,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              if ($skpdeh != $row->kodeSatker  && $no>1){
 												
 												 // $printluas=  number_format($luasTotal);
-													 $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+													 $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 													 $tabletotal="
 														<tr align=\"center\">
 															<td colspan=\"13\">Jumlah Harga</td>
@@ -19009,10 +19009,10 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 													// $konstruksi_tanah= $this->get_konstruksi($row->Konstruksi);
 													
 													$luasTotal = $luasTotal + $row->LuasLantai;
-													$luas = number_format($row->LuasLantai);
+													$luas = number_format($row->LuasLantai,0,",",".");
 													//$panjangTotal = $panjangTotal + $row->Panjang;
 													$perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;
-													$perolehan = number_format($row->NilaiPerolehan);
+													$perolehan = number_format($row->NilaiPerolehan,0,",",".");
 													// $noReg=substr($row->NomorReg,18);
 													// $temp=explode('.',$row->NomorReg);
 													// $noReg=end($temp);
@@ -19052,7 +19052,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                  
                                              }
 												    // $printluas=  number_format($luasTotal);
-													 $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+													 $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 													 $tabletotal="
 														<tr align=\"center\">
 															<td colspan=\"13\">Jumlah Harga</td>
@@ -19408,7 +19408,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 				//uda dites footer disini
 			 if ($skpdeh != $row->kodeSatker || $thn != $row->Tahun && $no>1){
 			 // $printluas=  number_format($luasTotal);
-			 $printperolehanTotal=number_format($perolehanTotal,2,",",".");
+			 $printperolehanTotal=number_format($perolehanTotal,0,",",".");
 			 $tabletotal="
 							<tr>
 								 <td style=\"text-align: center;\" colspan=\"12\">Jumlah Harga</td>
@@ -19726,8 +19726,8 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              //udah dites
                                                        // $hak_tanah =$this->get_hak_pakai($row->HakTanah);
                                                        //$perolehan = number_format($row->NilaiPerolehan);
-													   $perolehan = number_format($row->NilaiPerolehan,2,",",".");
-                                                       $luas = number_format($row->LuasTotal,2,",",".");
+													   $perolehan = number_format($row->NilaiPerolehan,0,",",".");
+                                                       $luas = number_format($row->LuasTotal,0,",",".");
                                                        $luasTotal = $luasTotal + $row->LuasTotal;
                                                        $perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;
 													   $noReg = sprintf("%04s", $row->noRegister);
@@ -19768,7 +19768,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              //udah dicoba ga muncul
                                              
                                              // $printluas=  number_format($luasTotal);
-                                             $printperolehanTotal=number_format($perolehanTotal,2,",",".");
+                                             $printperolehanTotal=number_format($perolehanTotal,0,",",".");
 											 $tabletotal=" 
 														<tr>
 															 <td style=\"text-align: center;\" colspan=\"12\">Jumlah Harga</td>
@@ -20120,7 +20120,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                         	//uda dites footer disini
 											 if ($skpdeh != $row->kodeSatker || $thn != $row->Tahun && $no>1){
 												
-                                             	$printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                                             	$printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 												$tabletotal="
 													<tr>
 														<td style=\"text-align: center;\" colspan=\"15\">Jumlah Harga</td>
@@ -20440,7 +20440,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												// $noReg=$this->sortirNoReg($row->noRegister);
 												$noReg=$row->noRegister;*/
 												$nilaiPerolehan = $row->Nilai;
-												$nilaiPrlhnFix = number_format($row->Nilai,2,",",".");
+												$nilaiPrlhnFix = number_format($row->Nilai,0,",",".");
 												$perolehanTotal = $perolehanTotal + $nilaiPerolehan;
 
 												$noReg=$row->noRegister;
@@ -20476,7 +20476,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              }
                                              //udah dicoba ga muncul
                                              
-                                             $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                                             $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
                                              $tabletotal="
 													<tr>
 														<td style=\"text-align: center;\" colspan=\"15\">Jumlah Harga</td>
@@ -20831,7 +20831,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
   
 												// $print_luas_lantai=number_format($total_luaslantai);
 												// $printluas=  number_format($luasTotal);
-												$printperolehanTotal=  number_format($perolehanTotal,2,",",".");	
+												$printperolehanTotal=  number_format($perolehanTotal,0,",",".");	
 												$tabletotal="
 														<tr>
 															<td colspan=\"15\" style=\"text-align: center;\">Jumlah Harga</td>
@@ -21144,9 +21144,9 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												$bertingkat = $this->get_bertingkat($row->JumlahLantai);
 												$beton = $this->get_beton($row->Beton);
 												
-												$perolehan = number_format($row->NilaiPerolehan,2,",",".");
-												$luas = number_format($row->LuasTotal,2,",",".");
-												$luaslantai= number_format($row->LuasLantai,2,",",".");
+												$perolehan = number_format($row->NilaiPerolehan,0,",",".");
+												$luas = number_format($row->LuasTotal,0,",",".");
+												$luaslantai= number_format($row->LuasLantai,0,",",".");
 												$total_luaslantai= $total_luaslantai + $row->LuasLantai;
 												$luasTotal = $luasTotal + $row->LuasTotal;
 												$perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;
@@ -21205,7 +21205,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              // $printperolehanTotal=  number_format($perolehanTotal);
                                              // $print_luas_lantai=number_format($total_luaslantai);
 											 // $printluas=  number_format($luasTotal);
-											 $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+											 $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 											 
 											      $tabletotal="
 													<tr>
@@ -21579,7 +21579,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												
 												// $printluas=  number_format($luasTotal);
 												// $printpanjang= number_format($panjangTotal);
-												$printperolehanTotal=  number_format($perolehanTotal,2,",",".");	
+												$printperolehanTotal=  number_format($perolehanTotal,0,",",".");	
 												
 													   $tabletotal="
 															<tr>
@@ -21912,7 +21912,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 													$panjangTotal = $panjangTotal + $row->Panjang;
 													$perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;
 													
-													$perolehan = number_format($row->NilaiPerolehan,2,",",".");
+													$perolehan = number_format($row->NilaiPerolehan,0,",",".");
 													$panjang = number_format($row->Panjang,0,",",".");
 													$luas = number_format($row->LuasJaringan,0,",",".");
 													$lebar = number_format($row->Lebar,0,",",".");
@@ -21975,9 +21975,9 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                  
                                              }
 												
-												   $printluas=  number_format($luasTotal);
-													$printpanjang= number_format($panjangTotal);
-													$printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+												   $printluas=  number_format($luasTotal,0,",",".");
+													$printpanjang= number_format($panjangTotal,0,",",".");
+													$printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 													$tabletotal="
 														<tr>
 															<td style=\"text-align: center;\" colspan=\"14\">Total</td>
@@ -22342,7 +22342,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              if ($skpdeh != $row->kodeSatker || $thn != $row->Tahun  &&  $no>1){
 												
 												// $printjumlahTotal= number_format($jumlahTotal);
-												$printperolehanTotal=  number_format($perolehanTotal,2,",",".");	
+												$printperolehanTotal=  number_format($perolehanTotal,0,",",".");	
 												
 														$tabletotal="
 															<tr>
@@ -22690,7 +22690,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 													// $perolehan = number_format($row->NilaiPerolehan,2,",",".");
 													
 													$nilaiPerolehan = $row->Nilai;
-													$nilaiPrlhnFix = number_format($row->Nilai,2,",",".");
+													$nilaiPrlhnFix = number_format($row->Nilai,0,",",".");
 													$perolehanTotal = $perolehanTotal + $nilaiPerolehan;
 
 													$noReg=$row->noRegister;
@@ -22736,7 +22736,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                  
                                              }
 												    // $printjumlahTotal= number_format($jumlahTotal);
-													$printperolehanTotal=  number_format($perolehanTotal,2,",",".");	
+													$printperolehanTotal=  number_format($perolehanTotal,0,",",".");	
 												
 													$tabletotal="
 															<tr>
@@ -23100,7 +23100,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                              if ($skpdeh != $row->kodeSatker || $thn != $row->Tahun  && $no>1){
 												
 												 // $printluas=  number_format($luasTotal);
-													 $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+													 $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 													 $tabletotal="
 														<tr align=\"center\">
 															<td colspan=\"13\">Jumlah Harga</td>
@@ -23424,10 +23424,10 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 													// $konstruksi_tanah= $this->get_konstruksi($row->Konstruksi);
 													
 													$luasTotal = $luasTotal + $row->LuasLantai;
-													$luas = number_format($row->LuasLantai);
+													$luas = number_format($row->LuasLantai,0,",",".");
 													//$panjangTotal = $panjangTotal + $row->Panjang;
 													$perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;
-													$perolehan = number_format($row->NilaiPerolehan);
+													$perolehan = number_format($row->NilaiPerolehan,0,",",".");
 													// $noReg=substr($row->NomorReg,18);
 													// $temp=explode('.',$row->NomorReg);
 													// $noReg=end($temp);
@@ -23463,7 +23463,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                  
                                              }
 												    // $printluas=  number_format($luasTotal);
-													 $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+													 $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 													 $tabletotal="
 														<tr align=\"center\">
 															<td colspan=\"13\">Jumlah Harga</td>
@@ -23814,10 +23814,10 @@ $body="
 if ($skpdeh != $row->kodeSatker && $no>1){
 // $printbarang=  number_format($barangTotal);
                         //$printpanjang= number_format($panjangTotal);
-                    $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
-                    $printPPTotal=  number_format($PenyusutanPerTahunTotal,2,",",".");
-                    $printAPTotal=  number_format($AkumulasiPenyusutanTotal,2,",",".");
-                    $printNBTotal=  number_format($NilaiBukuTotal,2,",",".");
+                    $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
+                    $printPPTotal=  number_format($PenyusutanPerTahunTotal,0,",",".");
+                    $printAPTotal=  number_format($AkumulasiPenyusutanTotal,0,",",".");
+                    $printNBTotal=  number_format($NilaiBukuTotal,0,",",".");
                     $tabletotal="
 						<tr>
 							<td colspan=\"13\" style=\"text-align: center;\">Jumlah</td>
@@ -24176,26 +24176,33 @@ $footer ="
 						$kuantitas = $hasil;
 					}*/
 					$nilaiPerolehan = $row->Nilai;
-					$nilaiPrlhnFix = number_format($row->Nilai,2,",",".");
+					$nilaiPrlhnFix = number_format($row->Nilai,0,",",".");
 					
-					$PenyusutanPerTahun = $row->Ppt;
-					$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,2,",",".");
 					
-					$AkumulasiPenyusutan = $row->Ap;
-					$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
 					if ($kondisi == '1' ||  $kondisi == '2') {
+						$PenyusutanPerTahun = $row->Ppt;
+						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,0,",",".");
+						
+						$AkumulasiPenyusutan = $row->Ap;
+						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,0,",",".");
 						if($row->Nb){
 							// echo "NilaiBuku";
 							$NilaiBuku = $row->Nb;
-							$NilaiBukuFix = number_format($row->Nb,2,",",".");
+							$NilaiBukuFix = number_format($row->Nb,0,",",".");
 						}else{
 							// echo "nilai perolehan";
 							$NilaiBuku = $row->Nilai;
-							$NilaiBukuFix = number_format($row->Nilai,2,",",".");
+							$NilaiBukuFix = number_format($row->Nilai,0,",",".");
 						}
 					}else{
+						$PenyusutanPerTahun = 0;
+						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,0,",",".");
+						
+						$AkumulasiPenyusutan = 0;
+						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,0,",",".");
+						
 						$NilaiBuku = 0;
-						$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+						$NilaiBukuFix = number_format($NilaiBuku,0,",",".");
 					
 					}
 					
@@ -24235,10 +24242,10 @@ $footer ="
                            }
                                             
                     // $printbarang=  number_format($barangTotal);
-                    $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
-                    $printPPTotal=  number_format($PenyusutanPerTahunTotal,2,",",".");
-                    $printAPTotal=  number_format($AkumulasiPenyusutanTotal,2,",",".");
-                    $printNBTotal=  number_format($NilaiBukuTotal,2,",",".");
+                    $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
+                    $printPPTotal=  number_format($PenyusutanPerTahunTotal,0,",",".");
+                    $printAPTotal=  number_format($AkumulasiPenyusutanTotal,0,",",".");
+                    $printNBTotal=  number_format($NilaiBukuTotal,0,",",".");
                     $tabletotal="
 						<tr>
 							<td colspan=\"13\" style=\"text-align: center;\">Jumlah</td>
@@ -24582,7 +24589,7 @@ $body="
 if ($skpdeh != $row->kodeSatker && $no>1){
 // $printbarang=  number_format($barangTotal);
                         //$printpanjang= number_format($panjangTotal);
-                        $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                        $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
                         $tabletotal="
 						<tr>
 							<td colspan=\"13\" style=\"text-align: center;\">Jumlah</td>
@@ -24914,7 +24921,7 @@ $footer ="
 					}
 					$perolehanTotal = $perolehanTotal + $nilaiPrlhn;*/
 					$nilaiPerolehan = $row->Nilai;
-					$nilaiPrlhnFix = number_format($row->Nilai,2,",",".");
+					$nilaiPrlhnFix = number_format($row->Nilai,0,",",".");
 					$perolehanTotal = $perolehanTotal + $nilaiPerolehan;
 
 					$noReg=$row->noRegister;
@@ -24944,7 +24951,7 @@ $footer ="
                            }
                                             
                     // $printbarang=  number_format($barangTotal);
-                    $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                    $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
                     $tabletotal="
 						<tr>
 							<td colspan=\"13\" style=\"text-align: center;\">Jumlah</td>
@@ -25289,7 +25296,7 @@ $body="
 if ($skpdeh != $row->kodeSatker || $kodePemilik != substr($row->kodeLokasi,0,2) || $thn !=$row->Tahun && $no>1){
 // $printbarang=  number_format($barangTotal);
                         //$printpanjang= number_format($panjangTotal);
-                        $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                        $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
                         $tabletotal="
 						<tr>
 							<td colspan=\"13\" style=\"text-align: center;\">Jumlah</td>
@@ -25612,7 +25619,7 @@ $footer ="
 					$split = explode("-", $row->noRegister);
 					if (count($split) == 1){
 						// $hasil = 1;
-						$nilaiPrlhnFix = number_format($row->NilaiPerolehan,2,",",".");
+						$nilaiPrlhnFix = number_format($row->NilaiPerolehan,0,",",".");
 						$nilaiPrlhn = $row->NilaiPerolehan;
 						$kuantitas = 1;
 					}else{
@@ -25620,7 +25627,7 @@ $footer ="
 						$akhir = end($split);
 						$hasil = ($akhir - $awal) + 1;
 						$nilaiPrlhn = $hasil * $row->NilaiPerolehan;
-						$nilaiPrlhnFix = number_format($nilaiPrlhn,2,",",".");
+						$nilaiPrlhnFix = number_format($nilaiPrlhn,0,",",".");
 						$kuantitas = $hasil;
 					}
 					$perolehanTotal = $perolehanTotal + $nilaiPrlhn;
@@ -25966,7 +25973,7 @@ if($dataArr!="")
 			} 
 			$noReg=$row->noRegister;
 			$nilaiPrlhn = $row->NilaiPerolehan;
-			$nilaiPrlhnFix = number_format($row->NilaiPerolehan,2,",",".");
+			$nilaiPrlhnFix = number_format($row->NilaiPerolehan,0,",",".");
 			$kuantitas = 1;
 			$perolehanTotal = $perolehanTotal + $nilaiPrlhn;			
             $body.="
@@ -25993,7 +26000,7 @@ if($dataArr!="")
         }
                                             
             // $printbarang=  number_format($barangTotal);
-            $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+            $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
             $tabletotal="<tr>
                             <td colspan=\"13\" style=\"text-align: center;\">Jumlah</td>
                             <td style=\"text-align: right;\">$printperolehanTotal</td>
@@ -26333,7 +26340,7 @@ $body="
 if ($skpdeh != $row->kodeSatker || $kodePemilik != substr($row->kodeLokasi,0,2) && $no>1){
 // $printbarang=  number_format($barangTotal);
                         //$printpanjang= number_format($panjangTotal);
-                        $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                        $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
                         $tabletotal="
 						<tr>
 							<td colspan=\"13\" style=\"text-align: center;\">Jumlah</td>
@@ -26669,7 +26676,7 @@ $footer ="
 					}
 					$perolehanTotal = $perolehanTotal + $nilaiPrlhn;*/
 					$nilaiPerolehan = $row->Nilai;
-					$nilaiPrlhnFix = number_format($row->Nilai,2,",",".");
+					$nilaiPrlhnFix = number_format($row->Nilai,0,",",".");
 					$perolehanTotal = $perolehanTotal + $nilaiPerolehan;
 
 					$noReg=$row->noRegister;
@@ -26699,7 +26706,7 @@ $footer ="
                            }
                                             
                     // $printbarang=  number_format($barangTotal);
-                    $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                    $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
                     $tabletotal="
 						<tr>
 							<td colspan=\"13\" style=\"text-align: center;\">Jumlah</td>
@@ -27014,14 +27021,14 @@ if($dataArr!="")
 			if (count($split) == 1){
 				// $hasil = 1;
 				$nilaiPrlhn = $row->NilaiPerolehan;
-				$nilaiPrlhnFix = number_format($row->NilaiPerolehan,2,",",".");
+				$nilaiPrlhnFix = number_format($row->NilaiPerolehan,0,",",".");
 				$kuantitas = 1;
 			}else{
 				$awal = $split[0];
 				$akhir = end($split);
 				$hasil = (intval($akhir) - intval($awal)) + 1;
 				$nilaiPrlhn = $hasil * $row->NilaiPerolehan;
-				$nilaiPrlhnFix = number_format($nilaiPrlhn,2,",",".");
+				$nilaiPrlhnFix = number_format($nilaiPrlhn,0,",",".");
 				$kuantitas = $hasil;
 			}    
 			$perolehanTotal = $perolehanTotal + $nilaiPrlhn;			
@@ -27412,7 +27419,7 @@ if($dataArr!="")
                                              // if ($skpdeh != $row->kodeSatker || $tahun != $row->Tahun || $ruangan != $row->kodeRuangan  || $kodePemilik != substr($row->kodeLokasi,0,2) && $no>1){
                                              if ($skpdeh != $row->kodeSatker || $ruangan != $row->kodeRuangan  || $kodePemilik != substr($row->kodeLokasi,0,2) && $no>1){
 
-                                             $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                                             $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
                                                $tabletotal="
 													<tr>
 														<td colspan=\"9\" align=\"center\">Total Harga</td>
@@ -27772,7 +27779,7 @@ if($dataArr!="")
 												}
 												$perolehanTotal = $perolehanTotal + $nilaiPrlhn;*/
 												$nilaiPerolehan = $row->Nilai;
-												$nilaiPrlhnFix = number_format($row->Nilai,2,",",".");
+												$nilaiPrlhnFix = number_format($row->Nilai,0,",",".");
 												$perolehanTotal = $perolehanTotal + $nilaiPerolehan;
 
 												$noReg=$row->noRegister;
@@ -27805,7 +27812,7 @@ if($dataArr!="")
                                              }
                                              //udah dicoba ga muncul
                                              
-                                            $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                                            $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
 											$tabletotal="
 												<tr align=\"center\">
 													<td colspan=\"9\">Total Harga</td>
@@ -28307,35 +28314,35 @@ $body="
 						if($LastSatker == $FirstSatker){
 							$kuantitas = 0;
 							$nilaiAwalPrlhn = 0;
-							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
+							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
 						
 							$jmlTambah = 1;
 							$nilaiPrlhnMutasiTambah = $row->NilaiPerolehan;
-							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
 							//kurang
 							$jmlKurang = 0;
 							$nilaiPrlhnMutasiKurang = 0;
-							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
 							$ket = "tidak sama";
 							$jmlHasilMutasi = 1;	
 							$nilaiPerolehanHasilMutasi = $nilaiPrlhnMutasiKurang + $nilaiPrlhnMutasiTambah;
-							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
 						}else{
 							$kuantitas = 1;
 							$nilaiAwalPrlhn = $row->NilaiPerolehan_Awal;
-							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
+							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
 							
 							$jmlTambah = 0;
 							$nilaiPrlhnMutasiTambah = 0;
-							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
 							//kurang
 							$jmlKurang = 1;
 							$nilaiPrlhnMutasiKurang = $row->NilaiPerolehan;
-							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
 							$ket = "sama";
 							$jmlHasilMutasi = 0;	
 							$nilaiPerolehanHasilMutasi = 0;
-							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
 						}
 						
 						
@@ -28374,83 +28381,83 @@ $body="
 						}*/
 						$kuantitas = 1;
 						$nilaiAwalPrlhn = $row->NilaiPerolehan_Awal;
-						$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
+						$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
 						if($Aset_ID_Penambahan == 0){
 						//berkurang
 							$jmlTambah = 0;
 							$nilaiPrlhnMutasiTambah = 0;
-							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
 							//kurang
 							$jmlKurang = 1;
 							$nilaiPrlhnMutasiKurang = $row->NilaiPerolehan;
-							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
 							
 							$jmlHasilMutasi = 0;	
 							$nilaiPerolehanHasilMutasi = 0;
-							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
 							
 						}elseif($Aset_ID_Penambahan != 0){
 						//bertambah
 							$jmlTambah = 1;
 							$nilaiPrlhnMutasiTambah = $row->NilaiPerolehan;
-							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
 							//kurang
 							$jmlKurang = 0;
 							$nilaiPrlhnMutasiKurang = 0;
-							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
 							
 							//get value nilaiperolehan from Aset_ID_Penambahan
 							$addValueKptls = $this->get_NP_Aset_ID_Penambahan($row->Aset_ID_Penambahan);
 							
 							$jmlHasilMutasi = 1;	
 							$nilaiPerolehanHasilMutasi = $nilaiPrlhnMutasiKurang + $addValueKptls + $nilaiPrlhnMutasiTambah;
-							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");	
+							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");	
 						}
 						
 					}elseif($row->Kd_Riwayat == '26'){
 						// echo "MASUK PEMUSNAHAN PENGHAPUSAN";
 							$kuantitas = 1;	
 							$nilaiAwalPrlhn = $row->NilaiPerolehan;
-							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
+							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
 							
 							//mutasi tambah
 							$valAdd = 0;
 							$jmlTambah = 0;
 							$nilaiPrlhnMutasiTambah = $valAdd;
-							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
 							
 							//mutasi kurang
 							$valSubst = $row->NilaiPerolehan;
 							$jmlKurang = 1;
 							$nilaiPrlhnMutasiKurang = $valSubst;
-							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
 							
 							//jumlah akhir
 							$jmlHasilMutasi = 0;	
 							$nilaiPerolehanHasilMutasi = 0;
-							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
 					}elseif($row->Kd_Riwayat == '27'){
 						// echo "MASUK PEMUSNAHAN PENGHAPUSAN";
 							$kuantitas = 1;	
 							$nilaiAwalPrlhn = $row->NilaiPerolehan;
-							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
+							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
 							
 							//mutasi tambah
 							$valAdd = 0;
 							$jmlTambah = 0;
 							$nilaiPrlhnMutasiTambah = $valAdd;
-							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
 							
 							//mutasi kurang
 							$valSubst = $row->NilaiPerolehan;
 							$jmlKurang = 1;
 							$nilaiPrlhnMutasiKurang = $valSubst;
-							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
 							
 							//jumlah akhir
 							$jmlHasilMutasi = 0;	
 							$nilaiPerolehanHasilMutasi = 0;
-							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
 					}else{
 						// echo "OTHER";
 						$cekSelisih =($row->NilaiPerolehan - $row->NilaiPerolehan_Awal);  
@@ -28461,49 +28468,49 @@ $body="
 									$valAdd = $row->NilaiPerolehan;
 									// $nilaiAwalPerolehan = 0;
 									$nilaiAwalPrlhn = 0;
-									$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
+									$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
 									$kuantitas = 0;
 								}else{
 									$valAdd = $cekSelisih;
 									$nilaiAwalPrlhn = $row->NilaiPerolehan_Awal;
-									$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
+									$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
 									$kuantitas = 1;		
 								}
 								$jmlTambah = 1;
 								$nilaiPrlhnMutasiTambah =  $valAdd;
-								$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+								$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
 								
 								//mutasi kurang
 								$valSubst = 0;
 								$jmlKurang = 0;
 								$nilaiPrlhnMutasiKurang = $valSubst;
-								$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+								$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
 								
 								//jumlah akhir		
 								$jmlHasilMutasi = 1;	
 								$nilaiPerolehanHasilMutasi = $row->NilaiPerolehan;
-								$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+								$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
 					
 							}else{
 								$kuantitas = 1;	
 								$nilaiAwalPrlhn = $row->NilaiPerolehan_Awal;
-								$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
+								$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
 								//mutasi tambah
 								$valAdd = 0;
 								$jmlTambah = 0;
 								$nilaiPrlhnMutasiTambah = $valAdd;
-								$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+								$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
 								
 								//mutasi kurang
 								$valSubst = abs($cekSelisih);
 								$jmlKurang = 1;
 								$nilaiPrlhnMutasiKurang = $valSubst;
-								$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+								$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
 								
 								//jumlah akhir
 								$jmlHasilMutasi = 1;	
 								$nilaiPerolehanHasilMutasi = $row->NilaiPerolehan_Awal - $nilaiPrlhnMutasiKurang;
-								$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+								$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
 							}
 					}
 					$perolehanTotal = $perolehanTotal + $nilaiAwalPrlhn;	
@@ -28542,10 +28549,10 @@ $body="
 	   }
                                             
                     // $printbarang=  number_format($barangTotal);
-						$printperolehanTotal=  number_format($perolehanTotal,2,",",".");
-                        $printperolehanTotalKurang=  number_format($perolehanTotalKurang,2,",",".");
-                        $printperolehanTotalTambah=  number_format($perolehanTotalTambah,2,",",".");
-                        $printperolehanTotalMutasi=  number_format($perolehanTotalMutasi,2,",",".");
+						$printperolehanTotal=  number_format($perolehanTotal,0,",",".");
+                        $printperolehanTotalKurang=  number_format($perolehanTotalKurang,0,",",".");
+                        $printperolehanTotalTambah=  number_format($perolehanTotalTambah,0,",",".");
+                        $printperolehanTotalMutasi=  number_format($perolehanTotalMutasi,0,",",".");
 						
 						$tabletotal="
 						<tr>
@@ -28889,23 +28896,23 @@ if($dataArr!="")
 			if($row->SatkerTujuan == $skpd){
 				//mutasi tambah
 				$nilaiPrlhn_tambah = $row->NilaiPerolehan;
-				$nilaiPrlhnFix_tambah = number_format($nilaiPrlhn_tambah,2,",",".");
+				$nilaiPrlhnFix_tambah = number_format($nilaiPrlhn_tambah,0,",",".");
 				$perolehanSubTotal_tambah = $perolehanSubTotal_tambah + $nilaiPrlhnFix_tambah;	
 				
 				//mutasi kurang
 				$nilaiPrlhn_kurang = 0;
-				$nilaiPrlhnFix_kurang = number_format($nilaiPrlhn_kurang,2,",",".");
+				$nilaiPrlhnFix_kurang = number_format($nilaiPrlhn_kurang,0,",",".");
 				$perolehanSubTotal_kurang = $perolehanSubTotal_kurang + $nilaiPrlhn_kurang;			
 			
 			}else {
 				//mutasi tambah
 				$nilaiPrlhn_tambah = 0;
-				$nilaiPrlhnFix_tambah = number_format($nilaiPrlhn_tambah,2,",",".");
+				$nilaiPrlhnFix_tambah = number_format($nilaiPrlhn_tambah,0,",",".");
 				$perolehanSubTotal_tambah = $perolehanSubTotal_tambah + $nilaiPrlhnFix_tambah;	
 				
 				//mutasi kurang
 				$nilaiPrlhn_kurang = $row->NilaiPerolehan;
-				$nilaiPrlhnFix_kurang = number_format($nilaiPrlhn_kurang,2,",",".");
+				$nilaiPrlhnFix_kurang = number_format($nilaiPrlhn_kurang,0,",",".");
 				$perolehanSubTotal_kurang = $perolehanSubTotal_kurang + $nilaiPrlhn_kurang;		
 			
 			}
@@ -28935,8 +28942,8 @@ if($dataArr!="")
         }
                                             
             // $printbarang=  number_format($barangTotal);
-            $printperolehanTotal_berkurang=  number_format($perolehanTotal_kurang,2,",",".");
-            $printperolehanTotal_bertambah=  number_format($perolehanTotal_tambah,2,",",".");
+            $printperolehanTotal_berkurang=  number_format($perolehanTotal_kurang,0,",",".");
+            $printperolehanTotal_bertambah=  number_format($perolehanTotal_tambah,0,",",".");
             $tabletotal="<tr>
                             <td colspan=\"8\" style=\"font-weight: bold; text-align: center;\">Jumlah</td>
                             <td style=\"text-align: right; font-weight: bold;\">$printperolehanTotal_berkurang<br><hr>$printperolehanTotal_bertambah</td>
@@ -29099,9 +29106,9 @@ if($dataArr!="")
         
     }
         $satuanTotal=$satuanTotal + $row->Satuan;
-        $satuanTotal_1=number_format($satuanTotal);
+        $satuanTotal_1=number_format($satuanTotal,0,",",".");
         $hargaTotal = $hargaTotal + $row->NilaiStandar;
-        $hargaTotal_1 = number_format($hargaTotal);
+        $hargaTotal_1 = number_format($hargaTotal,0,",",".");
         $harga = number_format($row->NilaiStandar);	
 
         ($row->Uraian == '') ?      $dataNamaAset = "-" : $dataNamaAset = $row->Uraian;
@@ -29109,7 +29116,7 @@ if($dataArr!="")
         ($row->Keterangan == '') ?   $dataKeterangan = "-" : $dataKeterangan = $row->Keterangan;
         ($row->NilaiStandar == '') ? $dataStandar = "-" : $dataStandar = $row->NilaiStandar;
         ($row->Satuan == '') ? $dataSatuan = "-" : $dataSatuan = $row->Satuan;
-        $dataStandar_1=number_format($dataStandar);
+        $dataStandar_1=number_format($dataStandar,0,",",".");
 
                     $body.= "<tr>
                                 <td style=\"width: 30px; text-align: center;\">$no</td>
@@ -29222,15 +29229,15 @@ if($dataArr!="")
         }
 											
             $satuanTotal=$satuanTotal + $row->Satuan;
-            $satuanTotal_1=number_format($satuanTotal);
+            $satuanTotal_1=number_format($satuanTotal,0,",",".");
             $hargaTotal = $hargaTotal + $row->Pemeliharaan;
-            $hargaTotal_1 = number_format($hargaTotal);
+            $hargaTotal_1 = number_format($hargaTotal,0,",",".");
             ($row->Uraian == '') ?     $dataNamaAset = "-" : $dataNamaAset = $row->Uraian;
             ($row->Spesifikasi == '') ?  $dataSpesifikasi = "-" : $dataSpesifikasi = $row->Spesifikasi; 
             ($row->Keterangan == '') ?   $dataKeterangan = "-" : $dataKeterangan = $row->Keterangan;
             ($row->Pemeliharaan == '') ? $dataStandar = "-" : $dataStandar = $row->Pemeliharaan;
             ($row->Satuan == '') ? $dataSatuan = "-" : $dataSatuan = $row->Satuan;
-            $dataStandar_1=number_format($dataStandar);
+            $dataStandar_1=number_format($dataStandar,0,",",".");
                                             
                 $body.= "<tr>
                             <td style=\"width: 30px; text-align: center;\">$no</td>
@@ -29372,8 +29379,8 @@ if($dataArr!="")
 						  		  
 						//uda dites footer disini
                         if ($skpdeh != $row->NamaSatker && $no>1){
-						$printluas=  number_format($luasTotal);
-						$printperolehanTotal=  number_format($perolehanTotal);	      
+						$printluas=  number_format($luasTotal,0,",",".");
+						$printperolehanTotal=  number_format($perolehanTotal,0,",",".");	      
                            
                            
                         $tabletotal= "<tr align=\"center\">
@@ -29532,8 +29539,8 @@ if($dataArr!="")
                        }
                        //udah dites
                        $hak_tanah =$this->get_hak_pakai($row->HakTanah);
-                       $perolehan = number_format($row->NilaiPerolehan);
-                       $luas = number_format($row->LuasTotal);
+                       $perolehan = number_format($row->NilaiPerolehan,0,",",".");
+                       $luas = number_format($row->LuasTotal,0,",",".");
                        $luasTotal = $luasTotal + $row->LuasTotal;
                        $perolehanTotal = $perolehanTotal + $row->NilaiPerolehan;   
                            
@@ -29565,8 +29572,8 @@ if($dataArr!="")
                                              
                                              
                                              
-                         $printluas=  number_format($luasTotal);
-                         $printperolehanTotal=  number_format($perolehanTotal);	   
+                         $printluas=  number_format($luasTotal,0,",",".");
+                         $printperolehanTotal=  number_format($perolehanTotal,0,",",".");	   
                          
                          $tabletotal= "<tr align=\"center\">
                                             <td colspan=\"4\">Total</td>
