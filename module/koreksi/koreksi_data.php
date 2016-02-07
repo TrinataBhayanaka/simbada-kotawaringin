@@ -25,7 +25,9 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 
 		      	$dataArr = $STORE->koreksiAset($_POST);
 
-		  }		
+		  }
+
+		$dataArr['aset']['kodepemilik'] = substr($dataArr['aset']['kodeLokasi'], 0,2);		
 
 	?>
 	<!-- End Sql -->
@@ -87,12 +89,12 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 							<li>
 								<span class="span2">Kode Pemilik</span>
 								<select id="kodepemilik" name="kodepemilik" style="width:255px" class="full" disabled>
-									<option value="0">0 Pemerintah Pusat</option>
-									<option value="11">11 Pemerintah Provinsi</option>
-									<option value="12" selected>12 Pemerintah Kabupaten/Kota</option>
-									<option value="13">13 Pemerintah Provinsi Lain</option>
-									<option value="14">14 Pemerintah Kabupaten/Kota Lain</option>
-									<option value="15">15 Non Pemerintah</option>
+									<option value="0" <?=($dataArr['aset']['kodepemilik'] == '0') ? selected : ""?>>0 Pemerintah Pusat</option>
+									<option value="11" <?=($dataArr['aset']['kodepemilik'] == '11') ? selected : ""?>>11 Pemerintah Provinsi</option>
+									<option value="12" <?=($dataArr['aset']['kodepemilik'] == '12') ? selected : ""?>>12 Pemerintah Kabupaten/Kota</option>
+									<option value="13" <?=($dataArr['aset']['kodepemilik'] == '13') ? selected : ""?>>13 Pemerintah Provinsi Lain</option>
+									<option value="14" <?=($dataArr['aset']['kodepemilik'] == '14') ? selected : ""?>>14 Pemerintah Kabupaten/Kota Lain</option>
+									<option value="15" <?=($dataArr['aset']['kodepemilik'] == '15') ? selected : ""?>>15 Non Pemerintah</option>
 								</select>
 							</li>
 						</ul>
