@@ -103,7 +103,7 @@ while ($dataSP2D = mysql_fetch_assoc($sql)){
             unset($tmpValue);
             foreach ($kib as $key => $val) {
               $tmpField[] = $key;
-              $tmpValue[] = "'".$val."'";
+              $tmpValue[] = "'".trim(addslashes($val))."'";
             }
              
             $fileldImp = implode(',', $tmpField);
