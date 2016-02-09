@@ -107,7 +107,7 @@ while ($dataSP2D = mysql_fetch_assoc($sql)){
             }
              
             $fileldImp = implode(',', $tmpField);
-            $dataImp = implode(',', $tmpValue);
+            $dataImp = implode(',', trim($tmpValue));
 
             $sql = "INSERT INTO log_{$tabel} ({$fileldImp}) VALUES ({$dataImp})";
             $execquery = mysql_query($sql);
