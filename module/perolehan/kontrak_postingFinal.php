@@ -103,11 +103,11 @@ while ($dataSP2D = mysql_fetch_assoc($sql)){
             unset($tmpValue);
             foreach ($kib as $key => $val) {
               $tmpField[] = $key;
-              $tmpValue[] = "'".$val."'";
+              $tmpValue[] = "'".trim(addslashes($val))."'";
             }
              
             $fileldImp = implode(',', $tmpField);
-            $dataImp = implode(',', trim($tmpValue));
+            $dataImp = implode(',', $tmpValue);
 
             $sql = "INSERT INTO log_{$tabel} ({$fileldImp}) VALUES ({$dataImp})";
             $execquery = mysql_query($sql);
