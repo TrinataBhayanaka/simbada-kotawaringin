@@ -24,7 +24,7 @@ $id = $argv[4];
 
 $newTahun = $tahun;
 // $newTahun = $tahun - 1; 
-$aColumns = array('a.Aset_ID', 'a.kodeKelompok', 'k.Uraian', 'a.Tahun', 'a.Info', 'a.NilaiPerolehan', 'a.noRegister', 'a.PenyusutanPerTahun', 'a.AkumulasiPenyusutan', 'a.TipeAset', 'a.kodeSatker', 'a.Status_Validasi_Barang');
+$aColumns = array('a.Aset_ID', 'a.kodeKelompok', 'k.Uraian', 'a.Tahun', 'a.Info', 'a.NilaiPerolehan', 'a.noRegister', 'a.PenyusutanPerTahun', 'a.AkumulasiPenyusutan', 'a.TipeAset', 'a.kodeSatker', 'a.Status_Validasi_Barang','a.MasaManfaat');
 $fieldCustom = str_replace(" , ", " ", implode(", ", $aColumns));
 $sTable = "aset_tmp as a";
 $sTable2 = "aset_tmp2 as a";
@@ -41,7 +41,7 @@ if ($kib == 'B') {
                                                   a.kodeRuangan, Status_Validasi_Barang, StatusTampil, a.Tahun, a.NilaiPerolehan, a.Alamat, a.Info, 
                                                   a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran, a.Silinder, a.MerkMesin, a.JumlahMesin,a.Material, a.NoSeri,
                                                   a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar, 
-                                                  a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis  
+                                                  a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis,a.TahunPenyusutan
                                             from mesin a where a.TglPerolehan <= '$TglPerubahan_temp'  and a.kodeSatker like '$kodeSatker%'";
     $ExeQuery = $DBVAR->query($queryKib) or die($DBVAR->error());
 
@@ -55,13 +55,15 @@ if ($kib == 'B') {
                                                  kodeRuangan, Status_Validasi_Barang, StatusTampil, Tahun, NilaiPerolehan, Alamat, Info, 
                                                  AsalUsul, kondisi, CaraPerolehan, Merk, Model, Ukuran, Silinder, MerkMesin, JumlahMesin, Material, NoSeri,
                                                  NoRangka, NoMesin, NoSTNK, TglSTNK, NoBPKB, TglBPKB, NoDokumen, TglDokumen, Pabrik, TahunBuat, BahanBakar, 
-                                                 NegaraAsal, NegaraRakit, Kapasitas, Bobot, GUID, MasaManfaat, AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis)
+                                                 NegaraAsal, NegaraRakit, Kapasitas, Bobot, GUID, MasaManfaat, AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis,TahunPenyusutan)
                                                  select a.Mesin_ID, a.Aset_ID, a.kodeKelompok, a.kodeSatker, a.kodeLokasi, a.noRegister, a.TglPerolehan, a.TglPembukuan, a.kodeData, a.kodeKA, 'B',
                                                        a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, if(a.NilaiPerolehan_Awal!=0,a.NilaiPerolehan_Awal,a.NilaiPerolehan), a.Alamat, a.Info, 
                                                        a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran, a.Silinder, a.MerkMesin, a.JumlahMesin,a.Material, a.NoSeri,
                                                        a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar, 
                                                        a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, 
-                                                       if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis 
+                                                       if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), 
+                                                       if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), 
+                                                       if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan
                                                  from log_mesin a
                                                  inner join mesin t on t.Aset_ID=a.Aset_ID
                                                  inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -74,7 +76,7 @@ if ($kib == 'B') {
               NilaiPerolehan, Alamat, Info, AsalUsul, kondisi, CaraPerolehan, Merk, Model, Ukuran, Silinder, 
               MerkMesin, JumlahMesin, Material, NoSeri, NoRangka, NoMesin, NoSTNK, TglSTNK, 
               NoBPKB, TglBPKB, NoDokumen, TglDokumen, Pabrik, TahunBuat, BahanBakar, NegaraAsal, NegaraRakit, 
-              Kapasitas, Bobot, GUID, MasaManfaat, AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis) 
+              Kapasitas, Bobot, GUID, MasaManfaat, AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis,TahunPenyusutan) 
       select a.Mesin_ID, a.Aset_ID, a.kodeKelompok, a.SatkerAwal, concat(left(a.kodeLokasi,9),left(a.SatkerAwal,6),
               lpad(right(a.Tahun,2),2,'0'),'.',right(a.SatkerAwal,5)), a.NomorRegAwal, a.TglPerolehan, a.TglPembukuan, 
               a.kodeData, a.kodeKA, 'B',a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, 
@@ -82,7 +84,7 @@ if ($kib == 'B') {
               a.Silinder, a.MerkMesin, a.JumlahMesin, a.Material, 
 a.NoSeri, a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen,
 a.Pabrik, a.TahunBuat, a.BahanBakar, a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, 
-a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis from 
+a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,t.UmurEkonomis,t.TahunPenyusutan from 
 view_mutasi_mesin a inner join mesin t 
 on t.Aset_ID=a.Aset_ID inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID 
 and t.Aset_ID is not null and t.Aset_ID != 0
@@ -97,7 +99,7 @@ and t.Aset_ID is not null and t.Aset_ID != 0
                                                   a.kodeRuangan, Status_Validasi_Barang, StatusTampil, a.Tahun, a.NilaiPerolehan, a.Alamat, a.Info, 
                                                   a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran, a.Silinder, a.MerkMesin, a.JumlahMesin,a.Material, a.NoSeri,
                                                   a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar, 
-                                                  a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis 
+                                                  a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis ,a.TahunPenyusutan
                                             from mesin a where  a.kodeSatker like '$kodeSatker%' and  a.TglPerolehan <= '$TglPerubahan_temp' ";
     $ExeQuery = $DBVAR->query($queryKib) or die($DBVAR->error());
 
@@ -111,13 +113,14 @@ and t.Aset_ID is not null and t.Aset_ID != 0
                                                  kodeRuangan, Status_Validasi_Barang, StatusTampil, Tahun, NilaiPerolehan, Alamat, Info, 
                                                  AsalUsul, kondisi, CaraPerolehan, Merk, Model, Ukuran, Silinder, MerkMesin, JumlahMesin, Material, NoSeri,
                                                  NoRangka, NoMesin, NoSTNK, TglSTNK, NoBPKB, TglBPKB, NoDokumen, TglDokumen, Pabrik, TahunBuat, BahanBakar, 
-                                                 NegaraAsal, NegaraRakit, Kapasitas, Bobot, GUID, MasaManfaat, AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis)
+                                                 NegaraAsal, NegaraRakit, Kapasitas, Bobot, GUID, MasaManfaat, AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis,TahunPenyusutan)
                                                  select a.Mesin_ID, a.Aset_ID, a.kodeKelompok, a.kodeSatker, a.kodeLokasi, a.noRegister, a.TglPerolehan, a.TglPembukuan, a.kodeData, a.kodeKA, 'B',
                                                        a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, if(a.NilaiPerolehan_Awal!=0,a.NilaiPerolehan_Awal,a.NilaiPerolehan), a.Alamat, a.Info, 
                                                        a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran, a.Silinder, a.MerkMesin, a.JumlahMesin,a.Material, a.NoSeri,
                                                        a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar, 
                                                        a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, 
-                                                       if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis 
+                                                       if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), 
+                                                       if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan 
                                                  from log_mesin a
                                                  inner join mesin t on t.Aset_ID=a.Aset_ID
                                                  inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -130,7 +133,7 @@ and t.Aset_ID is not null and t.Aset_ID != 0
               NilaiPerolehan, Alamat, Info, AsalUsul, kondisi, CaraPerolehan, Merk, Model, Ukuran, Silinder, 
               MerkMesin, JumlahMesin, Material, NoSeri, NoRangka, NoMesin, NoSTNK, TglSTNK, 
               NoBPKB, TglBPKB, NoDokumen, TglDokumen, Pabrik, TahunBuat, BahanBakar, NegaraAsal, NegaraRakit, 
-              Kapasitas, Bobot, GUID, MasaManfaat, AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis) 
+              Kapasitas, Bobot, GUID, MasaManfaat, AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis,TahunPenyusutan) 
       select a.Mesin_ID, a.Aset_ID, a.kodeKelompok, a.SatkerAwal, concat(left(a.kodeLokasi,9),left(a.SatkerAwal,6),
               lpad(right(a.Tahun,2),2,'0'),'.',right(a.SatkerAwal,5)), a.NomorRegAwal, a.TglPerolehan, a.TglPembukuan, 
               a.kodeData, a.kodeKA, 'B',a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, 
@@ -138,7 +141,7 @@ and t.Aset_ID is not null and t.Aset_ID != 0
               a.Silinder, a.MerkMesin, a.JumlahMesin, a.Material, 
 a.NoSeri, a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen,
 a.Pabrik, a.TahunBuat, a.BahanBakar, a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, 
-a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,UmurEkonomis from 
+a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,t.UmurEkonomis,t.TahunPenyusutan from 
 view_mutasi_mesin a inner join mesin t 
 on t.Aset_ID=a.Aset_ID inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID 
 and t.Aset_ID is not null and t.Aset_ID != 0
@@ -159,7 +162,7 @@ and t.Aset_ID is not null and t.Aset_ID != 0
                                                        a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, a.NilaiPerolehan, a.Alamat, a.Info, a.AsalUsul, a.kondisi, 
                                                        a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, 
                                                        a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas, 
-                                                       a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis
+                                                       a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis,a.TahunPenyusutan
                                                  from bangunan a
                                                  where  a.kodeSatker like '$kodeSatker%' and a.TglPerolehan <= '$TglPerubahan_temp'";
     $ExeQuery = $DBVAR->query($queryKib) or die($DBVAR->error());
@@ -175,13 +178,13 @@ and t.Aset_ID is not null and t.Aset_ID != 0
                                                   kodeRuangan, Status_Validasi_Barang, StatusTampil, Tahun, NilaiPerolehan, Alamat, Info, AsalUsul, kondisi, 
                                                   CaraPerolehan, TglPakai, Konstruksi, Beton, JumlahLantai, LuasLantai, Dinding, Lantai, LangitLangit, Atap, 
                                                   NoSurat, TglSurat, NoIMB, TglIMB, StatusTanah, NoSertifikat, TglSertifikat, Tanah_ID, Tmp_Tingkat, Tmp_Beton, Tmp_Luas, 
-                                                  KelompokTanah_ID, GUID, TglPembangunan, MasaManfaat, AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis)
+                                                  KelompokTanah_ID, GUID, TglPembangunan, MasaManfaat, AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis,TahunPenyusutan)
                                             select a.Bangunan_ID, a.Aset_ID, a.kodeKelompok, a.kodeSatker, a.kodeLokasi, a.noRegister, a.TglPerolehan, a.TglPembukuan, a.kodeData, a.kodeKA, 'C',
                                                   a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, if(a.NilaiPerolehan_Awal!=0,a.NilaiPerolehan_Awal,a.NilaiPerolehan), a.Alamat, a.Info, a.AsalUsul, a.kondisi, 
                                                   a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, 
                                                   a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas, 
                                                   a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, 
-                                                  if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis  
+                                                  if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan  
                                             from log_bangunan a
                                             inner join bangunan t on t.Aset_ID=a.Aset_ID
                                             inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -196,7 +199,7 @@ and t.Aset_ID is not null and t.Aset_ID != 0
            Info, AsalUsul, kondisi, CaraPerolehan, TglPakai, Konstruksi, Beton, JumlahLantai, LuasLantai, Dinding, 
            Lantai, LangitLangit, Atap, NoSurat, TglSurat, NoIMB, TglIMB, StatusTanah, NoSertifikat, TglSertifikat, Tanah_ID, 
            Tmp_Tingkat, Tmp_Beton, Tmp_Luas, KelompokTanah_ID, GUID, TglPembangunan, MasaManfaat, 
-           AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis) 
+           AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis,TahunPenyusutan) 
         select a.Bangunan_ID, a.Aset_ID, a.kodeKelompok, 
            a.SatkerAwal,concat(left(a.kodeLokasi,9),left(a.SatkerAwal,6),lpad(right(a.Tahun,2),2,'0'),'.',right(a.SatkerAwal,5)), 
            a.NomorRegAwal, a.TglPerolehan, a.TglPembukuan, a.kodeData, a.kodeKA,'C', a.kodeRuangan,
@@ -205,7 +208,7 @@ and t.Aset_ID is not null and t.Aset_ID != 0
 JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, a.NoSurat, 
 a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, 
 a.Tmp_Beton, a.Tmp_Luas, a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, a.AkumulasiPenyusutan, 
-a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis 
+a.NilaiBuku, a.PenyusutanPerTahun,t.UmurEkonomis ,t.TahunPenyusutan
 from view_mutasi_bangunan a inner join bangunan t on t.Aset_ID=a.Aset_ID 
 inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0 
 where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND a.TglPembukuan <='$TglPerubahan_temp' "
@@ -218,7 +221,7 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
                                                        a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, a.NilaiPerolehan, a.Alamat, a.Info, a.AsalUsul, a.kondisi, 
                                                        a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, 
                                                        a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas, 
-                                                       a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis  
+                                                       a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis  ,a.TahunPenyusutan
                                                  from bangunan a
                                                  where  a.kodeSatker like '$kodeSatker%' and a.TglPerolehan <= '$TglPerubahan_temp'";
     $ExeQuery = $DBVAR->query($queryKib) or die($DBVAR->error());
@@ -234,13 +237,13 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
                                                   kodeRuangan, Status_Validasi_Barang, StatusTampil, Tahun, NilaiPerolehan, Alamat, Info, AsalUsul, kondisi, 
                                                   CaraPerolehan, TglPakai, Konstruksi, Beton, JumlahLantai, LuasLantai, Dinding, Lantai, LangitLangit, Atap, 
                                                   NoSurat, TglSurat, NoIMB, TglIMB, StatusTanah, NoSertifikat, TglSertifikat, Tanah_ID, Tmp_Tingkat, Tmp_Beton, Tmp_Luas, 
-                                                  KelompokTanah_ID, GUID, TglPembangunan, MasaManfaat, AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis)
+                                                  KelompokTanah_ID, GUID, TglPembangunan, MasaManfaat, AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis,TahunPenyusutan)
                                             select a.Bangunan_ID, a.Aset_ID, a.kodeKelompok, a.kodeSatker, a.kodeLokasi, a.noRegister, a.TglPerolehan, a.TglPembukuan, a.kodeData, a.kodeKA, 'C',
                                                   a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, if(a.NilaiPerolehan_Awal!=0,a.NilaiPerolehan_Awal,a.NilaiPerolehan), a.Alamat, a.Info, a.AsalUsul, a.kondisi, 
                                                   a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, 
                                                   a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas, 
                                                   a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, 
-                                                  if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis  
+                                                  if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis  ,a.TahunPenyusutan
                                             from log_bangunan a
                                             inner join bangunan t on t.Aset_ID=a.Aset_ID
                                             inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -253,7 +256,7 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
            Info, AsalUsul, kondisi, CaraPerolehan, TglPakai, Konstruksi, Beton, JumlahLantai, LuasLantai, Dinding, 
            Lantai, LangitLangit, Atap, NoSurat, TglSurat, NoIMB, TglIMB, StatusTanah, NoSertifikat, TglSertifikat, Tanah_ID, 
            Tmp_Tingkat, Tmp_Beton, Tmp_Luas, KelompokTanah_ID, GUID, TglPembangunan, MasaManfaat, 
-           AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis) 
+           AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis,TahunPenyusutan) 
         select a.Bangunan_ID, a.Aset_ID, a.kodeKelompok, 
            a.SatkerAwal,concat(left(a.kodeLokasi,9),left(a.SatkerAwal,6),lpad(right(a.Tahun,2),2,'0'),'.',right(a.SatkerAwal,5)), 
            a.NomorRegAwal, a.TglPerolehan, a.TglPembukuan, a.kodeData, a.kodeKA,'C', a.kodeRuangan,
@@ -262,7 +265,7 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
 JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, a.NoSurat, 
 a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, 
 a.Tmp_Beton, a.Tmp_Luas, a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, a.AkumulasiPenyusutan, 
-a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis 
+a.NilaiBuku, a.PenyusutanPerTahun,t.UmurEkonomis ,t.TahunPenyusutan
 from view_mutasi_bangunan a inner join bangunan t on t.Aset_ID=a.Aset_ID 
 inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0 
 where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND a.TglPembukuan <='$TglPerubahan_temp' "
@@ -281,7 +284,7 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
                                                  a.kodeKA, a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, a.NilaiPerolehan, a.Alamat, a.Info, 
                                                  a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Konstruksi, a.Panjang, a.Lebar, a.NoDokumen, a.TglDokumen, a.StatusTanah, 
                                                  a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.KelompokTanah_ID, a.GUID, a.TanggalPemakaian, a.LuasJaringan, a.MasaManfaat, 
-                                                 a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,UmurEkonomis  
+                                                 a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis,a.TahunPenyusutan  
                                            from jaringan a
                                            where  a.kodeSatker like '$kodeSatker%' and a.TglPerolehan <= '$TglPerubahan_temp'";
     $ExeQuery = $DBVAR->query($queryKib) or die($DBVAR->error());
@@ -298,12 +301,12 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
                                             kodeKA, kodeRuangan,Status_Validasi_Barang, StatusTampil, Tahun, NilaiPerolehan, Alamat, Info, 
                                             AsalUsul, kondisi, CaraPerolehan, Konstruksi, Panjang, Lebar, NoDokumen, TglDokumen, StatusTanah, 
                                             NoSertifikat, TglSertifikat, Tanah_ID, KelompokTanah_ID, GUID, TanggalPemakaian, LuasJaringan, MasaManfaat, 
-                                            AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis)
+                                            AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis,TahunPenyusutan)
                                       select a.Jaringan_ID, a.Aset_ID, a.kodeKelompok, a.kodeSatker, a.kodeLokasi, a.noRegister, a.TglPerolehan, a.TglPembukuan, a.kodeData, 'D',
                                             a.kodeKA, a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, if(a.NilaiPerolehan_Awal!=0,a.NilaiPerolehan_Awal,a.NilaiPerolehan), a.Alamat, a.Info, 
                                             a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Konstruksi, a.Panjang, a.Lebar, a.NoDokumen, a.TglDokumen, a.StatusTanah, 
                                             a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.KelompokTanah_ID, a.GUID, a.TanggalPemakaian, a.LuasJaringan, a.MasaManfaat, 
-                                            if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis
+                                            if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan
                                       from log_jaringan a
                                       inner join jaringan t on t.Aset_ID=a.Aset_ID
                                       inner join jaringan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -316,7 +319,7 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
            TglPembukuan, kodeData, kodeKA, TipeAset,kodeRuangan, Status_Validasi_Barang, StatusTampil, Tahun, 
            NilaiPerolehan, Alamat, Info, AsalUsul, kondisi, CaraPerolehan, Konstruksi, Panjang, Lebar, NoDokumen,
            TglDokumen, StatusTanah, NoSertifikat, TglSertifikat, Tanah_ID, KelompokTanah_ID, GUID, TanggalPemakaian, 
-           LuasJaringan, MasaManfaat, AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis) 
+           LuasJaringan, MasaManfaat, AkumulasiPenyusutan, NilaiBuku, PenyusutanPerTahun,UmurEkonomis,TahunPenyusutan) 
            select a.Jaringan_ID, a.Aset_ID, 
            a.kodeKelompok, a.SatkerAwal,concat(left(a.kodeLokasi,9),left(a.SatkerAwal,6),lpad(right(a.Tahun,2),2,'0'),'.',
            right(a.SatkerAwal,5)), a.NomorRegAwal, a.TglPerolehan, a.TglPembukuan, a.kodeData, a.kodeKA, 'D',
@@ -324,7 +327,7 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
            a.Alamat, a.Info, a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Konstruksi, a.Panjang, a.Lebar, a.NoDokumen, 
            a.TglDokumen, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.KelompokTanah_ID, 
 a.GUID, a.TanggalPemakaian, a.LuasJaringan, a.MasaManfaat, a.AkumulasiPenyusutan, a.NilaiBuku, 
-a.PenyusutanPerTahun,a.UmurEkonomis from view_mutasi_jaringan a 
+a.PenyusutanPerTahun,t.UmurEkonomis,t.TahunPenyusutan from view_mutasi_jaringan a 
 inner join jaringan t on t.Aset_ID=a.Aset_ID 
 inner join jaringan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0 
 where a.TglPerolehan <='$TglPerubahan_temp' AND a.TglSKKDH >'$TglPerubahan_temp' AND "
@@ -349,8 +352,9 @@ for($i=0;$i<2;$i++){
             break;
 
         case 1:
+            $thn_sblm=$newTahun-1;
             $sWhere=" WHERE $status a.AkumulasiPenyusutan IS NOT NULL AND a.PenyusutanPerTahun IS NOT NULL  
-			  AND a.kodeSatker like '$kodeSatker%' AND a.kodeKelompok like '$flagKelompok%'";
+			  AND a.kodeSatker like '$kodeSatker%' AND a.kodeKelompok like '$flagKelompok%' and a.TahunPenyusutan='$thn_sblm' ";
             break;
     }
 
@@ -598,8 +602,8 @@ for($i=0;$i<2;$i++){
          echo "Penyusutan tahun berjalan untuk tahun $newTahun $kodeSatker dengan kondisi penyusutan kedua kali (log ada di log_penyusutan) \n"
          . "Aset_ID \t kodeKelompok  \t NilaiPerolehan \t Tahun \t masa_manfaat \t AkumulasiPenyusutan \t NilaiBuku  \t penyusutan_per_tahun \n";
       while ($Data = $DBVAR->fetch_array($ExeQuery)){   
-         
-          $Aset_ID=$DATA->Aset_ID;
+         $Aset_ID = $Data['Aset_ID'];
+          //$Aset_ID=$DATA->Aset_ID;
           $kodeKelompok = $Data['kodeKelompok'];
           $tmp_kode = explode(".", $kodeKelompok);
           $NilaiPerolehan = $Data['NilaiPerolehan'];
@@ -651,8 +655,9 @@ for($i=0;$i<2;$i++){
              }
              $data_log=array("NilaiPerolehan_Awal"=>$NilaiPerolehan_Awal,
                     "AkumulasiPenyusutan_Awal"=>$AkumulasiPenyusutan_Awal,
-                    "PenyusutanPerTahun_Awal"=>$PenyusutanPerTahun_Awal);
-             log_penyusutan($Aset_ID, $tableKib, 49, $data_log, $DBVAR);
+                    "PenyusutanPerTahun_Awal"=>$PenyusutanPerTahun_Awal,
+                     "kodeSatker"=>$kodeSatker);
+             log_penyusutan($Aset_ID, $tableKib, 49,$newTahun, $data_log, $DBVAR);
             //akhir untuk log sblm penyusutan
           
           
@@ -665,6 +670,7 @@ for($i=0;$i<2;$i++){
              $count=0;
              $qlog=$DBVAR->query($query_perubahan) or die($DBVAR->error());
              while($Data_Log=$DBVAR->fetch_array($ExeQuery)){
+                 echo "masuk-logg \n";
                  $status_transaksi=1;
                  $kd_riwayat=$Data_Log->kd_riwayat;
                  $Nilai_Perolehan_log=$Data_Log->NilaiPerolehan;
@@ -743,8 +749,8 @@ for($i=0;$i<2;$i++){
                                             WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan_temp' ";
                             $ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());;
                          //update log penyusutan
-                         $log_id=log_penyusutan($Aset_ID, $tableKib, 50, $data_log, $DBVAR);
-                         
+                         $log_id=log_penyusutan($Aset_ID, $tableKib, 50,$newTahun, $data_log, $DBVAR);
+                         echo "$Aset_ID \t $kodeKelompok_log \t $NP \t $Tahun \t $MasaManfaat \t $AkumulasiPenyusutan_hasil \t $NilaiBuku_hasil  \t $penyusutan_per_tahun \n $Kd_Riwayat \n";
                          
                          $perhitungan="  $NilaiYgDisusutkan=$NP+$selisih; \n"
                                  . "$Umur_Ekonomis_Final=$UmurEkonomis+$penambahan_masa_manfaat;\n
@@ -752,7 +758,7 @@ for($i=0;$i<2;$i++){
                                     $AkumulasiPenyusutan_hasil=$PenyusutanPerTahun;\n
                                     $NilaiBuku_hasil=$NilaiYgDisusutkan-$AkumulasiPenyusutan;\n
                                     $Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1; \n";
-                                     $data_penyusutan=array('id' => NULL,'Aset_ID' => "$Aset_ID",
+                        $data_penyusutan=array('id' => NULL,'Aset_ID' => "$Aset_ID",
                              'kodeKelompok' => "$kodeKelompok",
                              'kodeSatker' => "$kodeSatker",
                              'Tahun' => "$Tahun",
@@ -809,8 +815,30 @@ for($i=0;$i<2;$i++){
                                                WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan_temp' ";
                                $ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());;
                             //update log penyusutan
-                            $log_id=log_penyusutan($Aset_ID, $tableKib, 50, $data_log, $DBVAR);
+                            $log_id=log_penyusutan($Aset_ID, $tableKib, 50,$newTahun, $data_log, $DBVAR);
                             //akhir update log penyusutan
+                            echo "$Aset_ID \t $kodeKelompok_log \t $NP \t $Tahun \t $MasaManfaat \t $AkumulasiPenyusutan_hasil \t $NilaiBuku_hasil  \t $penyusutan_per_tahun \n $Kd_Riwayat \n";
+                         
+                            
+                            $perhitungan="$PenyusutanPerTahun=$NP/$MasaManfaat;\n
+                         $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;\n
+                         $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;\n
+                         $NilaiBuku=$NP-$AkumulasiPenyusutan;\n
+                         $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;\n";
+                            $data_penyusutan=array('id' => NULL,'Aset_ID' => "$Aset_ID",
+                             'kodeKelompok' => "$kodeKelompok",
+                             'kodeSatker' => "$kodeSatker",
+                             'Tahun' => "$Tahun",
+                             'NilaiPerolehan' => "$NilaiPerolehan",
+                             'MasaManfaat' => "$MasaManfaat",
+                             'NilaiBuku' => "$NilaiBuku_hasil",
+                             'info' =>"$kd_riwayat | Kapitalisasi",
+                             'log_id' => '10',
+                             'perhitungan' => "$perhitungan",
+                             'TahunPenyusutan' => "$newTahun",
+                             'changeDate' => date('Y-m-d'),'StatusTampil' => '1');
+                         
+                         catatan_hasil_penyusutan($data_penyusutan, $DBVAR);
                          
                      }
                  $tmp_nilai=$Nilai_Perolehan_log;
@@ -819,6 +847,7 @@ for($i=0;$i<2;$i++){
              }
              
              if($status_transaksi!=1){
+                 echo "tidak masuk log \n";
                  //bila tidak ada transaksi
                  $PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;
                  $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
@@ -830,6 +859,8 @@ for($i=0;$i<2;$i++){
                     $NilaiBuku=0;
                  }
                  
+                 echo "$Aset_ID \t $kodeKelompok \t $NilaiPerolehan \t $Tahun \t $MasaManfaat \t $AkumulasiPenyusutan \t $NilaiBuku  \t $PenyusutanPerTahun \n $Kd_Riwayat \n";
+                         
                  //update aset dan update log untuk kapitalisasi
                                $QueryAset = "UPDATE aset SET MasaManfaat = '$MasaManfaat' ,
                                                AkumulasiPenyusutan = '$AkumulasiPenyusutan',	
@@ -850,31 +881,53 @@ for($i=0;$i<2;$i++){
                                //akhir update aset dan update log untuk kapitalisasi
 
                                //update untuk mereset akumulasi penyusutan untuk diatas tanggal penyusutan
-                               $QueryKib = "UPDATE $tableLog MasaManfaat = '$MasaManfaat' ,
+                               $QueryKib = "UPDATE $tableLog set MasaManfaat = '$MasaManfaat' ,
                                               AkumulasiPenyusutan = '$AkumulasiPenyusutan',	
                                                PenyusutanPerTahun = '$PenyusutanPerTahun',
                                                NilaiBuku = '$NilaiBuku',
                                                UmurEkonomis = '$Sisa_Masa_Manfaat',
-                                               TahunPenyusutan='$newTahun'
+                                               TahunPenyusutan='$newTahun',
                                                AkumulasiPenyusutan_Awal='$AkumulasiPenyusutan_Awal',
                                                PenyusutanPerTahun_Awal='$PenyusutanPerTahun_Awal' 
                                                WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan_temp' ";
                                $ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());;
                             //update log penyusutan
-                            $log_id=log_penyusutan($Aset_ID, $tableKib, 50, $data_log, $DBVAR);
+                            $log_id=log_penyusutan($Aset_ID, $tableKib, 50,$newTahun, $data_log, $DBVAR);
                             //akhir update log penyusutan
+                            
+                            
+                               $perhitungan="  $PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;\n
+                                            $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;\n
+                                            $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;\n
+                                            $NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;\n
+                                            $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;\n";
+                               
+                            $data_penyusutan=array('id' => NULL,'Aset_ID' => "$Aset_ID",
+                             'kodeKelompok' => "$kodeKelompok",
+                             'kodeSatker' => "$kodeSatker",
+                             'Tahun' => "$Tahun",
+                             'NilaiPerolehan' => "$NilaiPerolehan",
+                             'MasaManfaat' => "$MasaManfaat",
+                             'NilaiBuku' => "$NilaiBuku_hasil",
+                             'info' =>"biasa",
+                             'log_id' => '10',
+                             'perhitungan' => "$perhitungan",
+                             'TahunPenyusutan' => "$newTahun",
+                             'changeDate' => date('Y-m-d'),'StatusTampil' => '1');
+                         
+                         catatan_hasil_penyusutan($data_penyusutan, $DBVAR);
              }
          
          
          
       }  
      }
-    //update table status untuk penyusutan
+   
+}
+ //update table status untuk penyusutan
     $query = "update penyusutan_tahun_berjalan  set StatusRunning=2 where id=$id";
    
     $DBVAR->query($query) or die($DBVAR->error());
-}
-
 
 function cek_masamanfaat($kd_aset1, $kd_aset2, $kd_aset3, $DBVAR) {
     $query = "select * from ref_masamanfaat where kd_aset1='$kd_aset1' "
@@ -948,7 +1001,7 @@ function microtime_float() {
 }
 
 
-function log_penyusutan($Aset_ID,$tableKib,$Kd_Riwayat,$Data,$DBVAR){
+function log_penyusutan($Aset_ID,$tableKib,$Kd_Riwayat,$tahun,$Data,$DBVAR){
     //select field dan value tabel kib
     
           $QueryKibSelect	  = "SELECT * FROM $tableKib WHERE Aset_ID = '$Aset_ID'";
@@ -962,9 +1015,21 @@ function log_penyusutan($Aset_ID,$tableKib,$Kd_Riwayat,$Data,$DBVAR){
         $action = "Penyusutan_".$tahun."_".$Data['kodeSatker'];
         $changeDate = date('Y-m-d');
         $NilaiPerolehan_Awal = $Data['NilaiPerolehan_Awal'];
+        if($NilaiPerolehan_Awal ==""||$NilaiPerolehan_Awal ==0){
+            $NilaiPerolehan_Awal ="NULL";
+        }
         $AkumulasiPenyusutan_Awal=$Data['AkumulasiPenyusutan_Awal'];
+        if($AkumulasiPenyusutan_Awal==""||$AkumulasiPenyusutan_Awal=="0"){
+            $AkumulasiPenyusutan_Awal="NULL";
+        }
         $NilaiBuku_Awal = $Data['NilaiBuku_Awal'];
+        if($NilaiBuku_Awal ==""||$NilaiBuku_Awal =="0"){
+            $NilaiBuku_Awal ="NULL";
+        }
         $PenyusutanPerTahun_Awal = $Data['PenyusutanPerTahun_Awal'];
+        if($PenyusutanPerTahun_Awal ==""||$PenyusutanPerTahun_Awal =="0"){
+            $PenyusutanPerTahun_Awal ="NULL";
+        }
         foreach ($resultqueryKibSelect as $key => $val) {
             $tmpField[] = $key;
             if ($val ==''){
@@ -976,7 +1041,7 @@ function log_penyusutan($Aset_ID,$tableKib,$Kd_Riwayat,$Data,$DBVAR){
 	$implodeField = implode (',',$tmpField);
 	$implodeVal = implode (',',$tmpVal);
         
-        $QueryLog ="INSERT INTO $tableLog ($implodeField,$AddField) VALUES"
+        $QueryLog ="INSERT INTO log_$tableKib ($implodeField,$AddField) VALUES"
                 . "      ($implodeVal,'$action','$changeDate','$TglPerubahan','$Kd_Riwayat','$NilaiPerolehan_Awal',$AkumulasiPenyusutan_Awal,"
                 . "$NilaiBuku_Awal,$PenyusutanPerTahun_Awal)";
 	$exeQueryLog = $DBVAR->query($QueryLog) or die($DBVAR->error());;
@@ -999,10 +1064,10 @@ function catatan_hasil_penyusutan($data,$DBVAR){
  $TahunPenyusutan=$data['TahunPenyusutan'];
  $changeDate=$data['changeDate'];
   
-    $query="INSERT INTO `simbada_kotawaringin_v3`.`log_penyusutan` (`id`, `Aset_ID`, `kodeKelompok`, `kodeSatker`, `Tahun`, `NilaiPerolehan`, "
-            . "             `MasaManfaat`, `NilaiBuku`, `info`, `log_id`, `perhitunga`, `TahunPenyusutan`, `changeDate`,`StatusTampil`)"
+    $query="INSERT INTO log_penyusutan (id, Aset_ID, kodeKelompok, kodeSatker, Tahun, NilaiPerolehan, "
+            . "             MasaManfaat, NilaiBuku, info, log_id, perhitungan, TahunPenyusutan, changeDate,StatusTampil)"
             . " VALUES (NULL, '$Aset_ID', '$kodeKelompok', '$kodeSatker', '$Tahun', '$NilaiPerolehan', "
-            . "     '$MasaManfaat', '$NilaiBuku', '$info', $log_id, '$perhitugan', '$TahunPenyusutan', '$changeDate');";
-    $exeQueryLog = $DBVAR->query($QueryLog) or die($DBVAR->error());;
+            . "     '$MasaManfaat', '$NilaiBuku', '$info', $log_id, '$perhitugan', '$TahunPenyusutan', '$changeDate',1);";
+    $exeQueryLog = $DBVAR->query($query) or die($DBVAR->error());;
 }
 ?>

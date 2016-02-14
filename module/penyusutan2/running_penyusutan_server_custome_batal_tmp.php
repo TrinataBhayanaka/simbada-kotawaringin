@@ -348,7 +348,7 @@ where a.TglPerolehan <='$newTahun-12-31' AND a.TglSKKDH >'$newTahun-12-31' AND "
                                                                            $TglPerubahan = $tahun."-12"."-31";
 
 $sWhere=" WHERE $status a.AkumulasiPenyusutan IS NOT NULL AND a.PenyusutanPerTahun IS NOT NULL  
-			  AND a.kodeSatker like '$kodeSatker%' AND a.kodeKelompok like '$flagKelompok%'";
+			  AND a.kodeSatker like '$kodeSatker%' and TahunPenyusutan='$newTahun' AND a.kodeKelompok like '$flagKelompok%'";
 
 if($kib == 'B' || $kib == 'C'){ 				   
 $sQuery = "
@@ -375,7 +375,7 @@ $sQuery = "
 // $time_start = microtime_float();
 //select Tgl Penyusutan
 $ExeQuery = $DBVAR->query($sQuery) or die($DBVAR->error());
-echo "Penyusutan tahun pertama $kodeSatker \n"
+echo "Penyusutan tahun berjalan $kodeSatker \n"
         . "Aset_ID \t kodeKelompok  \t NilaiPerolehan \t Tahun \t masa_manfaat \t AkumulasiPenyusutan \t NilaiBuku  \t penyusutan_per_tahun \n";
 
 while($Data = $DBVAR->fetch_array($ExeQuery)){
@@ -492,7 +492,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 						$ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());
 		}elseif($tahun >= 2015){
                     $tahun_sblm=$tahun-1;
-				$QueryLogSelect = "select PenyusutanPerTahun_Awal,AkumulasiPenyusutan_Awal,NilaiBuku_Awal,MasaManfaat,UmurEkonomis from $tableLog where Aset_ID = {$Aset_ID} "
+				$QueryLogSelect = "select kodeKelompok,PenyusutanPerTahun_Awal,AkumulasiPenyusutan_Awal,NilaiBuku_Awal,MasaManfaat,UmurEkonomis from $tableLog where Aset_ID = {$Aset_ID} "
                                 . " and TahunPenyusutan='$tahun_sblm' and Kd_Riwayat=50 order by log_id desc limit 1";
 				$exeQueryLogSelect = $DBVAR->query($QueryLogSelect);
 				$resultQueryLogSelect = $DBVAR->fetch_array($exeQueryLogSelect);
@@ -502,7 +502,10 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$PenyusutanPerTahun_Awal = $resultQueryLogSelect['PenyusutanPerTahun_Awal'];
 				$MasaManfaat_Awal = $resultQueryLogSelect['MasaManfaat'];
 				$UmurEkonomis = $resultQueryLogSelect['UmurEkonomis'];
-				
+			        $kodeKelompok= $resultQueryLogSelect['kodeKelompok'];
+                                
+                                echo "$Aset_ID \t $kodeKelompok \t $NilaiPerolehan \t $Tahun \t $MasaManfaat_Awal \t $AkumulasiPenyusutan_Awal \t $NilaiBuku_Awal  \t $PenyusutanPerTahun_Awal \n  $UmurEkonomis\n";
+			
 				//update AkumulasiPenyusutan,penyusutan_per_tahun,MasaManfaat
 				$QueryAset	  = "UPDATE aset SET MasaManfaat = '{$MasaManfaat_Awal}',
 												 AkumulasiPenyusutan = '{$AkumulasiPenyusutan_Awal}',	

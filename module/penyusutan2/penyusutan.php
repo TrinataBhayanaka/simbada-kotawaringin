@@ -12,7 +12,7 @@ if($Session['ses_uaksesadmin'] == 1){
 	$param = $Session['ses_satkerkode'];
 }
 $get_data_penyusutan= $PENYUSUTAN->getStatusPenyusutansatker_berjalan($param);
-echo "masukk gak";
+//echo "masukk gak";
 // echo "<pre>";
 // print_r($get_data_penyusutan);
 // pr($get_data_penyusutan);
