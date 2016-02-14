@@ -413,7 +413,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID'";
-				$ExeQueryKib = $DBVAR->query($QueryKib);
+				$ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());
 				
 				//update untuk mereset akumulasi penyusutan untuk diatas tanggal penyusutan
 				$QueryKib	  = "UPDATE $tableLog SET MasaManfaat = NULL,
@@ -423,7 +423,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
-				$ExeQueryKib = $DBVAR->query($QueryKib);
+				$ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());
 				
 			}elseif($Data['TipeAset'] == 'C'){
 				$tableKib = 'bangunan';
@@ -435,7 +435,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID'";
-				$ExeQueryKib = $DBVAR->query($QueryKib);
+				$ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());
 
 				//update untuk mereset akumulasi penyusutan untuk diatas tanggal penyusutan
 				$QueryKib	  = "UPDATE $tableLog SET MasaManfaat = NULL,
@@ -445,7 +445,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
-				$ExeQueryKib = $DBVAR->query($QueryKib);
+				$ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());
 
 				
 			}elseif($Data['TipeAset'] == 'D'){
@@ -458,7 +458,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID'";
-				$ExeQueryKib = $DBVAR->query($QueryKib);
+				$ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());
 
 
 				//update untuk mereset akumulasi penyusutan untuk diatas tanggal penyusutan
@@ -469,7 +469,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
-				$ExeQueryKib = $DBVAR->query($QueryKib);
+				$ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());
 
 			}
 
@@ -489,9 +489,11 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 										WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
-						$ExeQueryKib = $DBVAR->query($QueryKib);
+						$ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());
 		}elseif($tahun >= 2015){
-				$QueryLogSelect = "select PenyusutanPerTahun_Awal,AkumulasiPenyusutan_Awal,NilaiBuku_Awal,MasaManfaat,UmurEkonomis from $tableLog where Aset_ID = {$Aset_ID} order by log_id desc limit 1";
+                    $tahun_sblm=$tahun-1;
+				$QueryLogSelect = "select PenyusutanPerTahun_Awal,AkumulasiPenyusutan_Awal,NilaiBuku_Awal,MasaManfaat,UmurEkonomis from $tableLog where Aset_ID = {$Aset_ID} "
+                                . " and TahunPenyusutan='$tahun_sblm' and Kd_Riwayat=50 order by log_id desc limit 1";
 				$exeQueryLogSelect = $DBVAR->query($QueryLogSelect);
 				$resultQueryLogSelect = $DBVAR->fetch_array($exeQueryLogSelect);
 			
@@ -508,7 +510,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 												 NilaiBuku = '{$NilaiBuku_Awal}',
 												 UmurEkonomis = '{$UmurEkonomis}'
 								WHERE Aset_ID = '$Aset_ID'";
-				$ExeQueryAset = $DBVAR->query($QueryAset);
+				$ExeQueryAset = $DBVAR->query($QueryAset) or die($DBVAR->error());
 				
 				//update AkumulasiPenyusutan,penyusutan_per_tahun,MasaManfaat,NilaiBuku
 				if($Data['TipeAset'] == 'B'){
@@ -520,7 +522,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 												 NilaiBuku = '{$NilaiBuku_Awal}',
 												 UmurEkonomis = '{$UmurEkonomis}'
 									WHERE Aset_ID = '{$Aset_ID}'";
-					$ExeQueryKib = $DBVAR->query($QueryKib);
+					$ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());
 					
 				}elseif($Data['TipeAset'] == 'C'){
 					$tableKib = 'bangunan';
@@ -531,7 +533,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 												 NilaiBuku = '{$NilaiBuku_Awal}',
 												 UmurEkonomis = '{$UmurEkonomis}'
 									WHERE Aset_ID = '{$Aset_ID}'";
-					$ExeQueryKib = $DBVAR->query($QueryKib);
+					$ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());
 					
 				}elseif($Data['TipeAset'] == 'D'){
 					$tableKib = 'jaringan';
@@ -542,12 +544,21 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 												 NilaiBuku = '{$NilaiBuku_Awal}',
 												 UmurEkonomis = '{$UmurEkonomis}'
 									WHERE Aset_ID = '{$Aset_ID}'";
-					$ExeQueryKib = $DBVAR->query($QueryKib);
+					$ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());
 				}
 				$action = "Penyusutan_".$tahun."_".$Data['kodeSatker'];
 				// $QueryLog ="DELETE FROM $tableLog WHERE  Aset_ID = '{$Aset_ID}' and Kd_Riwayat = '50' and kodeSatker = '{$Data[kodeSatker]}' and action ='{$action}' and YEAR(TglPerubahan) = {$tahun}";
-				$QueryLog ="DELETE FROM $tableLog WHERE  Aset_ID = '{$Aset_ID}' and Kd_Riwayat = '50' and kodeSatker = '{$Data[kodeSatker]}' and action ='{$action}' ";
+				$QueryLog ="DELETE FROM $tableLog WHERE  Aset_ID = '{$Aset_ID}' and Kd_Riwayat  IN ('49','50')  and kodeSatker = '{$Data[kodeSatker]}' and action ='{$action}' ";
 				$exeQueryLog = $DBVAR->query($QueryLog);
+                                
+                                $QueryKib	  = "UPDATE $tableLog SET MasaManfaat = '{$MasaManfaat_Awal}',
+												 AkumulasiPenyusutan = '{$AkumulasiPenyusutan_Awal}',	
+												 PenyusutanPerTahun = '{$PenyusutanPerTahun_Awal}',
+												 NilaiBuku = '{$NilaiBuku_Awal}',
+												 UmurEkonomis = '{$UmurEkonomis}' 
+                                                                                                     
+										WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
+						$ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());
 		
 			}
 		
@@ -578,4 +589,21 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
     return ((float)$usec + (float)$sec);
 }
     
+function delete_catatan_penyusutan($action,$kodeSatker,$tableKIB,$DBVAR){
+    switch ($tableKIB) {
+        case "B":
+            $kodeKelompok="kodeKelompok like '02%'";
+            break;
+        case "C":
+            $kodeKelompok="kodeKelompok like '03%'";
+            break;
+        case "D":
+            $kodeKelompok="kodeKelompok like '04%'";
+            break;
+        default:
+            break;
+    }
+    $query="update log_penyusutan set StatusTampil=0 where kodeSatker='$kodeSatker' and $kodeKelompok and action='$action' ";
+    $ExeQueryKib = $DBVAR->query($query) or die($DBVAR->error());
+}
 ?>

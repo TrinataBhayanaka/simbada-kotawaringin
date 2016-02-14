@@ -595,6 +595,8 @@ for($i=0;$i<2;$i++){
         }
      }
      else{
+         echo "Penyusutan tahun berjalan untuk tahun $newTahun $kodeSatker dengan kondisi penyusutan kedua kali (log ada di log_penyusutan) \n"
+         . "Aset_ID \t kodeKelompok  \t NilaiPerolehan \t Tahun \t masa_manfaat \t AkumulasiPenyusutan \t NilaiBuku  \t penyusutan_per_tahun \n";
       while ($Data = $DBVAR->fetch_array($ExeQuery)){   
          
           $Aset_ID=$DATA->Aset_ID;
