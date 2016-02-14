@@ -28,7 +28,7 @@ $get_data_penyusutan= $PENYUSUTAN->getStatusPenyusutansatker_berjalan($param);
 <section id="main">
 	<ul class="breadcrumb">
 	  <li><a href="#"><i class="fa fa-home fa-2x"></i>  Home</a> <span class="divider"><b>&raquo;</b></span></li>
-	  <li><a href="#">Penyusutan Aset</a><span class="divider"><b>&raquo;</b></span></li>
+	  <li><a href="#">Penyusutan Tahun Berjalan</a><span class="divider"><b>&raquo;</b></span></li>
 	  <li class="active">Status Penyusutan Aset</li>
 	  <?php SignInOut();?>
 	</ul>

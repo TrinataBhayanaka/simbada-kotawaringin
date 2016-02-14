@@ -611,6 +611,7 @@ for($i=0;$i<2;$i++){
           $kodeSatker= $Data['kodeSatker'];
           $Tahun = $Data['Tahun'];
           $AkumulasiPenyusutan=$Data['AkumulasiPenyusutan'];
+          $PenyusutanPerTahun=$Data['PenyusutanPerTahun'];
           $NilaiBuku=$Data['NilaiBuku'];
           $MasaManfaat=$Data['MasaManfaat'];
           $UmurEkonomis=$Data['UmurEkonomis'];
@@ -676,7 +677,7 @@ for($i=0;$i<2;$i++){
                  $kd_riwayat=$Data_Log->kd_riwayat;
                  $Nilai_Perolehan_log=$Data_Log->NilaiPerolehan;
                  $Nilai_Perolehan_awal_log=$Data_Log->NilaiPerolehan_Awal;
-                 $selisih=$Data_Log->selisih;
+                 $selisih=abs($Data_Log->selisih);
                  $Tahun = $Data['Tahun'];
                  $nb_buku_log=$Data_Log->NilaiBuku;
                  $MasaManfaat=$Data_Log->MasaManfaat;
@@ -719,11 +720,11 @@ for($i=0;$i<2;$i++){
                         }
                         
                         $PenyusutanPerTahun_hasil=$NilaiYgDisusutkan/$Umur_Ekonomis_Final;
-                        $AkumulasiPenyusutan_hasil=$PenyusutanPerTahun_hasil;
-                        $NilaiBuku_hasil=$NilaiYgDisusutkan-$AkumulasiPenyusutan_hasil;
+                        $AkumulasiPenyusutan_hasil=$AkumulasiPenyusutan+$PenyusutanPerTahun_hasil;
+                        $NilaiBuku_hasil=$NP-$AkumulasiPenyusutan_hasil;
                         $Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1;
                         
-                        if($Sisa_Masa_Manfaat==0){
+                        if($Sisa_Masa_Manfaat<=0){
                             $NilaiBuku_hasil=0;
                             $AkumulasiPenyusutan_hasil=$NP;
                         }
@@ -751,7 +752,7 @@ for($i=0;$i<2;$i++){
                                             AkumulasiPenyusutan = '$AkumulasiPenyusutan_hasil',	
                                             PenyusutanPerTahun = '$penyusutan_per_tahun',
                                             NilaiBuku = '$NilaiBuku_hasil',
-                                            UmurEkonomis = '$Sisa_Masa_Manfaat',
+                                            UmurEkonomis = '$Sisa_Masa_Manfaat  ',
                                             TahunPenyusutan='$newTahun',
                                             AkumulasiPenyusutan_Awal='$AkumulasiPenyusutan_Awal',
                                             PenyusutanPerTahun_Awal='$PenyusutanPerTahun_Awal' 
@@ -766,6 +767,7 @@ for($i=0;$i<2;$i++){
                                  . "TahunPerolehan \t=$Tahun\n"
                                  . "MasaManfaat \t=$MasaManfaat\n"
                                  . "AkumulasiPenyusutan \t=$AkumulasiPenyusutan_hasil\n"
+                                 . "AkumulasiPenyusutan_lama=$AkumulasiPenyusutan\n"
                                  . "NilaiBUku \t= $NilaiBuku_hasil\n"
                                  . "NilaiBUku_Sblm \t= $nb_buku_log\n"
                                  . "NilaiYgDisusutkan \t= $NilaiYgDisusutkan\n"
@@ -804,7 +806,7 @@ for($i=0;$i<2;$i++){
                          $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
                          $NilaiBuku=$NP-$AkumulasiPenyusutan;
                          $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
-                         if($Sisa_Masa_Manfaat=0){
+                         if($Sisa_Masa_Manfaat<=0){
                              $AkumulasiPenyusutan=$NP;
                              $NilaiBuku=0;
                          }
@@ -885,12 +887,13 @@ for($i=0;$i<2;$i++){
              if($status_transaksi!=1){
                  echo "tidak masuk log \n";
                  //bila tidak ada transaksi
-                 $PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;
+                 //$PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;
                  $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
-                 $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
+                 //$AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
+                 $AkumulasiPenyusutan=$AkumulasiPenyusutan+$PenyusutanPerTahun;
                  $NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;
                  $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
-                 if($Sisa_Masa_Manfaat==0){
+                 if($Sisa_Masa_Manfaat<=0){
                     $AkumulasiPenyusutan=$NilaiPerolehan;
                     $NilaiBuku=0;
                  }
