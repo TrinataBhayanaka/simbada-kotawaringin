@@ -392,6 +392,25 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 		$NilaiPerolehan=$Data['NilaiPerolehan'];
         $Tahun=$Data['Tahun'];
   
+          
+          switch ($Data['TipeAset']) {
+              case 'B':
+                  $tableKib="mesin";
+                  $tableLog="log_mesin";
+                  break;
+              case 'C':
+                  $tableKib="bangunan";
+                  $tableLog="log_bangunan";
+                  break;
+              case 'D':
+                  $tableKib="jaringan";
+                  $tableLog="log_jaringan";
+                  break;
+
+              default:
+                  break;
+          }
+          
 		//cek untuk rollback
 			//$ceck = $tahun - 2015;
 			
@@ -501,7 +520,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
                                         . "MasaManfaat,UmurEkonomis,NilaiBuku,AkumulasiPenyusutan,PenyusutanPerTahun "
                                         . " from $tableLog where Aset_ID = {$Aset_ID} "
                                 . " and TahunPenyusutan='$tahun_sblm' and Kd_Riwayat=50 order by log_id desc limit 1";
-				$exeQueryLogSelect = $DBVAR->query($QueryLogSelect);
+				$exeQueryLogSelect = $DBVAR->query($QueryLogSelect) or die($DBVAR->error());
 				$resultQueryLogSelect = $DBVAR->fetch_array($exeQueryLogSelect);
 			
 				$AkumulasiPenyusutan_Awal = $resultQueryLogSelect['AkumulasiPenyusutan'];
@@ -511,11 +530,11 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$UmurEkonomis = $resultQueryLogSelect['UmurEkonomis'];
 			        $kodeKelompok= $resultQueryLogSelect['kodeKelompok'];
                                 if($AkumulasiPenyusutan_Awal==""||$AkumulasiPenyusutan_Awal==0){
-                                    $TahunPenyusutan="";
+                                    $TahunPenyusutan=",TahunPenyusutan='' ";
                                 }else{
                                      $TahunPenyusutan=",TahunPenyusutan='$tahun_sblm'";
                                 }
-                                echo "$Aset_ID \t $kodeKelompok \t $NilaiPerolehan \t $Tahun \t $MasaManfaat_Awal \t $AkumulasiPenyusutan_Awal \t $NilaiBuku_Awal  \t $PenyusutanPerTahun_Awal \n  $UmurEkonomis\n";
+                                echo "$Aset_ID \t $kodeKelompok \t $NilaiPerolehan \t $Tahun \t $MasaManfaat_Awal \t $AkumulasiPenyusutan_Awal \t $NilaiBuku_Awal  \t $PenyusutanPerTahun_Awal  $UmurEkonomis $TahunPenyusutan\n";
 			
 				//update AkumulasiPenyusutan,penyusutan_per_tahun,MasaManfaat
 				$QueryAset	  = "UPDATE aset SET MasaManfaat = '{$MasaManfaat_Awal}',
