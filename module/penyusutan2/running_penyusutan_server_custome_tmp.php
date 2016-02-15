@@ -668,7 +668,7 @@ for($i=0;$i<2;$i++){
              $query_perubahan="select kd_riwayat,log_id,kodeKelompok,kodeSatker,Aset_ID,NilaiPerolehan,NilaiPerolehan_Awal,Tahun,Kd_Riwayat,"
                      . "(NilaiPerolehan-NilaiPerolehan_Awal) as selisih,AkumulasiPenyusutan,NilaiBuku,MasaManfaat,UmurEkonomis,TahunPenyusutan "
                      . " from $tableLog where TglPerubahan>'$TglPerubahan_awal' and kd_riwayat in (2,21,28,7) "
-                     . "and Aset_ID='$Aset_ID' order by log_id desc";
+                     . "and Aset_ID='$Aset_ID' order by log_id asc";
              $count=0;
              $qlog=$DBVAR->query($query_perubahan) or die($DBVAR->error());
              while($Data_Log=$DBVAR->fetch_object($qlog)){
