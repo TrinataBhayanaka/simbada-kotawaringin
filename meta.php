@@ -67,6 +67,8 @@ if ($u_sess) $isLogin = true;
 				forceParse:true
 			});
 			initTableCheckable ();
+			
+			$('[data-toggle="popover"]').popover();
 			});
 		</script>
 		<script type="text/javascript" charset="utf-8">
