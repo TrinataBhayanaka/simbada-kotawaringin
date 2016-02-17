@@ -2718,7 +2718,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                     $oldkelompok = explode(".", $data['old_kelompok']);
                     if($newkelompok[0] != $oldkelompok[0]){
                         $this->logMe($data,$_GET['tbl']);
-                        $delsql = "DELETE FROM {$_GET['tbl']} WHERE Aset_ID = '{$data['Aset_ID']}'";
+                        $delsql = "UPDATE {$_GET['tbl']} SET StatusValidasi = 0, Status_Validasi_Barang = 0 WHERE Aset_ID = '{$data['Aset_ID']}'";
                         $result=  $this->query($delsql) or die($this->error());
                     }
                 }
@@ -2733,7 +2733,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                     $oldkelompok = explode(".", $data['old_kelompok']);
                     if($newkelompok[0] != $oldkelompok[0]){
                         $this->logMe($data,$_GET['tbl']);
-                        $delsql = "DELETE FROM {$_GET['tbl']} WHERE Aset_ID = '{$data['Aset_ID']}'";
+                        $delsql = "UPDATE {$_GET['tbl']} StatusValidasi = 0, Status_Validasi_Barang = 0 WHERE Aset_ID = '{$data['Aset_ID']}'";
                         // pr($delsql);
                         $result=  $this->query($delsql) or die($this->error());
                     }
@@ -2772,7 +2772,8 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
               $sqlquery = mysql_query($sqlkib);
               while ($dataAset = mysql_fetch_assoc($sqlquery)){
                       $kib_old = $dataAset;
-                  }  
+                  }
+                $kib_old['TglPerubahan'] = $data['tglPerubahan']; 
             if(isset($data['kodeKelompok'])){
                 $newkelompok = explode(".", $data['kodeKelompok']);
                 $oldkelompok = explode(".", $data['old_kelompok']);
@@ -2791,9 +2792,10 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                       $sqlquery = mysql_query($sqlkib);
                       while ($dataAset = mysql_fetch_assoc($sqlquery)){
                               $kib_old = $dataAset;
-                          } 
+                          }
+                    $kib_old['TglPerubahan'] = $data['tglPerubahan'];   
                     $this->logMe($kib_old,$_GET['tbl']);
-                    $delsql = "DELETE FROM {$_GET['tbl']} WHERE Aset_ID = '{$data['Aset_ID']}'";
+                    $delsql = "UPDATE {$_GET['tbl']} SET StatusValidasi = 0, Status_Validasi_Barang = 0, StatusTampil = 0  WHERE Aset_ID = '{$data['Aset_ID']}'";
                     // pr($delsql);exit;
                     $result=  $this->query($delsql) or die($this->error());
 
@@ -2841,7 +2843,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                     unset($kib['PenyusutanPertaun']);
                   }
 
-              $kib['tglPerubahan'] = $data['tglPerubahan'];          
+              $kib['TglPerubahan'] = $data['tglPerubahan'];          
               $kib['changeDate'] = date("Y-m-d");
               $kib['action'] = 'koreksi';
               $kib['operator'] = $_SESSION['ses_uoperatorid'];
@@ -2855,7 +2857,12 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
               if($data['koreksinilai']) $kib['Kd_Riwayat'] = 21;
               if($data['rubahdata']) $kib['Kd_Riwayat'] = 18;
               if($data['pindahruang']) $kib['Kd_Riwayat'] = 4;
-              if(isset($reklas)) {$kib['Kd_Riwayat'] = 30;$kib['action'] = 'reklas';}
+              if(isset($reklas)) {
+                $kib['Kd_Riwayat'] = 30;$kib['action'] = 'reklas';
+                $kib['StatusTampil'] = 0;
+                $kib['StatusValidasi'] = 0;
+                $kib['Status_Validasi_Barang'] = 0;
+              }
 
               // pr($kib);
               
@@ -2891,7 +2898,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
               while ($dataAset = mysql_fetch_assoc($sqlquery)){
                       $kib = $dataAset;
                   }
-              $kib['tglPerubahan'] = $data['tglPerubahan'];          
+              $kib['TglPerubahan'] = $data['TglPerubahan'];          
               $kib['changeDate'] = date("Y-m-d");
               $kib['action'] = 'reklas';
               $kib['operator'] = $_SESSION['ses_uoperatorid'];
