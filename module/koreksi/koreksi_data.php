@@ -117,7 +117,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 								<div class="control">
 									<div class="input-prepend">
 										<span class="add-on"><i class="fa fa-calendar"></i></span>
-										<input type="text" class="span2 full" name="tglPerolehan" id="tglPerolehan" value="<?=$dataArr['aset']['TglPerolehan']?>" disabled/>
+										<input type="text" class="span2 full rubahaset" name="tglPerolehan" id="tglPerolehan" value="<?=$dataArr['aset']['TglPerolehan']?>" disabled/>
 									</div>
 								</div>
 							</li>
@@ -126,7 +126,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 								<div class="control">
 									<div class="input-prepend">
 										<span class="add-on"><i class="fa fa-calendar"></i></span>
-										<input type="text" class="span2 full" name="tglPembukuan" id="datepicker" value="<?=$dataArr['aset']['TglPembukuan']?>" disabled/>
+										<input type="text" class="span2 full rubahaset" name="tglPembukuan" id="datepicker" value="<?=$dataArr['aset']['TglPembukuan']?>" disabled/>
 									</div>
 								</div>
 							</li>
@@ -466,6 +466,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 
 	function initKondisi(){	
 			$(".rubahaset").removeAttr('readonly');
+			$(".rubahaset").removeAttr('disabled');
 			var kode = $('#kodeKelompok').val();
 			var gol = kode.split(".");
 			
@@ -565,6 +566,8 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 			$(".koreksi,#rubahdata,#flagupd").removeAttr('disabled');
 			$(".well h2").html("Rubah Data");
 			$("#kodeKelompok,#kodeSatker,#kodeRuangan").select2("enable", false);
+			$(".rubahaset").removeAttr('readonly');
+			$(".rubahaset").removeAttr('disabled');
 			$(".well p").html("Koreksi data aset yang digunakan khusus untuk melakukan perubahan data rincian aset.");
 		} else if ($("#"+item).attr('id') == "kapital") {
 			$("textarea").attr('readonly','readonly');
