@@ -9764,7 +9764,7 @@ $offset = @$_POST['record'];
         }
         $setval = implode(' AND ', $tmpsetval);
 
-        $sql = mysql_query("SELECT kodeKelompok,kodeSatker,kodeLokasi,COUNT(*) as kuantitas,MIN(CAST(noRegister AS SIGNED)) as min,MAX(CAST(noRegister AS SIGNED)) as max FROM {$table} WHERE {$setval} AND kodeSatker LIKE '{$kodesatker}%' AND StatusTampil='1' AND Status_Validasi_Barang IS NULL  GROUP BY  kodeKelompok ,  kodeLokasi");
+        $sql = mysql_query("SELECT Tahun,kodeKelompok,kodeSatker,kodeLokasi,COUNT(*) as kuantitas,MIN(CAST(noRegister AS SIGNED)) as min,MAX(CAST(noRegister AS SIGNED)) as max FROM {$table} WHERE {$setval} AND kodeSatker LIKE '{$kodesatker}%' AND StatusTampil='1' AND Status_Validasi_Barang IS NULL  GROUP BY  kodeKelompok ,  kodeLokasi");
         while ($dataAset = mysql_fetch_assoc($sql)){
                     $aset[] = $dataAset;
                 }
@@ -9780,6 +9780,28 @@ $offset = @$_POST['record'];
             }
         }
        
+        return $aset;
+    }
+
+    function retrieve_searchAsetDist_detail($data)
+    {
+        
+        $sql = mysql_query("SELECT Tahun,kodeKelompok,kodeSatker,kodeLokasi,NilaiPerolehan,noRegister FROM {$data['tbl']} WHERE Tahun = '{$data['th']}' AND kodeKelompok = '{$data['kel']}' AND kodelokasi = '{$data['lok']}' AND StatusTampil='1' AND Status_Validasi_Barang IS NULL ORDER BY noRegister");
+        while ($dataAset = mysql_fetch_assoc($sql)){
+                    $aset[] = $dataAset;
+                }
+
+        if($aset){
+            foreach ($aset as $key => $value) {
+                $sqlnmBrg = mysql_query("SELECT Uraian FROM kelompok WHERE Kode = '{$value['kodeKelompok']}' LIMIT 1");
+                while ($uraian = mysql_fetch_array($sqlnmBrg)){
+                        $tmp = $uraian;
+                        $aset[$key]['uraian'] = $tmp['Uraian'];
+                    }
+                $aset[$key]['tabel'] = $table;
+            }
+        }
+        
         return $aset;
     }
 	
