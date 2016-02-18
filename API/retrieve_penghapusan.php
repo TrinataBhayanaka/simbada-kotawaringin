@@ -432,7 +432,7 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
         if ($newData) return $newData;
         return false;
     }
-    public function retrieve_usulan_penghapusan_pms($data,$debug=false)
+    public function retrieve_usulan_penghapusan_pms($data,$debug=2)
     {
             
         //////////////////////////////////////////////pr($data);
