@@ -49,6 +49,7 @@ $penghapusan_id=get_auto_increment("penghapusan");
         $data_delete=$PENGHAPUSAN->apl_userasetlistHPS_del("PTUSPMS");
         
 
+    $DBVAR->log(7, $_POST);
 /*
 $asset_id=Array();
 $no_reg=Array();

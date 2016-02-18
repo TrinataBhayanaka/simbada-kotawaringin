@@ -15,6 +15,7 @@ $id=$_GET['id'];
 
 		$data = $PENGHAPUSAN->delete_daftar_usulan_penghapusan_pms($_GET);
 
+    $DBVAR->log(7, $_POST);
 /*
 $query="UPDATE Usulan SET FixUsulan=0 WHERE Usulan_ID='$id' AND Jenis_Usulan='HPS'";
 $exec=mysql_query($query) or die(mysql_error());
