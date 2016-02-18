@@ -33,6 +33,7 @@ $PENGHAPUSAN = new RETRIEVE_PENGHAPUSAN;
         // exit;
 		$data = $PENGHAPUSAN->store_usulan_penghapusan_psb($POST);
 
+    $DBVAR->log(7, $_POST);
         $data_postRVW=$PENGHAPUSAN->apl_userasetlistHPS("RVWUSPSB");
         if($data_postRVW){
          $data_delete=$PENGHAPUSAN->apl_userasetlistHPS_del("RVWUSPSB");

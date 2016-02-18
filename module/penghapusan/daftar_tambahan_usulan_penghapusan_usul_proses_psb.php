@@ -30,6 +30,7 @@ $PENGHAPUSAN = new RETRIEVE_PENGHAPUSAN;
 		$data = $PENGHAPUSAN->store_tambahan_usulan_penghapusan_psb($_POST);
         
         
+    $DBVAR->log(7, $_POST);
         if(isset($_POST['usulanID'])){
             $id=$_POST['usulanID'];
             echo "<script>

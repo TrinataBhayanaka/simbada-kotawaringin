@@ -18,6 +18,7 @@ $PENGHAPUSAN = new RETRIEVE_PENGHAPUSAN;
 	
 		$data = $PENGHAPUSAN->delete_usulan_penghapusan_asetid_pmd($_GET);
     
+    $DBVAR->log(7, $_POST);
     /*
     
     echo "$id";

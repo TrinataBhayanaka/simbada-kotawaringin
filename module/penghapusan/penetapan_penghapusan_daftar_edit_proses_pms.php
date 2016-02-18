@@ -25,6 +25,7 @@ $submit=$_POST['btn_action'];
 	
 	$data = $PENGHAPUSAN->update_daftar_penetapan_penghapusan_pms($_POST);
 
+    $DBVAR->log(7, $_POST);
 /*
 echo "$id";
 echo "$no";

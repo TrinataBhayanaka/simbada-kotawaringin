@@ -27,7 +27,8 @@ $PENGHAPUSAN = new RETRIEVE_PENGHAPUSAN;
     $id=$POST['usulanID'];
 
     $data_delete=$PENGHAPUSAN->apl_userasetlistHPS_del("DELUSPMD");
-    /*
+    
+    $DBVAR->log(7, $_POST);/*
     
     echo "$id";
 
