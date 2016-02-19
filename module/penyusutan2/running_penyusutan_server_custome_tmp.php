@@ -724,7 +724,7 @@ for($i=0;$i<2;$i++){
                             $Umur_Ekonomis_Final=$MasaManfaat;
                         }
                         
-                        $PenyusutanPerTahun_hasil=$NilaiYgDisusutkan/$Umur_Ekonomis_Final;
+                        $PenyusutanPerTahun_hasil=round($NilaiYgDisusutkan/$Umur_Ekonomis_Final);
                         $AkumulasiPenyusutan_hasil=$AkumulasiPenyusutan+$PenyusutanPerTahun_hasil;
                         $NilaiBuku_hasil=$NP-$AkumulasiPenyusutan_hasil;
                         $Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1;
