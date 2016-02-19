@@ -716,7 +716,8 @@ for($i=0;$i<2;$i++){
                   
                   if($kd_riwayat==2||$kd_riwayat==28){
                         $NilaiYgDisusutkan=$nb_buku_log+$selisih;
-                        $penambahan_masa_manfaat=  overhaul($tmp_kode_log[0], $tmp_kode_log[1], $tmp_kode_log[2],$selisih, $DBVAR);
+                         $persen=($selisih/$Nilai_Perolehan_awal_log)*100;
+                        $penambahan_masa_manfaat=  overhaul($tmp_kode_log[0], $tmp_kode_log[1], $tmp_kode_log[2],$persen, $DBVAR);
                         $Umur_Ekonomis_Final=$UmurEkonomis+$penambahan_masa_manfaat;
                         
                         if($Umur_Ekonomis_Final>$MasaManfaat){
@@ -995,9 +996,12 @@ function cek_masamanfaat($kd_aset1, $kd_aset2, $kd_aset3, $DBVAR) {
     return $masa_manfaat;
 }
 function overhaul($kd_aset1, $kd_aset2, $kd_aset3,$persen, $DBVAR) {
+      $kd_aset1=intval($kd_aset1);
+    $kd_aset2=intval($kd_aset2);
+    $kd_aset3=intval($kd_aset3);
     $query = "select * from re_masamanfaat_tahun_berjalan where kd_aset1='$kd_aset1' "
             . " and kd_aset2='$kd_aset2' and kd_aset3='$kd_aset3' ";
-    //echo $query;
+    echo $query;
     $result = $DBVAR->query($query) or die($query);
     while ($row = $DBVAR->fetch_object($result)) {
         $masa_manfaat = $row->masa_manfaat;
