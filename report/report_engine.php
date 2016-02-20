@@ -24185,7 +24185,7 @@ $footer ="
 						
 						$AkumulasiPenyusutan = $row->Ap;
 						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,0,",",".");
-						if($row->Nb){
+						if($row->Ap!=''&&$row->Ap!=0){
 							// echo "NilaiBuku";
 							$NilaiBuku = $row->Nb;
 							$NilaiBukuFix = number_format($row->Nb,0,",",".");

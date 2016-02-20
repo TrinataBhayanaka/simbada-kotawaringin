@@ -685,7 +685,7 @@ for($i=0;$i<2;$i++){
                  //$UmurEkonomis=$Data_Log->UmurEkonomis;
                  //$AkumulasiPenyusutan=$Data_Log->AkumulasiPenyusutan;
                  //ambil dari tabel live
-                list($AkumulasiPenyusutan,$UmurEkonomis)= get_data_akumulasi_from_eksisting($Aset_ID,$DBVAR);
+                 list($AkumulasiPenyusutan,$UmurEkonomis,$MasaManfaat)= get_data_akumulasi_from_eksisting($Aset_ID,$DBVAR);
                  
                  $TahunPenyusutan=$Data_Log->TahunPenyusutan;
                  $kodeKelompok_log = $Data['kodeKelompok'];
@@ -724,7 +724,7 @@ for($i=0;$i<2;$i++){
                             $Umur_Ekonomis_Final=$MasaManfaat;
                         }
                         
-                        $PenyusutanPerTahun_hasil=$NilaiYgDisusutkan/$Umur_Ekonomis_Final;
+                        $PenyusutanPerTahun_hasil=round($NilaiYgDisusutkan/$Umur_Ekonomis_Final);
                         $AkumulasiPenyusutan_hasil=$AkumulasiPenyusutan+$PenyusutanPerTahun_hasil;
                         $NilaiBuku_hasil=$NP-$AkumulasiPenyusutan_hasil;
                         $Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1;
@@ -744,7 +744,7 @@ for($i=0;$i<2;$i++){
                             $ExeQueryAset = $DBVAR->query($QueryAset) or die($DBVAR->error());;
                              $QueryKib = "UPDATE $tableKib SET MasaManfaat = '$MasaManfaat' ,
                                             AkumulasiPenyusutan = '$AkumulasiPenyusutan_hasil',	
-                                            PenyusutanPerTahun = '$penyusutan_per_tahun',
+                                            PenyusutanPerTahun = '$PenyusutanPerTahun_hasil',
                                             NilaiBuku = '$NilaiBuku_hasil',
                                             UmurEkonomis = '$Sisa_Masa_Manfaat',
                                             TahunPenyusutan='$newTahun'
@@ -755,7 +755,7 @@ for($i=0;$i<2;$i++){
                             //update untuk mereset akumulasi penyusutan untuk diatas tanggal penyusutan
                             $QueryKib = "UPDATE $tableLog set MasaManfaat = '$MasaManfaat' ,
                                             AkumulasiPenyusutan = '$AkumulasiPenyusutan_hasil',	
-                                            PenyusutanPerTahun = '$penyusutan_per_tahun',
+                                            PenyusutanPerTahun = '$PenyusutanPerTahun_hasil',
                                             NilaiBuku = '$NilaiBuku_hasil',
                                             UmurEkonomis = '$Sisa_Masa_Manfaat  ',
                                             TahunPenyusutan='$newTahun',
@@ -764,9 +764,17 @@ for($i=0;$i<2;$i++){
                                             WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan_temp' ";
                             $ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());;
                          //update log penyusutan
-                         log_penyusutan($Aset_ID, $tableKib, 50,$newTahun, $data_log, $DBVAR);
+                         log_penyusutan($Aset_ID, $tableKib, 51,$newTahun, $data_log, $DBVAR);
                          
-                         echo "Kapitalisasi\n Aset_ID=$Aset_ID\n"
+                      
+                         $perhitungan="  NilaiYgDisusutkan=$NP+$selisih; \n"
+                                 . "Umur_Ekonomis_Final=$UmurEkonomis+$penambahan_masa_manfaat;\n
+                                    PenyusutanPerTahun_hasil=$NilaiYgDisusutkan/$UmurEkonomis;\n
+                                    AkumulasiPenyusutan_hasil=$PenyusutanPerTahun;\n
+                                    NilaiBuku_hasil=$NilaiYgDisusutkan-$AkumulasiPenyusutan;\n
+                                    Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1; \n";
+                         
+                            echo "Kapitalisasi\n Aset_ID=$Aset_ID\n"
                                  . "kodeKelompok \t=$kodeKelompok_log \n"
                                  . "NilaiPerolehan \t=$NP\n"
                                  . "TahunPerolehan \t=$Tahun\n"
@@ -781,14 +789,9 @@ for($i=0;$i<2;$i++){
                                  . "selisih \t=$selisih\n"
                                  . "UmurEkonomis_Sblm \t=$UmurEkonomis\n"
                                  . "UmurEkonomis \t=$Sisa_Masa_Manfaat\n"
-                                 . "Penambahan \t=$penambahan_masa_manfaat \n\n   ";
+                                 . "Penambahan \t=$penambahan_masa_manfaat \n"
+                                    . "Hitung==$perhitungan\n\n   ";
                          
-                         $perhitungan="  $NilaiYgDisusutkan=$NP+$selisih; \n"
-                                 . "$Umur_Ekonomis_Final=$UmurEkonomis+$penambahan_masa_manfaat;\n
-                                    $PenyusutanPerTahun_hasil=$NilaiYgDisusutkan/$UmurEkonomis;\n
-                                    $AkumulasiPenyusutan_hasil=$PenyusutanPerTahun;\n
-                                    $NilaiBuku_hasil=$NilaiYgDisusutkan-$AkumulasiPenyusutan;\n
-                                    $Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1; \n";
                         $data_penyusutan=array('id' => NULL,'Aset_ID' => "$Aset_ID",
                              'kodeKelompok' => "$kodeKelompok",
                              'kodeSatker' => "$kodeSatker",
@@ -806,9 +809,12 @@ for($i=0;$i<2;$i++){
                          //akhir update log penyusutan
                          
                      }else if($kd_riwayat==7||$kd_riwayat==21){
-                         $PenyusutanPerTahun=$NP/$MasaManfaat;
+                       
+                        list($AkumulasiPenyusutan,$UmurEkonomis,$MasaManfaat)= get_data_akumulasi_from_eksisting($Aset_ID,$DBVAR);
+                       
+                         $PenyusutanPerTahun=round($NP/$MasaManfaat);
                          $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
-                         //list($AkumulasiPenyusutan,$UmurEkonomis)= get_data_akumulasi_from_eksisting($Aset_ID,$DBVAR);
+                         
                          $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
                          $NilaiBuku=$NP-$AkumulasiPenyusutan;
                          $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
@@ -818,17 +824,17 @@ for($i=0;$i<2;$i++){
                          }
                             //update aset dan update log untuk kapitalisasi
                                $QueryAset = "UPDATE aset SET MasaManfaat = '$MasaManfaat' ,
-                                               AkumulasiPenyusutan = '$AkumulasiPenyusutan_hasil',	
-                                               PenyusutanPerTaun = '$PenyusutanPerTahun_hasil',
-                                               NilaiBuku = '$NilaiBuku_hasil',
+                                               AkumulasiPenyusutan = '$AkumulasiPenyusutan',	
+                                               PenyusutanPerTaun = '$PenyusutanPerTahun',
+                                               NilaiBuku = '$NilaiBuku',
                                                UmurEkonomis = '$Sisa_Masa_Manfaat',
                                                 TahunPenyusutan='$newTahun'     
                                                WHERE Aset_ID = '$Aset_ID'";
                                $ExeQueryAset = $DBVAR->query($QueryAset);
                                 $QueryKib = "UPDATE $tableKib SET MasaManfaat = '$MasaManfaat' ,
-                                               AkumulasiPenyusutan = '$AkumulasiPenyusutan_hasil',	
-                                               PenyusutanPerTahun = '$penyusutan_per_tahun',
-                                               NilaiBuku = '$NilaiBuku_hasil',
+                                               AkumulasiPenyusutan = '$AkumulasiPenyusutan',	
+                                               PenyusutanPerTahun = '$PenyusutanPerTahun',
+                                               NilaiBuku = '$NilaiBuku',
                                                UmurEkonomis = '$Sisa_Masa_Manfaat',
                                                TahunPenyusutan='$newTahun'
                                                WHERE Aset_ID = '$Aset_ID'";
@@ -837,9 +843,9 @@ for($i=0;$i<2;$i++){
 
                                //update untuk mereset akumulasi penyusutan untuk diatas tanggal penyusutan
                                $QueryKib = "UPDATE $tableLog set MasaManfaat = '$MasaManfaat' ,
-                                               AkumulasiPenyusutan = '$AkumulasiPenyusutan_hasil',	
-                                               PenyusutanPerTahun = '$penyusutan_per_tahun',
-                                               NilaiBuku = '$NilaiBuku_hasil',
+                                               AkumulasiPenyusutan = '$AkumulasiPenyusutan',	
+                                               PenyusutanPerTahun = '$PenyusutanPerTahun',
+                                               NilaiBuku = '$NilaiBuku',
                                                UmurEkonomis = '$Sisa_Masa_Manfaat',
                                                TahunPenyusutan='$newTahun',
                                                AkumulasiPenyusutan_Awal='$AkumulasiPenyusutan_Awal',
@@ -847,28 +853,30 @@ for($i=0;$i<2;$i++){
                                                WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan_temp' ";
                                $ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());;
                             //update log penyusutan
-                            log_penyusutan($Aset_ID, $tableKib, 50,$newTahun, $data_log, $DBVAR);
+                            log_penyusutan($Aset_ID, $tableKib, 52,$newTahun, $data_log, $DBVAR);
                             //akhir update log penyusutan
+                            $perhitungan="PenyusutanPerTahun=$NP/$MasaManfaat;\n
+                         rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;\n
+                         AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;\n
+                         NilaiBuku=$NP-$AkumulasiPenyusutan;\n
+                         Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;\n";
                               echo "Aset_ID=$Aset_ID\n"
                                       . "kodeKelompok \t=$kodeKelompok_log \n"
                                       . "NilaiPerolehan \t=$NP \n"
                                       . "TahunPerolehan \t=$Tahun\n"
                                       . "MasaManfaat \t=$MasaManfaat\n"
                                       . "AkumulasiPenyusutan \t=$AkumulasiPenyusutan_hasil\n"
-                                      . "NilaiBUku \t=$NilaiBuku_hasil\n"
-                                      . "PenyusutanPerTahun \t=$penyusutan_per_tahun \n"
+                                      . "NilaiBUku \t=$NilaiBuku\n"
+                                      . "PenyusutanPerTahun \t=$PenyusutanPerTahun \n"
                                       . "KodeRiwayat \t=$Kd_Riwayat\n"
                                       . "selisih \t=$selisih\n"
-                                      . "UmurEkonomis \t=$Sisa_Masa_Manfaat\n\n 
+                                      . "UmurEkonomis \t=$Sisa_Masa_Manfaat
+                                          $perhitungan\n 
                               ";
                          //   echo "$Aset_ID \t $kodeKelompok_log \t $NP \t $Tahun \t $MasaManfaat \t $AkumulasiPenyusutan_hasil \t $NilaiBuku_hasil  \t $penyusutan_per_tahun $Kd_Riwayat sisa=$Sisa_Masa_Manfaat penambahan=$penambahan_masa_manfaat \n";
                          
                             
-                            $perhitungan="$PenyusutanPerTahun=$NP/$MasaManfaat;\n
-                         $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;\n
-                         $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;\n
-                         $NilaiBuku=$NP-$AkumulasiPenyusutan;\n
-                         $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;\n";
+                            
                             $data_penyusutan=array('id' => NULL,'Aset_ID' => "$Aset_ID",
                              'kodeKelompok' => "$kodeKelompok",
                              'kodeSatker' => "$kodeSatker",
@@ -952,12 +960,12 @@ for($i=0;$i<2;$i++){
                                   
                  //echo "$Aset_ID \t $kodeKelompok \t $NilaiPerolehan \t $Tahun \t $MasaManfaat \t $AkumulasiPenyusutan \t $NilaiBuku  \t $PenyusutanPerTahun $Kd_Riwayat \n";
               
-                               $perhitungan="  $PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;\n
-                                            $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;\n
-                                            $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;\n
-                                            $NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;\n
-                                            $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;\n";
-                               
+                               $perhitungan="  PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;\n
+                                            rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;\n
+                                            AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;\n
+                                            NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;\n
+                                            Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;\n";
+                               //echo "$perhitungan";
                             $data_penyusutan=array('id' => NULL,'Aset_ID' => "$Aset_ID",
                              'kodeKelompok' => "$kodeKelompok",
                              'kodeSatker' => "$kodeSatker",
@@ -1001,7 +1009,7 @@ function overhaul($kd_aset1, $kd_aset2, $kd_aset3,$persen, $DBVAR) {
     $kd_aset3=intval($kd_aset3);
     $query = "select * from re_masamanfaat_tahun_berjalan where kd_aset1='$kd_aset1' "
             . " and kd_aset2='$kd_aset2' and kd_aset3='$kd_aset3' ";
-    echo $query;
+    //echo $query;
     $result = $DBVAR->query($query) or die($query);
     while ($row = $DBVAR->fetch_object($result)) {
         $masa_manfaat = $row->masa_manfaat;
@@ -1073,6 +1081,7 @@ function log_penyusutan($Aset_ID,$tableKib,$Kd_Riwayat,$tahun,$Data,$DBVAR){
 	$sign = "'"; 
         $AddField = "action,changeDate,TglPerubahan,Kd_Riwayat,NilaiPerolehan_Awal,AkumulasiPenyusutan_Awal,NilaiBuku_Awal,PenyusutanPerTahun_Awal";
         $action = "Penyusutan_".$tahun."_".$Data['kodeSatker'];
+        $TglPerubahan="$tahun-12-31";
         $changeDate = date('Y-m-d');
         $NilaiPerolehan_Awal = $Data['NilaiPerolehan_Awal'];
         if($NilaiPerolehan_Awal ==""||$NilaiPerolehan_Awal ==0){
@@ -1132,13 +1141,12 @@ function catatan_hasil_penyusutan($data,$DBVAR){
 }
 
 function get_data_akumulasi_from_eksisting($Aset_ID,$DBVAR){
-      $query= "SELECT AkumulasiPenyusutan,UmurEkonomis FROM aset WHERE Aset_ID = '$Aset_ID' limit 1";
+      $query= "SELECT AkumulasiPenyusutan,UmurEkonomis,MasaManfaat FROM aset WHERE Aset_ID = '$Aset_ID' limit 1";
       $hasil= $DBVAR->query($query);
       $data= $DBVAR->fetch_array($hasil);
       $Akumulasi=$data['AkumulasiPenyusutan'];
       $UmurEkonomis=$data['UmurEkonomis'];
-
-      
-      return array($Akumulasi,$UmurEkonomis);
+      $MasaManfaat=$data['MasaManfaat'];
+      return array($Akumulasi,$UmurEkonomis,$MasaManfaat);
 }
 ?>
