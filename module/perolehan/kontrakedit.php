@@ -102,27 +102,27 @@ $get_data_filter = $RETRIEVE->retrieve_kontrak();
               </li>
               <li>
                 <span  class="span2">Jenis Posting</span>
-				<div class="checkbox">
-					<label>
-					<input type="radio" required name="tipeAset" value="1" <?=(isset($kontrak)) ? (($kontrak[0]['tipeAset']== "1") ? 'checked' : '') : '' ?>/>&nbsp;Aset Baru
-					</label>
-				</div>
-			</li>
-			<li>
+        <div class="checkbox">
+          <label>
+          <input type="radio" required name="tipeAset" value="1" <?=(isset($kontrak)) ? (($kontrak[0]['tipeAset']== "1") ? 'checked' : '') : '' ?>/>&nbsp;Aset Baru
+          </label>
+        </div>
+      </li>
+      <li>
                 <span  class="span2">&nbsp;</span>
-				<div class="checkbox">
-					<label>
-						<input type="radio" required name="tipeAset" value="2" <?=(isset($kontrak)) ? (($kontrak[0]['tipeAset']== "2") ? 'checked' : '') : '' ?>/>&nbsp;Kapitalisasi
-					</label>
-				</div>
-			</li>
-			<li>
+        <div class="checkbox">
+          <label>
+            <input type="radio" class="add-popover" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="left" data-original-title="<label style='color:red'>Peringatan Kapitalisasi!!</label>" data-content="Khusus untuk jenis barang : <br> <b>Mesin</b> : Minimal <u>Rp. 300.000</u> <br> <b>Bangunan</b> : Minimal <u>Rp. 10.000.000</u> " required name="tipeAset" value="2" <?=(isset($kontrak)) ? (($kontrak[0]['tipeAset']== "2") ? 'checked' : '') : '' ?>/>&nbsp;Kapitalisasi
+          </label>
+        </div>
+      </li>
+      <li>
                 <span  class="span2">&nbsp;</span>
-				<div class="checkbox">
-					<label>
-					<input type="radio" required name="tipeAset" value="3" <?=(isset($kontrak)) ? (($kontrak[0]['tipeAset']== "3") ? 'checked' : '') : '' ?>/>&nbsp;Ubah Status
-					</label>
-				</div>
+        <div class="checkbox">
+          <label>
+          <input type="radio" required name="tipeAset" value="3" <?=(isset($kontrak)) ? (($kontrak[0]['tipeAset']== "3") ? 'checked' : '') : '' ?>/>&nbsp;Ubah Status
+          </label>
+        </div>
               </li>
             </ul>
               
@@ -162,12 +162,12 @@ $get_data_filter = $RETRIEVE->retrieve_kontrak();
                 <span class="span2">No.Rekening </span>
                 <input type="text" name="norek_pemilik" value="<?=(isset($kontrak)) ? $kontrak[0]['norek_pemilik'] : '' ?>"/>
               </li>
-			  <li>
+        <li>
                 <span class="span2">
-				<button class="btn" type="reset">Reset</button>
-				<button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
-				</span>
-			  </li>
+        <button class="btn" type="reset">Reset</button>
+        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
+        </span>
+        </li>
             </ul>
           </div>
           
