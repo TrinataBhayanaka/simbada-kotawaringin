@@ -8612,7 +8612,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 									   <td colspan=\"3\" rowspan=\"1\" style=\"font-weight: bold; width: 220px; text-align: center;\">Status Tanah</td>
 									   <td style=\"font-weight: bold; width: 140px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Penggunaan</td>
 									   <td style=\"font-weight: bold; width: 70px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Asal Usul</td>
-									   <td style=\"font-weight: bold; width: 80px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Nilai<br>Perolehan<br>(ribuan Rp)</td>
+									   <td style=\"font-weight: bold; width: 80px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Nilai<br>Perolehan<br>(Rp)</td>
 									   
 									   <td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"3\">Ket</td>
 								  </tr>
@@ -8938,7 +8938,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 									<td style=\"font-weight: bold; text-align: center; width: 360px;\" colspan=\"5\" rowspan=\"1\">Nomor</td>
 									<td style=\"font-weight: bold; text-align: center;\" colspan=\"1\" rowspan=\"2\">Asal Usul</td>
 									<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Jumlah<br>Barang</td>
-									<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (ribuan Rp)</td>
+									<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (Rp)</td>
 									<td style=\"font-weight: bold; text-align: center; width: 70px;\" colspan=\"1\" rowspan=\"2\">Ket</td>
 								</tr>
 								<tr>
@@ -9256,7 +9256,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 								<td style=\"width: 70px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Status<br>Tanah<br></td>
 								<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nomer<br>Kode<br>Tanah</td>
 								<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Asal Usul<br></td>
-								<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan<br>(RibuanRp)</td>
+								<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan<br>(Rp)</td>
 								<td style=\"width: 60px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Ket</td>
 							</tr>
 							<tr>
@@ -9575,7 +9575,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																										  Tanah</td>
 								 <td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold;\">Asal Usul</td>
 								 <td colspan=\"1\" rowspan=\"2\" style=\"width:80px;text-align: center; font-weight: bold;\">Nilai<br>Perolehan
-																										  (Ribuan Rp)</td>
+																										  (Rp)</td>
 
 								<td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold; width: 80px;\">Kondisi<br>
 																										  (B,KB,RB)</td>
@@ -10170,7 +10170,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																												  Cara Perolehan</td>
 										<td colspan=\"1\" rowspan=\"2\" style=\"width:80px;font-weight: bold; text-align: center;\">Jumlah<br>Barang</td>
 										<td colspan=\"1\" rowspan=\"2\" style=\"width:80px;font-weight: bold; text-align: center;\">Nilai<br>Perolehan<br>
-																												 (Ribuan Rp)</td>																		 
+																												 (Rp)</td>																		 
 										
 										<td colspan=\"1\" rowspan=\"2\" style=\"width: 60px;font-weight: bold; text-align: center;\">Ket</td>
 									</tr>
@@ -10550,7 +10550,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 									   <td colspan=\"3\" rowspan=\"1\" style=\"font-weight: bold; width: 220px; text-align: center;\">Status Tanah</td>
 									   <td style=\"font-weight: bold; width: 140px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Penggunaan</td>
 									   <td style=\"font-weight: bold; width: 70px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Asal Usul</td>
-									   <td style=\"font-weight: bold; width: 80px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Nilai<br>Perolehan<br>(ribuan Rp)</td>
+									   <td style=\"font-weight: bold; width: 80px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Nilai<br>Perolehan<br>(Rp)</td>
 									   
 									   <td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"3\">Ket</td>
 								  </tr>
@@ -10859,7 +10859,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                                        <td colspan=\"3\" rowspan=\"1\" style=\"font-weight: bold; width: 220px; text-align: center;\">Status Tanah</td>
                                                        <td style=\"font-weight: bold; width: 140px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Penggunaan</td>
                                                        <td style=\"font-weight: bold; width: 70px;text-align: center;\" colspan=\"1\" rowspan=\"3\">Asal Usul</td>
-                                                       <td style=\"font-weight: bold; width: 80px;text-align: center;\" colspan=\"1\" rowspan=\"3\">Nilai<br>Perolehan<br>(ribuan Rp)</td>
+                                                       <td style=\"font-weight: bold; width: 80px;text-align: center;\" colspan=\"1\" rowspan=\"3\">Nilai<br>Perolehan<br>(Rp)</td>
                                                        <td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"3\">Ket</td>
                                                   </tr>
                                                   <tr>
@@ -11250,7 +11250,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														<td style=\"font-weight: bold; text-align: center; width: 360px;\" colspan=\"5\" rowspan=\"1\">Nomor</td>
 														<td style=\"font-weight: bold; text-align: center;\" colspan=\"1\" rowspan=\"2\">Asal Usul</td>
 														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Jumlah<br>Barang/td>
-														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (ribuan Rp)</td>
+														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (Rp)</td>
 														<td style=\"font-weight: bold; text-align: center; width: 70px;\" colspan=\"1\" rowspan=\"2\">Ket</td>
 													</tr>
 													<tr>
@@ -11544,7 +11544,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														<td style=\"font-weight: bold; text-align: center; width: 360px;\" colspan=\"5\" rowspan=\"1\">Nomor</td>
 														<td style=\"font-weight: bold; text-align: center;\" colspan=\"1\" rowspan=\"2\">Asal Usul</td>
 														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Jumlah<br>Barang</td>
-														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (ribuan Rp)</td>
+														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (Rp)</td>
 														<td style=\"font-weight: bold; text-align: center; width: 70px;\" colspan=\"1\" rowspan=\"2\">Ket</td>
 													</tr>
 													<tr>
@@ -11939,7 +11939,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														<td style=\"width: 70px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Status<br>Tanah<br></td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nomer<br>Kode<br>Tanah</td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Asal Usul<br></td>
-														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan<br>(RibuanRp)</td>
+														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan<br>(Rp)</td>
 														<td style=\"width: 60px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Ket</td>
 													</tr>
 													<tr>
@@ -12241,7 +12241,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														<td style=\"width: 70px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Status<br>Tanah<br></td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nomer<br>Kode<br>Tanah</td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Asal Usul<br></td>
-														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai Perolehan<br>(RibuanRp)</td>
+														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai Perolehan<br>(Rp)</td>
 														<td style=\"width: 60px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Ket</td>
 													</tr>
 													<tr>
@@ -12665,7 +12665,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																																  Tanah</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold;\">Asal Usul</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"width:80px;text-align: center; font-weight: bold;\">Nilai<br>Perolehan
-																																  (Ribuan Rp)</td>
+																																  (Rp)</td>
 
 														<td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold; width: 80px;\">Kondisi<br>
 																																  (B,KB,RB)</td>
@@ -12985,7 +12985,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																																  Tanah</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold;\">Asal Usul</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"width:80px;text-align: center; font-weight: bold;\">Nilai<br>Perolehan
-																																  (Ribuan Rp)</td>
+																																  (Rp)</td>
 														
 
 														<td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold; width: 80px;\">Kondisi<br>
@@ -13406,7 +13406,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																																	  Cara Perolehan</td>
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:80px;font-weight: bold; text-align: center;\">Jumlah<br>Barang</td>
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:80px;font-weight: bold; text-align: center;\">Nilai<br>Perolehan<br>
-																																	 (Ribuan Rp)</td>
+																																	 (Rp)</td>
 															<td colspan=\"1\" rowspan=\"2\" style=\"width: 60px;font-weight: bold; text-align: center;\">Ket</td>
 														</tr>
 														<tr>
@@ -13724,7 +13724,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																																	  Cara Perolehan</td>
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:80px;font-weight: bold; text-align: center;\">Jumlah<br>Barang</td>
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:80px;font-weight: bold; text-align: center;\">Nilai<br>Perolehan<br>
-																																	 (Ribuan Rp)</td>
+																																	 (Rp)</td>
 															
 															<td colspan=\"1\" rowspan=\"2\" style=\"width: 60px;font-weight: bold; text-align: center;\">Ket</td>
 														</tr>
@@ -14863,7 +14863,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 									   <td colspan=\"3\" rowspan=\"1\" style=\"font-weight: bold; width: 220px; text-align: center;\">Status Tanah</td>
 									   <td style=\"font-weight: bold; width: 140px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Penggunaan</td>
 									   <td style=\"font-weight: bold; width: 70px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Asal Usul</td>
-									   <td style=\"font-weight: bold; width: 80px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Nilai<br>Perolehan<br>(ribuan Rp)</td>
+									   <td style=\"font-weight: bold; width: 80px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Nilai<br>Perolehan<br>(Rp)</td>
 									   
 									   <td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"3\">Ket</td>
 									   <td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"3\">Kondisi</td>
@@ -15187,7 +15187,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                                        <td colspan=\"3\" rowspan=\"1\" style=\"font-weight: bold; width: 220px; text-align: center;\">Status Tanah</td>
                                                        <td style=\"font-weight: bold; width: 140px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Penggunaan</td>
                                                        <td style=\"font-weight: bold; width: 70px;text-align: center;\" colspan=\"1\" rowspan=\"3\">Asal Usul</td>
-                                                       <td style=\"font-weight: bold; width: 80px;text-align: center;\" colspan=\"1\" rowspan=\"3\">Nilai<br>Perolehan<br>(ribuan Rp)</td>
+                                                       <td style=\"font-weight: bold; width: 80px;text-align: center;\" colspan=\"1\" rowspan=\"3\">Nilai<br>Perolehan<br>(Rp)</td>
                                                        <td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"3\">Ket</td>
 													   <td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"3\">Kondisi</td>
 													   <td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"3\">Ada / Tidak</td>
@@ -15601,7 +15601,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														<td style=\"font-weight: bold; text-align: center;\" colspan=\"1\" rowspan=\"2\">Tanggal<br>Perolehan</td>
 														<td style=\"font-weight: bold; text-align: center; width: 360px;\" colspan=\"5\" rowspan=\"1\">Nomor</td>
 														<td style=\"font-weight: bold; text-align: center;\" colspan=\"1\" rowspan=\"2\">Asal Usul</td>
-														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (ribuan Rp)</td>
+														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (Rp)</td>
 														<td style=\"font-weight: bold; text-align: center; width: 70px;\" colspan=\"1\" rowspan=\"2\">Ket</td>
 														<td style=\"font-weight: bold; text-align: center; width: 70px;\" colspan=\"1\" rowspan=\"2\">Kondisi</td>
 														<td style=\"font-weight: bold; text-align: center; width: 70px;\" colspan=\"1\" rowspan=\"2\">Ada / Tidak</td>
@@ -15907,7 +15907,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														<td style=\"font-weight: bold; text-align: center;\" colspan=\"1\" rowspan=\"2\">Tanggal<br>Perolehan</td>
 														<td style=\"font-weight: bold; text-align: center; width: 360px;\" colspan=\"5\" rowspan=\"1\">Nomor</td>
 														<td style=\"font-weight: bold; text-align: center;\" colspan=\"1\" rowspan=\"2\">Asal Usul</td>
-														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (ribuan Rp)</td>
+														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (Rp)</td>
 														<td style=\"font-weight: bold; text-align: center; width: 70px;\" colspan=\"1\" rowspan=\"2\">Ket</td>
 														<td style=\"font-weight: bold; text-align: center; width: 70px;\" colspan=\"1\" rowspan=\"2\">Kondisi</td>
 														<td style=\"font-weight: bold; text-align: center; width: 70px;\" colspan=\"1\" rowspan=\"2\">Ada / Tidak</td>
@@ -16321,7 +16321,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nomer<br>Kode<br>Tanah</td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Asal Usul<br></td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Tanggal<br>Perolehan</td>
-														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan<br>(RibuanRp)</td>
+														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan<br>(Rp)</td>
 														<td style=\"width: 70px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Ket</td>
 														<td style=\"width: 70px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Kondisi</td>
 														<td style=\"width: 70px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Ada / Tidak</td>
@@ -16637,7 +16637,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nomer<br>Kode<br>Tanah</td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Asal Usul<br></td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Tanggal<br>Perolehan</td>
-														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai Perolehan<br>(RibuanRp)</td>
+														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai Perolehan<br>(Rp)</td>
 														<td style=\"width: 70px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Ket</td>
 														<td style=\"width: 70px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Kondisi</td>
 														<td style=\"width: 70px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Ada / Tidak</td>
@@ -17082,7 +17082,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														 <td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold;\">Asal Usul</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold;\">Tanggal<br>Perolehan</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"width:80px;text-align: center; font-weight: bold;\">Nilai<br>Perolehan
-																																  (Ribuan Rp)</td>
+																																  (Rp)</td>
 
 														<td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold; width: 80px;\">Kondisi<br>
 																																  (B,KB,RB)</td>
@@ -17416,7 +17416,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														 <td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold;\">Asal Usul</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold;\">Tanggal<br>Perolehan</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"width:80px;text-align: center; font-weight: bold;\">Nilai<br>Perolehan
-																																  (Ribuan Rp)</td>
+																																  (Rp)</td>
 														
 
 														<td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold; width: 80px;\">Kondisi<br>
@@ -17863,7 +17863,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:100px; font-weight: bold; text-align: center;\">Tanggal<br>
 																																		Perolehan</td>																		  
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:80px;font-weight: bold; text-align: center;\">Nilai<br>Perolehan<br>
-																																	 (Ribuan Rp)</td>
+																																	 (Rp)</td>
 															
 															<td colspan=\"1\" rowspan=\"2\" style=\"width: 70px;font-weight: bold; text-align: center;\">Ket</td>
 															<td colspan=\"1\" rowspan=\"2\" style=\"width: 70px;font-weight: bold; text-align: center;\">Kondisi</td>
@@ -18195,7 +18195,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:100px; font-weight: bold; text-align: center;\">Tanggal<br>
 																																	  Perolehan</td>																		  
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:80px;font-weight: bold; text-align: center;\">Nilai<br>Perolehan<br>
-																																	 (Ribuan Rp)</td>
+																																	 (Rp)</td>
 															
 															<td colspan=\"1\" rowspan=\"2\" style=\"width: 60px;font-weight: bold; text-align: center;\">Ket</td>
 														</tr>
@@ -19370,7 +19370,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 									   <td colspan=\"3\" rowspan=\"1\" style=\"font-weight: bold; width: 220px; text-align: center;\">Status Tanah</td>
 									   <td style=\"font-weight: bold; width: 140px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Penggunaan</td>
 									   <td style=\"font-weight: bold; width: 70px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Asal Usul</td>
-									   <td style=\"font-weight: bold; width: 80px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Nilai<br>Perolehan<br>(ribuan Rp)</td>
+									   <td style=\"font-weight: bold; width: 80px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Nilai<br>Perolehan<br>(Rp)</td>
 									   
 									   <td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"3\">Ket</td>
 								  </tr>
@@ -19687,7 +19687,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
                                                        <td colspan=\"3\" rowspan=\"1\" style=\"font-weight: bold; width: 220px; text-align: center;\">Status Tanah</td>
                                                        <td style=\"font-weight: bold; width: 140px; text-align: center;\" colspan=\"1\" rowspan=\"3\">Penggunaan</td>
                                                        <td style=\"font-weight: bold; width: 70px;text-align: center;\" colspan=\"1\" rowspan=\"3\">Asal Usul</td>
-                                                       <td style=\"font-weight: bold; width: 80px;text-align: center;\" colspan=\"1\" rowspan=\"3\">Nilai<br>Perolehan<br>(ribuan Rp)</td>
+                                                       <td style=\"font-weight: bold; width: 80px;text-align: center;\" colspan=\"1\" rowspan=\"3\">Nilai<br>Perolehan<br>(Rp)</td>
                                                        <td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"3\">Ket</td>
                                                   </tr>
                                                   <tr>
@@ -20084,7 +20084,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														<td style=\"font-weight: bold; text-align: center; width: 360px;\" colspan=\"5\" rowspan=\"1\">Nomor</td>
 														<td style=\"font-weight: bold; text-align: center;\" colspan=\"1\" rowspan=\"2\">Asal Usul</td>
 														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Jumlah<br>Barang</td>
-														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (ribuan Rp)</td>
+														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (Rp)</td>
 														<td style=\"font-weight: bold; text-align: center; width: 70px;\" colspan=\"1\" rowspan=\"2\">Ket</td>
 													</tr>
 													<tr>
@@ -20386,7 +20386,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														<td style=\"font-weight: bold; text-align: center; width: 360px;\" colspan=\"5\" rowspan=\"1\">Nomor</td>
 														<td style=\"font-weight: bold; text-align: center;\" colspan=\"1\" rowspan=\"2\">Asal Usul</td>
 														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Jumlah<br>Barang</td>
-														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (ribuan Rp)</td>
+														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (Rp)</td>
 														<td style=\"font-weight: bold; text-align: center; width: 70px;\" colspan=\"1\" rowspan=\"2\">Ket</td>
 													</tr>
 													<tr>
@@ -20792,7 +20792,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														<td style=\"width: 70px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Status<br>Tanah<br></td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nomer<br>Kode<br>Tanah</td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Asal Usul<br></td>
-														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan<br>(RibuanRp)</td>
+														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan<br>(Rp)</td>
 														<td style=\"width: 60px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Ket</td>
 													</tr>
 													<tr>
@@ -21103,7 +21103,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 														<td style=\"width: 70px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Status<br>Tanah<br></td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nomer<br>Kode<br>Tanah</td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Asal Usul<br></td>
-														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai Perolehan<br>(RibuanRp)</td>
+														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai Perolehan<br>(Rp)</td>
 														<td style=\"width: 60px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Ket</td>
 													</tr>
 													<tr>
@@ -21538,7 +21538,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																																  Tanah</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold;\">Asal Usul</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"width:80px;text-align: center; font-weight: bold;\">Nilai<br>Perolehan
-																																  (Ribuan Rp)</td>
+																																  (Rp)</td>
 
 														<td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold; width: 80px;\">Kondisi<br>
 																																  (B,KB,RB)</td>
@@ -21867,7 +21867,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																																  Tanah</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold;\">Asal Usul</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"width:80px;text-align: center; font-weight: bold;\">Nilai<br>Perolehan
-																																  (Ribuan Rp)</td>
+																																  (Rp)</td>
 														
 
 														<td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold; width: 80px;\">Kondisi<br>
@@ -22298,7 +22298,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:100px; font-weight: bold; text-align: center;\">Asal Usul<br>
 																																	  Cara Perolehan</td>
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:80px;font-weight: bold; text-align: center;\">Nilai<br>Perolehan<br>
-																																	 (Ribuan Rp)</td>
+																																	 (Rp)</td>
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:80px;font-weight: bold; text-align: center;\">Jumlah<br>Barang</td>
 															<td colspan=\"1\" rowspan=\"2\" style=\"width: 60px;font-weight: bold; text-align: center;\">Ket</td>
 														</tr>
@@ -22624,7 +22624,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																																	  Cara Perolehan</td>
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:80px;font-weight: bold; text-align: center;\">Jumlah<br>Barang</td>
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:80px;font-weight: bold; text-align: center;\">Nilai<br>Perolehan<br>
-																																	 (Ribuan Rp)</td>
+																																	 (Rp)</td>
 															<td colspan=\"1\" rowspan=\"2\" style=\"width: 60px;font-weight: bold; text-align: center;\">Ket</td>
 														</tr>
 														<tr>
@@ -23785,7 +23785,7 @@ $body="
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 45px;\">Merk / Type</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 120px;\">No.Sertifikat<br>No. pabrik<br>No.Chasis Mesin</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Barang</td>
-                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(ribuan Rp)</td>
+                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(Rp)</td>
             </tr>
             <tr>
                 <td style=\"text-align:center; font-weight: bold; width: 47px;\">1</td>
@@ -24095,7 +24095,7 @@ $footer ="
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 45px;\">Merk / Type</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 120px;\">No.Sertifikat<br>No. pabrik<br>No.Chasis Mesin</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Barang</td>
-                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(ribuan Rp)</td>
+                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(Rp)</td>
             </tr>
             <tr>
                 <td style=\"text-align:center; font-weight: bold; width: 47px;\">1</td>
@@ -24563,7 +24563,7 @@ $body="
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 45px;\">Merk / Type</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 120px;\">No.Sertifikat<br>No. pabrik<br>No.Chasis Mesin</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Barang</td>
-                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(ribuan Rp)</td>
+                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(Rp)</td>
             </tr>
             <tr>
                 <td style=\"text-align:center; font-weight: bold; width: 47px;\">1</td>
@@ -24857,7 +24857,7 @@ $footer ="
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 45px;\">Merk / Type</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 120px;\">No.Sertifikat<br>No. pabrik<br>No.Chasis Mesin</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Barang</td>
-                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(ribuan Rp)</td>
+                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(Rp)</td>
             </tr>
             <tr>
                 <td style=\"text-align:center; font-weight: bold; width: 47px;\">1</td>
@@ -25270,7 +25270,7 @@ $body="
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 45px;\">Merk / Type</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 120px;\">No.Sertifikat<br>No. pabrik<br>No.Chasis Mesin</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Barang</td>
-                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(ribuan Rp)</td>
+                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(Rp)</td>
             </tr>
             <tr>
                 <td style=\"text-align:center; font-weight: bold; width: 47px;\">1</td>
@@ -25569,7 +25569,7 @@ $footer ="
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 45px;\">Merk / Type</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 120px;\">No.Sertifikat<br>No. pabrik<br>No.Chasis Mesin</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Barang</td>
-                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(ribuan Rp)</td>
+                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(Rp)</td>
             </tr>
             <tr>
                 <td style=\"text-align:center; font-weight: bold; width: 47px;\">1</td>
@@ -26314,7 +26314,7 @@ $body="
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 45px;\">Merk / Type</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 120px;\">No.Sertifikat<br>No. pabrik<br>No.Chasis Mesin</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Barang</td>
-                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(ribuan Rp)</td>
+                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(Rp)</td>
             </tr>
             <tr>
                 <td style=\"text-align:center; font-weight: bold; width: 47px;\">1</td>
@@ -26613,7 +26613,7 @@ $footer ="
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 45px;\">Merk / Type</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 120px;\">No.Sertifikat<br>No. pabrik<br>No.Chasis Mesin</td>
                 <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Barang</td>
-                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(ribuan Rp)</td>
+                <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(Rp)</td>
             </tr>
             <tr>
                 <td style=\"text-align:center; font-weight: bold; width: 47px;\">1</td>
@@ -26970,7 +26970,7 @@ if($dataArr!="")
                     <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 45px;\">Merk / Type</td>
                     <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 120px;\">No.Sertifikat<br>No. pabrik<br>No.Chasis Mesin</td>
                     <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Barang</td>
-                    <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(ribuan Rp)</td>
+                    <td colspan=\"1\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Harga<br>(Rp)</td>
                 </tr>
                 <tr>
                     <td style=\"text-align:center; font-weight: bold; width: 47px;\">1</td>
@@ -28347,72 +28347,26 @@ $body="
 						
 						
 					}elseif($row->Kd_Riwayat == '28'){
-						/*$LastSatker = $row->SatkerTujuan;
-						$FirstSatker = $skpdfiltr;
+						$kuantitas = 1;
 						
-						$kuantitas = 1;
-						// $nilaiAwalPerolehan = number_format($row->NilaiPerolehan_Awal,2,",",".");
-						$nilaiAwalPrlhn = $row->NilaiPerolehan_Awal;
+						//tambah
+						$jmlTambah = 1;
+						//get value nilaiperolehan from Aset_ID_Penambahan
+						$addValueKptls = $this->get_NP_Aset_ID_Penambahan($row->Aset_ID_Penambahan,$row->log_id);
+						
+						$nilaiAwalPrlhn = $addValueKptls;
 						$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
-						if($LastSatker == $FirstSatker){
-							$jmlTambah = 1;
-							$nilaiPrlhnMutasiTambah = $row->NilaiPerolehan;
-							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
-							//kurang
-							$jmlKurang = 0;
-							$nilaiPrlhnMutasiKurang = 0;
-							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
-							$ket = "tidak sama";
-							$jmlHasilMutasi = 1;	
-							$nilaiPerolehanHasilMutasi = $nilaiPrlhnMutasiKurang + $nilaiPrlhnMutasiTambah;
-							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
-						}else{
-							$jmlTambah = 0;
-							$nilaiPrlhnMutasiTambah = 0;
-							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
-							//kurang
-							$jmlKurang = 1;
-							$nilaiPrlhnMutasiKurang = $row->NilaiPerolehan;
-							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
-							$ket = "sama";
-							$jmlHasilMutasi = 0;	
-							$nilaiPerolehanHasilMutasi = 0;
-							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
-						}*/
-						$kuantitas = 1;
-						$nilaiAwalPrlhn = $row->NilaiPerolehan_Awal;
-						$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
-						if($Aset_ID_Penambahan == 0){
-						//berkurang
-							$jmlTambah = 0;
-							$nilaiPrlhnMutasiTambah = 0;
-							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
-							//kurang
-							$jmlKurang = 1;
-							$nilaiPrlhnMutasiKurang = $row->NilaiPerolehan;
-							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
-							
-							$jmlHasilMutasi = 0;	
-							$nilaiPerolehanHasilMutasi = 0;
-							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
-							
-						}elseif($Aset_ID_Penambahan != 0){
-						//bertambah
-							$jmlTambah = 1;
-							$nilaiPrlhnMutasiTambah = $row->NilaiPerolehan;
-							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
-							//kurang
-							$jmlKurang = 0;
-							$nilaiPrlhnMutasiKurang = 0;
-							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
-							
-							//get value nilaiperolehan from Aset_ID_Penambahan
-							$addValueKptls = $this->get_NP_Aset_ID_Penambahan($row->Aset_ID_Penambahan);
-							
-							$jmlHasilMutasi = 1;	
-							$nilaiPerolehanHasilMutasi = $nilaiPrlhnMutasiKurang + $addValueKptls + $nilaiPrlhnMutasiTambah;
-							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");	
-						}
+						
+						$nilaiPrlhnMutasiTambah = $row->NilaiPerolehan;
+						$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+						//kurang
+						$jmlKurang = 0;
+						$nilaiPrlhnMutasiKurang = 0;
+						$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+						
+						$jmlHasilMutasi = 1;	
+						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn + $nilaiPrlhnMutasiTambah;
+						$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
 						
 					}elseif($row->Kd_Riwayat == '26'){
 						// echo "MASUK PEMUSNAHAN PENGHAPUSAN";
@@ -28458,6 +28412,56 @@ $body="
 							$jmlHasilMutasi = 0;	
 							$nilaiPerolehanHasilMutasi = 0;
 							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
+					}elseif($row->Kd_Riwayat == '30' && $row->StatusValidasi == '1' && $row->Status_Validasi_Barang == '1' && $row->StatusTampil == '1'){
+							//echo "reklas kurang";
+							// pr('reklas kurang');
+							
+							//reklas kurang
+							$kuantitas = 1;	
+							$nilaiAwalPrlhn = $row->NilaiPerolehan;
+							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
+							
+							//mutasi tambah
+							$valAdd = 0;
+							$jmlTambah = 0;
+							$nilaiPrlhnMutasiTambah = $valAdd;
+							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+							
+							//mutasi kurang
+							$valSubst = $row->NilaiPerolehan;
+							$jmlKurang = 1;
+							$nilaiPrlhnMutasiKurang = $valSubst;
+							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+							
+							//jumlah akhir
+							$jmlHasilMutasi = 0;	
+							$nilaiPerolehanHasilMutasi = 0;
+							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+							
+					}elseif($row->Kd_Riwayat == '30' && $row->StatusValidasi == '0' && $row->Status_Validasi_Barang == '0' && $row->StatusTampil == '0'){
+						//reklas tambah
+						// pr('reklas tambah');
+						$kuantitas = 0;	
+						$nilaiAwalPrlhn = 0 ;
+						$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
+						
+						//mutasi tambah
+						$valAdd = $row->NilaiPerolehan;
+						$jmlTambah =  1;
+						$nilaiPrlhnMutasiTambah = $valAdd;
+						$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+						
+						//mutasi kurang
+						$valSubst = 0;
+						$jmlKurang = 0;
+						$nilaiPrlhnMutasiKurang = $valSubst;
+						$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+						
+						//jumlah akhir
+						$jmlHasilMutasi = 1;	
+						$nilaiPerolehanHasilMutasi = $nilaiPrlhnMutasiTambah + $nilaiPrlhnMutasiKurang;
+						$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+					
 					}else{
 						// echo "OTHER";
 						$cekSelisih =($row->NilaiPerolehan - $row->NilaiPerolehan_Awal);  
@@ -28841,6 +28845,8 @@ if($dataArr!="")
                 <td colspan=\"3\" rowspan=\"1\" style=\"text-align:center; font-weight: bold; width: 283px;\">Spesifikasi Barang</td>
                 <td colspan=\"1\" rowspan=\"3\" style=\"text-align:center; font-weight: bold; width: 70px;\">Bahan</td>
                 <td colspan=\"1\" rowspan=\"3\" style=\"text-align:center; font-weight: bold; width: 81px;\">Kondisi Barang (B,KB,RB)</td>
+                <td colspan=\"1\" rowspan=\"3\" style=\"text-align:center; font-weight: bold; width: 81px;\">Akumulasi <br/> Penyusutan</td>
+                <td colspan=\"1\" rowspan=\"3\" style=\"text-align:center; font-weight: bold; width: 81px;\">Nilai <br/> Buku</td>
                 <td colspan=\"1\" rowspan=\"3\" style=\"text-align:center; font-weight: bold; width: 81px;\">Berkurang<br/><hr>Bertambah</td>
                 <td colspan=\"2\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">SKPD</td>
             </tr>
@@ -28872,6 +28878,8 @@ if($dataArr!="")
                 <td style=\"text-align:center; font-weight: bold; width: 70px;\">9</td>
                 <td style=\"text-align:center; font-weight: bold; width: 72px;\">10</td>
                 <td style=\"text-align:center; font-weight: bold; width: 72px;\">11</td>
+                <td style=\"text-align:center; font-weight: bold; width: 72px;\">12</td>
+                <td style=\"text-align:center; font-weight: bold; width: 72px;\">13</td>
             </tr>	
 		</thead>";
     }
@@ -28892,27 +28900,29 @@ if($dataArr!="")
 				$ketKondisi = "";
 			} 
 			$NamaKlmpk = $this->get_NamaKelompok($row->kodeKelompok);
-			$NamaSatker = $this->get_NamaSatker($row->kodeSatker);
+			
 			if($row->SatkerTujuan == $skpd){
+				$NamaSatker = $this->get_NamaSatker($row->SatkerAwal);
 				//mutasi tambah
 				$nilaiPrlhn_tambah = $row->NilaiPerolehan;
-				$nilaiPrlhnFix_tambah = number_format($nilaiPrlhn_tambah,0,",",".");
+				$nilaiPrlhnFix_tambah = number_format($nilaiPrlhn_tambah,2,",",".");
 				$perolehanSubTotal_tambah = $perolehanSubTotal_tambah + $nilaiPrlhnFix_tambah;	
 				
 				//mutasi kurang
 				$nilaiPrlhn_kurang = 0;
-				$nilaiPrlhnFix_kurang = number_format($nilaiPrlhn_kurang,0,",",".");
+				$nilaiPrlhnFix_kurang = number_format($nilaiPrlhn_kurang,2,",",".");
 				$perolehanSubTotal_kurang = $perolehanSubTotal_kurang + $nilaiPrlhn_kurang;			
 			
 			}else {
+				$NamaSatker = $this->get_NamaSatker($row->SatkerTujuan);
 				//mutasi tambah
 				$nilaiPrlhn_tambah = 0;
-				$nilaiPrlhnFix_tambah = number_format($nilaiPrlhn_tambah,0,",",".");
+				$nilaiPrlhnFix_tambah = number_format($nilaiPrlhn_tambah,2,",",".");
 				$perolehanSubTotal_tambah = $perolehanSubTotal_tambah + $nilaiPrlhnFix_tambah;	
 				
 				//mutasi kurang
 				$nilaiPrlhn_kurang = $row->NilaiPerolehan;
-				$nilaiPrlhnFix_kurang = number_format($nilaiPrlhn_kurang,0,",",".");
+				$nilaiPrlhnFix_kurang = number_format($nilaiPrlhn_kurang,2,",",".");
 				$perolehanSubTotal_kurang = $perolehanSubTotal_kurang + $nilaiPrlhn_kurang;		
 			
 			}
@@ -28920,7 +28930,16 @@ if($dataArr!="")
 			$perolehanTotal_kurang = $perolehanTotal_kurang + $nilaiPrlhn_kurang;			
 			$perolehanTotal_tambah = $perolehanTotal_tambah + $nilaiPrlhn_tambah;	
 			
-            $body.="
+			//get NIlai Buku dan AkumulasiPenyusutan
+			$GetNb_AP = $this->get_NbAP($row->Aset_ID);
+			$AkumulasiPenyusutan = number_format($GetNb_AP->AkumulasiPenyusutan,2,",",".");
+			if($GetNb_AP->AkumulasiPenyusutan != 0 && $GetNb_AP->AkumulasiPenyusutan ! =''){
+				$NilaiBuku = number_format($GetNb_AP->NilaiBuku,2,",",".");
+			}else{
+				$NilaiBuku = number_format($row->NilaiPerolehan,2,",",".");
+			}
+			
+           $body.="
                 <tr>
                     <td style=\"text-align:center;  width: 47px;\">$no</td>
 					<td style=\"text-align:center;  width: 83px;\">$NamaKlmpk</td>
@@ -28930,7 +28949,9 @@ if($dataArr!="")
 					<td style=\"text-align:center;  width: 120px;\">$dataRangka/"."$dataMesin/"."$dataBPKB</td>
 					<td style=\"text-align:center;  width: 70px;\">$row->Material</td>
 					<td style=\"text-align:center;  width: 70px;\">$ketKondisi</td>
-					<td style=\"text-align:center;  width: 70px;\">$nilaiPrlhnFix_kurang<br/><hr>$nilaiPrlhnFix_tambah</td>
+					<td style=\"text-align:right;  width: 70px;\">$AkumulasiPenyusutan</td>
+					<td style=\"text-align:right;  width: 70px;\">$NilaiBuku</td>
+					<td style=\"text-align:right;  width: 70px;\">$nilaiPrlhnFix_kurang<br/><hr>$nilaiPrlhnFix_tambah</td>
 					<td style=\"text-align:center;  width: 72px;\">$row->kodeSatker</td>
 					<td style=\"text-align:center;  width: 200px;\">$NamaSatker</td>
                 </tr>";
@@ -32490,7 +32511,7 @@ $html ="
       <td style=\"text-align: center; font-weight: bold; width: 6%\">Bidang</td>
       <td style=\"text-align: center; font-weight: bold; width: 32%\">Nama Bidang Bahan</td>
       <td style=\"text-align: center; font-weight: bold; width: 10%\">Jumlah</td>
-      <td style=\"text-align: center; font-weight: bold; width: 15%\">Harga<br>(ribuan Rp.)</td>
+      <td style=\"text-align: center; font-weight: bold; width: 15%\">Harga<br>(Rp.)</td>
       <td style=\"text-align: center; font-weight: bold; width: 25%\">Keterangan</td>
     </tr>
     <tr>
@@ -32784,7 +32805,7 @@ foreach ($dataArr as $satker_id => $value)
           <td style=\"text-align: center; font-weight: bold; width: 6%\">Bidang</td>
           <td style=\"text-align: center; font-weight: bold; width: 32%\">Nama Bidang Bahan</td>
           <td style=\"text-align: center; font-weight: bold; width: 10%\">Jumlah</td>
-          <td style=\"text-align: center; font-weight: bold; width: 15%\">Harga<br>(ribuan Rp.)</td>
+          <td style=\"text-align: center; font-weight: bold; width: 15%\">Harga<br>(Rp)</td>
           <td style=\"text-align: center; font-weight: bold; width: 25%\">Keterangan</td>
         </tr>
         <tr>
@@ -33531,7 +33552,7 @@ return $hasil_html;
 														<td style=\"font-weight: bold; text-align: center;\" colspan=\"1\" rowspan=\"2\">Tahun<br>Pembelian</td>
 														<td style=\"font-weight: bold; text-align: center; width: 360px;\" colspan=\"5\" rowspan=\"1\">Nomor</td>
 														<td style=\"font-weight: bold; text-align: center;\" colspan=\"1\" rowspan=\"2\">Asal Usul</td>
-														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (ribuan Rp)</td>
+														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (Rp)</td>
 														<td style=\"font-weight: bold; text-align: center; width: 70px;\" colspan=\"1\" rowspan=\"2\">Ket</td>
 													</tr>
 													<tr>
@@ -33787,7 +33808,7 @@ return $hasil_html;
 														<td style=\"font-weight: bold; text-align: center;\" colspan=\"1\" rowspan=\"2\">Tahun<br>Pembelian</td>
 														<td style=\"font-weight: bold; text-align: center; width: 360px;\" colspan=\"5\" rowspan=\"1\">Nomor</td>
 														<td style=\"font-weight: bold; text-align: center;\" colspan=\"1\" rowspan=\"2\">Asal Usul</td>
-														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (ribuan Rp)</td>
+														<td style=\"font-weight: bold; text-align: center; width: 80px;\" colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan (Rp)</td>
 														<td style=\"font-weight: bold; text-align: center; width: 70px;\" colspan=\"1\" rowspan=\"2\">Ket</td>
 													</tr>
 													<tr>
@@ -34176,7 +34197,7 @@ return $hasil_html;
 														<td style=\"width: 70px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Status<br>Tanah<br></td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nomer<br>Kode<br>Tanah</td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Asal Usul<br></td>
-														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan<br>(RibuanRp)</td>
+														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai<br>Perolehan<br>(Rp)</td>
 														<td style=\"width: 60px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Ket</td>
 													</tr>
 													<tr>
@@ -34439,7 +34460,7 @@ return $hasil_html;
 														<td style=\"width: 70px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Status<br>Tanah<br></td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nomer<br>Kode<br>Tanah</td>
 														<td style=\"text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Asal Usul<br></td>
-														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai Perolehan<br>(RibuanRp)</td>
+														<td style=\"width:50px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Nilai Perolehan<br>(Rp)</td>
 														<td style=\"width: 60px;text-align: center; font-weight: bold;\"colspan=\"1\" rowspan=\"2\">Ket</td>
 													</tr>
 													<tr>
@@ -34865,7 +34886,7 @@ return $hasil_html;
 																																  Tanah</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold;\">Asal Usul</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"width:80px;text-align: center; font-weight: bold;\">Nilai<br>Perolehan
-																																  (Ribuan Rp)</td>
+																																  (Rp)</td>
 
 														<td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold; width: 80px;\">Kondisi<br>
 																																  (B,KB,RB)</td>
@@ -35148,7 +35169,7 @@ return $hasil_html;
 																																  Tanah</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold;\">Asal Usul</td>
 														 <td colspan=\"1\" rowspan=\"2\" style=\"width:80px;text-align: center; font-weight: bold;\">Nilai<br>Perolehan
-																																  (Ribuan Rp)</td>
+																																  (Rp)</td>
 														
 
 														<td colspan=\"1\" rowspan=\"2\" style=\"text-align: center; font-weight: bold; width: 80px;\">Kondisi<br>
@@ -35573,7 +35594,7 @@ return $hasil_html;
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:100px; font-weight: bold; text-align: center;\">Asal Usul<br>
 																																	  Cara Perolehan</td>
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:80px;font-weight: bold; text-align: center;\">Nilai<br>Perolehan<br>
-																																	 (Ribuan Rp)</td>
+																																	 (Rp)</td>
 															
 															<td colspan=\"1\" rowspan=\"2\" style=\"width: 60px;font-weight: bold; text-align: center;\">Ket</td>
 														</tr>
@@ -35853,7 +35874,7 @@ return $hasil_html;
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:100px; font-weight: bold; text-align: center;\">Asal Usul<br>
 																																	  Cara Perolehan</td>
 															<td colspan=\"1\" rowspan=\"2\" style=\"width:80px;font-weight: bold; text-align: center;\">Nilai<br>Perolehan<br>
-																																	 (Ribuan Rp)</td>
+																																	 (Rp)</td>
 															
 															<td colspan=\"1\" rowspan=\"2\" style=\"width: 60px;font-weight: bold; text-align: center;\">Ket</td>
 														</tr>
@@ -38100,8 +38121,30 @@ return $hasil_html;
 	
 		//buat kapitalisasi
 	public function get_NP_Aset_ID_Penambahan($Aset_ID_Penambahan){
-		$queryNpKp = "select NilaiPerolehan from aset where Aset_ID ='$Aset_ID_Penambahan' ";
+		$resulTipe= $this->retrieve_query($queryceckTipe);
+		if($resulTipe){
+			foreach($resulTipe as $valueTipe){
+				$TipeAset=$valueTipe->TipeAset;
+			}
+		}
+		if($TipeAset == 'A'){
+			$tabel = 'log_tanah';
+		}elseif($TipeAset == 'B'){
+			$tabel = 'log_mesin';
+		}elseif($TipeAset == 'C'){
+			$tabel = 'log_bangunan';
+		}elseif($TipeAset == 'D'){
+			$tabel = 'log_jaringan';
+		}elseif($TipeAset == 'E'){
+			$tabel = 'log_asetlain';
+		}elseif($TipeAset == 'F'){
+			$tabel = 'log_kdp';
+		}
 		
+		$queryNpKp = "select NilaiPerolehan from {$tabel} where Aset_ID ='$Aset_ID_Penambahan' and Kd_Riwayat = '28' 
+					  and action like 'Aset Penambahan kapitalisasi Mutasi%' 
+					  and log_id < {$log_id} order by log_id desc limit 1";
+		// pr($queryNpKp);
 		$resulNpKp=$this->retrieve_query($queryNpKp);
 		if($resulNpKp!=""){
 			foreach($resulNpKp as $valueNpKp){
