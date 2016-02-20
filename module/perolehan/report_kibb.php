@@ -154,7 +154,7 @@ $body="<table style=\"text-align: left; width: 100%; border-collapse: collapse;\
                 <td style=\"width: 360px;\" colspan=\"5\" rowspan=\"1\">Nomor</td>
                 <td colspan=\"1\" rowspan=\"2\"><br><br>Asal Usul</td>
                 <td style=\"width: 80px;\"colspan=\"1\" rowspan=\"2\"><br><br>Nilai Perolehan
-                                            (ribuan Rp)</td>
+                                            </td>
                 <td colspan=\"1\" rowspan=\"2\"><br><br>Nilai<br> Hasil<br>Penilaian </td>
                 <td style=\"width: 70px;\" colspan=\"1\" rowspan=\"2\"><br><br>Ket</td>
             </tr>
@@ -366,7 +366,7 @@ $pdf->AddPage($orientation, $format, $keepmargins, $tocpage);
 										<td style=\"width: 360px;\" colspan=\"5\" rowspan=\"1\">Nomor</td>
 										<td colspan=\"1\" rowspan=\"2\"><br><br>Asal Usul</td>
 										<td style=\"width: 80px;\"colspan=\"1\" rowspan=\"2\"><br><br>Nilai Perolehan
-																	(ribuan Rp)</td>
+																	</td>
 										<td colspan=\"1\" rowspan=\"2\"><br><br>Nilai<br> Hasil<br>Penilaian </td>
 										<td style=\"width: 70px;\" colspan=\"1\" rowspan=\"2\"><br><br>Ket</td>
 									</tr>
