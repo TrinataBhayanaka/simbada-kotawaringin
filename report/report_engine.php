@@ -28933,7 +28933,7 @@ if($dataArr!="")
 			//get NIlai Buku dan AkumulasiPenyusutan
 			$GetNb_AP = $this->get_NbAP($row->Aset_ID);
 			$AkumulasiPenyusutan = number_format($GetNb_AP->AkumulasiPenyusutan,2,",",".");
-			if($GetNb_AP->AkumulasiPenyusutan != 0 && $GetNb_AP->AkumulasiPenyusutan ! =''){
+			if($GetNb_AP->AkumulasiPenyusutan != 0 && $GetNb_AP->AkumulasiPenyusutan !=''){
 				$NilaiBuku = number_format($GetNb_AP->NilaiBuku,2,",",".");
 			}else{
 				$NilaiBuku = number_format($row->NilaiPerolehan,2,",",".");
