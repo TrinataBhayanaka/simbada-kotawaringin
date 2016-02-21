@@ -481,7 +481,7 @@ $head = "
                $perolehanTotal = number_format($perolehanTotal, 2, ",", ".");
                $body.="<tbody>
                <tr>
-                         <td colspan=\"8\" style=\"text-align:right\">Jumlah</td>
+                         <td colspan=\"7\" style=\"text-align:right\">Jumlah</td>
                     
                          <td style=\"text-align:right\">{$perolehanTotal}</td>
                          <td colspan=\"2\"  style=\"width:15%\"></td>
