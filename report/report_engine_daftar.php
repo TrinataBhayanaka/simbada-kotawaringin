@@ -375,7 +375,7 @@ $head = "
                          <td>$nosp2d</td>
                          <td>$Jumlah</td>
 						 <td>$Total</td>
-                         <td>$keterangan</td>
+                         <td>$Satker</td>
                           <td>$info</td>
                </tr>
              </tbody>";
