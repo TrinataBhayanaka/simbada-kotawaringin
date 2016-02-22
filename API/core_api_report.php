@@ -6043,7 +6043,7 @@ class core_api_report extends DB {
 		Kode Riwayat
 		28 = Transfer Kapitalisasi (-) jika Aset_ID_Penambahan 0
 		*/
-		$paramLogTransferKapitalisasiKurang =  "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
+		/*$paramLogTransferKapitalisasiKurang =  "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
 						   AND l.Kd_Riwayat = '28' and l.$paramSatker 
 						   and l.Aset_ID_Penambahan = '0' order by l.Aset_ID ASC";
 						   
@@ -6063,7 +6063,7 @@ class core_api_report extends DB {
 					where $paramLogTransferKapitalisasiKurang";
 		
 		$log_kdp_tr_kp="select l.* from log_kdp as l 
-					where $paramLogTransferKapitalisasiKurang";			
+					where $paramLogTransferKapitalisasiKurang";		*/	
 		//======================================================================================				   
 		/*
 		Kode Riwayat
@@ -6092,14 +6092,73 @@ class core_api_report extends DB {
 		$log_kdp_rc_kp="select l.* from log_kdp as l 
 					where $paramLogTransferKapitalisasiTambah";	
 		
+		//reklas (berkurang)
+		$paramlogReklasKurang = "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
+						   AND l.Kd_Riwayat = '30'  and l.$paramSatker 
+						   and t.StatusValidasi = 1 and t.Status_Validasi_Barang = 1 and t.StatusTampil = 1
+						   order by l.Aset_ID ASC";
 		
+		$log_tanah_reklas_kurang ="select l.* from log_tanah as l 
+							inner join tanah as t on t.Aset_ID = l.Aset_ID
+					where $paramlogReklasKurang ";		
+		
+		$log_mesin_reklas_kurang ="select l.* from log_mesin as l 
+							inner join mesin as t on t.Aset_ID = l.Aset_ID
+					where $paramlogReklasKurang ";
+		
+		$log_bangunan_reklas_kurang ="select l.*  from log_bangunan as l 
+							inner join bangunan as t on t.Aset_ID = l.Aset_ID
+					where $paramlogReklasKurang";
+					
+		$log_jaringan_reklas_kurang ="select l.* from log_jaringan as l 
+							inner join jaringan as t on t.Aset_ID = l.Aset_ID
+					where $paramlogReklasKurang";	
+					
+		$log_asetlain_reklas_kurang ="select l.* from log_asetlain as l 
+							inner join asetlain as t on t.Aset_ID = l.Aset_ID
+					where $paramlogReklasKurang";			
+		
+		$log_kdp_reklas_kurang ="select l.* from log_kdp as l 
+						inner join kdp as t on t.Aset_ID = l.Aset_ID
+					where $paramlogReklasKurang";	
+					
+		//reklas (bertambah)			
+		$paramlogReklasTambah = "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
+						   AND l.Kd_Riwayat = '30'  and l.$paramSatker 
+						   and t.StatusValidasi = 0 and t.Status_Validasi_Barang = 0 and t.StatusTampil = 0
+						  order by l.Aset_ID ASC";
+		
+		$log_tanah_reklas_tambah ="select l.* from log_tanah as l 
+							inner join tanah as t on t.Aset_ID = l.Aset_ID
+					where $paramlogReklasTambah ";		
+		
+		$log_mesin_reklas_tambah ="select l.* from log_mesin as l 
+							inner join mesin as t on t.Aset_ID = l.Aset_ID
+					where $paramlogReklasTambah ";
+		
+		$log_bangunan_reklas_tambah ="select l.*  from log_bangunan as l 
+							inner join bangunan as t on t.Aset_ID = l.Aset_ID
+					where $paramlogReklasTambah";
+					
+		$log_jaringan_reklas_tambah ="select l.* from log_jaringan as l 
+							inner join jaringan as t on t.Aset_ID = l.Aset_ID
+					where $paramlogReklasTambah";	
+					
+		$log_asetlain_reklas_tambah ="select l.* from log_asetlain as l 
+							inner join asetlain as t on t.Aset_ID = l.Aset_ID
+					where $paramlogReklasTambah";			
+		
+		$log_kdp_reklas_tambah ="select l.* from log_kdp as l 
+						inner join kdp as t on t.Aset_ID = l.Aset_ID
+					where $paramlogReklasTambah";
 		
 		$queryALL = array($log_tanah,$log_mesin,$log_bangunan,$log_jaringan,$log_asetlain,$log_kdp,
 						  $log_tanah_tr,$log_mesin_tr,$log_bangunan_tr,$log_jaringan_tr,$log_asetlain_tr,$log_kdp_tr,
 						  $log_tanah_rc,$log_mesin_rc,$log_bangunan_rc,$log_jaringan_rc,$log_asetlain_rc,$log_kdp_rc,
-						  $log_tanah_tr_kp,$log_mesin_tr_kp,$log_bangunan_tr_kp,$log_jaringan_tr_kp,$log_asetlain_tr_kp,$log_asetlain_tr_kp,$log_kdp_tr_kp,
-						  $log_tanah_rc_kp,$log_mesin_rc_kp,$log_bangunan_rc_kp,$log_jaringan_rc_kp,$log_asetlain_rc_kp,$log_kdp_rc_kp
-						  );
+						  $log_tanah_rc_kp,$log_mesin_rc_kp,$log_bangunan_rc_kp,$log_jaringan_rc_kp,$log_asetlain_rc_kp,$log_kdp_rc_kp,
+						  $log_tanah_reklas_kurang,$log_mesin_reklas_kurang,$log_bangunan_reklas_kurang,$log_jaringan_reklas_kurang,$log_asetlain_reklas_kurang,$log_kdp_reklas_kurang,
+						  $log_tanah_reklas_tambah,$log_mesin_reklas_tambah,$log_bangunan_reklas_tambah,$log_jaringan_reklas_tambah,$log_asetlain_reklas_tambah,$log_kdp_reklas_tambah
+						  );	
 		
 		// $queryALL = array($log_tanah_tr,$log_mesin_tr,$log_bangunan_tr,$log_jaringan_tr,$log_asetlain_tr,$log_kdp_tr);
 		// $queryALL = array($log_tanah_rc,$log_mesin_rc,$log_bangunan_rc,$log_jaringan_rc,$log_asetlain_rc,$log_kdp_rc);
@@ -6327,10 +6386,17 @@ class core_api_report extends DB {
 				$paramLog_2 		= "a.TglPerolehan >='2008-01-01' AND a.TglPerolehan <='$tglakhirperolehan' AND a.TglPerubahan >'$tglakhirperolehan' AND a.TglPembukuan <='$tglakhirperolehan' AND a.$paramSatker AND (a.Kd_Riwayat != '77' AND a.Kd_Riwayat != '0')  order by a.log_id desc";
 			
 			}elseif($TypeRprtr == 'KIB' || $TypeRprtr == 'kir' || $TypeRprtr == 'BIS' || $TypeRprtr == 'BISG' || $TypeRprtr == 'RBIS'){
-				$paramKib 		= "a.TglPerolehan <='$tglakhirperolehan' AND a.$paramSatker ";
+			
+				/*$paramKib 		= "a.TglPerolehan <='$tglakhirperolehan' AND a.$paramSatker ";
 				$paramMutasi 	= "a.TglPerolehan <='$tglakhirperolehan' AND a.TglSKKDH >'$tglakhirperolehan'  AND a.$paramSatker_mts_tr order by a.TglSKKDH desc";
 				$paramPnghpsn 	= "a.TglPerolehan <='$tglakhirperolehan' AND a.TglHapus >'$tglakhirperolehan' AND a.$paramSatker  order by a.TglHapus desc"; 
-				$paramLog 		= "a.TglPerolehan <='$tglakhirperolehan' AND a.TglPerubahan >'$tglakhirperolehan' AND a.$paramSatker  AND (a.Kd_Riwayat != '77' AND a.Kd_Riwayat != '0')  order by a.log_id desc";
+				$paramLog 		= "a.TglPerolehan <='$tglakhirperolehan' AND a.TglPerubahan >'$tglakhirperolehan' AND a.$paramSatker  AND (a.Kd_Riwayat != '77' AND a.Kd_Riwayat != '0')  order by a.log_id desc";*/
+				
+				$paramKib 		= "a.TglPerolehan <='$tglakhirperolehan' AND a.TglPembukuan <='$tglakhirperolehan' AND a.$paramSatker ";
+				$paramMutasi 	= "a.TglPerolehan <='$tglakhirperolehan' AND a.TglSKKDH >'$tglakhirperolehan' AND a.TglPembukuan <='$tglakhirperolehan' AND a.$paramSatker_mts_tr  order by a.TglSKKDH desc";
+				$paramPnghpsn 	= "a.TglPerolehan <='$tglakhirperolehan' AND a.TglHapus >'$tglakhirperolehan' AND a.TglPembukuan <='$tglakhirperolehan'  AND a.$paramSatker order by a.TglHapus desc"; 
+				$paramLog 		= "a.TglPerolehan <='$tglakhirperolehan' AND a.TglPerubahan >'$tglakhirperolehan' AND a.TglPembukuan <='$tglakhirperolehan' AND a.$paramSatker AND (a.Kd_Riwayat != '77' AND a.Kd_Riwayat != '0')  order by a.log_id desc";
+			
 				
 			}
 			else{
