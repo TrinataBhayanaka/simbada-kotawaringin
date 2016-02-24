@@ -66,7 +66,7 @@ foreach ($kapital as $key => $value) {
           $kib = $dataAset;
       }    
   $kib['changeDate'] = date("Y-m-d");
-  $kib['TglPerubahan'] = $kib['TglPerolehan'];
+  $kib['TglPerubahan'] = $noKontrak['tglKontrak'];//$kib['TglPerolehan'];
   $kib['action'] = "Penghapusan KDP";
   $kib['operator'] = $_SESSION['ses_uoperatorid'];
   $kib['NilaiPerolehan_Awal'] = $kib['NilaiPerolehan'] + $value['nilai'];
@@ -93,7 +93,7 @@ foreach ($kapital as $key => $value) {
           $kib = $dataAset;
       }    
   $kib['changeDate'] = date("Y-m-d");
-  $kib['TglPerubahan'] = $kib['TglPerolehan'];
+  $kib['TglPerubahan'] =$noKontrak['tglKontrak'];// $kib['TglPerolehan'];
   $kib['action'] = "Ubah Status";
   $kib['operator'] = $_SESSION['ses_uoperatorid'];
   $kib['NilaiPerolehan_Awal'] = $kib['NilaiPerolehan'] - $value['nilai'];
