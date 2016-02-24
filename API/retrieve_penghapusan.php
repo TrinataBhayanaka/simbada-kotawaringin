@@ -309,10 +309,10 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
                             $dataArr[]=$asetid[Aset_ID];
                         }
                         $aset_id=implode(', ',array_values($dataArr));
-                        $condition="ast.Aset_ID NOT IN ($aset_id) AND ast.fixPenggunaan=1 AND (ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
+                        $condition="ast.Aset_ID NOT IN ($aset_id) AND ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
                         
                     }else{
-                        $condition="ast.fixPenggunaan=1 AND (ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
+                        $condition="ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
                     }
                     // //////////////////////////////////////////////////////pr($aset_id);
                     // //////////////////////////////////////////////////////pr($sql1);
@@ -486,10 +486,10 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
                             $dataArr[]=$asetid[Aset_ID];
                         }
                         $aset_id=implode(', ',array_values($dataArr));
-                        $condition="ast.Aset_ID NOT IN ($aset_id) AND ast.fixPenggunaan=1 AND ast.kondisi=3";
+                        $condition="ast.Aset_ID NOT IN ($aset_id) AND ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND ast.kondisi=3";
                         
                     }else{
-                        $condition="ast.fixPenggunaan=1 AND ast.kondisi=3";
+                        $condition="ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND ast.kondisi=3";
                     }
                     // //////////////////////////////////////////////////////pr($aset_id);
                     // //////////////////////////////////////////////////////pr($sql1);
@@ -658,10 +658,10 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
                             $dataArr[]=$asetid[Aset_ID];
                         }
                         $aset_id=implode(', ',array_values($dataArr));
-                        $condition="ast.Aset_ID NOT IN ($aset_id) AND ast.fixPenggunaan=1 AND (ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
+                        $condition="ast.Aset_ID NOT IN ($aset_id) AND ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
                         
                     }else{
-                        $condition="ast.fixPenggunaan=1 AND (ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
+                        $condition="ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
                     }
                     // //////////////////////////////////////////////////////pr($aset_id);
                     // //////////////////////////////////////////////////////pr($sql1);
@@ -8602,7 +8602,7 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
                     $res1 = $this->db->lazyQuery($sql1,$debug,2);
 
                             foreach ($Aset_IDtmp as $key => $value) {
-                                    logFile('log data penghapusan, Aset_ID ='.$key);
+                                    logFile('log data penghapusan, Aset_ID ='.$key,'penghapusan.txt');
                                     $this->db->logItHPS($tabel=array($value), $Aset_ID=$key, 26,$resPeng[0][NoSKHapus],$resPeng[0][TglHapus]);
                                 }
                     
