@@ -5,11 +5,7 @@ $menu_id = 10;
             ($SessionUser['ses_uid']!='') ? $Session = $SessionUser : $Session = $SESSION->get_session(array('title'=>'GuestMenu', 'ses_name'=>'menu_without_login')); 
             $USERAUTH->FrontEnd_check_akses_menu($menu_id, $Session);
 
-            $kodeSatker = $_SESSION['ses_satkerkode'];
-            $jabatan = $_SESSION['ses_ujabatan'];
-			$par_data_table="kodeSatker=$kodeSatker&jabatan=$jabatan";
-
-// $get_data_filter = $RETRIEVE->retrieve_kontrak();
+$get_data_filter = $RETRIEVE->retrieve_kontrak();
 // pr($get_data_filter);
 ?>
 
@@ -20,31 +16,13 @@ $menu_id = 10;
 	
 ?>
 	<!-- SQL Sementara -->
-	<script>
-		$(document).ready(function() {
-			$('#kontrak').dataTable(
-			   {
-					"aoColumnDefs": [
-						 { "aTargets": [2] }
-					],
-					"aoColumns":[
-						 {"bSortable": false},
-						 {"bSortable": true},
-						 {"bSortable": true},
-						 {"bSortable": true},
-						 {"bSortable": true},
-						 {"bSortable": true},
-						 {"bSortable": true},
-						 {"bSortable": true},
-						 {"bSortable": true}],
-					"sPaginationType": "full_numbers",
+	<?php
 
-					"bProcessing": true,
-					"bServerSide": true,
-					"sAjaxSource": "<?=$url_rewrite?>/api_list/view_kontrak_posting.php?<?php echo $par_data_table?>"
-			   });
-		});
-	</script>
+		 $sql = mysql_query("SELECT * FROM kontrak ORDER BY id");
+        while ($dataKontrak = mysql_fetch_assoc($sql)){
+                $kontrak[] = $dataKontrak;
+            }
+	?>
 	<!-- End Sql -->
 	<section id="main">
 		<ul class="breadcrumb">
@@ -101,7 +79,7 @@ $menu_id = 10;
 			
 			
 			<div id="demo">
-			<table cellpadding="0" cellspacing="0" border="0" class="display table-checkable" id="kontrak">
+			<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
 				<thead>
 					<tr>
 						<th>No</th>
@@ -112,25 +90,50 @@ $menu_id = 10;
 						<th>Tipe Aset</th>
 						<th>Nilai</th>
 						<th>Status Posting</th>
-						<th width="18%">Action</th>
+						<th>Aksi</th>
 					</tr>
 				</thead>
-				<tbody>			
-					 <tr>
-                        <td colspan="9">Data Tidak di temukan</td>
-                     </tr>
+				<tbody>
+					
+				<?php
+				if($get_data_filter){
+					$no = 1;
+					foreach($get_data_filter as $val){
+				?>
+					<tr class="gradeA">
+						<td><?=$no?></td>
+						<td width="20%"><?=$val['NamaSatker']?></td>
+						<td><?=$val['noKontrak']?></td>
+						<td><?=$val['tglKontrak']?></td>
+						<td><?=($val['tipe_kontrak'] == 2) ? 'Pembelian Langsung' : 'Kontrak'?></td>
+						<td><?=$val['tipeAset']?></td>
+						<td><?=number_format($val['nilai'])?></td>
+						<td class="center"><?=($val['n_status']==1) ? '<span class="label label-success">SUDAH</span>' : '<span class="label label-Default">BELUM</span>'?></td>
+						<td class="center">
+						<?php
+						if($val['n_status'] != 1){
+						?>	
+							<a href="kontrak_postingRincian.php?id=<?=$val['id']?>" class="btn btn-default btn-small"><i class="fa fa-book"></i>&nbsp;Posting</a>
+						<?php
+						} else {
+						?>
+							<a href="kontrak_postingView.php?id=<?=$val['id']?>" class="btn btn-default btn-small"><i class="fa fa-eye"></i>&nbsp;View</a>
+						<?php
+						}
+						?>
+						</td>
+						
+					</tr>
+				<?php
+					$no++;
+					}
+				}
+				?>
+			
 				</tbody>
 				<tfoot>
 					<tr>
-						<th>&nbsp;</th>
-						<th>&nbsp;</th>
-						<th>&nbsp;</th>
-						<th>&nbsp;</th>
-						<th>&nbsp;</th>
-						<th>&nbsp;</th>
-						<th>&nbsp;</th>
-						<th>&nbsp;</th>
-						<th>&nbsp;</th>
+						<th colspan="5">&nbsp;</th>
 					</tr>
 				</tfoot>
 			</table>
