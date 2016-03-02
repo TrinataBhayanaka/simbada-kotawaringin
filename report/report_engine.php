@@ -23814,10 +23814,10 @@ $body="
 if ($skpdeh != $row->kodeSatker && $no>1){
 // $printbarang=  number_format($barangTotal);
                         //$printpanjang= number_format($panjangTotal);
-                    $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
-                    $printPPTotal=  number_format($PenyusutanPerTahunTotal,0,",",".");
-                    $printAPTotal=  number_format($AkumulasiPenyusutanTotal,0,",",".");
-                    $printNBTotal=  number_format($NilaiBukuTotal,0,",",".");
+                    $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                    $printPPTotal=  number_format($PenyusutanPerTahunTotal,2,",",".");
+                    $printAPTotal=  number_format($AkumulasiPenyusutanTotal,2,",",".");
+                    $printNBTotal=  number_format($NilaiBukuTotal,2,",",".");
                     $tabletotal="
 						<tr>
 							<td colspan=\"13\" style=\"text-align: center;\">Jumlah</td>
@@ -24176,33 +24176,33 @@ $footer ="
 						$kuantitas = $hasil;
 					}*/
 					$nilaiPerolehan = $row->Nilai;
-					$nilaiPrlhnFix = number_format($row->Nilai,0,",",".");
+					$nilaiPrlhnFix = number_format($row->Nilai,2,",",".");
 					
 					
 					if ($kondisi == '1' ||  $kondisi == '2') {
 						$PenyusutanPerTahun = $row->Ppt;
-						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,0,",",".");
+						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,2,",",".");
 						
 						$AkumulasiPenyusutan = $row->Ap;
-						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,0,",",".");
+						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
 						if($row->Ap!=''&&$row->Ap!=0){
 							// echo "NilaiBuku";
 							$NilaiBuku = $row->Nb;
-							$NilaiBukuFix = number_format($row->Nb,0,",",".");
+							$NilaiBukuFix = number_format($row->Nb,2,",",".");
 						}else{
 							// echo "nilai perolehan";
 							$NilaiBuku = $row->Nilai;
-							$NilaiBukuFix = number_format($row->Nilai,0,",",".");
+							$NilaiBukuFix = number_format($row->Nilai,2,",",".");
 						}
 					}else{
 						$PenyusutanPerTahun = 0;
-						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,0,",",".");
+						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,2,",",".");
 						
 						$AkumulasiPenyusutan = 0;
-						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,0,",",".");
+						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
 						
 						$NilaiBuku = 0;
-						$NilaiBukuFix = number_format($NilaiBuku,0,",",".");
+						$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
 					
 					}
 					
@@ -24242,10 +24242,10 @@ $footer ="
                            }
                                             
                     // $printbarang=  number_format($barangTotal);
-                    $printperolehanTotal=  number_format($perolehanTotal,0,",",".");
-                    $printPPTotal=  number_format($PenyusutanPerTahunTotal,0,",",".");
-                    $printAPTotal=  number_format($AkumulasiPenyusutanTotal,0,",",".");
-                    $printNBTotal=  number_format($NilaiBukuTotal,0,",",".");
+                    $printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                    $printPPTotal=  number_format($PenyusutanPerTahunTotal,2,",",".");
+                    $printAPTotal=  number_format($AkumulasiPenyusutanTotal,2,",",".");
+                    $printNBTotal=  number_format($NilaiBukuTotal,2,",",".");
                     $tabletotal="
 						<tr>
 							<td colspan=\"13\" style=\"text-align: center;\">Jumlah</td>
