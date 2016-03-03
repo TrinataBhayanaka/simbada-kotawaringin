@@ -5928,7 +5928,9 @@ class core_api_report extends DB {
 		//l.TglPembukuan >='$tglawalperolehan' AND l.TglPembukuan <='$tglakhirperolehan' AND
 		$paramLog 		= "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
 						   AND l.Kd_Riwayat in (0,2,7,21,26,27) and l.Kd_Riwayat != 77 and l.$paramSatker order by l.Aset_ID ASC";
-		
+						   
+				   
+		//l.Kd_Riwayat in (0,2,7,21,26,27)
 		/*
 		Kode Riwayat
 		3 = Pindah SKPD (-) SatkerAwal != KodeSatker
@@ -5959,6 +5961,8 @@ class core_api_report extends DB {
 		26 = Penghapusan Pemindahtanganan
 		27 = Penghapusan Pemusnahan
 		*/
+		// 0 = Data baru
+		 
 		$log_tanah = "select l.* from log_tanah as l 
 					inner join tanah as t on l.Aset_ID = t.Aset_ID 
 					where $paramLog";
@@ -5982,6 +5986,8 @@ class core_api_report extends DB {
 		$log_kdp = "select l.* from log_kdp as l 
 					inner join kdp as t on l.Aset_ID = t.Aset_ID 
 					where $paramLog";
+		
+				
 		//======================================================================================
 		/*
 		Kode Riwayat
@@ -6039,64 +6045,68 @@ class core_api_report extends DB {
 					inner join view_mutasi_kdp as mt on l.Aset_ID = mt.Aset_ID 
 					where $paramLog_mts_rc group by l.Aset_ID order by l.Aset_ID ASC";	
 		
-		//transfer kapitalisasi
 		/*
 		Kode Riwayat
-		28 = Transfer Kapitalisasi (-) jika Aset_ID_Penambahan 0
-		*/
-		/*$paramLogTransferKapitalisasiKurang =  "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
-						   AND l.Kd_Riwayat = '28' and l.$paramSatker 
-						   and l.Aset_ID_Penambahan = '0' order by l.Aset_ID ASC";
-						   
-		$log_tanah_tr_kp="select l.* from log_tanah as l 
-					where $paramLogTransferKapitalisasiKurang ";
-		
-		$log_mesin_tr_kp="select l.* from log_mesin as l 
-					where $paramLogTransferKapitalisasiKurang ";
-		
-		$log_bangunan_tr_kp="select l.*  from log_bangunan as l 
-					where $paramLogTransferKapitalisasiKurang";
-		
-		$log_jaringan_tr_kp="select l.* from log_jaringan as l 
-					where $paramLogTransferKapitalisasiKurang";	
-			
-		$log_asetlain_tr_kp="select l.* from log_asetlain as l 
-					where $paramLogTransferKapitalisasiKurang";
-		
-		$log_kdp_tr_kp="select l.* from log_kdp as l 
-					where $paramLogTransferKapitalisasiKurang";		*/	
-		//======================================================================================				   
-		/*
-		Kode Riwayat
-		28 = Transfer Kapitalisasi (+) jika Aset_ID_Penambahan !=0
+		28 = Transfer Kapitalisasi (+) jika Aset_ID_Penambahan ==0
 		*/
 		$paramLogTransferKapitalisasiTambah =  "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
 						   AND l.Kd_Riwayat = '28' and l.$paramSatker 
-						   and l.Aset_ID_Penambahan != '0' order by l.Aset_ID ASC";
+						   and l.Aset_ID_Penambahan = '0' and action like 'Aset Penambahan kapitalisasi Mutasi%' order by l.Aset_ID ASC";
+						   
+		$log_tanah_tr_kp="select l.* from log_tanah as l 
+					where $paramLogTransferKapitalisasiTambah ";
+		
+		$log_mesin_tr_kp="select l.* from log_mesin as l 
+					where $paramLogTransferKapitalisasiTambah ";
+		
+		$log_bangunan_tr_kp="select l.*  from log_bangunan as l 
+					where $paramLogTransferKapitalisasiTambah";
+		
+		$log_jaringan_tr_kp="select l.* from log_jaringan as l 
+					where $paramLogTransferKapitalisasiTambah";	
+			
+		$log_asetlain_tr_kp="select l.* from log_asetlain as l 
+					where $paramLogTransferKapitalisasiTambah";
+		
+		$log_kdp_tr_kp="select l.* from log_kdp as l 
+					where $paramLogTransferKapitalisasiTambah";
+		
+		/*
+		Kode Riwayat
+		28 = Transfer Kapitalisasi (-) jika Aset_ID_Penambahan !=0
+		*/
+		$paramLogTransferKapitalisasiKurang =  "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
+						   AND l.Kd_Riwayat = '28' and l.$paramSatker 
+						   and l.Aset_ID_Penambahan != '0' and action like 'Sukses kapitalisasi Mutasi%'
+						   order by l.Aset_ID ASC";
 		
 		
 		$log_tanah_rc_kp="select l.* from log_tanah as l 
-					where $paramLogTransferKapitalisasiTambah ";
+					where $paramLogTransferKapitalisasiKurang ";
 		
 		$log_mesin_rc_kp="select l.* from log_mesin as l 
-					where $paramLogTransferKapitalisasiTambah ";
+					where $paramLogTransferKapitalisasiKurang ";
 		
 		$log_bangunan_rc_kp="select l.*  from log_bangunan as l 
-					where $paramLogTransferKapitalisasiTambah";
+					where $paramLogTransferKapitalisasiKurang";
 		
 		$log_jaringan_rc_kp="select l.* from log_jaringan as l 
-					where $paramLogTransferKapitalisasiTambah";	
+					where $paramLogTransferKapitalisasiKurang";	
 			
 		$log_asetlain_rc_kp="select l.* from log_asetlain as l 
-					where $paramLogTransferKapitalisasiTambah";
+					where $paramLogTransferKapitalisasiKurang";
 		
 		$log_kdp_rc_kp="select l.* from log_kdp as l 
-					where $paramLogTransferKapitalisasiTambah";	
+					where $paramLogTransferKapitalisasiKurang";	
+		
+		
+		
 		
 		//reklas (berkurang)
 		$paramlogReklasKurang = "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
 						   AND l.Kd_Riwayat = '30'  and l.$paramSatker 
 						   and t.StatusValidasi = 1 and t.Status_Validasi_Barang = 1 and t.StatusTampil = 1
+						   and l.kodeData = '30'
 						   order by l.Aset_ID ASC";
 		
 		$log_tanah_reklas_kurang ="select l.* from log_tanah as l 
@@ -6127,6 +6137,7 @@ class core_api_report extends DB {
 		$paramlogReklasTambah = "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
 						   AND l.Kd_Riwayat = '30'  and l.$paramSatker 
 						   and t.StatusValidasi = 0 and t.Status_Validasi_Barang = 0 and t.StatusTampil = 0
+						   and l.kodeData = '30'
 						  order by l.Aset_ID ASC";
 		
 		$log_tanah_reklas_tambah ="select l.* from log_tanah as l 
@@ -6151,18 +6162,22 @@ class core_api_report extends DB {
 		
 		$log_kdp_reklas_tambah ="select l.* from log_kdp as l 
 						inner join kdp as t on t.Aset_ID = l.Aset_ID
-					where $paramlogReklasTambah";
-		
+					where $paramlogReklasTambah";	
+					
+					
+	
 		$queryALL = array($log_tanah,$log_mesin,$log_bangunan,$log_jaringan,$log_asetlain,$log_kdp,
 						  $log_tanah_tr,$log_mesin_tr,$log_bangunan_tr,$log_jaringan_tr,$log_asetlain_tr,$log_kdp_tr,
 						  $log_tanah_rc,$log_mesin_rc,$log_bangunan_rc,$log_jaringan_rc,$log_asetlain_rc,$log_kdp_rc,
 						  $log_tanah_rc_kp,$log_mesin_rc_kp,$log_bangunan_rc_kp,$log_jaringan_rc_kp,$log_asetlain_rc_kp,$log_kdp_rc_kp,
+						  $log_tanah_tr_kp,$log_mesin_tr_kp,$log_bangunan_tr_kp,$log_jaringan_tr_kp,$log_asetlain_tr_kp,$log_kdp_tr_kp,
 						  $log_tanah_reklas_kurang,$log_mesin_reklas_kurang,$log_bangunan_reklas_kurang,$log_jaringan_reklas_kurang,$log_asetlain_reklas_kurang,$log_kdp_reklas_kurang,
 						  $log_tanah_reklas_tambah,$log_mesin_reklas_tambah,$log_bangunan_reklas_tambah,$log_jaringan_reklas_tambah,$log_asetlain_reklas_tambah,$log_kdp_reklas_tambah
-						  );	
-		
-		// $queryALL = array($log_tanah_tr,$log_mesin_tr,$log_bangunan_tr,$log_jaringan_tr,$log_asetlain_tr,$log_kdp_tr);
-		// $queryALL = array($log_tanah_rc,$log_mesin_rc,$log_bangunan_rc,$log_jaringan_rc,$log_asetlain_rc,$log_kdp_rc);
+						  );
+		/*$queryALL = array($log_tanah_tr_kp,$log_mesin_tr_kp,$log_bangunan_tr_kp,$log_jaringan_tr_kp,$log_asetlain_tr_kp,$log_kdp_tr_kp, 
+							$log_tanah_rc_kp,$log_mesin_rc_kp,$log_bangunan_rc_kp,$log_jaringan_rc_kp,$log_asetlain_rc_kp,$log_kdp_rc_kp
+						  );*/			
+							  
 		
 		for ($i = 0; $i < count($queryALL); $i++)
 			{
@@ -6190,7 +6205,6 @@ class core_api_report extends DB {
 			return $getdata;
 		}		
 	}
-	
 	public function MutasiSkpd ($satker,$tglawal,$tglakhir){
 		
 		foreach ($satker as $key){
