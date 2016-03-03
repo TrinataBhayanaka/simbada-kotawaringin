@@ -15,16 +15,18 @@ $mode = $_GET['mode'];
 $tab = $_GET['tab'];
 $skpd_id = $_GET['skpd_id'];
 $kb = $_GET['kb'];
-$tglawal = $_GET['tglawalperolehan'];
 $kelompok = $_GET['kelompok'];
 $noregAwal = $_GET['noregAwal'];
 $noregAkhir = $_GET['noregAkhir'];
+
+/*$tglawal = $_GET['tglawalperolehan'];
 if($tglawal != ''){
 	$tglawalperolehan = $tglawal;
 }else{
 	$tglawalperolehan = '0000-00-00';
-}
+}*/
 $tglakhirperolehan = $_GET['tglakhirperolehan'];
+$tahun = $_GET['tahun'];
 $tglcetak = $_GET['tglcetak'];
 $tipe=$_GET['tipe_file'];
 // pr($_GET);
@@ -33,8 +35,9 @@ $data=array(
     "modul"=>$modul,
     "mode"=>$mode,
     "kb"=>$kb,
-    "tglawalperolehan"=>$tglawalperolehan,
-    "tglakhirperolehan"=>$tglakhirperolehan,
+	"tahun"=>$tahun,
+    // "tglawalperolehan"=>$tglawalperolehan,
+    // "tglakhirperolehan"=>$tglakhirperolehan,
     "skpd_id"=>$skpd_id,
     "kelompok"=>$kelompok,
     "noregAwal"=>$noregAwal,
@@ -51,11 +54,12 @@ $REPORT->set_data($data);
 //mendapatkan jenis query yang digunakan
 $query=$REPORT->list_query($data);
 // pr($query);
+// exit;
 $hit = count($query);
 if($kb == 'KB-E'){
 	$flag = 'E';
 }
-$TypeRprtr = '';
+$TypeRprtr = 'kartu';
 $Info = '';
 $exeTempTable = $REPORT->TempTable($hit,$flag,$TypeRprtr,$Info,$tglawalperolehan,$tglakhirperolehan,
 $skpd_id);
@@ -71,7 +75,7 @@ $resQuery=$REPORT->kartuBarang($query);
 $gambar = $FILE_GAMBAR_KABUPATEN;
 // exit;
 //retrieve html
-$html=$REPORT->retrieve_html_kb_e($resQuery,$gambar,$skpd_id);
+$html=$REPORT->retrieve_html_kb_rev_general($resQuery,$gambar,$skpd_id,$tglakhirperolehan,$flag);
 // exit;
 /*$count = count($html);
 	for ($i = 0; $i < $count; $i++) {

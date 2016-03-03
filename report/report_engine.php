@@ -40,6 +40,7 @@ class report_engine extends core_api_report {
 		 $this->KODE_KABUPATEN = $KODE_KABUPATEN;
 		 $this->KODE_PROVINSI = $KODE_PROVINSI;
 	 }
+	 
 public function set_footer_to_png($path,$url_rewrite,$data){
 			 
 
@@ -331,6 +332,847 @@ public function retrieve_html_liat_dftr_aset($dataArr,$skpd_id,$gambar,$tipe){
           
     }
 		
+public function retrieve_html_kb_rev_general($dataArr,$gambar,$skpd_id,$tglakhirperolehan,$flagkib){
+foreach ($dataArr as $asetID => $value)
+{
+	// echo "asetid =".$asetID ;
+	// echo "<br>";
+	// exit;
+	//isi nilai asetID
+	
+    foreach ($value as $keys =>$row)
+    {	
+		$AsetId = $row->Aset_ID;
+		$Satker = $row->kodeSatker;
+		$ex = explode('.',$row->kodeKelompok);
+		$param = $ex['0'];
+	
+		$detailSatker=$this->get_satker($Satker);
+		$NoBidang = $detailSatker[0];
+		$NoUnitOrganisasi = $detailSatker[1];
+		$NoSubUnitOrganisasi = $detailSatker[2];
+		$NoUPB = $detailSatker[3];
+
+		if($NoBidang !=""){
+			$paramKodeLokasi = $NoBidang;
+		}
+		if($NoBidang !="" && $NoUnitOrganisasi != ""){
+			$paramKodeLokasi = $NoUnitOrganisasi;
+		}
+		if($NoBidang !="" && $NoUnitOrganisasi != "" && $NoSubUnitOrganisasi !=""){
+			$paramKodeLokasi = $NoUnitOrganisasi.".".$NoSubUnitOrganisasi;
+		}
+		if($NoBidang !="" && $NoUnitOrganisasi != "" && $NoSubUnitOrganisasi !="" && $NoUPB !=""){
+			$paramKodeLokasi = $NoUnitOrganisasi.".".$NoSubUnitOrganisasi.".".$NoUPB;
+		}
+		$Bidang = $detailSatker[4][0];
+		$UnitOrganisasi = $detailSatker[4][1];
+		$SubUnitOrganisasi = $detailSatker[4][2];
+		$UPB = $detailSatker[4][3];	
+		if($row->Alamat != '' && $row->Alamat != 'NULL'){
+			$alamat = $row->Alamat;
+		}else{
+			$alamat = '';
+		}
+		if($row->kondisi ==1){
+			$kondisi = 'Baik';
+		}elseif($row->kondisi ==2){
+			$kondisi = 'Rusak Ringan';
+		}elseif($row->kondisi ==3){
+			$kondisi = 'Rusak Berat';
+		}else{
+			$kondisi ='';
+		}
+		$noReg = sprintf("%04s", $row->noRegister);
+		$head = "
+		<html>
+		<head>
+			<meta content=\"text/html; charset=UTF-8\" http-equiv=\"content-type\">
+		<title></title>
+		</head>
+		<body>
+		<table style=\"font-size:; border-collapse: collapse; text-align: left; width: 100%;\" border=\"0\"cellpadding=\"0\" cellspacing=\"0\">
+			<tr>
+				<td style=\"width: 150px; text-align: center;\"><img style=\"width: 80px; height: 90px;\" alt=\"\"
+				src=\"$gambar\"></td>
+				<td style=\"width: 902px; text-align: center;\">
+					<h3>KARTU BARANG {$flagkib}</h3>
+				</td>
+			</tr>
+		</table>
+		<br>";
+
+		$body="<table style=\"font-size:; border-colslapse: collapse; text-align: left; width: 100%;\" border=\"0\"cellpadding=\"0\" cellspacing=\"0\">
+				<tr>
+				  <td style=\"width: 200px; font-weight: bold; text-align: left;\">UPB</td>
+				  <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
+				  <td style=\"width: 873px; font-weight: bold;\">$UPB</td>
+				</tr>
+				<tr>
+				  <td style=\"width: 200px; font-weight: bold; text-align: left;\">Kode Barang / No Register</td>
+				  <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
+				  <td style=\"width: 873px; font-weight: bold;\">$row->kodeKelompok / $noReg</td>
+				</tr>
+				<tr>
+				  <td style=\"width: 200px; font-weight: bold; text-align: left;\">Kode Lokasi</td>
+				  <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
+				  <td style=\"width: 873px; font-weight: bold;\">$row->kodeLokasi</td>
+				</tr>
+				<tr>
+				  <td style=\"width: 200px; font-weight: bold; text-align: left;\">Tahun</td>
+				  <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
+				  <td style=\"width: 873px; font-weight: bold;\">$row->Tahun</td>
+				</tr>
+				<tr>
+				  <td style=\"width: 200px; font-weight: bold; text-align: left;\">Nama Barang</td>
+				  <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
+				  <td style=\"width: 873px; font-weight: bold;\">$row->Uraian</td>
+				</tr>
+				<tr>
+				  <td style=\"width: 200px; font-weight: bold; text-align: left;\">Alamat</td>
+				  <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
+				  <td style=\"width: 873px; font-weight: bold;\">$alamat</td>
+				</tr>
+				<tr>
+				  <td style=\"width: 200px; font-weight: bold; text-align: left;\">Kondisi</td>
+				  <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
+				  <td style=\"width: 873px; font-weight: bold;\">$kondisi</td>
+				</tr>
+				<tr>
+				  <td style=\"width: 200px; font-weight: bold; text-align: left;\">Nilai Perolehan</td>
+				  <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
+				  <td style=\"width: 873px; font-weight: bold;\">".number_format($row->NilaiPerolehan,2,",",".")."</td>
+				</tr>
+			</table><br>";
+		$body.="<table  style=\"width: 100%; height: ; text-align: left; margin-left: auto; margin-right: auto;\"border=\"1\" cellpadding=\"0\" cellspacing=\"0\">
+				<thead>
+					<tr>
+						<td colspan=\"\" rowspan=\"3\" style=\"text-align:center; font-weight: bold; width: ;\">Tgl Transaksi</td>
+						<td colspan=\"\" rowspan=\"3\" style=\"text-align:center; font-weight: bold; width: ;\">Transaksi</td>
+						<td colspan=\"3\" rowspan=\"2\" style=\"text-align:center; font-weight: bold; width: ;\">SALDO AWAL</td>
+						<td colspan=\"4\" rowspan=\"\" style=\"text-align:center; font-weight: bold; width: ;\">MUTASI</td>
+						<td colspan=\"3\" rowspan=\"2\" style=\"text-align:center; font-weight: bold; width: ;\">SALDO AKHIR</td>
+						<td colspan=\"3\" rowspan=\"2\" style=\"text-align:center; font-weight: bold; width: 72px;\">PENYUSUTAN</td>
+						<td colspan=\"\" rowspan=\"3\" style=\"text-align:center; font-weight: bold; width: 72px;\">KETERANGAN</td>
+					</tr>
+					<tr>
+						<td colspan=\"2\" style=\"text-align:center; font-weight: bold; width: ;\">ASET</td>
+						<td colspan=\"2\" style=\"text-align:center; font-weight: bold; width: ;\">PENYUSUTAN</td>
+					</tr>
+					<tr>
+						<td style=\"text-align:center; font-weight: bold; width: ;\">Nilai Perolehan</td>
+						<td style=\"text-align:center; font-weight: bold; width: ;\">Akumulasi Penyusutan</td>
+						<td style=\"text-align:center; font-weight: bold; width: ;\">Nilai Buku</td>
+						<td style=\"text-align:center; font-weight: bold; width: ;\">Bertambah</td>
+						<td style=\"text-align:center; font-weight: bold; width: ;\">Berkurang</td>
+						<td style=\"text-align:center; font-weight: bold; width: ;\">Bertambah</td>
+						<td style=\"text-align:center; font-weight: bold; width: ;\">Berkurang</td>
+						<td style=\"text-align:center; font-weight: bold; width: ;\">Nilai Perolehan</td>
+						<td style=\"text-align:center; font-weight: bold; width: ;\">Akumulasi Penyusutan</td>
+						<td style=\"text-align:center; font-weight: bold; width: ;\">Nilai Buku</td>
+						<td style=\"text-align:center; font-weight: bold; width: ;\">Penyusutan Per Tahun</td>
+						<td style=\"text-align:center; font-weight: bold; width: ;\">Umur Ekonomis</td>
+						<td style=\"text-align:center; font-weight: bold; width: ;\">Tahun<br/>Penyusutan</td>
+					</tr>
+					<tr>
+						<td style=\"text-align:center; font-weight: bold;\">1</td>
+						<td style=\"text-align:center; font-weight: bold;\">2</td>
+						<td style=\"text-align:center; font-weight: bold;\">3</td>
+						<td style=\"text-align:center; font-weight: bold;\">4</td>
+						<td style=\"text-align:center; font-weight: bold;\">5</td>
+						<td style=\"text-align:center; font-weight: bold;\">6</td>
+						<td style=\"text-align:center; font-weight: bold;\">7</td>
+						<td style=\"text-align:center; font-weight: bold;\">8</td>
+						<td style=\"text-align:center; font-weight: bold;\">9</td>
+						<td style=\"text-align:center; font-weight: bold;\">10</td>
+						<td style=\"text-align:center; font-weight: bold;\">11</td>
+						<td style=\"text-align:center; font-weight: bold;\">12</td>
+						<td style=\"text-align:center; font-weight: bold;\">13</td>
+						<td style=\"text-align:center; font-weight: bold;\">14</td>
+						<td style=\"text-align:center; font-weight: bold;\">15</td>
+						<td style=\"text-align:center; font-weight: bold;\">16</td>
+					  </tr>
+				 </thead>";
+				 
+			//get data 	 
+			// $Satker, $tglakhirperolehan
+			$getdataRwyt = $this->getdataRwyt($skpd_id,$AsetId,$tglakhirperolehan,$param);
+			// pr($getdataRwyt);
+			foreach ($getdataRwyt as $valRwyt){
+				$tglFormat = $new_date = date('d-m-Y ', strtotime($valRwyt->TglPerubahan));
+				// pr($tglFormat);
+				$newtglFormat = str_replace("-","/",$tglFormat);
+				// pr($newtglFormat);
+				// exit;
+				$Riwayat = $this->get_NamaRiwayat($valRwyt->Kd_Riwayat);
+				$paramKd_Rwyt = $valRwyt->Kd_Riwayat;
+				
+				//cek tgl u/info
+				$ex_tgl_filter = explode('-',$valRwyt->TglPerubahan);
+				$tahun = $ex_tgl_filter[0];
+				$tahun_pnystn = $valRwyt->TahunPenyusutan;
+				if($tahun_pnystn == 0){
+					$Info = '';
+				}elseif($tahun_pnystn < $tahun){
+					if($paramKd_Rwyt == 0 || $paramKd_Rwyt == 2 || $paramKd_Rwyt == 7 || $paramKd_Rwyt == 21 || $paramKd_Rwyt == 28){
+						$Info = "Belum Dilakukan Koreksi Penyusutan";
+					}else{
+						$Info = "";
+					}
+				}else{
+					$Info = "";
+				}
+				if($paramKd_Rwyt == 0 || $paramKd_Rwyt == 2 || $paramKd_Rwyt == 7 || $paramKd_Rwyt == 21 ){
+					/*
+					Kode Riwayat
+					0 = Data baru
+					2 = Ubah Kapitalisasi
+					7 = Penghapusan Sebagian
+					21 = Koreksi Nilai
+					26 = Penghapusan Pemindahtanganan
+					27 = Penghapusan Pemusnahan
+					*/
+					$cekSelisih =($valRwyt->NilaiPerolehan - $valRwyt->NilaiPerolehan_Awal);  
+					if($cekSelisih >= 0){
+						//mutasi tambah
+						if($cekSelisih == 0){
+							$valAdd = $valRwyt->NilaiPerolehan;
+							
+							//SALDO AWAL
+							$nilaiAwalPrlhn = 0;
+							$nilaiAwalPerolehanFix = number_format($nilaiAwalPrlhn,2,",",".");
+							
+							$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+							$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
+							
+							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
+								$NilaiBuku = $valRwyt->NilaiBuku;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}else{
+								$NilaiBuku = $valRwyt->NilaiPerolehan;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}
+							
+						}else{
+							$valAdd = $cekSelisih;
+							//SALDO AWAL
+							$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan_Awal;
+							$nilaiAwalPerolehanFix = number_format($nilaiAwalPrlhn,2,",",".");
+							
+							$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+							$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
+							
+							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
+								$NilaiBuku = $valRwyt->NilaiBuku;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}else{
+								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}
+								
+						}
+						//MUTASI ASET (Bertambah)
+						$flag = "(+)";
+						$nilaiPrlhnMutasiTambah =  $valAdd;
+						$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+					
+						//MUTASI ASET (Berkurang)
+						$valSubst = 0;
+						$nilaiPrlhnMutasiKurang = $valSubst;
+						$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Bertambah)
+						$penyusutanBerkurang = 0;
+						$penyusutanBerkurangFix = number_format($penyusutanBerkurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Berkurang)
+						$penyusutanBertambah = 0;
+						$penyusutanBertambahFix = number_format($penyusutanBertambah,2,",",".");
+						
+						//SALDO AKHIR
+						$nilaiPerolehanHasilMutasi = $valRwyt->NilaiPerolehan;
+						$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+						
+						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan -  $penyusutanBerkurang;
+						$AkumulasiPenyusutanHasilMutasiFix = number_format($AkumulasiPenyusutanHasilMutasi,2,",",".");
+						
+						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
+						$nilaibukuHasilMutasiFix = number_format($nilaibukuHasilMutasi,2,",",".");
+						
+						//PENYUSUTAN
+						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
+						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,2,",",".");
+						
+						$umurEkonomis = $valRwyt->UmurEkonomis;
+					}else{
+						$flag = "(-)";
+						//SALDO AWAL
+						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan_Awal;
+						$nilaiAwalPerolehanFix = number_format($nilaiAwalPrlhn,2,",",".");
+						
+						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
+							
+							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
+								$NilaiBuku = $valRwyt->NilaiBuku;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}else{
+								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}
+						
+						
+						//MUTASI ASET (Bertambah)
+						$valAdd = 0;
+						$nilaiPrlhnMutasiTambah = $valAdd;
+						$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+						
+						//MUTASI ASET (Berkurang)
+						$valSubst = abs($cekSelisih);
+						$nilaiPrlhnMutasiKurang = $valSubst;
+						$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Berkurang)
+						$penyusutanBerkurang = 0;
+						$penyusutanBerkurangFix = number_format($penyusutanBerkurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Bertambah)
+						$penyusutanBertambah = 0;
+						$penyusutanBertambahFix = number_format($penyusutanBertambah,2,",",".");
+						
+						//SALDO AKHIR
+						$nilaiPerolehanHasilMutasi = $valRwyt->NilaiPerolehan_Awal - $nilaiPrlhnMutasiKurang;
+						$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+						
+						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan -  $penyusutanBerkurang;
+						$AkumulasiPenyusutanHasilMutasiFix = number_format($AkumulasiPenyusutanHasilMutasi,2,",",".");
+						
+						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
+						$nilaibukuHasilMutasiFix = number_format($nilaibukuHasilMutasi,2,",",".");
+						
+						//PENYUSUTAN
+						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
+						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,2,",",".");
+						
+						$umurEkonomis = $valRwyt->UmurEkonomis;
+					
+					}
+				}elseif($paramKd_Rwyt == 1){
+					// $LastSatker = $valRwyt->kodeSatker;
+					// $FirstSatker = $skpd_id;
+					if($valRwyt->kondisi == 1 || $valRwyt->kondisi == 2){
+						$flag = "";
+						
+						//SALDO AWAL
+						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
+						$nilaiAwalPerolehanFix = number_format($nilaiAwalPrlhn,2,",",".");
+						
+						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
+							
+						if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
+								$NilaiBuku = $valRwyt->NilaiBuku;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}else{
+								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}
+						
+						//MUTASI ASET (Bertambah)
+						$nilaiPrlhnMutasiTambah = 0;
+						$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+						
+						//MUTASI ASET (Berkurang)
+						$nilaiPrlhnMutasiKurang = 0;
+						$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Berkurang)
+						$penyusutanBerkurang = 0;
+						$penyusutanBerkurangFix = number_format($penyusutanBerkurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Bertambah)
+						$penyusutanBertambah = 0;
+						$penyusutanBertambahFix = number_format($penyusutanBertambah,2,",",".");
+							
+						//SALDO AKHIR
+						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn + $nilaiPrlhnMutasiTambah;
+						$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+						
+						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan +  $penyusutanBertambah;
+						$AkumulasiPenyusutanHasilMutasiFix = number_format($AkumulasiPenyusutanHasilMutasi,2,",",".");
+						
+						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
+						$nilaibukuHasilMutasiFix = number_format($nilaibukuHasilMutasi,2,",",".");	
+						
+						//PENYUSUTAN
+						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
+						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,2,",",".");
+						
+						$umurEkonomis = $valRwyt->UmurEkonomis;
+					}else{
+						$flag = "(-)";
+						//SALDO AWAL
+						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
+						$nilaiAwalPerolehanFix = number_format($nilaiAwalPrlhn,2,",",".");
+						
+						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
+							
+							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
+								$NilaiBuku = $valRwyt->NilaiBuku;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}else{
+								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}
+						
+						
+						//MUTASI ASET (Bertambah)
+						$nilaiPrlhnMutasiTambah = 0;
+						$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+						
+						//MUTASI ASET (Berkurang)
+						$nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
+						$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Berkurang)
+						$penyusutanBerkurang = $AkumulasiPenyusutan;
+						$penyusutanBerkurangFix = number_format($penyusutanBerkurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Bertambah)
+						$penyusutanBertambah = 0;
+						$penyusutanBertambahFix = number_format($penyusutanBertambah,2,",",".");
+						
+						//SALDO AKHIR
+						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn - $nilaiPrlhnMutasiKurang;
+						$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+						
+						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan - $penyusutanBerkurang;
+						$AkumulasiPenyusutanHasilMutasiFix = number_format($AkumulasiPenyusutanHasilMutasi,2,",",".");
+						
+						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
+						$nilaibukuHasilMutasiFix = number_format($nilaibukuHasilMutasi,2,",",".");
+						
+						//PENYUSUTAN
+						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
+						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,2,",",".");
+						
+						$umurEkonomis = $valRwyt->UmurEkonomis;
+					
+					}
+				}elseif($paramKd_Rwyt == 3){
+					$LastSatker = $valRwyt->kodeSatker;
+					$FirstSatker = $skpd_id;
+					if($LastSatker == $FirstSatker){
+						$flag = "(+)";
+						
+						//SALDO AWAL
+						$nilaiAwalPrlhn = 0;
+						$nilaiAwalPerolehanFix = number_format($nilaiAwalPrlhn,2,",",".");
+						
+						$AkumulasiPenyusutan = 0;
+						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
+							
+						$NilaiBuku = 0;
+						$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+						
+						//MUTASI ASET (Bertambah)
+						$nilaiPrlhnMutasiTambah = $valRwyt->NilaiPerolehan;
+						$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+						
+						//MUTASI ASET (Berkurang)
+						$nilaiPrlhnMutasiKurang = 0;
+						$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Berkurang)
+						$penyusutanBerkurang = 0;
+						$penyusutanBerkurangFix = number_format($penyusutanBerkurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Bertambah)
+						$penyusutanBertambah = $valRwyt->AkumulasiPenyusutan;
+						$penyusutanBertambahFix = number_format($penyusutanBertambah,2,",",".");
+							
+						//SALDO AKHIR
+						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn + $nilaiPrlhnMutasiTambah;
+						$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+						
+						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan +  $penyusutanBertambah;
+						$AkumulasiPenyusutanHasilMutasiFix = number_format($AkumulasiPenyusutanHasilMutasi,2,",",".");
+						
+						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
+						$nilaibukuHasilMutasiFix = number_format($nilaibukuHasilMutasi,2,",",".");	
+						
+						//PENYUSUTAN
+						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
+						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,2,",",".");
+						
+						$umurEkonomis = $valRwyt->UmurEkonomis;
+					}else{
+						$flag = "(-)";
+						//SALDO AWAL
+						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
+						$nilaiAwalPerolehanFix = number_format($nilaiAwalPrlhn,2,",",".");
+						
+						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
+							
+							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
+								$NilaiBuku = $valRwyt->NilaiBuku;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}else{
+								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}
+						
+						
+						//MUTASI ASET (Bertambah)
+						$nilaiPrlhnMutasiTambah = 0;
+						$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+						
+						//MUTASI ASET (Berkurang)
+						$nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
+						$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Berkurang)
+						$penyusutanBerkurang = $AkumulasiPenyusutan;
+						$penyusutanBerkurangFix = number_format($penyusutanBerkurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Bertambah)
+						$penyusutanBertambah = 0;
+						$penyusutanBertambahFix = number_format($penyusutanBertambah,2,",",".");
+						
+						//SALDO AKHIR
+						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn - $nilaiPrlhnMutasiKurang;
+						$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+						
+						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan - $penyusutanBerkurang;
+						$AkumulasiPenyusutanHasilMutasiFix = number_format($AkumulasiPenyusutanHasilMutasi,2,",",".");
+						
+						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
+						$nilaibukuHasilMutasiFix = number_format($nilaibukuHasilMutasi,2,",",".");
+						
+						//PENYUSUTAN
+						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
+						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,2,",",".");
+						
+						$umurEkonomis = $valRwyt->UmurEkonomis;
+					
+					}
+				}elseif($paramKd_Rwyt == 28 && $valRwyt->Aset_ID_Penambahan == '0'){
+						$flag = "(+)";
+						
+						//SALDO AWAL
+						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
+						$nilaiAwalPerolehanFix = number_format($nilaiAwalPrlhn,2,",",".");
+						
+						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
+							
+						if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
+								$NilaiBuku = $valRwyt->NilaiBuku;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}else{
+								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}
+						
+						//MUTASI ASET (Bertambah)
+						$addValueKptls = $this->get_NP_Aset_ID_Penambahan($valRwyt->Aset_ID,$valRwyt->log_id);
+						$nilaiPrlhnMutasiTambah = $addValueKptls;
+						$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+						
+						//MUTASI ASET (Berkurang)
+						$nilaiPrlhnMutasiKurang = 0;
+						$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Berkurang)
+						$penyusutanBerkurang = 0;
+						$penyusutanBerkurangFix = number_format($penyusutanBerkurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Bertambah)
+						$penyusutanBertambah = 0;
+						$penyusutanBertambahFix = number_format($penyusutanBertambah,2,",",".");
+							
+						//SALDO AKHIR
+						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn + $nilaiPrlhnMutasiTambah;
+						$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+						
+						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan +  $penyusutanBertambah;
+						$AkumulasiPenyusutanHasilMutasiFix = number_format($AkumulasiPenyusutanHasilMutasi,2,",",".");
+						
+						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
+						$nilaibukuHasilMutasiFix = number_format($nilaibukuHasilMutasi,2,",",".");	
+						
+						//PENYUSUTAN
+						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
+						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,2,",",".");
+						
+						$umurEkonomis = $valRwyt->UmurEkonomis;
+				}elseif($paramKd_Rwyt == 28 && $valRwyt->Aset_ID_Penambahan != '0'){
+						$flag = "(-)";
+						//SALDO AWAL
+						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
+						$nilaiAwalPerolehanFix = number_format($nilaiAwalPrlhn,2,",",".");
+						
+						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
+							
+							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
+								$NilaiBuku = $valRwyt->NilaiBuku;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}else{
+								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}
+						
+						
+						//MUTASI ASET (Bertambah)
+						$nilaiPrlhnMutasiTambah = 0;
+						$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+						
+						//MUTASI ASET (Berkurang)
+						$nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
+						$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Berkurang)
+						$penyusutanBerkurang = $AkumulasiPenyusutan;
+						$penyusutanBerkurangFix = number_format($penyusutanBerkurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Bertambah)
+						$penyusutanBertambah = 0;
+						$penyusutanBertambahFix = number_format($penyusutanBertambah,2,",",".");
+						
+						//SALDO AKHIR
+						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn - $nilaiPrlhnMutasiKurang;
+						$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+						
+						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan - $penyusutanBerkurang;
+						$AkumulasiPenyusutanHasilMutasiFix = number_format($AkumulasiPenyusutanHasilMutasi,2,",",".");
+						
+						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
+						$nilaibukuHasilMutasiFix = number_format($nilaibukuHasilMutasi,2,",",".");
+						
+						//PENYUSUTAN
+						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
+						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,2,",",".");
+						
+						$umurEkonomis = $valRwyt->UmurEkonomis;
+				}elseif($paramKd_Rwyt == 26 || $paramKd_Rwyt == 27){
+						$flag = "(-)";
+						//SALDO AWAL
+						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
+						$nilaiAwalPerolehanFix = number_format($nilaiAwalPrlhn,2,",",".");
+						
+						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
+							
+							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
+								$NilaiBuku = $valRwyt->NilaiBuku;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}else{
+								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
+								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
+							}
+						
+						
+						//MUTASI ASET (Bertambah)
+						$nilaiPrlhnMutasiTambah = 0;
+						$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+						
+						//MUTASI ASET (Berkurang)
+						$nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
+						$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Berkurang)
+						$penyusutanBerkurang = $AkumulasiPenyusutan;
+						$penyusutanBerkurangFix = number_format($penyusutanBerkurang,2,",",".");
+						
+						//MUTASI PENYUSUTAN (Bertambah)
+						$penyusutanBertambah = 0;
+						$penyusutanBertambahFix = number_format($penyusutanBertambah,2,",",".");
+						
+						//SALDO AKHIR
+						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn - $nilaiPrlhnMutasiKurang;
+						$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+						
+						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan - $penyusutanBerkurang;
+						$AkumulasiPenyusutanHasilMutasiFix = number_format($AkumulasiPenyusutanHasilMutasi,2,",",".");
+						
+						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
+						$nilaibukuHasilMutasiFix = number_format($nilaibukuHasilMutasi,2,",",".");
+						
+						//PENYUSUTAN
+						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
+						$PenyusutanPerTahunFix = number_format($PenyusutanPerTahun,2,",",".");
+						
+						$umurEkonomis = $valRwyt->UmurEkonomis;
+				}
+				
+				$body.="<tr>
+						<td style=\"text-align:center;\">{$newtglFormat}</td>
+						<td>$Riwayat $flag</td>
+						<td style=\"text-align:right;\">{$nilaiAwalPerolehanFix}</td>
+						<td style=\"text-align:right;\">{$AkumulasiPenyusutanFix}</td>
+						<td style=\"text-align:right;\">{$NilaiBukuFix}</td>
+						<td style=\"text-align:right;\">{$nilaiPrlhnMutasiTambahFix}</td>
+						<td style=\"text-align:right;\">{$nilaiPrlhnMutasiKurangFix}</td>
+						<td style=\"text-align:right;\">{$penyusutanBertambahFix}</td>
+						<td style=\"text-align:right;\">{$penyusutanBerkurangFix}</td>
+						<td style=\"text-align:right;\">{$nilaiPerolehanHasilMutasiFix}</td>
+						<td style=\"text-align:right;\">{$AkumulasiPenyusutanHasilMutasiFix}</td>
+						<td style=\"text-align:right;\">{$nilaibukuHasilMutasiFix}</td>
+						<td style=\"text-align:right;\">{$PenyusutanPerTahunFix}</td>
+						<td style=\"text-align:center;\">{$umurEkonomis}</td>
+						<td style=\"text-align:center;\">{$tahun_pnystn}</td>
+						<td style=\"text-align:center;\">{$Info}</td>
+					  </tr>";
+			
+			}
+			$foot.="</table></body></html>";
+		}
+		
+	}				 
+$hasil_html[]=$head.$body.$foot; 
+return $hasil_html;		 
+}
+
+public function getdataRwyt($skpd_id,$AsetId,$tglakhirperolehan,$param){
+
+	if($param == '01'){
+		$tabel_log = 'log_tanah';
+		$tabel = 'tanah';
+		$tabel_view = 'view_mutasi_tanah';
+	}elseif($param == '02'){
+		$tabel_log = 'log_mesin';
+		$tabel = 'mesin';
+		$tabel_view = 'view_mutasi_mesin';
+	}elseif($param == '03'){
+		$tabel_log = 'log_bangunan';
+		$tabel = 'bangunan';
+		$tabel_view = 'view_mutasi_bangunan';
+	}elseif($param == '04'){
+		$tabel_log = 'log_jaringan';
+		$tabel = 'jaringan';
+		$tabel_view = 'view_mutasi_jaringan';
+	}elseif($param == '05'){
+		$tabel_log = 'log_asetlain';
+		$tabel = 'asetlain';
+		$tabel_view = 'view_mutasi_asetlain';
+	}elseif($param == '06'){
+		$tabel_log = 'log_kdp';
+		$tabel = 'kdp';
+		$tabel_view = 'view_mutasi_kdp';
+	}
+
+	/*Kode Riwayat
+	0 = Data baru
+	2 = Ubah Kapitalisasi
+	7 = Penghapusan Sebagian
+	21 = Koreksi Nilai
+	26 = Penghapusan Pemindahtanganan
+	27 = Penghapusan Pemusnahan
+	*/
+	$paramLog = "l.TglPerubahan <='$tglakhirperolehan' 
+				 AND l.Kd_Riwayat in (0,1,2,3,7,21,26,27,28) and l.Kd_Riwayat != 77 
+				 and l.Aset_ID = '{$AsetId}'
+				 order by l.Aset_ID ASC";
+					   
+	$log_data = "select l.* from {$tabel_log} as l 
+						inner join {$tabel} as t on l.Aset_ID = t.Aset_ID 
+						where $paramLog";	
+						
+	// pr($log_data);	
+	$splitKodeSatker = explode ('.',$skpd_id);
+	if(count($splitKodeSatker) == 4){	
+		$paramSatker = "kodeSatker = '$skpd_id'";
+		$paramSatker_mts_tr = "SatkerAwal = '$skpd_id'";
+		$paramSatker_mts_rc = "SatkerTujuan = '$skpd_id'";
+		
+	}else{
+		$paramSatker = "kodeSatker like '$skpd_id%'";
+		$paramSatker_mts_tr = "SatkerAwal like '$skpd_id%'";
+		$paramSatker_mts_rc = "SatkerTujuan like '$skpd_id%'";
+		
+	}	
+	
+	/*
+	Kode Riwayat
+	3 = Pindah SKPD (-) SatkerAwal != KodeSatker
+	*/
+	//tabel log inner join tabel viewmutasi
+	//parameter dengan SatkerAwal(view mutasi) untuk barang berkurang
+	// l.TglPembukuan >='$tglawalperolehan' AND l.TglPembukuan <='$tglakhirperolehan' AND
+	// $paramLog_mts_tr = "l.TglPerubahan <='$tglakhirperolehan' 
+						// AND l.Kd_Riwayat in (3) and l.Kd_Riwayat != 77 and mt.$paramSatker_mts_tr 
+						// and l.Aset_ID = '{$AsetId}'";
+	
+	// $log_skpd_tr ="select l.*,mt.SatkerAwal,mt.SatkerTujuan from {$tabel_log} as l 
+				    // inner join {$tabel_view} as mt on l.Aset_ID = mt.Aset_ID 
+				    // where $paramLog_mts_tr group by l.Aset_ID order by l.Aset_ID ASC";	
+	/*
+	Kode Riwayat
+	3 = Pindah SKPD (+) SatkerTujuan = KodeSatker
+	*/
+	//tabel log inner join tabel viewmutasi
+	//parameter dengan SatkerTujuan(view mutasi) untuk barang bertambah
+	// $paramLog_mts_rc =  "l.TglPerubahan <='$tglakhirperolehan' 
+						   // AND l.Kd_Riwayat in (3) and l.Kd_Riwayat != 77 and mt.$paramSatker_mts_rc
+						   // and l.Aset_ID = '{$AsetId}'";
+
+	// $log_skpd_rc="select l.*,mt.SatkerAwal,mt.SatkerTujuan from log_tanah as l 
+					// inner join {$tabel_view} as mt on l.Aset_ID = mt.Aset_ID 
+					// where $paramLog_mts_rc group by l.Aset_ID order by l.Aset_ID ASC";
+					
+	/*
+	Kode Riwayat
+	28 = Transfer Kapitalisasi (+) jika Aset_ID_Penambahan ==0
+	*/
+	// $paramLogTransferKapitalisasiTambah =  "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
+					   // AND l.Kd_Riwayat = '28' and l.$paramSatker 
+					   // and l.Aset_ID_Penambahan = '0' and action like 'Aset Penambahan kapitalisasi Mutasi%' 
+					   // and l.Aset_ID = '{$AsetId}'
+					   // order by l.Aset_ID ASC";
+	
+	// $log_tr_kp="select l.* from {$tabel_log} as l 
+					// where $paramLogTransferKapitalisasiTambah ";
+	/*
+	Kode Riwayat
+	28 = Transfer Kapitalisasi (-) jika Aset_ID_Penambahan !=0
+	*/
+	// $paramLogTransferKapitalisasiKurang =  "l.TglPerubahan >='$tglawalperolehan' AND l.TglPerubahan <='$tglakhirperolehan' 
+					   // AND l.Kd_Riwayat = '28' and l.$paramSatker 
+					   // and l.Aset_ID_Penambahan != '0' and action like 'Sukses kapitalisasi Mutasi%'
+					   // and l.Aset_ID = '{$AsetId}'
+					   // order by l.Aset_ID ASC";	
+
+	// $log_rc_kp="select l.* from {$tabel_log} as l 
+					// where $paramLogTransferKapitalisasiKurang ";						
+
+	// $queryALL = array($log_data,$log_skpd_tr,$log_skpd_rc,$log_tr_kp,$log_rc_kp);	
+	$queryALL = array($log_data);	
+	for ($i = 0; $i < count($queryALL); $i++){
+		// pr($queryALL);
+		// echo "<br/>";
+		// echo "<br/>";
+		$result = mysql_query($queryALL[$i]) or die (mysql_error);
+		if($result){
+			while ($dataAll = mysql_fetch_object($result))
+			{
+				if($dataAll->Kd_Riwayat == 3 && $dataAll->kodeSatker !=$skpd_id){
+
+				}else{
+					$getdata[]= $dataAll;
+				}				
+				
+			}
+		}
+		
+	}
+	if($getdata){ 
+		return $getdata;
+	}
+}	
+
 		
 public function retrieve_html_kb_a($dataArr,$gambar,$skpd_id)
 {
@@ -9319,9 +10161,9 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 								}
 								elseif ($kondisi == '3') {
 									$ketKondisi = "Rusak Berat";
-								}else{
-									$ketKondisi = "";
-								} 
+								}elseif($kondisi == '4'){
+									$ketKondisi = "Dalam Penelusuran";
+								}  
 								$noReg = sprintf("%04s", $data->noRegister);
 							  
 								if($data->TglSurat == ''){
@@ -9636,8 +10478,8 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 								}
 								elseif ($kondisi == '3') {
 									$ketKondisi = "Rusak Berat";
-								}else{
-									$ketKondisi = "";
+								}elseif($kondisi == '4'){
+									$ketKondisi = "Dalam Penelusuran";
 								} 	
 								if($row->TglDokumen == ''){
 									$tgl = ''; 
@@ -12301,9 +13143,9 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												}
 												elseif ($kondisi == '3') {
 													$ketKondisi = "Rusak Berat";
-												}else{
-													$ketKondisi = "";
-												} 
+												}elseif($kondisi == '4'){
+														$ketKondisi = "Dalam Penelusuran";
+													}  
 												$length = strlen($row->noRegister);
 											    $noReg = sprintf("%04s", $row->noRegister);
 											  
@@ -13054,8 +13896,8 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 													}
 													elseif ($kondisi == '3') {
 														$ketKondisi = "Rusak Berat";
-													}else{
-														$ketKondisi = "";
+													}elseif($kondisi == '4'){
+														$ketKondisi = "Dalam Penelusuran";
 													} 	
 													if($row->TglDokumen == ''){
 														$tgl = ''; 
@@ -16706,9 +17548,9 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												}
 												elseif ($kondisi == '3') {
 													$ketKondisi = "Rusak Berat";
-												}else{
-													$ketKondisi = "";
-												} 
+												}elseif($kondisi == '4'){
+														$ketKondisi = "Dalam Penelusuran";
+												}  
 												$length = strlen($row->noRegister);
 											    $noReg = sprintf("%04s", $row->noRegister);
 											  
@@ -17494,9 +18336,9 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 													}
 													elseif ($kondisi == '3') {
 														$ketKondisi = "Rusak Berat";
-													}else{
-														$ketKondisi = "";
-													} 	
+													}elseif($kondisi == '4'){
+														$ketKondisi = "Dalam Penelusuran";
+													}  	
 													if($row->TglDokumen == ''){
 														$tgl = ''; 
 													}else{
@@ -21163,8 +22005,8 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												}
 												elseif ($kondisi == '3') {
 													$ketKondisi = "Rusak Berat";
-												}else{
-													$ketKondisi = "";
+												}elseif($kondisi == '4'){
+													$ketKondisi = "Dalam Penelusuran";
 												} 
 												$length = strlen($row->noRegister);
 											    $noReg = sprintf("%04s", $row->noRegister);
@@ -21937,9 +22779,9 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 													}
 													elseif ($kondisi == '3') {
 														$ketKondisi = "Rusak Berat";
-													}else{
-														$ketKondisi = "";
-													} 	
+													}elseif($kondisi == '4'){
+														$ketKondisi = "Dalam Penelusuran";
+													}  	
 													if($row->TglDokumen == ''){
 														$tgl = ''; 
 													}else{
@@ -24140,8 +24982,8 @@ $footer ="
 					}
 					elseif ($kondisi == '3') {
 						$ketKondisi = "Rusak Berat";
-					}else{
-						$ketKondisi = "";
+					}elseif($kondisi == '4'){
+						$ketKondisi = "Dalam Penelusuran";
 					} 
 					/*$noReg=$row->noRegister;
 					$kuantitas=count($noReg);
@@ -24899,8 +25741,8 @@ $footer ="
 					}
 					elseif ($kondisi == '3') {
 						$ketKondisi = "Rusak Berat";
-					}else{
-						$ketKondisi = "";
+					}elseif($kondisi == '4'){
+						$ketKondisi = "Dalam Penelusuran";
 					} 
 					/*$noReg=$row->noRegister;
 					$kuantitas=count($noReg);
@@ -25611,8 +26453,8 @@ $footer ="
 					}
 					elseif ($kondisi == '3') {
 						$ketKondisi = "Rusak Berat";
-					}else{
-						$ketKondisi = "";
+					}elseif($kondisi == '4'){
+						$ketKondisi = "Dalam Penelusuran";
 					} 
 					$noReg=$row->noRegister;
 					$kuantitas=count($noReg);
@@ -25968,8 +26810,8 @@ if($dataArr!="")
 			}
 			elseif ($kondisi == '3') {
 				$ketKondisi = "Rusak Berat";
-			}else{
-				$ketKondisi = "";
+			}elseif($kondisi == '4'){
+				$ketKondisi = "Dalam Penelusuran";
 			} 
 			$noReg=$row->noRegister;
 			$nilaiPrlhn = $row->NilaiPerolehan;
@@ -26655,8 +27497,8 @@ $footer ="
 					}
 					elseif ($kondisi == '3') {
 						$ketKondisi = "Rusak Berat";
-					}else{
-						$ketKondisi = "";
+					}elseif($kondisi == '4'){
+						$ketKondisi = "Dalam Penelusuran";
 					} 
 					/*$noReg=$row->noRegister;
 					$kuantitas=count($noReg);
@@ -27012,9 +27854,9 @@ if($dataArr!="")
 			}
 			elseif ($kondisi == '3') {
 				$ketKondisi = "Rusak Berat";
-			}else{
-				$ketKondisi = "";
-			} 
+			}elseif($kondisi == '4'){
+				$ketKondisi = "Dalam Penelusuran";
+			}  
 			$noReg=$row->noRegister;
 			$kuantitas=count($noReg);
 			$split = explode("-", $row->noRegister);
@@ -27756,7 +28598,7 @@ if($dataArr!="")
 													$baik = "-";
 													$kurangBaik ="KurangBaik";
 													$rusakBerat="-";
-												}elseif(($ketKondisi == 3)){
+												}elseif($ketKondisi == 3){
 													$baik = "-";
 													$kurangBaik ="-";
 													$rusakBerat="Rusak Berat";
@@ -28005,7 +28847,7 @@ if($dataArr!="")
     } 
 
 //mutasi
-    public function  retrieve_html_laporan_mutasi($dataArr,$skpdfiltr,$gambar,$tglawalperolehan,$tglakhirperolehan,$tanggalCetak,$thnPejabat){
+  public function  retrieve_html_laporan_mutasi($dataArr,$skpdfiltr,$gambar,$tglawal,$tglakhir,$tanggalCetak,$thnPejabat){
          
 if($dataArr!="")
 {
@@ -28134,7 +28976,8 @@ $body="
                  <td style=\"width: 10%;\"><img style=\"width: 80px; height: 85px;\" alt=\"\" src=\"$gambar\"></td>
                  <td style=\"width: 90%; text-align: center;\">
                     <h3>LAPORAN MUTASI BARANG</h3>
-                </td>
+					<h4>Periode $tglawal s/d $tglakhir</h4>
+				</td>
             </tr>
         </thead>
         </table>
@@ -28226,7 +29069,7 @@ $body="
                 <td colspan=\"1\" rowspan=\"3\" style=\"text-align:center; font-weight: bold; width: 81px;\">Kondisi</td>
                 <td colspan=\"1\" rowspan=\"3\" style=\"text-align:center; font-weight: bold;  width: 60px;\">Keterangan</td>
                 <td colspan=\"2\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Jumlah Awal</td>
-                <td colspan=\"2\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Mutasi</td>
+                <td colspan=\"4\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Mutasi</td>
                 <td colspan=\"2\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Jumlah Akhir</td>
             </tr>
 			
@@ -28239,12 +29082,15 @@ $body="
                 <td colspan=\"1\" rowspan=\"2\" style=\"text-align:center; font-weight: bold; width: 120px;\">No.Sertifikat<br>No. pabrik<br>No.Chasis Mesin</td>
                 <td colspan=\"1\" rowspan=\"2\" style=\"text-align:center; font-weight: bold;\">Barang</td>
                 <td colspan=\"1\" rowspan=\"2\" style=\"text-align:center; font-weight: bold;\">Harga</td>
-                <td colspan=\"2\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Berkurang<br/><hr>Bertambah</td>
+                <td colspan=\"2\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Berkurang</td>
+                <td colspan=\"2\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Bertambah</td>
 				<td colspan=\"1\" rowspan=\"2\" style=\"text-align:center; font-weight: bold;\">Barang</td>
                 <td colspan=\"1\" rowspan=\"2\" style=\"text-align:center; font-weight: bold;\">Harga</td>
                 
 			</tr>
 			<tr>
+				<td style=\"text-align:center; font-weight: bold;\">Barang</td>
+                <td style=\"text-align:center; font-weight: bold;\">Harga</td>
 				<td style=\"text-align:center; font-weight: bold;\">Barang</td>
                 <td style=\"text-align:center; font-weight: bold;\">Harga</td>
 			</tr>
@@ -28267,6 +29113,8 @@ $body="
                 <td style=\"text-align:center; font-weight: bold; width: 60px;\">16</td>
                 <td style=\"text-align:center; font-weight: bold; width: 60px;\">17</td>
                 <td style=\"text-align:center; font-weight: bold; width: 60px;\">18</td>
+                <td style=\"text-align:center; font-weight: bold; width: 60px;\">19</td>
+                <td style=\"text-align:center; font-weight: bold; width: 60px;\">20</td>
             </tr></thead>";
 																					  
 		}
@@ -28291,8 +29139,8 @@ $body="
 					}
 					elseif ($kondisi == '3') {
 						$ketKondisi = "Rusak Berat";
-					}else{
-						$ketKondisi = "";
+					}else($kondisi == '4'){
+						$ketKondisi = "Dalam Penelusuran";
 					} 
 					
 					$noReg = sprintf("%04s", $row->noRegister);
@@ -28312,53 +29160,57 @@ $body="
 						$FirstSatker = $skpdfiltr;
 						
 						if($LastSatker == $FirstSatker){
+							$flag = "(+)";
 							$kuantitas = 0;
 							$nilaiAwalPrlhn = 0;
-							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
+							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
 						
 							$jmlTambah = 1;
 							$nilaiPrlhnMutasiTambah = $row->NilaiPerolehan;
-							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
+							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
 							//kurang
 							$jmlKurang = 0;
 							$nilaiPrlhnMutasiKurang = 0;
-							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
+							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
 							$ket = "tidak sama";
 							$jmlHasilMutasi = 1;	
 							$nilaiPerolehanHasilMutasi = $nilaiPrlhnMutasiKurang + $nilaiPrlhnMutasiTambah;
-							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
+							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+							
 						}else{
+							$flag = "(-)";
 							$kuantitas = 1;
 							$nilaiAwalPrlhn = $row->NilaiPerolehan_Awal;
-							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
+							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
 							
 							$jmlTambah = 0;
 							$nilaiPrlhnMutasiTambah = 0;
-							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
+							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
 							//kurang
 							$jmlKurang = 1;
 							$nilaiPrlhnMutasiKurang = $row->NilaiPerolehan;
-							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
+							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
 							$ket = "sama";
 							$jmlHasilMutasi = 0;	
 							$nilaiPerolehanHasilMutasi = 0;
-							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
+							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
 						}
 						
 						
-					}elseif($row->Kd_Riwayat == '28'){
+					}elseif($row->Kd_Riwayat == '28' && $row->Aset_ID_Penambahan == '0'){
+						// yg dikapitalisasi (+) 
+						$flag = "(+)";
 						$kuantitas = 1;
+						$nilaiAwalPrlhn = $row->NilaiPerolehan;
+						$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
 						
 						//tambah
 						$jmlTambah = 1;
 						//get value nilaiperolehan from Aset_ID_Penambahan
-						$addValueKptls = $this->get_NP_Aset_ID_Penambahan($row->Aset_ID_Penambahan,$row->log_id);
-						
-						$nilaiAwalPrlhn = $addValueKptls;
-						$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
-						
-						$nilaiPrlhnMutasiTambah = $row->NilaiPerolehan;
+						$addValueKptls = $this->get_NP_Aset_ID_Penambahan($row->Aset_ID,$row->log_id);
+						$nilaiPrlhnMutasiTambah = $addValueKptls;
 						$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+						
 						//kurang
 						$jmlKurang = 0;
 						$nilaiPrlhnMutasiKurang = 0;
@@ -28368,54 +29220,79 @@ $body="
 						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn + $nilaiPrlhnMutasiTambah;
 						$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
 						
+						
+					}elseif($row->Kd_Riwayat == '28' && $row->Aset_ID_Penambahan != '0'){
+						//yg mengkapitalisasi (-)
+						$flag = "(-)";
+						$kuantitas = 1;
+						$nilaiAwalPrlhn = $row->NilaiPerolehan;
+						$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
+						
+						//tambah
+						$jmlTambah = 0;
+						$nilaiPrlhnMutasiTambah = 0;
+						$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
+						//kurang
+						$jmlKurang = 1;
+						$nilaiPrlhnMutasiKurang = $row->NilaiPerolehan;
+						$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
+						
+						$jmlHasilMutasi = 0;	
+						$nilaiPerolehanHasilMutasi = 0;
+						$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+						
+						
+						
 					}elseif($row->Kd_Riwayat == '26'){
 						// echo "MASUK PEMUSNAHAN PENGHAPUSAN";
+							$flag = "(-)";
 							$kuantitas = 1;	
 							$nilaiAwalPrlhn = $row->NilaiPerolehan;
-							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
+							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
 							
 							//mutasi tambah
 							$valAdd = 0;
 							$jmlTambah = 0;
 							$nilaiPrlhnMutasiTambah = $valAdd;
-							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
+							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
 							
 							//mutasi kurang
 							$valSubst = $row->NilaiPerolehan;
 							$jmlKurang = 1;
 							$nilaiPrlhnMutasiKurang = $valSubst;
-							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
+							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
 							
 							//jumlah akhir
 							$jmlHasilMutasi = 0;	
 							$nilaiPerolehanHasilMutasi = 0;
-							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
+							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
 					}elseif($row->Kd_Riwayat == '27'){
 						// echo "MASUK PEMUSNAHAN PENGHAPUSAN";
+							$flag = "(-)";
 							$kuantitas = 1;	
 							$nilaiAwalPrlhn = $row->NilaiPerolehan;
-							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
+							$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
 							
 							//mutasi tambah
 							$valAdd = 0;
 							$jmlTambah = 0;
 							$nilaiPrlhnMutasiTambah = $valAdd;
-							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
+							$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
 							
 							//mutasi kurang
 							$valSubst = $row->NilaiPerolehan;
 							$jmlKurang = 1;
 							$nilaiPrlhnMutasiKurang = $valSubst;
-							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
+							$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
 							
 							//jumlah akhir
 							$jmlHasilMutasi = 0;	
 							$nilaiPerolehanHasilMutasi = 0;
-							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
+							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
 					}elseif($row->Kd_Riwayat == '30' && $row->StatusValidasi == '1' && $row->Status_Validasi_Barang == '1' && $row->StatusTampil == '1'){
 							//echo "reklas kurang";
 							// pr('reklas kurang');
-							
+							$flag = "(-)";
 							//reklas kurang
 							$kuantitas = 1;	
 							$nilaiAwalPrlhn = $row->NilaiPerolehan;
@@ -28441,6 +29318,7 @@ $body="
 					}elseif($row->Kd_Riwayat == '30' && $row->StatusValidasi == '0' && $row->Status_Validasi_Barang == '0' && $row->StatusTampil == '0'){
 						//reklas tambah
 						// pr('reklas tambah');
+						$flag = "(+)";
 						$kuantitas = 0;	
 						$nilaiAwalPrlhn = 0 ;
 						$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
@@ -28472,49 +29350,51 @@ $body="
 									$valAdd = $row->NilaiPerolehan;
 									// $nilaiAwalPerolehan = 0;
 									$nilaiAwalPrlhn = 0;
-									$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
+									$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
 									$kuantitas = 0;
 								}else{
 									$valAdd = $cekSelisih;
 									$nilaiAwalPrlhn = $row->NilaiPerolehan_Awal;
-									$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
+									$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
 									$kuantitas = 1;		
 								}
+								$flag = "(+)";
 								$jmlTambah = 1;
 								$nilaiPrlhnMutasiTambah =  $valAdd;
-								$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
+								$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
 								
 								//mutasi kurang
 								$valSubst = 0;
 								$jmlKurang = 0;
 								$nilaiPrlhnMutasiKurang = $valSubst;
-								$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
+								$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
 								
 								//jumlah akhir		
 								$jmlHasilMutasi = 1;	
 								$nilaiPerolehanHasilMutasi = $row->NilaiPerolehan;
-								$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
+								$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
 					
 							}else{
+								$flag = "(-)";
 								$kuantitas = 1;	
 								$nilaiAwalPrlhn = $row->NilaiPerolehan_Awal;
-								$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,0,",",".");
+								$nilaiAwalPerolehan = number_format($nilaiAwalPrlhn,2,",",".");
 								//mutasi tambah
 								$valAdd = 0;
 								$jmlTambah = 0;
 								$nilaiPrlhnMutasiTambah = $valAdd;
-								$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,0,",",".");
+								$nilaiPrlhnMutasiTambahFix = number_format($nilaiPrlhnMutasiTambah,2,",",".");
 								
 								//mutasi kurang
 								$valSubst = abs($cekSelisih);
 								$jmlKurang = 1;
 								$nilaiPrlhnMutasiKurang = $valSubst;
-								$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,0,",",".");
+								$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
 								
 								//jumlah akhir
 								$jmlHasilMutasi = 1;	
 								$nilaiPerolehanHasilMutasi = $row->NilaiPerolehan_Awal - $nilaiPrlhnMutasiKurang;
-								$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,0,",",".");
+								$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
 							}
 					}
 					$perolehanTotal = $perolehanTotal + $nilaiAwalPrlhn;	
@@ -28540,31 +29420,38 @@ $body="
 									<td style=\"width: 71px; text-align:center;\">$row->Tahun</td>
 									<td style=\"width: 71px;\">$konstruksi</td>
 									<td style=\"width: 81px;\">$ketKondisi</td>
-									<td style=\"width: 60px; text-align:center;\">$Ket_Riwayat</td>
+									<td style=\"width: 60px; text-align:center;\">$Ket_Riwayat $flag</td>
 									<td style=\"width: 71px; text-align:center;\">$kuantitas</td>
 									<td style=\"width: 80px; text-align:right;\">$nilaiAwalPerolehan</td>
-									<td style=\"width: 71px; text-align:center;\">$jmlKurang<br/><hr>$jmlTambah</td>
-									<td style=\"width: 80px; text-align:right;\">$nilaiPrlhnMutasiKurangFix<br/><hr>$nilaiPrlhnMutasiTambahFix</td>
+									<td style=\"width: 71px; text-align:center;\">$jmlKurang</td>
+									<td style=\"width: 80px; text-align:right;\">$nilaiPrlhnMutasiKurangFix</td>
+									<td style=\"width: 71px; text-align:center;\">$jmlTambah</td>
+									<td style=\"width: 80px; text-align:right;\">$nilaiPrlhnMutasiTambahFix</td>
 									<td style=\"width: 71px; text-align:center;\">$jmlHasilMutasi</td>
 									<td style=\"width: 80px; text-align:right;\">$nilaiPerolehanHasilMutasiFix</td>
 								</tr>";
                                                             
                              $no++;
-	   }
-                                            
+	   }						//$jmlTambah $nilaiPrlhnMutasiTambahFix
+                               /* <td style=\"width: 71px; text-align:center;\">$jmlKurang<br/><hr>$jmlTambah</td>
+									<td style=\"width: 80px; text-align:right;\">$nilaiPrlhnMutasiKurangFix<br/><hr>$nilaiPrlhnMutasiTambahFix</td>*/
+									            
                     // $printbarang=  number_format($barangTotal);
-						$printperolehanTotal=  number_format($perolehanTotal,0,",",".");
-                        $printperolehanTotalKurang=  number_format($perolehanTotalKurang,0,",",".");
-                        $printperolehanTotalTambah=  number_format($perolehanTotalTambah,0,",",".");
-                        $printperolehanTotalMutasi=  number_format($perolehanTotalMutasi,0,",",".");
+						$printperolehanTotal=  number_format($perolehanTotal,2,",",".");
+                        $printperolehanTotalKurang=  number_format($perolehanTotalKurang,2,",",".");
+                        $printperolehanTotalTambah=  number_format($perolehanTotalTambah,2,",",".");
+                        $printperolehanTotalMutasi=  number_format($perolehanTotalMutasi,2,",",".");
 						
 						$tabletotal="
 						<tr>
 							<td colspan=\"13\" style=\"text-align: center;\">Jumlah</td>
 							<td style=\"text-align: right;\">$printperolehanTotal</td>
                             <td>&nbsp;</td>
-                            <td>$printperolehanTotalKurang<br/><hr>$printperolehanTotalTambah</td>
-                            <td colspan=\"2\" style=\"text-align: right;\">$printperolehanTotalMutasi</td>
+                            <td  style=\"text-align: right;\">$printperolehanTotalKurang</td>
+							<td>&nbsp;</td>
+                            <td  style=\"text-align: right;\">$printperolehanTotalTambah</td>
+							<td>&nbsp;</td>
+                            <td style=\"text-align: right;\">$printperolehanTotalMutasi</td>
 						</tr></table>"; 
 						
 											  $foot="<table border=\"0\">
@@ -28640,7 +29527,7 @@ $body="
      }
 
 //mutasi skpd (ok)
-	public function  retrieve_html_laporan_mutasi_skpd($dataArr,$skpd,$gambar,$tglawal,$tglakhir,$tanggalCetak,$thnPejabat){
+public function  retrieve_html_laporan_mutasi_skpd($dataArr,$skpd,$gambar,$tglawal,$tglakhir,$tanggalCetak,$thnPejabat){
 
 if($dataArr!="")
 {
@@ -28896,8 +29783,8 @@ if($dataArr!="")
 			}
 			elseif ($kondisi == '3') {
 				$ketKondisi = "Rusak Berat";
-			}else{
-				$ketKondisi = "";
+			}elseif($kondisi == '4'){
+				$ketKondisi = "Dalam Penelusuran";
 			} 
 			$NamaKlmpk = $this->get_NamaKelompok($row->kodeKelompok);
 			
@@ -28931,15 +29818,25 @@ if($dataArr!="")
 			$perolehanTotal_tambah = $perolehanTotal_tambah + $nilaiPrlhn_tambah;	
 			
 			//get NIlai Buku dan AkumulasiPenyusutan
-			$GetNb_AP = $this->get_NbAP($row->Aset_ID);
+			/*$GetNb_AP = $this->get_NbAP($row->Aset_ID);
 			$AkumulasiPenyusutan = number_format($GetNb_AP->AkumulasiPenyusutan,2,",",".");
-			if($GetNb_AP->AkumulasiPenyusutan != 0 && $GetNb_AP->AkumulasiPenyusutan !=''){
+			if($GetNb_AP->NilaiBuku){
 				$NilaiBuku = number_format($GetNb_AP->NilaiBuku,2,",",".");
 			}else{
 				$NilaiBuku = number_format($row->NilaiPerolehan,2,",",".");
+			}*/
+			$GetNb_AP = $row->AkumulasiPenyusutan;
+			if($GetNb_AP != 0 || $GetNb_AP != ''){
+				$NilaiBuku = $row->NilaiBuku;
+				$NilaiBukuFix = number_format($row->NilaiBuku,2,",",".");
+			}else{
+				$NilaiBuku = $row->NilaiPerolehan;
+				$NilaiBukuFix = number_format($row->NilaiPerolehan,2,",",".");
 			}
+			$AkumulasiPenyusutan = number_format($row->AkumulasiPenyusutan,2,",",".");
+			$totalNilaiBuku = $totalNilaiBuku + $NilaiBuku;
 			
-           $body.="
+            $body.="
                 <tr>
                     <td style=\"text-align:center;  width: 47px;\">$no</td>
 					<td style=\"text-align:center;  width: 83px;\">$NamaKlmpk</td>
@@ -28950,7 +29847,7 @@ if($dataArr!="")
 					<td style=\"text-align:center;  width: 70px;\">$row->Material</td>
 					<td style=\"text-align:center;  width: 70px;\">$ketKondisi</td>
 					<td style=\"text-align:right;  width: 70px;\">$AkumulasiPenyusutan</td>
-					<td style=\"text-align:right;  width: 70px;\">$NilaiBuku</td>
+					<td style=\"text-align:right;  width: 70px;\">$NilaiBukuFix</td>
 					<td style=\"text-align:right;  width: 70px;\">$nilaiPrlhnFix_kurang<br/><hr>$nilaiPrlhnFix_tambah</td>
 					<td style=\"text-align:center;  width: 72px;\">$row->kodeSatker</td>
 					<td style=\"text-align:center;  width: 200px;\">$NamaSatker</td>
@@ -28963,10 +29860,12 @@ if($dataArr!="")
         }
                                             
             // $printbarang=  number_format($barangTotal);
-            $printperolehanTotal_berkurang=  number_format($perolehanTotal_kurang,0,",",".");
-            $printperolehanTotal_bertambah=  number_format($perolehanTotal_tambah,0,",",".");
+            $printperolehanTotal_berkurang=  number_format($perolehanTotal_kurang,2,",",".");
+            $printperolehanTotal_bertambah=  number_format($perolehanTotal_tambah,2,",",".");
+            $printperolehanNilaiBuku=  number_format($totalNilaiBuku,2,",",".");
             $tabletotal="<tr>
-                            <td colspan=\"8\" style=\"font-weight: bold; text-align: center;\">Jumlah</td>
+                            <td colspan=\"9\" style=\"font-weight: bold; text-align: center;\">Jumlah</td>
+                            <td style=\"text-align: right; font-weight: bold;\">$printperolehanNilaiBuku</td>
                             <td style=\"text-align: right; font-weight: bold;\">$printperolehanTotal_berkurang<br><hr>$printperolehanTotal_bertambah</td>
                             <td  colspan=\"2\">&nbsp;</td>
                         </tr>
@@ -29039,7 +29938,7 @@ if($dataArr!="")
           }
          
      }
-	 
+	  
 
 //MERLI     
      
@@ -34524,9 +35423,9 @@ return $hasil_html;
 												}
 												elseif ($kondisi == '3') {
 													$ketKondisi = "Rusak Berat";
-												}else{
-													$ketKondisi = "";
-												} 
+												}elseif($kondisi == '4'){
+														$ketKondisi = "Dalam Penelusuran";
+													} 
 												$length = strlen($row->noRegister);
 											    $noReg = sprintf("%04s", $row->noRegister);
 											  
@@ -35244,8 +36143,8 @@ return $hasil_html;
 													}
 													elseif ($kondisi == '3') {
 														$ketKondisi = "Rusak Berat";
-													}else{
-														$ketKondisi = "";
+													}elseif($kondisi == '4'){
+														$ketKondisi = "Dalam Penelusuran";
 													} 	
 													if($row->TglDokumen == ''){
 														$tgl = ''; 
@@ -37509,31 +38408,31 @@ return $hasil_html;
 	public function get_TotalNilai($satker_id,$gol,$tglawalperolehan,$tglakhirperolehan){
 		if($gol == '01'){
 			$paramGol ="tanahView";
-			$kondisi ="";
+			$kondisi ="and kondisi != 3 and kondisi != 4";
 		}elseif($gol == '02'){
 			$paramGol ="mesin_ori";
 			$paramGol2 ="mesin_Rplctn";
-			$kondisi ="and kondisi != 3";
+			$kondisi ="and kondisi != 3 and kondisi != 4";
 		}elseif($gol == '03'){
 			$paramGol ="bangunan_ori";
 			$paramGol2 ="bangunan_Rplctn";
-			$kondisi ="and kondisi != 3";
+			$kondisi ="and kondisi != 3 and kondisi != 4";
 		}elseif($gol == '04'){
 			$paramGol ="jaringan_ori";
-			$kondisi ="and kondisi != 3";
+			$kondisi ="and kondisi != 3 and kondisi != 4";
 		}elseif($gol == '05'){
 			$paramGol ="asetlain_ori";
-			$kondisi ="and kondisi != 3";
+			$kondisi ="and kondisi != 3 and kondisi != 4";
 		}elseif($gol == '06'){
 			$paramGol ="kdp_ori";
-			$kondisi ="and kondisi != 3";
+			$kondisi ="";
 		}elseif($gol == 'NonAset'){
 			$paramGol ="mesin_ori";
 			$paramGol2 ="bangunan_ori";
 		}
 		else{
 			$paramGol ="aset_lain_3";
-			$kondisi ="and kondisi = 3";
+			$kondisi ="and (kondisi = 3 or kondisi = 4)";
 		}
 		$tglDefault = '2008-01-01';
 		$thnDefault ="2008";
@@ -37554,13 +38453,13 @@ return $hasil_html;
 						WHERE kodeSatker = '$satker_id'  
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
-						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' and kondisi !='3'";
+						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' $kondisi";
 		}elseif($gol == '02'){
 			if($thnFix < $thnDefault){
 				$query = "SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku
 						FROM $paramGol
-						WHERE kodeSatker = '$satker_id' and kondisi != '3'
+						WHERE kodeSatker = '$satker_id' $kondisi
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 						
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'
@@ -37570,7 +38469,7 @@ return $hasil_html;
 				$query = "SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku
 						FROM $paramGol
-						WHERE kodeSatker = '$satker_id' and kondisi != '3' 
+						WHERE kodeSatker = '$satker_id' $kondisi 
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'
@@ -37579,7 +38478,7 @@ return $hasil_html;
 				$query = "SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku
 						FROM $paramGol
-						WHERE kodeSatker = '$satker_id' and kondisi != '3' 
+						WHERE kodeSatker = '$satker_id' $kondisi 
 						and TglPerolehan >= '$tglawalperolehan' AND TglPerolehan < '$tglDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' 
@@ -37588,7 +38487,7 @@ return $hasil_html;
 						SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku
 						FROM $paramGol2 
-						WHERE kodeSatker = '$satker_id' and kondisi != '3' 
+						WHERE kodeSatker = '$satker_id' $kondisi 
 						and TglPerolehan >= '$tglDefault' AND TglPerolehan <='$tglakhirperolehan' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault'
 						and Status_Validasi_Barang =1 and StatusTampil = 1 
@@ -37599,7 +38498,7 @@ return $hasil_html;
 				$query = "SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku
 						FROM $paramGol
-						WHERE kodeSatker = '$satker_id' and kondisi != '3'
+						WHERE kodeSatker = '$satker_id' $kondisi
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 						
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'
@@ -37609,7 +38508,7 @@ return $hasil_html;
 				$query = "SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku
 						FROM $paramGol
-						WHERE kodeSatker = '$satker_id' and kondisi != '3' 
+						WHERE kodeSatker = '$satker_id' $kondisi 
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'
@@ -37618,7 +38517,7 @@ return $hasil_html;
 				$query = "SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku
 						FROM $paramGol
-						WHERE kodeSatker = '$satker_id' and kondisi != '3' 
+						WHERE kodeSatker = '$satker_id' $kondisi 
 						and TglPerolehan >= '$tglawalperolehan' AND TglPerolehan < '$tglDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' 
@@ -37627,20 +38526,29 @@ return $hasil_html;
 						SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku
 						FROM $paramGol2 
-						WHERE kodeSatker = '$satker_id' and kondisi != '3' 
+						WHERE kodeSatker = '$satker_id' $kondisi 
 						and TglPerolehan >= '$tglDefault' AND TglPerolehan <='$tglakhirperolehan' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 						and Status_Validasi_Barang =1 and StatusTampil = 1 
 						and (NilaiPerolehan >= 10000000 $KodeKa) and kodeLokasi like '12%' ";
 			}
-		}elseif($gol == '04' || $gol == '05' || $gol == '06' ){
+		}elseif($gol == '04' || $gol == '05'){
 			$query = "SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml,
 			sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku
 			FROM $paramGol
-			WHERE kodeSatker = '$satker_id' and kondisi != '3' 
+			WHERE kodeSatker = '$satker_id' $kondisi 
 			and TglPerolehan >= '$tglawalperolehan' AND TglPerolehan <='$tglakhirperolehan' 
 			and TglPembukuan >= '$tglawalperolehan' AND TglPembukuan < '$tglakhirperolehan' 
 			and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' ";
+		}elseif($gol == '06'){
+			$query = "SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml,
+			sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NilaiBuku
+			FROM $paramGol
+			WHERE kodeSatker = '$satker_id' 
+			and TglPerolehan >= '$tglawalperolehan' AND TglPerolehan <='$tglakhirperolehan' 
+			and TglPembukuan >= '$tglawalperolehan' AND TglPembukuan < '$tglakhirperolehan' 
+			and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' ";
+		
 		}elseif($gol == 'NonAset'){
 			$query = "SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml FROM $paramGol 
 						WHERE kodeSatker = '$satker_id'  
@@ -37657,7 +38565,7 @@ return $hasil_html;
 						and (NilaiPerolehan < 10000000 ) and kodeLokasi like '12%' ";
 		}else{
 			$query = "SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml FROM $paramGol
-			WHERE kodeSatker = '$satker_id' and kondisi = '3' 
+			WHERE kodeSatker = '$satker_id' $kondisi 
 			and TglPerolehan >= '$tglawalperolehan' AND TglPerolehan <='$tglakhirperolehan' 
 			and TglPembukuan >= '$tglawalperolehan' AND TglPembukuan < '$tglakhirperolehan' 
 			and Status_Validasi_Barang =1 and kodeLokasi like '12%' $KodeKaCondt1";
@@ -37720,33 +38628,33 @@ return $hasil_html;
     public function get_TotalNilaiNeraca($satker_id,$gol,$tglawalperolehan,$tglakhirperolehan){
 		if($gol == '01'){
 			$paramGol ="tanahView";
-			$kondisi ="";
+			$kondisi ="and kondisi != 3 and kondisi != 4";
 			$kodeKelompok ="kodeKelompok like '01%' and";
 		}elseif($gol == '02'){
 			$paramGol ="mesin_ori";
 			$paramGol2 ="mesin_Rplctn";
-			$kondisi ="and kondisi != 3";
+			$kondisi ="and kondisi != 3 and kondisi != 4";
 			$kodeKelompok ="kodeKelompok like '02%' and";
 		}elseif($gol == '03'){
 			$paramGol ="bangunan_ori";
 			$paramGol2 ="bangunan_Rplctn";
-			$kondisi ="and kondisi != 3";
+			$kondisi ="and kondisi != 3 and kondisi != 4";
 			$kodeKelompok ="kodeKelompok like '03%' and";
 		}elseif($gol == '04'){
 			$paramGol ="jaringan_ori";
-			$kondisi ="and kondisi != 3";
+			$kondisi ="and kondisi != 3 and kondisi != 4";
 			$kodeKelompok ="kodeKelompok like '04%' and";
 		}elseif($gol == '05'){
 			$paramGol ="asetlain_ori";
-			$kondisi ="and kondisi != 3";
+			$kondisi ="and kondisi != 3 and kondisi != 4";
 			$kodeKelompok ="kodeKelompok like '05%' and";
 		}elseif($gol == '06'){
 			$paramGol ="kdp_ori";
-			$kondisi ="and kondisi != 3";
+			$kondisi ="";
 			$kodeKelompok ="kodeKelompok like '06%' and";
 		}else{
 			$paramGol ="aset_lain_3";
-			$kondisi ="and kondisi = 3";
+			$kondisi ="and (kondisi = 3 or kondisi = 4)";
 			$kodeKelompok ="kodeKelompok like '07%' and";
 		}
 		$tglDefault = '2008-01-01';
@@ -37777,14 +38685,14 @@ return $hasil_html;
 						WHERE $kodeKelompok $paramSatker  
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
-						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' and kondisi !='3'
+						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' $kondisi
 						";
 		}elseif($gol == '02'){
 			if($thnFix < $thnDefault){
 				$query = "SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 						FROM $paramGol
-						WHERE $kodeKelompok $paramSatker and kondisi != '3' 
+						WHERE $kodeKelompok $paramSatker $kondisi 
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'
@@ -37793,7 +38701,7 @@ return $hasil_html;
 				$query = "SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 						FROM $paramGol
-						WHERE $kodeKelompok $paramSatker and kondisi != '3' 
+						WHERE $kodeKelompok $paramSatker $kondisi
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'
@@ -37802,7 +38710,7 @@ return $hasil_html;
 				$query = "SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 						FROM $paramGol
-						WHERE $kodeKelompok $paramSatker and kondisi != '3' 
+						WHERE $kodeKelompok $paramSatker $kondisi 
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan < '$tglDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'
@@ -37811,7 +38719,7 @@ return $hasil_html;
 						SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 						FROM $paramGol2 
-						WHERE $kodeKelompok $paramSatker and kondisi != '3' 
+						WHERE $kodeKelompok $paramSatker $kondisi 
 						and TglPerolehan >= '$tglDefault' AND TglPerolehan <='$tglakhirperolehan' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 						and Status_Validasi_Barang =1 and StatusTampil = 1 
@@ -37823,7 +38731,7 @@ return $hasil_html;
 				$query = "SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 						FROM $paramGol
-						WHERE $kodeKelompok $paramSatker' and kondisi != '3' 
+						WHERE $kodeKelompok $paramSatker' $kondisi 
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'
@@ -37832,7 +38740,7 @@ return $hasil_html;
 				$query = "SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jml,
 					sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 					FROM $paramGol
-					WHERE $kodeKelompok $paramSatker and kondisi != '3' 
+					WHERE $kodeKelompok $paramSatker $kondisi 
 					and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault' 
 					and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 					and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'
@@ -37841,7 +38749,7 @@ return $hasil_html;
 				$query = "SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 						FROM $paramGol
-						WHERE $kodeKelompok $paramSatker and kondisi != '3' 
+						WHERE $kodeKelompok $paramSatker $kondisi 
 						and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan < '$tglDefault' 
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 						and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%'
@@ -37850,7 +38758,7 @@ return $hasil_html;
 						SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jml,
 						sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 						FROM $paramGol2 
-						WHERE $kodeKelompok $paramSatker and kondisi != '3' 
+						WHERE $kodeKelompok $paramSatker $kondisi 
 						and TglPerolehan >= '$tglDefault' AND TglPerolehan <='$tglAkhirDefault'
 						and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 						
 						and Status_Validasi_Barang =1 and StatusTampil = 1 
@@ -37861,21 +38769,28 @@ return $hasil_html;
 			$query = "SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jml,
 					sum(PenyusutanPerTahun) as NilaiPP,sum(AkumulasiPenyusutan) as NilaiAP,sum(NilaiBuku) as NB 
 			FROM $paramGol
-			WHERE $kodeKelompok $paramSatker and kondisi != '3' 
+			WHERE $kodeKelompok $paramSatker $kondisi 
 			and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault'
 			and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <='$tglAkhirDefault' 
 			and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' 
 			";
-		}elseif($gol == '05' || $gol == '06' ){
+		}elseif($gol == '05'){
 			$query = "SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jml FROM $paramGol
-			WHERE $kodeKelompok $paramSatker and kondisi != '3' 
+			WHERE $kodeKelompok $paramSatker $kondisi 
+			and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault'
+			and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <='$tglAkhirDefault' 
+			and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' 
+			";
+		}elseif($gol == '06'){
+			$query = "SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jml FROM $paramGol
+			WHERE $kodeKelompok $paramSatker  
 			and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault'
 			and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <='$tglAkhirDefault' 
 			and Status_Validasi_Barang =1 and StatusTampil = 1 and kodeLokasi like '12%' 
 			";
 		}else{
 			$query = "SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jml FROM $paramGol
-			WHERE $paramSatker and kondisi = '3' 
+			WHERE $paramSatker $kondisi 
 			and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault'
 			and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan <= '$tglAkhirDefault' 
 			and Status_Validasi_Barang =1 and kodeLokasi like '12%' $KodeKaCondt1
