@@ -29133,13 +29133,11 @@ $body="
 					$kondisi= $row->kondisi;
 					if ($kondisi == '1') {
 						$ketKondisi = "Baik";
-					}
-					elseif ($kondisi == '2') {
+					}elseif ($kondisi == '2'){
 						$ketKondisi = "Kurang Baik";
-					}
-					elseif ($kondisi == '3') {
+					}elseif ($kondisi == '3'){
 						$ketKondisi = "Rusak Berat";
-					}else($kondisi == '4'){
+					}elseif($kondisi == '4'){
 						$ketKondisi = "Dalam Penelusuran";
 					} 
 					
