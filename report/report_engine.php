@@ -38565,8 +38565,9 @@ return $hasil_html;
 			$query = "SELECT sum(NilaiPerolehan) as Nilai, count(Aset_ID) as jml FROM $paramGol
 			WHERE kodeSatker = '$satker_id' $kondisi 
 			and TglPerolehan >= '$tglawalperolehan' AND TglPerolehan <='$tglakhirperolehan' 
-			and TglPembukuan >= '$tglawalperolehan' AND TglPembukuan < '$tglakhirperolehan' 
+			and TglPembukuan >= '$tglawalperolehan' AND TglPembukuan <= '$tglakhirperolehan' 
 			and Status_Validasi_Barang =1 and kodeLokasi like '12%' $KodeKaCondt1";
+			
 		}
 		
 		/*echo "query =".$query;
