@@ -6986,7 +6986,7 @@ class core_api_report extends DB {
 				$query_asetlain_3="create temporary table aset_lain_3 as
 						  SELECT a.kodeKA,a.kodeKelompok,a.kodeSatker,a.kodeLokasi,a.noRegister, a.Aset_ID, a.NilaiPerolehan ,k.Uraian ,a.Kondisi,a.Status_Validasi_Barang,a.TglPerolehan,a.TglPembukuan
 						  FROM aset as a, kelompok as k 
-						  WHERE a.kodeKelompok = k.Kode  AND a.kondisi = 3 and a.Status_Validasi_Barang = 1 AND a.Aset_ID is not null And a.Aset_ID!=0
+						  WHERE a.kodeKelompok = k.Kode  AND (a.kondisi = 3 or a.kondisi = 4) and a.Status_Validasi_Barang = 1 AND a.Aset_ID is not null And a.Aset_ID!=0
 						  and $paramKib";
 			      
 				$query_alter_asetlain_3="alter table aset_lain_3 add primary key(Aset_ID)";
@@ -8616,7 +8616,7 @@ class core_api_report extends DB {
 				$query_asetlain_3="create temporary table aset_lain_3 as
 						  SELECT a.kodeKA,a.kodeKelompok,a.kodeSatker,a.kodeLokasi,a.noRegister, a.Aset_ID, a.NilaiPerolehan ,k.Uraian ,a.Kondisi,a.Status_Validasi_Barang,a.TglPerolehan,a.TglPembukuan
 						  FROM aset as a, kelompok as k 
-						  WHERE a.kodeKelompok = k.Kode  AND a.kondisi = 3 and a.Status_Validasi_Barang = 1 AND a.Aset_ID is not null And a.Aset_ID!=0
+						  WHERE a.kodeKelompok = k.Kode  AND (a.kondisi = 3 or a.kondisi = 4) and a.Status_Validasi_Barang = 1 AND a.Aset_ID is not null And a.Aset_ID!=0
 						  and $paramKib";
 			      
 				$query_alter_asetlain_3="alter table aset_lain_3 add primary key(Aset_ID)";
@@ -9130,7 +9130,7 @@ class core_api_report extends DB {
 				$query_asetlain_3="create temporary table aset_lain_3 as
 						  SELECT a.kodeKA,a.kodeKelompok,a.kodeSatker,a.kodeLokasi,a.noRegister, a.Aset_ID, a.NilaiPerolehan ,k.Uraian ,a.Kondisi,a.Status_Validasi_Barang,a.TglPerolehan,a.TglPembukuan
 						  FROM aset as a, kelompok as k 
-						  WHERE a.kodeKelompok = k.Kode  AND a.kondisi = 3 and a.Status_Validasi_Barang = 1 AND a.Aset_ID is not null And a.Aset_ID!=0
+						  WHERE a.kodeKelompok = k.Kode  AND (a.kondisi = 3 or a.kondisi = 4)  and a.Status_Validasi_Barang = 1 AND a.Aset_ID is not null And a.Aset_ID!=0
 						  and $paramKib";
 			      
 				$query_alter_asetlain_3="alter table aset_lain_3 add primary key(Aset_ID)";
