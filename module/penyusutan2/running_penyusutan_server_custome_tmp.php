@@ -671,6 +671,8 @@ for($i=0;$i<2;$i++){
                      . "and Aset_ID='$Aset_ID' order by log_id asc";
              $count=0;
              $qlog=$DBVAR->query($query_perubahan) or die($DBVAR->error());
+             $kapitalisasi=0;
+
              while($Data_Log=$DBVAR->fetch_object($qlog)){
                  echo "masuk-logg \n";
                  $status_transaksi=1;
@@ -718,6 +720,9 @@ for($i=0;$i<2;$i++){
                         $NilaiYgDisusutkan=$nb_buku_log+$selisih;
                          $persen=($selisih/$Nilai_Perolehan_awal_log)*100;
                         $penambahan_masa_manfaat=  overhaul($tmp_kode_log[0], $tmp_kode_log[1], $tmp_kode_log[2],$persen, $DBVAR);
+                        if($kapitalisasi>0)
+                            $Umur_Ekonomis_Final=$UmurEkonomis+$penambahan_masa_manfaat+1;
+                          else
                         $Umur_Ekonomis_Final=$UmurEkonomis+$penambahan_masa_manfaat;
                         
                         if($Umur_Ekonomis_Final>$MasaManfaat){
@@ -807,7 +812,7 @@ for($i=0;$i<2;$i++){
                          
                          catatan_hasil_penyusutan($data_penyusutan, $DBVAR);
                          //akhir update log penyusutan
-                         
+                         $kapitalisasi++;
                      }else if($kd_riwayat==7||$kd_riwayat==21){
                        
                         list($AkumulasiPenyusutan,$UmurEkonomis,$MasaManfaat)= get_data_akumulasi_from_eksisting($Aset_ID,$DBVAR);
