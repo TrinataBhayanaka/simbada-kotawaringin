@@ -738,6 +738,32 @@ for($i=0;$i<2;$i++){
                             $NilaiBuku_hasil=0;
                             $AkumulasiPenyusutan_hasil=$NP;
                         }
+
+                          $perhitungan="  NilaiYgDisusutkan=$nb_buku_log+$selisih; \n"
+                                 . "Umur_Ekonomis_Final=$UmurEkonomis+$penambahan_masa_manfaat;\n
+                                    PenyusutanPerTahun_hasil=$NilaiYgDisusutkan/$UmurEkonomis;\n
+                                    AkumulasiPenyusutan_hasil=$PenyusutanPerTahun;\n
+                                    NilaiBuku_hasil=$NilaiYgDisusutkan-$AkumulasiPenyusutan;\n
+                                    Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1; \n";
+                         
+                            echo "Kapitalisasi\n Aset_ID=$Aset_ID\n"
+                                 . "kodeKelompok \t=$kodeKelompok_log \n"
+                                 . "NilaiPerolehan \t=$NP\n"
+                                 . "TahunPerolehan \t=$Tahun\n"
+                                 . "MasaManfaat \t=$MasaManfaat\n"
+                                 . "AkumulasiPenyusutan \t=$AkumulasiPenyusutan_hasil\n"
+                                 . "AkumulasiPenyusutan_lama=$AkumulasiPenyusutan\n"
+                                 . "NilaiBUku \t= $NilaiBuku_hasil\n"
+                                 . "NilaiBUku_Sblm \t= $nb_buku_log\n"
+                                 . "NilaiYgDisusutkan \t= $NilaiYgDisusutkan\n"
+                                 . "PenyusutanPerTahun \t=$PenyusutanPerTahun_hasil \n"
+                                 . "KodeRiwayat \t=$Kd_Riwayat\n"
+                                 . "selisih \t=$selisih\n"
+                                 . "UmurEkonomis_Sblm \t=$UmurEkonomis\n"
+                                 . "UmurEkonomis \t=$Sisa_Masa_Manfaat\n"
+                                 . "Penambahan \t=$penambahan_masa_manfaat \n"
+                                    . "Hitung==$perhitungan\n\n   ";
+
                         //update aset dan update log untuk kapitalisasi
                             $QueryAset = "UPDATE aset SET MasaManfaat = '$MasaManfaat' ,
                                             AkumulasiPenyusutan = '$AkumulasiPenyusutan_hasil',	
@@ -772,30 +798,7 @@ for($i=0;$i<2;$i++){
                          log_penyusutan($Aset_ID, $tableKib, 51,$newTahun, $data_log, $DBVAR);
                          
                       
-                         $perhitungan="  NilaiYgDisusutkan=$NP+$selisih; \n"
-                                 . "Umur_Ekonomis_Final=$UmurEkonomis+$penambahan_masa_manfaat;\n
-                                    PenyusutanPerTahun_hasil=$NilaiYgDisusutkan/$UmurEkonomis;\n
-                                    AkumulasiPenyusutan_hasil=$PenyusutanPerTahun;\n
-                                    NilaiBuku_hasil=$NilaiYgDisusutkan-$AkumulasiPenyusutan;\n
-                                    Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1; \n";
-                         
-                            echo "Kapitalisasi\n Aset_ID=$Aset_ID\n"
-                                 . "kodeKelompok \t=$kodeKelompok_log \n"
-                                 . "NilaiPerolehan \t=$NP\n"
-                                 . "TahunPerolehan \t=$Tahun\n"
-                                 . "MasaManfaat \t=$MasaManfaat\n"
-                                 . "AkumulasiPenyusutan \t=$AkumulasiPenyusutan_hasil\n"
-                                 . "AkumulasiPenyusutan_lama=$AkumulasiPenyusutan\n"
-                                 . "NilaiBUku \t= $NilaiBuku_hasil\n"
-                                 . "NilaiBUku_Sblm \t= $nb_buku_log\n"
-                                 . "NilaiYgDisusutkan \t= $NilaiYgDisusutkan\n"
-                                 . "PenyusutanPerTahun \t=$PenyusutanPerTahun_hasil \n"
-                                 . "KodeRiwayat \t=$Kd_Riwayat\n"
-                                 . "selisih \t=$selisih\n"
-                                 . "UmurEkonomis_Sblm \t=$UmurEkonomis\n"
-                                 . "UmurEkonomis \t=$Sisa_Masa_Manfaat\n"
-                                 . "Penambahan \t=$penambahan_masa_manfaat \n"
-                                    . "Hitung==$perhitungan\n\n   ";
+                       
                          
                         $data_penyusutan=array('id' => NULL,'Aset_ID' => "$Aset_ID",
                              'kodeKelompok' => "$kodeKelompok",
@@ -1009,12 +1012,12 @@ function cek_masamanfaat($kd_aset1, $kd_aset2, $kd_aset3, $DBVAR) {
     return $masa_manfaat;
 }
 function overhaul($kd_aset1, $kd_aset2, $kd_aset3,$persen, $DBVAR) {
-      $kd_aset1=intval($kd_aset1);
-    $kd_aset2=intval($kd_aset2);
-    $kd_aset3=intval($kd_aset3);
+     // $kd_aset1=intval($kd_aset1);
+    //$kd_aset2=intval($kd_aset2);
+    //$kd_aset3=intval($kd_aset3);
     $query = "select * from re_masamanfaat_tahun_berjalan where kd_aset1='$kd_aset1' "
             . " and kd_aset2='$kd_aset2' and kd_aset3='$kd_aset3' ";
-    //echo $query;
+    echo $query;
     $result = $DBVAR->query($query) or die($query);
     while ($row = $DBVAR->fetch_object($result)) {
         $masa_manfaat = $row->masa_manfaat;
@@ -1031,30 +1034,30 @@ function overhaul($kd_aset1, $kd_aset2, $kd_aset3,$persen, $DBVAR) {
     //echo "<pre> ";
    // print($prosentase3);
     if($prosentase4!=0){
-      //  echo "masuk11";
+        echo "masuk11";
       if($persen >$prosentase4){
-          //echo "0 =4";
+          echo "0 =4";
           $hasil=$penambahan4;
       }else if($persen>$prosentase2 && $persen <=$prosentase3) {
-          //echo "0 =3";
+          echo "0 =3";
           $hasil=$penambahan3;
       }
       else if($persen>$prosentase1 && $persen <=$prosentase2) {
-           //echo "0 =2";
+           echo "0 =2";
           $hasil=$penambahan2;
       }
       else if($persen<=$prosentase1) {
-          // echo "0 =1";
+           echo "0 =1";
           $hasil=$penambahan1;
       }
     }else{
-      //  echo " $prosentase1 $prosentase2 $prosentase3 $prosentase4 ";
+        echo " $prosentase1 $prosentase2 $prosentase3 $prosentase4 ";
          if($persen >$prosentase3){
-              //echo "1 =3";
+              echo "1 =3";
               
           $hasil=$penambahan3;
       }else if($persen>$prosentase1 && $persen <=$prosentase2) {
-         // echo "1 =2 ";
+          echo "1 =2 ";
           $hasil=$penambahan2;
       }
     else if($persen<=$prosentase1 ) {
@@ -1063,6 +1066,7 @@ function overhaul($kd_aset1, $kd_aset2, $kd_aset3,$persen, $DBVAR) {
       }
         
     }
+    echo "\n hasill == $hasil == \n";
     if($hasil=="")
         $hasil=0;
     return $hasil;
