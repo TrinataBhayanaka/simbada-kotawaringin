@@ -77,12 +77,12 @@ include "../../config/config.php";
 		foreach ($resultqueryKibSelect as $key => $val) {
             $tmpField[] = $key;
 			if ($val ==''){
-				$tmpVal[] = $sign."NULL".$sign;
+				$tmpVal[] = NULL;
 			}else{
 				$tmpVal[] = $sign.addslashes($val).$sign;
 			}
 		}
-		
+		pr($tmpVal);
 		$implodeField = implode (',',$tmpField);
 		$implodeVal = implode (',',$tmpVal);
 		
