@@ -655,7 +655,7 @@ for($i=0;$i<2;$i++){
                  
                  
              }
-             $data_log=array("NilaiPerolehan_Awal"=>$NilaiPerolehan_Awal,
+             $data_log=array("NilaiPerolehan_Awal"=>$NilaiPerolehan,
                     "AkumulasiPenyusutan_Awal"=>$AkumulasiPenyusutan_Awal,
                     "PenyusutanPerTahun_Awal"=>$PenyusutanPerTahun_Awal,
                      "kodeSatker"=>$kodeSatker);
@@ -1096,6 +1096,7 @@ function log_penyusutan($Aset_ID,$tableKib,$Kd_Riwayat,$tahun,$Data,$DBVAR){
         if($NilaiPerolehan_Awal ==""||$NilaiPerolehan_Awal ==0){
             $NilaiPerolehan_Awal ="NULL";
         }
+        $NilaiPerolehan_Awal=0;
         $AkumulasiPenyusutan_Awal=$Data['AkumulasiPenyusutan_Awal'];
         if($AkumulasiPenyusutan_Awal==""||$AkumulasiPenyusutan_Awal=="0"){
             $AkumulasiPenyusutan_Awal="NULL";
