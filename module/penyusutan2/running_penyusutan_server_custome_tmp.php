@@ -717,6 +717,8 @@ for($i=0;$i<2;$i++){
                  }
                   
                   if($kd_riwayat==2||$kd_riwayat==28){
+                      
+                       $nb_buku_log=get_nb($Aset_ID,$DBVAR);
                         $NilaiYgDisusutkan=$nb_buku_log+$selisih;
                          $persen=($selisih/$Nilai_Perolehan_awal_log)*100;
                         $penambahan_masa_manfaat=  overhaul($tmp_kode_log[0], $tmp_kode_log[1], $tmp_kode_log[2],$persen, $DBVAR);
@@ -724,13 +726,22 @@ for($i=0;$i<2;$i++){
                             $Umur_Ekonomis_Final=$UmurEkonomis+$penambahan_masa_manfaat+1;
                           else
                         $Umur_Ekonomis_Final=$UmurEkonomis+$penambahan_masa_manfaat;
+                          
+                        $MasaManfaat=  cek_masamanfaat($tmp_kode_log[0],  $tmp_kode_log[1], $tmp_kode_log[2], $DBVAR);
                         
+                        $status_awal_karena_melebihi_masa_manfaat=0;
                         if($Umur_Ekonomis_Final>$MasaManfaat){
                             $Umur_Ekonomis_Final=$MasaManfaat;
+                            $status_awal_karena_melebihi_masa_manfaat=1;
                         }
                         
                         $PenyusutanPerTahun_hasil=round($NilaiYgDisusutkan/$Umur_Ekonomis_Final);
-                        $AkumulasiPenyusutan_hasil=$AkumulasiPenyusutan+$PenyusutanPerTahun_hasil;
+                        
+                        if($status_awal_karena_melebihi_masa_manfaat!=1)
+                            $AkumulasiPenyusutan_hasil=$AkumulasiPenyusutan+$PenyusutanPerTahun_hasil;
+                        else
+                            $AkumulasiPenyusutan_hasil=$PenyusutanPerTahun_hasil;
+                                
                         $NilaiBuku_hasil=$NP-$AkumulasiPenyusutan_hasil;
                         $Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1;
                         
@@ -741,7 +752,7 @@ for($i=0;$i<2;$i++){
 
                           $perhitungan="  NilaiYgDisusutkan=$nb_buku_log+$selisih; \n"
                                  . "Umur_Ekonomis_Final=$UmurEkonomis+$penambahan_masa_manfaat;\n
-                                    PenyusutanPerTahun_hasil=$NilaiYgDisusutkan/$UmurEkonomis;\n
+                                    PenyusutanPerTahun_hasil=$NilaiYgDisusutkan/$Umur_Ekonomis_Final;\n
                                     AkumulasiPenyusutan_hasil=$PenyusutanPerTahun;\n
                                     NilaiBuku_hasil=$NilaiYgDisusutkan-$AkumulasiPenyusutan;\n
                                     Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1; \n";
@@ -1158,5 +1169,15 @@ function get_data_akumulasi_from_eksisting($Aset_ID,$DBVAR){
       $UmurEkonomis=$data['UmurEkonomis'];
       $MasaManfaat=$data['MasaManfaat'];
       return array($Akumulasi,$UmurEkonomis,$MasaManfaat);
+}
+function get_nb($Aset_ID,$DBVAR){
+    $query= "SELECT NilaiBuku,AkumulasiPenyusutan,UmurEkonomis,MasaManfaat FROM aset WHERE Aset_ID = '$Aset_ID' limit 1";
+      $hasil= $DBVAR->query($query);
+      $data= $DBVAR->fetch_array($hasil);
+      $Akumulasi=$data['AkumulasiPenyusutan'];
+      $UmurEkonomis=$data['UmurEkonomis'];
+      $MasaManfaat=$data['MasaManfaat'];
+      $NilaiBuku=$data['NilaiBuku'];
+      return $NilaiBuku;
 }
 ?>
