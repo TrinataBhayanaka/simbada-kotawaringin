@@ -25043,7 +25043,7 @@ $footer ="
 						$AkumulasiPenyusutan = 0;
 						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
 						
-						$NilaiBuku = 0;
+						$NilaiBuku = $row->Nilai;
 						$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
 					
 					}
