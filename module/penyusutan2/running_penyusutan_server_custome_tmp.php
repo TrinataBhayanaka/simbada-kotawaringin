@@ -694,6 +694,16 @@ for($i=0;$i<2;$i++){
                  $tmp_kode_log = explode(".", $kodeKelompok_log);
                 // $kd_riwayat=$Data_Log->kd_riwayat;
                  
+                 $nb_buku_log=get_nb($Aset_ID,$DBVAR);
+                 $NilaiYgDisusutkan=$nb_buku_log+$selisih;
+                 $persen=($selisih/$Nilai_Perolehan_awal_log)*100;
+                 $penambahan_masa_manfaat=  overhaul($tmp_kode_log[0], $tmp_kode_log[1], $tmp_kode_log[2],$persen, $DBVAR);
+                 if($penambahan_masa_manfaat==0)
+                 {    
+                     $kd_riwayat=21;
+                    echo "masuk sebagai koreksi karena tidak ada penambahan masa manfaat\n";
+                 }
+                 
                  $log_id=$Data_Log->log_id;
                  if($count==0){
                      if($kd_riwayat==28){
