@@ -701,6 +701,7 @@ for($i=0;$i<2;$i++){
                  if($penambahan_masa_manfaat==0)
                  {    
                      $kd_riwayat=21;
+                     $kapitalisasi=0;
                     echo "masuk sebagai koreksi karena tidak ada penambahan masa manfaat\n";
                  }
                  
