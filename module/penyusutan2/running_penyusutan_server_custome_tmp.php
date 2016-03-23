@@ -931,16 +931,26 @@ for($i=0;$i<2;$i++){
              if($status_transaksi!=1){
                  echo "tidak masuk log \n";
                  //bila tidak ada transaksi
-                 //$PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;
-                 $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
-                 //$AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
+                /* $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
                  $AkumulasiPenyusutan=$AkumulasiPenyusutan+$PenyusutanPerTahun;
                  $NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;
                  $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
                  if($Sisa_Masa_Manfaat<=0){
                     $AkumulasiPenyusutan=$NilaiPerolehan;
                     $NilaiBuku=0;
-                 }
+                 }*/
+                  list($AkumulasiPenyusutan,$UmurEkonomis,$MasaManfaat)= get_data_akumulasi_from_eksisting($Aset_ID,$DBVAR);
+                       
+                         $PenyusutanPerTahun=round($NP/$MasaManfaat);
+                         $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
+                         
+                         $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
+                         $NilaiBuku=$NP-$AkumulasiPenyusutan;
+                         $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
+                         if($Sisa_Masa_Manfaat<=0){
+                             $AkumulasiPenyusutan=$NP;
+                             $NilaiBuku=0;
+                         }
                          
                  //update aset dan update log untuk kapitalisasi
                                $QueryAset = "UPDATE aset SET MasaManfaat = '$MasaManfaat' ,
