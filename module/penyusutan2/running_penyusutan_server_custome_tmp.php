@@ -751,8 +751,18 @@ for($i=0;$i<2;$i++){
                         if($status_awal_karena_melebihi_masa_manfaat!=1)
                             $AkumulasiPenyusutan_hasil=$AkumulasiPenyusutan+$PenyusutanPerTahun_hasil;
                         else
-                            $AkumulasiPenyusutan_hasil=$PenyusutanPerTahun_hasil;
-                                
+                        { 
+                           // $AkumulasiPenyusutan_hasil=$PenyusutanPerTahun_hasil;
+                         $PenyusutanPerTahun=round($NP/$Umur_Ekonomis_Final);
+                         $rentang_tahun_penyusutan = 1;
+                         
+                         $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
+                         $NilaiBuku=$NP-$AkumulasiPenyusutan;
+                         $AkumulasiPenyusutan_hasil=$AkumulasiPenyusutan;
+                         $PenyusutanPerTahun_hasil=$PenyusutanPerTahun;
+                         
+                                                     
+                        }       
                         $NilaiBuku_hasil=$NP-$AkumulasiPenyusutan_hasil;
                         $Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1;
                         
@@ -931,26 +941,17 @@ for($i=0;$i<2;$i++){
              if($status_transaksi!=1){
                  echo "tidak masuk log \n";
                  //bila tidak ada transaksi
-                /* $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
+                 //$PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;
+                 $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
+                 //$AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
                  $AkumulasiPenyusutan=$AkumulasiPenyusutan+$PenyusutanPerTahun;
                  $NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;
                  $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
                  if($Sisa_Masa_Manfaat<=0){
                     $AkumulasiPenyusutan=$NilaiPerolehan;
                     $NilaiBuku=0;
-                 }*/
-                  list($AkumulasiPenyusutan,$UmurEkonomis,$MasaManfaat)= get_data_akumulasi_from_eksisting($Aset_ID,$DBVAR);
-                       
-                         $PenyusutanPerTahun=round($NP/$MasaManfaat);
-                         $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
-                         
-                         $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
-                         $NilaiBuku=$NP-$AkumulasiPenyusutan;
-                         $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
-                         if($Sisa_Masa_Manfaat<=0){
-                             $AkumulasiPenyusutan=$NP;
-                             $NilaiBuku=0;
-                         }
+                 }
+                
                          
                  //update aset dan update log untuk kapitalisasi
                                $QueryAset = "UPDATE aset SET MasaManfaat = '$MasaManfaat' ,
