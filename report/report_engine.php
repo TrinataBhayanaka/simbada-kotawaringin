@@ -6093,7 +6093,7 @@ foreach ($dataArr as $satker_id => $value)
 			//nilai akumulasi penyusutan
 			$TotalNilaiAPFix=number_format(0,0,",",".");
 			
-			$TotalNilaiNilaiBukuFix=number_format(0,0,",",".");
+			$TotalNilaiNilaiBukuFix=number_format($TotalNilai[0],0,",",".");
 			
 		}
 		
@@ -6130,7 +6130,7 @@ foreach ($dataArr as $satker_id => $value)
 			 
 			 //cek jika nilai buku 0 diganti sama nilai perolehan (pengecualian aset lain)
 			  // if($TotalNilai[4] != 0){
-				$totalALLNilaiBuku = $TotalNilai[4];
+				$totalALLNilaiBuku = $TotalNilai[0];
 			  // }else{
 				// $totalALLNilaiBuku = $TotalNilai[0];
 			  // }
@@ -6221,7 +6221,7 @@ foreach ($dataArr as $satker_id => $value)
 					$nilaiNBFix = ($nilai_1) + ($nilai_2);
 				}	
 			}else{
-				$nilaiNBFix = 0;
+				$nilaiNBFix = $nilai_1 + $nilai_2;
 			}
 			
 		}else{
@@ -6242,7 +6242,7 @@ foreach ($dataArr as $satker_id => $value)
 			$nilaiAPFix = $nilaiAP_1;
 			//cek jika nilai buku 0 diganti sama nilai perolehan
 			if($kode_1_child == '07.01' || $kode_1_child == '07.21' || $kode_1_child == '07.22' || $kode_1_child == '07.23' || $kode_1_child == '07.24'){
-				$nilaiNBFix = 0;
+				$nilaiNBFix = $nilai_1;
 			}else{
 				if($nilaiNB_1 != 0 || $nilaiAPFix!=0){
 					$nilaiNBFix = $nilaiNB_1;
