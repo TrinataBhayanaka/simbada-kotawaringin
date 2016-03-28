@@ -337,18 +337,23 @@ class core_api_report extends DB {
 				}
 				// echo "param =".$param;
 				// exit;
-				
-				if($tglawalperolehan !='' && $tglakhirperolehan !='' && $skpd_id =="" && $kelompok == ""){
+				// pr($tahun);
+				// exit;
+				// if($tglawalperolehan !='' && $tglakhirperolehan !='' && $skpd_id =="" && $kelompok == ""){
+				if($tahun !='' && $skpd_id =="" && $kelompok == ""){
 					// echo "sini";
-					$query_tgl_awal = " $param.TglPerolehan >= '$tglawalperolehan' ";
-					$query_tgl_akhir = " $param.TglPerolehan <= '$tglakhirperolehan' ";
+					// $query_tgl_awal = " $param.TglPerolehan = '$tglawalperolehan' ";
+					$query_tahun = " $param.Tahun = '$tahun' ";
+					// $query_tgl_akhir = " $param.TglPerolehan <= '$tglakhirperolehan' ";
 					$query_no_reg = "$param.noRegister BETWEEN '$noregAwal' AND '$noregAkhir' ";
 			
 				}	
-				if($tglawalperolehan !='' && $tglakhirperolehan !='' && $skpd_id !="" && $kelompok != ""){
-					$query_tgl_awal = " $param.TglPerolehan >= '$tglawalperolehan' ";
-					$query_tgl_akhir = " $param.TglPerolehan <= '$tglakhirperolehan' ";
+				// if($tglawalperolehan !='' && $tglakhirperolehan !='' && $skpd_id !="" && $kelompok != ""){
+				if($tahun !='' && $skpd_id !="" && $kelompok != ""){
+					// $query_tgl_awal = " $param.TglPerolehan = '$tglawalperolehan' ";
+					// $query_tgl_akhir = " $param.TglPerolehan <= '$tglakhirperolehan' ";
 					// $query_satker_fix = " $param.kodeSatker LIKE '$skpd_id%'";
+					$query_tahun = " $param.Tahun = '$tahun' ";
 					
 					$splitKodeSatker = explode ('.',$skpd_id);
 					if(count($splitKodeSatker) == 4){	
@@ -358,42 +363,27 @@ class core_api_report extends DB {
 					}
 	
 					$query_satker_fix = $paramSatker;
+					$query_kelompok_fix =" $param.kodeKelompok like '".$kelompok."%'";
 					
-					$IDkelompok = "$kelompok";
-					$query_change_satker="SELECT Kode FROM Kelompok as K
-											WHERE Kelompok_ID = $IDkelompok";
-					$exec_query_change_satker=$this->query($query_change_satker) or die($this->error());
-					while($proses_kode_kel=$this->fetch_array($exec_query_change_satker)){
-						$dataRow2Kel[]=$proses_kode_kel['Kode'];
-					}
-					if($dataRow2Kel!=""){
-						$query_kelompok_fix =" $param.kodeKelompok = '".$dataRow2Kel[0]."'";
-					}
 					$query_no_reg = "$param.noRegister BETWEEN '$noregAwal' AND '$noregAkhir' ";
 			
 				}
-				if($tglawalperolehan !='' && $tglakhirperolehan !='' && $skpd_id =="" && $kelompok != ""){
-					$query_tgl_awal = " $param.TglPerolehan >= '$tglawalperolehan' ";
-					$query_tgl_akhir = " $param.TglPerolehan <= '$tglakhirperolehan' ";
+				// if($tglawalperolehan !='' && $tglakhirperolehan !='' && $skpd_id =="" && $kelompok != ""){
+				if($tahun !='' && $skpd_id =="" && $kelompok != ""){
+					// $query_tgl_awal = " $param.TglPerolehan = '$tglawalperolehan' ";
+					// $query_tgl_akhir = " $param.TglPerolehan <= '$tglakhirperolehan' ";
+					$query_tahun = " $param.Tahun = '$tahun' ";
 					
-					// if($kelompok != ""){
-					$IDkelompok = "$kelompok";
-					$query_change_satker="SELECT Kode FROM Kelompok as K
-											WHERE Kelompok_ID = $IDkelompok";
-					$exec_query_change_satker=$this->query($query_change_satker) or die($this->error());
-					while($proses_kode_kel=$this->fetch_array($exec_query_change_satker)){
-						$dataRow2Kel[]=$proses_kode_kel['Kode'];
-					}
-					if($dataRow2Kel!=""){
-						$query_kelompok_fix ="$param.kodeKelompok = '".$dataRow2Kel[0]."'";
-					}
+					$query_kelompok_fix =" $param.kodeKelompok like '".$kelompok."%'";
 					$query_no_reg = "$param.noRegister BETWEEN '$noregAwal' AND '$noregAkhir' ";
 			
 				}
-				if($tglawalperolehan !='' && $tglakhirperolehan !='' && $skpd_id !="" && $kelompok == ""){
-					$query_tgl_awal = " $param.TglPerolehan >= '$tglawalperolehan' ";
-					$query_tgl_akhir = " $param.TglPerolehan <= '$tglakhirperolehan' ";
+				// if($tglawalperolehan !='' && $tglakhirperolehan !='' && $skpd_id !="" && $kelompok == ""){
+				if($tahun !='' && $skpd_id !="" && $kelompok == ""){
+					// $query_tgl_awal = " $param.TglPerolehan = '$tglawalperolehan' ";
+					// $query_tgl_akhir = " $param.TglPerolehan <= '$tglakhirperolehan' ";
 					// $query_satker_fix = " $param.kodeSatker LIKE '$skpd_id%'";
+					$query_tahun = " $param.Tahun = '$tahun' ";
 					$splitKodeSatker = explode ('.',$skpd_id);
 					if(count($splitKodeSatker) == 4){	
 						$paramSatker = " $param.kodeSatker = '$skpd_id'";
@@ -962,9 +952,15 @@ class core_api_report extends DB {
 			if($tglakhirperolehan!="" && $tglawalperolehan !=""){
 				$parameter_sql=$parameter_sql." AND ".$query_tgl_akhir;
             }
-			if($noregAkhir!="" && $noregAwal !=""){
-				$parameter_sql=$parameter_sql." AND ".$query_no_reg;
-            }
+			if($kb != ''){
+				if($noregAkhir!="" && $noregAwal !=""){
+					$parameter_sql=$query_no_reg;
+				}
+			}else{
+				if($noregAkhir!="" && $noregAwal !=""){
+					$parameter_sql=$parameter_sql." AND ".$query_no_reg;
+				}
+			}
 			
 			if($skpd_id!="" && $parameter_sql!=""){
 				$parameter_sql=$parameter_sql." AND ".$query_satker_fix;
@@ -1129,7 +1125,7 @@ class core_api_report extends DB {
 												from 
 													tanahView as T,kelompok as K
 												where
-													T.kodeKelompok=K.Kode  and T.Status_Validasi_Barang =1 and T.StatusTampil =1 
+													T.kodeKelompok=K.Kode   
 													and $parameter_sql
 												group by T.Aset_ID
 												order by 
@@ -1145,7 +1141,7 @@ class core_api_report extends DB {
 													mesin_ori as M,kelompok as K 
 												where 
 													M.kodeKelompok=K.Kode  
-													 and M.Status_Validasi_Barang =1 and M.StatusTampil =1 and $parameter_sql
+													 and $parameter_sql
 												order by 
 													M.Aset_ID,M.kodeKelompok,M.kodeSatker $limit";
 										
@@ -1160,7 +1156,6 @@ class core_api_report extends DB {
 											bangunan_ori as B,kelompok as K  
 											where
 											B.kodeKelompok = K.Kode 
-											 and B.Status_Validasi_Barang = 1 and B.StatusTampil =1 
 											and $parameter_sql
 											order by
 												B.Aset_ID,B.kodeKelompok,B.kodeSatker $limit";
@@ -1175,7 +1170,6 @@ class core_api_report extends DB {
 											jaringan_ori as J,kelompok as K  
 											where
 											J.kodeKelompok = K.Kode 
-											 and J.Status_Validasi_Barang =1 and J.StatusTampil =1 
 											and $parameter_sql
 											order by 
 												J.Aset_ID,J.kodeKelompok,J.kodeSatker $limit";
@@ -1190,7 +1184,6 @@ class core_api_report extends DB {
 											asetlain_ori as AL,kelompok as K  
 											where
 											AL.kodeKelompok = K.Kode 
-											 and AL.Status_Validasi_Barang =1 and AL.StatusTampil =1 
 											and $parameter_sql
 											order by 
 												AL.Aset_ID,AL.kodeKelompok,AL.kodeSatker $limit";
@@ -1205,7 +1198,6 @@ class core_api_report extends DB {
 											kdp_ori as KDPA,kelompok as K  
 											where
 											KDPA.kodeKelompok = K.Kode  
-											 and KDPA.Status_Validasi_Barang =1 and KDPA.StatusTampil =1
 											and $parameter_sql
 											order by 
 												KDPA.Aset_ID,KDPA.kodeKelompok,KDPA.kodeSatker $limit";

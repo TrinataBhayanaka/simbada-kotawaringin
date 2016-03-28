@@ -331,7 +331,8 @@ public function retrieve_html_liat_dftr_aset($dataArr,$skpd_id,$gambar,$tipe){
               return $get_html;
           
     }
-		
+
+//kartu barang a,b,c,d,e,f rev 
 public function retrieve_html_kb_rev_general($dataArr,$gambar,$skpd_id,$tglakhirperolehan,$flagkib){
 foreach ($dataArr as $asetID => $value)
 {
@@ -508,7 +509,7 @@ foreach ($dataArr as $asetID => $value)
 				$paramKd_Rwyt = $valRwyt->Kd_Riwayat;
 				
 				//cek tgl u/info
-				$ex_tgl_filter = explode('-',$valRwyt->TglPerubahan);
+				/*$ex_tgl_filter = explode('-',$valRwyt->TglPerubahan);
 				$tahun = $ex_tgl_filter[0];
 				$tahun_pnystn = $valRwyt->TahunPenyusutan;
 				if($tahun_pnystn == 0){
@@ -521,7 +522,7 @@ foreach ($dataArr as $asetID => $value)
 					}
 				}else{
 					$Info = "";
-				}
+				}*/
 				if($paramKd_Rwyt == 0 || $paramKd_Rwyt == 2 || $paramKd_Rwyt == 7 || $paramKd_Rwyt == 21 ){
 					/*
 					Kode Riwayat
@@ -537,16 +538,16 @@ foreach ($dataArr as $asetID => $value)
 						//mutasi tambah
 						if($cekSelisih == 0){
 							$valAdd = $valRwyt->NilaiPerolehan;
-							
+							$valSubstAp = 0;
 							//SALDO AWAL
 							$nilaiAwalPrlhn = 0;
 							$nilaiAwalPerolehanFix = number_format($nilaiAwalPrlhn,2,",",".");
 							
-							$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+							$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan_Awal;
 							$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
 							
 							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
-								$NilaiBuku = $valRwyt->NilaiBuku;
+								$NilaiBuku = $valRwyt->NilaiBuku_Awal;
 								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
 							}else{
 								$NilaiBuku = $valRwyt->NilaiPerolehan;
@@ -555,15 +556,16 @@ foreach ($dataArr as $asetID => $value)
 							
 						}else{
 							$valAdd = $cekSelisih;
+							$valSubstAp = $valRwyt->AkumulasiPenyusutan - $valRwyt->AkumulasiPenyusutan_Awal;
 							//SALDO AWAL
 							$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan_Awal;
 							$nilaiAwalPerolehanFix = number_format($nilaiAwalPrlhn,2,",",".");
 							
-							$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+							$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan_Awal;
 							$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
 							
 							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
-								$NilaiBuku = $valRwyt->NilaiBuku;
+								$NilaiBuku = $valRwyt->NilaiBuku_Awal;
 								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
 							}else{
 								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
@@ -581,19 +583,19 @@ foreach ($dataArr as $asetID => $value)
 						$nilaiPrlhnMutasiKurang = $valSubst;
 						$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
 						
-						//MUTASI PENYUSUTAN (Bertambah)
+						//MUTASI PENYUSUTAN (Berkurang)
 						$penyusutanBerkurang = 0;
 						$penyusutanBerkurangFix = number_format($penyusutanBerkurang,2,",",".");
 						
-						//MUTASI PENYUSUTAN (Berkurang)
-						$penyusutanBertambah = 0;
+						//MUTASI PENYUSUTAN (Bertambah)
+						$penyusutanBertambah = $valSubstAp;
 						$penyusutanBertambahFix = number_format($penyusutanBertambah,2,",",".");
 						
 						//SALDO AKHIR
 						$nilaiPerolehanHasilMutasi = $valRwyt->NilaiPerolehan;
 						$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
 						
-						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan -  $penyusutanBerkurang;
+						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan + $penyusutanBertambah;
 						$AkumulasiPenyusutanHasilMutasiFix = number_format($AkumulasiPenyusutanHasilMutasi,2,",",".");
 						
 						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
@@ -606,15 +608,16 @@ foreach ($dataArr as $asetID => $value)
 						$umurEkonomis = $valRwyt->UmurEkonomis;
 					}else{
 						$flag = "(-)";
+						$valSubstAp = $valRwyt->AkumulasiPenyusutan_Awal - $valRwyt->AkumulasiPenyusutan;
 						//SALDO AWAL
 						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan_Awal;
 						$nilaiAwalPerolehanFix = number_format($nilaiAwalPrlhn,2,",",".");
 						
-						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan_Awal;
 						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
 							
 							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
-								$NilaiBuku = $valRwyt->NilaiBuku;
+								$NilaiBuku = $valRwyt->NilaiBuku_Awal;
 								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
 							}else{
 								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
@@ -632,8 +635,8 @@ foreach ($dataArr as $asetID => $value)
 						$nilaiPrlhnMutasiKurang = $valSubst;
 						$nilaiPrlhnMutasiKurangFix = number_format($nilaiPrlhnMutasiKurang,2,",",".");
 						
-						//MUTASI PENYUSUTAN (Berkurang)
-						$penyusutanBerkurang = 0;
+						//MUTASI PENYUSUTAN (Berkurang )
+						$penyusutanBerkurang = $valSubstAp;
 						$penyusutanBerkurangFix = number_format($penyusutanBerkurang,2,",",".");
 						
 						//MUTASI PENYUSUTAN (Bertambah)
@@ -864,12 +867,13 @@ foreach ($dataArr as $asetID => $value)
 						//SALDO AWAL
 						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
 						$nilaiAwalPerolehanFix = number_format($nilaiAwalPrlhn,2,",",".");
+						$valSubstAp = $valRwyt->AkumulasiPenyusutan - $valRwyt->AkumulasiPenyusutan_Awal;
 						
-						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan_Awal;
 						$AkumulasiPenyusutanFix = number_format($AkumulasiPenyusutan,2,",",".");
 							
 						if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
-								$NilaiBuku = $valRwyt->NilaiBuku;
+								$NilaiBuku = $valRwyt->NilaiBuku_Awal;
 								$NilaiBukuFix = number_format($NilaiBuku,2,",",".");
 							}else{
 								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
@@ -890,7 +894,7 @@ foreach ($dataArr as $asetID => $value)
 						$penyusutanBerkurangFix = number_format($penyusutanBerkurang,2,",",".");
 						
 						//MUTASI PENYUSUTAN (Bertambah)
-						$penyusutanBertambah = 0;
+						$penyusutanBertambah = $valSubstAp;
 						$penyusutanBertambahFix = number_format($penyusutanBertambah,2,",",".");
 							
 						//SALDO AKHIR
@@ -1034,8 +1038,8 @@ foreach ($dataArr as $asetID => $value)
 	}				 
 $hasil_html[]=$head.$body.$foot; 
 return $hasil_html;		 
-}
-
+}	
+	
 public function getdataRwyt($skpd_id,$AsetId,$tglakhirperolehan,$param){
 
 	if($param == '01'){
@@ -6093,7 +6097,7 @@ foreach ($dataArr as $satker_id => $value)
 			//nilai akumulasi penyusutan
 			$TotalNilaiAPFix=number_format(0,0,",",".");
 			
-			$TotalNilaiNilaiBukuFix=number_format(0,0,",",".");
+			$TotalNilaiNilaiBukuFix=number_format($TotalNilai[0],0,",",".");
 			
 		}
 		
@@ -6130,7 +6134,7 @@ foreach ($dataArr as $satker_id => $value)
 			 
 			 //cek jika nilai buku 0 diganti sama nilai perolehan (pengecualian aset lain)
 			  // if($TotalNilai[4] != 0){
-				$totalALLNilaiBuku = $TotalNilai[4];
+				$totalALLNilaiBuku = $TotalNilai[0];
 			  // }else{
 				// $totalALLNilaiBuku = $TotalNilai[0];
 			  // }
@@ -6221,7 +6225,7 @@ foreach ($dataArr as $satker_id => $value)
 					$nilaiNBFix = ($nilai_1) + ($nilai_2);
 				}	
 			}else{
-				$nilaiNBFix = 0;
+				$nilaiNBFix = $nilai_1 + $nilai_2;
 			}
 			
 		}else{
@@ -6242,7 +6246,7 @@ foreach ($dataArr as $satker_id => $value)
 			$nilaiAPFix = $nilaiAP_1;
 			//cek jika nilai buku 0 diganti sama nilai perolehan
 			if($kode_1_child == '07.01' || $kode_1_child == '07.21' || $kode_1_child == '07.22' || $kode_1_child == '07.23' || $kode_1_child == '07.24'){
-				$nilaiNBFix = 0;
+				$nilaiNBFix = $nilai_1;
 			}else{
 				if($nilaiNB_1 != 0 || $nilaiAPFix!=0){
 					$nilaiNBFix = $nilaiNB_1;
@@ -29121,7 +29125,7 @@ $body="
 
                                              //udah dites
 					// $barangTotal = $barangTotal + $row->Kuantitas;
-					$perolehanTotal = $perolehanTotal + $row->NilaiPerolehan_Awal;
+					// $perolehanTotal = $perolehanTotal + $row->NilaiPerolehan_Awal;
 					// $perolehan = number_format($row->NilaiPerolehan);
 					
 					// $konstruksi_tanah= $this->get_konstruksi($row->Konstruksi);
@@ -39033,8 +39037,12 @@ return $hasil_html;
 		return $NamaRwyt;
 	}
 	
-		//buat kapitalisasi
-	public function get_NP_Aset_ID_Penambahan($Aset_ID_Penambahan){
+	
+	//buat kapitalisasi
+	public function get_NP_Aset_ID_Penambahan($Aset_ID_Penambahan,$log_id){
+		
+		$queryceckTipe = "select TipeAset from aset where Aset_ID = '{$Aset_ID_Penambahan}'";
+		// pr($queryceckTipe);
 		$resulTipe= $this->retrieve_query($queryceckTipe);
 		if($resulTipe){
 			foreach($resulTipe as $valueTipe){
@@ -39055,9 +39063,9 @@ return $hasil_html;
 			$tabel = 'log_kdp';
 		}
 		
-		$queryNpKp = "select NilaiPerolehan from {$tabel} where Aset_ID ='$Aset_ID_Penambahan' and Kd_Riwayat = '28' 
-					  and action like 'Aset Penambahan kapitalisasi Mutasi%' 
-					  and log_id < {$log_id} order by log_id desc limit 1";
+		$queryNpKp = "select NilaiPerolehan from {$tabel} where Aset_ID_Penambahan ='$Aset_ID_Penambahan' and Kd_Riwayat = '28' 
+					  and action like 'Sukses kapitalisasi Mutasi%' 
+					  and log_id > {$log_id} order by log_id asc limit 1";
 		// pr($queryNpKp);
 		$resulNpKp=$this->retrieve_query($queryNpKp);
 		if($resulNpKp!=""){
