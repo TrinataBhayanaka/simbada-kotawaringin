@@ -768,6 +768,9 @@ for($i=0;$i<2;$i++){
                         $NilaiBuku_hasil=$NP-$AkumulasiPenyusutan_hasil;
                         $Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1;
                         
+                        if($status_awal_karena_melebihi_masa_manfaat!=1)
+                                $Sisa_Masa_Manfaat=$Umur_Ekonomis_Final;
+                        
                         if($Sisa_Masa_Manfaat<=0){
                             $NilaiBuku_hasil=0;
                             $AkumulasiPenyusutan_hasil=$NP;
