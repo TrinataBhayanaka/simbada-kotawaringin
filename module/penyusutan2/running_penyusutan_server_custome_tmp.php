@@ -757,9 +757,9 @@ for($i=0;$i<2;$i++){
                          $PenyusutanPerTahun=round($NilaiYgDisusutkan/$Umur_Ekonomis_Final);
                          $rentang_tahun_penyusutan = 1;
                          
-                         $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
-                         $NilaiBuku=$NP-$AkumulasiPenyusutan;
-                         $AkumulasiPenyusutan_hasil=$AkumulasiPenyusutan;
+                         $AkumulasiPenyusutan_baru=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
+                         $AkumulasiPenyusutan_hasil=$AkumulasiPenyusutan+$AkumulasiPenyusutan_baru;
+                         $NilaiBuku=$NP-$AkumulasiPenyusutan_hasil;
                          $PenyusutanPerTahun_hasil=$PenyusutanPerTahun;
                          
                          echo "masa manfaat meleihi maka akm=$AkumulasiPenyusutan_hasil\n "
