@@ -753,7 +753,8 @@ for($i=0;$i<2;$i++){
                         else
                         { 
                            // $AkumulasiPenyusutan_hasil=$PenyusutanPerTahun_hasil;
-                         $PenyusutanPerTahun=round($NP/$Umur_Ekonomis_Final);
+                         //$PenyusutanPerTahun=round($NP/$Umur_Ekonomis_Final);
+                         $PenyusutanPerTahun=round($NilaiYgDisusutkan/$Umur_Ekonomis_Final);
                          $rentang_tahun_penyusutan = 1;
                          
                          $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
@@ -761,7 +762,8 @@ for($i=0;$i<2;$i++){
                          $AkumulasiPenyusutan_hasil=$AkumulasiPenyusutan;
                          $PenyusutanPerTahun_hasil=$PenyusutanPerTahun;
                          
-                                                     
+                         echo "masa manfaat meleihi maka akm=$AkumulasiPenyusutan_hasil\n "
+                                 . "peny er tahun $PenyusutanPerTahun_hasil and nilai buku $NilaiBuku\n ";
                         }       
                         $NilaiBuku_hasil=$NP-$AkumulasiPenyusutan_hasil;
                         $Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1;
