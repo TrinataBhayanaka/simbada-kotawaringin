@@ -866,7 +866,7 @@ for($i=0;$i<2;$i++){
                                     $ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());;
                                  
                                       
-                            //update diri sendiri untuk mutasi
+                           /* //update diri sendiri untuk mutasi
                              $QueryKib = "UPDATE $tableLog set MasaManfaat = '$MasaManfaat_Final' ,
                                             AkumulasiPenyusutan = '$AkumulasiPenyusutan_hasil',	
                                             PenyusutanPerTahun = '$PenyusutanPerTahun_hasil',
@@ -877,7 +877,7 @@ for($i=0;$i<2;$i++){
                                             PenyusutanPerTahun_Awal='$PenyusutanPerTahun_Awal',
                                                  NilaiBuku_Awal = '$NilaiBuku_Awal' 
                                             WHERE Aset_ID = '$Aset_ID' and log_id= '$log_id' ";
-                            $ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());
+                            $ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());*/
                                  //update log penyusutan
                                  log_penyusutan($Aset_ID, $tableKib, 51,$newTahun, $data_log, $DBVAR);
 
