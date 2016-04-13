@@ -545,11 +545,16 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 					$sign = "'"; 
 					foreach ($resultqueryKibSelect as $key => $val) {
 						$tmpField[] = $key;
-						if ($val ==''){
-							$tmpVal[] = $sign."NULL".$sign;
-						}else{
-							$tmpVal[] = $sign.addslashes($val).$sign;
-						}
+                                                if($kye=="NilaiPerolehan")
+                                                    $tmpVal[] = $sign.addslashes($NilaiPerolehan).$sign;
+						else{
+                                                        if ($val ==''){
+                                                            $tmpVal[] = $sign."NULL".$sign;
+                                                    }else{
+                                                            $tmpVal[] = $sign.addslashes($val).$sign;
+                                                    }
+                                                
+                                                }
 					}
 					
 					$implodeField = implode (',',$tmpField);
