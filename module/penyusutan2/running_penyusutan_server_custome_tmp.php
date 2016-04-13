@@ -829,7 +829,7 @@ for($i=0;$i<2;$i++){
                                          . "PenyusutanPerTahun \t=$PenyusutanPerTahun_hasil \n"
                                          . "KodeRiwayat \t=$Kd_Riwayat\n"
                                          . "selisih \t=$selisih_kapitaliasi_total\n"
-                                         . "UmurEkonomis_Sblm \t=$UmurEkonomis\n"
+                                         . "persen==$persen \nUmurEkonomis_Sblm \t=$UmurEkonomis\n"
                                          . "UmurEkonomis \t=$Sisa_Masa_Manfaat\n"
                                          . "Penambahan \t=$penambahan_masa_manfaat \n"
                                             . "Hitung==$perhitungan\n\n   ";
