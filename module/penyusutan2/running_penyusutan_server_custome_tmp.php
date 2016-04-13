@@ -652,6 +652,7 @@ for($i=0;$i<2;$i++){
                  $AkumulasiPenyusutan_Awal=$Data_Log_Sblm->AkumulasiPenyusutan_Awal;
                  $NilaiBuku_Awal=$Data_Log_Sblm->NilaiBuku_Awal;
                  $PenyusutanPerTahun_Awal=$Data_Log_Sblm->PenyusutanPerTahun_Awal;
+                 $Nilai_Perolehan_awal_log=$Data_Log_Sblm->NilaiPerolehan;
                  
                  
              }
@@ -693,7 +694,7 @@ for($i=0;$i<2;$i++){
                  $status_transaksi=1;
                  $kd_riwayat=$Data_Log->kd_riwayat;
                  $Nilai_Perolehan_log=$Data_Log->NilaiPerolehan;
-                 $Nilai_Perolehan_awal_log=$Data_Log->NilaiPerolehan_Awal;
+                 //$Nilai_Perolehan_awal_log=$Data_Log->NilaiPerolehan_Awal;
                  $selisih=abs($Data_Log->selisih);
                  $Tahun = $Data['Tahun'];
                  $nb_buku_log=$Data_Log->NilaiBuku;
