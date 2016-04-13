@@ -648,7 +648,7 @@ for($i=0;$i<2;$i++){
             $NilaiBuku_Awal=0;
             $PenyusutanPerTahun_Awal=0;
             
-             while($Data_Log_Sblm=$DBVAR->fetch_array($qlog_sblm)){
+             while($Data_Log_Sblm=$DBVAR->fetch_object($qlog_sblm)){
                  $AkumulasiPenyusutan_Awal=$Data_Log_Sblm->AkumulasiPenyusutan_Awal;
                  $NilaiBuku_Awal=$Data_Log_Sblm->NilaiBuku_Awal;
                  $PenyusutanPerTahun_Awal=$Data_Log_Sblm->PenyusutanPerTahun_Awal;
