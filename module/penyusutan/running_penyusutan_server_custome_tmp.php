@@ -545,8 +545,11 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 					$sign = "'"; 
 					foreach ($resultqueryKibSelect as $key => $val) {
 						$tmpField[] = $key;
-                                                if($key=="NilaiPerolehan")
+                                                
+                                                if($key=="NilaiPerolehan"){
                                                     $tmpVal[] = $sign.addslashes($NilaiPerolehan).$sign;
+                                                   // echo "$key == $NilaiPerolehan $Aset_ID";
+                                                }
 						else{
                                                         if ($val ==''){
                                                             $tmpVal[] = $sign."NULL".$sign;
