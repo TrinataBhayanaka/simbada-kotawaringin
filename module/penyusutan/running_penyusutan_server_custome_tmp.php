@@ -545,7 +545,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 					$sign = "'"; 
 					foreach ($resultqueryKibSelect as $key => $val) {
 						$tmpField[] = $key;
-                                                if($kye=="NilaiPerolehan")
+                                                if($key=="NilaiPerolehan")
                                                     $tmpVal[] = $sign.addslashes($NilaiPerolehan).$sign;
 						else{
                                                         if ($val ==''){
