@@ -566,7 +566,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 						$AddField = "action,changeDate,TglPerubahan,NilaiPerolehan_Awal,Kd_Riwayat";
 						$action = "Penyusutan_".$tahun."_".$Data['kodeSatker'];
 						$changeDate = date('Y-m-d');
-						$NilaiPerolehan_Awal = $resultqueryKibSelect->NilaiPerolehan;
+						$NilaiPerolehan_Awal = $NilaiPerolehan;//$resultqueryKibSelect->NilaiPerolehan;
                                     
                                                                                 $Kd_Riwayat = '49';
 						//insert log
