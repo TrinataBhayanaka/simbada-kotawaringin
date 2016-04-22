@@ -52,7 +52,7 @@ if($tipe == 1){
 	$gmbr ="";
 }
 $hit = 2;
-$flag = '';
+$flag = "$tipeAset";
 $TypeRprtr = 'intra';
 $Info = '';
 $exeTempTable = $REPORT->TempTable($hit,$flag,$TypeRprtr,$Info,$tglawalperolehan,$tglakhirperolehan,
