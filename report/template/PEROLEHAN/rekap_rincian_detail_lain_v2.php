@@ -177,7 +177,7 @@ $head ="<head>
 				<tr>
 				  <td style=\"width: 150px; text-align: LEFT;\">$gmbr</td>
 				  <td style=\"width: 902px; text-align: center;\">
-				  <h3>REKAPITULASI RINCIAN BARANG KE NERACA</h3>
+				  <h3>REKAPITULASI DETAIL RINCIAN BARANG ASET LAIN</h3>
 				  <h3>TAHUN $tahun_neraca</h3>
 				  </td>
 				</tr>
@@ -380,7 +380,7 @@ $param_tgl = $tglakhirperolehan ;
 					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[ap_akhir],2,",",".")."</td>
 					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nb_akhir],2,",",".")."</td> 
 				</tr>";	
-			if($levelAset>=3||$levelAset==1)	
+				if($levelAset>=3||$levelAset==1)
 			foreach($gol['Bidang'] as $bidang)
 			{	
 			   if($bidang[ap]==""||$bidang[ap]==0)
@@ -590,7 +590,7 @@ if(count($splitKodeSatker) == 4){
 }
 $param_tgl = $pt;   
 if($gol == 'mesin_ori'){
-	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
+	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi ='3'  and 
 				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
 				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=0 or kodeKa=1)))
 				 and $paramSatker";
@@ -607,7 +607,7 @@ if($gol == 'mesin_ori'){
                  $param_where    
                order by kelompok asc";
 }elseif($gol == 'bangunan_ori'){
-	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
+	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi ='3'  and 
 				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
 				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=0  or kodeKa=1)))
 				 and $paramSatker";
@@ -629,7 +629,7 @@ if($gol == 'mesin_ori'){
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%' 
-					 and kondisi != '3'					 
+					 and kondisi ='3'					 
 					 and $paramSatker";
 		else
 		    $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
@@ -683,7 +683,7 @@ if(count($splitKodeSatker) == 4){
 $param_tgl = $pt;   
 if($gol == 'mesin_ori'){
     $gol="mesin";
-	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
+	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi ='3'  and 
 				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
 				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=0 or kodeKa=1)))
 				 and $paramSatker";
@@ -701,7 +701,7 @@ if($gol == 'mesin_ori'){
                order by kelompok asc";
 }elseif($gol == 'bangunan_ori'){
     $gol="bangunan";
-	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
+	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi ='3'  and 
 				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
 				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=0  or kodeKa=1)))
 				 and $paramSatker";
@@ -723,7 +723,7 @@ if($gol == 'mesin_ori'){
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%' 
-					 and kondisi != '3'					 
+					 and kondisi ='3'					 
 					 and $paramSatker";
 		else
 		    $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
@@ -788,7 +788,7 @@ if($gol == 'mesin_ori'){
     //cek kapitalisasi
     $kapitalisasi_kondisi=" and m.Aset_ID not in(select Aset_ID from log_$gol where  `action` LIKE 'Sukses kapitalisasi Mutasi%') ";
 
-    $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi != '3'  and 
+    $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi ='3'  and 
 				( (m.TglPerolehan < '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and m.kodeKa=1) or 
 				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl'  and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=0 or m.kodeKa=1)))
 				 and $paramSatker";
@@ -813,7 +813,7 @@ if($gol == 'mesin_ori'){
      //cek kapitalisasi
     $kapitalisasi_kondisi=" and m.Aset_ID not in(select Aset_ID from log_$gol where  `action` LIKE 'Sukses kapitalisasi Mutasi%') ";
 
-	$param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi != '3'  and 
+	$param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi ='3'  and 
 				( (m.TglPerolehan < '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and m.kodeKa=1) or 
 				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=0  or m.kodeKa=1)))
 				 and $paramSatker";
@@ -836,7 +836,7 @@ if($gol == 'mesin_ori'){
 					 and m.TglPerolehan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and l.kd_riwayat=3 and `action` like 'Sukses Mutasi%' 
 					 and m.TglPembukuan <='$param_tgl' 
 					 and m.kodeLokasi like '12%' 
-					 and m.kondisi != '3'					 
+					 and m.kondisi ='3'					 
 					 and $paramSatker";
 		else
 		    $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1  
@@ -1373,7 +1373,7 @@ foreach ($data_gabungan as $key => $value) {
     
     
 }
-//$data_level5=$data_gabungan;
+$data_level5=$data_gabungan;
 $data_level4=array();
 //Buat array gabungan --> level 4
 foreach ($data_level5 as $key => $value) {
@@ -1627,7 +1627,6 @@ function history_aset($kodesatker,$aset_id,$tglakhirperolehan,$tglawalperolehan,
     
     $ex = explode('.',$kodeKelompok);
 		$param = $ex['0'];
-    
     if($aset_id!=""){
     $getdataRwyt = getdataRwyt($kodesatker,$aset_id,$tglakhirperolehan,$tglawalperolehan,$param,$tglpembukuan);
 			//pr($getdataRwyt);
@@ -2319,8 +2318,7 @@ function history_aset($kodesatker,$aset_id,$tglakhirperolehan,$tglawalperolehan,
 			
 			}
                         
-    }
-     return array($BEBAN_PENYUSUTAN,$MUTASI_ASET_PENAMBAHAN,$MUTASI_ASET_KURANG,$MUTASI_AKM_PENAMBAHAN,$MUTASI_AKM_PENGURANG);
+    } return array($BEBAN_PENYUSUTAN,$MUTASI_ASET_PENAMBAHAN,$MUTASI_ASET_KURANG,$MUTASI_AKM_PENAMBAHAN,$MUTASI_AKM_PENGURANG);
 }
 
 function getdataRwyt($skpd_id,$AsetId,$tglakhirperolehan,$tglawalperolehan,$param,$tglpembukuan){
