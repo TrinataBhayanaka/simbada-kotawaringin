@@ -28642,7 +28642,7 @@ if($dataArr!="")
 													<td style=\"width: 85px;font-weight: \" align=\"center\">$row->Material</td>
 													<td style=\"width: 84px; font-weight: \" align=\"center\">$row->Tahun</td>
 													<td style=\"width: 85px; font-weight: \" align=\"center\">$row->Kode</td>
-													<td style=\"width: 84px;font-weight: \" align=\"center\">$hit / $noReg</td>
+													<td style=\"width: 84px;font-weight: \" align=\"center\">'$hit / $noReg</td>
 													<td style=\"width: 85px;font-weight: \" align=\"right\">$nilaiPrlhnFix</td>
 													<td style=\"width: 84px;font-weight: \" align=\"center\">$baik</td>
 													<td style=\"width: 85px;font-weight: \" align=\"center\">$kurangBaik</td>

@@ -86,7 +86,17 @@ $UPB = $detailSatker[4][3];
    
 $ex = explode('.',$skpd_id);
 $hit = count($ex);
+require_once 'phpexcel/PHPExcel/IOFactory.php';
+$objReader = PHPExcel_IOFactory::createReader('Excel5');
+$objPHPExcel = $objReader->load("template-rincian.xls");
+
+$objPHPExcel->getActiveSheet()->setCellValue('D8', $Bidang);
+$objPHPExcel->getActiveSheet()->setCellValue('D9', $UnitOrganisasi);
+$objPHPExcel->getActiveSheet()->setCellValue('D10', $SubUnitOrganisasi);
+$objPHPExcel->getActiveSheet()->setCellValue('D11', $UPB);
+
 if($hit == 1){
+	$head_csv="$Bidang";
 	$header = "<tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
@@ -94,6 +104,7 @@ if($hit == 1){
         </tr>
 		";
 }elseif($hit == 2){
+	$head_csv="$Bidang\n$UnitOrganisasi";
 	$header = "<tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
@@ -105,6 +116,7 @@ if($hit == 1){
           <td style=\"width: 873px; font-weight: bold;\">$UnitOrganisasi</td>
         </tr>";
 }elseif($hit == 3){
+	$head_csv="$Bidang\n$UnitOrganisasi\n$SubUnitOrganisasi";
 	$header = "<tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
@@ -121,6 +133,7 @@ if($hit == 1){
           <td style=\"width: 873px; font-weight: bold;\">$SubUnitOrganisasi</td>
         </tr>";
 }elseif($hit == 4){
+	$head_csv="$Bidang\n$UnitOrganisasi\n$SubUnitOrganisasi\n$UPB";
 	$header = "<tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
@@ -166,6 +179,14 @@ if($tipeAset == 'all'){
 //exit();
 $hit_loop = count($data);
 $i = 0;
+$objPHPExcel->getActiveSheet()->setCellValue('A2', $tahun_neraca);
+$objPHPExcel->getActiveSheet()->setCellValue('D6', $nama_kab);
+$objPHPExcel->getActiveSheet()->setCellValue('D7', $nama_prov);
+$baserow=16;
+
+
+$csv.= "REKAPITULASI RINCIAN BARANG KE NERACA
+    \n$tahun_neraca\n$nama_kab\n$nama_prov\n$head_csv\n";
 $head ="<head>
 			  <meta content=\"text/html; charset=UTF-8\"http-equiv=\"content-type\">
 			  <title></title>
@@ -200,21 +221,44 @@ $head ="<head>
 			  </tbody>
 			</table>
 				<br>";
+
+
+				$csv.="Kode|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=Uraian."|";
+		$csv.="Jumlah Awal|";
+		$csv.="Nilai Awal|";
+		$csv.="Penyusutan Pertahun|";
+		$csv.="Akumulasi Penyusutan"."|";
+		$csv.="Nilai Buku Awal "."|";
+		$csv.="Mutasi Nilai Kurang"."|";
+		$csv.="Mutasi Nilai Tambah"."|";
+		$csv.="Mutasi Akumulasi Kurang"."|";
+		$csv.="Mutasi Akumulasi Tambah"."|";
+		$csv.="Beban Penyusutan|";
+		$csv.="Jml Akhir"."|";
+		$csv.="Nilai Akhir"."|";
+		$csv.="Penyusutan Pertahun Akhir"."|";
+		$csv.="Akumulasi Penyusutan Akhir"."|";
+		$csv.="Nilai Buku Akhir"."\n";
 $head.=" <table style=\"width: 100%; text-align: left; margin-left: auto; margin-right: auto; border-collapse:collapse\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\; \">
 	<tr>
 		<td rowspan='2' colspan='5' style=\" text-align: center; font-weight: bold; width: \">Kode</td>
 		<td rowspan='2' style=\" text-align: center; font-weight: bold; width: \">Uraian</td>
-		<td colspan='4' style=\" text-align: center; font-weight: bold; width: \">1 Januari $tahun_neraca</td>
+		<td colspan='5' style=\" text-align: center; font-weight: bold; width: \">1 Januari $tahun_neraca</td>
                 <td colspan='2' style=\" text-align: center; font-weight: bold; width: \">Nilai Perolehan</td>
                 <td colspan='2' style=\" text-align: center; font-weight: bold; width: \">Akumulasi Penyusutan</td>
                 <td rowspan='2' style=\" text-align: center; font-weight: bold; width: \">Beban Penyusutan Tahun Berjalan</td>
-                <td colspan='4' style=\" text-align: center; font-weight: bold; width: \">31 Desember $tahun_neraca</td>
+                <td colspan='5' style=\" text-align: center; font-weight: bold; width: \">31 Desember $tahun_neraca</td>
                 
 	</tr>
         <tr>
             <td  style=\" text-align: center; font-weight: bold; width: \">Jumlah</td>
             <td  style=\" text-align: center; font-weight: bold; width: \">Nilai Perolehan</td>
-            
+            <td  style=\" text-align: center; font-weight: bold; width: \">Penyusutan PerTahun</td>
             <td  style=\" text-align: center; font-weight: bold; width: \">Akumulasi Penyusutan</td>
             <td  style=\" text-align: center; font-weight: bold; width: \">Nilai Buku</td>
             
@@ -225,7 +269,7 @@ $head.=" <table style=\"width: 100%; text-align: left; margin-left: auto; margin
             
             <td  style=\" text-align: center; font-weight: bold; width: \">Jumlah</td>
             <td  style=\" text-align: center; font-weight: bold; width: \">Nilai Perolehan</td>
-          
+            <td  style=\" text-align: center; font-weight: bold; width: \">Penyusutan PerTahun</td>
             <td  style=\" text-align: center; font-weight: bold; width: \">Akumulasi Penyusutan</td>
             <td  style=\" text-align: center; font-weight: bold; width: \">Nilai Buku</td>
         </tr>
@@ -248,9 +292,9 @@ $head.=" <table style=\"width: 100%; text-align: left; margin-left: auto; margin
                    <td style=\" text-align: center; font-weight: bold; width: \">16</td>
                    <td style=\" text-align: center; font-weight: bold; width: \">17</td>
                    <td style=\" text-align: center; font-weight: bold; width: \">18</td>
-                   
-                   
                    <td style=\" text-align: center; font-weight: bold; width: \">19</td>
+                   <td style=\" text-align: center; font-weight: bold; width: \">20</td>
+                   <td style=\" text-align: center; font-weight: bold; width: \">21</td>
                    
 	</tr>";	
 //foreach ($data as $gol) {
@@ -304,7 +348,7 @@ $param_tgl = $tglakhirperolehan ;
                 $data_akhir=  subsub($kode_golongan, $q_gol_final, $ps, "$tahun_neraca-12-31");
                 $data_hilang=subsub_hapus($kode_golongan, $q_gol_final, $ps, "$tahun_neraca-12-31",$pt);
 		//exit();
-                $hasil=  group_data($data_awal, $data_akhir,$data_hilang,"$tahun_neraca-12-31","$tahun_neraca-01-02");
+                $hasil=  group_data($data_awal, $data_akhir,$data_hilang);
                //echo "<pre>";
                //print_r($hasil);
               // exit();
@@ -353,7 +397,53 @@ $param_tgl = $tglakhirperolehan ;
 						$pp_total_akhir += $gol[pp_akhir];
 						$ap_total_akhir += $gol[ap_akhir];
 						$nb_total_akhir += $gol[nb_akhir];
-		
+
+		/*$row=$baserow++;	
+		$objPHPExcel->getActiveSheet()->insertNewRowBefore($row,1);		
+		$objPHPExcel->getActiveSheet()->setCellValue('A'.$row, $gol[Kelompok]);
+		$objPHPExcel->getActiveSheet()->setCellValue('B'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('C'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('D'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('E'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('F'.$row, $gol[Uraian]);
+		$objPHPExcel->getActiveSheet()->setCellValue('G'.$row, $gol[jml]);
+		$objPHPExcel->getActiveSheet()->setCellValue('H'.$row, $gol[nilai]);
+		$objPHPExcel->getActiveSheet()->setCellValue('I'.$row, $gol[pp]);
+		$objPHPExcel->getActiveSheet()->setCellValue('J'.$row, $gol[ap]);
+		$objPHPExcel->getActiveSheet()->setCellValue('K'.$row, $gol[nb]);
+		$objPHPExcel->getActiveSheet()->setCellValue('L'.$row, $gol[mutasi_nilai_kurang]);
+		$objPHPExcel->getActiveSheet()->setCellValue('M'.$row, $gol[mutasi_nilai_tambah]);
+		$objPHPExcel->getActiveSheet()->setCellValue('N'.$row, $gol[mutasi_ap_kurang]);
+		$objPHPExcel->getActiveSheet()->setCellValue('O'.$row, $gol[mutasi_ap_tambah]);
+		$objPHPExcel->getActiveSheet()->setCellValue('P'.$row, $bp);
+		$objPHPExcel->getActiveSheet()->setCellValue('Q'.$row, $gol[jml_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('R'.$row, $gol[nilai_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('S'.$row, $gol[pp_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('T'.$row, $gol[ap_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('U'.$row, $gol[np_akhir]);*/
+
+
+		$csv.=$gol[Kelompok]."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=$gol[Uraian]."|";
+		$csv.=$gol[jml]."|";
+		$csv.=$gol[nilai]."|";
+		$csv.=$gol[pp]."|";
+		$csv.=$gol[ap]."|";
+		$csv.=$gol[nb]."|";
+		$csv.=$gol[mutasi_nilai_kurang]."|";
+		$csv.=$gol[mutasi_nilai_tambah]."|";
+		$csv.=$gol[mutasi_ap_kurang]."|";
+		$csv.=$gol[mutasi_ap_tambah]."|";
+		$csv.=$bp."|";
+		$csv.=$gol[jml_akhir]."|";
+		$csv.=$gol[nilai_akhir]."|";
+		$csv.=$gol[pp_akhir]."|";
+		$csv.=$gol[ap_akhir]."|";
+		$csv.=$gol[nb_akhir]."\n";
 		$body.="<tr>
 					<td style=\"font-weight: bold;\">{$gol[Kelompok]}</td>
 					<td>&nbsp;</td>
@@ -363,7 +453,7 @@ $param_tgl = $tglakhirperolehan ;
 					<td style=\"font-weight: bold;\">{$gol[Uraian]}</td>
 					<td style=\"text-align: center; font-weight: bold;\">{$gol[jml]}</td>
 					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nilai],2,",",".")."</td>
-					
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[pp],2,",",".")."</td>
 					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[ap],2,",",".")."</td>
 					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nb],2,",",".")."</td> 
                                         
@@ -376,11 +466,11 @@ $param_tgl = $tglakhirperolehan ;
 					
                                         <td style=\"text-align: center; font-weight: bold;\">{$gol[jml_akhir]}</td>
 					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nilai_akhir],2,",",".")."</td>
-					
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[pp_akhir],2,",",".")."</td>
 					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[ap_akhir],2,",",".")."</td>
 					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nb_akhir],2,",",".")."</td> 
 				</tr>";	
-			if($levelAset>=3||$levelAset==1)	
+				
 			foreach($gol['Bidang'] as $bidang)
 			{	
 			   if($bidang[ap]==""||$bidang[ap]==0)
@@ -392,6 +482,53 @@ $param_tgl = $tglakhirperolehan ;
                            
 				if($bidang[ap_akhir]==""||$bidang[ap_akhir]==0)
 					$bidang[nb_akhir]=$bidang[nilai_akhir];
+
+				/*$row=$baserow++;	
+				$objPHPExcel->getActiveSheet()->insertNewRowBefore($row,1);		
+		$objPHPExcel->getActiveSheet()->setCellValue('A'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('B'.$row, $bidang[Kelompok]);
+		$objPHPExcel->getActiveSheet()->setCellValue('C'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('D'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('E'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('F'.$row, $bidang[Uraian]);
+		$objPHPExcel->getActiveSheet()->setCellValue('G'.$row, $bidang[jml]);
+		$objPHPExcel->getActiveSheet()->setCellValue('H'.$row, $bidang[nilai]);
+		$objPHPExcel->getActiveSheet()->setCellValue('I'.$row, $bidang[pp]);
+		$objPHPExcel->getActiveSheet()->setCellValue('J'.$row, $bidang[ap]);
+		$objPHPExcel->getActiveSheet()->setCellValue('K'.$row, $bidang[nb]);
+		$objPHPExcel->getActiveSheet()->setCellValue('L'.$row, $bidang[mutasi_nilai_kurang]);
+		$objPHPExcel->getActiveSheet()->setCellValue('M'.$row, $bidang[mutasi_nilai_tambah]);
+		$objPHPExcel->getActiveSheet()->setCellValue('N'.$row, $bidang[mutasi_ap_kurang]);
+		$objPHPExcel->getActiveSheet()->setCellValue('O'.$row, $bidang[mutasi_ap_tambah]);
+		$objPHPExcel->getActiveSheet()->setCellValue('P'.$row, $bp_bidang);
+		$objPHPExcel->getActiveSheet()->setCellValue('Q'.$row, $bidang[jml_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('R'.$row, $bidang[nilai_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('S'.$row, $bidang[pp_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('T'.$row, $bidang[ap_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('U'.$row, $bidang[np_akhir]);*/
+
+
+		$csv.=""."|";
+		$csv.=$bidang[Kelompok]."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=$bidang[Uraian]."|";
+		$csv.=$bidang[jml]."|";
+		$csv.=$bidang[nilai]."|";
+		$csv.=$bidang[pp]."|";
+		$csv.=$bidang[ap]."|";
+		$csv.=$bidang[nb]."|";
+		$csv.=$bidang[mutasi_nilai_kurang]."|";
+		$csv.=$bidang[mutasi_nilai_tambah]."|";
+		$csv.=$bidang[mutasi_ap_kurang]."|";
+		$csv.=$bidang[mutasi_ap_tambah]."|";
+		$csv.=$bp_bidang."|";
+		$csv.=$bidang[jml_akhir]."|";
+		$csv.=$bidang[nilai_akhir]."|";
+		$csv.=$bidang[pp_akhir]."|";
+		$csv.=$bidang[ap_akhir]."|";
+		$csv.=$bidang[nb_akhir]."\n";
 					$body.="<tr>
 								<td>&nbsp;</td>
 								<td style=\"font-weight: bold;\">{$bidang[Kelompok]}</td>
@@ -401,7 +538,7 @@ $param_tgl = $tglakhirperolehan ;
 								<td style=\"font-weight: bold;\">{$bidang[Uraian]}</td>
                                 <td style=\"text-align: center; font-weight: bold;\">{$bidang[jml]}</td>
                                 <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nilai],2,",",".")."</td>
- 
+                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[pp],2,",",".")."</td>
                                 <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[ap],2,",",".")."</td>
                                 <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nb],2,",",".")."</td>
                                     
@@ -414,11 +551,10 @@ $param_tgl = $tglakhirperolehan ;
                                 
                                 <td style=\"text-align: center; font-weight: bold;\">{$bidang[jml_akhir]}</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nilai_akhir],2,",",".")."</td>
-				
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[pp_akhir],2,",",".")."</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[ap_akhir],2,",",".")."</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nb_akhir],2,",",".")."</td> 
 							</tr>";	
-                                if($levelAset>=4||$levelAset==1)
 				foreach($bidang['Kel'] as $Kelompok)
 				{	
 				   if($Kelompok[ap]==""||$Kelompok[ap]==0)
@@ -430,7 +566,52 @@ $param_tgl = $tglakhirperolehan ;
                                         $bp_kelompok=0;
                                         //$bp_kelompok=$Kelompok[ap_akhir]-$Kelompok[ap_awal]-$Kelompok[mutasi_ap_tambah]+$Kelompok[mutasi_ap_kurang];
                                         $bp_kelompok=$Kelompok[bp];
-                                        
+                     
+                    /*	$row=$baserow++;	
+                    	$objPHPExcel->getActiveSheet()->insertNewRowBefore($row,1);		
+		$objPHPExcel->getActiveSheet()->setCellValue('A'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('B'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('C'.$row, $Kelompok[Kelompok]);
+		$objPHPExcel->getActiveSheet()->setCellValue('D'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('E'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('F'.$row, $Kelompok[Uraian]);
+		$objPHPExcel->getActiveSheet()->setCellValue('G'.$row, $Kelompok[jml]);
+		$objPHPExcel->getActiveSheet()->setCellValue('H'.$row, $Kelompok[nilai]);
+		$objPHPExcel->getActiveSheet()->setCellValue('I'.$row, $Kelompok[pp]);
+		$objPHPExcel->getActiveSheet()->setCellValue('J'.$row, $Kelompok[ap]);
+		$objPHPExcel->getActiveSheet()->setCellValue('K'.$row, $Kelompok[nb]);
+		$objPHPExcel->getActiveSheet()->setCellValue('L'.$row, $Kelompok[mutasi_nilai_kurang]);
+		$objPHPExcel->getActiveSheet()->setCellValue('M'.$row, $Kelompok[mutasi_nilai_tambah]);
+		$objPHPExcel->getActiveSheet()->setCellValue('N'.$row, $Kelompok[mutasi_ap_kurang]);
+		$objPHPExcel->getActiveSheet()->setCellValue('O'.$row, $Kelompok[mutasi_ap_tambah]);
+		$objPHPExcel->getActiveSheet()->setCellValue('P'.$row, $bp_kelompok);
+		$objPHPExcel->getActiveSheet()->setCellValue('Q'.$row, $Kelompok[jml_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('R'.$row, $Kelompok[nilai_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('S'.$row, $Kelompok[pp_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('T'.$row, $Kelompok[ap_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('U'.$row, $Kelompok[np_akhir]);   */ 
+
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=$Kelompok[Kelompok]."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=$Kelompok[Uraian]."|";
+		$csv.=$Kelompok[jml]."|";
+		$csv.=$Kelompok[nilai]."|";
+		$csv.=$Kelompok[pp]."|";
+		$csv.=$Kelompok[ap]."|";
+		$csv.=$Kelompok[nb]."|";
+		$csv.=$Kelompok[mutasi_nilai_kurang]."|";
+		$csv.=$Kelompok[mutasi_nilai_tambah]."|";
+		$csv.=$Kelompok[mutasi_ap_kurang]."|";
+		$csv.=$Kelompok[mutasi_ap_tambah]."|";
+		$csv.=$bp_kelompok."|";
+		$csv.=$Kelompok[jml_akhir]."|";
+		$csv.=$Kelompok[nilai_akhir]."|";
+		$csv.=$Kelompok[pp_akhir]."|";
+		$csv.=$Kelompok[ap_akhir]."|";
+		$csv.=$Kelompok[nb_akhir]."\n";               
 					$body.="<tr>
 								<td>&nbsp;</td>
 								<td>&nbsp;</td>
@@ -440,7 +621,7 @@ $param_tgl = $tglakhirperolehan ;
 								<td>{$Kelompok[Uraian]}</td>
                                 <td style=\"text-align: center;\">{$Kelompok[jml]}</td>
 								<td style=\"text-align: right;\">".number_format($Kelompok[nilai],2,",",".")."</td>
-								
+								<td style=\"text-align: right;\">".number_format($Kelompok[pp],2,",",".")."</td>
 								<td style=\"text-align: right;\">".number_format($Kelompok[ap],2,",",".")."</td>
 								<td style=\"text-align: right;\">".number_format($Kelompok[nb],2,",",".")."</td>
 		   	        <td style=\"text-align: center; font-weight: bold;\">".number_format($Kelompok[mutasi_nilai_kurang],2,",",".")."</td>
@@ -452,12 +633,11 @@ $param_tgl = $tglakhirperolehan ;
 
                                 <td style=\"text-align: center; font-weight: bold;\">{$Kelompok[jml_akhir]}</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[nilai_akhir],2,",",".")."</td>
-				
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[pp_akhir],2,",",".")."</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[ap_akhir],2,",",".")."</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[nb_akhir],2,",",".")."</td> 
 						
                                         </tr>";
-                                if($levelAset>=5||$levelAset==1)
 					foreach($Kelompok['Sub'] as $Sub)
 					{	
 						if($Sub[ap]==""||$Sub[ap]==0)
@@ -469,6 +649,51 @@ $param_tgl = $tglakhirperolehan ;
                                                 $bp_sub=0;
                                                 //$bp_sub=$Sub[ap_akhir]-$Sub[ap_awal]-$Sub[mutasi_ap_tambah]+$Sub[mutasi_ap_kurang];
                                                 $bp_sub=$Sub[bp];
+       /* $row=$baserow++;			
+        $objPHPExcel->getActiveSheet()->insertNewRowBefore($row,1);
+		$objPHPExcel->getActiveSheet()->setCellValue('A'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('B'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('C'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('D'.$row, $Sub[Kelompok]);
+		$objPHPExcel->getActiveSheet()->setCellValue('E'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('F'.$row, $Sub[Uraian]);
+		$objPHPExcel->getActiveSheet()->setCellValue('G'.$row, $Sub[jml]);
+		$objPHPExcel->getActiveSheet()->setCellValue('H'.$row, $Sub[nilai]);
+		$objPHPExcel->getActiveSheet()->setCellValue('I'.$row, $Sub[pp]);
+		$objPHPExcel->getActiveSheet()->setCellValue('J'.$row, $Sub[ap]);
+		$objPHPExcel->getActiveSheet()->setCellValue('K'.$row, $Sub[nb]);
+		$objPHPExcel->getActiveSheet()->setCellValue('L'.$row, $Sub[mutasi_nilai_kurang]);
+		$objPHPExcel->getActiveSheet()->setCellValue('M'.$row, $Sub[mutasi_nilai_tambah]);
+		$objPHPExcel->getActiveSheet()->setCellValue('N'.$row, $Sub[mutasi_ap_kurang]);
+		$objPHPExcel->getActiveSheet()->setCellValue('O'.$row, $Sub[mutasi_ap_tambah]);
+		$objPHPExcel->getActiveSheet()->setCellValue('P'.$row, $bp_sub);
+		$objPHPExcel->getActiveSheet()->setCellValue('Q'.$row, $Sub[jml_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('R'.$row, $Sub[nilai_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('S'.$row, $Sub[pp_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('T'.$row, $Sub[ap_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('U'.$row, $Sub[np_akhir]);   */
+
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=$Sub[Kelompok]."|";
+		$csv.=""."|";
+		$csv.=$Sub[Uraian]."|";
+		$csv.=$Sub[jml]."|";
+		$csv.=$Sub[nilai]."|";
+		$csv.=$Sub[pp]."|";
+		$csv.=$Sub[ap]."|";
+		$csv.=$Sub[nb]."|";
+		$csv.=$Sub[mutasi_nilai_kurang]."|";
+		$csv.=$Sub[mutasi_nilai_tambah]."|";
+		$csv.=$Sub[mutasi_ap_kurang]."|";
+		$csv.=$Sub[mutasi_ap_tambah]."|";
+		$csv.=$bp_sub."|";
+		$csv.=$Sub[jml_akhir]."|";
+		$csv.=$Sub[nilai_akhir]."|";
+		$csv.=$Sub[pp_akhir]."|";
+		$csv.=$Sub[ap_akhir]."|";
+		$csv.=$Sub[nb_akhir]."\n"; 
                                                 
 							$body.="<tr>
 										<td>&nbsp;</td>
@@ -479,7 +704,7 @@ $param_tgl = $tglakhirperolehan ;
 										<td>{$Sub[Uraian]}</td>
 										<td style=\"text-align: center;\">{$Sub[jml]}</td>
 										<td style=\"text-align: right;\">".number_format($Sub[nilai],2,",",".")."</td>
-										
+										<td style=\"text-align: right;\">".number_format($Sub[pp],2,",",".")."</td>
 										<td style=\"text-align: right;\">".number_format($Sub[ap],2,",",".")."</td>
 										<td style=\"text-align: right;\">".number_format($Sub[nb],2,",",".")."</td>
                                                                                     
@@ -492,12 +717,12 @@ $param_tgl = $tglakhirperolehan ;
                                     
                                 <td style=\"text-align: center; font-weight: bold;\">{$Sub[jml_akhir]}</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[nilai_akhir],2,",",".")."</td>
-				
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[pp_akhir],2,",",".")."</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[ap_akhir],2,",",".")."</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[nb_akhir],2,",",".")."</td> 
 
 									</tr>";
-                                if($levelAset==6||$levelAset==1)
+
 						foreach($Sub['SubSub'] as $SubSub)
 						{	 
 							if($SubSub[ap]==""||$SubSub[ap]==0)
@@ -511,7 +736,52 @@ $param_tgl = $tglakhirperolehan ;
                                                        $bp_subsub=$SubSub[bp];
                                                         //$SubSub[mutasi_ap_tambah]-$SubSub[mutasi_ap_kurang];
                                                         
-								$body.="<tr>
+							/*	$row=$baserow++;	
+								$objPHPExcel->getActiveSheet()->insertNewRowBefore($row,1);		
+		$objPHPExcel->getActiveSheet()->setCellValue('A'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('B'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('C'.$row, "");
+		$objPHPExcel->getActiveSheet()->setCellValue('D'.$row, "'");
+		$objPHPExcel->getActiveSheet()->setCellValue('E'.$row, $SubSub[Kelompok]);
+		$objPHPExcel->getActiveSheet()->setCellValue('F'.$row, $SubSub[Uraian]);
+		$objPHPExcel->getActiveSheet()->setCellValue('G'.$row, $SubSub[jml]);
+		$objPHPExcel->getActiveSheet()->setCellValue('H'.$row, $SubSub[nilai]);
+		$objPHPExcel->getActiveSheet()->setCellValue('I'.$row, $SubSub[pp]);
+		$objPHPExcel->getActiveSheet()->setCellValue('J'.$row, $SubSub[ap]);
+		$objPHPExcel->getActiveSheet()->setCellValue('K'.$row, $SubSub[nb]);
+		$objPHPExcel->getActiveSheet()->setCellValue('L'.$row, $SubSub[mutasi_nilai_kurang]);
+		$objPHPExcel->getActiveSheet()->setCellValue('M'.$row, $SubSub[mutasi_nilai_tambah]);
+		$objPHPExcel->getActiveSheet()->setCellValue('N'.$row, $SubSub[mutasi_ap_kurang]);
+		$objPHPExcel->getActiveSheet()->setCellValue('O'.$row, $SubSub[mutasi_ap_tambah]);
+		$objPHPExcel->getActiveSheet()->setCellValue('P'.$row, $bp_sub);
+		$objPHPExcel->getActiveSheet()->setCellValue('Q'.$row, $SubSub[jml_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('R'.$row, $SubSub[nilai_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('S'.$row, $SubSub[pp_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('T'.$row, $SubSub[ap_akhir]);
+		$objPHPExcel->getActiveSheet()->setCellValue('U'.$row, $SubSub[np_akhir]); */
+
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=$SubSub[Kelompok]."|";
+		$csv.=$SubSub[Uraian]."|";
+		$csv.=$SubSub[jml]."|";
+		$csv.=$SubSub[nilai]."|";
+		$csv.=$SubSub[pp]."|";
+		$csv.=$SubSub[ap]."|";
+		$csv.=$SubSub[nb]."|";
+		$csv.=$SubSub[mutasi_nilai_kurang]."|";
+		$csv.=$SubSub[mutasi_nilai_tambah]."|";
+		$csv.=$SubSub[mutasi_ap_kurang]."|";
+		$csv.=$SubSub[mutasi_ap_tambah]."|";
+		$csv.=$bp_sub."|";
+		$csv.=$SubSub[jml_akhir]."|";
+		$csv.=$SubSub[nilai_akhir]."|";
+		$csv.=$SubSub[pp_akhir]."|";
+		$csv.=$SubSub[ap_akhir]."|";
+		$csv.=$SubSub[nb_akhir]."\n";
+							$body.="<tr>
 											<td>&nbsp;</td>
 											<td>&nbsp;</td>
 											<td>&nbsp;</td>
@@ -520,7 +790,8 @@ $param_tgl = $tglakhirperolehan ;
 											<td>{$SubSub[Uraian]}</td>
                                             <td style=\"text-align: center;\">{$SubSub[jml]}</td>
 											<td style=\"text-align: right;\">".number_format($SubSub[nilai],2,",",".")."</td>
-																						<td style=\"text-align: right;\">".number_format($SubSub[ap],2,",",".")."</td>
+											<td style=\"text-align: right;\">".number_format($SubSub[pp],2,",",".")."</td>
+											<td style=\"text-align: right;\">".number_format($SubSub[ap],2,",",".")."</td>
 											<td style=\"text-align: right;\">".number_format($SubSub[nb],2,",",".")."</td>
                                                                                             
 <td style=\"text-align: center; font-weight: bold;\">".number_format($SubSub[mutasi_nilai_kurang],2,",",".")."</td>
@@ -533,7 +804,7 @@ $param_tgl = $tglakhirperolehan ;
 
                                 <td style=\"text-align: center; font-weight: bold;\">{$SubSub[jml_akhir]}</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[nilai_akhir],2,",",".")."</td>
-				
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[pp_akhir],2,",",".")."</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[ap_akhir],2,",",".")."</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[nb_akhir],2,",",".")."</td> 
 
@@ -550,11 +821,33 @@ $param_tgl = $tglakhirperolehan ;
 	
 	
 	if($i == $hit_loop){
+			$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.="'"."|";
+		$csv.=""."|";
+		$csv.="|";
+		$csv.=$jml_total."|";
+		$csv.=$np_total."|";
+		$csv.=$pp_total."|";
+		$csv.=$ap_total."|";
+		$csv.=$nb_total."|";
+		$csv.=$mutasi_nilai_kurang."|";
+		$csv.=$mutasi_nilai_tambah."|";
+		$csv.=$mutasi_ap_kurang."|";
+		$csv.=$mutasi_ap_tambah."|";
+		$csv.=$bp_total."|";
+		$csv.=$jml_total_akhir."|";
+		$csv.=$nilai_total_akhir."|";
+		$csv.=$pp_total_akhir."|";
+		$csv.=$ap_total_akhir."|";
+		$csv.=$nb_total_akhir."\n";
+
 		$foot="<tr>
 				<td colspan = \"6\" style=\"text-align: center; font-weight: bold;\">Total</td>
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($jml_total,0,",",".")."</td>
 				<td style=\"text-align: right; font-weight: bold;\">".number_format($np_total,2,",",".")."</td>
-				
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($pp_total,2,",",".")."</td>
 				<td style=\"text-align: right; font-weight: bold;\">".number_format($ap_total,2,",",".")."</td>
 				<td style=\"text-align: right; font-weight: bold;\">".number_format($nb_total,2,",",".")."</td>
 
@@ -567,7 +860,7 @@ $param_tgl = $tglakhirperolehan ;
     
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($jml_total_akhir,0,",",".")."</td>
 				<td style=\"text-align: right; font-weight: bold;\">".number_format($np_total_akhir,2,",",".")."</td>
-				
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($pp_total_akhir,2,",",".")."</td>
 				<td style=\"text-align: right; font-weight: bold;\">".number_format($ap_total_akhir,2,",",".")."</td>
 				<td style=\"text-align: right; font-weight: bold;\">".number_format($nb_total_akhir,2,",",".")."</td>
 			</tr>
@@ -595,7 +888,7 @@ if($gol == 'mesin_ori'){
 				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=0 or kodeKa=1)))
 				 and $paramSatker";
  
-      $sql = "select  kodeKelompok as kelompok,Aset_ID,TglPembukuan,kodeSatker,
+      $sql = "select  kodeKelompok as kelompok,Aset_ID,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
                PenyusutanPerTahun as PP,Tahun as Tahun, noRegister as noRegister,
                AkumulasiPenyusutan as AP, NilaiBuku as NB,
@@ -612,7 +905,7 @@ if($gol == 'mesin_ori'){
 				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=0  or kodeKa=1)))
 				 and $paramSatker";
 	 
-	$sql = "select  kodeKelompok as kelompok,Aset_ID,TglPembukuan,kodeSatker,
+	$sql = "select  kodeKelompok as kelompok,Aset_ID,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
                PenyusutanPerTahun as PP,Tahun as Tahun, noRegister as noRegister,
                AkumulasiPenyusutan as AP, NilaiBuku as NB,
@@ -639,7 +932,7 @@ if($gol == 'mesin_ori'){
 					 and $paramSatker";
 	 
 	 if($gol == 'jaringan_ori'){
-		$sql = "select  kodeKelompok as kelompok,Aset_ID,TglPembukuan,kodeSatker,
+		$sql = "select  kodeKelompok as kelompok,Aset_ID,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
                PenyusutanPerTahun as PP,Tahun as Tahun, noRegister as noRegister,
                AkumulasiPenyusutan as AP, NilaiBuku as NB,
@@ -651,7 +944,7 @@ if($gol == 'mesin_ori'){
                  $param_where    
                order by kelompok asc";
 	 }else{
-		$sql = "select  kodeKelompok as kelompok,Tahun as Tahun, noRegister as noRegister,Aset_ID,TglPembukuan,kodeSatker,
+		$sql = "select  kodeKelompok as kelompok,Tahun as Tahun, noRegister as noRegister,Aset_ID,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
               (select Uraian from kelompok 
                where kode= kodeKelompok 
@@ -688,7 +981,7 @@ if($gol == 'mesin_ori'){
 				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=0 or kodeKa=1)))
 				 and $paramSatker";
  
-      $sql = "select  kodeKelompok as kelompok,Aset_ID,TglPembukuan,kodeSatker,TahunPenyusutan,
+      $sql = "select  kodeKelompok as kelompok,Aset_ID,TahunPenyusutan,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
                PenyusutanPerTahun as PP,Tahun as Tahun, noRegister as noRegister,
                AkumulasiPenyusutan as AP, NilaiBuku as NB,
@@ -706,7 +999,7 @@ if($gol == 'mesin_ori'){
 				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=0  or kodeKa=1)))
 				 and $paramSatker";
 	 
-	$sql = "select  kodeKelompok as kelompok,Aset_ID,TglPembukuan,kodeSatker,TahunPenyusutan,
+	$sql = "select  kodeKelompok as kelompok,Aset_ID,TahunPenyusutan,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
                PenyusutanPerTahun as PP,Tahun as Tahun, noRegister as noRegister,
                AkumulasiPenyusutan as AP, NilaiBuku as NB,
@@ -734,7 +1027,7 @@ if($gol == 'mesin_ori'){
 	 
 	 if($gol == 'jaringan_ori'){
              $gol="jaringan";
-		$sql = "select  kodeKelompok as kelompok,Aset_ID,TglPembukuan,kodeSatker,TahunPenyusutan,
+		$sql = "select  kodeKelompok as kelompok,Aset_ID,TahunPenyusutan,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
                PenyusutanPerTahun as PP,Tahun as Tahun, noRegister as noRegister,
                AkumulasiPenyusutan as AP, NilaiBuku as NB,
@@ -752,7 +1045,7 @@ if($gol == 'mesin_ori'){
                  $gol="tanah";
              else  $gol="asetlain";
              
-		$sql = "select  kodeKelompok as kelompok,Tahun as Tahun, noRegister as noRegister,Aset_ID,TglPembukuan,kodeSatker,
+		$sql = "select  kodeKelompok as kelompok,Tahun as Tahun, noRegister as noRegister,Aset_ID,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
                 (select Uraian from kelompok 
                where kode= kodeKelompok 
@@ -900,7 +1193,7 @@ if($gol == 'mesin_ori'){
 if($tipe=="3"){
 	echo $serviceJson;
 	exit;
-}elseif($tipe!="2"){
+}elseif($tipe=="1"){
 $REPORT->show_status_download_kib();
 $mpdf=new mPDF('','','','',15,15,16,16,9,9,'L');
 $mpdf->AddPage('L','','','','',15,15,16,16,9,9);
@@ -931,16 +1224,36 @@ $namafile_web="$url_rewrite/report/output/Rekapitulasi-Rincian-Mutasi-Barang-Ke-
 echo "<script>window.location.href='$namafile_web';</script>";
 exit;
 }
-else
+elseif($tipe=="4")
 {
+
+/*$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+$namafile="$path/report/output/Rekapitulasi-Detail-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca-$waktu.xls";
+$objWriter->save($namafile);
+$namafile_web="$url_rewrite/report/output/Rekapitulasi-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca$waktu.xls";
+echo "<script>window.location.href='$namafile_web';</script>";*/
+
+	/*$waktu=date("d-m-y_h:i:s");
+	$filename ="Rekapitulasi-Detail-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca-$waktu.xls";
+	header('Content-type: application/ms-excel');
+	header('Content-Disposition: attachment; filename='.$filename);
+	echo $html; */
+
+	$waktu=date("d-m-y_h:i:s");
+	$filename ="Rekapitulasi-Detail-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca-$waktu.csv";
+	header('Content-type: text/csv');
+	header('Content-Disposition: attachment; filename='.$filename);
+	echo $csv; 
+}
+else{
 	$waktu=date("d-m-y_h:i:s");
 	$filename ="Rekapitulasi-Detail-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca-$waktu.xls";
 	header('Content-type: application/ms-excel');
 	header('Content-Disposition: attachment; filename='.$filename);
-	echo $html; 
+	echo $html;
 }
 
-function group_data($data_awal_perolehan,$data_akhir_perolehan,$data_hapus_awal,$tgl_akhir="",$tgl_awal=""){
+function group_data($data_awal_perolehan,$data_akhir_perolehan,$data_hapus_awal){
     
     //tes
  $data_awal = array();
@@ -952,13 +1265,6 @@ foreach($data_awal_perolehan as $arg)
     $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['TahunPenyusutan']= $arg['TahunPenyusutan'];
     $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Aset_ID']= $arg['Aset_ID'];
     $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Tahun']= $arg['Tahun'];
-    
-    $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['TglPembukuan']= $arg['TglPembukuan'];
-    $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Aset_ID']= $arg['Aset_ID'];
-    $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['kodeSatker']= "{$arg['kodeSatker']}";
-    $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['kodeKelompok']= "{$arg['kelompok']}";
-    
-    
     
     $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Uraian']= $arg['Uraian'];
     $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['nilai']+= $arg['nilai'];
@@ -978,11 +1284,6 @@ foreach($data_akhir_perolehan as $arg)
     $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Aset_ID']= $arg['Aset_ID'];
     $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Tahun']= $arg['Tahun'];
     
-    $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['TglPembukuan']= $arg['TglPembukuan'];
-    $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Aset_ID']= $arg['Aset_ID'];
-    $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['kodeSatker']= "{$arg['kodeSatker']}";
-    $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['kodeKelompok']= "{$arg['kelompok']}";
-    
     $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Uraian']= $arg['Uraian'];
     $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['nilai']+= $arg['nilai'];
     $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['PP']+= $arg['PP'];
@@ -1001,13 +1302,6 @@ foreach($data_hapus_awal as $arg)
     $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['PP']+= $arg['PP'];
     $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['AP']+= $arg['AP'];
     $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['NB']+= $arg['NB'];
-    
-    $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Aset_ID']= $arg['Tahun'];
-    $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['TglPembukuan']= $arg['TglPembukuan'];
-    $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Aset_ID']= $arg['Aset_ID'];
-    $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['kodeSatker']= "{$arg['kodeSatker']}";
-    $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['kodeKelompok']= "{$arg['kelompok']}";
-    
     $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['jml']+= 1;
 }
    
@@ -1027,7 +1321,6 @@ foreach ($result as $key =>$value){
     
     
     
-    
     $selisih_nilai_tambah=0;
     $selisih_nilai_kurang=0;
     $selisih_jml_tambah=0;
@@ -1036,45 +1329,21 @@ foreach ($result as $key =>$value){
     $selisih_ap_kurang=0;
     $selisih_nb_tambah=0;
     $selisih_nb_kurang=0;
-    $bp=0;
-    
-    /*$selisih_pp_tambah=0;
-    $selisih_pp_kurang=0;*/
-    if($data_akhir[$tipe][kodeSatker]==""){
-        $data_selisih=$data_awal;
-         $selisih_nilai_tambah=0;
-         $selisih_nilai_kurang=$data_awal[$tipe]['nilai'];
-         $selisih_jml_tambah=0;
-         $selisih_jml_kurang=1;
-         $selisih_ap_tambah=0;
-         $selisih_ap_kurang=$data_awal[$tipe]['AP'];
-         $selisih_nb_tambah=0;
-         $selisih_nb_kurang=$data_awal[$tipe]['NB'];
-         $bp=0;
-        
-    }else{
-        $data_selisih=$data_akhir;
-        $kodesatker=$data_selisih[$tipe][kodeSatker];
-        $aset_id=$data_selisih[$tipe][Aset_ID];
-        $kodeKelompok=$data_selisih[$tipe]['kodeKelompok'];
-        $tglperolehan=$tgl_akhir;
-
-        $tglpembukuan=$data_selisih[$tipe]['TglPembukuan'];
-        list($bp,$selisih_nilai_tambah,$selisih_nilai_kurang,$selisih_ap_tambah,$selisih_ap_kurang)=
-                history_aset($kodesatker,$aset_id,$tglperolehan,$tgl_awal,$tglpembukuan,$kodeKelompok);
-    }
+    $selisih_pp_tambah=0;
+    $selisih_pp_kurang=0;
     
     
-    /*if($selisih_nilai<0)
+    
+    if($selisih_nilai<0)
         $selisih_nilai_kurang=abs($selisih_nilai);
-    else $selisih_nilai_tambah=$selisih_nilai;*/
+    else $selisih_nilai_tambah=$selisih_nilai;
     
     if($selisih_jml<0)
         $selisih_jml_kurang=abs($selisih_jml);
     else $selisih_jml_tambah=$selisih_jml;
     
     
-   /* if($data_akhir[$tipe]['nilai']!=0 && $data_awal[$tipe]['nilai']!=0 && $selisih_nilai!=0){
+    if($data_akhir[$tipe]['nilai']!=0 && $data_awal[$tipe]['nilai']!=0 && $selisih_nilai!=0){
         if($selisih_ap<0)
            $selisih_ap_kurang=abs($selisih_ap);
        else $selisih_ap_tambah=$selisih_ap;
@@ -1095,7 +1364,7 @@ foreach ($result as $key =>$value){
     if($selisih_pp<0)
         $selisih_pp_kurang=$selisih_pp;
     else
-        $selisih_pp_tambah=$selisih_pp;*/
+        $selisih_pp_tambah=$selisih_pp;
     
     $data_gabungan[$tipe]['Kelompok']=$tipe;
     $data_gabungan[$tipe]['Uraian']=$data_awal[$tipe]['Uraian'];
@@ -1104,21 +1373,17 @@ foreach ($result as $key =>$value){
     $data_gabungan[$tipe]['ap']=$data_awal[$tipe]['AP'];
     $data_gabungan[$tipe]['pp']=$data_awal[$tipe]['PP'];
     $data_gabungan[$tipe]['nb']=$data_awal[$tipe]['NB'];
-    
     $data_gabungan[$tipe]['mutasi_jml_tambah']=$selisih_jml_tambah;
     $data_gabungan[$tipe]['mutasi_jml_kurang']=$selisih_jml_kurang;
     
     $data_gabungan[$tipe]['mutasi_ap_tambah']=$selisih_ap_tambah;
      $data_gabungan[$tipe]['mutasi_ap_kurang']=$selisih_ap_kurang;
      
-   /* $data_gabungan[$tipe]['mutasi_pp_tambah']=$selisih_pp_tambah;
-    $data_gabungan[$tipe]['mutasi_pp_kurang']=$selisih_pp_kurang;*/
+    $data_gabungan[$tipe]['mutasi_pp_tambah']=$selisih_pp_tambah;
+    $data_gabungan[$tipe]['mutasi_pp_kurang']=$selisih_pp_kurang;
     
     $data_gabungan[$tipe]['mutasi_nb_tambah']=$selisih_nb_tambah;
     $data_gabungan[$tipe]['mutasi_nb_kurang']=$selisih_nb_kurang;
-    
-    $data_gabungan[$tipe]['bp']=$bp;
-    
     
     $data_gabungan[$tipe]['mutasi_nilai_tambah']=$selisih_nilai_tambah;
     $data_gabungan[$tipe]['mutasi_nilai_kurang']=$selisih_nilai_kurang;
@@ -1198,7 +1463,7 @@ foreach ($data_akhir_alone as $tipe => $value) {
     $TahunPenyusutan=$value['TahunPenyusutan'];
     $kelompok=$value['Kelompok'];
     $Tahun=$value['Tahun'];
-    /*$akumulasi_sblm=get_akumulasi_sblm($Aset_ID, $TahunPenyusutan, $kelompok);
+    $akumulasi_sblm=get_akumulasi_sblm($Aset_ID, $TahunPenyusutan, $kelompok);
     
     if($Tahun==$TahunPenyusutan){
         //pengadaan di tahun berjalan
@@ -1219,7 +1484,7 @@ foreach ($data_akhir_alone as $tipe => $value) {
             $bp=0;
             $akumulasi_sblm=$value['AP'];
         } 
-    }*/
+    }
        
     $data_akhir[$tipe]['Kelompok']=$tipe;
     $data_akhir[$tipe]['Uraian']=$value['Uraian'];
@@ -1229,34 +1494,7 @@ foreach ($data_akhir_alone as $tipe => $value) {
     $data_akhir[$tipe]['ap']=0;
     $data_akhir[$tipe]['pp']=0;
     $data_akhir[$tipe]['nb']=0;
-    
-    $selisih_nilai_tambah=0;
-    $selisih_nilai_kurang=0;
-    $selisih_jml_tambah=0;
-    $selisih_jml_kurang=0;
-    $selisih_ap_tambah=0;
-    $selisih_ap_kurang=0;
-    $selisih_nb_tambah=0;
-    $selisih_nb_kurang=0;
-    $bp=0;
-    
-    /*$selisih_pp_tambah=0;
-    $selisih_pp_kurang=0;*/
-    
-    $kodesatker=$data_akhir[$tipe]['kodeSatker'];
-    $aset_id=$data_akhir[$tipe]['Aset_ID'];
-    $kodekelompok=$data_akhir[$tipe]['kodeKelompok'];
-    $tglperolehan=$tgl_akhir;
-    $tglpembukuan=$data_akhir[$tipe]['TglPembukuan'];    
-    list($bp,$selisih_nilai_tambah,$selisih_nilai_kurang,$selisih_ap_tambah,$selisih_ap_kurang)=
-            history_aset($kodesatker,$aset_id,$tglperolehan,$tgl_awal,$tglpembukuan,$kodeKelompok);
-    if($bp==0){
-        $selisih_jml_tambah=$value['jml'];
-        $selisih_ap_tambah=$value['AP'];
-        $selisih_nilai_tambah=$value['nilai'];
-    }
-    
-  /*  $data_akhir[$tipe]['mutasi_jml_tambah']=$value['jml'];
+    $data_akhir[$tipe]['mutasi_jml_tambah']=$value['jml'];
     $data_akhir[$tipe]['mutasi_nilai_tambah']=$value['nilai'];
     $data_akhir[$tipe]['mutasi_ap_tambah']=$akumulasi_sblm;//$value['AP'];
     $data_akhir[$tipe]['mutasi_pp_tambah']=$value['PP'];
@@ -1268,23 +1506,7 @@ foreach ($data_akhir_alone as $tipe => $value) {
     $data_akhir[$tipe]['mutasi_pp_kurang']=0;
     $data_akhir[$tipe]['mutasi_nb_kurang']=0;
     
-    $data_akhir[$tipe]['bp']=$bp;//$value['AP'];*/
-    $data_akhir[$tipe]['mutasi_jml_tambah']=$selisih_jml_tambah;
-    $data_akhir[$tipe]['mutasi_jml_kurang']=$selisih_jml_kurang;
-    
-    $data_akhir[$tipe]['mutasi_ap_tambah']=$selisih_ap_tambah;
-    $data_akhir[$tipe]['mutasi_ap_kurang']=$selisih_ap_kurang;
-     
-   /* $data_gabungan[$tipe]['mutasi_pp_tambah']=$selisih_pp_tambah;
-    $data_gabungan[$tipe]['mutasi_pp_kurang']=$selisih_pp_kurang;*/
-    
-    $data_akhir[$tipe]['mutasi_nilai_tambah']=$selisih_nilai_tambah;
-    $data_akhir[$tipe]['mutasi_nilai_kurang']=0;
-    
-    $data_akhir[$tipe]['mutasi_nb_tambah']=$selisih_nb_tambah;
-    $data_akhir[$tipe]['mutasi_nb_kurang']=$selisih_nb_kurang;
-    
-    $data_akhir[$tipe]['bp']=$bp;
+    $data_akhir[$tipe]['bp']=$bp;//$value['AP'];
     
     $data_akhir[$tipe]['nilai_akhir']=$value['nilai'];
     $data_akhir[$tipe]['jml_akhir']=$value['jml'];
@@ -1622,795 +1844,4 @@ function get_akumulasi_sblm($Aset_ID,$TahunPenyusutan,$kelompok){
     
     return $AkumulasiPenyusutan;
 }
-
-function history_aset($kodesatker,$aset_id,$tglakhirperolehan,$tglawalperolehan,$tglpembukuan,$kodeKelompok){
-    
-    $ex = explode('.',$kodeKelompok);
-		$param = $ex['0'];
-    
-    if($aset_id!=""){
-    $getdataRwyt = getdataRwyt($kodesatker,$aset_id,$tglakhirperolehan,$tglawalperolehan,$param,$tglpembukuan);
-			//pr($getdataRwyt);
-
-                        $status_masuk_penyusutan=0;
-                        $flag_penyusutan=0;
-                        
-                        $BEBAN_PENYUSUTAN=0;
-                        $MUTASI_ASET_PENAMBAHAN=0;
-                        $MUTASI_ASET_KURANG=0;
-                        $MUTASI_AKM_PENAMBAHAN=0;
-                        $MUTASI_AKM_PENGURANG=0;
-                        
-			foreach ($getdataRwyt as $valRwyt){
-				$tglFormat = $new_date = date('d-m-Y ', strtotime($valRwyt->TglPerubahan));
-				$tahun_penyusutan=$valRwyt->TahunPenyusutan;
-                                
-                                $tgl_perubahan_sistem=$valRwyt->TglPerubahan;
-                                $tmp_tahun=explode("-",$tgl_perubahan_sistem);
-                                $tahun_penyusutan_log=$tmp_tahun[0];
-                                if($tahun_penyusutan_log==$tahun_penyusutan)
-                                    $tahun_penyusutan_log=$tahun_penyusutan_log-1;
-                                
-                                $tahun_perolehan=$valRwyt->Tahun;
-                                $rentang_penyusutan=$tahun_penyusutan_log-$tahun_perolehan+1;
-                                 $tmp_kode = explode(".", $kodeKelompok);
-                                $masa_manfaat = $valRwyt->MasaManfaat;//$this->cek_masamanfaat($tmp_kode[0], $tmp_kode[1], $tmp_kode[2]);
-                                         
-                                //akhir rentang waktu
-				$newtglFormat = str_replace("-","/",$tglFormat);
-				// pr($newtglFormat);
-				// exit;
-				$Riwayat = get_NamaRiwayat($valRwyt->Kd_Riwayat);
-				$paramKd_Rwyt = $valRwyt->Kd_Riwayat;
-				$kodeKelompok=$valRwyt->kodeKelompok;
-                               
-				//cek tgl u/info
-				/*$ex_tgl_filter = explode('-',$valRwyt->TglPerubahan);
-				$tahun = $ex_tgl_filter[0];
-				$tahun_pnystn = $valRwyt->TahunPenyusutan;
-				if($tahun_pnystn == 0){
-					$Info = '';
-				}elseif($tahun_pnystn < $tahun){
-					if($paramKd_Rwyt == 0 || $paramKd_Rwyt == 2 || $paramKd_Rwyt == 7 || $paramKd_Rwyt == 21 || $paramKd_Rwyt == 28){
-						$Info = "Belum Dilakukan Koreksi Penyusutan";
-					}else{
-						$Info = "";
-					}
-				}else{
-					$Info = "";
-				}*/
-				if($paramKd_Rwyt == 0 || $paramKd_Rwyt == 2 || $paramKd_Rwyt == 7 || $paramKd_Rwyt == 21 || $paramKd_Rwyt == 29 ){
-					/*
-					Kode Riwayat
-					0 = Data baru
-					2 = Ubah Kapitalisasi
-					7 = Penghapusan Sebagian
-					21 = Koreksi Nilai
-					26 = Penghapusan Pemindahtanganan
-					27 = Penghapusan Pemusnahan
-					*/
-                                    //$status_masuk_penyusutan=1;
-					$cekSelisih =($valRwyt->NilaiPerolehan - $valRwyt->NilaiPerolehan_Awal);  
-					if($cekSelisih >= 0){
-						//mutasi tambah
-						if($cekSelisih == 0){
-							$valAdd = $valRwyt->NilaiPerolehan;
-							$valSubstAp = 0;
-							//SALDO AWAL
-							$nilaiAwalPrlhn = 0;
-							$nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
-							
-							$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan_Awal;
-							$AkumulasiPenyusutanFix = ($AkumulasiPenyusutan);
-							
-							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
-								$NilaiBuku = $valRwyt->NilaiBuku_Awal;
-								$NilaiBukuFix = ($NilaiBuku);
-							}else{
-								$NilaiBuku = $valRwyt->NilaiPerolehan;
-								$NilaiBukuFix = ($NilaiBuku);
-							}
-							
-						}else{
-							$valAdd = $cekSelisih;
-							$valSubstAp = $valRwyt->AkumulasiPenyusutan - $valRwyt->AkumulasiPenyusutan_Awal;
-							//SALDO AWAL
-							$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan_Awal;
-							$nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
-							
-							$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan_Awal;
-							$AkumulasiPenyusutanFix = ($AkumulasiPenyusutan);
-							
-							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
-								$NilaiBuku = $valRwyt->NilaiBuku_Awal;
-								$NilaiBukuFix = ($NilaiBuku);
-							}else{
-								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
-								$NilaiBukuFix = ($NilaiBuku);
-							}
-								
-						}
-						//MUTASI ASET (Bertambah)
-						$flag = "(+)";
-						$nilaiPrlhnMutasiTambah =  $valAdd;
-						$nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
-					
-						//MUTASI ASET (Berkurang)
-						$valSubst = 0;
-						$nilaiPrlhnMutasiKurang = $valSubst;
-						$nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
-						
-						//MUTASI PENYUSUTAN (Berkurang)
-						$penyusutanBerkurang = 0;
-						$penyusutanBerkurangFix = ($penyusutanBerkurang);
-						
-						//MUTASI PENYUSUTAN (Bertambah)
-                                              /*     if($valSubstAp!=0 && $paramKd_Rwyt==21)//artinya ada penyusutan
-                                                {
-                                                    $valSubstAp=(abs($cekSelisih)/$masa_manfaat)*$rentang_penyusutan;
-                                                }else $valSubstAp=0;*/
-						$valSubstAp=$valRwyt->AkumulasiPenyusutan - $valRwyt->AkumulasiPenyusutan_Awal;
-						$penyusutanBertambah = $valSubstAp;
-						$penyusutanBertambahFix = ($penyusutanBertambah);
-						
-						//SALDO AKHIR
-						$nilaiPerolehanHasilMutasi = $valRwyt->NilaiPerolehan;
-						$nilaiPerolehanHasilMutasiFix = ($nilaiPerolehanHasilMutasi);
-						
-						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan + $penyusutanBertambah;
-						$AkumulasiPenyusutanHasilMutasiFix = ($AkumulasiPenyusutanHasilMutasi);
-						
-						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
-						$nilaibukuHasilMutasiFix = ($nilaibukuHasilMutasi);
-						
-						//PENYUSUTAN
-						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
-						$PenyusutanPerTahunFix = ($PenyusutanPerTahun);
-						
-						$umurEkonomis = $valRwyt->UmurEkonomis;
-					}else{
-						$flag = "(-)";
-						$valSubstAp = $valRwyt->AkumulasiPenyusutan_Awal - $valRwyt->AkumulasiPenyusutan;
-						//SALDO AWAL
-						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan_Awal;
-						$nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
-						
-						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan_Awal;
-						$AkumulasiPenyusutanFix = ($AkumulasiPenyusutan);
-							
-							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
-								$NilaiBuku = $valRwyt->NilaiBuku_Awal;
-								$NilaiBukuFix = ($NilaiBuku);
-							}else{
-								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
-								$NilaiBukuFix = ($NilaiBuku);
-							}
-						
-						
-						//MUTASI ASET (Bertambah)
-						$valAdd = 0;
-						$nilaiPrlhnMutasiTambah = $valAdd;
-						$nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
-						
-						//MUTASI ASET (Berkurang)
-						$valSubst = abs($cekSelisih);
-						$nilaiPrlhnMutasiKurang = $valSubst;
-						$nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
-						
-						//MUTASI PENYUSUTAN (Berkurang )
-                                                //revisi mutasi penyusutan berkurang
-                                               /* if($valSubstAp!=0)//artinya ada penyusutan
-                                                {
-                                                    $valSubstAp=(abs($cekSelisih)/$masa_manfaat)*$rentang_penyusutan;
-                                                }*/
-                                                $valSubstAp=abs($valRwyt->AkumulasiPenyusutan - $valRwyt->AkumulasiPenyusutan_Awal);
-						$penyusutanBerkurang = $valSubstAp;
-                                                
-						$penyusutanBerkurangFix = ($penyusutanBerkurang);
-						
-						//MUTASI PENYUSUTAN (Bertambah)
-						$penyusutanBertambah = 0;
-						$penyusutanBertambahFix = ($penyusutanBertambah);
-						
-						//SALDO AKHIR
-						$nilaiPerolehanHasilMutasi = $valRwyt->NilaiPerolehan;
-						$nilaiPerolehanHasilMutasiFix = ($nilaiPerolehanHasilMutasi);
-						
-						$AkumulasiPenyusutanHasilMutasi = $valRwyt->AkumulasiPenyusutan;
-						$AkumulasiPenyusutanHasilMutasiFix = ($AkumulasiPenyusutanHasilMutasi);
-						
-						$nilaibukuHasilMutasi = $valRwyt->NilaiBuku;
-						$nilaibukuHasilMutasiFix = ($nilaibukuHasilMutasi);
-						
-						//PENYUSUTAN
-						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
-						$PenyusutanPerTahunFix = ($PenyusutanPerTahun);
-						
-						$umurEkonomis = $valRwyt->UmurEkonomis;
-					
-					}
-				}elseif($paramKd_Rwyt == 1){
-					// $LastSatker = $valRwyt->kodeSatker;
-					// $FirstSatker = $skpd_id;
-					if($valRwyt->kondisi == 1 || $valRwyt->kondisi == 2){
-						$flag = "";
-						
-						//SALDO AWAL
-						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
-						$nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
-						
-						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
-						$AkumulasiPenyusutanFix = ($AkumulasiPenyusutan);
-							
-						if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
-								$NilaiBuku = $valRwyt->NilaiBuku;
-								$NilaiBukuFix = ($NilaiBuku);
-							}else{
-								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
-								$NilaiBukuFix = ($NilaiBuku);
-							}
-						
-						//MUTASI ASET (Bertambah)
-						$nilaiPrlhnMutasiTambah = 0;
-						$nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
-						
-						//MUTASI ASET (Berkurang)
-						$nilaiPrlhnMutasiKurang = 0;
-						$nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
-						
-						//MUTASI PENYUSUTAN (Berkurang)
-						$penyusutanBerkurang = 0;
-						$penyusutanBerkurangFix = ($penyusutanBerkurang);
-						
-						//MUTASI PENYUSUTAN (Bertambah)
-						$penyusutanBertambah = 0;
-						$penyusutanBertambahFix = ($penyusutanBertambah);
-							
-						//SALDO AKHIR
-						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn + $nilaiPrlhnMutasiTambah;
-						$nilaiPerolehanHasilMutasiFix = ($nilaiPerolehanHasilMutasi);
-						
-						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan +  $penyusutanBertambah;
-						$AkumulasiPenyusutanHasilMutasiFix = ($AkumulasiPenyusutanHasilMutasi);
-						
-						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
-						$nilaibukuHasilMutasiFix = ($nilaibukuHasilMutasi);	
-						
-						//PENYUSUTAN
-						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
-						$PenyusutanPerTahunFix = ($PenyusutanPerTahun);
-						
-						$umurEkonomis = $valRwyt->UmurEkonomis;
-					}else{
-						$flag = "(-)";
-						//SALDO AWAL
-						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
-						$nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
-						
-						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
-						$AkumulasiPenyusutanFix = ($AkumulasiPenyusutan);
-							
-							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
-								$NilaiBuku = $valRwyt->NilaiBuku;
-								$NilaiBukuFix = ($NilaiBuku);
-							}else{
-								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
-								$NilaiBukuFix = ($NilaiBuku);
-							}
-						
-						
-						//MUTASI ASET (Bertambah)
-						$nilaiPrlhnMutasiTambah = 0;
-						$nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
-						
-						//MUTASI ASET (Berkurang)
-						$nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
-						$nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
-						
-						//MUTASI PENYUSUTAN (Berkurang)
-						$penyusutanBerkurang = $AkumulasiPenyusutan;
-						$penyusutanBerkurangFix = ($penyusutanBerkurang);
-						
-						//MUTASI PENYUSUTAN (Bertambah)
-						$penyusutanBertambah = 0;
-						$penyusutanBertambahFix = ($penyusutanBertambah);
-						
-						//SALDO AKHIR
-						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn - $nilaiPrlhnMutasiKurang;
-						$nilaiPerolehanHasilMutasiFix = ($nilaiPerolehanHasilMutasi);
-						
-						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan - $penyusutanBerkurang;
-						$AkumulasiPenyusutanHasilMutasiFix = ($AkumulasiPenyusutanHasilMutasi);
-						
-						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
-						$nilaibukuHasilMutasiFix = ($nilaibukuHasilMutasi);
-						
-						//PENYUSUTAN
-						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
-						$PenyusutanPerTahunFix = ($PenyusutanPerTahun);
-						
-						$umurEkonomis = $valRwyt->UmurEkonomis;
-					
-					}
-				}elseif($paramKd_Rwyt == 3){
-					$LastSatker = $valRwyt->kodeSatker;
-					$FirstSatker = $skpd_id;
-					if($LastSatker == $FirstSatker){
-						$flag = "(+)";
-						
-						//SALDO AWAL
-						$nilaiAwalPrlhn = 0;
-						$nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
-						
-						$AkumulasiPenyusutan = 0;
-						$AkumulasiPenyusutanFix = ($AkumulasiPenyusutan);
-							
-						$NilaiBuku = 0;
-						$NilaiBukuFix = ($NilaiBuku);
-						
-						//MUTASI ASET (Bertambah)
-						$nilaiPrlhnMutasiTambah = $valRwyt->NilaiPerolehan;
-						$nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
-						
-						//MUTASI ASET (Berkurang)
-						$nilaiPrlhnMutasiKurang = 0;
-						$nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
-						
-						//MUTASI PENYUSUTAN (Berkurang)
-						$penyusutanBerkurang = 0;
-						$penyusutanBerkurangFix = ($penyusutanBerkurang);
-						
-						//MUTASI PENYUSUTAN (Bertambah)
-						$penyusutanBertambah = $valRwyt->AkumulasiPenyusutan;
-						$penyusutanBertambahFix = ($penyusutanBertambah);
-							
-						//SALDO AKHIR
-						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn + $nilaiPrlhnMutasiTambah;
-						$nilaiPerolehanHasilMutasiFix = ($nilaiPerolehanHasilMutasi);
-						
-						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan +  $penyusutanBertambah;
-						$AkumulasiPenyusutanHasilMutasiFix = ($AkumulasiPenyusutanHasilMutasi);
-						
-						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
-						$nilaibukuHasilMutasiFix = ($nilaibukuHasilMutasi);	
-						
-						//PENYUSUTAN
-						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
-						$PenyusutanPerTahunFix = ($PenyusutanPerTahun);
-						
-						$umurEkonomis = $valRwyt->UmurEkonomis;
-					}else{
-						$flag = "(-)";
-						//SALDO AWAL
-						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
-						$nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
-						
-						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
-						$AkumulasiPenyusutanFix = ($AkumulasiPenyusutan);
-							
-							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
-								$NilaiBuku = $valRwyt->NilaiBuku;
-								$NilaiBukuFix = ($NilaiBuku);
-							}else{
-								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
-								$NilaiBukuFix = ($NilaiBuku);
-							}
-						
-						
-						//MUTASI ASET (Bertambah)
-						$nilaiPrlhnMutasiTambah = 0;
-						$nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
-						
-						//MUTASI ASET (Berkurang)
-						$nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
-						$nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
-						
-						//MUTASI PENYUSUTAN (Berkurang)
-						$penyusutanBerkurang = $AkumulasiPenyusutan;
-						$penyusutanBerkurangFix = ($penyusutanBerkurang);
-						
-						//MUTASI PENYUSUTAN (Bertambah)
-						$penyusutanBertambah = 0;
-						$penyusutanBertambahFix = ($penyusutanBertambah);
-						
-						//SALDO AKHIR
-						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn - $nilaiPrlhnMutasiKurang;
-						$nilaiPerolehanHasilMutasiFix = ($nilaiPerolehanHasilMutasi);
-						
-						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan - $penyusutanBerkurang;
-						$AkumulasiPenyusutanHasilMutasiFix = ($AkumulasiPenyusutanHasilMutasi);
-						
-						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
-						$nilaibukuHasilMutasiFix = ($nilaibukuHasilMutasi);
-						
-						//PENYUSUTAN
-						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
-						$PenyusutanPerTahunFix = ($PenyusutanPerTahun);
-						
-						$umurEkonomis = $valRwyt->UmurEkonomis;
-					
-					}
-				}elseif($paramKd_Rwyt == 28 && $valRwyt->Aset_ID_Penambahan == '0'){
-						$flag = "(+)";
-						
-						//SALDO AWAL
-						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan_Awal;
-						$nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
-						
-						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan_Awal;
-						$AkumulasiPenyusutanFix = ($AkumulasiPenyusutan);
-							
-						if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
-								$NilaiBuku = $valRwyt->NilaiBuku_Awal;
-								$NilaiBukuFix = ($NilaiBuku);
-							}else{
-								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
-								$NilaiBukuFix = ($NilaiBuku);
-							}
-						
-						//MUTASI ASET (Bertambah)
-						$addValueKptls = $valRwyt->NilaiPerolehan - $valRwyt->NilaiPerolehan_Awal;
-						$nilaiPrlhnMutasiTambah = $addValueKptls;
-						$nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
-						
-						//MUTASI ASET (Berkurang)
-						$nilaiPrlhnMutasiKurang = 0;
-						$nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
-						
-						//MUTASI PENYUSUTAN (Berkurang)
-						$penyusutanBerkurang = 0;
-						$penyusutanBerkurangFix = ($penyusutanBerkurang);
-						
-						//MUTASI PENYUSUTAN (Bertambah)
-                                                $valSubstAp = $valRwyt->AkumulasiPenyusutan - $valRwyt->AkumulasiPenyusutan_Awal;
-						$penyusutanBertambah = $valSubstAp;
-						$penyusutanBertambahFix = ($penyusutanBertambah);
-							
-						//SALDO AKHIR
-						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn + $nilaiPrlhnMutasiTambah;
-						$nilaiPerolehanHasilMutasiFix = ($nilaiPerolehanHasilMutasi);
-						
-						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan +  $penyusutanBertambah;
-						$AkumulasiPenyusutanHasilMutasiFix = ($AkumulasiPenyusutanHasilMutasi);
-						
-						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
-						$nilaibukuHasilMutasiFix = ($nilaibukuHasilMutasi);	
-						
-						//PENYUSUTAN
-						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
-						$PenyusutanPerTahunFix = ($PenyusutanPerTahun);
-						
-						$umurEkonomis = $valRwyt->UmurEkonomis;
-				}elseif($paramKd_Rwyt == 28 && $valRwyt->Aset_ID_Penambahan != '0'){
-						$flag = "(-)";
-						//SALDO AWAL
-						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
-						$nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
-						
-						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
-						$AkumulasiPenyusutanFix = ($AkumulasiPenyusutan);
-							
-							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
-								$NilaiBuku = $valRwyt->NilaiBuku;
-								$NilaiBukuFix = ($NilaiBuku);
-							}else{
-								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
-								$NilaiBukuFix = ($NilaiBuku);
-							}
-						
-						
-						//MUTASI ASET (Bertambah)
-						$nilaiPrlhnMutasiTambah = 0;
-						$nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
-						
-						//MUTASI ASET (Berkurang)
-						$nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
-						$nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
-						
-						//MUTASI PENYUSUTAN (Berkurang)
-						$penyusutanBerkurang = $AkumulasiPenyusutan;
-						$penyusutanBerkurangFix = ($penyusutanBerkurang);
-						
-						//MUTASI PENYUSUTAN (Bertambah)
-						$penyusutanBertambah = 0;
-						$penyusutanBertambahFix = ($penyusutanBertambah);
-						
-						//SALDO AKHIR
-						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn - $nilaiPrlhnMutasiKurang;
-						$nilaiPerolehanHasilMutasiFix = ($nilaiPerolehanHasilMutasi);
-						
-						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan - $penyusutanBerkurang;
-						$AkumulasiPenyusutanHasilMutasiFix = ($AkumulasiPenyusutanHasilMutasi);
-						
-						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
-						$nilaibukuHasilMutasiFix = ($nilaibukuHasilMutasi);
-						
-						//PENYUSUTAN
-						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
-						$PenyusutanPerTahunFix = ($PenyusutanPerTahun);
-						
-						$umurEkonomis = $valRwyt->UmurEkonomis;
-				}elseif($paramKd_Rwyt == 26 || $paramKd_Rwyt == 27){
-						$flag = "(-)";
-						//SALDO AWAL
-						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
-						$nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
-						
-						$AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
-						$AkumulasiPenyusutanFix = ($AkumulasiPenyusutan);
-							
-							if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan !=''){
-								$NilaiBuku = $valRwyt->NilaiBuku;
-								$NilaiBukuFix = ($NilaiBuku);
-							}else{
-								$NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
-								$NilaiBukuFix = ($NilaiBuku);
-							}
-						
-						
-						//MUTASI ASET (Bertambah)
-						$nilaiPrlhnMutasiTambah = 0;
-						$nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
-						
-						//MUTASI ASET (Berkurang)
-						$nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
-						$nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
-						
-						//MUTASI PENYUSUTAN (Berkurang)
-						$penyusutanBerkurang = $AkumulasiPenyusutan;
-						$penyusutanBerkurangFix = ($penyusutanBerkurang);
-						
-						//MUTASI PENYUSUTAN (Bertambah)
-						$penyusutanBertambah = 0;
-						$penyusutanBertambahFix = ($penyusutanBertambah);
-						
-						//SALDO AKHIR
-						$nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn - $nilaiPrlhnMutasiKurang;
-						$nilaiPerolehanHasilMutasiFix = ($nilaiPerolehanHasilMutasi);
-						
-						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan - $penyusutanBerkurang;
-						$AkumulasiPenyusutanHasilMutasiFix = ($AkumulasiPenyusutanHasilMutasi);
-						
-						$nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
-						$nilaibukuHasilMutasiFix = ($nilaibukuHasilMutasi);
-						
-						//PENYUSUTAN
-						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
-						$PenyusutanPerTahunFix = ($PenyusutanPerTahun);
-						
-						$umurEkonomis = $valRwyt->UmurEkonomis;
-				}
-				//tambahan
-				elseif(($paramKd_Rwyt == 50 ||$paramKd_Rwyt == 51  )&& $status_masuk_penyusutan!=1){
-						$flag = "";
-						
-						/*(if($flag_penyusutan==0)
-						{
-							$akumulasi_penyusutan_awal=0;
-							$nilai_buku_awal=$valRwyt->NilaiPerolehan;
-							$penyusutan_pertahun_awal=0;
-						}else{
-							$akumulasi_penyusutan_awal=$akumulasi_penyusutan_awal;
-							$nilai_buku_awal=$nilai_buku_awal;
-							$penyusutan_pertahun_awal=$penyusutan_pertahun_awal;
-						}*/
-                                                $akumulasi_penyusutan_awal=$valRwyt->AkumulasiPenyusutan_Awal;
-                                                if($akumulasi_penyusutan_awal!=0)
-                                                    $nilai_buku_awal=$valRwyt->NilaiBuku_Awal;
-                                                else
-                                                    $nilai_buku_awal=$valRwyt->NilaiPerolehan;
-						$penyusutan_pertahun_awal=$valRwyt->PenyusutanPerTahun_Awal;;
-                                                
-						//SALDO AWAL
-						$nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
-						$nilaiAwalPerolehanFix=($nilaiAwalPrlhn);
-						$AkumulasiPenyusutanFix=($akumulasi_penyusutan_awal);
-						$NilaiBukuFix=($nilai_buku_awal);
-
-						
-						//MUTASI ASET (Bertambah)
-						$nilaiPrlhnMutasiTambah = 0;
-						$nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
-						
-						//MUTASI ASET (Berkurang)
-						$nilaiPrlhnMutasiKurang = 0;
-						$nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
-						
-						//MUTASI PENYUSUTAN (Berkurang)
-						$penyusutanBerkurang = 0;
-						$penyusutanBerkurangFix = ($penyusutanBerkurang);
-						
-						//MUTASI PENYUSUTAN (Bertambah)
-						$penyusutanBertambah = 0;
-						$penyusutanBertambahFix = ($penyusutanBertambah);
-						
-
-						//SALDO AKHIR
-						$nilaiPerolehanHasilMutasi = $valRwyt->NilaiPerolehan;
-						$nilaiPerolehanHasilMutasiFix = ($nilaiPerolehanHasilMutasi);
-						
-						$AkumulasiPenyusutan_Akhir = $valRwyt->AkumulasiPenyusutan;
-
-						$beban_penyusutan=$valRwyt->PenyusutanPerTahun;
-						$beban_penyusutanFix = ($beban_penyusutan);
-
-
-						$AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan_Akhir;
-						$AkumulasiPenyusutanHasilMutasiFix = ($AkumulasiPenyusutanHasilMutasi);
-						
-						$nilaibukuHasilMutasi = $valRwyt->NilaiBuku;
-						$nilaibukuHasilMutasiFix = ($nilaibukuHasilMutasi);
-						
-						$nilai_buku_awal=$valRwyt->NilaiBuku;
-						$akumulasi_penyusutan_awal=$valRwyt->AkumulasiPenyusutan;
-						$penyusutan_pertahun_awal=$valRwyt->PenyusutanPerTahun;
-						//PENYUSUTAN
-						$PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
-						$PenyusutanPerTahunFix = ($PenyusutanPerTahun);
-						
-						$umurEkonomis = $valRwyt->UmurEkonomis;
-						$flag_penyusutan++;
-				}
-
-				if(($paramKd_Rwyt == 50 ||$paramKd_Rwyt == 51  ) && $status_masuk_penyusutan!=1){
-                                /*    if($valRwyt->Aset_ID="718755"){
-                                        echo "$nilaiPrlhnMutasiTambahFix ==$beban_penyusutanFix==$BEBAN_PENYUSUTAN<br/>";
-                                        exit();
-                                    }*/
-                                    
-                                    $BEBAN_PENYUSUTAN+=$beban_penyusutanFix;
-                                    $MUTASI_ASET_PENAMBAHAN+=$nilaiPrlhnMutasiTambahFix;
-                                    $MUTASI_ASET_KURANG+=$nilaiPrlhnMutasiKurangFix;
-                                    $MUTASI_AKM_PENAMBAHAN+=$penyusutanBertambahFix;
-                                    $MUTASI_AKM_PENGURANG+=$penyusutanBerkurangFix;
-                                       /*    
-					$body.="<tr>
-						<td style=\"text-align:center;\">{$newtglFormat}</td>
-						<td>$Riwayat $flag</td>
-						<td style=\"text-align:right;\">{$nilaiAwalPerolehanFix}</td>
-						<td style=\"text-align:right;\">{$AkumulasiPenyusutanFix}</td>
-						<td style=\"text-align:right;\">{$NilaiBukuFix}</td>
-						<td style=\"text-align:right;\">{$nilaiPrlhnMutasiTambahFix}</td>
-						<td style=\"text-align:right;\">{$nilaiPrlhnMutasiKurangFix}</td>
-						<td style=\"text-align:right;\">{$penyusutanBertambahFix}</td>
-						<td style=\"text-align:right;\">{$penyusutanBerkurangFix}</td>
-                                                    
-                        <td style=\"text-align:right;\">{$beban_penyusutanFix}</td>    
-						
-                                                <td style=\"text-align:right;\">{$nilaiPerolehanHasilMutasiFix}</td>
-						<td style=\"text-align:right;\">{$AkumulasiPenyusutanHasilMutasiFix}</td>
-						<td style=\"text-align:right;\">{$nilaibukuHasilMutasiFix}</td>
-						<td style=\"text-align:right;\">{$PenyusutanPerTahunFix}</td>
-						<td style=\"text-align:center;\">{$umurEkonomis}</td>
-						<td style=\"text-align:center;\">{$tahun_pnystn}</td>
-						<td style=\"text-align:center;\">{$Info}</td>
-					  </tr>";*/
-				}else{
-                                    /*if($valRwyt->Aset_ID="718755"){
-                                        echo "$nilaiPrlhnMutasiTambahFix<br/>";
-                                    }*/
-                                    $BEBAN_PENYUSUTAN+=0;
-                                    $MUTASI_ASET_PENAMBAHAN+=$nilaiPrlhnMutasiTambahFix;
-                                    $MUTASI_ASET_KURANG+=$nilaiPrlhnMutasiKurangFix;
-                                    $MUTASI_AKM_PENAMBAHAN+=$penyusutanBertambahFix;
-                                    $MUTASI_AKM_PENGURANG+=$penyusutanBerkurangFix;
-                         /*$body.="<tr>
-						<td style=\"text-align:center;\">{$newtglFormat}</td>
-						<td>$Riwayat $flag</td>
-						<td style=\"text-align:right;\">{$nilaiAwalPerolehanFix}</td>
-						<td style=\"text-align:right;\">{$AkumulasiPenyusutanFix}</td>
-						<td style=\"text-align:right;\">{$NilaiBukuFix}</td>
-						<td style=\"text-align:right;\">{$nilaiPrlhnMutasiTambahFix}</td>
-						<td style=\"text-align:right;\">{$nilaiPrlhnMutasiKurangFix}</td>
-						<td style=\"text-align:right;\">{$penyusutanBertambahFix}</td>
-						<td style=\"text-align:right;\">{$penyusutanBerkurangFix}</td>
-                                                    
-                                                <td style=\"text-align:right;\">0</td>    
-						
-                                                <td style=\"text-align:right;\">{$nilaiPerolehanHasilMutasiFix}</td>
-						<td style=\"text-align:right;\">{$AkumulasiPenyusutanHasilMutasiFix}</td>
-						<td style=\"text-align:right;\">{$nilaibukuHasilMutasiFix}</td>
-						<td style=\"text-align:right;\">{$PenyusutanPerTahunFix}</td>
-						<td style=\"text-align:center;\">{$umurEkonomis}</td>
-						<td style=\"text-align:center;\">{$tahun_pnystn}</td>
-						<td style=\"text-align:center;\">{$Info}</td>
-					  </tr>";*/
-				}	  
-			
-			}
-                        
-    }
-     return array($BEBAN_PENYUSUTAN,$MUTASI_ASET_PENAMBAHAN,$MUTASI_ASET_KURANG,$MUTASI_AKM_PENAMBAHAN,$MUTASI_AKM_PENGURANG);
-}
-
-function getdataRwyt($skpd_id,$AsetId,$tglakhirperolehan,$tglawalperolehan,$param,$tglpembukuan){
-
-	if($param == '01'){
-		$tabel_log = 'log_tanah';
-		$tabel = 'tanah';
-		$tabel_view = 'view_mutasi_tanah';
-	}elseif($param == '02'){
-		$tabel_log = 'log_mesin';
-		$tabel = 'mesin';
-		$tabel_view = 'view_mutasi_mesin';
-	}elseif($param == '03'){
-		$tabel_log = 'log_bangunan';
-		$tabel = 'bangunan';
-		$tabel_view = 'view_mutasi_bangunan';
-	}elseif($param == '04'){
-		$tabel_log = 'log_jaringan';
-		$tabel = 'jaringan';
-		$tabel_view = 'view_mutasi_jaringan';
-	}elseif($param == '05'){
-		$tabel_log = 'log_asetlain';
-		$tabel = 'asetlain';
-		$tabel_view = 'view_mutasi_asetlain';
-	}elseif($param == '06'){
-		$tabel_log = 'log_kdp';
-		$tabel = 'kdp';
-		$tabel_view = 'view_mutasi_kdp';
-	}
-
-	/*Kode Riwayat
-	0 = Data baru
-	2 = Ubah Kapitalisasi
-	7 = Penghapusan Sebagian
-	21 = Koreksi Nilai
-	26 = Penghapusan Pemindahtanganan
-	27 = Penghapusan Pemusnahan
-	*/
-	$paramLog = "l.TglPerubahan >'$tglawalperolehan' and l.TglPerubahan <='$tglakhirperolehan'  and l.TglPembukuan>='$tglpembukuan' 
-				 AND l.Kd_Riwayat in (0,1,2,3,7,21,26,27,28,50,51,29) and l.Kd_Riwayat != 77 
-				 and l.Aset_ID = '{$AsetId}' 
-				 order by l.Aset_ID ASC";
-					   
-	$log_data = "select l.* from {$tabel_log} as l 
-						inner join {$tabel} as t on l.Aset_ID = t.Aset_ID 
-						where $paramLog";	
-						
-	 //pr($log_data);	
-	$splitKodeSatker = explode ('.',$skpd_id);
-	if(count($splitKodeSatker) == 4){	
-		$paramSatker = "kodeSatker = '$skpd_id'";
-		$paramSatker_mts_tr = "SatkerAwal = '$skpd_id'";
-		$paramSatker_mts_rc = "SatkerTujuan = '$skpd_id'";
-		
-	}else{
-		$paramSatker = "kodeSatker like '$skpd_id%'";
-		$paramSatker_mts_tr = "SatkerAwal like '$skpd_id%'";
-		$paramSatker_mts_rc = "SatkerTujuan like '$skpd_id%'";
-		
-	}	
-	$queryALL = array($log_data);	
-	for ($i = 0; $i < count($queryALL); $i++){
-		$result = mysql_query($queryALL[$i]) or die (mysql_error);
-		if($result){
-			while ($dataAll = mysql_fetch_object($result))
-			{
-				if($dataAll->Kd_Riwayat == 3 && $dataAll->kodeSatker !=$skpd_id){
-
-				}else{
-					$getdata[]= $dataAll;
-				}				
-				
-			}
-		}
-		
-	}
-	if($getdata){ 
-		return $getdata;
-	}
-}
-
-function get_NamaRiwayat($kode){
-		$queryRwyt = "select Nm_Riwayat from ref_riwayat where Kd_Riwayat ='$kode' ";
-		
-		$resulRwyt=mysql_query($queryRwyt) or die(mysql_error());
-		if($resulRwyt!=""){
-			foreach($resulRwyt as $valueRwyt){
-				$NamaRwyt=$valueRwyt->Nm_Riwayat;
-			}
-		}
-	return $NamaRwyt;
-	}
 ?>
