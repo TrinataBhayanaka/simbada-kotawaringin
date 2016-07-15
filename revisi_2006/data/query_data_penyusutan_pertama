@@ -1,0 +1,4 @@
+INSERT INTO `penyusutan_tahun` (`id`, `kodeSatker`, `KelompokAset`, `Tahun`, `StatusRunning`, `UserNm`) VALUES
+(155, 'REVISI', 'Peralatan dan Mesin (B)', 2014, 0, 'cuncun'),
+(156, 'REVISI', 'Gedung dan Bangunan (C)', 2014, 0, 'cuncun'),
+(157, 'REVISI', 'Jalan, Irigrasi, dan Jaringan (D)', 2014, 0, 'cuncun');

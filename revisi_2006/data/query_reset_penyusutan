@@ -1,0 +1,19 @@
+delete from log_mesin where aset_id in (select aset_id from mesin where Tahun<'2007' and (AkumulasiPenyusutan!=0 or AkumulasiPenyusutan is not null) and NilaiPerolehan>AkumulasiPenyusutan) and kd_riwayat in (49,50,51,52);
+
+update log_mesin set NilaiBuku=0,PenyusutanPertahun=0, AkumulasiPenyusutan=0,MasaManfaat=0,UmurEkonomis=0, TahunPenyusutan=0,NilaiBuku_Awal=0, PenyusutanPerTahun_Awal=0,AkumulasiPenyusutan_Awal=0 where aset_id in (select aset_id from mesin where Tahun<'2007' and (AkumulasiPenyusutan!=0 or AkumulasiPenyusutan is not null) and NilaiPerolehan>AkumulasiPenyusutan);
+
+delete from log_bangunan where aset_id in (select aset_id from bangunan where Tahun<'2007' and (AkumulasiPenyusutan!=0 or AkumulasiPenyusutan is not null) and NilaiPerolehan>AkumulasiPenyusutan) and kd_riwayat in (49,50,51,52);
+
+update log_bangunan set NilaiBuku=0,PenyusutanPertahun=0, AkumulasiPenyusutan=0,MasaManfaat=0,UmurEkonomis=0, TahunPenyusutan=0,NilaiBuku_Awal=0, PenyusutanPerTahun_Awal=0,AkumulasiPenyusutan_Awal=0 where aset_id in (select aset_id from bangunan where Tahun<'2007' and (AkumulasiPenyusutan!=0 or AkumulasiPenyusutan is not null) and NilaiPerolehan>AkumulasiPenyusutan);
+
+delete from log_jaringan where aset_id in (select aset_id from jaringan where Tahun<'2007' and (AkumulasiPenyusutan!=0 or AkumulasiPenyusutan is not null) and NilaiPerolehan>AkumulasiPenyusutan) and kd_riwayat in (49,50,51,52);
+
+update log_jaringan set NilaiBuku=0,PenyusutanPertahun=0, AkumulasiPenyusutan=0,MasaManfaat=0,UmurEkonomis=0, TahunPenyusutan=0,NilaiBuku_Awal=0, PenyusutanPerTahun_Awal=0,AkumulasiPenyusutan_Awal=0 where aset_id in (select aset_id from jaringan where Tahun<'2007' and (AkumulasiPenyusutan!=0 or AkumulasiPenyusutan is not null) and NilaiPerolehan>AkumulasiPenyusutan);
+
+update aset set NilaiBuku=0,PenyusutanPertaun=0, AkumulasiPenyusutan=0,MasaManfaat=0,UmurEkonomis=0, TahunPenyusutan=0 where TipeAset in ('B','C','D') and Tahun<'2007' and (AkumulasiPenyusutan!=0 or AkumulasiPenyusutan is not null) and NilaiPerolehan>AkumulasiPenyusutan;
+
+update mesin set NilaiBuku=0,PenyusutanPertahun=0, AkumulasiPenyusutan=0,MasaManfaat=0,UmurEkonomis=0, TahunPenyusutan=0 where Tahun<'2007' and (AkumulasiPenyusutan!=0 or AkumulasiPenyusutan is not null) and NilaiPerolehan>AkumulasiPenyusutan;
+
+update bangunan set NilaiBuku=0,PenyusutanPertahun=0, AkumulasiPenyusutan=0,MasaManfaat=0,UmurEkonomis=0, TahunPenyusutan=0 where Tahun<'2007' and (AkumulasiPenyusutan!=0 or AkumulasiPenyusutan is not null) and NilaiPerolehan>AkumulasiPenyusutan;
+
+update jaringan set NilaiBuku=0,PenyusutanPertahun=0, AkumulasiPenyusutan=0,MasaManfaat=0,UmurEkonomis=0, TahunPenyusutan=0 where Tahun<'2007' and (AkumulasiPenyusutan!=0 or AkumulasiPenyusutan is not null) and NilaiPerolehan>AkumulasiPenyusutan;
