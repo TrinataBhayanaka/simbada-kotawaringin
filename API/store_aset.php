@@ -1522,7 +1522,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
         $tblAset['kodeSatker'] = $data['kodeSatker'];
         $tahun = explode("-", $data['TglPerolehan']);
         $tblAset['Tahun'] = $tahun[0];
-        $tblAset['kodeLokasi'] = "12.11.33.".$kodeSatker[0].".".$kodeSatker[1].".".substr($tahun[0],-2).".".$kodeSatker[2].".".$kodeSatker[3];
+        $tblAset['kodeLokasi'] = $data['kodepemilik'].".24.05.".$kodeSatker[0].".".$kodeSatker[1].".".substr($tahun[0],-2).".".$kodeSatker[2].".".$kodeSatker[3];
         $tblAset['noKontrak'] = $data['noKontrak'];
         $tblAset['TglPerolehan'] = $data['TglPerolehan'];
         $tblAset['NilaiPerolehan'] = $data['Satuan'];
@@ -1937,7 +1937,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
         $kodeSatker = explode(".",$data['kodeSatker']);
         $tblAset['kodeKelompok'] = $data['kodeKelompok'];
         $tblAset['kodeSatker'] = $data['kodeSatker'];
-        $tblAset['kodeLokasi'] = "12.11.33.".$kodeSatker[0].".".$kodeSatker[1].".".substr($data['Tahun'],-2).".".$kodeSatker[2].".".$kodeSatker[3];
+        $tblAset['kodeLokasi'] = $data['kodepemilik'].".24.05.".$kodeSatker[0].".".$kodeSatker[1].".".substr($data['Tahun'],-2).".".$kodeSatker[2].".".$kodeSatker[3];
         $tblAset['noKontrak'] = $data['noKontrak'];
         $tblAset['TglPerolehan'] = $data['TglPerolehan'];
         $tblAset['NilaiPerolehan'] = $data['NilaiPerolehan'];
@@ -2018,7 +2018,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
         $tblAset['kodeKelompok'] = $data['kodeKelompok'];
         $tblAset['kodeSatker'] = $data['kodeSatker'];
         $tahun = explode("-", $data['TglPerolehan']);
-        $tblAset['kodeLokasi'] = "12.11.33.".$kodeSatker[0].".".$kodeSatker[1].".".substr($tahun[0],-2).".".$kodeSatker[2].".".$kodeSatker[3];
+        $tblAset['kodeLokasi'] = $data['kodepemilik'].".24.05.".$kodeSatker[0].".".$kodeSatker[1].".".substr($tahun[0],-2).".".$kodeSatker[2].".".$kodeSatker[3];
         $tblAset['noKontrak'] = $data['noKontrak'];
         $tblAset['Tahun'] = $tahun[0];
         $tblAset['TglPerolehan'] = $data['TglPerolehan'];
@@ -2322,7 +2322,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
         $tblAset['kodeKelompok'] = $data['kodeKelompok'];
         $tblAset['kodeSatker'] = $data['kodeSatker'];
         $tblAset['Tahun'] = date('Y', strtotime($data['tglPerolehan']));
-        $tblAset['kodeLokasi'] = $data['kodepemilik'].".11.33.".$kodeSatker[0].".".$kodeSatker[1].".".substr($tblAset['Tahun'],-2).".".$kodeSatker[2].".".$kodeSatker[3];
+        $tblAset['kodeLokasi'] = $data['kodepemilik'].".24.05.".$kodeSatker[0].".".$kodeSatker[1].".".substr($tblAset['Tahun'],-2).".".$kodeSatker[2].".".$kodeSatker[3];
         $tblAset['TglPerolehan'] = $data['tglPerolehan'];
         $tblAset['TglPembukuan'] = $data['tglPembukuan'];
         $tblAset['NilaiPerolehan'] = $data['Satuan'];
@@ -2568,7 +2568,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
         if(isset($data['tglPerolehan'])) {$tblAset['TglPerolehan'] = $data['tglPerolehan'];$tblAset['Tahun'] = date('Y', strtotime($data['tglPerolehan']));}
         if(isset($data['tglPembukuan'])) $tblAset['TglPembukuan'] = $data['tglPembukuan'];
         if(isset($data['kodepemilik'])) {
-            $tblAset['kodeLokasi'] = $data['kodepemilik'].".11.33.".$kodeSatker[0].".".$kodeSatker[1].".".substr($tblAset['Tahun'],-2).".".$kodeSatker[2].".".$kodeSatker[3];
+            $tblAset['kodeLokasi'] = $data['kodepemilik'].".24.05.".$kodeSatker[0].".".$kodeSatker[1].".".substr($tblAset['Tahun'],-2).".".$kodeSatker[2].".".$kodeSatker[3];
             $sql = "SELECT MAX(noRegister) AS lastreg FROM aset WHERE kodeKelompok = '{$data['kodeKelompok']}' AND kodeLokasi = '{$tblAset['kodeLokasi']}'";
             $noreg = $this->fetch($sql);
             $tblAset['noRegister'] = intval($noreg['lastreg'])+1;
@@ -2638,7 +2638,13 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                 $tblAset['kodeRuangan'] = $ruangan[1];   
             }
         }    
-
+            
+        
+             $sql_np = "SELECT NilaiPerolehan FROM aset WHERE Aset_ID = '{$data['Aset_ID']}'";
+              $sql_np_query = mysql_query($sql_np);
+              while ($dataAset_np = mysql_fetch_assoc($sql_np_query)){
+                      $NilaiPerolehan = $dataAset_np['NilaiPerolehan'];
+                  }
 
             foreach ($tblAset as $key => $val) {
                 $tmpfield[] = $key."='$val'";
@@ -2859,7 +2865,10 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
               $kib['changeDate'] = date("Y-m-d");
               $kib['action'] = 'koreksi';
               $kib['operator'] = $_SESSION['ses_uoperatorid'];
-              $kib['NilaiPerolehan_Awal'] = $kib_old['NilaiPerolehan'];
+              if($tabel!="aset")
+                $kib['NilaiPerolehan_Awal'] = $kib_old['NilaiPerolehan'];
+              else
+                  $kib['NilaiPerolehan_Awal'] = $NilaiPerolehan;
               $kib['GUID'] = $data['GUID'];
               if($data['rubahkondisi']) {
                 $kib['Kd_Riwayat'] = 1;
@@ -2981,7 +2990,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
         $tblAset['kodeSatker'] = $data['kodeSatker'];
         $tahun = explode("-", $data['TglPerolehan']);
         $tblAset['Tahun'] = $tahun[0];
-        $tblAset['kodeLokasi'] = "12.11.33.".$kodeSatker[0].".".$kodeSatker[1].".".substr($tahun[0],-2).".".$kodeSatker[2].".".$kodeSatker[3];
+        $tblAset['kodeLokasi'] = $data['kodepemilik'].".24.05.".$kodeSatker[0].".".$kodeSatker[1].".".substr($tahun[0],-2).".".$kodeSatker[2].".".$kodeSatker[3];
         $tblAset['TglPerolehan'] = $data['TglPerolehan'];
         $tblAset['NilaiPerolehan'] = $data['Satuan'];
         $tblAset['kondisi'] = $data['kondisi'];
@@ -3161,7 +3170,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
         $tblAset['kodeSatker'] = $data['kodeSatker'];
         $tahun = explode("-", $data['TglPerolehan']);
         $tblAset['Tahun'] = $tahun[0];
-        $tblAset['kodeLokasi'] = "12.11.33.".$kodeSatker[0].".".$kodeSatker[1].".".substr($tahun[0],-2).".".$kodeSatker[2].".".$kodeSatker[3];
+        $tblAset['kodeLokasi'] = $data['kodepemilik'].".24.05.".$kodeSatker[0].".".$kodeSatker[1].".".substr($tahun[0],-2).".".$kodeSatker[2].".".$kodeSatker[3];
         $tblAset['TglPerolehan'] = $data['TglPerolehan'];
         $tblAset['NilaiPerolehan'] = $data['Satuan'];
         $tblAset['kondisi'] = $data['kondisi'];
