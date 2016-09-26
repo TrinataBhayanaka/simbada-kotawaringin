@@ -927,7 +927,11 @@ for ( $i=0;$i<2;$i++ ) {
             list( $AkumulasiPenyusutan, $UmurEkonomis, $MasaManfaat )= get_data_akumulasi_from_eksisting( $Aset_ID, $DBVAR );
 
             $PenyusutanPerTahun=round( $NP/$MasaManfaat );
-            $rentang_tahun_penyusutan = ( $newTahun-$Tahun )+1;
+            $selisih_2006=2006-$Tahun+1;
+            if($Tahun<2007)
+              $rentang_tahun_penyusutan = ( $newTahun-$Tahun )+1-$selisih_2006;
+            else
+              $rentang_tahun_penyusutan = ( $newTahun-$Tahun )+1;
 
             $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
             $NilaiBuku=$NP-$AkumulasiPenyusutan;
@@ -1032,7 +1036,12 @@ for ( $i=0;$i<2;$i++ ) {
         echo "tidak masuk log \n";
         //bila tidak ada transaksi
         //$PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;
-        $rentang_tahun_penyusutan = ( $newTahun-$Tahun )+1;
+        $selisih_2006=2006-$Tahun+1;
+        if($Tahun<2007)
+          $rentang_tahun_penyusutan = ( $newTahun-$Tahun )+1-$selisih_2006;
+        else
+          $rentang_tahun_penyusutan = ( $newTahun-$Tahun )+1;
+
         //$AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
         $AkumulasiPenyusutan=$AkumulasiPenyusutan+$PenyusutanPerTahun;
         $NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;
