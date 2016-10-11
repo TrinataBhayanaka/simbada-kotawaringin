@@ -419,7 +419,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
         $masa_manfaat=$masa_manfaat-$selisih_2006;
         
 		if ($masa_manfaat!=""){
-                   $penyusutan_per_tahun=round($NilaiPerolehan/$masa_manfaat)  ;
+                   $penyusutan_per_tahun=round(($NilaiPerolehan/$masa_manfaat),2)  ;
                    $Tahun_Aktif= $tahun;
                    // $Tahun_Aktif= $tahun - 1;
                    $rentang_tahun_penyusutan = ($Tahun_Aktif-2007)+1;

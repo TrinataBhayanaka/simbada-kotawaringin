@@ -412,7 +412,7 @@ for ( $i=0;$i<2;$i++ ) {
       $masa_manfaat = cek_masamanfaat( $tmp_kode[0], $tmp_kode[1], $tmp_kode[2], $DBVAR );
 
       if ( $masa_manfaat != "" ) {
-        $penyusutan_per_tahun = round( $NilaiPerolehan / $masa_manfaat );
+        $penyusutan_per_tahun = round(( $NilaiPerolehan / $masa_manfaat ),2);
         $Tahun_Aktif = $tahun;
         // $Tahun_Aktif= $tahun - 1;
         $rentang_tahun_penyusutan = ( $Tahun_Aktif - $Tahun ) + 1;
@@ -794,14 +794,14 @@ for ( $i=0;$i<2;$i++ ) {
               $status_awal_karena_melebihi_masa_manfaat=1;
             }
 
-            $PenyusutanPerTahun_hasil=round( $NilaiYgDisusutkan/$Umur_Ekonomis_Final );
+            $PenyusutanPerTahun_hasil=round(( $NilaiYgDisusutkan/$Umur_Ekonomis_Final ),2);
 
             if ( $status_awal_karena_melebihi_masa_manfaat!=1 )
               $AkumulasiPenyusutan_hasil=$AkumulasiPenyusutan+$PenyusutanPerTahun_hasil;
             else {
               // $AkumulasiPenyusutan_hasil=$PenyusutanPerTahun_hasil;
               //$PenyusutanPerTahun=round($NP/$Umur_Ekonomis_Final);
-              $PenyusutanPerTahun=round( $NilaiYgDisusutkan/$Umur_Ekonomis_Final );
+              $PenyusutanPerTahun=round(( $NilaiYgDisusutkan/$Umur_Ekonomis_Final ),2);
               $rentang_tahun_penyusutan = 1;
 
               $AkumulasiPenyusutan_baru=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
@@ -926,7 +926,7 @@ for ( $i=0;$i<2;$i++ ) {
 
             list( $AkumulasiPenyusutan, $UmurEkonomis, $MasaManfaat )= get_data_akumulasi_from_eksisting( $Aset_ID, $DBVAR );
 
-            $PenyusutanPerTahun=round( $NP/$MasaManfaat );
+            $PenyusutanPerTahun=round(( $NP/$MasaManfaat ),2);
             $selisih_2006=2006-$Tahun+1;
             if($Tahun<2007)
               $rentang_tahun_penyusutan = ( $newTahun-$Tahun )+1-$selisih_2006;
