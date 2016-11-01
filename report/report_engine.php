@@ -9877,7 +9877,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 								<td style=\"width: 60px;font-weight: \">$row->Ukuran</td>
 								<td style=\"width: 60px;font-weight: \">$row->Material</td>
 								<td style=\"width: 70; text-align: center;\">$row->Tahun</td>
-								<td style=\"width: 72px; text-align: center;\">$row->NoSTNK</td>
+								<td style=\"width: 72px; text-align: center;\">$row->Pabrik</td>
 								<td style=\"width: 72px; text-align: center;\">$row->NoRangka</td>
 								<td style=\"width: 72px; text-align: center;\">$row->NoMesin</td>
 								<td style=\"width: 72px; text-align: center;\">$row->NoSeri</td>
@@ -12458,7 +12458,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												<td style=\"width: 60px;font-weight: \">$row->Ukuran</td>
 												<td style=\"width: 60px;font-weight: \">$row->Material</td>
 												<td style=\"width: 70; text-align: center;\">$row->Tahun</td>
-												<td style=\"width: 72px; text-align: center;\">$row->NoSTNK</td>
+												<td style=\"width: 72px; text-align: center;\">$row->Pabrik</td>
 												<td style=\"width: 72px; text-align: center;\">$row->NoRangka</td>
 												<td style=\"width: 72px; text-align: center;\">$row->NoMesin</td>
 												<td style=\"width: 72px; text-align: center;\">$row->NoSeri</td>
@@ -16833,7 +16833,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 								<td style=\"width: 60px;font-weight: \">$row->Material</td>
 								<td style=\"width: 70; text-align: center;\">$row->Tahun</td>
 								<td style=\"width: 70; text-align: center;\">$tglPrlhn</td>
-								<td style=\"width: 72px; text-align: center;\">$row->NoSTNK</td>
+								<td style=\"width: 72px; text-align: center;\">$row->Pabrik</td>
 								<td style=\"width: 72px; text-align: center;\">$row->NoRangka</td>
 								<td style=\"width: 72px; text-align: center;\">$row->NoMesin</td>
 								<td style=\"width: 72px; text-align: center;\">$row->NoSeri</td>
@@ -21306,7 +21306,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 											<td style=\"width: 60px;font-weight: \">$row->Ukuran</td>
 											<td style=\"width: 60px;font-weight: \">$row->Material</td>
 											<td style=\"width: 70; text-align: center;\">$row->Tahun</td>
-											<td style=\"width: 72px; text-align: center;\">$row->NoSTNK</td>
+											<td style=\"width: 72px; text-align: center;\">$row->Pabrik</td>
 											<td style=\"width: 72px; text-align: center;\">$row->NoRangka</td>
 											<td style=\"width: 72px; text-align: center;\">$row->NoMesin</td>
 											<td style=\"width: 72px; text-align: center;\">$row->NoSeri</td>
