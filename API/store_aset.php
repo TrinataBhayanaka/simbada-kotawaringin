@@ -1522,6 +1522,8 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
         $tblAset['kodeSatker'] = $data['kodeSatker'];
         $tahun = explode("-", $data['TglPerolehan']);
         $tblAset['Tahun'] = $tahun[0];
+        if($data['kodepemilik']=="")
+            $data['kodepemilik']="12";
         $tblAset['kodeLokasi'] = $data['kodepemilik'].".24.05.".$kodeSatker[0].".".$kodeSatker[1].".".substr($tahun[0],-2).".".$kodeSatker[2].".".$kodeSatker[3];
         $tblAset['noKontrak'] = $data['noKontrak'];
         $tblAset['TglPerolehan'] = $data['TglPerolehan'];
