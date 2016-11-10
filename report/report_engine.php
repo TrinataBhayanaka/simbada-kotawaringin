@@ -9867,26 +9867,26 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 							$data = $row->noReg;
 							$ex = explode(',',$data);
 							$hit = count($ex);												
-										$html.="
-											<tr align=\"center\">
-												<td style=\"width: 30px; text-align: center;\">$no</td>
-												<td style=\"width: 85px; text-align: center;\">$row->Kode</td>
-												<td style=\"width: 150px; \">$row->Uraian</td>
-												<td style=\"width: 60px; text-align: center; width: 60px; \">$noReg</td>
-												<td style=\"width: 43px; font-weight: \">$row->Merk</td>
-												<td style=\"width: 60px;font-weight: \">$row->Ukuran</td>
-												<td style=\"width: 60px;font-weight: \">$row->Material</td>
-												<td style=\"width: 70; text-align: center;\">$row->Tahun</td>
-												<td style=\"width: 72px; text-align: center;\">$row->NoSeri</td>
-												<td style=\"width: 72px; text-align: center;\">$row->NoRangka</td>
-												<td style=\"width: 72px; text-align: center;\">$row->NoMesin</td>
-												<td style=\"width: 72px; text-align: center;\">$row->NoSTNK</td>
-												<td style=\"width: 72px; text-align: center;\">$row->NoBPKB</td>
-												<td style=\"width: 69; text-align: center;\">$row->AsalUsul</td>
-												<td style=\"width: 81px; text-align: center;\">$hit</td>
-												<td style=\"width: 81px; text-align: right;\">$nilaiPrlhnFix</td>
-												<td style=\"width: 69px;font-weight: \">$row->Info</td>
-											</tr>";
+						$html.="
+							<tr align=\"center\">
+								<td style=\"width: 30px; text-align: center;\">$no</td>
+								<td style=\"width: 85px; text-align: center;\">$row->Kode</td>
+								<td style=\"width: 150px; \">$row->Uraian</td>
+								<td style=\"width: 60px; text-align: center; width: 60px; \">$noReg</td>
+								<td style=\"width: 43px; font-weight: \">$row->Merk</td>
+								<td style=\"width: 60px;font-weight: \">$row->Ukuran</td>
+								<td style=\"width: 60px;font-weight: \">$row->Material</td>
+								<td style=\"width: 70; text-align: center;\">$row->Tahun</td>
+								<td style=\"width: 72px; text-align: center;\">$row->Pabrik</td>
+								<td style=\"width: 72px; text-align: center;\">$row->NoRangka</td>
+								<td style=\"width: 72px; text-align: center;\">$row->NoMesin</td>
+								<td style=\"width: 72px; text-align: center;\">$row->NoSeri</td>
+								<td style=\"width: 72px; text-align: center;\">$row->NoBPKB</td>
+								<td style=\"width: 69; text-align: center;\">$row->AsalUsul</td>
+								<td style=\"width: 81px; text-align: center;\">$hit</td>
+								<td style=\"width: 81px; text-align: right;\">$nilaiPrlhnFix</td>
+								<td style=\"width: 69px;font-weight: \">$row->Info</td>
+							</tr>";
 									   
 							  $no++;
 							 
@@ -12446,28 +12446,28 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												// $noReg=$this->sortirNoReg($row->noRegister);
 												$noReg=$row->noRegister;
 																								
-                                                            $body.="
-																<tr align=\"center\">
-																	<td style=\"width: 30px; text-align: center;\">$no</td>
-																	<td style=\"width: 85px; text-align: center;\">$row->Kode</td>
-																	<td style=\"width: 150px; \">$row->Uraian</td>
-																	
-																	<td style=\"width: 60px; text-align: center; width: 60px; \">$noReg</td>
-																	
-																	<td style=\"width: 43px; font-weight: \">$row->Merk</td>
-																	<td style=\"width: 60px;font-weight: \">$row->Ukuran</td>
-																	<td style=\"width: 60px;font-weight: \">$row->Material</td>
-																	<td style=\"width: 70; text-align: center;\">$row->Tahun</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoSeri</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoRangka</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoMesin</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoSTNK</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoBPKB</td>
-																	<td style=\"width: 69; text-align: center;\">$row->AsalUsul</td>
-																	<td style=\"width: 81px; text-align: center;\">$hit</td>
-																	<td style=\"width: 81px; text-align: right;\">$nilaiPrlhnFix</td>
-																	<td style=\"width: 69px;font-weight: \">$row->Info</td>
-																</tr>";
+                                        $body.="
+											<tr align=\"center\">
+												<td style=\"width: 30px; text-align: center;\">$no</td>
+												<td style=\"width: 85px; text-align: center;\">$row->Kode</td>
+												<td style=\"width: 150px; \">$row->Uraian</td>
+												
+												<td style=\"width: 60px; text-align: center; width: 60px; \">$noReg</td>
+												
+												<td style=\"width: 43px; font-weight: \">$row->Merk</td>
+												<td style=\"width: 60px;font-weight: \">$row->Ukuran</td>
+												<td style=\"width: 60px;font-weight: \">$row->Material</td>
+												<td style=\"width: 70; text-align: center;\">$row->Tahun</td>
+												<td style=\"width: 72px; text-align: center;\">$row->Pabrik</td>
+												<td style=\"width: 72px; text-align: center;\">$row->NoRangka</td>
+												<td style=\"width: 72px; text-align: center;\">$row->NoMesin</td>
+												<td style=\"width: 72px; text-align: center;\">$row->NoSeri</td>
+												<td style=\"width: 72px; text-align: center;\">$row->NoBPKB</td>
+												<td style=\"width: 69; text-align: center;\">$row->AsalUsul</td>
+												<td style=\"width: 81px; text-align: center;\">$hit</td>
+												<td style=\"width: 81px; text-align: right;\">$nilaiPrlhnFix</td>
+												<td style=\"width: 69px;font-weight: \">$row->Info</td>
+											</tr>";
                                                            
                                                   $no++;
                                                  
@@ -16822,32 +16822,32 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 													list($tahun, $bulan, $tanggal)= explode('-', $row->TglPerolehan);
 													$tglPrlhn = "$tanggal/$bulan/$tahun";
 												}												
-                                                            $body.="
-																<tr align=\"center\">
-																	<td style=\"width: 30px; text-align: center;\">$no</td>
-																	<td style=\"width: 85px; text-align: center;\">$row->Kode</td>
-																	<td style=\"width: 150px; \">$row->Uraian</td>
-																	<td style=\"width: 60px; text-align: center; width: 60px; \">$noReg</td>
-																	<td style=\"width: 43px; font-weight: \">$row->Merk</td>
-																	<td style=\"width: 60px;font-weight: \">$row->Ukuran</td>
-																	<td style=\"width: 60px;font-weight: \">$row->Material</td>
-																	<td style=\"width: 70; text-align: center;\">$row->Tahun</td>
-																	<td style=\"width: 70; text-align: center;\">$tglPrlhn</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoSeri</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoRangka</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoMesin</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoSTNK</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoBPKB</td>
-																	<td style=\"width: 69; text-align: center;\">$row->AsalUsul</td>
-																	<td style=\"width: 81px; text-align: right;\">$nilaiPrlhnFix</td>
-																	<td style=\"width: 70px;font-weight: \">$row->Info</td>
-																	<td style=\"width: 70px;font-weight: \"></td>
-																	<td style=\"width: 70px;font-weight: \"></td>
-																	<td style=\"width: 100px;font-weight: \"></td>
-																	<td style=\"width: 100px;font-weight: \"></td>
-																</tr>";
-                                                           
-                                                  $no++;
+                                $body.="
+								<tr align=\"center\">
+								<td style=\"width: 30px; text-align: center;\">$no</td>
+								<td style=\"width: 85px; text-align: center;\">$row->Kode</td>
+								<td style=\"width: 150px; \">$row->Uraian</td>
+								<td style=\"width: 60px; text-align: center; width: 60px; \">$noReg</td>
+								<td style=\"width: 43px; font-weight: \">$row->Merk</td>
+								<td style=\"width: 60px;font-weight: \">$row->Ukuran</td>
+								<td style=\"width: 60px;font-weight: \">$row->Material</td>
+								<td style=\"width: 70; text-align: center;\">$row->Tahun</td>
+								<td style=\"width: 70; text-align: center;\">$tglPrlhn</td>
+								<td style=\"width: 72px; text-align: center;\">$row->Pabrik</td>
+								<td style=\"width: 72px; text-align: center;\">$row->NoRangka</td>
+								<td style=\"width: 72px; text-align: center;\">$row->NoMesin</td>
+								<td style=\"width: 72px; text-align: center;\">$row->NoSeri</td>
+								<td style=\"width: 72px; text-align: center;\">$row->NoBPKB</td>
+								<td style=\"width: 69; text-align: center;\">$row->AsalUsul</td>
+								<td style=\"width: 81px; text-align: right;\">$nilaiPrlhnFix</td>
+								<td style=\"width: 70px;font-weight: \">$row->Info</td>
+								<td style=\"width: 70px;font-weight: \"></td>
+								<td style=\"width: 70px;font-weight: \"></td>
+								<td style=\"width: 100px;font-weight: \"></td>
+								<td style=\"width: 100px;font-weight: \"></td>
+								</tr>";
+                               
+                                      $no++;
                                                  
                                              }
                                              //udah dicoba ga muncul
@@ -21294,29 +21294,29 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												$ex = explode(',',$data);
 												$hit = count($ex);
 												
-                                                            $body.="
-																<tr align=\"center\">
-																	<td style=\"width: 30px; text-align: center;\">$no</td>
-																	<td style=\"width: 85px; text-align: center;\">$row->Kode</td>
-																	<td style=\"width: 150px; \">$row->Uraian</td>
-																	
-																	<td style=\"width: 60px; text-align: center; width: 60px; \">$noReg</td>
-																	
-																	<td style=\"width: 43px; font-weight: \">$row->Merk</td>
-																	<td style=\"width: 60px;font-weight: \">$row->Ukuran</td>
-																	<td style=\"width: 60px;font-weight: \">$row->Material</td>
-																	<td style=\"width: 70; text-align: center;\">$row->Tahun</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoSeri</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoRangka</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoMesin</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoSTNK</td>
-																	<td style=\"width: 72px; text-align: center;\">$row->NoBPKB</td>
-																	<td style=\"width: 69; text-align: center;\">$row->AsalUsul</td>
-																	<td style=\"width: 81px; text-align: center;\">$hit</td>
-																	<td style=\"width: 81px; text-align: right;\">$nilaiPrlhnFix</td>
-																	<td style=\"width: 69px;font-weight: \">$row->Info</td>
-																</tr>";
-                                                           
+                                    $body.="
+										<tr align=\"center\">
+											<td style=\"width: 30px; text-align: center;\">$no</td>
+											<td style=\"width: 85px; text-align: center;\">$row->Kode</td>
+											<td style=\"width: 150px; \">$row->Uraian</td>
+											
+											<td style=\"width: 60px; text-align: center; width: 60px; \">$noReg</td>
+											
+											<td style=\"width: 43px; font-weight: \">$row->Merk</td>
+											<td style=\"width: 60px;font-weight: \">$row->Ukuran</td>
+											<td style=\"width: 60px;font-weight: \">$row->Material</td>
+											<td style=\"width: 70; text-align: center;\">$row->Tahun</td>
+											<td style=\"width: 72px; text-align: center;\">$row->Pabrik</td>
+											<td style=\"width: 72px; text-align: center;\">$row->NoRangka</td>
+											<td style=\"width: 72px; text-align: center;\">$row->NoMesin</td>
+											<td style=\"width: 72px; text-align: center;\">$row->NoSeri</td>
+											<td style=\"width: 72px; text-align: center;\">$row->NoBPKB</td>
+											<td style=\"width: 69; text-align: center;\">$row->AsalUsul</td>
+											<td style=\"width: 81px; text-align: center;\">$hit</td>
+											<td style=\"width: 81px; text-align: right;\">$nilaiPrlhnFix</td>
+											<td style=\"width: 69px;font-weight: \">$row->Info</td>
+										</tr>";
+                                   
                                                   $no++;
                                                 
                                              }
