@@ -111,6 +111,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
 					<span class="span2">Ruangan Tujuan</span>
 					<select name="kodeRuang" id="kodeRuang" style="width:170px">
 						<option value="">-</option>
+						<option value="NULL">Ruang Penghapusan</option>
 						<?php 
 							$queryRuangan = "select NamaSatker,Kd_Ruang from satker where kode ='$kodeSatker' and Tahun = '$tahunRuangan' and Kd_Ruang != '$kodeRuangan'";
 							$exequeryRuangan = $DBVAR->query($queryRuangan);	
