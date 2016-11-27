@@ -21,7 +21,7 @@ $id=$_SESSION['user_id'];//Nanti diganti
  * you want to insert a non-database field (for example a counter or static image)
  */
 
-$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_max','jml_optml','jml_rill','jml_usul_rev','jml_max_rev','jml_rill_rev','status_penetapan','ket','status_validasi');
+$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_optml','jml_usul_rev','status_penetapan','ket','status_validasi');
 //$test = count($aColumns);
   
 // echo $aColumns; 
@@ -29,7 +29,7 @@ $aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_max','jml_optml','
 $sIndexColumn = "idr";
 
 /* DB table to use */
-$sTable = "usulan_rencana_pengadaaan_aset";
+$sTable = "usulan_rencana_pemeliharaan_aset";
 //variabel ajax
 //$tgl_usul=$_GET['tgl_usul'];
 $satker=$_GET['satker'];
@@ -184,18 +184,8 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
       $jml_usul     = $aRow['jml_usul'];
     }
 
-    if($aRow['jml_max_rev']){
-      $jml_max     = $aRow['jml_max_rev'];
-    }else{
-      $jml_max     = $aRow['jml_max'];
-    }
     $jml_optml 		= $aRow['jml_optml'];
     
-    if($aRow['jml_rill_rev']){
-      $jml_rill     = $aRow['jml_rill_rev'];
-    }else{
-      $jml_rill     = $aRow['jml_rill'];
-    }
     $keterangan = $aRow['ket'];   	
    	$ketKodeKelompok = mysql_query("select Uraian from kelompok where Kode = '{$kodeKelompok}'");
    	$ket = mysql_fetch_assoc($ketKodeKelompok);
@@ -214,9 +204,7 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
 	  $row[] ="<center>".$no."<center>";
 	  $row[] ="[".$kodeKelompok."] "."<br/>".$ket['Uraian'];
       $row[] ="<center>".$jml_usul."<center>";
-      $row[] ="<center>".$jml_max."<center>";
       $row[] ="<center>".$jml_optml."<center>";
-      $row[] ="<center>".$jml_rill."<center>";
       
       if($aRow['status_penetapan'] == 0){
         $wrd = "Barang"."<br>"."belom proses";
@@ -229,7 +217,7 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
       }else{
         $wrd = "Barang"."<br>"."ditolak";
         $label ="label-default";
-        $row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+        $row[] = "<center><span class=\"label $label-default\">$wrd </span></center>";
       }
       $row[] ="$keterangan";
       if($aRow['status_validasi'] == 1){

@@ -37944,9 +37944,13 @@ return $hasil_html;
 		 }
      
 	public function get_beton($beton){
-        if($beton == 0)
+        /*if($beton == 0)
                 $ton = "Tidak";
 	else if($beton == 1)
+		$ton = "Beton";*/
+		if($beton == 2)
+                $ton = "Tidak";
+		else if($beton == 1)
 		$ton = "Beton";
     return $ton;
 }

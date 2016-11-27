@@ -5,7 +5,7 @@ $USERAUTH = new UserAuth();
 
 $SESSION = new Session();
 
-$menu_id = 73;
+$menu_id = 74;
 $SessionUser = $SESSION->get_session_user();
 $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
 
@@ -34,35 +34,15 @@ $tahun  = $TAHUN_AKTIF;
 		var KodeSatker = $('#satker').val();
 			
 			if(kodeKelompok !='' && KodeSatker !='' ){
-			$.post('../../function/api/asetOptml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
+			$.post('../../function/api/asetOptmlPml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
 					document.getElementById('jml_optml').value = result; 
 				})
 	 	 	}
 		});
 
-	   $('#jml_max').on('change', function(){
-		var jml_max = $('#jml_max').val();
-		var jml_optml = $('#jml_optml').val();
-		var hasil = parseInt(jml_max) - parseInt(jml_optml);
-			if(parseInt(hasil) < 0){
-				//document.getElementById('jml_rill').value = 0; 
-				$('#jml_rill').val('0');
-				alert("Kebutuhan Barang Optimal > Kebutuhan Maksimal");
-				$('#simpan').attr('disabled','disabled');
-            	$('#simpan').css("background","grey");
-			}else{
-				//document.getElementById('jml_rill').value = hasil; 
-				$('#jml_rill').val(hasil);
-				$('#simpan').removeAttr('disabled');
-		    	$('#simpan').css("background","#04c");
-			}	
-		});
-
 	   $('#satuan_usul').on('change', function(){
 		var satuan_usul = $('#satuan_usul').val();
-			document.getElementById('satuan_max').value = satuan_usul; 
 			document.getElementById('satuan_optml').value = satuan_usul; 
-			document.getElementById('satuan_rill').value = satuan_usul; 
 		});
 		
 
@@ -108,6 +88,8 @@ $tahun  = $TAHUN_AKTIF;
 					<?php selectAset('kodeKelompok','255',true,false,'required'); ?>
 				</li>
 				<br/>
+				<li><span class="span2">&nbsp;</span>
+				*)Kondisi Barang Baik dan Rusak Ringan</li>
 				<li>
 					<p><b>Usulan Barang Milik Daerah</b></p>
 				</li>
@@ -121,17 +103,6 @@ $tahun  = $TAHUN_AKTIF;
 					<input type="text" name="satuan_usul" id="satuan_usul" value="" required/>
 				</li>
 				<li>
-					<p><b>Kebutuhan Maksimal</b></p>
-				</li>
-				<li>
-					<span class="span2">Jml Maksimal</span>
-					<input type="text" class="span1 numbersOnly" name="jml_max" id="jml_max" value="" required/>
-				</li>
-				<li>
-					<span class="span2">Satuan Maksimal</span>
-					<input type="text" name="satuan_max" id="satuan_max" value=""  readonly="" />
-				</li>
-				<li>
 					<p><b>Data Daftar Barang yang dapat di optimalkan</b></p>
 				</li>
 				<li>
@@ -141,17 +112,6 @@ $tahun  = $TAHUN_AKTIF;
 				<li>
 					<span class="span2">Satuan Optimal</span>
 					<input type="text" name="satuan_optml" id="satuan_optml" value="" readonly=""/>
-				</li>
-				<li>
-					<p><b>Kebutuhan Riil Barang Milik Daerah</b></p>
-				</li>
-				<li>
-					<span class="span2">Jml Rill</span>
-					<input type="text" class="span1" name="jml_rill" id="jml_rill" value="" readonly=""/>
-				</li>
-				<li>
-					<span class="span2">Satuan Rill</span>
-					<input type="text" name="satuan_rill" id="satuan_rill" value="" readonly=""/>
 				</li>
 				<li>
 					<span class="span2">Keterangan</span>

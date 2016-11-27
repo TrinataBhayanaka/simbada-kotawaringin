@@ -3,7 +3,6 @@ ob_start();
 include "../config/config.php";
 
 $id=$_SESSION['user_id'];//Nanti diganti
-//pr($_SESSION);
 // echo  $id;
 /*
  * To change this template, choose Tools | Templates
@@ -21,7 +20,7 @@ $id=$_SESSION['user_id'];//Nanti diganti
  * you want to insert a non-database field (for example a counter or static image)
  */
 
-$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_max','jml_optml','jml_rill','jml_usul_rev','jml_max_rev','jml_rill_rev','status_penetapan','ket','status_validasi');
+$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_optml','status_penetapan');
 //$test = count($aColumns);
   
 // echo $aColumns; 
@@ -29,7 +28,7 @@ $aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_max','jml_optml','
 $sIndexColumn = "idr";
 
 /* DB table to use */
-$sTable = "usulan_rencana_pengadaaan_aset";
+$sTable = "usulan_rencana_pemeliharaan_aset";
 //variabel ajax
 //$tgl_usul=$_GET['tgl_usul'];
 $satker=$_GET['satker'];
@@ -174,75 +173,39 @@ $no=$_GET['iDisplayStart']+1;
 
 while ($aRow = $DBVAR->fetch_array($rResult)) {
     
-	$row 			= array();
-	$idr 			= $aRow['idr'];
-	$idus 			= $aRow['idus'];
+	   $row 			= array();
+	   $idr 			= $aRow['idr'];
+	   $idus 			= $aRow['idus'];
     $kodeKelompok 	= $aRow['kodeKelompok'];
-    if($aRow['jml_usul_rev']){
-      $jml_usul     = $aRow['jml_usul_rev'];
-    }else{
-      $jml_usul     = $aRow['jml_usul'];
-    }
-
-    if($aRow['jml_max_rev']){
-      $jml_max     = $aRow['jml_max_rev'];
-    }else{
-      $jml_max     = $aRow['jml_max'];
-    }
-    $jml_optml 		= $aRow['jml_optml'];
-    
-    if($aRow['jml_rill_rev']){
-      $jml_rill     = $aRow['jml_rill_rev'];
-    }else{
-      $jml_rill     = $aRow['jml_rill'];
-    }
-    $keterangan = $aRow['ket'];   	
+    $jml_usul 		= $aRow['jml_usul'];
+    $jml_max 		= $aRow['jml_max'];
+    $jml_optml 		 = $aRow['jml_optml'];
+    $jml_rill 		  = $aRow['jml_rill'];
+   	$status_penetapan = $aRow['status_penetapan'];
    	$ketKodeKelompok = mysql_query("select Uraian from kelompok where Kode = '{$kodeKelompok}'");
    	$ket = mysql_fetch_assoc($ketKodeKelompok);
 
-	/*$delete="<a style=\"display:display\" 
+	$delete="<a style=\"display:display\" 
 			href=\"delete_usulan_aset.php?idr={$idr}&idus={$idus}&tgl_usul={$param_tgl_usul}&satker={$satker}\" onclick=\"return confirm('Hapus Data?');\"
 			class=\"btn btn-danger btn-circle\" id=\"\" value=\"\" title=\"Hapus\">
 			
-			<i class=\"fa fa-trash simbol\">&nbsp;Hapus</i></a>";*/
+			<i class=\"fa fa-trash simbol\">&nbsp;Hapus</i></a>";
 	
 	$edit="<a style=\"display:display\"  
-			href=\"edit_penetapan_aset.php?idr={$idr}&idus={$idus}&tgl_usul={$param_tgl_usul}&satker={$satker}\"	class=\"btn btn-primary btn-small\" id=\"\" value=\"\" >
+			href=\"edit_usulan_aset.php?idr={$idr}&idus={$idus}&tgl_usul={$param_tgl_usul}&satker={$satker}\"	class=\"btn btn-warning btn-small\" id=\"\" value=\"\" >
 			 
 			<i class=\"fa fa-pencil\" align=\"center\"></i>&nbsp;&nbsp;Edit</a>";
 
 	  $row[] ="<center>".$no."<center>";
-	  $row[] ="[".$kodeKelompok."] "."<br/>".$ket['Uraian'];
+	  $row[] ="[".$kodeKelompok."]"."<br/>".$ket['Uraian'];
       $row[] ="<center>".$jml_usul."<center>";
-      $row[] ="<center>".$jml_max."<center>";
       $row[] ="<center>".$jml_optml."<center>";
-      $row[] ="<center>".$jml_rill."<center>";
+      if($status_penetapan == 0){
+        $row[] ="<center>".$edit."&nbsp;".$delete."<center>";
+      }else{
+        $row[] ='';
+      }
       
-      if($aRow['status_penetapan'] == 0){
-        $wrd = "Barang"."<br>"."belom proses";
-        $label ="label-warning";
-        $row[] = "<center><span class=\"label $label\">$wrd </span></center>"; 
-      }elseif($aRow['status_penetapan'] == 1){
-        $wrd = "Barang"."<br>"."diterima";
-        $label ="label-success";
-        $row[] = "<center><span class=\"label $label\">$wrd </span></center>";
-      }else{
-        $wrd = "Barang"."<br>"."ditolak";
-        $label ="label-default";
-        $row[] = "<center><span class=\"label $label\">$wrd </span></center>";
-      }
-      $row[] ="$keterangan";
-      if($aRow['status_validasi'] == 1){
-          //nothing
-        $row[] ="";
-      }else{
-        if($_SESSION['ses_uaksesadmin'] == 1){
-            $row[] ="<center>".$edit."<center>";
-        }else{
-            $row[] ="";
-        }
-        
-      }
       
 	$no++;
      $output['aaData'][] = $row;

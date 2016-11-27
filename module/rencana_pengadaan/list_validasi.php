@@ -31,13 +31,6 @@ include"$path/menu.php";
 	<script>
 	jQuery(function($){
 	   $("select").select2();
-	   
-	   $('.proses').on('click', function(){
-	   		console.log("testtes");
-	   		alert("tes");
-	   	});
-
-
 	});
 	</script>
 
@@ -52,21 +45,21 @@ include"$path/menu.php";
 			<div class="subtitle">Filter Usulan Rencana Pengadaan</div>
 		</div>
 		<div class="grey-container shortcut-wrapper">
-			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pengadaan/">
+			<a class="shortcut-link " href="<?=$url_rewrite?>/module/rencana_pengadaan/">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">1</i>
 			    </span>
 				<span class="text">Usulan Rencana Pengadaan</span>
 			</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_penetapan.php">
+			<a class="shortcut-link " href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_penetapan.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">2</i>
 				    </span>
 					<span class="text">Penetapan Rencana Pengadaan</span>
 				</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
+			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">3</i>
@@ -86,14 +79,14 @@ include"$path/menu.php";
 							"aoColumns":[
 								 {"bSortable": false,"sWidth": '2%'},
 								 {"bSortable": true,"sWidth": '15%'},
-								 {"bSortable": true,"sWidth": '30%'},
-								 {"bSortable": true,"sWidth": '20%'},
+								 {"bSortable": true,"sWidth": '35%'},
+								 {"bSortable": true,"sWidth": '15%'},
 								 {"bSortable": false,"sWidth": '33%'}],
 							"sPaginationType": "full_numbers",
 
 							"bProcessing": true,
 							"bServerSide": true,
-							"sAjaxSource": "<?=$url_rewrite?>/api_list/view_usul_rencana_pegadaan.php?<?php echo $par_data_table?>"
+							"sAjaxSource": "<?=$url_rewrite?>/api_list/view_validasi_rencana_pegadaan.php?<?php echo $par_data_table?>"
 					   }
 						  );
 			  });
@@ -106,14 +99,7 @@ include"$path/menu.php";
 						<span class="labelInfo">Satker</span>
 						<input type="text" class="span3" value="<?='['.$satker.'] '.$dataKetkodeSatker['NamaSatker']?>" disabled/>
 					</li>
-					<li>
-						<a style="display:display"  href="tambah_usulan.php?tgl_usul=<?=$tgl_usul?>&satker=<?=$satker?>" class="btn btn-info btn-small" id="addruangan"><i class="icon-plus-sign icon-white" align="center"></i>&nbsp;&nbsp;Tambah Usulan</a>
-					
-					</li>
 				</ul>
-
-				
-				<!--<a style="display:display" data-toggle="modal" href="#addruang" class="btn btn-info btn-small" id="addruangan" title="Tambah Ruangan"><i class="icon-plus-sign">Tambah Ruangan</i></a>-->
 			</div>	
 			&nbsp;
 			<div id="demo">

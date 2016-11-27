@@ -5,7 +5,7 @@ $USERAUTH = new UserAuth();
 
 $SESSION = new Session();
 
-$menu_id = 73;
+$menu_id = 74;
 $SessionUser = $SESSION->get_session_user();
 $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
 
@@ -23,7 +23,7 @@ $idus   = $_GET['idus'];
 $program = mysql_query("select * from program where KodeSatker = '$satker'");
 
 //get usulan perencanaan
-$usul = mysql_query("select * from usulan_rencana_pengadaaan where idus = '$idus'");
+$usul = mysql_query("select * from usulan_rencana_pemeliharaan where idus = '$idus'");
 $usulan = mysql_fetch_assoc($usul);
 
 ?>

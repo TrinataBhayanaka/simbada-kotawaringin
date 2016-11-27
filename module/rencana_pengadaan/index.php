@@ -44,10 +44,10 @@ include"$path/menu.php";
 				    </span>
 					<span class="text">Penetapan Rencana Pengadaan</span>
 				</a>
-				<a class="shortcut-link" href="<?=$url_rewrite?>/module/pejabat/export.php">
+				<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
-				      <i class="fa fa-inverse fa-stack-1x">2</i>
+				      <i class="fa fa-inverse fa-stack-1x">3</i>
 				    </span>
 					<span class="text">Validasi</span>
 				</a>

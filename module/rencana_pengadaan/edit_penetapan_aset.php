@@ -88,24 +88,24 @@ $data = mysql_fetch_assoc($dataUsulan);
 			<div class="subtitle">Filter Usulan Rencana Pengadaan</div>
 		</div>
 		<div class="grey-container shortcut-wrapper">
-			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pengadaan/">
+			<a class="shortcut-link " href="<?=$url_rewrite?>/module/rencana_pengadaan/">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">1</i>
 			    </span>
 				<span class="text">Usulan Rencana Pengadaan</span>
 			</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_penetapan.php">
+			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_penetapan.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">2</i>
 				    </span>
 					<span class="text">Penetapan Rencana Pengadaan</span>
 				</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/pejabat/export.php">
+		<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
-			      <i class="fa fa-inverse fa-stack-1x">2</i>
+			      <i class="fa fa-inverse fa-stack-1x">3</i>
 			    </span>
 				<span class="text">Validasi</span>
 			</a>
@@ -195,11 +195,31 @@ $data = mysql_fetch_assoc($dataUsulan);
 				</li>
 				<li>
 					<span class="span2">Keterangan</span>
-					<textarea rows="3" cols="30" name="ket" readonly><?=$data[ket]?></textarea>
+					<textarea rows="3" cols="30" name="ket"><?=$data[ket]?></textarea>
 				</li>
 				<li>
 					<span class="span2">Cara Pemenuhan</span>
-					<input type="text" name="cara" id="cara" value="<?=$data[cara]?>" required/>
+					<!--<input type="text" name="cara" id="cara" value="<?=$data[cara]?>" required/>-->
+					<select name="cara" style="width: 200px;">
+						<?php
+							if($data[cara] == 'Pembelian'){	
+								$flag_pembelian = 'selected';
+								$flag_sewa = '';
+								$flag_optml = '';
+							}elseif($data[cara] == 'Sewa'){
+								$flag_pembelian = '';
+								$flag_sewa = 'selected';
+								$flag_optml = '';
+							}elseif($data[cara] == 'Pengoptimalan BMD'){
+								$flag_pembelian = '';
+								$flag_sewa = '';
+								$flag_optml = 'selected';
+							}
+						?>
+					<option value="Pembelian" <?=$flag_pembelian?>>Pembelian</option>
+				    <option value="Sewa" <?=$flag_sewa?>>Sewa</option>
+				    <option value="Pengoptimalan BMD" <?=$flag_optml?>>Pengoptimalan BMD</option>
+				  </select>
 				</li>
 				<br/>
 				<li>

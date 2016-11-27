@@ -20,7 +20,7 @@ $id=$_SESSION['user_id'];//Nanti diganti
  * you want to insert a non-database field (for example a counter or static image)
  */
 
-$aColumns = array('idus','kodeSatker','no_usul','tgl_usul');
+$aColumns = array('idus','kodeSatker','no_usul','tgl_usul','status_penetapan');
 //$test = count($aColumns);
   
 // echo $aColumns; 
@@ -176,7 +176,7 @@ $output = array(
 $no=$_GET['iDisplayStart']+1;
 
 while ($aRow = $DBVAR->fetch_array($rResult)) {
-    
+    //pr($aRow);
 	$row 			= array();
 	$idus 			= $aRow['idus'];
     $kodeSatker 	= $aRow['kodeSatker'];
@@ -202,6 +202,15 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
 	  $row[] ="<center>".$no."<center>";
 	  $row[] =$format_tgl;
       $row[] =$no_usul;
+      if($aRow['status_penetapan'] == '1'){
+      	$wrd = "Usulan Sudah Ditetapkan";
+		$label ="label-success";
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+      }else{
+      	$wrd = "Usulan Belum Ditetapkan";
+		$label ="label-warning";	
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+      }
       $row[] ="<center>".$detail."&nbsp;&nbsp;".$edit."&nbsp;&nbsp;".$delete."<center>";
       
       

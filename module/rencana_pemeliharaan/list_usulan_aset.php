@@ -2,7 +2,7 @@
 include "../../config/config.php";
 		
 //cek akses menu 
-$menu_id = 73;
+$menu_id = 74;
 
 ($SessionUser['ses_uid']!='') ? $Session = $SessionUser : $Session = $SESSION->get_session(array('title'=>'GuestMenu', 'ses_name'=>'menu_without_login')); 
 $SessionUser = $SESSION->get_session_user();
@@ -42,7 +42,7 @@ $ketOutput = mysql_query("select kd_output,output from output
 $dataKetOutput = mysql_fetch_assoc($ketOutput);
 //pr($dataKetOutput);
 
-$dataUsulan = mysql_query("select * from usulan_rencana_pengadaaan 
+$dataUsulan = mysql_query("select * from usulan_rencana_pemeliharaan 
 						where 
 						idus ='$_GET[idus]'");
 $dataKet = mysql_fetch_assoc($dataUsulan);
@@ -65,29 +65,29 @@ include"$path/menu.php";
 	<section id="main">
 		<ul class="breadcrumb">
 		  <li><a href="#"><i class="fa fa-home fa-2x"></i>  Home</a> <span class="divider"><b>&raquo;</b></span></li>
-		  <li><a href="#">Usulan Rencana Pengadaan</a><span class="divider"></span></li>
+		  <li><a href="#">Usulan Rencana pemeliharaan</a><span class="divider"></span></li>
 		  <?php SignInOut();?>
 		</ul>
 		<div class="breadcrumb">
-			<div class="title">Usulan Rencana Pengadaan</div>
-			<div class="subtitle">Filter Usulan Rencana Pengadaan</div>
+			<div class="title">Usulan Rencana Pemeliharaan</div>
+			<div class="subtitle">Filter Usulan Rencana Pemeliharaan</div>
 		</div>
 		<div class="grey-container shortcut-wrapper">
-			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pengadaan/">
+			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">1</i>
 			    </span>
-				<span class="text">Usulan Rencana Pengadaan</span>
+				<span class="text">Usulan Rencana Pemeliharaan</span>
 			</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_penetapan.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/filter_penetapan.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">2</i>
 				    </span>
-					<span class="text">Penetapan Rencana Pengadaan</span>
+					<span class="text">Penetapan Rencana Pemeliharaan</span>
 				</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/filter_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">3</i>
@@ -104,18 +104,16 @@ include"$path/menu.php";
 								 { "aTargets": [2] }
 							],
 							"aoColumns":[
-								 {"bSortable": false},
-								 {"bSortable": true},
-								 {"bSortable": true},
-								 {"bSortable": true},
-								 {"bSortable": true},
-								 {"bSortable": true},
-								 {"bSortable": false}],
+								 {"bSortable": false,"sWidth": '2%'},
+								 {"bSortable": true,"sWidth": '28%'},
+								 {"bSortable": true,"sWidth": '20%'},
+								 {"bSortable": true,"sWidth": '20%'},
+								 {"bSortable": false,"sWidth": '25%'}],
 							"sPaginationType": "full_numbers",
 
 							"bProcessing": true,
 							"bServerSide": true,
-							"sAjaxSource": "<?=$url_rewrite?>/api_list/view_usul_rencana_pegadaan_aset.php?<?php echo $par_data_table?>"
+							"sAjaxSource": "<?=$url_rewrite?>/api_list/view_usul_rencana_pemeliharaan_aset.php?<?php echo $par_data_table?>"
 					   }
 						  );
 			  });
@@ -232,9 +230,7 @@ include"$path/menu.php";
 						<th>No</th>
 						<th>KodeBarang</th>
 						<th>Jml barang usulan</th>
-						<th>Jml barang maksimal</th>
 						<th>Jml barang optimal</th>
-						<th>Jml barang riil</th>
 						<th>Aksi</th>
 					</tr>
 				</thead>
@@ -246,8 +242,6 @@ include"$path/menu.php";
 				</tbody>
 				<tfoot>
 					<tr>
-						<th>&nbsp;</th>
-						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>

@@ -59,10 +59,10 @@ include"$path/menu.php";
 				    </span>
 					<span class="text">Penetapan Rencana Pengadaan</span>
 				</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/pejabat/export.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
-			      <i class="fa fa-inverse fa-stack-1x">2</i>
+			      <i class="fa fa-inverse fa-stack-1x">3</i>
 			    </span>
 				<span class="text">Validasi</span>
 			</a>
@@ -79,7 +79,8 @@ include"$path/menu.php";
 							"aoColumns":[
 								 {"bSortable": false,"sWidth": '2%'},
 								 {"bSortable": true,"sWidth": '15%'},
-								 {"bSortable": true,"sWidth": '50%'},
+								 {"bSortable": true,"sWidth": '35%'},
+								 {"bSortable": true,"sWidth": '15%'},
 								 {"bSortable": false,"sWidth": '33%'}],
 							"sPaginationType": "full_numbers",
 
@@ -108,17 +109,19 @@ include"$path/menu.php";
 						<th>No</th>
 						<th>Tgl Usulan</th>
 						<th>No Usulan</th>
+						<th>Status</th>
 						<th>Aksi</th>
 					</tr>
 				</thead>
 				<tbody>			
 					<tr>
-                        <td colspan="4">Data Tidak di temukan</td>
+                        <td colspan="5">Data Tidak di temukan</td>
                     </tr>
                     
 				</tbody>
 				<tfoot>
 					<tr>
+						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>

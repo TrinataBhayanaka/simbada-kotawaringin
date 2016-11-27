@@ -2,7 +2,7 @@
 include "../../config/config.php";
 		
 //cek akses menu 
-$menu_id = 73;
+$menu_id = 74;
 
 ($SessionUser['ses_uid']!='') ? $Session = $SessionUser : $Session = $SESSION->get_session(array('title'=>'GuestMenu', 'ses_name'=>'menu_without_login')); 
 $SessionUser = $SESSION->get_session_user();
@@ -21,6 +21,22 @@ if($_GET){
 	}*/
 }
 //sql temp
+/*$par_data_table="tgl_usul=$tgl_usul&satker=$satker&idus=$idus";
+$ketkodeSatker = mysql_query("select NamaSatker from satker where kode ='{$satker}'");
+$dataKetkodeSatker = mysql_fetch_assoc($ketkodeSatker);
+
+$ketusulan = mysql_query("select us.*,p.* from usulan_rencana_pengadaaan as us 
+						inner join program as p on p.idp = us.idp
+						where 
+						us.idus ='{$idus}'");
+$dataKetUsulan = mysql_fetch_assoc($ketusulan);
+//pr($dataKetUsulan);
+$ketKegiatan = mysql_query("select kd_kegiatan,kegiatan from kegiatan  
+						where 
+						idp ='{$dataKetUsulan[idp]}' and idk ='{$dataKetUsulan[idk]}' ");
+$dataKetKegiatan = mysql_fetch_assoc($ketKegiatan);
+//pr($dataKetKegiatan);*/
+
 $par_data_table="tgl_usul=$tgl_usul&satker=$satker&idus=$idus";
 $ketkodeSatker = mysql_query("select NamaSatker from satker where kode ='{$satker}'");
 $dataKetkodeSatker = mysql_fetch_assoc($ketkodeSatker);
@@ -42,14 +58,20 @@ $ketOutput = mysql_query("select kd_output,output from output
 $dataKetOutput = mysql_fetch_assoc($ketOutput);
 //pr($dataKetOutput);
 
-$dataUsulan = mysql_query("select * from usulan_rencana_pengadaaan 
+$dataUsulan = mysql_query("select * from usulan_rencana_pemeliharaan 
 						where 
 						idus ='$_GET[idus]'");
 $dataKet = mysql_fetch_assoc($dataUsulan);
-//pr($dataKetUsulan);
+//pr($dataKet);
 $tgl = explode('-',$dataKet['tgl_usul']);
 $format_tgl = $tgl[2]."/".$tgl[1]."/".$tgl[0];
 
+//url post validasi dan unpost
+if($dataKet['status_validasi'] == '0'){
+	$url = $url_rewrite."/module/rencana_pemeliharaan/post_validasi.php?idus=".$idus."&tgl_usul=".$tgl_usul."&satker=".$satker;
+}else{
+	$url = $url_rewrite."/module/rencana_pemeliharaan/unpost_validasi.php?idus=".$idus."&tgl_usul=".$tgl_usul."&satker=".$satker;
+}
 
 include"$path/meta.php";
 include"$path/header.php";
@@ -65,29 +87,29 @@ include"$path/menu.php";
 	<section id="main">
 		<ul class="breadcrumb">
 		  <li><a href="#"><i class="fa fa-home fa-2x"></i>  Home</a> <span class="divider"><b>&raquo;</b></span></li>
-		  <li><a href="#">Usulan Rencana Pengadaan</a><span class="divider"></span></li>
+		  <li><a href="#">Usulan Rencana Pemeliharaan</a><span class="divider"></span></li>
 		  <?php SignInOut();?>
 		</ul>
 		<div class="breadcrumb">
-			<div class="title">Usulan Rencana Pengadaan</div>
-			<div class="subtitle">Filter Usulan Rencana Pengadaan</div>
+			<div class="title">Usulan Rencana Pemeliharaan</div>
+			<div class="subtitle">Filter Usulan Rencana Pemeliharaan</div>
 		</div>
 		<div class="grey-container shortcut-wrapper">
-			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pengadaan/">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">1</i>
 			    </span>
-				<span class="text">Usulan Rencana Pengadaan</span>
+				<span class="text">Usulan Rencana Pemeliharaan</span>
 			</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_penetapan.php">
+			<a class="shortcut-link " href="<?=$url_rewrite?>/module/rencana_pemeliharaan/filter_penetapan.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">2</i>
 				    </span>
-					<span class="text">Penetapan Rencana Pengadaan</span>
+					<span class="text">Penetapan Rencana Pemeliharaan</span>
 				</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
+			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/filter_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">3</i>
@@ -95,6 +117,7 @@ include"$path/menu.php";
 				<span class="text">Validasi</span>
 			</a>
 		</div>	
+		
 		<section class="formLegend">
 			<script>
 			$(document).ready(function() {
@@ -104,18 +127,17 @@ include"$path/menu.php";
 								 { "aTargets": [2] }
 							],
 							"aoColumns":[
-								 {"bSortable": false},
-								 {"bSortable": true},
-								 {"bSortable": true},
-								 {"bSortable": true},
-								 {"bSortable": true},
-								 {"bSortable": true},
-								 {"bSortable": false}],
+								 {"bSortable": false,"sWidth": '2%'},
+								 {"bSortable": true,"sWidth": '18%'},
+								 {"bSortable": true,"sWidth": '12%'},
+								 {"bSortable": true,"sWidth": '12%'},
+								 {"bSortable": true,"sWidth": '12%'},
+								 {"bSortable": false,"sWidth": '20%'}],
 							"sPaginationType": "full_numbers",
 
 							"bProcessing": true,
 							"bServerSide": true,
-							"sAjaxSource": "<?=$url_rewrite?>/api_list/view_usul_rencana_pegadaan_aset.php?<?php echo $par_data_table?>"
+							"sAjaxSource": "<?=$url_rewrite?>/api_list/view_validasi_rencana_pemeliharaan_aset.php?<?php echo $par_data_table?>"
 					   }
 						  );
 			  });
@@ -160,6 +182,7 @@ include"$path/menu.php";
 								<br/>
 								<input type="text" class="span5" value="<?=$dataKetOutput['kd_output']." ".$dataKetOutput['output'] ?>" disabled/>
 							</li>
+
 						</ul>
 					<!--</div>-->
 				</div>
@@ -169,60 +192,41 @@ include"$path/menu.php";
 				</div>
 			</div> 
 
-			<div class="detailLeft">
+			<div class="detailLeft">	
 				<ul>
 					<li>
-						<?php
-							if($dataKet['status_penetapan'] == 1){
-
-							}else{
-								?>
-								<a style="display:display"  href="tambah_usulan_aset.php?idus=<?=$idus?>&tgl_usul=<?=$tgl_usul?>&satker=<?=$satker?>" class="btn btn-info btn-small" id="addruangan"><i class="icon-plus-sign icon-white" align="center"></i>&nbsp;&nbsp;Tambah Usulan Aset</a>	
-							<?php
-							}
+						<a style="display:display" data-toggle="modal" href="#info" class="btn btn-warning btn-small" id="addruangan"><i class="fa fa-eye" align="center"></i>&nbsp;&nbsp;Info </a>
+					</li><br/>
+					<?php
+					if($dataKet['status_validasi'] == '0'){
 						?>
-							
-					</li>
-					<br/>
-					<li>
-						<a style="display:display" data-toggle="modal" href="#info" class="btn btn-warning btn-small" id="addruangan"><i class="fa fa-eye" align="center"></i>&nbsp;&nbsp;Info</a>
-					</li>
-					<!--<li>
-						<span class="labelInfo">Satker</span>
-						<input type="text" class="span3" value="<?='['.$satker.'] '.$dataKetkodeSatker['NamaSatker']?>" disabled/>
-					</li>
-					<li>
-						<span class="labelInfo">Program </span>
-						<input type="text" class="span5" value="<?=$dataKetUsulan['kd_program']." ".$dataKetUsulan['program'] ?>" disabled/>
-					</li>
-					<li>
-						<span class="labelInfo">kegiatan</span>
-						<input type="text" class="span5" value="<?=$dataKetKegiatan['kd_kegiatan']." ".$dataKetKegiatan['kegiatan'] ?>" disabled/>
-					</li>
-					<li>
-						<span class="labelInfo">Output</span>
-						<input type="text" class="span5" value="<?=$dataKetOutput['kd_output']." ".$dataKetOutput['output'] ?>" disabled/>
-					</li>
-					<li>
-						<span class="labelInfo">No Usulan</span>
-						<input type="text" class="span3" value="<?=$dataKetUsulan['no_usul']?>" disabled/>
-					</li>
-					-->
-				</ul>		
+						<li>
+						<p style='color:red'><a href="<?=$url?>" class="btn btn-info btn-small" <?=$disabled?> onclick="return confirm('Data akan divalidasi. Pastikan data sudah benar. Lanjutkan?');"><i class="icon-upload icon-white"></i>&nbsp;&nbsp; Posting Validasi Usulan</a></p>
+						</li>
+					<?php	
+					}else{
+						?>
+						<li>
+						<p style='color:red'><a href="<?=$url?>" class="btn btn-danger btn-small" <?=$disabled?> onclick="return confirm('Data validasi akan dibatalkan. Yakin?');"><i class="icon-upload icon-white"></i>&nbsp;&nbsp;Unposting Validasi Usulan</a></p>
+						</li>
+					<?php	
+					}
+					?>
+					
+					
+				</ul>
 			</div>
+
 			<div class="detailRight">
 				<ul>
-
 					<li>
-						<a id="" class="btn btn-small" href="list_usulan.php?tgl_usul=<?=$tgl_usul?>&satker=<?=$satker?>" >
+						<a id="" class="btn btn-small" href="list_validasi.php?tgl_usul=<?=$tgl_usul?>&satker=<?=$satker?>" >
 						<i class="" align="center"></i>
-				  			Kembali ke halaman Sebelumnya : List Usulan
+						  Kembali ke halaman Sebelumnya : List Usulan
 						</a>
 					</li>
-					
-					
-					
 				</ul>		
+				
 			</div>
 			&nbsp;
 			<div id="demo">
@@ -232,21 +236,19 @@ include"$path/menu.php";
 						<th>No</th>
 						<th>KodeBarang</th>
 						<th>Jml barang usulan</th>
-						<th>Jml barang maksimal</th>
 						<th>Jml barang optimal</th>
-						<th>Jml barang riil</th>
-						<th>Aksi</th>
+						<th>Status</th>
+						<th>Ket</th>
 					</tr>
 				</thead>
 				<tbody>			
 					<tr>
-                        <td colspan="7">Data Tidak di temukan</td>
+                        <td colspan="6">Data Tidak di temukan</td>
                     </tr>
                     
 				</tbody>
 				<tfoot>
 					<tr>
-						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
@@ -261,6 +263,7 @@ include"$path/menu.php";
 			    
 		</section> 
 	</section>
+	
 <?php
 	include"$path/footer.php";
 ?>

@@ -177,8 +177,7 @@ $output = array(
 $no=$_GET['iDisplayStart']+1;
 
 while ($aRow = $DBVAR->fetch_array($rResult)) {
-    
-	$row 			= array();
+    $row 			= array();
 	$idus 			= $aRow['idus'];
     $kodeSatker 	= $aRow['kodeSatker'];
     $no_usul 		= $aRow['no_usul'];
@@ -205,25 +204,43 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
 			href=\"edit_usulan.php?idus={$idus}&tgl_usul={$param_tgl_usul}&satker={$kodeSatker}\"	class=\"btn btn-warning btn-small\" id=\"\" value=\"\" >
 			 
 			<i class=\"fa fa-pencil\" align=\"center\"></i>&nbsp;&nbsp;Edit</a>";
+	
+	//add tombol proses
+	/*$proses="<a style=\"display:display\"  
+		href=\"#\"	class=\"btn btn-success btn-small proses\" id=\"\" value=\"\" >
+			<i class=\"fa fa-spinner\" align=\"center\"></i>&nbsp;&nbsp;Proses</a>";*/
+	
+	$proses="<button type=\"button\" id=\"\" name=\"print\" value=\"\" 
+	class=\"btn btn-success btn-small fa fa-spinner proses\">Download pdf</button>";		
 
 	  $row[] ="<center>".$no."<center>";
 	  $row[] =$format_tgl;
       $row[] =$no_usul;
 
-      //status_usulan = 0, usulan belum di proses
-      //status_usulan = 1,status_penetapan = 1 usulan di verifikasi
-      //status_usulan = 1,status_penetapan = 1,status_validasi usulan di validasi
-      if($status_usulan == '0'){
-		$row[] ="<center>".$detail."&nbsp;&nbsp;".$edit."&nbsp;&nbsp;".$delete."<center>";
-		$wrd = "Belum Di Proses";
-		$label ="label-warning";
-      }elseif($status_usulan == '1' && $status_penetapan = '1'){
+      /*if($status_penetapan == '1'){
+      	$wrd = "Usulan Diproses";
+		$label ="label-success";
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
       	$row[] ="<center>".$detail."<center>";
-      }elseif ($status_usulan == '1' && $status_penetapan = '1' & $status_validasi = '1') {
+      }else{
+      	$wrd = "Usulan Belum Diproses";
+		$label ="label-warning";	
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+      	$row[] ="<center>".$proses."<br/><br/>".$detail."&nbsp;".$edit."&nbsp;".$delete.".<center>";
+      }*/
+
+	  if($status_penetapan == '1'){
+      	$wrd = "Usulan Diproses";
+		$label ="label-success";
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
       	$row[] ="<center>".$detail."<center>";
+      }else{
+      	$wrd = "Usulan Belum Diproses";
+		$label ="label-warning";	
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+      	$row[] ="<center>".$proses."<br/><br/>".$detail."&nbsp;".$edit."&nbsp;".$delete.".<center>";
       }
 
-      
       
 	$no++;
      $output['aaData'][] = $row;

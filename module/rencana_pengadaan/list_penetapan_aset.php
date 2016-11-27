@@ -21,6 +21,22 @@ if($_GET){
 	}*/
 }
 //sql temp
+/*$par_data_table="tgl_usul=$tgl_usul&satker=$satker&idus=$idus";
+$ketkodeSatker = mysql_query("select NamaSatker from satker where kode ='{$satker}'");
+$dataKetkodeSatker = mysql_fetch_assoc($ketkodeSatker);
+
+$ketusulan = mysql_query("select us.*,p.* from usulan_rencana_pengadaaan as us 
+						inner join program as p on p.idp = us.idp
+						where 
+						us.idus ='{$idus}'");
+$dataKetUsulan = mysql_fetch_assoc($ketusulan);
+//pr($dataKetUsulan);
+$ketKegiatan = mysql_query("select kd_kegiatan,kegiatan from kegiatan  
+						where 
+						idp ='{$dataKetUsulan[idp]}' and idk ='{$dataKetUsulan[idk]}' ");
+$dataKetKegiatan = mysql_fetch_assoc($ketKegiatan);
+//pr($dataKetKegiatan);*/
+
 $par_data_table="tgl_usul=$tgl_usul&satker=$satker&idus=$idus";
 $ketkodeSatker = mysql_query("select NamaSatker from satker where kode ='{$satker}'");
 $dataKetkodeSatker = mysql_fetch_assoc($ketkodeSatker);
@@ -36,6 +52,19 @@ $ketKegiatan = mysql_query("select kd_kegiatan,kegiatan from kegiatan
 						idp ='{$dataKetUsulan[idp]}' and idk ='{$dataKetUsulan[idk]}' ");
 $dataKetKegiatan = mysql_fetch_assoc($ketKegiatan);
 //pr($dataKetKegiatan);
+$ketOutput = mysql_query("select kd_output,output from output  
+						where 
+						idot ='{$dataKetUsulan[idot]}'");
+$dataKetOutput = mysql_fetch_assoc($ketOutput);
+//pr($dataKetOutput);
+
+$dataUsulan = mysql_query("select * from usulan_rencana_pengadaaan 
+						where 
+						idus ='$_GET[idus]'");
+$dataKet = mysql_fetch_assoc($dataUsulan);
+//pr($dataKet);
+$tgl = explode('-',$dataKet['tgl_usul']);
+$format_tgl = $tgl[2]."/".$tgl[1]."/".$tgl[0];
 include"$path/meta.php";
 include"$path/header.php";
 include"$path/menu.php";
@@ -72,10 +101,10 @@ include"$path/menu.php";
 				    </span>
 					<span class="text">Penetapan Rencana Pengadaan</span>
 				</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/pejabat/export.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
-			      <i class="fa fa-inverse fa-stack-1x">2</i>
+			      <i class="fa fa-inverse fa-stack-1x">3</i>
 			    </span>
 				<span class="text">Validasi</span>
 			</a>
@@ -90,13 +119,15 @@ include"$path/menu.php";
 								 { "aTargets": [2] }
 							],
 							"aoColumns":[
-								 {"bSortable": false},
-								 {"bSortable": true},
-								 {"bSortable": true},
-								 {"bSortable": true},
-								 {"bSortable": true},
-								 {"bSortable": true},
-								 {"bSortable": false}],
+								 {"bSortable": false,"sWidth": '2%'},
+								 {"bSortable": true,"sWidth": '18%'},
+								 {"bSortable": true,"sWidth": '10%'},
+								 {"bSortable": true,"sWidth": '10%'},
+								 {"bSortable": true,"sWidth": '10%'},
+								 {"bSortable": true,"sWidth": '10%'},
+								 {"bSortable": true,"sWidth": '10%'},
+								 {"bSortable": false,"sWidth": '20%'},
+								 {"bSortable": false,"sWidth": '10%'}],
 							"sPaginationType": "full_numbers",
 
 							"bProcessing": true,
@@ -107,8 +138,56 @@ include"$path/menu.php";
 			  });
 			  
 			</script>
+			<!-- Info Usual-->
+			<div id="info" class="modal hide fade  myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			 <div class="modal-dialog modal-lg">
+				<div id="titleForm" class="modal-header" >
+				  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				  <h3 id="myModalLabel">Info</h3>
+				</div>
+				<div class="modal-body">
+					<!--<div class="detailLeft">-->
+						<ul>
+							<li>
+								<span class="labelInfo " style="font-weight: bold;">Satker</span>
+								<br/>
+								<input type="text" class="span5" value="<?='['.$satker.'] '.$dataKetkodeSatker['NamaSatker']?>" disabled/>
+							</li>
+							<li>
+								<span class="labelInfo " style="font-weight: bold;">Usulan</span>
+								<br/>
+								<input type="text" class="span5" value="<?=$dataKet['no_usul']?>" disabled/>
+							</li>
+								<span class="labelInfo " style="font-weight: bold;">Tanggal Usulan</span>
+								<br/>
+								<input type="text" class="span5" value="<?=$format_tgl?>" disabled/>
+							</li>
+							<li>
+								<span class="labelInfo " style="font-weight: bold;">Program </span>
+								<br/>
+								<input type="text" class="span5" value="<?=$dataKetUsulan['kd_program']." ".$dataKetUsulan['program'] ?>" disabled/>
+							</li>
+							<li>
+								<span class="labelInfo " style="font-weight: bold;">kegiatan</span>
+								<br/>
+								<input type="text" class="span5" value="<?=$dataKetKegiatan['kd_kegiatan']." ".$dataKetKegiatan['kegiatan'] ?>" disabled/>
+							</li>
+							<li>
+								<span class="labelInfo " style="font-weight: bold;">Output</span>
+								<br/>
+								<input type="text" class="span5" value="<?=$dataKetOutput['kd_output']." ".$dataKetOutput['output'] ?>" disabled/>
+							</li>
+						</ul>
+					<!--</div>-->
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+				</div>
+				</div>
+			</div> 
+
 			<div class="detailLeft">
-				<ul>
+				<!--<ul>
 					<li>
 						<span class="labelInfo">Satker</span>
 						<input type="text" class="span3" value="<?='['.$satker.'] '.$dataKetkodeSatker['NamaSatker']?>" disabled/>
@@ -125,24 +204,24 @@ include"$path/menu.php";
 						<span class="labelInfo">kegiatan</span>
 						<input type="text" class="span5" value="<?=$dataKetKegiatan['kd_kegiatan']." ".$dataKetKegiatan['kegiatan'] ?>" disabled/>
 					</li>
-				</ul>		
+				</ul>-->		
+				<ul>
+					<li>
+						<a style="display:display" data-toggle="modal" href="#info" class="btn btn-warning btn-small" id="addruangan"><i class="fa fa-eye" align="center"></i>&nbsp;&nbsp;Info</a>
+					</li>
+				</ul>
 			</div>
 
 			<div class="detailRight">
 				<ul>
-					<li>&nbsp;</li>
-					<li>&nbsp;</li>
-					<li>&nbsp;</li>
-					<li>&nbsp;</li>
-					<li>&nbsp;</li>
-					<li>&nbsp;</li>
-					<li>&nbsp;</li>
-					<li>&nbsp;</li>
+					<li>
+						<a id="" class="btn btn-small" href="list_penetapan.php?tgl_usul=<?=$tgl_usul?>&satker=<?=$satker?>" >
+						<i class="" align="center"></i>
+						  Kembali ke halaman Sebelumnya : List Usulan
+						</a>
+					</li>
 				</ul>		
-				<a id="" class="btn btn-small" href="list_usulan.php?tgl_usul=<?=$tgl_usul?>&satker=<?=$satker?>" >
-				<i class="" align="center"></i>
-				  Kembali ke halaman Sebelumnya : List Usulan
-				</a>
+				
 			</div>
 			&nbsp;
 			<div id="demo">
@@ -155,17 +234,21 @@ include"$path/menu.php";
 						<th>Jml barang maksimal</th>
 						<th>Jml barang optimal</th>
 						<th>Jml barang riil</th>
+						<th>Status</th>
+						<th>Ket</th>
 						<th>Aksi</th>
 					</tr>
 				</thead>
 				<tbody>			
 					<tr>
-                        <td colspan="7">Data Tidak di temukan</td>
+                        <td colspan="9">Data Tidak di temukan</td>
                     </tr>
                     
 				</tbody>
 				<tfoot>
 					<tr>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
