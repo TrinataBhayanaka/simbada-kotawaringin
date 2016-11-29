@@ -36,7 +36,7 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker'");
 			var satker 		= $("#satker").val();
 
 			$.post('../../function/api/selectkegiatan.php', {programid:programid,tahun:tahun,satker:satker}, function(data){
-				
+				console.log(data);
 			$('#kegiatan')
 			    .find('option')
 			    .remove()

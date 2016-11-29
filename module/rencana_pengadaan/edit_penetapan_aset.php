@@ -33,38 +33,67 @@ $data = mysql_fetch_assoc($dataUsulan);
 		    }
 		});
 
-	   /*$('#kodeKelompok').on('change', function(){
-		var kodeKelompok = $('#kodeKelompok').val();
-		var KodeSatker = $('#satker').val();
-			
-			if(kodeKelompok !='' && KodeSatker !='' ){
-			$.post('../../function/api/asetOptml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
-					document.getElementById('jml_optml').value = result; 
-					var jml_max = $('#jml_max').val();
-			 		if(jml_max){
-			 			var jml_optml = $('#jml_optml').val();
-			 			var hasil = parseInt(jml_max) - parseInt(jml_optml);
-			 			if(parseInt(hasil) < 0){
-							document.getElementById('jml_rill').value = 0; 
-						}else{
-							document.getElementById('jml_rill').value = hasil; 
-						}	
-			 		}
-				})
-	 	 	}
-
-		});*/
+	   var revisi_jml_rill = $('#jml_rill_rev').val();
+	   //console.log(revisi_jml_rill);
+	   if($('#jml_rill_rev').val().length != 0){
+	   		if(revisi_jml_rill == 0){
+	   			//console.log("rill 0");
+   				$("#jml_usul_rev").prop("readonly", true);
+				$("#satuan_usul_rev").prop("readonly", true);
+				$('.infoTolak').show();
+      		$('#infoTolak').html('Optimalisasi BMD (Revisi Jml Maksimal < Jml Optimal)');
+            	$('#infoTolak').css("color","red");
+            	//$("#simpan").prop("disabled", true);
+		    }else{
+		   		//console.log("rill not 0");
+	   			$("#jml_usul_rev").prop("readonly", false);
+				$("#satuan_usul_rev").prop("readonly", false); 
+				$('.infoTolak').hide();		
+		   }	
+	   }else{
+			//console.log("rill kosong");
+   			$("#jml_usul_rev").prop("readonly", false);
+			$("#satuan_usul_rev").prop("readonly", false); 
+	   }
+	   
 
 	   $('#jml_max_rev').on('change', function(){
 		var jml_max = $('#jml_max_rev').val();
 		var jml_optml = $('#jml_optml').val();
 		var hasil = parseInt(jml_max) - parseInt(jml_optml);
-			if(parseInt(hasil) < 0){
-				document.getElementById('jml_rill_rev').value = 0; 
+			if(parseInt(hasil) <= 0){
+				document.getElementById('jml_rill_rev').value = 0;
+				document.getElementById('jml_usul_rev').value = 0;
+				//readonly jml dan satuan rencana
+				$("#jml_usul_rev").prop("readonly", true);
+				$("#satuan_usul_rev").prop("readonly", true);
+				$('.infoTolak').show();
+      		$('#infoTolak').html('Optimalisasi BMD (Revisi Jml Maksimal < Jml Optimal)');
+            $('#infoTolak').css("color","red");
+            	$("#simpan").prop("disabled", true);
 			}else{
-				document.getElementById('jml_rill_rev').value = hasil; 
+				document.getElementById('jml_rill_rev').value = hasil;
+				//unreadonly jml dan satuan rencana
+				$("#jml_usul_rev").prop("readonly", false);
+				$("#satuan_usul_rev").prop("readonly", false); 
+				$('.infoTolak').hide();
 			}	
 		});
+
+	   $('#jml_usul_rev').on('change', function(){
+	   	var jml_usul_rev = $('#jml_usul_rev').val();
+	   	var jml_rill_rev = $('#jml_rill_rev').val();
+	   		if(jml_usul_rev > jml_rill_rev){
+	   			$('.infoReklas').show();
+          		$('#infoReklas').html('Jumlah Rencana > Revisi Jumlah Riil');
+            	$('#infoReklas').css("color","red");
+            	$("#simpan").prop("disabled", true);
+	   		}else{
+	   			$('.infoReklas').hide();
+	   			$("#simpan").prop("disabled", false);
+	      		
+	   		}
+	   	});
 
 	   $('#satuan_usul_rev').on('change', function(){
 		var satuan_usul_rev = $('#satuan_usul_rev').val();
@@ -188,10 +217,18 @@ $data = mysql_fetch_assoc($dataUsulan);
 					<input type="text" class="span1 numbersOnly" name="jml_usul_rev" id="jml_usul_rev" 
 					value="<?=$data[jml_usul_rev]?>" required/>
 				</li>
+				<li style="display:none" class="infoReklas">
+					<span class="">&nbsp;</span>
+					 <em id="infoReklas"></em>
+				</li>
 				<li>
 					<span class="span2">Satuan Rencana</span>
 					<input type="text" name="satuan_usul_rev" id="satuan_usul_rev" 
 					value="<?=$data[satuan_usul_rev]?>" required />
+				</li>
+				<li style="display:none" class="infoTolak">
+					<span class="">&nbsp;</span>
+					 <em id="infoTolak"></em>
 				</li>
 				<li>
 					<span class="span2">Keterangan</span>

@@ -173,12 +173,12 @@ include"$path/menu.php";
 				<ul>
 					<li>
 						<?php
-							if($dataKet['status_penetapan'] == 1){
-
-							}else{
-								?>
-								<a style="display:display"  href="tambah_usulan_aset.php?idus=<?=$idus?>&tgl_usul=<?=$tgl_usul?>&satker=<?=$satker?>" class="btn btn-info btn-small" id="addruangan"><i class="icon-plus-sign icon-white" align="center"></i>&nbsp;&nbsp;Tambah Usulan Aset</a>	
+							if($dataKet['status_usulan'] == 0){
+							?>
+								<a style="display:display"  href="tambah_usulan_aset.php?idus=<?=$idus?>&tgl_usul=<?=$tgl_usul?>&satker=<?=$satker?>" class="btn btn-info btn-small" id=""><i class="icon-plus-sign icon-white" align="center"></i>&nbsp;&nbsp;Tambah Usulan Aset</a>	
 							<?php
+							}else{
+								//nothing
 							}
 						?>
 							

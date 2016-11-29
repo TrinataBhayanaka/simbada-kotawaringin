@@ -33,7 +33,6 @@ $data = mysql_fetch_assoc($dataUsulan);
 		    }
 		});
 
-
 	   $('#satuan_usul_rev').on('change', function(){
 		var satuan_usul_rev = $('#satuan_usul_rev').val();
 			document.getElementById('satuan_usul').value = satuan_usul_rev; 
@@ -41,6 +40,20 @@ $data = mysql_fetch_assoc($dataUsulan);
 		});
 		
 
+	   var kodeKelompok = $('#paramkodekelompok').val();
+	    console.log(kodeKelompok);
+	    var KodeSatker = $('#satker').val();
+		console.log(KodeSatker);
+	    
+		if(kodeKelompok !='' && KodeSatker !='' ){
+			$.post('../../function/api/asetOptmlPml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
+					//console.log(result);
+					document.getElementById('jml_optml').value = result[0].total; 
+					document.getElementById('kondisi_baik').value = result[0].Baik; 
+					document.getElementById('kondisi_rusak_ringan').value = result[0].RR;
+
+				},"JSON")
+	 	 	}
 	});
 	</script>
 	<section id="main">
@@ -108,6 +121,14 @@ $data = mysql_fetch_assoc($dataUsulan);
 					value="<?=$data[jml_optml]?>" readonly=""/>
 				</li>
 				<li>
+					<span class="span2">Jml Kondisi Baik</span>
+					<input type="text" class="span1" name="kondisi_baik" id="kondisi_baik" value="" readonly=""/>
+				</li>
+				<li>
+					<span class="span2">Jml Kondisi Rusak Ringan</span>
+					<input type="text" class="span1" name="kondisi_rusak_ringan" id="kondisi_rusak_ringan" value="" readonly=""/>
+				</li>
+				<li>
 					<span class="span2">Satuan Optimal</span>
 					<input type="text" name="satuan_optml" id="satuan_optml" 
 					value="<?=$data[satuan_optml]?>" readonly=""/>
@@ -141,6 +162,8 @@ $data = mysql_fetch_assoc($dataUsulan);
 					<input type="hidden" name="idus" id="idus" value="<?=$idus;?>">
 					<input type="hidden" name="satker" id="satker" value="<?=$satker;?>">
 					<input type="hidden" name="tgl_usul_param" id="tgl_usul" value="<?=$tgl_usul;?>">
+					<input type="hidden" name="paramkodekelompok" id="paramkodekelompok" value="<?=$data[kodeKelompok];?>">
+					
 					<!--<input type="reset" name="reset" class="btn" value="Bersihkan Data">-->
 				</li>
 			</ul>

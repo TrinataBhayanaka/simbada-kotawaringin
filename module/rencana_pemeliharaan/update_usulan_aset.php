@@ -10,8 +10,6 @@ $query	  = "UPDATE usulan_rencana_pemeliharaan_aset SET
 				satuan_optml 		= '$_POST[satuan_optml]',
 				ket 				= '".addslashes(html_entity_decode($_POST[ket]))."'
 			WHERE idr 	= '$_POST[idr]'";
-//pr($query);
-//exit;			
 $exec =  mysql_query($query);
   	echo "<script>
 			alert('Data Berhasil Dirubah');

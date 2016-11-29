@@ -204,11 +204,11 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
       $row[] =$no_usul;
       $status_validasi = $aRow['status_validasi'];
       if($status_validasi == 1){
-      	$wrd = "Usulan Sudah Divalidasi";
+      	$wrd = "Usulan Divalidasi";
 		$label ="label-success";
 		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
       }else{
-      	$wrd = "Usulan Sudah Ditetapkan";
+      	$wrd = "Usulan Ditetapkan";
 		$label ="label-success";
 		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
 	  }

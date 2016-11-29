@@ -20,7 +20,7 @@ $id=$_SESSION['user_id'];//Nanti diganti
  * you want to insert a non-database field (for example a counter or static image)
  */
 
-$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_max','jml_optml','jml_rill','jml_usul_rev','jml_max_rev','jml_rill_rev','status_penetapan','ket','status_validasi');
+$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_max','jml_optml','jml_rill','jml_usul_rev','jml_max_rev','jml_rill_rev','status_penetapan','ket','status_validasi','status_verifikasi');
 //$test = count($aColumns);
   
 // echo $aColumns; 
@@ -95,7 +95,7 @@ if (isset($_GET['iSortCol_0'])) {
  */
 $sWhere = "";
 if($idus != ''){
-	$sWhere=" WHERE idus='{$idus}' AND status_penetapan = '1'";
+	$sWhere=" WHERE idus='{$idus}' AND status_penetapan = '1' ";
 }else{
 	$sWhere="";
 }
@@ -177,20 +177,23 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
 	$idr 			= $aRow['idr'];
 	$idus 			= $aRow['idus'];
     $kodeKelompok 	= $aRow['kodeKelompok'];
-    if($aRow['jml_usul_rev']){
+    //if($aRow['jml_usul_rev']){
+    if(!($aRow['jml_usul_rev'] == NULL)){
       $jml_usul     = $aRow['jml_usul_rev'];
     }else{
       $jml_usul     = $aRow['jml_usul'];
     }
 
-    if($aRow['jml_max_rev']){
+    //if($aRow['jml_max_rev']){
+    if(!($aRow['jml_max_rev'] == NULL)){
       $jml_max     = $aRow['jml_max_rev'];
     }else{
       $jml_max     = $aRow['jml_max'];
     }
     $jml_optml 		= $aRow['jml_optml'];
     
-    if($aRow['jml_rill_rev']){
+    //if($aRow['jml_rill_rev']){
+    if(!($aRow['jml_rill_rev'] == NULL)){  
       $jml_rill     = $aRow['jml_rill_rev'];
     }else{
       $jml_rill     = $aRow['jml_rill'];
@@ -206,15 +209,11 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
       $row[] ="<center>".$jml_optml."<center>";
       $row[] ="<center>".$jml_rill."<center>";
       
-      if($aRow['status_penetapan'] == 0){
-        $wrd = "Barang"."<br>"."belom proses";
-        $label ="label-warning";
-        $row[] = "<center><span class=\"label $label\">$wrd </span></center>"; 
-      }elseif($aRow['status_penetapan'] == 1){
-        $wrd = "Barang"."<br>"."diterima";
+      if($aRow['status_penetapan'] == 1 && $aRow['status_verifikasi'] == 1){
+        $wrd = "Barang"."<br>"."diterima"; 
         $label ="label-success";
         $row[] = "<center><span class=\"label $label\">$wrd </span></center>";
-      }else{
+      }elseif($aRow['status_penetapan'] == 1 && $aRow['status_verifikasi'] == 2){
         $wrd = "Barang"."<br>"."ditolak";
         $label ="label-default";
         $row[] = "<center><span class=\"label $label\">$wrd </span></center>";

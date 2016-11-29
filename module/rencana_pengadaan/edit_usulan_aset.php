@@ -44,10 +44,15 @@ $data = mysql_fetch_assoc($dataUsulan);
 			 		if(jml_max){
 			 			var jml_optml = $('#jml_optml').val();
 			 			var hasil = parseInt(jml_max) - parseInt(jml_optml);
-			 			if(parseInt(hasil) < 0){
-							document.getElementById('jml_rill').value = 0; 
+			 			if(parseInt(hasil) <= 0){
+							document.getElementById('jml_rill').value = 0;
+							alert("Kebutuhan Barang Optimal > Kebutuhan Maksimal");
+							$('#simpan').attr('disabled','disabled');
+			            	$('#simpan').css("background","grey"); 
 						}else{
 							document.getElementById('jml_rill').value = hasil; 
+							$('#simpan').removeAttr('disabled');
+		    				$('#simpan').css("background","#04c");
 						}	
 			 		}
 				})
@@ -59,10 +64,17 @@ $data = mysql_fetch_assoc($dataUsulan);
 		var jml_max = $('#jml_max').val();
 		var jml_optml = $('#jml_optml').val();
 		var hasil = parseInt(jml_max) - parseInt(jml_optml);
-			if(parseInt(hasil) < 0){
-				document.getElementById('jml_rill').value = 0; 
+			if(parseInt(hasil) <= 0){
+				//document.getElementById('jml_rill').value = 0; 
+				$('#jml_rill').val('0');
+				alert("Kebutuhan Barang Optimal > Kebutuhan Maksimal");
+				$('#simpan').attr('disabled','disabled');
+            	$('#simpan').css("background","grey");
 			}else{
-				document.getElementById('jml_rill').value = hasil; 
+				//document.getElementById('jml_rill').value = hasil; 
+				$('#jml_rill').val(hasil);
+				$('#simpan').removeAttr('disabled');
+		    	$('#simpan').css("background","#04c");
 			}	
 		});
 

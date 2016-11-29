@@ -41,7 +41,7 @@ $par_data_table="tgl_usul=$tgl_usul&satker=$satker&idus=$idus";
 $ketkodeSatker = mysql_query("select NamaSatker from satker where kode ='{$satker}'");
 $dataKetkodeSatker = mysql_fetch_assoc($ketkodeSatker);
 
-$ketusulan = mysql_query("select us.*,p.* from usulan_rencana_pengadaaan as us 
+$ketusulan = mysql_query("select us.*,p.* from usulan_rencana_pemeliharaan as us 
 						inner join program as p on p.idp = us.idp
 						where 
 						us.idus ='{$idus}'");

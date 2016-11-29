@@ -35,8 +35,12 @@ $tahun  = $TAHUN_AKTIF;
 			
 			if(kodeKelompok !='' && KodeSatker !='' ){
 			$.post('../../function/api/asetOptmlPml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
-					document.getElementById('jml_optml').value = result; 
-				})
+					//console.log(result);
+					document.getElementById('jml_optml').value = result[0].total; 
+					document.getElementById('kondisi_baik').value = result[0].Baik; 
+					document.getElementById('kondisi_rusak_ringan').value = result[0].RR;
+
+				},"JSON")
 	 	 	}
 		});
 
@@ -51,29 +55,29 @@ $tahun  = $TAHUN_AKTIF;
 	<section id="main">
 		<ul class="breadcrumb">
 		  <li><a href="#"><i class="fa fa-home fa-2x"></i>  Home</a> <span class="divider"><b>&raquo;</b></span></li>
-		  <li><a href="#">Usulan Rencana Pengadaan</a><span class="divider"></span></li>
+		  <li><a href="#">Usulan Rencana Pemeliharaan</a><span class="divider"></span></li>
 		  <?php SignInOut();?>
 		</ul>
 		<div class="breadcrumb">
-			<div class="title">Usulan Rencana Pengadaan</div>
-			<div class="subtitle">Filter Usulan Rencana Pengadaan</div>
+			<div class="title">Usulan Rencana Pemeliharaan</div>
+			<div class="subtitle">Filter Usulan Rencana Pemeliharaan</div>
 		</div>
 		<div class="grey-container shortcut-wrapper">
-			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pengadaan/">
+			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">1</i>
 			    </span>
-				<span class="text">Usulan Rencana Pengadaan</span>
+				<span class="text">Usulan Rencana Pemeliharaan</span>
 			</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_penetapan.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/filter_penetapan.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">2</i>
 				    </span>
-					<span class="text">Penetapan Rencana Pengadaan</span>
+					<span class="text">Penetapan Rencana Pemeliharaan</span>
 				</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/filter_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">3</i>
@@ -106,8 +110,16 @@ $tahun  = $TAHUN_AKTIF;
 					<p><b>Data Daftar Barang yang dapat di optimalkan</b></p>
 				</li>
 				<li>
-					<span class="span2">Jml Optimal</span>
+					<span class="span2">Jml Total Optimal</span>
 					<input type="text" class="span1" name="jml_optml" id="jml_optml" value="" readonly=""/>
+				</li>
+				<li>
+					<span class="span2">Jml Kondisi Baik</span>
+					<input type="text" class="span1" name="kondisi_baik" id="kondisi_baik" value="" readonly=""/>
+				</li>
+				<li>
+					<span class="span2">Jml Kondisi Rusak Ringan</span>
+					<input type="text" class="span1" name="kondisi_rusak_ringan" id="kondisi_rusak_ringan" value="" readonly=""/>
 				</li>
 				<li>
 					<span class="span2">Satuan Optimal</span>

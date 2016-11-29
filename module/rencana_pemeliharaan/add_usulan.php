@@ -6,7 +6,7 @@ $query	  = "INSERT INTO usulan_rencana_pemeliharaan (idp,idk,idot,kodeSatker,
 						 no_usul,tgl_usul,status_usulan) 
 			VALUES ('$_POST[program]','$_POST[kegiatan]','$_POST[output]',
 					'$_POST[KodeSatker]','".addslashes(html_entity_decode($_POST[no_usul]))."',
-					'$_POST[tgl_usul]','1')";
+					'$_POST[tgl_usul]','0')";
 //pr($query);
 //exit;
 $exec =  mysql_query($query);

@@ -29,10 +29,21 @@ include"$path/menu.php";
 	
 ?>
 	<script>
+	function gets(){
+		console.log("testtes");
+   		//alert("tes");
+		//get id 
+		//var param = ;
+		var proses = $('#proses').val();
+		console.log(proses);
+		//split 
+		//var val_split = param.split("_");
+		//console.log(val_split);   		
+	}
 	jQuery(function($){
 	   $("select").select2();
 	   
-	   $('.proses').on('click', function(){
+	   $('#proses_2').on('click', function(){
 	   		console.log("testtes");
 	   		alert("tes");
 	   	});
@@ -110,6 +121,11 @@ include"$path/menu.php";
 						<a style="display:display"  href="tambah_usulan.php?tgl_usul=<?=$tgl_usul?>&satker=<?=$satker?>" class="btn btn-info btn-small" id="addruangan"><i class="icon-plus-sign icon-white" align="center"></i>&nbsp;&nbsp;Tambah Usulan</a>
 					
 					</li>
+					<!--<li>
+						<button type="button" id="" name="print" value="" 
+						class="btn btn-success btn-small fa fa-spinner proses">Download pdf</button>
+
+					</li>-->
 				</ul>
 
 				

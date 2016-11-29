@@ -21,7 +21,7 @@ $id=$_SESSION['user_id'];//Nanti diganti
  * you want to insert a non-database field (for example a counter or static image)
  */
 
-$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_optml','jml_usul_rev','status_penetapan','ket','status_validasi');
+$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_optml','jml_usul_rev','status_penetapan','ket','status_validasi','status_verifikasi');
 //$test = count($aColumns);
   
 // echo $aColumns; 
@@ -178,7 +178,8 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
 	$idr 			= $aRow['idr'];
 	$idus 			= $aRow['idus'];
     $kodeKelompok 	= $aRow['kodeKelompok'];
-    if($aRow['jml_usul_rev']){
+    //if($aRow['jml_usul_rev']){
+    if(!($aRow['jml_usul_rev'] == NULL)){
       $jml_usul     = $aRow['jml_usul_rev'];
     }else{
       $jml_usul     = $aRow['jml_usul'];
@@ -206,18 +207,18 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
       $row[] ="<center>".$jml_usul."<center>";
       $row[] ="<center>".$jml_optml."<center>";
       
-      if($aRow['status_penetapan'] == 0){
+      if($aRow['status_verifikasi'] == 0 ){
         $wrd = "Barang"."<br>"."belom proses";
         $label ="label-warning";
         $row[] = "<center><span class=\"label $label\">$wrd </span></center>"; 
-      }elseif($aRow['status_penetapan'] == 1){
+      }elseif($aRow['status_verifikasi'] == 1){
         $wrd = "Barang"."<br>"."diterima";
         $label ="label-success";
         $row[] = "<center><span class=\"label $label\">$wrd </span></center>";
       }else{
         $wrd = "Barang"."<br>"."ditolak";
         $label ="label-default";
-        $row[] = "<center><span class=\"label $label-default\">$wrd </span></center>";
+        $row[] = "<center><span class=\"label $label\">$wrd </span></center>";
       }
       $row[] ="$keterangan";
       if($aRow['status_validasi'] == 1){
@@ -225,12 +226,17 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
         $row[] ="";
       }else{
         if($_SESSION['ses_uaksesadmin'] == 1){
-            $row[] ="<center>".$edit."<center>";
+            if($aRow['status_penetapan'] == 0){
+              $row[] ="<center>".$edit."<center>";
+            }else{
+              $row[] ="";
+            } 
         }else{
             $row[] ="";
         }
         
       }
+      
       
 	$no++;
      $output['aaData'][] = $row;

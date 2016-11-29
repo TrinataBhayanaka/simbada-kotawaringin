@@ -33,14 +33,34 @@ $data = mysql_fetch_assoc($dataUsulan);
 		    }
 		});
 
+	    var kodeKelompok = $('#paramkodekelompok').val();
+	    //console.log(kodeKelompok);
+	    var KodeSatker = $('#satker').val();
+		//console.log(KodeSatker);
+	    
+		if(kodeKelompok !='' && KodeSatker !='' ){
+			$.post('../../function/api/asetOptmlPml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
+					//console.log(result);
+					document.getElementById('jml_optml').value = result[0].total; 
+					document.getElementById('kondisi_baik').value = result[0].Baik; 
+					document.getElementById('kondisi_rusak_ringan').value = result[0].RR;
+
+				},"JSON")
+	 	 	}
+		
+
 	   $('#kodeKelompok').on('change', function(){
 		var kodeKelompok = $('#kodeKelompok').val();
 		var KodeSatker = $('#satker').val();
 			
 			if(kodeKelompok !='' && KodeSatker !='' ){
 			$.post('../../function/api/asetOptmlPml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
-					document.getElementById('jml_optml').value = result; 
-				})
+					//console.log(result);
+					document.getElementById('jml_optml').value = result[0].total; 
+					document.getElementById('kondisi_baik').value = result[0].Baik; 
+					document.getElementById('kondisi_rusak_ringan').value = result[0].RR;
+
+				},"JSON")
 	 	 	}
 
 		});
@@ -113,9 +133,17 @@ $data = mysql_fetch_assoc($dataUsulan);
 					<p><b>Data Daftar Barang yang dapat di optimalkan</b></p>
 				</li>
 				<li>
-					<span class="span2">Jml Optimal</span>
+					<span class="span2">Jml Total Optimal</span>
 					<input type="text" class="span1" name="jml_optml" id="jml_optml" 
 					value="<?=$data[jml_optml]?>" readonly=""/>
+				</li>
+				<li>
+					<span class="span2">Jml Kondisi Baik</span>
+					<input type="text" class="span1" name="kondisi_baik" id="kondisi_baik" value="" readonly=""/>
+				</li>
+				<li>
+					<span class="span2">Jml Kondisi Rusak Ringan</span>
+					<input type="text" class="span1" name="kondisi_rusak_ringan" id="kondisi_rusak_ringan" value="" readonly=""/>
 				</li>
 				<li>
 					<span class="span2">Satuan Optimal</span>
@@ -133,6 +161,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 					<input type="hidden" name="idr" id="idr" value="<?=$idr;?>">
 					<input type="hidden" name="idus" id="idus" value="<?=$idus;?>">
 					<input type="hidden" name="satker" id="satker" value="<?=$satker;?>">
+					<input type="hidden" name="paramkodekelompok" id="paramkodekelompok" value="<?=$data[kodeKelompok];?>">
 					<input type="hidden" name="tgl_usul_param" id="tgl_usul" value="<?=$tgl_usul;?>">
 					<!--<input type="reset" name="reset" class="btn" value="Bersihkan Data">-->
 				</li>

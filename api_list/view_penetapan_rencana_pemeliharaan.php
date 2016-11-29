@@ -20,7 +20,7 @@ $id=$_SESSION['user_id'];//Nanti diganti
  * you want to insert a non-database field (for example a counter or static image)
  */
 
-$aColumns = array('idus','kodeSatker','no_usul','tgl_usul','status_penetapan');
+$aColumns = array('idus','kodeSatker','no_usul','tgl_usul','status_penetapan','status_verifikasi');
 //$test = count($aColumns);
   
 // echo $aColumns; 
@@ -93,9 +93,9 @@ if (isset($_GET['iSortCol_0'])) {
  */
 $sWhere = "";
 if($satker != ''){
-	$sWhere=" WHERE kodeSatker='$satker'";
+	$sWhere=" WHERE kodeSatker='$satker' AND status_usulan = 1";
 }elseif($satker != '' AND $tgl_usul != ''){
-	$sWhere=" WHERE tgl_usul='$tgl_usul' AND kodeSatker='$satker'";
+	$sWhere=" WHERE tgl_usul='$tgl_usul' AND kodeSatker='$satker' AND status_usulan = 1";
 }else{
 	$sWhere="";
 }
@@ -104,9 +104,9 @@ if($satker != ''){
 if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
      //$sWhere = "WHERE (";
 	if($satker != ''){
-		$sWhere .=" WHERE kodeSatker='$satker' AND (";
+		$sWhere .=" WHERE kodeSatker='$satker' AND status_usulan = 1 AND (";
 	}elseif ($satker != '' AND $tgl_usul != ''){
-		$sWhere .=" WHERE tgl_usul='$tgl_usul' AND kodeSatker='$satker' AND (";
+		$sWhere .=" WHERE tgl_usul='$tgl_usul' AND kodeSatker='$satker' AND status_usulan = 1 AND (";
 	}else{
 		$sWhere .="(";
 	}
@@ -148,9 +148,9 @@ $iFilteredTotal = $aResultFilterTotal[0];
 
 /* Total data set length */
 if($satker != ''){
-	$condtn =" WHERE kodeSatker='$satker'";
+$condtn =" WHERE kodeSatker='$satker' AND status_usulan = 1";
 }elseif($satker != '' AND $tgl_usul != ''){
-	$condtn =" WHERE tgl_usul='$tgl_usul' AND kodeSatker='$satker'";
+$condtn =" WHERE tgl_usul='$tgl_usul' AND kodeSatker='$satker' AND status_usulan = 1";
 }else{
 	$condtn="";
 }
@@ -188,30 +188,54 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
 		href=\"list_penetapan_aset.php?idus={$idus}&tgl_usul={$param_tgl_usul}&satker={$kodeSatker}\"	class=\"btn btn-info btn-small\" id=\"\" value=\"\" >
 			<i class=\"fa fa-eye\" align=\"center\"></i>&nbsp;&nbsp;Detail</a>";
 	
-	/*$delete="<a style=\"display:display\" 
-			href=\"delete_usulan.php?idus={$idus}&tgl_usul={$param_tgl_usul}&satker={$kodeSatker}\" onclick=\"return confirm('Hapus Data?');\"
-			class=\"btn btn-danger btn-circle\" id=\"\" value=\"\" title=\"Hapus\">
-			
-			<i class=\"fa fa-trash simbol\">&nbsp;Hapus</i></a>";
-	
-	$edit="<a style=\"display:display\"  
-			href=\"edit_usulan.php?idus={$idus}&tgl_usul={$param_tgl_usul}&satker={$kodeSatker}\"	class=\"btn btn-warning btn-small\" id=\"\" value=\"\" >
-			 
-			<i class=\"fa fa-pencil\" align=\"center\"></i>&nbsp;&nbsp;Edit</a>";*/
-
 	  $row[] ="<center>".$no."<center>";
 	  $row[] =$format_tgl;
       $row[] =$no_usul;
-      if($aRow['status_penetapan'] == '1'){
-      	$wrd = "Usulan Sudah Ditetapkan";
+      
+   if($aRow['status_validasi'] == 0){
+      	if($aRow['status_penetapan'] == 1 && $aRow['status_verifikasi'] == 1){
+      	$wrd = "Usulan Ditetapkan";
 		$label ="label-success";
 		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
-      }else{
+      	
+      	$unpenetapan="<a style=\"display:display\"  
+			href=\"proses_usulan.php?idus={$idus}&tgl_usul={$param_tgl_usul}&satker={$kodeSatker}&flag=4\"	class=\"btn btn-danger btn-small proses\" id=\"\" value=\"\" >
+				<i class=\"fa fa-spinner\" align=\"center\"></i>&nbsp;&nbsp;Batal Penetapan</a>";
+		
+		if($_SESSION['ses_uaksesadmin'] == 1){
+			$row[] ="<center>".$unpenetapan."&nbsp;&nbsp;".$detail."</center>";
+      	}else{
+      		$row[] ="<center>".$detail."</center>";
+      	}    		
+			
+      }elseif($aRow['status_penetapan'] == 0 && $aRow['status_verifikasi'] == 1){
+      	$wrd = "Usulan Diverifikasi";
+		$label ="label-success";
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+
+		$unverifikasi="<a style=\"display:display\"  
+			href=\"proses_usulan.php?idus={$idus}&tgl_usul={$param_tgl_usul}&satker={$kodeSatker}&flag=3\"	class=\"btn btn-danger btn-small proses\" id=\"\" value=\"\" >
+				<i class=\"fa fa-spinner\" align=\"center\"></i>&nbsp;&nbsp;Batal Verifikasi</a>";
+		$Penetapan ="<a style=\"display:display\"  
+			href=\"proses_usulan.php?idus={$idus}&tgl_usul={$param_tgl_usul}&satker={$kodeSatker}&flag=5\"	class=\"btn btn-success btn-small proses\" id=\"\" value=\"\" >
+				<i class=\"fa fa-spinner\" align=\"center\"></i>&nbsp;&nbsp;Penetapan</a>"; 		
+		if($_SESSION['ses_uaksesadmin'] == 1){
+			$row[] ="<center>".$Penetapan."<br/><br/>".$unverifikasi."&nbsp;&nbsp;".$detail."</center>";
+      	}else{
+      		$row[] ="<center>".$detail."</center>";
+      	}   
+      }elseif($aRow['status_penetapan'] == 0 && $aRow['status_verifikasi'] == 0){
       	$wrd = "Usulan Belum Ditetapkan";
 		$label ="label-warning";	
 		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+		$row[] ="<center>".$detail."<center>";
       }
-      $row[] ="<center>".$detail."&nbsp;&nbsp;".$edit."&nbsp;&nbsp;".$delete."<center>";
+  }else{
+  		$wrd = "Usulan Divalidasi";
+		$label ="label-success";
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+		$row[] ="<center>".$detail."<center>";
+  }
       
       
 	$no++;

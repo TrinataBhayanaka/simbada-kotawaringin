@@ -44,7 +44,7 @@ $tahun  = $TAHUN_AKTIF;
 		var jml_max = $('#jml_max').val();
 		var jml_optml = $('#jml_optml').val();
 		var hasil = parseInt(jml_max) - parseInt(jml_optml);
-			if(parseInt(hasil) < 0){
+			if(parseInt(hasil) <= 0){
 				//document.getElementById('jml_rill').value = 0; 
 				$('#jml_rill').val('0');
 				alert("Kebutuhan Barang Optimal > Kebutuhan Maksimal");
