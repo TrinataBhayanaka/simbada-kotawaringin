@@ -51,7 +51,7 @@ $menu_id = 1;
 	<script>
     jQuery(function($) {
         $('#totalmask').autoNumeric('init');   
-        $("#datepicker").mask("00-00-00"); 
+        $("#datepicker").mask('0000-00-00'); 
     });
 
     function getCurrency(item){

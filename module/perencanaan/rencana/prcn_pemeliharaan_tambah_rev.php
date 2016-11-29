@@ -61,7 +61,7 @@ $Uraian = $GetDataTipe['Uraian'];
 	$(document).ready(function() {
 	   $("select").select2();
 	   $('#hargaPemeliharaan').autoNumeric('init');
-	   $("#tglPemeliharaan").mask('00-00-00');
+	   $("#tglPemeliharaan").mask('0000-00-00');
 	   $("#tglPemeliharaan" ).datepicker({ dateFormat: 'yy-mm-dd' });
 	   /*function getCurrency(item){
 	      $('#hargaPemeliharaan').val($(item).autoNumeric('get'));

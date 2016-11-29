@@ -32,7 +32,7 @@ include "../../config/config.php";
 	
 	jQuery(function($) {
       		AreAnyCheckboxesChecked();
-			$( "#datepicker").mask('00-00-00');
+			$( "#datepicker").mask('0000-00-00');
 			//$( "#tglPerubahan" ).datepicker({ dateFormat: 'yy-mm-dd' });
 			
 	

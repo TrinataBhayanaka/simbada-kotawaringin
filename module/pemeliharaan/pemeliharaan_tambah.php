@@ -19,7 +19,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
 ?>
 	<script>
 	jQuery(function($){
-	   $("#tglsp2d,#tglkontrak,#tglpemeliharaan").mask('00-00-00');
+	   $("#tglsp2d,#tglkontrak,#tglpemeliharaan").mask('0000-00-00');
 	   $("#tglsp2d,#tglkontrak,#tglpemeliharaan" ).datepicker({ dateFormat: 'yy-mm-dd' });
 	   $("select").select2();
 	});

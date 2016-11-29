@@ -19,7 +19,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
 ?>
 	<script>
 	jQuery(function($){
-	   $("#tglPemeliharaanAwal,#tglPemeliharaanAkhir").mask('00-00-00');
+	   $("#tglPemeliharaanAwal,#tglPemeliharaanAkhir").mask('0000-00-00');
 	   $("#tglPemeliharaanAwal,#tglPemeliharaanAkhir" ).datepicker({ dateFormat: 'yy-mm-dd' });
 	   $("select").select2();
 	});

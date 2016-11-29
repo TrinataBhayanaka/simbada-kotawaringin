@@ -45,7 +45,7 @@ $dataArr = $RETRIEVE->retrieve_editkontrak($_GET);
         $('#hrgmask,#total').autoNumeric('init');
         $("select").select2({});
         $( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen" ).datepicker({ format: 'yyyy-mm-dd' });
-		$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#datepicker" ).mask('00-00-00');
+		$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#datepicker" ).mask('0000-00-00');
 		setTimeout(function() {
 		 	initKondisi();
 		}, 100);
