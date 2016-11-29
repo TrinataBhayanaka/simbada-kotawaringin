@@ -43,7 +43,7 @@ include "../../config/config.php";
 	
 	jQuery(function($) {
       		AreAnyCheckboxesChecked();
-			$( "#tglPerubahan").mask('9999-99-99');
+			$( "#tglPerubahan").mask('00-00-00');
 			$( "#tglPerubahan" ).datepicker({ dateFormat: 'yy-mm-dd' });
 	
       	});

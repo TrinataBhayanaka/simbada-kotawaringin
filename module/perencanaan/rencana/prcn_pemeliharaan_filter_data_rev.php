@@ -15,7 +15,7 @@ include"$path/menu.php";
 	<script type="text/javascript">
 		jQuery(function($){
 	   $("select").select2();
-	    $("#tglPemeliharaanAwal,#tglPemeliharaanAkhir").mask('9999-99-99');
+	    $("#tglPemeliharaanAwal,#tglPemeliharaanAkhir").mask('00-00-00');
 	   $("#tglPemeliharaanAwal,#tglPemeliharaanAkhir" ).datepicker({ dateFormat: 'yy-mm-dd' });
 	});
 	</script>

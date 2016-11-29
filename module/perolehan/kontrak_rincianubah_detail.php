@@ -45,7 +45,7 @@ $dataArr = $RETRIEVE->get_rincianBarangDetail($_GET);
         $('#hrgmask,#total').autoNumeric('init');
         $("select").select2({});
         $( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen" ).datepicker({ format: 'yyyy-mm-dd' });
-		$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#datepicker" ).mask('9999-99-99');
+		$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#datepicker" ).mask('00-00-00');
 		setTimeout(function() {
 		 	initKondisi();
 		}, 100);

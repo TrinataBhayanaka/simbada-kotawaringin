@@ -20,7 +20,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
 	jQuery(function($){
 	   $("#Tahun_aw,#Tahun_ak,#register_aw,#register_ak").mask("9999");
 	   $("select").select2();
-	   $( "#tglPerubahan").mask('9999-99-99');
+	   $( "#tglPerubahan").mask('00-00-00');
 	 //$( "#tglPerubahan" ).datepicker({ dateFormat: 'yy-mm-dd' });
 	  // $( "#tglPerubahan" ).datepicker({ format: 'yyyy-mm-dd',autoclose:true,clearBtn:true,forceParse:true });
 			

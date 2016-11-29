@@ -17,7 +17,7 @@
 	<script>
 	jQuery(function($){
 	   $("select").select2();
-	   $("#TglPenyusutan").mask('9999-99-99');
+	   $("#TglPenyusutan").mask('00-00-00');
 	   $("#TglPenyusutan").datepicker({ dateFormat: 'yy-mm-dd' });
 
 	});

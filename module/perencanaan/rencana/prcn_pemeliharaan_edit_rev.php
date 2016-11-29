@@ -44,7 +44,7 @@ $keterangan = $GetData['keterangan'];
 	$(document).ready(function() {
 	   $("select").select2();
 	   $('#hargaPemeliharaan').autoNumeric('init');
-	   $("#tglPemeliharaan").mask('9999-99-99');
+	   $("#tglPemeliharaan").mask('00-00-00');
 	   $("#tglPemeliharaan" ).datepicker({ dateFormat: 'yy-mm-dd' });
 	   /*function getCurrency(item){
 	      $('#hargaPemeliharaan').val($(item).autoNumeric('get'));

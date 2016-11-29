@@ -27,7 +27,7 @@ if($_GET['id']){
 ?>
 	<script>
 	jQuery(function($){
-		$("#datepicker").mask("9999-99-99");
+		$("#datepicker").mask("00-00-00");
 	});
 	</script>
 	<section id="main">
