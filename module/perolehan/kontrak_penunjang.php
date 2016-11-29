@@ -5,7 +5,10 @@ $menu_id = 10;
             ($SessionUser['ses_uid']!='') ? $Session = $SessionUser : $Session = $SESSION->get_session(array('title'=>'GuestMenu', 'ses_name'=>'menu_without_login')); 
             $USERAUTH->FrontEnd_check_akses_menu($menu_id, $Session);
 
-$get_data_filter = $RETRIEVE->retrieve_kontrak();
+ $tahun= $_GET['tahun'];
+  if($tahun=="")
+            	$tahun=$TAHUN_AKTIF;
+$get_data_filter = $RETRIEVE->retrieve_kontrak($tahun);
 // pr($get_data_filter);
 ?>
 
@@ -77,6 +80,19 @@ $get_data_filter = $RETRIEVE->retrieve_kontrak();
 
 		<section class="formLegend">
 			
+			<p>Tahun Kontrak:
+				<?=$tahun?>
+			</p>
+			<?php
+			$tahun_akhir=date("Y");
+			for($tahun=2014;$tahun<=$tahun_akhir;$tahun++){
+
+
+			?><a href="?tahun=<?=$tahun?>" class="btn btn-info btn-small"><i class="icon-plus-sign icon-white"></i>&nbsp;&nbsp;<?=$tahun?></a>
+			&nbsp;
+			<?php
+			}
+			?>
 			
 			<div id="demo">
 			<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">

@@ -13,7 +13,7 @@
 	<script>
 	jQuery(function($){
 	   $("select").select2();
-	   $("#TglPenyusutan").mask('9999-99-99');
+	   $("#TglPenyusutan").mask('0000-00-00');
 	   $("#TglPenyusutan" ).datepicker({ dateFormat: 'yy-mm-dd' });
 	});
 	$(document).on('change', '#kodeSatker', function (){

@@ -7,7 +7,9 @@
  */
 include "../../config/config.php";
 //echo "masuk";
-echo overhaul('03', '12', '07', 51, $DBVAR);
+//echo overhaul('03', '12', '07', 51, $DBVAR);
+list($Akumulasi,$UmurEkonomis)=get_data_akumulasi_from_eksisting(137569,$DBVAR);
+echo "$Akumulasi,$UmurEkonomis";
 //echo " selesai";
 function overhaul($kd_aset1, $kd_aset2, $kd_aset3,$persen, $DBVAR) {
     $query = "select * from re_masamanfaat_tahun_berjalan where kd_aset1='$kd_aset1' "
@@ -62,4 +64,16 @@ function overhaul($kd_aset1, $kd_aset2, $kd_aset3,$persen, $DBVAR) {
         
     }
     return $hasil;
+}
+
+
+function get_data_akumulasi_from_eksisting($Aset_ID,$DBVAR){
+      $query= "SELECT AkumulasiPenyusutan,UmurEkonomis FROM aset WHERE Aset_ID = '$Aset_ID' limit 1";
+      $hasil= $DBVAR->query($query);
+      $data= $DBVAR->fetch_array($hasil);
+      $Akumulasi=$data['AkumulasiPenyusutan'];
+      $UmurEkonomis=$data['UmurEkonomis'];
+
+      
+      return array($Akumulasi,$UmurEkonomis);
 }

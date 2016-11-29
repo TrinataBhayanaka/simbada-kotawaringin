@@ -30,7 +30,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id,$SessionUser);
 		 <script>
 		$(document).ready(function() {
 			$("#tahun_rencana,#tahun_pemeliharaan").mask('9999');
-			$( "#tglCetakPengadaan,#tglCetakPemeliharaan,#TanggalAwal,#TanggalAkhir").mask('9999-99-99');
+			$( "#tglCetakPengadaan,#tglCetakPemeliharaan,#TanggalAwal,#TanggalAkhir").mask('0000-00-00');
 			$( "#tglCetakPengadaan,#tglCetakPemeliharaan,#TanggalAwal,#TanggalAkhir" ).datepicker({ dateFormat: 'yy-mm-dd' });
 				
 		});

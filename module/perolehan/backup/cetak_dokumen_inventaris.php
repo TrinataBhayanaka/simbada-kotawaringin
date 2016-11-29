@@ -74,7 +74,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id,$SessionUser);
 						});*/
 						$(document).ready(function() {
 							$("select").select2({});
-							$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen" ).mask('9999-99-99');
+							$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen" ).mask('0000-00-00');
 							$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen" ).datepicker({ format: 'yyyy-mm-dd' });
 							initKondisi();
 							});	

@@ -13,7 +13,7 @@
 	<script>
 	jQuery(function($){
 	   $("select").select2();
-	   $("#TglUpdate").mask('9999-99-99');
+	   $("#TglUpdate").mask('0000-00-00');
 	   $("#TglUpdate" ).datepicker({ dateFormat: 'yy-mm-dd' });
 	});
 	

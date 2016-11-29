@@ -110,8 +110,6 @@ $LAYANAN = new RETRIEVE_LAYANAN;
 						<?php
 							// if($kontrak[0]['n_status'] != 1){
 						?>
-						<!--<a href="kontrak_rincianubah.php?id=<?=$value['Aset_ID']?>&tmpthis=<?=$_GET['id']?>" class="btn btn-warning btn-small" ><i class="icon-pencil icon-white"></i>&nbsp;Edit</a>-->
-						<!-- <a href="kontrak_rincianhapus.php?id=<?=$value['kodeKelompok']?>&idLok=<?=$value['kodeLokasi']?>&tmpthis=<?=$_GET['id']?>" class="btn btn-danger btn-small" onclick="return confirm('Hapus Aset?')"><i class="icon-trash icon-white"></i>&nbsp;Hapus</a> -->
 						
 						<?php
 						// } else {
