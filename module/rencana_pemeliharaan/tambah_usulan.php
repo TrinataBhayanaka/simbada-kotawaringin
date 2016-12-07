@@ -24,73 +24,73 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker'");
 	<script>
 	jQuery(function($){
 	   $("select").select2();
-	   $('.selectpicker').selectpicker({
+	   /*$('.selectpicker').selectpicker({
       
-      });
+      });*/
 	
-	function hierachy(){
-	   		var i =0;
-			var template 	= "";
-			var programid 	= $("#program").val();
-			var tahun 		= $("#tahun").val();
-			var satker 		= $("#satker").val();
+		function hierachy(){
+		   		var i =0;
+				var template 	= "";
+				var programid 	= $("#program").val();
+				var tahun 		= $("#tahun").val();
+				var satker 		= $("#satker").val();
 
-			$.post('../../function/api/selectkegiatan.php', {programid:programid,tahun:tahun,satker:satker}, function(data){
-				console.log(data);
-			$('#kegiatan')
-			    .find('option')
-			    .remove()
-			    .end()
-			;
-			
-			if (data){
-				for(i=0;i<data.length;i++){
-					template+='<option value="'+data[i].idk+'">'+data[i].kd_kegiatan+" "+data[i].kegiatan+'</option>';
-				}
-				$("#kegiatan").html(template);
-				$("#kegiatan").select2();
-
-				secondhierachy();
-			}
-		},"JSON")
-
-	}
-
-	function secondhierachy(){
-	   		var i =0;
-			var template 	= "";
-			var programid 	= $("#program").val();
-			var kegiatanid 	= $("#kegiatan").val();
-			var tahun 		= $("#tahun").val();
-			var satker 		= $("#satker").val();
-
-			$.post('../../function/api/selectOutput.php', {programid:programid,kegiatanid:kegiatanid,tahun:tahun,satker:satker}, function(data){
+				$.post('../../function/api/selectkegiatan.php', {programid:programid,tahun:tahun,satker:satker}, function(data){
+					//console.log(data);
+				$('#kegiatan')
+				    .find('option')
+				    .remove()
+				    .end()
+				;
 				
-			$('#output')
-			    .find('option')
-			    .remove()
-			    .end()
-			;
-			
-			if (data){
-				for(i=0;i<data.length;i++){
-					template+='<option value="'+data[i].idot+'">'+data[i].kd_output+" "+data[i].output+'</option>';
+				if (data){
+					for(i=0;i<data.length;i++){
+						template+='<option value="'+data[i].idk+'">'+data[i].kd_kegiatan+" "+data[i].kegiatan+'</option>';
+					}
+					$("#kegiatan").html(template);
+					$("#kegiatan").select2();
+
+					secondhierachy();
 				}
-				$("#output").html(template);
-				$("#output").select2();
+			},"JSON")
 
-			}
-		},"JSON")
+		}
 
-	}
+		function secondhierachy(){
+		   		var i =0;
+				var template 	= "";
+				var programid 	= $("#program").val();
+				var kegiatanid 	= $("#kegiatan").val();
+				var tahun 		= $("#tahun").val();
+				var satker 		= $("#satker").val();
 
-	$('.program').on('change', function(){
-   		hierachy();
-	});
+				$.post('../../function/api/selectOutput.php', {programid:programid,kegiatanid:kegiatanid,tahun:tahun,satker:satker}, function(data){
+					
+				$('#output')
+				    .find('option')
+				    .remove()
+				    .end()
+				;
+				
+				if (data){
+					for(i=0;i<data.length;i++){
+						template+='<option value="'+data[i].idot+'">'+data[i].kd_output+" "+data[i].output+'</option>';
+					}
+					$("#output").html(template);
+					$("#output").select2();
 
-	$('.kegiatan').on('change', function(){
-   		secondhierachy();
-	});
+				}
+			},"JSON")
+
+		}
+
+		$('.program').on('change', function(){
+	   		hierachy();
+		});
+
+		$('.kegiatan').on('change', function(){
+	   		secondhierachy();
+		});
 
 	});
 	</script>
