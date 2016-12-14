@@ -203,10 +203,10 @@ foreach ($data as $key => $value)
 							// }
 
               $NamaSatker=$PENGHAPUSAN->getNamaSatker($value[SatkerUsul]);
-              $totalNilaiPerolehan=$PENGHAPUSAN->TotalNilaiPerolehan($value[Aset_ID]); 
+              //$totalNilaiPerolehan=$PENGHAPUSAN->TotalNilaiPerolehan($value[Aset_ID]); 
               
               //tambahan cuncun
-              list($jmlh,$jumlahAset)=$PENGHAPUSAN->TotalAsetBasedonTblAset($value[Usulan_ID]);
+              list($jumlahAset,$totalNilaiPerolehan)=$PENGHAPUSAN->TotalAsetBasedonTblAset($value[Usulan_ID]);
              
               // pr($totalNilaiPerolehan);
              /* $jmlh=explode(",", $value[Aset_ID]);
