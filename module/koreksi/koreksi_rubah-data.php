@@ -36,10 +36,11 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 
 			$('#hrgmask,#total').autoNumeric('init');
 			$("select").select2({});
-			$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#tglPerubahan" ).mask('0000-00-00');
+			$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#tglPerubahan" ).mask('9999-99-99');
 			$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#datepicker,#tglPerubahan,#dp-ex-3" ).datepicker({ format: 'yyyy-mm-dd',autoclose:true,clearBtn:true,forceParse:true });
 			setTimeout(function() {
 			 	initKondisi();
+                                $("#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#tglPerubahan").attr('readonly','readonly');
 			}, 1000);
 			});	
 
@@ -113,7 +114,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 								<div class="control">
 									<div class="input-prepend">
 										<span class="add-on"><i class="fa fa-calendar"></i></span>
-										<input type="text" class="span2 full rubahaset" name="tglPerolehan" id="tglPerolehan" value="<?=$dataArr['aset']['TglPerolehan']?>" disabled/>
+										<input type="text" class="span2 full rubahaset" disbaled name="tglPerolehan" id="tglPerolehan" value="<?=$dataArr['aset']['TglPerolehan']?>" disabled/>
 									</div>
 								</div>
 							</li>
@@ -122,7 +123,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 								<div class="control">
 									<div class="input-prepend">
 										<span class="add-on"><i class="fa fa-calendar"></i></span>
-										<input type="text" class="span2 full rubahaset" name="tglPembukuan" id="datepicker" value="<?=$dataArr['aset']['TglPembukuan']?>" disabled/>
+										<input type="text" class="span2 full rubahaset"  disbaled name="tglPembukuan" id="datepicker" value="<?=$dataArr['aset']['TglPembukuan']?>" disabled/>
 									</div>
 								</div>
 							</li>
@@ -453,7 +454,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 	})
 
 	function initKondisi(){	
-			$(".rubahaset").removeAttr('readonly');
+           		$(".rubahaset").removeAttr('readonly');
 			$(".rubahaset").removeAttr('disabled');
 			var kode = $('#kodeKelompok').val();
 			var gol = kode.split(".");

@@ -25,10 +25,11 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 
 		      	$dataArr = $STORE->koreksiAset($_POST);
 
-		  }
+		  }		
 
-		$dataArr['aset']['kodepemilik'] = substr($dataArr['aset']['kodeLokasi'], 0,2);		
+		  $dataArr['aset']['kodepemilik'] = substr($dataArr['aset']['kodeLokasi'], 0,2);
 
+		  // pr($dataArr);exit;
 	?>
 	<!-- End Sql -->
 	<script type="text/javascript">
@@ -36,7 +37,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 
 			$('#hrgmask,#total').autoNumeric('init');
 			$("select").select2({});
-			$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#tglPerubahan" ).mask('0000-00-00');
+			$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#tglPerubahan" ).mask('9999-99-99');
 			$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#datepicker,#tglPerubahan,#dp-ex-3" ).datepicker({ format: 'yyyy-mm-dd',autoclose:true,clearBtn:true,forceParse:true });
 			setTimeout(function() {
 			 	initKondisi();
@@ -105,7 +106,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 							<?=selectRuang('kodeRuangan','kodeSatker','255',true,$dataArr['aset']['Tahun']."_".$dataArr['aset']['kodeRuangan'],'disabled');?>
 						</ul>
 						<ul>
-							<?php selectAset('kodeKelompok','255',true,$dataArr['aset']['kodeKelompok'],'disabled'); ?>
+							<?php selectAset('kodeKelompok','255',true,$dataArr['aset']['kodeKelompok'],'disabled required'); ?>
 						</ul>		
 						<ul>
 							<!-- <li>
@@ -156,7 +157,6 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 									<option value="1" <?=$dataArr['kib']['kondisi'] == '1' ? 'selected' : ''?>>Baik</option>
 									<option value="2" <?=$dataArr['kib']['kondisi'] == '2' ? 'selected' : ''?>>Rusak Ringan</option>
 									<option value="3" <?=$dataArr['kib']['kondisi'] == '3' ? 'selected' : ''?>>Rusak Berat</option>
-									<option value="4" <?=$dataArr['kib']['kondisi'] == '4' ? 'selected' : ''?>>Dalam Penelusuran</option>
 								</select>
 							</li>
 						</ul>
@@ -176,8 +176,26 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 								<span class="span2">Asal Usul</span>
 								<select id="asalusul" name="asalusul" style="width:255px" class="koreksi">
 									<option></option>
-									<option value="Pembelian" <?=$dataArr['aset']['AsalUsul'] == 'Pembelian' ? 'selected' : ''?>>Pembelian</option>
-									<option value="Hibah" <?=$dataArr['aset']['AsalUsul'] == 'Hibah' ? 'selected' : ''?>>Hibah</option>
+									<optgroup label="Pembelian">
+										<option value="Inventarisasi" <?=$dataArr['aset']['AsalUsul'] == 'Inventarisasi' ? 'selected' : ''?>>Inventarisasi</option>
+										<option value="perolehan sah lainnya" <?=$dataArr['aset']['AsalUsul'] == 'perolehan sah lainnya' ? 'selected' : ''?>>perolehan sah lainnya</option>
+									</optgroup>
+
+									<optgroup label="Hibah">
+												<option value="Hibah" <?=$dataArr['aset']['AsalUsul'] == 'Hibah' ? 'selected' : ''?>>Hibah</option>
+											<option value="BOS" <?=$dataArr['aset']['AsalUsul'] == 'BOS' ? 'selected' : ''?>>BOS</option>
+											<option value="Hibah BOS" <?=$dataArr['aset']['AsalUsul'] == 'Hibah BOS' ? 'selected' : ''?>>Hibah BOS</option>
+											<option value="Hibah Komite" <?=$dataArr['aset']['AsalUsul'] == 'Hibah Komite' ? 'selected' : ''?>>Hibah Komite</option>
+											<option value="Hibah Pusat" <?=$dataArr['aset']['AsalUsul'] == 'Hibah Pusat' ? 'selected' : ''?>>Hibah Pusat</option>
+											<option value="Hibah Provinsi" <?=$dataArr['aset']['AsalUsul'] == 'Hibah Provinsi' ? 'selected' : ''?>>Hibah Provinsi</option>
+											<option value="Hibah Pihak ke-3" <?=$dataArr['aset']['AsalUsul'] == 'Hibah Pihak ke-3' ? 'selected' : ''?>>Hibah Pihak ke-3</option>
+									</optgroup>
+									<optgroup label="Sitaan/ Rampasan">
+										<option value="Sitaan/ Rampasan" <?=$dataArr['aset']['AsalUsul'] == 'Sitaan/ Rampasan' ? 'selected' : ''?>>Sitaan/ Rampasan</option>
+									</optgroup>
+									
+									
+								
 								</select>
 							</li>
 							<li>&nbsp;</li>
@@ -261,6 +279,10 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 							<li>
 								<span class="span2">No. Polisi</span>
 								<input type="text" class="span3" name="NoSeri" value="<?=$dataArr['kib']['NoSeri']?>" disabled/>
+							</li>
+							<li>
+								<span class="span2">No. STNK</span>
+								<input type="text" class="span3" name="NoSTNK" value="<?=$dataArr['kib']['NoSTNK']?>" disabled/>
 							</li>
 							<li>
 								<span class="span2">No. BPKB</span>

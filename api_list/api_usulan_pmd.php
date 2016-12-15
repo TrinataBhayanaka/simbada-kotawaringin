@@ -129,8 +129,7 @@ $dataParam['limit']="$sLimit";
 // list($data,$iFilteredTotal ) = $PENGHAPUSAN->retrieve_daftar_usulan_penghapusan_pmd($dataParam);	
 
 $data = $PENGHAPUSAN->retrieve_daftar_usulan_penghapusan_pmd($dataParam); 
-//pr($dataSESSION);
-//exit;
+
 //$rResult = $DBVAR->query($sQuery);
 
 // /* Data set length after filtering */
@@ -204,15 +203,20 @@ foreach ($data as $key => $value)
 							// }
 
               $NamaSatker=$PENGHAPUSAN->getNamaSatker($value[SatkerUsul]);
-              $totalNilaiPerolehan=$PENGHAPUSAN->TotalNilaiPerolehan($value[Aset_ID]); 
+              //$totalNilaiPerolehan=$PENGHAPUSAN->TotalNilaiPerolehan($value[Aset_ID]); 
+              
+              //tambahan cuncun
+              list($jumlahAset,$totalNilaiPerolehan)=$PENGHAPUSAN->TotalAsetBasedonTblAset($value[Usulan_ID]);
+             
               // pr($totalNilaiPerolehan);
-              $jmlh=explode(",", $value[Aset_ID]);
+             /* $jmlh=explode(",", $value[Aset_ID]);
               $jumlahAset=0;
               foreach ($jmlh as $keyJMlaset => $valuekeyJMlaset) {
                 if($valuekeyJMlaset){
                   $jumlahAset=$jumlahAset+1;
                 }
-              }
+              }*/
+
               // $jumlahAset=count($jmlh);
               $change=$value[TglUpdate]; 
               $change2=  format_tanggal_db3($change); 
@@ -284,7 +288,8 @@ foreach ($data as $key => $value)
                              $row[]=$SatkerUsul;
                              $row[]=$jumlahAset;
                              $row[]=$change2;
-                             $row[]=number_format($totalNilaiPerolehan[TotalNilaiPerolehan],4);
+                             //$row[]=number_format($totalNilaiPerolehan[TotalNilaiPerolehan],4);
+                             $row[]=number_format($totalNilaiPerolehan,4);
                              $row[]=$value[KetUsulan];
                              $row[]=$text.$textvalid;
                              $row[]=$tindakan;
