@@ -2437,6 +2437,13 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                 $tblKib['Beton'] = $data['Beton'];
                 $tblKib['NoSurat'] = $data['NoSurat'];
                 $tblKib['tglSurat'] = $data['tglSurat'];
+
+                $tblKib['Tanah_ID'] = $data['tanah_id'];
+                $tblKib['KelompokTanah_ID'] = $data['kelompok_tanah'];
+                $tblKib['StatusTanah'] = $data['status_tanah'];
+                $tblKib['Tmp_Luas'] = $data['luas_total'];
+
+
                 $tabel = "bangunan";
                 $logtabel = "log_bangunan";
                 $idkey = "Bangunan_ID";
