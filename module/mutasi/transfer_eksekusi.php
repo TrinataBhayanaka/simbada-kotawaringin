@@ -405,7 +405,7 @@ include "../../config/config.php";
 														</li>
 														<li>
 															<span class="span2">Tgl. Proses</span>
-															<input type="text" style="width:180px;" name="mutasi_trans_eks_tglproses" required="required" id="datepicker" value="<?=@$data[0][TglSKKDH]?>" readonly="readonly">
+															<input type="text" style="width:180px;" name="mutasi_trans_eks_tglproses" required="required" id="datepicker" value="<?=@$data[0][TglSKKDH]?>">
 														</li>
 														<li>
 															<span class="span2">Pemakai</span>
