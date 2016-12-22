@@ -18,37 +18,6 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
 	include"$path/menu.php";
 	
 ?>
-
-   
-    
-    <!--buat date-->
-    <script type="text/javascript" src="<?php echo "$url_rewrite/"; ?>JS/jquery.min.js"></script>
-    <script type="text/javascript" src="<?php echo "$url_rewrite/"; ?>JS/jquery-ui.min.js"></script> 
-    <script type="text/javascript" src="<?php echo "$url_rewrite/"; ?>JS/jquery.ui.datepicker-id.js"></script>
-    <script type="text/javascript" src="<?php echo "$url_rewrite/";?>JS/ajax_checkbox.js"></script>
-    <script>
-        $(function()
-        {
-        $('#tanggal1').datepicker($.datepicker.regional['id']);
-        $('#tanggal2').datepicker($.datepicker.regional['id']);
-        $('#tanggal3').datepicker($.datepicker.regional['id']);
-        $('#tanggal4').datepicker($.datepicker.regional['id']);
-        $('#tanggal5').datepicker($.datepicker.regional['id']);
-        $('#tanggal6').datepicker($.datepicker.regional['id']);
-        $('#tanggal7').datepicker($.datepicker.regional['id']);
-        $('#tanggal8').datepicker($.datepicker.regional['id']);
-        $('#tanggal9').datepicker($.datepicker.regional['id']);
-        $('#tanggal10').datepicker($.datepicker.regional['id']);
-        $('#tanggal11').datepicker($.datepicker.regional['id']);
-        $('#tanggal12').datepicker($.datepicker.regional['id']);
-        $('#tanggal13').datepicker($.datepicker.regional['id']);
-        $('#tanggal14').datepicker($.datepicker.regional['id']);
-        $('#tanggal15').datepicker($.datepicker.regional['id']);
-        }
-        );
-    </script>   
-    <link href="<?php echo "$url_rewrite/"; ?>css/jquery-ui.css" type="text/css" rel="stylesheet">
-        
     <!--buat number only-->
     <style>
         #errmsg { color:red; }

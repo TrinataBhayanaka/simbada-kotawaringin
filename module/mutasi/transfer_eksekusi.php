@@ -59,38 +59,6 @@ include "../../config/config.php";
             }
             -->
         </script>
-        
-        <!--buat date-->
-        <script type="text/javascript" src="<?php echo "$url_rewrite/"; ?>JS/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo "$url_rewrite/"; ?>JS/jquery-ui.min.js"></script> 
-        <script type="text/javascript" src="<?php echo "$url_rewrite/"; ?>JS/jquery.ui.datepicker-id.js"></script>
-        <script type="text/javascript" src="<?php echo "$url_rewrite/";?>JS/ajax_radio.js"></script>
-
-        <script>
-            $(function()
-            {
-            $('#tanggal1').datepicker($.datepicker.regional['id']);
-            $('#tanggal2').datepicker($.datepicker.regional['id']);
-            $('#tanggal3').datepicker($.datepicker.regional['id']);
-            $('#tanggal4').datepicker($.datepicker.regional['id']);
-            $('#tanggal5').datepicker($.datepicker.regional['id']);
-            $('#tanggal6').datepicker($.datepicker.regional['id']);
-            $('#tanggal7').datepicker($.datepicker.regional['id']);
-            $('#tanggal8').datepicker($.datepicker.regional['id']);
-            $('#tanggal9').datepicker($.datepicker.regional['id']);
-            $('#tanggal10').datepicker($.datepicker.regional['id']);
-            $('#tanggal11').datepicker($.datepicker.regional['id']);
-            $('#tanggal12').datepicker($.datepicker.regional['id']);
-            $('#tanggal13').datepicker($.datepicker.regional['id']);
-            $('#tanggal14').datepicker($.datepicker.regional['id']);
-            $('#tanggal15').datepicker($.datepicker.regional['id']);
-
-            }
-
-            );
-        </script>   
-        <link href="<?php echo "$url_rewrite/"; ?>css/jquery-ui.css" type="text/css" rel="stylesheet">
-        
         <!--buat number only-->
         <style>
             #errmsg { color:red; }
@@ -163,44 +131,6 @@ include "../../config/config.php";
 			<div class="subtitle">Filter Data</div>
 		</div>
 		<section class="formLegend">
-			
-                            <?php
-
-                            /*
-                                $query = "SELECT aset_list FROM apl_userasetlist WHERE aset_action = 'Mutasi[]' AND UserSes = '$_SESSION[ses_uid]'";
-                                        //print_r($query);
-                                        $result = mysql_query($query) or die (mysql_error());
-
-                                        $numRows = mysql_num_rows($result);
-                                        if ($numRows)
-                                        {
-                                            $dataID = mysql_fetch_object($result);
-                                        }
-                                        $explodeID = explode(',',$dataID->aset_list);
-                                        
-                                        $id=0;
-                                        foreach($explodeID as $value)
-                                        {
-                                            
-                                            $query = "SELECT a.Aset_ID,a.LastSatker_ID,a.TglPerolehan, a.AsetOpr, a.Kuantitas, a.Satuan,a.OrigSatker_ID,a.Ruangan, 
-														a.SumberAset, a.NilaiPerolehan,a.Alamat, a.RTRW, a.Pemilik, a.NomorReg, a.NamaAset,a.TglPerolehan, 
-														b.Aset_ID,  
-														c.NoKontrak, e.NamaSatker,e.KodeSatker, f.NamaLokasi, g.Kode,g.Uraian  
-														FROM PenggunaanAset AS b 
-														INNER JOIN Aset AS a ON b.Aset_ID=a.Aset_ID
-														LEFT JOIN KontrakAset AS d ON b.Aset_ID=d.Aset_ID
-														LEFT JOIN Kontrak AS c ON d.Kontrak_ID=c.Kontrak_ID
-														INNER JOIN Satker AS e ON a.LastSatker_ID=e.Satker_ID
-														INNER JOIN Lokasi AS f ON a.Lokasi_ID=f.Lokasi_ID
-														INNER JOIN Kelompok AS g ON a.Kelompok_ID=g.Kelompok_ID
-														WHERE b.Aset_ID = '$value' limit 1";
-                                                //print_r($query);
-                                                $result = mysql_query($query) or die(mysql_error());
-                                                $data[$id] = mysql_fetch_object($result);
-
-                                                $id++;
-                                        }*/
-                            ?>
 			<form name="form" method="POST" action="<?php echo "$url_rewrite/module/mutasi/"; ?>transfer_eksekusi_proses.php" onsubmit="return validasiTanggal()">
                 <input type="hidden" name="jenisaset" value="<?php echo $_POST['jenisaset']?>">
                 <input type="hidden" name="Mutasi_ID" value="<?php echo $data[0]['Mutasi_ID']?>">
