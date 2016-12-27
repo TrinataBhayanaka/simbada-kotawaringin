@@ -118,7 +118,7 @@ $LAYANAN = new RETRIEVE_LAYANAN;
 						<?php
 							$Selisih=0;
 							if($value['NilaiPerolehan_Awal']!=""||$value['NilaiPerolehan_Awal']!=0){
-								$selisih=$value['NilaiPerolehan']-$value['NilaiPerolehan_Awal'];
+								$Selisih=$value['NilaiPerolehan']-$value['NilaiPerolehan_Awal'];
 							}
 						?>
 						<td class="center"><?=number_format($Selisih)?></td>
