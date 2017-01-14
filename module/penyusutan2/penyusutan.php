@@ -11,7 +11,15 @@ if($Session['ses_uaksesadmin'] == 1){
 }else{
 	$param = $Session['ses_satkerkode'];
 }
-$get_data_penyusutan= $PENYUSUTAN->getStatusPenyusutansatker_berjalan($param);
+ $tahun= $_GET['tahun'];
+  if($tahun=="")
+            	$tahun=$TAHUN_AKTIF;
+          
+$get_data_penyusutan= $PENYUSUTAN->getStatusPenyusutansatker_berjalan($param,$tahun);
+
+ $tahun= $_GET['tahun'];
+  if($tahun=="")
+            	$tahun=$TAHUN_AKTIF;
 //echo "masukk gak";
 // echo "<pre>";
 // print_r($get_data_penyusutan);
@@ -47,6 +55,20 @@ $get_data_penyusutan= $PENYUSUTAN->getStatusPenyusutansatker_berjalan($param);
 		&nbsp;
 		<!-- <a class="btn btn-danger btn-small"><i class="icon-plus-sign icon-white"></i>&nbsp;&nbsp;Kontrak Simral</a>
 		&nbsp; --></p>	
+		<p>Tahun Kontrak:
+				<?=$tahun?>
+			</p>
+			<?php
+			$tahun_akhir=date("Y");
+			for($tahun=2014;$tahun<=$tahun_akhir;$tahun++){
+
+
+			?><a href="?tahun=<?=$tahun?>" class="btn btn-info btn-small"><i class="icon-plus-sign icon-white"></i>&nbsp;&nbsp;<?=$tahun?></a>
+			&nbsp;
+			<?php
+			}
+			?>
+				</p>	
 		<div id="demo">
 		<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
 			<thead>

@@ -10,7 +10,8 @@ $LAYANAN = new RETRIEVE_LAYANAN;
 	include"$path/header.php";
 	include"$path/menu.php";
 	
-	$data = $LAYANAN->retrieve_history_aset($_GET);	
+	$data = $LAYANAN->retrieve_history_aset($_GET);
+	// pr($data);	
 	if (!$data){
 		?>
 		<script>
@@ -84,10 +85,10 @@ $LAYANAN = new RETRIEVE_LAYANAN;
 				<thead>
 					<tr>
 						<th>No</th>
-						<th>Tanggal Kejadian</th>
-						<th>Tanggal Pencatatan(Pelaporan)</th>
+						<th>Tanggal</th>
 						<th>Keterangan</th>
 						<th>SKPD</th>
+						<th>Nilai Perolehan</th>
 						<th>Status</th>
 					</tr>
 				</thead>
@@ -102,14 +103,15 @@ $LAYANAN = new RETRIEVE_LAYANAN;
 					<tr class="gradeA">
 						<td><?=$i?></td>
 						<td><?=$value['changeDate']?></td>
-						<td><?=$value['TglPerubahan']?></td>
 						<td><?=$value['Nm_Riwayat']?></td>
-						
-						<td class="center"><?=$value['NamaSatker'][0]['NamaSatker']?></td>
+						<td class="center"><?=$value['kodeSatker']?></td>
+						<td class="center"><?=number_format($value['NilaiPerolehan'])?></td>
 						<td class="center">
 						<?php
 							// if($kontrak[0]['n_status'] != 1){
 						?>
+						<!--<a href="kontrak_rincianubah.php?id=<?=$value['Aset_ID']?>&tmpthis=<?=$_GET['id']?>" class="btn btn-warning btn-small" ><i class="icon-pencil icon-white"></i>&nbsp;Edit</a>-->
+						<!-- <a href="kontrak_rincianhapus.php?id=<?=$value['kodeKelompok']?>&idLok=<?=$value['kodeLokasi']?>&tmpthis=<?=$_GET['id']?>" class="btn btn-danger btn-small" onclick="return confirm('Hapus Aset?')"><i class="icon-trash icon-white"></i>&nbsp;Hapus</a> -->
 						
 						<?php
 						// } else {
