@@ -23,7 +23,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 		}
 		if(isset($_POST['old_kelompok'])){
 
-		      	$dataArr = $STORE->koreksiAset($_POST);
+		      	$dataArr = $STORE->koreksiAset($_POST,2);
 
 		  }
 

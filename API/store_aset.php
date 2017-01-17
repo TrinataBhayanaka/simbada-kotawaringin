@@ -2583,7 +2583,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
 
     } 
 
-    public function koreksiAset($data)
+    public function koreksiAset($data,$link=1)
     {
 
         global $url_rewrite;
@@ -2935,9 +2935,10 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                     }
                     $execquery = mysql_query($sql);
                     
-
-        echo "<script>alert('Data Berhasil Disimpan');</script><meta http-equiv=\"Refresh\" content=\"0; url={$url_rewrite}/module/koreksi/koreksi_data_aset.php\">";
-
+        if  ($link==1)
+            echo "<script>alert('Data Berhasil Disimpan');</script><meta http-equiv=\"Refresh\" content=\"0; url={$url_rewrite}/module/koreksi/koreksi_data_aset.php\">";
+        else
+            echo "<script>alert('Data Berhasil Disimpan');</script><meta http-equiv=\"Refresh\" content=\"0; url={$url_rewrite}/module/koreksi/koreksi_data_biasa.php\">";
         exit;    
 
     }
