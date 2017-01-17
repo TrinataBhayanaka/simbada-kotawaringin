@@ -132,6 +132,22 @@ $get_data_filter = $RETRIEVE->retrieve_kontrak($tahun);
 						<?php
 						} else {
 						?>
+						<?php
+						if($val['tipeAset']=="Aset Baru")
+						{
+							$noKontrak=$val['noKontrak'];
+							$nama_satker=$val['NamaSatker'];
+							$tmp_kontrak=explode("-",$val['tglKontrak']);
+							$tahun_kontrak=$tmp_kontrak[0];
+							$id_kontrak=$val['id'];
+							if($tahun_kontrak==$TAHUN_AKTIF){
+										$batal_kontrak="<a href=\"batal_kontrak.php?id_kontrak=$id_kontrak\" class=\"btn btn-danger btn-small\" onclick=\"return confirm('Apakah anda akan membatalkan kontrak =$noKontrak pada $nama_satker')\">
+									<i class=\"fa fa-delete\"></i>&nbsp;Batal Kontrak</a>";
+										echo "$batal_kontrak<br/>";
+							}
+			
+						}
+						?>
 							<a href="kontrak_postingView.php?id=<?=$val['id']?>" class="btn btn-default btn-small"><i class="fa fa-eye"></i>&nbsp;View</a>
 						<?php
 						}
