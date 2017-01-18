@@ -153,7 +153,7 @@ $menu_id = 1;
 							</li>
 							<li>
 								<span class="labelInfo">Nilai SPK</span>
-								<input type="text" value="<?=number_format($kontrak['nilai'])?>" disabled/>
+								<input type="text" value="<?=number_format($kontrak['nilai'],2)?>" disabled/>
 							</li>
 						</ul>
 							
@@ -164,21 +164,21 @@ $menu_id = 1;
 							<li>
 								<span  class="labelInfo">Total Rincian Barang</span>
 								<?php if($kontrak['tipeAset'] == 1 || $kontrak['tipeAset'] == 2){ ?>
-								<input type="text" value="<?=isset($sumTotal) ? number_format($sumTotal['total']-$sumsp2d['total']) : '0'?>" disabled/>
+								<input type="text" value="<?=isset($sumTotal) ? number_format($sumTotal['total']-$sumsp2d['total'],2) : '0'?>" disabled/>
 								<?php } else { ?>
-								<input type="text" value="<?=isset($sumTotal) ? number_format($sumTotal['total']-$sumsp2d['total']-$aset[0]['NilaiPerolehan']) : '0'?>" disabled/>
+								<input type="text" value="<?=isset($sumTotal) ? number_format($sumTotal['total']-$sumsp2d['total']-$aset[0]['NilaiPerolehan'],2) : '0'?>" disabled/>
 								<?php } ?>
 							</li>
 							<li>
 								<span  class="labelInfo">Total Penunjang</span>
-								<input type="text" value="<?=isset($sumsp2d) ? number_format($sumsp2d['total']) : '0'?>" disabled/>
+								<input type="text" value="<?=isset($sumsp2d) ? number_format($sumsp2d['total'],2) : '0'?>" disabled/>
 							</li>
 							<li>
 								<span class="labelInfo">Total Perolehan</span>
 								<?php if($kontrak['tipeAset'] == 1 || $kontrak['tipeAset'] == 2){ ?>
-								<input type="text" value="<?=number_format($sumTotal['total']-$sumsp2d['total']+$sumsp2d['total'])?>" disabled/>
+								<input type="text" value="<?=number_format($sumTotal['total']-$sumsp2d['total']+$sumsp2d['total'],2)?>" disabled/>
 								<?php } else { ?>
-								<input type="text" value="<?=number_format($sumTotal['total']-$sumsp2d['total']+$sumsp2d['total']-$aset[0]['NilaiPerolehan'])?>" disabled/>
+								<input type="text" value="<?=number_format($sumTotal['total']-$sumsp2d['total']+$sumsp2d['total']-$aset[0]['NilaiPerolehan'],2)?>" disabled/>
 								<?php } ?>
 							</li>
 						</ul>
@@ -213,18 +213,18 @@ $menu_id = 1;
 								<td align="center">
 									<?php
 										if($kontrak['tipeAset'] == 3) {
-											echo number_format($sumTotal['total']-$kontrak['nilai']);
+											echo number_format($sumTotal['total']-$kontrak['nilai'],2);
 										} else {
-											echo number_format($aset[0]['NilaiPerolehan']-$sumTotal['total']);
+											echo number_format($aset[0]['NilaiPerolehan']-$sumTotal['total'],2);
 										}
 									?>
 								</td>
 								<td align="center">
 								<?php
 									if($kontrak['tipeAset'] == 3) {
-										echo number_format($sumTotal['total']);
+										echo number_format($sumTotal['total'],2);
 									} else {
-										echo number_format($aset[0]['NilaiPerolehan']);
+										echo number_format($aset[0]['NilaiPerolehan'],2);
 									}
 								?>
 								</td>
@@ -291,9 +291,9 @@ $menu_id = 1;
 						<td>
 						<?php
 							if($kontrak['tipeAset'] == 3) {
-								echo number_format($aset[0]['NilaiPerolehan']);
+								echo number_format($aset[0]['NilaiPerolehan'],2);
 							} else {
-								echo number_format($satuan);
+								echo number_format($satuan,2);
 							} 
 						?>
 						</td>
@@ -301,9 +301,9 @@ $menu_id = 1;
 						<td>
 						<?php
 							if($kontrak['tipeAset'] == 3) {
-								echo number_format($aset[0]['NilaiPerolehan']+$bop);
+								echo number_format($aset[0]['NilaiPerolehan']+$bop,2);
 							} else {
-								echo number_format($satuan+$bop);
+								echo number_format($satuan+$bop,2);
 							} 
 						?></td>
 						

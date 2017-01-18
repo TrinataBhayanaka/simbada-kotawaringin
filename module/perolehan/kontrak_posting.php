@@ -135,8 +135,8 @@ $get_data_filter = $RETRIEVE->retrieve_kontrak($tahun);
 						<?php
 						$hak_akses_admin=$SessionUser['ses_uaksesadmin'];
 						if($hak_akses_admin==1){
-							if($val['tipeAset']=="Aset Baru")
-							{
+							//if($val['tipeAset']=="Aset Baru")
+						//	{
 								$noKontrak=$val['noKontrak'];
 								$nama_satker=$val['NamaSatker'];
 								$tmp_kontrak=explode("-",$val['tglKontrak']);
@@ -148,7 +148,7 @@ $get_data_filter = $RETRIEVE->retrieve_kontrak($tahun);
 											echo "$batal_kontrak<br/>";
 								}
 				
-							}
+						//	}
 						}
 						?>
 							<a href="kontrak_postingView.php?id=<?=$val['id']?>" class="btn btn-default btn-small"><i class="fa fa-eye"></i>&nbsp;View</a>
