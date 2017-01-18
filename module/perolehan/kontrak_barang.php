@@ -126,11 +126,11 @@ $menu_id = 10;
 						<ul>
 							<li>
 								<span class="labelInfo">Nilai SPK</span>
-								<input type="text" value="<?=number_format($kontrak[0]['nilai'])?>" disabled/>
+								<input type="text" value="<?=number_format($kontrak[0]['nilai'],2)?>" disabled/>
 							</li>
 							<li>
 								<span  class="labelInfo">Total RIncian Barang</span>
-								<input type="text" value="<?=isset($sumTotal) ? number_format($sumTotal['total']) : '0'?>" disabled/>
+								<input type="text" value="<?=isset($sumTotal) ? number_format($sumTotal['total'],2) : '0'?>" disabled/>
 							</li>
 						</ul>
 							
@@ -193,7 +193,7 @@ $menu_id = 10;
 						<td><?=$value['uraian']?></td>
 						<td class="center"><?=$value['minreg']?> s/d <?=$value['maxreg']?></td>
 						<td class="center"><?=$value['Kuantitas']?></td>
-						<td class="center"><?=number_format($value['NilaiPerolehan'])?></td>
+						<td class="center"><?=number_format($value['NilaiPerolehan'],2)?></td>
 						<td class="center">
 						<?php
 							if($kontrak[0]['n_status'] != 1){

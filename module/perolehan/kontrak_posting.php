@@ -122,7 +122,7 @@ $get_data_filter = $RETRIEVE->retrieve_kontrak($tahun);
 						<td><?=$val['tglKontrak']?></td>
 						<td><?=($val['tipe_kontrak'] == 2) ? 'Pembelian Langsung' : 'Kontrak'?></td>
 						<td><?=$val['tipeAset']?></td>
-						<td><?=number_format($val['nilai'])?></td>
+						<td><?=number_format($val['nilai'],2)?></td>
 						<td class="center"><?=($val['n_status']==1) ? '<span class="label label-success">SUDAH</span>' : '<span class="label label-Default">BELUM</span>'?></td>
 						<td class="center">
 						<?php

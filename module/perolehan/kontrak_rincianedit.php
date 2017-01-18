@@ -98,11 +98,11 @@ $menu_id = 10;
 						<ul>
 							<li>
 								<span class="labelInfo">Nilai SPK</span>
-								<input type="text" id="spk" value="<?=number_format($kontrak[0]['nilai'])?>" disabled/>
+								<input type="text" id="spk" value="<?=number_format($kontrak[0]['nilai'],2)?>" disabled/>
 							</li>
 							<li>
 								<span  class="labelInfo">Total Rincian Barang</span>
-								<input type="text" id="totalRB" value="<?=isset($sumTotal) ? number_format($sumTotal['total']) : '0'?>" disabled/>
+								<input type="text" id="totalRB" value="<?=isset($sumTotal) ? number_format($sumTotal['total'],2) : '0'?>" disabled/>
 							</li>
 						</ul>
 							
@@ -488,7 +488,7 @@ $menu_id = 10;
 		setTimeout(function(){
 			var tipe = $("#getTipe").val();
 			var spk = $("#spk").val();
-			var str = parseInt(spk.replace(/[^0-9\.]+/g, ""));
+			var str = (spk.replace(/[^0-9\.]+/g, ""));
 			if(tipe == "mesin"){
 				if(str < 0){
 					alert("Maaf nilai kontrak anda tidak sesuai dengan aturan. Untuk jenis barang mesin minimal Rp. 300.000. Silahkan edit kontrak anda.");
@@ -577,11 +577,16 @@ $menu_id = 10;
 		var perolehan = $("#nilaiPerolehan").val();
 		var total = $("#totalRB").val();
 		var spk = $("#spk").val();
-		var str = parseInt(spk.replace(/[^0-9\.]+/g, ""));
-		var rb = parseInt(total.replace(/[^0-9\.]+/g, ""));
-
-		var diff = parseInt(perolehan) + parseInt(rb);
-
+		var str = (spk.replace(/[^0-9\.]+/g, ""));
+		var rb = (total.replace(/[^0-9\.]+/g, ""));
+		
+		perolehan=perolehan.replace(/[^0-9\.]+/g, "");
+		var diff = parseFloat(perolehan) + parseFloat(rb);
+		
+		console.log('perolehan=='+perolehan);
+		console.log('dif=='+diff);
+		console.log('str=='+str);
+		
 		if(diff > str) {
 			alert("Total rincian barang melebihi nilai SPK");
 			return false;	

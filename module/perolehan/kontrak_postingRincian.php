@@ -126,15 +126,15 @@ $menu_id = 1;
 						<ul>
 							<li>
 								<span  class="labelInfo">Total Rincian Barang</span>
-								<input type="text" value="<?=isset($sumTotal) ? number_format($sumTotal['total']) : '0'?>" disabled/>
+								<input type="text" value="<?=isset($sumTotal) ? number_format($sumTotal['total'],2) : '0'?>" disabled/>
 							</li>
 							<li>
 								<span  class="labelInfo">Total Penunjang</span>
-								<input type="text" value="<?=isset($sumsp2d['total']) ? number_format($sumsp2d['total']) : '0'?>" disabled/>
+								<input type="text" value="<?=isset($sumsp2d['total']) ? number_format($sumsp2d['total'],2) : '0'?>" disabled/>
 							</li>
 							<li>
 								<span class="labelInfo">Total Perolehan</span>
-								<input type="text" value="<?=number_format($sumsp2d['total']+$sumTotal['total'])?>" disabled/>
+								<input type="text" value="<?=number_format($sumsp2d['total']+$sumTotal['total'],2)?>" disabled/>
 							</li>
 						</ul>
 							
@@ -182,8 +182,8 @@ $menu_id = 1;
 								<td align="center"><?=$aset[0]['kodeSatker']?></td>
 								<td align="center"><?=$aset[0]['kodeLokasi']?></td>
 								<td align="center"><?=$aset[0]['noRegister']?></td>
-								<td align="center"><?=number_format($aset[0]['NilaiPerolehan'])?></td>
-								<td align="center"><?=number_format($aset[0]['NilaiPerolehan']+$sumsp2d['total']+$sumTotal['total'])?></td>
+								<td align="center"><?=number_format($aset[0]['NilaiPerolehan'],2)?></td>
+								<td align="center"><?=number_format($aset[0]['NilaiPerolehan']+$sumsp2d['total']+$sumTotal['total'],2)?></td>
 							</tr>	
 						</table>	
 
@@ -258,10 +258,10 @@ $menu_id = 1;
 						<td><?=$value['uraian']?></td>
 						<!-- <td><?=$value['Kuantitas']?></td> -->
 						<td><?=$value['noRegister']?></td>
-						<td><?=number_format($value['Satuan'])?></td>
-						<!-- <td><?=number_format($value['Satuan']*$value['Kuantitas'])?></td> -->
-						<td><?=number_format($bop)?></td>
-						<td><?=number_format($value['NilaiPerolehan']+$bop)?></td>
+						<td><?=number_format($value['Satuan'],2)?></td>
+						<!-- <td><?=number_format($value['Satuan']*$value['Kuantitas'],2)?></td> -->
+						<td><?=number_format($bop,2)?></td>
+						<td><?=number_format($value['NilaiPerolehan']+$bop,2)?></td>
 						
 					</tr>
 				<?php

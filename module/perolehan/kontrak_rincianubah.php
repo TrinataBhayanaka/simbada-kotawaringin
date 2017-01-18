@@ -470,10 +470,10 @@ $dataArr = $RETRIEVE->retrieve_editkontrak($_GET);
 		var perolehan = $("#nilaiPerolehan").val();
 		var total = $("#totalRB").val();
 		var spk = $("#spk").val();
-		var str = parseInt(spk.replace(/[^0-9\.]+/g, ""));
-		var rb = parseInt(total.replace(/[^0-9\.]+/g, ""));
+		var str = (spk.replace(/[^0-9\.]+/g, ""));
+		var rb = (total.replace(/[^0-9\.]+/g, ""));
 
-		var diff = parseInt(perolehan) + parseInt(rb);
+		var diff = (perolehan) + (rb);
 
 		if(diff > str) {
 			console.log(diff+" = "+str);

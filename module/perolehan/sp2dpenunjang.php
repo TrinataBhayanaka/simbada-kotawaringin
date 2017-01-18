@@ -122,11 +122,11 @@ $menu_id = 1;
 						<ul>
 							<li>
 								<span class="labelInfo">Nilai Kontrak</span>
-								<input type="text" value="<?=number_format($kontrak[0]['nilai'])?>" disabled/>
+								<input type="text" value="<?=number_format($kontrak[0]['nilai'],2)?>" disabled/>
 							</li>
 							<li>
 								<span  class="labelInfo">Total SP2D Penunjang</span>
-								<input type="text" value="<?=isset($totalsp2dP) ? number_format($totalsp2dP[0]['total']) : '0'?>" disabled/>
+								<input type="text" value="<?=isset($totalsp2dP) ? number_format($totalsp2dP[0]['total'],2) : '0'?>" disabled/>
 							</li>
 						</ul>
 							
