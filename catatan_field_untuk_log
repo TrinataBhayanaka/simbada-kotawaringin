@@ -14,3 +14,6 @@ ALTER TABLE `penghapusan` ADD `Usulan_ID` TEXT NULL ;
 ALTER TABLE `usulanaset` ADD `NilaiPerolehan` DECIMAL(50,4) NULL ;
 ALTER TABLE `usulanaset` ADD `kondisi` TINYINT NULL DEFAULT '0' ;
 ALTER TABLE `usulanaset` CHANGE `NilaiPerolehan` `NilaiPerolehanTmp` DECIMAL(50,4) NULL DEFAULT NULL, CHANGE `kondisi` `kondisiTmp` TINYINT(4) NULL DEFAULT '0';
+
+ALTER TABLE `sp2d` CHANGE `nilai` `nilai` DECIMAL(50,4) NULL DEFAULT NULL;
+ALTER TABLE `sp2d_rinc` CHANGE `jumlah` `jumlah` DECIMAL(50,4) NULL DEFAULT NULL;
