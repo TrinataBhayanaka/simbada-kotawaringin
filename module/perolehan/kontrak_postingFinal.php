@@ -27,7 +27,7 @@ while ($dataSP2D = mysql_fetch_assoc($sql)){
     $sumsp2d = $dataSP2D;
   }
 
-  $sql = "SELECT * FROM aset WHERE noKontrak = '{$noKontrak[noKontrak]}' AND (StatusValidasi != 9 OR StatusValidasi IS NULL) AND (Status_Validasi_Barang != 9 OR Status_Validasi_Barang IS NULL)";
+  $sql = "SELECT * FROM aset WHERE noKontrak = '{$noKontrak[noKontrak]}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL)";
   $exec = mysql_query($sql);
   while ($dataAset = mysql_fetch_assoc($exec)){
               $aset[] = $dataAset;
@@ -48,8 +48,8 @@ while ($dataSP2D = mysql_fetch_assoc($sql)){
     }
     // pr($bop);
     // $bop = ceil($data['NilaiPerolehan']/$noKontrak['nilai']*$sumsp2d['total']);
-    $NilaiPerolehan = ceil($data['NilaiPerolehan'] + $bop);
-    $satuan = ceil(intval($data['Satuan']) + ($bop/$data['Kuantitas']));
+    $NilaiPerolehan = ($data['NilaiPerolehan'] + $bop);
+    $satuan = (intval($data['Satuan']) + ($bop/$data['Kuantitas']));
 
     $updateAset = "UPDATE aset SET NilaiPerolehan = '{$NilaiPerolehan}', Satuan = '{$satuan}', StatusValidasi = '1' WHERE Aset_ID = '{$data['Aset_ID']}'";
     $execquery = mysql_query($updateAset);

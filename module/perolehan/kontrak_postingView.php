@@ -10,6 +10,30 @@ $menu_id = 1;
 	include"$path/header.php";
 	include"$path/menu.php";
 
+	function cek_kelompok( $kodeKelompok ) {
+	$cek=abs( $kodeKelompok );
+	if ( $cek==1 ) {
+		$tabel="tanah";
+	}else if ( $cek==2 ) {
+			$tabel="mesin";
+		}else if ( $cek==3 ) {
+			$tabel="bangunan";
+		}else if ( $cek==4 ) {
+			$tabel="jaringan";
+		}else if ( $cek==5 ) {
+			$tabel="asetlain";
+		}else if ( $cek==6 ) {
+			$tabel="kdp";
+		}else if ( $cek==7 ) {
+			$tabel="aset_07";
+		}else if ( $cek==8 ) {
+			$tabel="aset_07";
+		}
+	return $tabel;
+
+
+}
+
 	//SQL Sementara
 	$idKontrak = $_GET['id'];
 	$sql = mysql_query("SELECT * FROM kontrak WHERE id='{$idKontrak}'");
@@ -38,7 +62,7 @@ $menu_id = 1;
 	        }
 	    }
 	}
-	$RKsql = mysql_query("SELECT Aset_ID, noRegister, Satuan, kodeLokasi, kodeKelompok, NilaiPerolehan FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' AND (StatusValidasi != 9 OR StatusValidasi IS NULL) AND (Status_Validasi_Barang != 9 OR Status_Validasi_Barang IS NULL)");
+	$RKsql = mysql_query("SELECT Aset_ID, noRegister, Satuan, kodeLokasi, kodeKelompok, NilaiPerolehan FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL)");
 	while ($dataRKontrak = mysql_fetch_assoc($RKsql)){
 				$rKontrak[] = $dataRKontrak;
 			}
@@ -60,7 +84,7 @@ $menu_id = 1;
 			}
 
 	//sum total 
-	$sqlsum = mysql_query("SELECT SUM(NilaiPerolehan) as total FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' AND (StatusValidasi != 9 OR StatusValidasi IS NULL) AND (Status_Validasi_Barang != 9 OR Status_Validasi_Barang IS NULL)");
+	$sqlsum = mysql_query("SELECT SUM(NilaiPerolehan) as total FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL)");
 	while ($sum = mysql_fetch_assoc($sqlsum)){
 				$sumTotal = $sum;
 			}
@@ -204,18 +228,43 @@ $menu_id = 1;
 								<th>Nilai</th>
 								<th>Nilai Setelah Kapitalisasi</th>
 							</tr>
+							<?php
+							//pr($aset[0]);
+							$status_kontrak=$kontrak['n_status'];
+							$kodeKel=$aset[0]['kodeKelompok'];
+							$tmp=explode( ".", $kodeKel );
+							$kelompok=$tmp[0];
+							$tabel=cek_kelompok( $kelompok );
+							if($status_kontrak=="0"){
+								$nilai_sblm=$aset[0]['NilaiPerolehan'];
+								$nilai_sesudah=$aset[0]['NilaiPerolehan']+$kontrak['nilai'];
+							}else{
+								if($kontrak['tipeAset'] == 2){
+									$sql = mysql_query("SELECT NilaiPerolehan,NilaiPerolehan_Awal
+									   FROM log_$tabel WHERE aset_id='{$aset[0]['Aset_ID']}' 
+									   	AND kd_riwayat = '2' and TglPerubahan='{$kontrak['tglKontrak']}'");
+									while ($data_kap = mysql_fetch_assoc($sql)){
+											$nilai_sesudah = $data_kap['NilaiPerolehan'];
+											$nilai_sblm = $data_kap['NilaiPerolehan_Awal'];
+										}
+
+								}
+							}
+							//pr($kontrak)
+							?>
 							<tr>
 								<td align="center"><?=$aset[0]['kodeKelompok']?></td>
 								<td align="center"><?=$aset[0]['uraian']?></td>
 								<td align="center"><?=$aset[0]['kodeSatker']?></td>
 								<td align="center"><?=$aset[0]['kodeLokasi']?></td>
-								<td align="center"><?=$aset[0]['noRegister']?></td>
+								<td align="center"><?=$aset[0]['noRegister']?>  </td>
 								<td align="center">
 									<?php
 										if($kontrak['tipeAset'] == 3) {
 											echo number_format($sumTotal['total']-$kontrak['nilai'],2);
 										} else {
-											echo number_format($aset[0]['NilaiPerolehan']-$sumTotal['total'],2);
+											//echo number_format($aset[0]['NilaiPerolehan']-$sumTotal['total'],2);
+											echo number_format($nilai_sblm,2);
 										}
 									?>
 								</td>
@@ -224,7 +273,8 @@ $menu_id = 1;
 									if($kontrak['tipeAset'] == 3) {
 										echo number_format($sumTotal['total'],2);
 									} else {
-										echo number_format($aset[0]['NilaiPerolehan'],2);
+										//echo number_format($aset[0]['NilaiPerolehan'],2);
+										echo number_format($nilai_sesudah,2);
 									}
 								?>
 								</td>

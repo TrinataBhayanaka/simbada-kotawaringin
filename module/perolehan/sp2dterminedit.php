@@ -27,6 +27,8 @@ $menu_id = 1;
 	//post
 	if(isset($_POST['nosp2d'])){
 		if($_POST['id'] == ""){
+		//	pr($_POST);
+			//exit();
 			$dataArr = $STORE->store_sp2d($_POST,$idKontrak);
 		} else {
 			$dataArr = $STORE->store_edit_sp2d($_POST,$idKontrak);
