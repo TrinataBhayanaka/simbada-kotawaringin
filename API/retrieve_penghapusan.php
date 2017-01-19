@@ -284,7 +284,7 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
         $filterkontrak = "";
         if ($nokontrak) $filterkontrak .= " AND ast.noKontrak = '{$nokontrak}' ";
         if ($kodeKelompok) $filterkontrak .= " AND ast.kodeKelompok = '{$kodeKelompok}' ";
-        if ($kodePemilik) $filterkontrak .= " AND ast.kodeLokasi LIKE '{$kodePemilik}.%' ";
+        if ($kodePemilik) $filterkontrak .= " AND ast.kodeLokasi LIKE '{$kodePemilik}%' ";
 
         if ($kodeSatker){ 
             $filterkontrak .= " AND ast.kodeSatker = '{$kodeSatker}' "; 
@@ -337,7 +337,7 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
                             'join' => "{$listTableAlias}.Aset_ID=ast.Aset_ID,ast.kodeKelompok = k.Kode"
                              );
                     // //pr($sqlAset);
-                    $resAset = $this->db->lazyQuery($sqlAset,1);
+                    $resAset = $this->db->lazyQuery($sqlAset,$debug);
                     // ////////////pr($resAset);
                         // $sQuery = "
                         //     SELECT FOUND_ROWS() as jml
