@@ -297,14 +297,14 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
                 foreach ($jenisaset as $value) {
 
                     $table = $this->getTableKibAlias($value);
-
+                    //pr($table);
                     //////////////////////////////////////////////pr($table);
                     $listTable = $table['listTable'];
                     $listTableAlias = $table['listTableAlias'];
                     $listTableAbjad = $table['listTableAbjad'];
                     $listTableField = $table['listTableField'];
                     $FieltableGeneral= $table['FieltableGeneral'];
-
+                    $listTableOri = $table['listTableOri'];
                     $sql1 = array(
                             'table'=>'usulanaset',
                             'field'=>"Aset_ID",
@@ -320,10 +320,21 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
                         }
                         $aset_id=implode(', ',array_values($dataArr));
                         //pr($aset_id);
-                        $condition="ast.Aset_ID NOT IN ($aset_id) AND ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
-                        
+                        if($listTableOri == 'tanah'){
+                          $condition="ast.Aset_ID NOT IN ($aset_id) AND ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
+                      
+                        }else{
+                            $condition="ast.Aset_ID NOT IN ($aset_id) AND ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
+                          
+                        }
+                          
                     }else{
-                        $condition="ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
+                        if($listTableOri == 'tanah'){
+                            $condition="ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
+                        }else{
+                            $condition="ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
+                        }
+                        
                     }
                     // //////////////////////////////////////////////////////pr($aset_id);
                     // //////////////////////////////////////////////////////pr($sql1);
