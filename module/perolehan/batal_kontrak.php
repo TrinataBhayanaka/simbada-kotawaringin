@@ -159,7 +159,7 @@ function get_data_kapitalisasi( $id_kontrak ) {
 
 function get_log( $aset_id, $tglPerubahan, $table ) {
 	$sql="select log_id, TglPerubahan,NilaiPerolehan_Awal from log_$table
-			 where Aset_ID='$aset_id' and TglPerubahan='$tglPerubahan'";
+			 where Aset_ID='$aset_id' and TglPerubahan='$tglPerubahan' and kd_riwayat in(2,30)";
 	$result=mysql_query( $sql ) or die( mysql_error() );
 	while ( $data = mysql_fetch_array( $result, MYSQL_ASSOC ) ) {
 		$NilaiPerolehan=$data['NilaiPerolehan_Awal'];
