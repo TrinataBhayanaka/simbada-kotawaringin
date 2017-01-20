@@ -19,7 +19,7 @@ $menu_id = 1;
 
 	//getdata
 	// $RKsql = mysql_query("SELECT Satuan, kodeLokasi, kodeKelompok,SUM(Kuantitas) as Kuantitas, SUM(NilaiPerolehan) as NilaiPerolehan FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' GROUP BY kodeKelompok, kodeLokasi");
-	$RKsql = mysql_query("SELECT Aset_ID, Satuan, kodeLokasi, kodeKelompok, noRegister, NilaiPerolehan FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' AND (StatusValidasi != 9 OR StatusValidasi IS NULL) AND (Status_Validasi_Barang != 9 OR Status_Validasi_Barang IS NULL)");
+	$RKsql = mysql_query("SELECT Aset_ID, Satuan, kodeLokasi, kodeKelompok, noRegister, NilaiPerolehan FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL)");
 	while ($dataRKontrak = mysql_fetch_assoc($RKsql)){
 				$rKontrak[] = $dataRKontrak;
 			}
@@ -42,7 +42,7 @@ $menu_id = 1;
 			}
 
 	//sum total 
-	$sqlsum = mysql_query("SELECT SUM(NilaiPerolehan) as total FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' AND (StatusValidasi != 9 OR StatusValidasi IS NULL) AND (Status_Validasi_Barang != 9 OR Status_Validasi_Barang IS NULL)");
+	$sqlsum = mysql_query("SELECT SUM(NilaiPerolehan) as total FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL)");
 	while ($sum = mysql_fetch_assoc($sqlsum)){
 				$sumTotal = $sum;
 			}
@@ -116,7 +116,7 @@ $menu_id = 1;
 							</li>
 							<li>
 								<span class="labelInfo">Nilai SPK</span>
-								<input type="text" value="<?=number_format($kontrak['nilai'])?>" disabled/>
+								<input type="text" value="<?=number_format($kontrak['nilai'],2)?>" disabled/>
 							</li>
 						</ul>
 							
@@ -200,7 +200,7 @@ $menu_id = 1;
 					$url = "#";
 					$text = "* Data belum dapat diposting";
 				} elseif ($sumtermin['total'] != $kontrak['nilai']) {
-					echo "<p style='color:red'>* Total SP2D Termin tidak sama dengan total SPK</p>";
+					echo "<p style='color:red'>*  Total SP2D Termin tidak sama dengan total SPK</p>";
 					$disabled = "style='display:none'";
 					$url = "#";
 					$text = "* Data belum dapat diposting";
