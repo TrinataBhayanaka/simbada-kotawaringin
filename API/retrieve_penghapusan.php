@@ -336,7 +336,7 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
                             'join' => "{$listTableAlias}.Aset_ID=ast.Aset_ID,ast.kodeKelompok = k.Kode"
                              );
                     // //pr($sqlAset);
-                    $resAset = $this->db->lazyQuery($sqlAset,$debug);
+                    $resAset = $this->db->lazyQuery($sqlAset,1);
                     // ////////////pr($resAset);
                         // $sQuery = "
                         //     SELECT FOUND_ROWS() as jml
