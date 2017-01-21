@@ -49,7 +49,7 @@ while ($dataSP2D = mysql_fetch_assoc($sql)){
     // pr($bop);
     // $bop = ceil($data['NilaiPerolehan']/$noKontrak['nilai']*$sumsp2d['total']);
     $NilaiPerolehan = ($data['NilaiPerolehan'] + $bop);
-    $satuan = (intval($data['Satuan']) + ($bop/$data['Kuantitas']));
+    $satuan = (($data['Satuan']) + ($bop/$data['Kuantitas']));
 
     $updateAset = "UPDATE aset SET NilaiPerolehan = '{$NilaiPerolehan}', Satuan = '{$satuan}', StatusValidasi = '1' WHERE Aset_ID = '{$data['Aset_ID']}'";
     $execquery = mysql_query($updateAset);
