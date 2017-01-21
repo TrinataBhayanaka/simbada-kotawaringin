@@ -10896,6 +10896,15 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
         return $data;
         }
 
+public function TotalAsetBasedonTblAset($usulan){
+        $sql="select count(Aset_ID) as Jmlh,sum(NilaiPerolehan) as Nilai  
+                    from aset where aset_id in(SELECT Aset_ID FROM usulanaset
+                     WHERE Usulan_ID = $usulan)";
+    
+        $result=$this->db->query($sql);
+        $data=$this->db->fetch_array($result);
+        return array($data[Jmlh],$data[Nilai]);
+    }
         function cekdataPenghapusan($asetid,$post=false,$debug=false){
             // pr($asetid);
             // pr($post);
