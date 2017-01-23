@@ -1564,7 +1564,14 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
             $tblAset['Status_Validasi_Barang'] = 1;
 
         }
-
+        if(substr($tblAset['kodeKelompok'], 0, 5) == "07.24")
+        {
+            $tblAset['TglPembukuan'] = $data['TglPerolehan'];
+            $tblAset['Status_Validasi_Barang'] = 1;
+            $tblAset['kondisi'] = 3;
+            $tblAset['kodeKA'] = 1;
+        }
+        //pr($tblAset);
         $query = mysql_query("SELECT noRegister FROM aset WHERE kodeKelompok = '{$data['kodeKelompok']}' AND kodeLokasi = '{$tblAset['kodeLokasi']}' ORDER BY noRegister DESC LIMIT 1");
             while ($row = mysql_fetch_assoc($query)){
             $startreg = $row['noRegister'];
@@ -1598,7 +1605,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
             $field = implode(',', $tmpfield);
             $value = implode(',', $tmpvalue);
             $query = "INSERT INTO aset ({$field}) VALUES ({$value})";
-            // pr($query);exit;
+            //pr($query);exit;
             // $result= $this->query($query) or die($this->error());
             $execquery = mysql_query($query);
             // logFile($query);
