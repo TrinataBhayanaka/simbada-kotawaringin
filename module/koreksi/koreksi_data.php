@@ -29,7 +29,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 
 		  $dataArr['aset']['kodepemilik'] = substr($dataArr['aset']['kodeLokasi'], 0,2);
 
-		  // pr($dataArr);exit;
+		   //pr($dataArr);
 	?>
 	<!-- End Sql -->
 	<script type="text/javascript">
@@ -157,6 +157,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 									<option value="1" <?=$dataArr['kib']['kondisi'] == '1' ? 'selected' : ''?>>Baik</option>
 									<option value="2" <?=$dataArr['kib']['kondisi'] == '2' ? 'selected' : ''?>>Rusak Ringan</option>
 									<option value="3" <?=$dataArr['kib']['kondisi'] == '3' ? 'selected' : ''?>>Rusak Berat</option>
+									<option value="4" <?=$dataArr['kib']['kondisi'] == '4' ? 'selected' : ''?>>Dalam Penelusuran</option>
 								</select>
 							</li>
 						</ul>

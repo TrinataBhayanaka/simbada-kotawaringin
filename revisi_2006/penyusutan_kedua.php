@@ -47,12 +47,16 @@ if ( $kib == 'B' ) {
                                                   a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar,
                                                   a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis,a.TahunPenyusutan
                                             from mesin a where a.TglPerolehan <= '$TglPerubahan_temp'  and a.Aset_Id in ($aset_id_cek)";
+  logFile("$queryKib; \n",'data-penyusutan-'.date('Y-m-d'));
+
   $ExeQuery = $DBVAR->query( $queryKib ) or die( $DBVAR->error() );
 
   $queryAlter = "ALTER table aset_tmp add primary key(Mesin_ID)";
+  logFile("$queryAlter; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryAlter ) or die( $DBVAR->error() );
 
   $queryAlter = "Update aset_tmp set TipeAset='B';";
+  logFile("$queryAlter; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryAlter ) or die( $DBVAR->error() );
 
   $queryLog = "replace into aset_tmp (Mesin_ID, Aset_ID, kodeKelompok, kodeSatker, kodeLokasi, noRegister, TglPerolehan, TglPembukuan, kodeData, kodeKA, TipeAset,
@@ -65,14 +69,15 @@ if ( $kib == 'B' ) {
                                                        a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran, a.Silinder, a.MerkMesin, a.JumlahMesin,a.Material, a.NoSeri,
                                                        a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar,
                                                        a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat,
-                                                       if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan),
-                                                       if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku),
-                                                       if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan
+                                                       if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan),
+                                                       if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0,a.NilaiBuku_Awal,a.NilaiBuku),
+                                                       if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan
                                                  from log_mesin a
                                                  inner join mesin t on t.Aset_ID=a.Aset_ID
                                                  inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
                                                  where  (a.Kd_Riwayat != '77' AND a.Kd_Riwayat != '0')  and a.Aset_Id in ($aset_id_cek) and a.TglPerolehan <= '$TglPerubahan_temp' and a.TglPerubahan>'$TglPerubahan_temp'"
     . "              order by a.log_id desc";
+    logFile("$queryLog; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryLog ) or die( $DBVAR->error() );
 
   $queryLog = "replace into aset_tmp (Mesin_ID, Aset_ID, kodeKelompok, kodeSatker, kodeLokasi, noRegister, TglPerolehan,
@@ -95,6 +100,7 @@ and t.Aset_ID is not null and t.Aset_ID != 0
  where a.TglPerolehan <='$TglPerubahan_temp' AND a.TglSKKDH >'$TglPerubahan_temp' AND "
     . "a.TglPembukuan <='$TglPerubahan_temp' AND a.SatkerTujuan like '$kodeSatker%' "
     . "order by a.TglSKKDH desc;";
+    logFile("$queryLog; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryLog ) or die( $DBVAR->error() );
 
   //untuk table selanjutnya
@@ -105,12 +111,15 @@ and t.Aset_ID is not null and t.Aset_ID != 0
                                                   a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar,
                                                   a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis ,a.TahunPenyusutan
                                             from mesin a where  a.Aset_Id in ($aset_id_cek) and  a.TglPerolehan <= '$TglPerubahan_temp' ";
+  logFile("$queryKib; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryKib ) or die( $DBVAR->error() );
 
   $queryAlter = "ALTER table aset_tmp2 add primary key(Mesin_ID)";
+  logFile("$queryAlter; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryAlter ) or die( $DBVAR->error() );
 
   $queryAlter = "Update aset_tmp2 set TipeAset='B';";
+  logFile("$queryAlter; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryAlter ) or die( $DBVAR->error() );
 
   $queryLog = "replace into aset_tmp2 (Mesin_ID, Aset_ID, kodeKelompok, kodeSatker, kodeLokasi, noRegister, TglPerolehan, TglPembukuan, kodeData, kodeKA, TipeAset,
@@ -123,13 +132,14 @@ and t.Aset_ID is not null and t.Aset_ID != 0
                                                        a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran, a.Silinder, a.MerkMesin, a.JumlahMesin,a.Material, a.NoSeri,
                                                        a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar,
                                                        a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat,
-                                                       if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku),
-                                                       if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan
+                                                       if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0,a.NilaiBuku_Awal,a.NilaiBuku),
+                                                       if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan
                                                  from log_mesin a
                                                  inner join mesin t on t.Aset_ID=a.Aset_ID
                                                  inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
                                                  where (a.Kd_Riwayat != '77' AND a.Kd_Riwayat != '0')  and  a.Aset_Id in ($aset_id_cek) and a.TglPerolehan <= '$TglPerubahan_temp' and a.TglPerubahan>'$TglPerubahan_temp'"
     . "                          order by a.log_id desc";
+    logFile("$queryLog; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryLog ) or die( $DBVAR->error() );
 
   $queryLog = "replace into aset_tmp (Mesin_ID, Aset_ID, kodeKelompok, kodeSatker, kodeLokasi, noRegister, TglPerolehan,
@@ -152,6 +162,7 @@ and t.Aset_ID is not null and t.Aset_ID != 0
  where a.TglPerolehan <='$TglPerubahan_temp' AND a.TglSKKDH >'$TglPerubahan_temp' AND "
     . "a.TglPembukuan <='$TglPerubahan_temp' AND a.SatkerTujuan like '$kodeSatker%' "
     . "order by a.TglSKKDH desc;";
+    logFile("$queryLog; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryLog ) or die( $DBVAR->error() );
 
   $flagKelompok = '02';
@@ -174,12 +185,16 @@ and t.Aset_ID is not null and t.Aset_ID != 0
                                                        a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis,a.TahunPenyusutan
                                                  from bangunan a
                                                  where  a.Aset_Id in ($aset_id_cek) and a.TglPerolehan <= '$TglPerubahan_temp'";
+  logFile("$queryKib; \n",'data-penyusutan-'.date('Y-m-d'));                                             
   $ExeQuery = $DBVAR->query( $queryKib ) or die( $DBVAR->error() );
 
   $queryAlter = "ALTER table aset_tmp add primary key(Bangunan_ID)";
+
+  logFile("$queryAlter; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryAlter ) or die( $DBVAR->error() );
 
   $queryAlter = "Update aset_tmp set TipeAset='C';";
+  logFile("$queryAlter; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryAlter ) or die( $DBVAR->error() );
 
 
@@ -193,14 +208,14 @@ and t.Aset_ID is not null and t.Aset_ID != 0
                                                   a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap,
                                                   a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas,
                                                   a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat,
-                                                  if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan
+                                                  if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan
                                             from log_bangunan a
                                             inner join bangunan t on t.Aset_ID=a.Aset_ID
                                             inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
                                             where  (a.Kd_Riwayat != '77' AND a.Kd_Riwayat != '0')  and a.Aset_Id in ($aset_id_cek) and a.TglPerolehan <= '$TglPerubahan_temp' and a.TglPerubahan>'$TglPerubahan_temp' "
     . ""
     . "    order by a.log_id desc";
-
+  logFile("$queryLog; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryLog ) or die( $DBVAR->error() );
 
   $queryLog = "replace into aset_tmp (Bangunan_ID, Aset_ID, kodeKelompok, kodeSatker, kodeLokasi, noRegister, TglPerolehan,
@@ -220,8 +235,10 @@ a.Tmp_Beton, a.Tmp_Luas, a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaMan
 a.NilaiBuku, a.PenyusutanPerTahun,t.UmurEkonomis ,t.TahunPenyusutan
 from view_mutasi_bangunan a inner join bangunan t on t.Aset_ID=a.Aset_ID
 inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
-where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND a.TglPembukuan <='$TglPerubahan_temp' "
+where a.TglPerolehan <='$TglPerubahan_temp' AND a.TglSKKDH >'$TglPerubahan_temp' AND a.TglPembukuan <='$TglPerubahan_temp' "
     . "AND a.SatkerTujuan like '$kodeSatker%' order by a.TglSKKDH desc";
+    
+  logFile("$queryLog; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryLog ) or die( $DBVAR->error() );
   //untuk tabel temp selanjutnya
 
@@ -233,12 +250,15 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
                                                        a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis  ,a.TahunPenyusutan
                                                  from bangunan a
                                                  where  a.Aset_Id in ($aset_id_cek) and a.TglPerolehan <= '$TglPerubahan_temp'";
+    logFile("$queryKib; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryKib ) or die( $DBVAR->error() );
 
   $queryAlter = "ALTER table aset_tmp2 add primary key(Bangunan_ID)";
+ logFile("$queryAlter; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryAlter ) or die( $DBVAR->error() );
 
   $queryAlter = "Update aset_tmp2 set TipeAset='C';";
+logFile("$queryAlter; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryAlter ) or die( $DBVAR->error() );
 
 
@@ -252,12 +272,13 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
                                                   a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap,
                                                   a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas,
                                                   a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat,
-                                                  if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis  ,a.TahunPenyusutan
+                                                  if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis  ,a.TahunPenyusutan
                                             from log_bangunan a
                                             inner join bangunan t on t.Aset_ID=a.Aset_ID
                                             inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
                                             where  (a.Kd_Riwayat != '77' AND a.Kd_Riwayat != '0')  and a.Aset_Id in ($aset_id_cek) and a.TglPerolehan <= '$TglPerubahan_temp' and a.TglPerubahan>'$TglPerubahan_temp' "
     . "   order by a.log_id desc";
+  logFile("$queryLog; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryLog ) or die( $DBVAR->error() );
 
   $queryLog = "replace into aset_tmp (Bangunan_ID, Aset_ID, kodeKelompok, kodeSatker, kodeLokasi, noRegister, TglPerolehan,
@@ -277,8 +298,9 @@ a.Tmp_Beton, a.Tmp_Luas, a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaMan
 a.NilaiBuku, a.PenyusutanPerTahun,t.UmurEkonomis ,t.TahunPenyusutan
 from view_mutasi_bangunan a inner join bangunan t on t.Aset_ID=a.Aset_ID
 inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
-where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND a.TglPembukuan <='$TglPerubahan_temp' "
+where a.TglPerolehan <='$TglPerubahan_temp' AND a.TglSKKDH >'$TglPerubahan_temp' AND a.TglPembukuan <='$TglPerubahan_temp' "
     . "AND a.SatkerTujuan like '$kodeSatker%' order by a.TglSKKDH desc";
+  logFile("$queryLog; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryLog ) or die( $DBVAR->error() );
 
   $flagKelompok = '03';
@@ -301,12 +323,15 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
                                                  a.AkumulasiPenyusutan, a.NilaiBuku, a.PenyusutanPerTahun,a.UmurEkonomis,a.TahunPenyusutan
                                            from jaringan a
                                            where  a.Aset_Id in ($aset_id_cek) and a.TglPerolehan <= '$TglPerubahan_temp'";
+  logFile("$queryKib; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryKib ) or die( $DBVAR->error() );
 
   $queryAlter = "ALTER table aset_tmp add primary key(Jaringan_ID)";
+  logFile("$queryAlter; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryAlter ) or die( $DBVAR->error() );
 
   $queryAlter = "Update aset_tmp set TipeAset='D';";
+logFile("$queryAlter; \n",'data-penyusutan-'.date('Y-m-d'));
   $ExeQuery = $DBVAR->query( $queryAlter ) or die( $DBVAR->error() );
 
 
@@ -320,12 +345,14 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
                                             a.kodeKA, a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, if(a.NilaiPerolehan_Awal!=0,a.NilaiPerolehan_Awal,a.NilaiPerolehan), a.Alamat, a.Info,
                                             a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Konstruksi, a.Panjang, a.Lebar, a.NoDokumen, a.TglDokumen, a.StatusTanah,
                                             a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.KelompokTanah_ID, a.GUID, a.TanggalPemakaian, a.LuasJaringan, a.MasaManfaat,
-                                            if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan
+                                            if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), 
+                                              if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan
                                       from log_jaringan a
                                       inner join jaringan t on t.Aset_ID=a.Aset_ID
                                       inner join jaringan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
                                       where  (a.Kd_Riwayat != '77' AND a.Kd_Riwayat != '0')  and a.Aset_Id in ($aset_id_cek) and a.TglPerolehan <= '$TglPerubahan_temp' and a.TglPerubahan>'$TglPerubahan_temp' "
     . "             order by a.log_id desc";
+logFile("$queryLog; \n",'data-penyusutan-'.date('Y-m-d'));  
   $ExeQuery = $DBVAR->query( $queryLog ) or die( $DBVAR->error() );
 
 
@@ -346,6 +373,8 @@ inner join jaringan t on t.Aset_ID=a.Aset_ID
 inner join jaringan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
 where a.TglPerolehan <='$TglPerubahan_temp' AND a.TglSKKDH >'$TglPerubahan_temp' AND "
     . "a.TglPembukuan <='$TglPerubahan_temp' AND a.SatkerTujuan like '$kodeSatker%' order by a.TglSKKDH desc";
+  logFile("$queryLog; \n",'data-penyusutan-'.date('Y-m-d'));  
+
   $ExeQuery = $DBVAR->query( $queryLog ) or die( $DBVAR->error() );
 
   $flagKelompok = '04';
@@ -394,6 +423,7 @@ for ( $i=0;$i<2;$i++ ) {
                             $AddCondtn_1";
   }
 
+logFile("$sQuery; \n",'data-penyusutan-exe-'.date('Y-m-d'));  
 
   $ExeQuery = $DBVAR->query( $sQuery ) or die( $DBVAR->error() );
   //echo "$i === $sQuery\n";
@@ -434,6 +464,7 @@ for ( $i=0;$i<2;$i++ ) {
                       UmurEkonomis = '$UmurEkonomis',
                       TahunPenyusutan='$tahun'
                       WHERE Aset_ID = '$Aset_ID'";
+        logFile("$QueryAset; \n",'query-penyusutan2-2006-'.date('Y-m-d'));  
         $ExeQueryAset = $DBVAR->query( $QueryAset );
         //untuk log txt
         echo "$Aset_ID \t $kodeKelompok \t $NilaiPerolehan \t $Tahun \t $masa_manfaat \t $AkumulasiPenyusutan \t $NilaiBuku  \t $penyusutan_per_tahun \n";
@@ -480,6 +511,7 @@ for ( $i=0;$i<2;$i++ ) {
                         UmurEkonomis = '$UmurEkonomis',
                         TahunPenyusutan='$tahun'
                         WHERE Aset_ID = '$Aset_ID'";
+        logFile("$QueryKib; \n",'query-penyusutan2-2006-'.date('Y-m-d'));
           $ExeQueryKib = $DBVAR->query( $QueryKib );
 
           //update untuk mereset akumulasi penyusutan untuk diatas tanggal penyusutan
@@ -489,7 +521,8 @@ for ( $i=0;$i<2;$i++ ) {
                         NilaiBuku = '$NilaiBuku',
                         UmurEkonomis = '$UmurEkonomis',
                         TahunPenyusutan='$tahun'
-                        WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
+                        WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan_temp' ";
+          logFile("$QueryKib; \n",'query-penyusutan2-2006-'.date('Y-m-d'));              
           $ExeQueryKib = $DBVAR->query( $QueryKib );
         } elseif ( $Data['TipeAset'] == 'C' ) {
           $tableKib = 'bangunan';
@@ -501,6 +534,7 @@ for ( $i=0;$i<2;$i++ ) {
                         UmurEkonomis = '$UmurEkonomis',
                         TahunPenyusutan='$tahun'
                         WHERE Aset_ID = '$Aset_ID'";
+            logFile("$QueryKib; \n",'query-penyusutan2-2006-'.date('Y-m-d'));      
           $ExeQueryKib = $DBVAR->query( $QueryKib );
 
           //update untuk mereset akumulasi penyusutan untuk diatas tanggal penyusutan
@@ -509,7 +543,8 @@ for ( $i=0;$i<2;$i++ ) {
                        PenyusutanPerTahun = '$penyusutan_per_tahun',
                        NilaiBuku = '$NilaiBuku',
                        UmurEkonomis = '$UmurEkonomis'
-                       WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
+                       WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan_temp' ";
+           logFile("$QueryKib; \n",'query-penyusutan2-2006-'.date('Y-m-d'));      
           $ExeQueryKib = $DBVAR->query( $QueryKib );
         } elseif ( $Data['TipeAset'] == 'D' ) {
           $tableKib = 'jaringan';
@@ -521,6 +556,7 @@ for ( $i=0;$i<2;$i++ ) {
                         UmurEkonomis = '$UmurEkonomis',
                         TahunPenyusutan='$tahun'
                          WHERE Aset_ID = '$Aset_ID'";
+            logFile("$QueryKib; \n",'query-penyusutan2-2006-'.date('Y-m-d'));      
           $ExeQueryKib = $DBVAR->query( $QueryKib );
 
           //update untuk mereset akumulasi penyusutan untuk diatas tanggal penyusutan
@@ -530,7 +566,8 @@ for ( $i=0;$i<2;$i++ ) {
                        NilaiBuku = '$NilaiBuku',
                        UmurEkonomis = '$UmurEkonomis',
                        TahunPenyusutan='$tahun'
-                        WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
+                        WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan_temp' ";
+            logFile("$QueryKib; \n",'query-penyusutan2-2006-'.date('Y-m-d'));      
           $ExeQueryKib = $DBVAR->query( $QueryKib );
         }
 
@@ -565,6 +602,7 @@ for ( $i=0;$i<2;$i++ ) {
           $QueryLog = "INSERT INTO $tableLog ($implodeField__lama,$AddField) VALUES ($implodeVal_lama,'$action','$changeDate','$TglPerubahan','$NilaiPerolehan_Awal','$Kd_Riwayat')";
           // pr($QueryLog);
           // exit;
+            logFile("$QueryLog; \n",'query-penyusutan2-2006-'.date('Y-m-d'));      
           $exeQueryLog = $DBVAR->query( $QueryLog );
 
           $Kd_Riwayat = '50';
@@ -606,6 +644,7 @@ for ( $i=0;$i<2;$i++ ) {
           // echo $QueryLog;
           // pr($QueryLog);
           // exit;
+            logFile("$QueryLog; \n",'query-penyusutan2-2006-'.date('Y-m-d'));
           $exeQueryLog = $DBVAR->query( $QueryLog );
         }
       }
@@ -678,7 +717,7 @@ for ( $i=0;$i<2;$i++ ) {
       //akhir untuk log sblm penyusutan
 
       //get-history urutan pennyusutan
-      $query_list="select kd_riwayat from $tableLog where TglPerubahan>'$TglPerubahan_awal'"
+      $query_list="select kd_riwayat from $tableLog where TglPerubahan>'$TglPerubahan_awal' and TglPerubahan <='$TglPerubahan_temp' "
         . " and kd_riwayat in (2,21,28,7) and Aset_ID='$Aset_ID' ";
       //echo $query_list;
       $r_list=$DBVAR->query( $query_list ) or die( $DBVAR->error() );
@@ -692,10 +731,10 @@ for ( $i=0;$i<2;$i++ ) {
       //untuk mengecek bila ada trasaksi
       $query_perubahan="select kd_riwayat,log_id,kodeKelompok,kodeSatker,Aset_ID,NilaiPerolehan,NilaiPerolehan_Awal,Tahun,Kd_Riwayat,"
         . "(NilaiPerolehan-NilaiPerolehan_Awal) as selisih,AkumulasiPenyusutan,NilaiBuku,MasaManfaat,UmurEkonomis,TahunPenyusutan "
-        . " from $tableLog where TglPerubahan>'$TglPerubahan_awal' and kd_riwayat in (2,21,28,7) "
+        . " from $tableLog where TglPerubahan>'$TglPerubahan_awal' and kd_riwayat in (2,21,28,7) and TglPerubahan <='$TglPerubahan_temp'"
         . "and Aset_ID='$Aset_ID' order by log_id asc";
 
-      echo $query_perubahan;
+      echo "\n$query_perubahan\n";
       $count=0;
       $qlog=$DBVAR->query( $query_perubahan ) or die( $DBVAR->error() );
       $kapitalisasi=0;
@@ -766,6 +805,7 @@ for ( $i=0;$i<2;$i++ ) {
           $selisih_kapitaliasi_total+=$selisih;
 
           $next_kd_riwayat=$list_kd_riwayat[$index+1];
+          echo "next kd-riwayat $next_kd_riwayat\n";
           if ( $next_kd_riwayat!=""&& ( $next_kd_riwayat==2||$next_kd_riwayat==28 ) ) {
             echo "|selisih $selisih_kapitaliasi_total -- $selisih |";
 
@@ -783,10 +823,11 @@ for ( $i=0;$i<2;$i++ ) {
                           else
                         $Umur_Ekonomis_Final=$UmurEkonomis+$penambahan_masa_manfaat;*/
             $Umur_Ekonomis_Final=$UmurEkonomis+$penambahan_masa_manfaat;
-
+            echo "Umur_Ekonomis_Final=$UmurEkonomis+$penambahan_masa_manfaat;\n";
+            echo "NilaiYgDisusutkan=$nb_buku_log+$selisih_kapitaliasi_total;";
 
             //gak di ambil dari sistem
-            //$MasaManfaat=  cek_masamanfaat( $tmp_kode_log[0],  $tmp_kode_log[1], $tmp_kode_log[2], $DBVAR );
+            $MasaManfaat=  cek_masamanfaat( $tmp_kode_log[0],  $tmp_kode_log[1], $tmp_kode_log[2], $DBVAR );
 
             $status_awal_karena_melebihi_masa_manfaat=0;
             if ( $Umur_Ekonomis_Final>$MasaManfaat ) {
@@ -830,7 +871,7 @@ for ( $i=0;$i<2;$i++ ) {
                                             NilaiBuku_hasil=$NilaiYgDisusutkan-$AkumulasiPenyusutan;\n
                                             Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1; \n";
 
-            echo "Kapitalisasi\n Aset_ID=$Aset_ID\n"
+            echo "\nKapitalisasi\n Aset_ID=$Aset_ID\n"
               . "kodeKelompok \t=$kodeKelompok_log \n"
               . "NilaiPerolehan \t=$NP\n"
               . "TahunPerolehan \t=$Tahun\n"
@@ -1255,6 +1296,7 @@ function log_penyusutan( $Aset_ID, $tableKib, $Kd_Riwayat, $tahun, $Data, $DBVAR
   $QueryLog ="INSERT INTO log_$tableKib ($implodeField,$AddField) VALUES"
     . "      ($implodeVal,'$action','$changeDate','$TglPerubahan','$Kd_Riwayat','$NilaiPerolehan_Awal',$AkumulasiPenyusutan_Awal,"
     . "$NilaiBuku_Awal,$PenyusutanPerTahun_Awal)";
+  echo $QueryLog;
   $exeQueryLog = $DBVAR->query( $QueryLog ) or die( $DBVAR->error() );;
 
 
