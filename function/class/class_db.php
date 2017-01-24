@@ -398,7 +398,7 @@ class DB
 	    logFile('class_db :: insert log sukses');
 	    return true;
 	}
-	function logItHPS($table=array(),$Aset_ID=false,$action=1, $No_Dokumen=false, $tgl=false,$Nilai_awal=false, $debug=false)
+	/*function logItHPS($table=array(),$Aset_ID=false,$action=1, $No_Dokumen=false, $tgl=false,$Nilai_awal=false, $debug=false)
 	{
 
 	    if (empty($table)) return false;
@@ -454,6 +454,138 @@ class DB
 	        		pr($sql); exit;
 	        	}
 	        	$res = $this->query($sql);
+	        	if ($res)return true;	
+	        	
+	        }
+
+	        
+	    }
+	    logFile('class_db :: Gagal insert log');
+	    return false;
+	}*/
+	function logItHPS($table=array(),$Aset_ID=false,$action=1, $No_Dokumen=false, $tgl=false,$Nilai_awal=false,
+                            $AkumulasiPenyusutan=false,$AkumulasiPenyusutan_Awal=false,$NilaiBuku=false,$debug=false)
+	{
+		/*pr($table);
+		pr($Aset_ID);
+		pr($No_Dokumen);
+		pr($tgl);
+		pr($Nilai_awal);
+		pr($AkumulasiPenyusutan);
+		pr($AkumulasiPenyusutan_Awal);
+		pr($NilaiBuku);*/
+		//exit;
+	    if (empty($table)) return false;
+	    if (empty($Aset_ID)) return false;
+	    
+	    $date = date('Y-m-d H:i:s');
+	    if ($tgl) $tglProses = $tgl;
+	    else $tglProses = '0000-00-00';
+
+	    if ($No_Dokumen) $noDok = $No_Dokumen;
+	    else $noDok = '-';
+
+	    //get penghapusan_ID
+	    $sqlpenghapusan_ID = array(
+                        'table'=>'Penghapusan',
+                        'field'=>"Penghapusan_ID",
+                        'condition' => "NoSKHapus='$No_Dokumen' AND 
+                        TglHapus='$tgl' AND FixPenghapusan = '1'",
+                        );
+        $ressqlpenghapusan_ID = $this->lazyQuery($sqlpenghapusan_ID,$debug);
+        $penghapusan_ID = $ressqlpenghapusan_ID['0']['Penghapusan_ID'];
+		//pr($penghapusan_ID);
+
+		//get jenis_penghapusan
+		$sqljenis_penghapusan = array(
+                        'table'=>'penghapusanaset',
+                        'field'=>"jenis_penghapusan",
+                        'condition' => "Aset_ID='$Aset_ID' AND 
+                        Penghapusan_ID='$penghapusan_ID'",
+                        );
+        $ressqljenis_penghapusan = $this->lazyQuery($sqljenis_penghapusan,$debug);
+        $jenis_penghapusan = $ressqljenis_penghapusan['0']['jenis_penghapusan'];
+        //pr($jenis_penghapusan);
+
+	    $actionList = array(1=>'insert',2=>'update');
+	    $addField = array(
+	    				'changeDate'=>$date,
+	    				'action'=>$action,
+	    				'operator'=>$_SESSION['ses_uoperatorid'],
+	    				'TglPerubahan'=>$tglProses,
+	    				'Kd_Riwayat'=>$action,
+	    				'No_Dokumen'=>$noDok,
+	    				'NilaiPerolehan_Awal'=>$Nilai_awal,
+                        'AkumulasiPenyusutan_Awal'=>$AkumulasiPenyusutan_Awal,
+                        'jenis_hapus'=>$jenis_penghapusan,
+                        );
+
+
+	    foreach ($table as $value) {
+	    	
+	    	// $field['log_id'] = get_auto_increment($value);
+			$field = $this->getFieldName($value,$Aset_ID);
+			//pr($field);
+			//exit;
+			$mergeField = array_merge($field, $addField);
+	        
+	        if ($mergeField){
+	        	foreach ($mergeField as $key => $val) {
+	        		$tmpField[] = $key;
+                                if($key=="StatusValidasi")
+                                    $val="1";
+                                elseif($key=="Status_Validasi_Barang")
+                                    $val="1";
+                                elseif($key=="StatusTampil")
+                                    $val="1";
+                                /*elseif($key=="NilaiBuku")
+                                    $val="$NilaiBuku";
+                                elseif($key=="AkumulasiPenyusutan")
+                                    $val="$AkumulasiPenyusutan";*/
+	        		$tmpValue[] = "'".$val."'";
+
+	        		// if ($key == 'NilaiPerolehan') $NilaiPerolehan_Awal = "'".$val."'";
+	        	}
+	        	
+	        	// $tmpField[] = 'NilaiPerolehan_Awal';
+	        	// $tmpValue[] = $NilaiPerolehan_Awal;
+
+	        	$fileldImp = implode(',', $tmpField);
+	        	$dataImp = implode(',', $tmpValue);
+
+	        	$sql = "INSERT INTO log_{$value} ({$fileldImp}) VALUES ({$dataImp})";
+	        	logFile($sql);
+	        	if ($debug){
+	        		pr($sql); exit;
+	        	}
+	        	$res = $this->query($sql);
+	        	if(!$res){
+	        		if($action == 26){
+	        			
+	        			$this->rollback();
+	        			echo "<script>
+	                    alert('Input Log Gagal. Silahkan coba lagi');
+	                    document.location='dftr_validasi_pmd.php?pid=1';
+	                    </script>";
+	                	exit();
+	        		}elseif($action == 27){
+	        			$this->rollback();
+	        			echo "<script>
+	                    alert('Input Log Gagal. Silahkan coba lagi');
+	                    document.location='dftr_validasi_pms.php?pid=1';
+	                    </script>";
+	                	exit();
+
+	        		}elseif($action == 7){
+						$this->rollback();
+	        			echo "<script>
+	                    alert('Input Log Gagal. Silahkan coba lagi');
+	                    document.location='dftr_validasi_psb.php?pid=1';
+	                    </script>";
+	                	exit();	        			
+	        		}
+	        		
+	        	}
 	        	if ($res)return true;	
 	        	
 	        }
