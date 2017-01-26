@@ -348,7 +348,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 							</li>
 							<li>
 								<span class="span2">Tgl. Dokumen</span>
-								<input type="text" class="span2" name="tglDokumen" id="tglDokumen" value="<?=$dataArr['kib']['tglDokumen']?>" disabled/>
+								<input type="text" class="span2" name="tglDokumen" id="tglDokumen" value="<?=$dataArr['kib']['TglDokumen']?>" disabled/>
 							</li>
 						</ul>
 						<ul class="asetlain" style="display:none">
