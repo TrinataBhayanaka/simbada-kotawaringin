@@ -10147,7 +10147,8 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 								$beton = $this->get_beton($data->Beton);
 								
 								$perolehan = number_format($data->NilaiPerolehan,0,",",".");
-								$luas = number_format($data->LuasTotal,0,",",".");
+								//$luas = number_format($data->LuasTotal,0,",",".");
+								$luas = number_format($data->Tmp_Luas,0,",",".");
 								$luaslantai= number_format($data->LuasLantai,0,",",".");
 								$total_luaslantai= $total_luaslantai + $data->LuasLantai;
 								$luasTotal = $luasTotal + $data->LuasTotal;
@@ -10192,7 +10193,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 									<td style=\"width: 66px;\">$data->NoSurat</td>
 									<td style=\"width: 50px; text-align: right;\">$luas</td>
 									<td style=\"width: 70px; text-align: center;\">$data->StatusTanah</td>
-									<td style=\"width: 67px;\"></td>
+									<td style=\"width: 67px;\">$data->KelompokTanah_ID</td>
 									<td style=\"width: 65px; text-align: center;\">$data->AsalUsul</td>
 									<td style=\"width: 50px; text-align: right;\">$perolehan</td>
 									<td style=\"width: 60px;\">$data->Info</td>
@@ -13129,7 +13130,8 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												$beton = $this->get_beton($row->Beton);
 												
 												$perolehan = number_format($row->NilaiPerolehan,0,",",".");
-												$luas = number_format($row->LuasTotal,0,",",".");
+												//$luas = number_format($row->LuasTotal,0,",",".");
+												$luas = number_format($row->Tmp_Luas,0,",",".");
 												$luaslantai= number_format($row->LuasLantai,0,",",".");
 												$total_luaslantai= $total_luaslantai + $row->LuasLantai;
 												$luasTotal = $luasTotal + $row->LuasTotal;
@@ -13174,7 +13176,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																	<td style=\"width: 66px;\">$row->NoSurat</td>
 																	<td style=\"width: 50px; text-align: right;\">$luas</td>
 																	<td style=\"width: 70px; text-align: center;\">$row->StatusTanah</td>
-																	<td style=\"width: 67px;\"></td>
+																	<td style=\"width: 67px;\">$row->KelompokTanah_ID</td>
 																	<td style=\"width: 65px; text-align: center;\">$row->AsalUsul</td>
 																	<td style=\"width: 50px; text-align: right;\">$perolehan</td>
 																	<td style=\"width: 60px;\">$row->Info</td>
@@ -17534,7 +17536,8 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												$beton = $this->get_beton($row->Beton);
 												
 												$perolehan = number_format($row->NilaiPerolehan,0,",",".");
-												$luas = number_format($row->LuasTotal,0,",",".");
+												//$luas = number_format($row->LuasTotal,0,",",".");
+												$luas = number_format($row->Tmp_Luas,0,",",".");
 												$luaslantai= number_format($row->LuasLantai,0,",",".");
 												$total_luaslantai= $total_luaslantai + $row->LuasLantai;
 												$luasTotal = $luasTotal + $row->LuasTotal;
@@ -17585,7 +17588,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																	<td style=\"width: 66px;\">$row->NoSurat</td>
 																	<td style=\"width: 50px; text-align: right;\">$luas</td>
 																	<td style=\"width: 70px; text-align: center;\">$row->StatusTanah</td>
-																	<td style=\"width: 67px;\"></td>
+																	<td style=\"width: 67px;\">$row->KelompokTanah_ID</td>
 																	<td style=\"width: 65px; text-align: center;\">$row->AsalUsul</td>
 																	<td style=\"width: 65px; text-align: center;\">$tglPrlhn</td>
 																	<td style=\"width: 50px; text-align: right;\">$perolehan</td>
@@ -21991,7 +21994,9 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												$beton = $this->get_beton($row->Beton);
 												
 												$perolehan = number_format($row->NilaiPerolehan,0,",",".");
-												$luas = number_format($row->LuasTotal,0,",",".");
+												//$luas = number_format($row->LuasTotal,0,",",".");
+												$luas = number_format($row->Tmp_Luas,0,",",".");
+
 												$luaslantai= number_format($row->LuasLantai,0,",",".");
 												$total_luaslantai= $total_luaslantai + $row->LuasLantai;
 												$luasTotal = $luasTotal + $row->LuasTotal;
@@ -22036,7 +22041,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																	<td style=\"width: 66px;\">$row->NoSurat</td>
 																	<td style=\"width: 50px; text-align: right;\">$luas</td>
 																	<td style=\"width: 70px; text-align: center;\">$row->StatusTanah</td>
-																	<td style=\"width: 67px;\"></td>
+																	<td style=\"width: 67px;\">$row->KelompokTanah_ID</td>
 																	<td style=\"width: 65px; text-align: center;\">$row->AsalUsul</td>
 																	<td style=\"width: 50px; text-align: right;\">$perolehan</td>
 																	<td style=\"width: 60px;\">$row->Info</td>
