@@ -1012,14 +1012,14 @@ if($gol == 'mesin_ori'){
                order by kelompok asc";
 }else{
 	if($gol!="tanahView")
-		  $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
+		  $param_where = "Status_Validasi_barang=1 and StatusTampil = 1   and kondisi not in (3,4) 
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%' 
 					 and kondisi not in (3,4)					 
 					 and $paramSatker";
 		else
-		    $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
+		    $param_where = "Status_Validasi_barang=1 and StatusTampil = 1   and kondisi not in (3,4) 
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%' 
