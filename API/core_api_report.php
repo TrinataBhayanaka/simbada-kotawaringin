@@ -1046,6 +1046,7 @@ class core_api_report extends DB {
 											B.Info, B.TglPerolehan,B.TglPembukuan,B.Tahun,B.noRegister,B.Alamat,
 											B.JumlahLantai, B.Beton, B.LuasLantai,B.NoSurat,
 											B.TglSurat,B.StatusTanah,B.kondisi,B.kodeRuangan,B.kodeLokasi,
+											B.Tanah_ID,B.KelompokTanah_ID,
 											K.Kode, K.Uraian
 											from 
 											bangunan_ori as B,kelompok as K  
@@ -1270,6 +1271,7 @@ class core_api_report extends DB {
 											B.Info, B.TglPerolehan,B.TglPembukuan,B.Tahun,B.noRegister,B.Alamat,
 											B.JumlahLantai, B.Beton, B.LuasLantai,B.NoSurat,
 											B.TglSurat,B.StatusTanah,B.kondisi,B.kodeRuangan,B.kodeLokasi,
+											B.Tanah_ID,B.KelompokTanah_ID,
 											K.Kode, K.Uraian
 											from 
 											bangunan_ori as B,kelompok as K  
@@ -1283,6 +1285,7 @@ class core_api_report extends DB {
 											B.Info, B.TglPerolehan,B.TglPembukuan,B.Tahun,B.noRegister,B.Alamat,
 											B.JumlahLantai, B.Beton, B.LuasLantai,B.NoSurat,
 											B.TglSurat,B.StatusTanah,B.kondisi,B.kodeRuangan, B.kodeLokasi,
+											B.Tanah_ID,B.KelompokTanah_ID,
 											K.Kode, K.Uraian
 											from 
 											bangunan_ori as B,kelompok as K  
