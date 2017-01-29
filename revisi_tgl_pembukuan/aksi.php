@@ -35,7 +35,7 @@ while($row=mysql_fetch_array($result)){
 echo "/*--Total Aset $i */";
 
 function get_tglPembukuan_sblm($log_id,$aset_id,$log_table){
-	$sql="select TglPembukuan from $log_table where log_id<$log_id and Aset_ID='$aset_id' and kd_riwayat!=18 limit 1;";
+	$sql="select TglPembukuan from $log_table where log_id<$log_id and Aset_ID='$aset_id' and kd_riwayat!=18 and TglPembukuan!='0000-00-00' limit 1;";
 	$result=mysql_query($sql) or die(mysql_error());
 	while($row=mysql_fetch_array($result)){
 		$TglPembukuan=$row['TglPembukuan'];
