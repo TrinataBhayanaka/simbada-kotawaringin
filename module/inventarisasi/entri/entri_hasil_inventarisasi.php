@@ -186,8 +186,10 @@ $menu_id = 10;
 							<li>
 								<span class="span2">Nilai Perolehan</span>
 								<!-- <input type="text" class="span3" name="NilaiPerolehan" id="total" value="<?=($kontrak[0]['tipeAset'] == 3)? $aset[0]['NilaiPerolehan'] : ''?>" readonly/> -->
-								<input type="text" class="span3" name="NilaiPerolehan" data-a-sign="Rp " data-a-dec="," data-a-sep="." id="total" value="<?=($kontrak[0]['tipeAset'] == 3)? $aset[0]['NilaiPerolehan'] : ''?>" readonly/>
-								<input type="hidden" name="NilaiPerolehan" id="nilaiPerolehan" value="<?=($kontrak[0]['tipeAset'] == 3)? $aset[0]['NilaiPerolehan'] : ''?>" >
+								<!--<input type="text" class="span3" name="NilaiPerolehan" data-a-sign="Rp " data-a-dec="," data-a-sep="." id="total" value="<?=($kontrak[0]['tipeAset'] == 3)? $aset[0]['NilaiPerolehan'] : ''?>" readonly/>
+								<input type="hidden" name="NilaiPerolehan" id="nilaiPerolehan" value="<?=($kontrak[0]['tipeAset'] == 3)? $aset[0]['NilaiPerolehan'] : ''?>" >-->
+
+								<input type="text" class="span3" name="tes" id="tes" value="<?=($kontrak[0]['tipeAset'] == 3)? $aset[0]['NilaiPerolehan'] : ''?>" readonly>
 							</li>
 							<li>
 								<span class="span2">Info</span>
@@ -571,7 +573,23 @@ $menu_id = 10;
 		var hrgSatuan = $("#hrgSatuan").val();
 		var total = jml*hrgSatuan;
 		$("#total").val(total);
+		var format = total.toFixed(2);
+		//var format2 = numberWithCommas(format);
+		var fix = total.toLocaleString(['ban', 'id']);
+		var ext = "Rp ";
+		var format = ext.concat(fix); 
+		$("#tes").val(format);
 	}
+
+	/*function numberWithCommas(x) {
+		console.log("here");
+    	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	function numberWithCommas(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+	}*/
 </script>
 
 <script>
