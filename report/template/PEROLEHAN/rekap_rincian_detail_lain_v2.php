@@ -632,10 +632,10 @@ if($gol == 'mesin_ori'){
 					 and kondisi in (3,4) 				 
 					 and $paramSatker";
 		else
-		    $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
+		    $param_where = "Status_Validasi_barang=1 and StatusTampil = 1   and kondisi in (3,4)				
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
-					 and kodeLokasi like '12%' 
+					 and kodeLokasi like '12%' 	 and kondisi in (3,4) 			
 					 and $paramSatker";
 	 
 	 if($gol == 'jaringan_ori'){

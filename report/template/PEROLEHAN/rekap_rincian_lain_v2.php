@@ -839,7 +839,7 @@ if($gol == 'mesin_ori'){
 					 and m.kondisi in (3,4)					 
 					 and $paramSatker";
 		else
-		    $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1  
+		    $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1   and m.kondisi in (3,4)				
 					 and m.TglPerolehan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and l.kd_riwayat=3 and `action` like 'Sukses Mutasi%' 
 					 and m.TglPembukuan <='$param_tgl' 
 					 and m.kodeLokasi like '12%' 
