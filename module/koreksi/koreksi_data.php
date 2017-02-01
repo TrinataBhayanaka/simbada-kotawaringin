@@ -576,7 +576,13 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 		var jml = $("#jumlah").val();
 		var hrgSatuan = $("#hrgSatuan").val();
 		var total = jml*hrgSatuan;
-		$("#total").val(total);
+		//$("#total").val(total);
+		var format = total.toFixed(2);
+		//var format2 = numberWithCommas(format);
+		var fix = total.toLocaleString(['ban', 'id']);
+		var ext = "Rp ";
+		var format = ext.concat(fix); 
+		$("#total").val(format);
 	}
 
 	function option(item){
