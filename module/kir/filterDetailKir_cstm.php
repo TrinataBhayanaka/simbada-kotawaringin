@@ -20,7 +20,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
 	jQuery(function($){
 	   $("#Tahun_aw,#Tahun_ak,#register_aw,#register_ak").mask("9999");
 	   $("select").select2();
-	   $( "#tglPerubahan").mask('0000-00-00');
+	   $( "#tglPerubahan").mask('9999-99-99');
 	 //$( "#tglPerubahan" ).datepicker({ dateFormat: 'yy-mm-dd' });
 	  // $( "#tglPerubahan" ).datepicker({ format: 'yyyy-mm-dd',autoclose:true,clearBtn:true,forceParse:true });
 			
@@ -111,7 +111,6 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
 					<span class="span2">Ruangan Tujuan</span>
 					<select name="kodeRuang" id="kodeRuang" style="width:170px">
 						<option value="">-</option>
-						<option value="NULL">Ruang Penghapusan</option>
 						<?php 
 							$queryRuangan = "select NamaSatker,Kd_Ruang from satker where kode ='$kodeSatker' and Tahun = '$tahunRuangan' and Kd_Ruang != '$kodeRuangan'";
 							$exequeryRuangan = $DBVAR->query($queryRuangan);	

@@ -27,7 +27,7 @@ include "../../config/config.php";
 	
 	jQuery(function($) {
       		AreAnyCheckboxesChecked();
-			$( "#tglPerubahan").mask('0000-00-00');
+			$( "#tglPerubahan").mask('9999-99-99');
 			$( "#tglPerubahan" ).datepicker({ dateFormat: 'yy-mm-dd' });
 	
       	});
@@ -122,12 +122,14 @@ include "../../config/config.php";
 		</div>
 		
 			<script>
+
 			$(document).ready(function() {
 				  $('#kir_aset').dataTable(
 						   {
 							"aoColumnDefs": [
 								 { "aTargets": [2] }
 							],
+							//"sScrollY": "200px",
 							"aoColumns":[
 								 {"bSortable": false},
 								 {"bSortable": false,"sClass": "checkbox-column" },
@@ -138,14 +140,15 @@ include "../../config/config.php";
 								 {"bSortable": true},
 								 {"bSortable": true},
 								 {"bSortable": true},
+								 {"bSortable": true},
 								 {"bSortable": true}],
 							"sPaginationType": "full_numbers",
-
 							"bProcessing": true,
 							"bServerSide": true,
 							"sAjaxSource": "<?=$url_rewrite?>/api_list/viewkir_aset_detail.php?<?php echo $par_data_table?>"
 					   }
-						  );
+					);
+
 			  });
 			</script>
 			<!--<div class="detailLeft">-->
@@ -159,6 +162,7 @@ include "../../config/config.php";
 						<th>No</th>
 						<th class="checkbox-column"><input type="checkbox" class="icheck-input" onchange="return AreAnyCheckboxesChecked();"></th>
 						<th>Satker</th>
+						<th>KodeLokasi</th>
 						<th>Kode Kelompok</th>
 						<th>Nama Barang</th>
 						<th>Merk</th>
@@ -170,11 +174,12 @@ include "../../config/config.php";
 				</thead>
 				<tbody>			
 					 <tr>
-                        <td colspan="10">Data Tidak di temukan</td>
+                        <td colspan="11">Data Tidak di temukan</td>
                      </tr>
 				</tbody>
 				<tfoot>
 					<tr>
+						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
