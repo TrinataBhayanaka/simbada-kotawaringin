@@ -2636,7 +2636,8 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
 
     public function koreksiAset($data,$link=1)
     {
-
+        //pr($data);
+        //exit;
         global $url_rewrite;
         // pr($data);exit;
         if(isset($data['kodeSatker'])) {$tblAset['kodeSatker'] = $data['kodeSatker'];$kodeSatker = explode(".",$data['kodeSatker']);}
@@ -2720,16 +2721,19 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
               while ($dataAset_np = mysql_fetch_assoc($sql_np_query)){
                       $NilaiPerolehan = $dataAset_np['NilaiPerolehan'];
                   }
-
             foreach ($tblAset as $key => $val) {
-                $tmpfield[] = $key."='$val'";
+                //$tmpfield[] = $key."='$val'";
+                //@revisi
+                $clearval = addslashes(html_entity_decode($val));
+                $tmpfield[] = $key."='$clearval'";
             }
             $field = implode(',', $tmpfield);
 
             $query = "UPDATE aset SET {$field} WHERE Aset_ID = '{$data['Aset_ID']}' ";
-            // pr($query);
+            //pr($query);
+            //exit;
             $result=  $this->query($query) or die($this->error());
-
+            //exit;
         
             if($data['TipeAset']=="A"){
                 if ($data['flagupd']) {
@@ -2878,9 +2882,10 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                 $oldkelompok = explode(".", $data['old_kelompok']);
                 if($newkelompok[0] == $oldkelompok[0]){
                     foreach ($tblKib as $key => $val) {
-                        $tmpfield2[] = $key."='$val'";
+                       $clearval3 = addslashes(html_entity_decode($val));
+                       $tmpfield2[] = $key."='$clearval3'";
                     }
-
+                    
                     $field = implode(',', $tmpfield2);
                     // $value = implode(',', $tmpvalue2);
                     $this->logMe($kib_old,$_GET['tbl']);
@@ -2902,7 +2907,8 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                         unset($tmpValue);
                         foreach ($tblKib as $key => $val) {
                           $tmpField[] = $key;
-                          $tmpValue[] = "'".$val."'";
+                          $clearval4 = addslashes(html_entity_decode($val));
+                          $tmpValue[] = "'".$clearval4."'";
                         }
                          
                         $fileldImp = implode(',', $tmpField);
@@ -2914,17 +2920,19 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                 $reklas = 30;
             } else {
                 foreach ($tblKib as $key => $val) {
-                        $tmpfield2[] = $key."='$val'";
+                        //@revisi
+                        $clearval2 = addslashes(html_entity_decode($val));
+                        $tmpfield2[] = $key."='$clearval2'";
                     }
 
                     $field = implode(',', $tmpfield2);
                     // $value = implode(',', $tmpvalue2);
 
                     $query = "UPDATE {$tabel} SET {$field} WHERE {$idkey} = '{$data[$idkey]}'";  
-                    // pr($query);
+                    //pr($query);
             }     
             
-            // pr($query);exit;
+            //pr($query);exit;
             $result=  $this->query($query) or die($this->error());
 
             //log
@@ -2933,7 +2941,6 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
               while ($dataAset = mysql_fetch_assoc($sqlquery)){
                       $kib = $dataAset;
                   }
-
                   if($tabel == 'aset'){
                     unset($kib['NilaiBuku']);
                     unset($kib['UmurEkonomis']);
@@ -2972,14 +2979,17 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                     unset($tmpValue);
                     foreach ($kib as $key => $val) {
                       $tmpField[] = $key;
-                      $tmpValue[] = "'".$val."'";
+                      //@revisi
+                      $temp = addslashes(html_entity_decode($val));
+                      //$tmpValue[] = "'".$val."'";
+                      $tmpValue[] = "'$temp'";;
                     }
                      
                     $fileldImp = implode(',', $tmpField);
                     $dataImp = implode(',', $tmpValue);
 
                     $sql = "INSERT INTO log_{$tabel} ({$fileldImp}) VALUES ({$dataImp})";
-                    // pr($kib);exit;
+                    //pr($sql);exit;
                     logFile($sql);
                     if ($debug){
                         pr($sql); exit;
@@ -2996,7 +3006,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
 
     public function logMe($data,$tabel){
             //log
-              $sqlkib = "SELECT * FROM {$tabel} WHERE Aset_ID = '{$data['Aset_ID']}'";
+             $sqlkib = "SELECT * FROM {$tabel} WHERE Aset_ID = '{$data['Aset_ID']}'";
               $sqlquery = mysql_query($sqlkib);
               while ($dataAset = mysql_fetch_assoc($sqlquery)){
                       $kib = $dataAset;
@@ -3023,14 +3033,15 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
                     unset($tmpValue);
                     foreach ($kib as $key => $val) {
                       $tmpField[] = $key;
-                      $tmpValue[] = "'".$val."'";
+                      $temp = addslashes(html_entity_decode($val));
+                      $tmpValue[] = "'".$temp."'";
                     }
-                     
+                    
                     $fileldImp = implode(',', $tmpField);
                     $dataImp = implode(',', $tmpValue);
 
                     $sql = "INSERT INTO log_{$tabel} ({$fileldImp}) VALUES ({$dataImp})";
-                    // pr($sql);exit;
+                    //pr($sql);exit;
                     logFile($sql);
                     if ($debug){
                         pr($sql); exit;
