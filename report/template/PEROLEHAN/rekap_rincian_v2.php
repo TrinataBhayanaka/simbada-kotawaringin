@@ -1346,7 +1346,7 @@ foreach ($result as $key =>$value){
     if($data_akhir[$tipe]['nilai']!=0 && $data_awal[$tipe]['nilai']!=0 && $selisih_nilai!=0){
         if($selisih_ap<0)
            $selisih_ap_kurang=abs($selisih_ap);
-       else $selisih_ap_tambah=$selisih_ap;
+       //else $selisih_ap_tambah=$selisih_ap;
     }
     
     if($data_akhir[$tipe]['AP']==""||$data_akhir[$tipe]['AP']==0)
