@@ -502,7 +502,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 			
 			//insert log
 			// $QueryLog ="DELETE FROM $tableLog WHERE  Aset_ID = '{$Aset_ID}' and Kd_Riwayat = '50' and kodeSatker = '{$Data[kodeSatker]}' and action ='{$action}' and YEAR(TglPerubahan) = {$tahun}";
-			$QueryLog ="DELETE FROM $tableLog WHERE  Aset_ID = '{$Aset_ID}' and Kd_Riwayat  IN ('49','50') and kodeSatker = '{$Data[kodeSatker]}' and action ='{$action}'";
+			$QueryLog ="DELETE FROM $tableLog WHERE  Aset_ID = '{$Aset_ID}' and Kd_Riwayat  IN ('49','50') and kodeSatker = '{$Data[kodeSatker]}' and action ='{$action}' ";
 			$exeQueryLog = $DBVAR->query($QueryLog);
                   
                   //update untuk mereset akumulasi penyusutan untuk diatas tanggal penyusutan
@@ -519,7 +519,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$QueryLogSelect = "select kodeKelompok,PenyusutanPerTahun_Awal,AkumulasiPenyusutan_Awal,NilaiBuku_Awal,"
                                         . "MasaManfaat,UmurEkonomis,NilaiBuku,AkumulasiPenyusutan,PenyusutanPerTahun "
                                         . " from $tableLog where Aset_ID = {$Aset_ID} "
-                                . " and TahunPenyusutan='$tahun_sblm' and Kd_Riwayat=50 order by log_id desc limit 1";
+                                . " and TahunPenyusutan='$tahun_sblm' and Kd_Riwayat in (50,51,52) and (tglperubahan!='0000-00-00 00:00:00' or  tglperubahan is not null) order by log_id desc limit 1";
 				$exeQueryLogSelect = $DBVAR->query($QueryLogSelect) or die($DBVAR->error());
 				$resultQueryLogSelect = $DBVAR->fetch_array($exeQueryLogSelect);
 			
