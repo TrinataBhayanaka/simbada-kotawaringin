@@ -92,11 +92,17 @@ $get_data_penyusutan= $PENYUSUTAN->getStatusPenyusutansatker_berjalan($param,$ta
 				$text_status=array("0"=>"Belum disusutkan",
 							  "1"=>"Sedang disusutkan",
 							  "2"=>"Telah disusutkan");
-				$namaSatker = $PENYUSUTAN->getNamaSatkercustome($val[kodeSatker]);
+					if($val[kodeSatker]=="%")
+						$namaSatker="All";
+						else
+							$namaSatker = $PENYUSUTAN->getNamaSatkercustome($val[kodeSatker]);
+
 				/*$namaSatker = $PENYUSUTAN->getNamaSatkercustome($val[UserNm]);*/
 				if($namaSatker){
 					$ketNamaSatker = $namaSatker[0]['NamaSatker']." "."[".$namaSatker[0]['kode']."]";
 				}
+					if($val[kodeSatker]=="%")
+						$ketNamaSatker="All";
 			?>
 			<tr class="gradeA">
 				<td><?=$no?></td>

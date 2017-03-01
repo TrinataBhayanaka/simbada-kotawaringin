@@ -419,7 +419,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 			$QueryAset	  = "UPDATE aset SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTaun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                      TahunPenyusutan=NULL
 							WHERE Aset_ID = '$Aset_ID'";
@@ -433,7 +433,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$QueryKib	  = "UPDATE $tableKib SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTahun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID'";
@@ -443,7 +443,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$QueryKib	  = "UPDATE $tableLog SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTahun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
@@ -455,7 +455,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$QueryKib	  = "UPDATE $tableKib SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTahun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID'";
@@ -465,7 +465,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$QueryKib	  = "UPDATE $tableLog SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTahun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
@@ -478,7 +478,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$QueryKib	  = "UPDATE $tableKib SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTahun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID'";
@@ -489,7 +489,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$QueryKib	  = "UPDATE $tableLog SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTahun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
@@ -509,7 +509,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 						$QueryKib	  = "UPDATE $tableLog SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTahun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 										WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";

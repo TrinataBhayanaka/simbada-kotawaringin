@@ -641,7 +641,7 @@ for($i=0;$i<2;$i++){
            $query_log_sblm="select log_id,kodeKelompok,kodeSatker,Aset_ID,NilaiPerolehan,NilaiPerolehan_Awal,Tahun,Kd_Riwayat,"
                      . "(NilaiPerolehan-NilaiPerolehan_Awal) as selisih,"
                    . " AkumulasiPenyusutan_Awal,NilaiBuku_Awal,PenyusutanPerTahun_Awal,MasaManfaat,UmurEkonomis,TahunPenyusutan "
-                     . " from $tableLog where TahunPenyusutan='$TahunPenyusutan_log' and kd_riwayat in (50) "
+                     . " from $tableLog where TahunPenyusutan='$TahunPenyusutan_log' and kd_riwayat in (50,51,52) "
                      . "and Aset_ID='$Aset_ID' order by log_id desc limit 1 ";
             $qlog_sblm=$DBVAR->query($query_log_sblm) or die($DBVAR->error());
             $AkumulasiPenyusutan_Awal=0;
@@ -802,8 +802,7 @@ for($i=0;$i<2;$i++){
                                 $NilaiBuku_hasil=$NP-$AkumulasiPenyusutan_hasil;
                                 $Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1;
 
-                                if($status_awal_karena_melebihi_masa_manfaat!=1)
-                                        $Sisa_Masa_Manfaat=$Umur_Ekonomis_Final;
+                               
 
                                 if($Sisa_Masa_Manfaat<=0){
                                     $NilaiBuku_hasil=0;
@@ -1143,38 +1142,35 @@ function overhaul($kd_aset1, $kd_aset2, $kd_aset3,$persen, $DBVAR) {
     }
     //echo "<pre> ";
    // print($prosentase3);
-    if($prosentase4!=0){
-        echo "masuk11";
-      if($persen >$prosentase4){
-          echo "0 =4";
-          $hasil=$penambahan4;
-      }else if($persen>$prosentase2 && $persen <=$prosentase3) {
-          echo "0 =3";
-          $hasil=$penambahan3;
-      }
-      else if($persen>$prosentase1 && $persen <=$prosentase2) {
-           echo "0 =2";
-          $hasil=$penambahan2;
-      }
-      else if($persen<=$prosentase1) {
-           echo "0 =1";
-          $hasil=$penambahan1;
-      }
-    }else{
-        echo " $prosentase1 $prosentase2 $prosentase3 $prosentase4 ";
-         if($persen >$prosentase3){
-              echo "1 =3";
-              
-          $hasil=$penambahan3;
-      }else if($persen>$prosentase1 && $persen <=$prosentase2) {
-          echo "1 =2 ";
-          $hasil=$penambahan2;
-      }
-    else if($persen<=$prosentase1 ) {
-          //echo "1 = 5 ";
-          $hasil=$penambahan1;
-      }
-        
+    if($prosentase4 != 0) {
+        echo " masuk 11 $persen====$prosentase1 $prosentase2 $prosentase3 $prosentase4 \n";
+        if($persen > $prosentase4) {
+            echo "0 =4";
+            $hasil = $penambahan4;
+        } else if($persen > $prosentase2 && $persen <= $prosentase3) {
+            echo "0 =3";
+            $hasil = $penambahan3;
+        } else if($persen > $prosentase1 && $persen <= $prosentase2) {
+            echo "0 =2";
+            $hasil = $penambahan2;
+        } else if($persen <= $prosentase1) {
+            echo "0 =1";
+            $hasil = $penambahan1;
+        }
+    } else {
+        echo " masuk 22 $persen====$prosentase1 $prosentase2 $prosentase3 $prosentase4 \n";
+        if($persen > $prosentase3) {
+            echo "1 =3";
+
+            $hasil = $penambahan3;
+        } else if($persen > $prosentase1 && $persen <= $prosentase2) {
+            echo "1 =2 ";
+            $hasil = $penambahan2;
+        } else if($persen <= $prosentase1) {
+            echo "1 = 5 ";
+            $hasil = $penambahan1;
+        }
+
     }
     echo "\n hasill == $hasil == \n";
     if($hasil=="")
