@@ -24,7 +24,7 @@ $id = $argv[4];
 
 $newTahun = $tahun;
 // $newTahun = $tahun - 1;
-$aColumns = array( 'a.Aset_ID', 'a.kodeKelompok', 'k.Uraian', 'a.Tahun', 'a.Info', 'a.NilaiPerolehan', 'a.noRegister', 'a.PenyusutanPerTahun', 'a.AkumulasiPenyusutan', 'a.TipeAset', 'a.kodeSatker', 'a.Status_Validasi_Barang', 'a.MasaManfaat' );
+$aColumns = array( 'a.Aset_ID', 'a.kodeKelompok', 'k.Uraian', 'a.Tahun', 'a.Info', 'a.NilaiPerolehan', 'a.noRegister', 'a.PenyusutanPerTahun', 'a.AkumulasiPenyusutan', 'a.TipeAset', 'a.kodeSatker', 'a.Status_Validasi_Barang', 'a.MasaManfaat','a.TahunPenyusutan' );
 $fieldCustom = str_replace( " , ", " ", implode( ", ", $aColumns ) );
 $sTable = "aset_tmp as a";
 $sTable2 = "aset_tmp2 as a";
@@ -694,7 +694,7 @@ logFile("$sQuery; \n",'data-penyusutan-exe-'.date('Y-m-d'));
       $query_log_sblm="select log_id,kodeKelompok,kodeSatker,Aset_ID,NilaiPerolehan,NilaiPerolehan_Awal,Tahun,Kd_Riwayat,"
         . "(NilaiPerolehan-NilaiPerolehan_Awal) as selisih,"
         . " AkumulasiPenyusutan_Awal,NilaiBuku_Awal,PenyusutanPerTahun_Awal,MasaManfaat,UmurEkonomis,TahunPenyusutan "
-        . " from $tableLog where TahunPenyusutan='$TahunPenyusutan_log' and kd_riwayat in (50,51) and tglperubahan!='0000-00-00' "
+        . " from $tableLog where TahunPenyusutan='$TahunPenyusutan_log' and kd_riwayat in (50,51,52) and tglperubahan!='0000-00-00' "
         . "and Aset_ID='$Aset_ID' order by log_id desc limit 1 ";
       $qlog_sblm=$DBVAR->query( $query_log_sblm ) or die( $DBVAR->error() );
       $AkumulasiPenyusutan_Awal=0;
