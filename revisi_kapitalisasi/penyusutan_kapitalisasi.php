@@ -441,6 +441,9 @@ logFile("$sQuery; \n",'data-penyusutan-exe-'.date('Y-m-d'));
       $Tahun = $Data['Tahun'];
       $masa_manfaat = cek_masamanfaat( $tmp_kode[0], $tmp_kode[1], $tmp_kode[2], $DBVAR );
 
+
+
+
       if ( $masa_manfaat != "" ) {
         $penyusutan_per_tahun = round(( $NilaiPerolehan / $masa_manfaat ),2);
         $Tahun_Aktif = $tahun;
@@ -481,6 +484,14 @@ logFile("$sQuery; \n",'data-penyusutan-exe-'.date('Y-m-d'));
           $tableKib = 'jaringan';
           $tableLog = 'log_jaringan';
         }
+
+        $data_log=array( "NilaiPerolehan_Awal"=>$NilaiPerolehan,
+            "AkumulasiPenyusutan_Awal"=>0,
+            "PenyusutanPerTahun_Awal"=>0,
+            "kodeSatker"=>$kodeSatker );
+
+        log_penyusutan( $Aset_ID, $tableKib, 49, $newTahun, $data_log, $DBVAR,$NilaiPerolehan );
+
         $QueryKibSelect = "SELECT * FROM $tableKib WHERE Aset_ID = '$Aset_ID'";
         $exequeryKibSelect = $DBVAR->query( $QueryKibSelect );
         $resultqueryKibSelect = $DBVAR->fetch_object( $exequeryKibSelect );
@@ -571,9 +582,14 @@ logFile("$sQuery; \n",'data-penyusutan-exe-'.date('Y-m-d'));
           $ExeQueryKib = $DBVAR->query( $QueryKib );
         }
 
+        $data_log=array( "NilaiPerolehan_Awal"=>$NilaiPerolehan,
+            "AkumulasiPenyusutan_Awal"=>0,
+            "PenyusutanPerTahun_Awal"=>0,
+            "kodeSatker"=>$kodeSatker );
 
+        log_penyusutan( $Aset_ID, $tableKib, 50, $newTahun, $data_log, $DBVAR,$NilaiPerolehan );
         //select field dan value tabel kib
-        $QueryKibSelect = "SELECT * FROM $tableKib WHERE Aset_ID = '$Aset_ID'";
+       /* $QueryKibSelect = "SELECT * FROM $tableKib WHERE Aset_ID = '$Aset_ID'";
         $exequeryKibSelect = $DBVAR->query( $QueryKibSelect );
         $resultqueryKibSelect = $DBVAR->fetch_object( $exequeryKibSelect );
 
@@ -599,7 +615,7 @@ logFile("$sQuery; \n",'data-penyusutan-exe-'.date('Y-m-d'));
 
           $Kd_Riwayat = '49';
           //insert log
-          $QueryLog = "INSERT INTO $tableLog ($implodeField__lama,$AddField) VALUES ($implodeVal_lama,'$action','$changeDate','$TglPerubahan','$NilaiPerolehan_Awal','$Kd_Riwayat')";
+          $QueryLog = "INSERT INTO $tableLog ($implodeField__lama,$AddField) VALUES ($implodeVal_lama,'$action','$changeDate','$TglPerubahan_temp','$NilaiPerolehan_Awal','$Kd_Riwayat')";
           // pr($QueryLog);
           // exit;
             logFile("$QueryLog; \n",'query-penyusutan2-2006-'.date('Y-m-d'));      
@@ -607,7 +623,7 @@ logFile("$sQuery; \n",'data-penyusutan-exe-'.date('Y-m-d'));
 
           $Kd_Riwayat = '50';
           //insert log
-          $QueryLog = "INSERT INTO $tableLog ($implodeField,$AddField) VALUES ($implodeVal,'$action','$changeDate','$TglPerubahan','$NilaiPerolehan_Awal','$Kd_Riwayat')";
+          $QueryLog = "INSERT INTO $tableLog ($implodeField,$AddField) VALUES ($implodeVal,'$action','$changeDate','$TglPerubahan_temp','$NilaiPerolehan_Awal','$Kd_Riwayat')";
           // pr($QueryLog);
           // exit;
           $exeQueryLog = $DBVAR->query( $QueryLog );
@@ -637,16 +653,23 @@ logFile("$sQuery; \n",'data-penyusutan-exe-'.date('Y-m-d'));
             $PenyusutanPerTahun_Awal = $resultQueryLogSelect['PenyusutanPerTahun_Awal'];
           }
 
+          $Kd_Riwayat = '49';
+          //insert log
+          $QueryLog = "INSERT INTO $tableLog ($implodeField__lama,$AddField) VALUES ($implodeVal_lama,'$action','$changeDate','$TglPerubahan_temp','$NilaiPerolehan_Awal','$Kd_Riwayat')";
+          // pr($QueryLog);
+          // exit;
+          logFile("$QueryLog; \n",'query-penyusutan2-2006-'.date('Y-m-d'));
+          $exeQueryLog = $DBVAR->query( $QueryLog );
 
           $Kd_Riwayat = '50';
           //insert log
-          $QueryLog = "INSERT INTO $tableLog ($implodeField,$AddField) VALUES ($implodeVal,'$action','$changeDate','$TglPerubahan','$NilaiPerolehan_Awal','$AkumulasiPenyusutan_Awal','$NilaiBuku_Awal','$PenyusutanPerTahun_Awal','$Kd_Riwayat')";
+          $QueryLog = "INSERT INTO $tableLog ($implodeField,$AddField) VALUES ($implodeVal,'$action','$changeDate','$TglPerubahan_temp','$NilaiPerolehan_Awal','$AkumulasiPenyusutan_Awal','$NilaiBuku_Awal','$PenyusutanPerTahun_Awal','$Kd_Riwayat')";
           // echo $QueryLog;
           // pr($QueryLog);
           // exit;
             logFile("$QueryLog; \n",'query-penyusutan2-2006-'.date('Y-m-d'));
           $exeQueryLog = $DBVAR->query( $QueryLog );
-        }
+        }*/
       }
     }
   }
@@ -713,7 +736,8 @@ logFile("$sQuery; \n",'data-penyusutan-exe-'.date('Y-m-d'));
         "AkumulasiPenyusutan_Awal"=>$AkumulasiPenyusutan_Awal,
         "PenyusutanPerTahun_Awal"=>$PenyusutanPerTahun_Awal,
         "kodeSatker"=>$kodeSatker );
-      log_penyusutan( $Aset_ID, $tableKib, 49, $newTahun, $data_log, $DBVAR );
+
+      log_penyusutan( $Aset_ID, $tableKib, 49, $newTahun, $data_log, $DBVAR,$NilaiPerolehan );
       //akhir untuk log sblm penyusutan
 
       //get-history urutan pennyusutan
@@ -931,7 +955,7 @@ logFile("$sQuery; \n",'data-penyusutan-exe-'.date('Y-m-d'));
                                             WHERE Aset_ID = '$Aset_ID' and log_id= '$log_id' ";
                             $ExeQueryKib = $DBVAR->query($QueryKib) or die($DBVAR->error());*/
             //update log penyusutan
-            log_penyusutan( $Aset_ID, $tableKib, 51, $newTahun, $data_log, $DBVAR,$NilaiPerolehan);
+            log_penyusutan( $Aset_ID, $tableKib, 51, $newTahun, $data_log, $DBVAR,$NP);
 
 
 
@@ -940,7 +964,7 @@ logFile("$sQuery; \n",'data-penyusutan-exe-'.date('Y-m-d'));
               'kodeKelompok' => "$kodeKelompok",
               'kodeSatker' => "$kodeSatker",
               'Tahun' => "$Tahun",
-              'NilaiPerolehan' => "$NilaiPerolehan",
+              'NilaiPerolehan' => "$NP",
               'MasaManfaat' => "$MasaManfaat",
               'NilaiBuku' => "$NilaiBuku_hasil",
               'info' =>"$kd_riwayat | Kapitalisasi",
@@ -1023,7 +1047,7 @@ logFile("$sQuery; \n",'data-penyusutan-exe-'.date('Y-m-d'));
 
 
             //update log penyusutan
-            log_penyusutan( $Aset_ID, $tableKib, 52, $newTahun, $data_log, $DBVAR ,$NilaiPerolehan);
+            log_penyusutan( $Aset_ID, $tableKib, 52, $newTahun, $data_log, $DBVAR ,$NP);
             //akhir update log penyusutan
             $perhitungan="PenyusutanPerTahun=$NP/$MasaManfaat;\n
                          rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;\n
