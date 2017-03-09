@@ -997,6 +997,7 @@ logFile("$sQuery; \n",'data-penyusutan-exe-'.date('Y-m-d'));
             $NilaiBuku=$NP-$AkumulasiPenyusutan;
             $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
             if ( $Sisa_Masa_Manfaat<=0 ) {
+              $Sisa_Masa_Manfaat=0;
               $AkumulasiPenyusutan=$NP;
               $NilaiBuku=0;
             }
@@ -1107,6 +1108,7 @@ logFile("$sQuery; \n",'data-penyusutan-exe-'.date('Y-m-d'));
         $NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;
         $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
         if ( $Sisa_Masa_Manfaat<=0 ) {
+          $Sisa_Masa_Manfaat=0;
           $AkumulasiPenyusutan=$NilaiPerolehan;
           $NilaiBuku=0;
         }
