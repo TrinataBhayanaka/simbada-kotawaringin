@@ -52,7 +52,7 @@ if($tipe == 1){
 	$gmbr ="";
 }
 $hit = 2;
-$flag = "$tipeAset";
+$flag = '';
 $TypeRprtr = 'intra';
 $Info = '';
 $exeTempTable = $REPORT->TempTable($hit,$flag,$TypeRprtr,$Info,$tglawalperolehan,$tglakhirperolehan,
@@ -61,8 +61,8 @@ $skpd_id);
 //begin 
 //head satker
 $detailSatker = $REPORT->get_satker($skpd_id);
-// pr($detailSatker);
-// exit;
+ /*pr($detailSatker);
+ exit;*/
 $NoBidang = $detailSatker[0];
 $NoUnitOrganisasi = $detailSatker[1];
 $NoSubUnitOrganisasi = $detailSatker[2];
@@ -86,17 +86,7 @@ $UPB = $detailSatker[4][3];
    
 $ex = explode('.',$skpd_id);
 $hit = count($ex);
-require_once 'phpexcel/PHPExcel/IOFactory.php';
-$objReader = PHPExcel_IOFactory::createReader('Excel5');
-$objPHPExcel = $objReader->load("template-rincian.xls");
-
-$objPHPExcel->getActiveSheet()->setCellValue('D8', $Bidang);
-$objPHPExcel->getActiveSheet()->setCellValue('D9', $UnitOrganisasi);
-$objPHPExcel->getActiveSheet()->setCellValue('D10', $SubUnitOrganisasi);
-$objPHPExcel->getActiveSheet()->setCellValue('D11', $UPB);
-
-if($hit == 1){
-	$head_csv="$Bidang";
+/*if($hit == 1){
 	$header = "<tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
@@ -104,7 +94,6 @@ if($hit == 1){
         </tr>
 		";
 }elseif($hit == 2){
-	$head_csv="$Bidang\n$UnitOrganisasi";
 	$header = "<tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
@@ -116,7 +105,6 @@ if($hit == 1){
           <td style=\"width: 873px; font-weight: bold;\">$UnitOrganisasi</td>
         </tr>";
 }elseif($hit == 3){
-	$head_csv="$Bidang\n$UnitOrganisasi\n$SubUnitOrganisasi";
 	$header = "<tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
@@ -133,7 +121,6 @@ if($hit == 1){
           <td style=\"width: 873px; font-weight: bold;\">$SubUnitOrganisasi</td>
         </tr>";
 }elseif($hit == 4){
-	$head_csv="$Bidang\n$UnitOrganisasi\n$SubUnitOrganisasi\n$UPB";
 	$header = "<tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
@@ -154,7 +141,27 @@ if($hit == 1){
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$UPB</td>
         </tr>";
-}
+}*/
+$header = "<tr>
+          <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
+          <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
+          <td style=\"width: 873px; font-weight: bold;\">$Bidang</td>
+        </tr>
+		<tr>
+          <td style=\"width: 200px; font-weight: bold; text-align: left;\">UNIT ORGANISASI</td>
+          <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
+          <td style=\"width: 873px; font-weight: bold;\">$UnitOrganisasi</td>
+        </tr>
+		<tr>
+          <td style=\"width: 200px; font-weight: bold; text-align: left;\">SUB UNIT ORGANISASI</td>
+          <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
+          <td style=\"width: 873px; font-weight: bold;\">$SubUnitOrganisasi</td>
+        </tr>
+		<tr>
+          <td style=\"width: 200px; font-weight: bold; text-align: left;\">UPB</td>
+          <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
+          <td style=\"width: 873px; font-weight: bold;\">$UPB</td>
+        </tr>";
 // echo $head;
 // exit;
 //start
@@ -179,14 +186,6 @@ if($tipeAset == 'all'){
 //exit();
 $hit_loop = count($data);
 $i = 0;
-$objPHPExcel->getActiveSheet()->setCellValue('A2', $tahun_neraca);
-$objPHPExcel->getActiveSheet()->setCellValue('D6', $nama_kab);
-$objPHPExcel->getActiveSheet()->setCellValue('D7', $nama_prov);
-$baserow=16;
-
-
-$csv.= "REKAPITULASI RINCIAN BARANG KE NERACA
-    \n$tahun_neraca\n$nama_kab\n$nama_prov\n$head_csv\n";
 $head ="<head>
 			  <meta content=\"text/html; charset=UTF-8\"http-equiv=\"content-type\">
 			  <title></title>
@@ -221,29 +220,6 @@ $head ="<head>
 			  </tbody>
 			</table>
 				<br>";
-
-
-				$csv.="Kode|";
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=Uraian."|";
-		$csv.="Jumlah Awal|";
-		$csv.="Nilai Awal|";
-		$csv.="Penyusutan Pertahun|";
-		$csv.="Akumulasi Penyusutan"."|";
-		$csv.="Nilai Buku Awal "."|";
-		$csv.="Mutasi Nilai Kurang"."|";
-		$csv.="Mutasi Nilai Tambah"."|";
-		$csv.="Mutasi Akumulasi Kurang"."|";
-		$csv.="Mutasi Akumulasi Tambah"."|";
-		$csv.="Beban Penyusutan|";
-		$csv.="Jml Akhir"."|";
-		$csv.="Nilai Akhir"."|";
-		$csv.="Penyusutan Pertahun Akhir"."|";
-		$csv.="Akumulasi Penyusutan Akhir"."|";
-		$csv.="Nilai Buku Akhir"."\n";
 $head.=" <table style=\"width: 100%; text-align: left; margin-left: auto; margin-right: auto; border-collapse:collapse\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\; \">
 	<tr>
 		<td rowspan='2' colspan='5' style=\" text-align: center; font-weight: bold; width: \">Kode</td>
@@ -306,6 +282,9 @@ $splitKodeSatker = explode ('.',$param_satker);
 		$paramSatker = "kodeSatker like '$param_satker%'";
 	}
 $param_tgl = $tglakhirperolehan ;
+$tmp_perubahan=explode("-",$param_tgl);
+$tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
+
 
         
 
@@ -348,7 +327,8 @@ $param_tgl = $tglakhirperolehan ;
                 $data_akhir=  subsub($kode_golongan, $q_gol_final, $ps, "$tahun_neraca-12-31");
                 $data_hilang=subsub_hapus($kode_golongan, $q_gol_final, $ps, "$tahun_neraca-12-31",$pt);
 		//exit();
-                $hasil=  group_data($data_awal, $data_akhir,$data_hilang);
+
+                $hasil=  group_data($data_awal, $data_akhir,$data_hilang,$tgl_perubahan_aset);
                //echo "<pre>";
                //print_r($hasil);
               // exit();
@@ -397,53 +377,7 @@ $param_tgl = $tglakhirperolehan ;
 						$pp_total_akhir += $gol[pp_akhir];
 						$ap_total_akhir += $gol[ap_akhir];
 						$nb_total_akhir += $gol[nb_akhir];
-
-		/*$row=$baserow++;	
-		$objPHPExcel->getActiveSheet()->insertNewRowBefore($row,1);		
-		$objPHPExcel->getActiveSheet()->setCellValue('A'.$row, $gol[Kelompok]);
-		$objPHPExcel->getActiveSheet()->setCellValue('B'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('C'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('D'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('E'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('F'.$row, $gol[Uraian]);
-		$objPHPExcel->getActiveSheet()->setCellValue('G'.$row, $gol[jml]);
-		$objPHPExcel->getActiveSheet()->setCellValue('H'.$row, $gol[nilai]);
-		$objPHPExcel->getActiveSheet()->setCellValue('I'.$row, $gol[pp]);
-		$objPHPExcel->getActiveSheet()->setCellValue('J'.$row, $gol[ap]);
-		$objPHPExcel->getActiveSheet()->setCellValue('K'.$row, $gol[nb]);
-		$objPHPExcel->getActiveSheet()->setCellValue('L'.$row, $gol[mutasi_nilai_kurang]);
-		$objPHPExcel->getActiveSheet()->setCellValue('M'.$row, $gol[mutasi_nilai_tambah]);
-		$objPHPExcel->getActiveSheet()->setCellValue('N'.$row, $gol[mutasi_ap_kurang]);
-		$objPHPExcel->getActiveSheet()->setCellValue('O'.$row, $gol[mutasi_ap_tambah]);
-		$objPHPExcel->getActiveSheet()->setCellValue('P'.$row, $bp);
-		$objPHPExcel->getActiveSheet()->setCellValue('Q'.$row, $gol[jml_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('R'.$row, $gol[nilai_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('S'.$row, $gol[pp_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('T'.$row, $gol[ap_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('U'.$row, $gol[np_akhir]);*/
-
-
-		$csv.=$gol[Kelompok]."|";
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=$gol[Uraian]."|";
-		$csv.=$gol[jml]."|";
-		$csv.=$gol[nilai]."|";
-		$csv.=$gol[pp]."|";
-		$csv.=$gol[ap]."|";
-		$csv.=$gol[nb]."|";
-		$csv.=$gol[mutasi_nilai_kurang]."|";
-		$csv.=$gol[mutasi_nilai_tambah]."|";
-		$csv.=$gol[mutasi_ap_kurang]."|";
-		$csv.=$gol[mutasi_ap_tambah]."|";
-		$csv.=$bp."|";
-		$csv.=$gol[jml_akhir]."|";
-		$csv.=$gol[nilai_akhir]."|";
-		$csv.=$gol[pp_akhir]."|";
-		$csv.=$gol[ap_akhir]."|";
-		$csv.=$gol[nb_akhir]."\n";
+		
 		$body.="<tr>
 					<td style=\"font-weight: bold;\">{$gol[Kelompok]}</td>
 					<td>&nbsp;</td>
@@ -482,53 +416,6 @@ $param_tgl = $tglakhirperolehan ;
                            
 				if($bidang[ap_akhir]==""||$bidang[ap_akhir]==0)
 					$bidang[nb_akhir]=$bidang[nilai_akhir];
-
-				/*$row=$baserow++;	
-				$objPHPExcel->getActiveSheet()->insertNewRowBefore($row,1);		
-		$objPHPExcel->getActiveSheet()->setCellValue('A'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('B'.$row, $bidang[Kelompok]);
-		$objPHPExcel->getActiveSheet()->setCellValue('C'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('D'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('E'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('F'.$row, $bidang[Uraian]);
-		$objPHPExcel->getActiveSheet()->setCellValue('G'.$row, $bidang[jml]);
-		$objPHPExcel->getActiveSheet()->setCellValue('H'.$row, $bidang[nilai]);
-		$objPHPExcel->getActiveSheet()->setCellValue('I'.$row, $bidang[pp]);
-		$objPHPExcel->getActiveSheet()->setCellValue('J'.$row, $bidang[ap]);
-		$objPHPExcel->getActiveSheet()->setCellValue('K'.$row, $bidang[nb]);
-		$objPHPExcel->getActiveSheet()->setCellValue('L'.$row, $bidang[mutasi_nilai_kurang]);
-		$objPHPExcel->getActiveSheet()->setCellValue('M'.$row, $bidang[mutasi_nilai_tambah]);
-		$objPHPExcel->getActiveSheet()->setCellValue('N'.$row, $bidang[mutasi_ap_kurang]);
-		$objPHPExcel->getActiveSheet()->setCellValue('O'.$row, $bidang[mutasi_ap_tambah]);
-		$objPHPExcel->getActiveSheet()->setCellValue('P'.$row, $bp_bidang);
-		$objPHPExcel->getActiveSheet()->setCellValue('Q'.$row, $bidang[jml_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('R'.$row, $bidang[nilai_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('S'.$row, $bidang[pp_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('T'.$row, $bidang[ap_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('U'.$row, $bidang[np_akhir]);*/
-
-
-		$csv.=""."|";
-		$csv.=$bidang[Kelompok]."|";
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=$bidang[Uraian]."|";
-		$csv.=$bidang[jml]."|";
-		$csv.=$bidang[nilai]."|";
-		$csv.=$bidang[pp]."|";
-		$csv.=$bidang[ap]."|";
-		$csv.=$bidang[nb]."|";
-		$csv.=$bidang[mutasi_nilai_kurang]."|";
-		$csv.=$bidang[mutasi_nilai_tambah]."|";
-		$csv.=$bidang[mutasi_ap_kurang]."|";
-		$csv.=$bidang[mutasi_ap_tambah]."|";
-		$csv.=$bp_bidang."|";
-		$csv.=$bidang[jml_akhir]."|";
-		$csv.=$bidang[nilai_akhir]."|";
-		$csv.=$bidang[pp_akhir]."|";
-		$csv.=$bidang[ap_akhir]."|";
-		$csv.=$bidang[nb_akhir]."\n";
 					$body.="<tr>
 								<td>&nbsp;</td>
 								<td style=\"font-weight: bold;\">{$bidang[Kelompok]}</td>
@@ -566,52 +453,7 @@ $param_tgl = $tglakhirperolehan ;
                                         $bp_kelompok=0;
                                         //$bp_kelompok=$Kelompok[ap_akhir]-$Kelompok[ap_awal]-$Kelompok[mutasi_ap_tambah]+$Kelompok[mutasi_ap_kurang];
                                         $bp_kelompok=$Kelompok[bp];
-                     
-                    /*	$row=$baserow++;	
-                    	$objPHPExcel->getActiveSheet()->insertNewRowBefore($row,1);		
-		$objPHPExcel->getActiveSheet()->setCellValue('A'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('B'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('C'.$row, $Kelompok[Kelompok]);
-		$objPHPExcel->getActiveSheet()->setCellValue('D'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('E'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('F'.$row, $Kelompok[Uraian]);
-		$objPHPExcel->getActiveSheet()->setCellValue('G'.$row, $Kelompok[jml]);
-		$objPHPExcel->getActiveSheet()->setCellValue('H'.$row, $Kelompok[nilai]);
-		$objPHPExcel->getActiveSheet()->setCellValue('I'.$row, $Kelompok[pp]);
-		$objPHPExcel->getActiveSheet()->setCellValue('J'.$row, $Kelompok[ap]);
-		$objPHPExcel->getActiveSheet()->setCellValue('K'.$row, $Kelompok[nb]);
-		$objPHPExcel->getActiveSheet()->setCellValue('L'.$row, $Kelompok[mutasi_nilai_kurang]);
-		$objPHPExcel->getActiveSheet()->setCellValue('M'.$row, $Kelompok[mutasi_nilai_tambah]);
-		$objPHPExcel->getActiveSheet()->setCellValue('N'.$row, $Kelompok[mutasi_ap_kurang]);
-		$objPHPExcel->getActiveSheet()->setCellValue('O'.$row, $Kelompok[mutasi_ap_tambah]);
-		$objPHPExcel->getActiveSheet()->setCellValue('P'.$row, $bp_kelompok);
-		$objPHPExcel->getActiveSheet()->setCellValue('Q'.$row, $Kelompok[jml_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('R'.$row, $Kelompok[nilai_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('S'.$row, $Kelompok[pp_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('T'.$row, $Kelompok[ap_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('U'.$row, $Kelompok[np_akhir]);   */ 
-
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=$Kelompok[Kelompok]."|";
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=$Kelompok[Uraian]."|";
-		$csv.=$Kelompok[jml]."|";
-		$csv.=$Kelompok[nilai]."|";
-		$csv.=$Kelompok[pp]."|";
-		$csv.=$Kelompok[ap]."|";
-		$csv.=$Kelompok[nb]."|";
-		$csv.=$Kelompok[mutasi_nilai_kurang]."|";
-		$csv.=$Kelompok[mutasi_nilai_tambah]."|";
-		$csv.=$Kelompok[mutasi_ap_kurang]."|";
-		$csv.=$Kelompok[mutasi_ap_tambah]."|";
-		$csv.=$bp_kelompok."|";
-		$csv.=$Kelompok[jml_akhir]."|";
-		$csv.=$Kelompok[nilai_akhir]."|";
-		$csv.=$Kelompok[pp_akhir]."|";
-		$csv.=$Kelompok[ap_akhir]."|";
-		$csv.=$Kelompok[nb_akhir]."\n";               
+                                        
 					$body.="<tr>
 								<td>&nbsp;</td>
 								<td>&nbsp;</td>
@@ -649,51 +491,6 @@ $param_tgl = $tglakhirperolehan ;
                                                 $bp_sub=0;
                                                 //$bp_sub=$Sub[ap_akhir]-$Sub[ap_awal]-$Sub[mutasi_ap_tambah]+$Sub[mutasi_ap_kurang];
                                                 $bp_sub=$Sub[bp];
-       /* $row=$baserow++;			
-        $objPHPExcel->getActiveSheet()->insertNewRowBefore($row,1);
-		$objPHPExcel->getActiveSheet()->setCellValue('A'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('B'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('C'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('D'.$row, $Sub[Kelompok]);
-		$objPHPExcel->getActiveSheet()->setCellValue('E'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('F'.$row, $Sub[Uraian]);
-		$objPHPExcel->getActiveSheet()->setCellValue('G'.$row, $Sub[jml]);
-		$objPHPExcel->getActiveSheet()->setCellValue('H'.$row, $Sub[nilai]);
-		$objPHPExcel->getActiveSheet()->setCellValue('I'.$row, $Sub[pp]);
-		$objPHPExcel->getActiveSheet()->setCellValue('J'.$row, $Sub[ap]);
-		$objPHPExcel->getActiveSheet()->setCellValue('K'.$row, $Sub[nb]);
-		$objPHPExcel->getActiveSheet()->setCellValue('L'.$row, $Sub[mutasi_nilai_kurang]);
-		$objPHPExcel->getActiveSheet()->setCellValue('M'.$row, $Sub[mutasi_nilai_tambah]);
-		$objPHPExcel->getActiveSheet()->setCellValue('N'.$row, $Sub[mutasi_ap_kurang]);
-		$objPHPExcel->getActiveSheet()->setCellValue('O'.$row, $Sub[mutasi_ap_tambah]);
-		$objPHPExcel->getActiveSheet()->setCellValue('P'.$row, $bp_sub);
-		$objPHPExcel->getActiveSheet()->setCellValue('Q'.$row, $Sub[jml_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('R'.$row, $Sub[nilai_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('S'.$row, $Sub[pp_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('T'.$row, $Sub[ap_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('U'.$row, $Sub[np_akhir]);   */
-
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=$Sub[Kelompok]."|";
-		$csv.=""."|";
-		$csv.=$Sub[Uraian]."|";
-		$csv.=$Sub[jml]."|";
-		$csv.=$Sub[nilai]."|";
-		$csv.=$Sub[pp]."|";
-		$csv.=$Sub[ap]."|";
-		$csv.=$Sub[nb]."|";
-		$csv.=$Sub[mutasi_nilai_kurang]."|";
-		$csv.=$Sub[mutasi_nilai_tambah]."|";
-		$csv.=$Sub[mutasi_ap_kurang]."|";
-		$csv.=$Sub[mutasi_ap_tambah]."|";
-		$csv.=$bp_sub."|";
-		$csv.=$Sub[jml_akhir]."|";
-		$csv.=$Sub[nilai_akhir]."|";
-		$csv.=$Sub[pp_akhir]."|";
-		$csv.=$Sub[ap_akhir]."|";
-		$csv.=$Sub[nb_akhir]."\n"; 
                                                 
 							$body.="<tr>
 										<td>&nbsp;</td>
@@ -722,7 +519,6 @@ $param_tgl = $tglakhirperolehan ;
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[nb_akhir],2,",",".")."</td> 
 
 									</tr>";
-
 						foreach($Sub['SubSub'] as $SubSub)
 						{	 
 							if($SubSub[ap]==""||$SubSub[ap]==0)
@@ -736,52 +532,7 @@ $param_tgl = $tglakhirperolehan ;
                                                        $bp_subsub=$SubSub[bp];
                                                         //$SubSub[mutasi_ap_tambah]-$SubSub[mutasi_ap_kurang];
                                                         
-							/*	$row=$baserow++;	
-								$objPHPExcel->getActiveSheet()->insertNewRowBefore($row,1);		
-		$objPHPExcel->getActiveSheet()->setCellValue('A'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('B'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('C'.$row, "");
-		$objPHPExcel->getActiveSheet()->setCellValue('D'.$row, "'");
-		$objPHPExcel->getActiveSheet()->setCellValue('E'.$row, $SubSub[Kelompok]);
-		$objPHPExcel->getActiveSheet()->setCellValue('F'.$row, $SubSub[Uraian]);
-		$objPHPExcel->getActiveSheet()->setCellValue('G'.$row, $SubSub[jml]);
-		$objPHPExcel->getActiveSheet()->setCellValue('H'.$row, $SubSub[nilai]);
-		$objPHPExcel->getActiveSheet()->setCellValue('I'.$row, $SubSub[pp]);
-		$objPHPExcel->getActiveSheet()->setCellValue('J'.$row, $SubSub[ap]);
-		$objPHPExcel->getActiveSheet()->setCellValue('K'.$row, $SubSub[nb]);
-		$objPHPExcel->getActiveSheet()->setCellValue('L'.$row, $SubSub[mutasi_nilai_kurang]);
-		$objPHPExcel->getActiveSheet()->setCellValue('M'.$row, $SubSub[mutasi_nilai_tambah]);
-		$objPHPExcel->getActiveSheet()->setCellValue('N'.$row, $SubSub[mutasi_ap_kurang]);
-		$objPHPExcel->getActiveSheet()->setCellValue('O'.$row, $SubSub[mutasi_ap_tambah]);
-		$objPHPExcel->getActiveSheet()->setCellValue('P'.$row, $bp_sub);
-		$objPHPExcel->getActiveSheet()->setCellValue('Q'.$row, $SubSub[jml_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('R'.$row, $SubSub[nilai_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('S'.$row, $SubSub[pp_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('T'.$row, $SubSub[ap_akhir]);
-		$objPHPExcel->getActiveSheet()->setCellValue('U'.$row, $SubSub[np_akhir]); */
-
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.=$SubSub[Kelompok]."|";
-		$csv.=$SubSub[Uraian]."|";
-		$csv.=$SubSub[jml]."|";
-		$csv.=$SubSub[nilai]."|";
-		$csv.=$SubSub[pp]."|";
-		$csv.=$SubSub[ap]."|";
-		$csv.=$SubSub[nb]."|";
-		$csv.=$SubSub[mutasi_nilai_kurang]."|";
-		$csv.=$SubSub[mutasi_nilai_tambah]."|";
-		$csv.=$SubSub[mutasi_ap_kurang]."|";
-		$csv.=$SubSub[mutasi_ap_tambah]."|";
-		$csv.=$bp_sub."|";
-		$csv.=$SubSub[jml_akhir]."|";
-		$csv.=$SubSub[nilai_akhir]."|";
-		$csv.=$SubSub[pp_akhir]."|";
-		$csv.=$SubSub[ap_akhir]."|";
-		$csv.=$SubSub[nb_akhir]."\n";
-							$body.="<tr>
+								$body.="<tr>
 											<td>&nbsp;</td>
 											<td>&nbsp;</td>
 											<td>&nbsp;</td>
@@ -821,28 +572,6 @@ $param_tgl = $tglakhirperolehan ;
 	
 	
 	if($i == $hit_loop){
-			$csv.=""."|";
-		$csv.=""."|";
-		$csv.=""."|";
-		$csv.="'"."|";
-		$csv.=""."|";
-		$csv.="|";
-		$csv.=$jml_total."|";
-		$csv.=$np_total."|";
-		$csv.=$pp_total."|";
-		$csv.=$ap_total."|";
-		$csv.=$nb_total."|";
-		$csv.=$mutasi_nilai_kurang."|";
-		$csv.=$mutasi_nilai_tambah."|";
-		$csv.=$mutasi_ap_kurang."|";
-		$csv.=$mutasi_ap_tambah."|";
-		$csv.=$bp_total."|";
-		$csv.=$jml_total_akhir."|";
-		$csv.=$nilai_total_akhir."|";
-		$csv.=$pp_total_akhir."|";
-		$csv.=$ap_total_akhir."|";
-		$csv.=$nb_total_akhir."\n";
-
 		$foot="<tr>
 				<td colspan = \"6\" style=\"text-align: center; font-weight: bold;\">Total</td>
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($jml_total,0,",",".")."</td>
@@ -883,9 +612,9 @@ if(count($splitKodeSatker) == 4){
 }
 $param_tgl = $pt;   
 if($gol == 'mesin_ori'){
-	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi not in (3,4)  and 
+	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
 				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=0 or kodeKa=1)))
+				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=1000000 or kodeKa=1)))
 				 and $paramSatker";
  
       $sql = "select  kodeKelompok as kelompok,Aset_ID,
@@ -900,9 +629,9 @@ if($gol == 'mesin_ori'){
                  $param_where    
                order by kelompok asc";
 }elseif($gol == 'bangunan_ori'){
-	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi not in (3,4)  and 
+	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
 				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=0  or kodeKa=1)))
+				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=20000000  or kodeKa=1)))
 				 and $paramSatker";
 	 
 	$sql = "select  kodeKelompok as kelompok,Aset_ID,
@@ -922,13 +651,13 @@ if($gol == 'mesin_ori'){
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%' 
-					 and kondisi not in (3,4)					 
+					 and kondisi != '3'					 
 					 and $paramSatker";
 		else
 		    $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
-					 and kodeLokasi like '12%'  and kondisi not in (3,4)				
+					 and kodeLokasi like '12%' 
 					 and $paramSatker";
 	 
 	 if($gol == 'jaringan_ori'){
@@ -976,9 +705,9 @@ if(count($splitKodeSatker) == 4){
 $param_tgl = $pt;   
 if($gol == 'mesin_ori'){
     $gol="mesin";
-	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi not in (3,4)  and 
+	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
 				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=0 or kodeKa=1)))
+				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=1000000 or kodeKa=1)))
 				 and $paramSatker";
  
       $sql = "select  kodeKelompok as kelompok,Aset_ID,TahunPenyusutan,
@@ -994,9 +723,9 @@ if($gol == 'mesin_ori'){
                order by kelompok asc";
 }elseif($gol == 'bangunan_ori'){
     $gol="bangunan";
-	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi not in (3,4)  and 
+	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
 				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=0  or kodeKa=1)))
+				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=20000000  or kodeKa=1)))
 				 and $paramSatker";
 	 
 	$sql = "select  kodeKelompok as kelompok,Aset_ID,TahunPenyusutan,
@@ -1012,17 +741,18 @@ if($gol == 'mesin_ori'){
                order by kelompok asc";
 }else{
 	if($gol!="tanahView")
-		  $param_where = "Status_Validasi_barang=1 and StatusTampil = 1   and kondisi not in (3,4) 
+		  $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%' 
-					 and kondisi not in (3,4)					 
+					 and kondisi != '3'					 
 					 and $paramSatker";
 		else
-		    $param_where = "Status_Validasi_barang=1 and StatusTampil = 1   and kondisi not in (3,4) 
+		    $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%' 
+					 and kondisi != '3'	
 					 and $paramSatker";
 	 
 	 if($gol == 'jaringan_ori'){
@@ -1081,9 +811,9 @@ if($gol == 'mesin_ori'){
     //cek kapitalisasi
     $kapitalisasi_kondisi=" and m.Aset_ID not in(select Aset_ID from log_$gol where  `action` LIKE 'Sukses kapitalisasi Mutasi%') ";
 
-    $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi not in (3,4)  and 
+    $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi != '3'  and 
 				( (m.TglPerolehan < '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and m.kodeKa=1) or 
-				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl'  and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=0 or m.kodeKa=1)))
+				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl'  and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=1000000 or m.kodeKa=1)))
 				 and $paramSatker";
         
      
@@ -1106,9 +836,9 @@ if($gol == 'mesin_ori'){
      //cek kapitalisasi
     $kapitalisasi_kondisi=" and m.Aset_ID not in(select Aset_ID from log_$gol where  `action` LIKE 'Sukses kapitalisasi Mutasi%') ";
 
-	$param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi not in (3,4)  and 
+	$param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi != '3'  and 
 				( (m.TglPerolehan < '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and m.kodeKa=1) or 
-				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=0  or m.kodeKa=1)))
+				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=20000000  or m.kodeKa=1)))
 				 and $paramSatker";
 	 
 	$sql = "select  m.kodeKelompok as kelompok,m.Aset_ID,m.TahunPenyusutan,
@@ -1129,7 +859,7 @@ if($gol == 'mesin_ori'){
 					 and m.TglPerolehan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and l.kd_riwayat=3 and `action` like 'Sukses Mutasi%' 
 					 and m.TglPembukuan <='$param_tgl' 
 					 and m.kodeLokasi like '12%' 
-					 and m.kondisi not in (3,4)					 
+					 and m.kondisi != '3'					 
 					 and $paramSatker";
 		else
 		    $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1  
@@ -1193,7 +923,7 @@ if($gol == 'mesin_ori'){
 if($tipe=="3"){
 	echo $serviceJson;
 	exit;
-}elseif($tipe=="1"){
+}elseif($tipe!="2"){
 $REPORT->show_status_download_kib();
 $mpdf=new mPDF('','','','',15,15,16,16,9,9,'L');
 $mpdf->AddPage('L','','','','',15,15,16,16,9,9);
@@ -1224,37 +954,18 @@ $namafile_web="$url_rewrite/report/output/Rekapitulasi-Rincian-Mutasi-Barang-Ke-
 echo "<script>window.location.href='$namafile_web';</script>";
 exit;
 }
-elseif($tipe=="4")
+else
 {
-
-/*$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-$namafile="$path/report/output/Rekapitulasi-Detail-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca-$waktu.xls";
-$objWriter->save($namafile);
-$namafile_web="$url_rewrite/report/output/Rekapitulasi-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca$waktu.xls";
-echo "<script>window.location.href='$namafile_web';</script>";*/
-
-	/*$waktu=date("d-m-y_h:i:s");
-	$filename ="Rekapitulasi-Detail-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca-$waktu.xls";
-	header('Content-type: application/ms-excel');
-	header('Content-Disposition: attachment; filename='.$filename);
-	echo $html; */
-
-	$waktu=date("d-m-y_h:i:s");
-	$filename ="Rekapitulasi-Detail-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca-$waktu.csv";
-	header('Content-type: text/csv');
-	header('Content-Disposition: attachment; filename='.$filename);
-	echo $csv; 
-}
-else{
 	$waktu=date("d-m-y_h:i:s");
 	$filename ="Rekapitulasi-Detail-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca-$waktu.xls";
 	header('Content-type: application/ms-excel');
 	header('Content-Disposition: attachment; filename='.$filename);
-	echo $html;
+	echo $html; 
 }
 
-function group_data($data_awal_perolehan,$data_akhir_perolehan,$data_hapus_awal){
-    
+function group_data($data_awal_perolehan,$data_akhir_perolehan,$data_hapus_awal,$tgl_perubahan_aset){
+
+
     //tes
  $data_awal = array();
 
@@ -1313,9 +1024,9 @@ foreach ($result as $key =>$value){
     $tipe=  $key;
     $selisih_nilai=$data_akhir[$tipe]['nilai']-$data_awal[$tipe]['nilai'];
     $selisih_jml=$data_akhir[$tipe]['jml']-$data_awal[$tipe]['jml'];
-    $selisih_ap=$data_akhir[$tipe]['AP']-$data_awal[$tipe]['AP'];
-    $selisih_pp=$data_akhir[$tipe]['PP']-$data_awal[$tipe]['PP'];
-    $selisih_nb=$data_akhir[$tipe]['NB']-$data_awal[$tipe]['NB'];
+    $selisih_ap=round($data_akhir[$tipe]['AP']-$data_awal[$tipe]['AP'],2);
+    $selisih_pp=round($data_akhir[$tipe]['PP']-$data_awal[$tipe]['PP'],2);
+    $selisih_nb=round($data_akhir[$tipe]['NB']-$data_awal[$tipe]['NB'],2);
     
     
     
@@ -1346,7 +1057,7 @@ foreach ($result as $key =>$value){
     if($data_akhir[$tipe]['nilai']!=0 && $data_awal[$tipe]['nilai']!=0 && $selisih_nilai!=0){
         if($selisih_ap<0)
            $selisih_ap_kurang=abs($selisih_ap);
-       //else $selisih_ap_tambah=$selisih_ap;
+       else $selisih_ap_tambah=$selisih_ap;
     }
     
     if($data_akhir[$tipe]['AP']==""||$data_akhir[$tipe]['AP']==0)
@@ -1388,11 +1099,11 @@ foreach ($result as $key =>$value){
     $data_gabungan[$tipe]['mutasi_nilai_tambah']=$selisih_nilai_tambah;
     $data_gabungan[$tipe]['mutasi_nilai_kurang']=$selisih_nilai_kurang;
     
-    $data_gabungan[$tipe]['nilai_akhir']=$data_akhir[$tipe]['nilai'];
-    $data_gabungan[$tipe]['jml_akhir']=$data_akhir[$tipe]['jml'];
-    $data_gabungan[$tipe]['ap_akhir']=$data_akhir[$tipe]['AP'];
-    $data_gabungan[$tipe]['pp_akhir']=$data_akhir[$tipe]['PP'];
-    $data_gabungan[$tipe]['nb_akhir']=$data_akhir[$tipe]['NB'];
+    $data_gabungan[$tipe]['nilai_akhir']=round($data_akhir[$tipe]['nilai'],2);
+    $data_gabungan[$tipe]['jml_akhir']=round($data_akhir[$tipe]['jml'],2);
+    $data_gabungan[$tipe]['ap_akhir']=round($data_akhir[$tipe]['AP'],2);
+    $data_gabungan[$tipe]['pp_akhir']=round($data_akhir[$tipe]['PP'],2);
+    $data_gabungan[$tipe]['nb_akhir']=round($data_akhir[$tipe]['NB'],2);
 
     
     
@@ -1496,7 +1207,22 @@ foreach ($data_akhir_alone as $tipe => $value) {
     $data_akhir[$tipe]['nb']=0;
     $data_akhir[$tipe]['mutasi_jml_tambah']=$value['jml'];
     $data_akhir[$tipe]['mutasi_nilai_tambah']=$value['nilai'];
-    $data_akhir[$tipe]['mutasi_ap_tambah']=$akumulasi_sblm;//$value['AP'];
+   // $TglPerubahan="";
+    $temp=explode("-",$tgl_perubahan_aset);
+    $tahun_aset=$temp[0];
+    list($AkmBaru,$status_pembukuan,$NilaiBuku)=get_data_log_data_aset($Aset_ID,$tgl_perubahan_aset,$tipe,0);
+    //$status_pembukuan=get_status_asetbaru($Aset_ID);
+    if($tahun_aset==$Tahun ||$status_pembukuan==1 )
+      $nb_sblm=1;
+    else
+      $nb_sblm=get_nb_penyusutan_sblm($Aset_ID,$tahun_aset,$tipe);
+    list($Akm,$status,$NilaiBuku_Transfer)=get_data_log_data_aset($Aset_ID,$tgl_perubahan_aset,$tipe,3);
+    if($status==1){
+        $data_akhir[$tipe]['mutasi_ap_tambah']=$Akm;//$akumulasi_sblm;//$value['AP'];
+        $nb_sblm=$NilaiBuku_Transfer;
+    }else
+        $data_akhir[$tipe]['mutasi_ap_tambah']=0;
+
     $data_akhir[$tipe]['mutasi_pp_tambah']=$value['PP'];
     $data_akhir[$tipe]['mutasi_nb_tambah']=$value['NB'];
     
@@ -1505,14 +1231,29 @@ foreach ($data_akhir_alone as $tipe => $value) {
     $data_akhir[$tipe]['mutasi_ap_kurang']=0;
     $data_akhir[$tipe]['mutasi_pp_kurang']=0;
     $data_akhir[$tipe]['mutasi_nb_kurang']=0;
-    
-    $data_akhir[$tipe]['bp']=$bp;//$value['AP'];
-    
+    //echo "$Aset_ID||==$tahun_aset==$TahunPenyusutan <br/>";
+
+    if($tahun_aset==$TahunPenyusutan)
+	{
+    //echo "masuk===$Aset_ID | Thn=$Tahun |TahunPenyusutan=$TahunPenyusutan|$nb_sblm<br/>";
+		if($nb_sblm!=0)
+		{	$data_akhir[$tipe]['bp']=$value['PP'];//$bp;//$value['AP'];
+      //echo "bp={$value['PP']}<br/>";
+    }
+		else
+			$data_akhir[$tipe]['bp']=0;
+	}        
+    else{
+        if($nb_sblm!=0)
+            $data_akhir[$tipe]['bp']=0;
+        else
+            $data_akhir[$tipe]['bp']=$value['PP'];
+ }
     $data_akhir[$tipe]['nilai_akhir']=$value['nilai'];
     $data_akhir[$tipe]['jml_akhir']=$value['jml'];
-    $data_akhir[$tipe]['ap_akhir']=$value['AP'];
-    $data_akhir[$tipe]['pp_akhir']=$value['PP'];
-    $data_akhir[$tipe]['nb_akhir']=$value['NB'];
+    $data_akhir[$tipe]['ap_akhir']=round($value['AP'],2);
+    $data_akhir[$tipe]['pp_akhir']=round($value['PP'],2);
+    $data_akhir[$tipe]['nb_akhir']=round($value['NB'],2);
     
     
 }
@@ -1796,6 +1537,104 @@ function get_uraian($kode,$level){
     return $Uraian;
 }
 
+function get_nb_penyusutan_sblm($Aset_ID,$TahunPenyusutan,$kelompok){
+    $gol=  explode(".", $kelompok);
+    switch ($gol[0]) {
+        case "1":
+            $nama_log="log_tanah";
+            break;
+        case "2":
+            $nama_log="log_mesin";
+            break;
+        case "3":
+            $nama_log="log_bangunan";
+            break;
+        case "4":
+            $nama_log="log_jaringan";
+            break;
+        case "5":
+            $nama_log="log_asetlain";
+            break;
+        case "6":
+            $nama_log="log_kdp";
+            break;
+
+        default:
+            break;
+    }
+   // echo "nama==$nama_log<br/>";
+    if($gol[0]!="2" && $gol[0]!="3" && $gol[0]!="4"){
+        $NilaiBuku=0;
+    }else{
+		    $TahunPenyusutan=$TahunPenyusutan-1;
+		    $query = "select NilaiBuku from $nama_log where TahunPenyusutan='$TahunPenyusutan' and "
+		        . "kd_riwayat in(50,51,52) and TglPerubahan!='0000-00-00 00:00:00' and TglPerubahan is not null "
+		        . " and Aset_ID='$Aset_ID' ";
+
+		   /* echo $query;
+		    echo "<br/>";*/
+		    $status = 0;
+		    $result = mysql_query($query) or die(mysql_error());
+		    $AkumulasiPenyusutan = 0;
+		    while ($row = mysql_fetch_array($result)) {
+		        $NilaiBuku = $row['NilaiBuku'];
+		     $status = 1;
+		    }
+	}
+    
+
+
+    return $NilaiBuku;
+}
+
+function get_data_log_data_aset($Aset_ID,$TglPerubahan,$kelompok,$kd_riwayat){
+    $gol=  explode(".", $kelompok);
+    switch ($gol[0]) {
+        case "1":
+            $nama_log="log_tanah";
+            break;
+        case "2":
+            $nama_log="log_mesin";
+            break;
+        case "3":
+            $nama_log="log_bangunan";
+            break;
+        case "4":
+            $nama_log="log_jaringan";
+            break;
+        case "5":
+            $nama_log="log_asetlain";
+            break;
+        case "6":
+            $nama_log="log_kdp";
+            break;
+
+        default:
+            break;
+    }
+   // echo "nama==$nama_log<br/>";
+    $Tahun = $TahunPenyusutan - 1;
+    $query = "select AkumulasiPenyusutan,NilaiBuku from $nama_log where "
+        . "kd_riwayat in($kd_riwayat) and TglPerubahan>='$TglPerubahan' "
+        . " and Aset_ID='$Aset_ID' ";
+    /*echo $query;
+    echo "<br/>";*/
+    $status = 0;
+    $result = mysql_query($query) or die(mysql_error());
+    $AkumulasiPenyusutan = 0;
+    while ($row = mysql_fetch_array($result)) {
+        $AkumulasiPenyusutan = $row['AkumulasiPenyusutan'];
+        $NilaiBuku=$row['NilaiBuku'];
+     $status = 1;
+    }
+    if($gol[0]!="2" && $gol[0]!="3" && $gol[0]!="4"){
+        $AkumulasiPenyusutan=0;
+        $NilaiBuku=0;
+    }
+
+
+    return array($AkumulasiPenyusutan,$status,$NilaiBuku);
+}
 function get_akumulasi_sblm($Aset_ID,$TahunPenyusutan,$kelompok){
     $gol=  explode(".", $kelompok);
     //echo "$kelompok<pre>";
