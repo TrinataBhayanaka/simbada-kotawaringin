@@ -11,7 +11,7 @@ ob_start();
 require_once('../../../config/config.php');
 define("_JPGRAPH_PATH", "$path/function/mpdf/jpgraph/src/"); // must define this before including mpdf.php file
 $JpgUseSVGFormat = true;
-define('_MPDF_URI',"$url_rewrite/function/mpdf/"); 	// must be  a relative or absolute URI - not a file system path
+define('_MPDF_URI',"$url_rewrite/function/mpdf/");  // must be  a relative or absolute URI - not a file system path
 include "../../report_engine.php";
 require ('../../../function/mpdf/mpdf.php');
 $modul = $_GET['menuID'];
@@ -19,9 +19,9 @@ $mode = $_GET['mode'];
 $tab = $_GET['tab'];
 $tglawal = $_GET['tglawalperolehan'];
 if($tglawal != ''){
-	$tglawalperolehan = $tglawal;
+  $tglawalperolehan = $tglawal;
 }else{
-	$tglawalperolehan = '0000-00-00';
+  $tglawalperolehan = '0000-00-00';
 }
 $tglakhirperolehan = $_GET['tglakhirperolehan'];
 $tglakhirperolehan = $_GET['tglakhirperolehan'];
@@ -37,19 +37,19 @@ $REPORT=new report_engine();
 $data=array(
     "modul"=>$modul,
     "mode"=>$mode,
-	"tglawalperolehan"=>$tglawalperolehan,
+  "tglawalperolehan"=>$tglawalperolehan,
     "tglakhirperolehan"=>$tglakhirperolehan,
     "skpd_id"=>$skpd_id,
-	"tab"=>$tab
+  "tab"=>$tab
 );
 $REPORT->set_data($data);
 $nama_kab = $NAMA_KABUPATEN;
 $nama_prov = $NAMA_PROVINSI;
 $gambar = $FILE_GAMBAR_KABUPATEN;
 if($tipe == 1){
-	$gmbr = "<img style=\"width: 80px; height: 85px;\" src=\"$gambar\">";
+  $gmbr = "<img style=\"width: 80px; height: 85px;\" src=\"$gambar\">";
 }else{
-	$gmbr ="";
+  $gmbr ="";
 }
 $hit = 2;
 $flag = '';
@@ -68,16 +68,16 @@ $NoUnitOrganisasi = $detailSatker[1];
 $NoSubUnitOrganisasi = $detailSatker[2];
 $NoUPB = $detailSatker[3];
 if($NoBidang !=""){
-	$paramKodeLokasi = $NoBidang;
+  $paramKodeLokasi = $NoBidang;
 }
 if($NoBidang !="" && $NoUnitOrganisasi != ""){
-	$paramKodeLokasi = $NoUnitOrganisasi;
+  $paramKodeLokasi = $NoUnitOrganisasi;
 }
 if($NoBidang !="" && $NoUnitOrganisasi != "" && $NoSubUnitOrganisasi !=""){
-	$paramKodeLokasi = $NoUnitOrganisasi.".".$NoSubUnitOrganisasi;
+  $paramKodeLokasi = $NoUnitOrganisasi.".".$NoSubUnitOrganisasi;
 }
 if($NoBidang !="" && $NoUnitOrganisasi != "" && $NoSubUnitOrganisasi !="" && $NoUPB !=""){
-	$paramKodeLokasi = $NoUnitOrganisasi.".".$NoSubUnitOrganisasi.".".$NoUPB;
+  $paramKodeLokasi = $NoUnitOrganisasi.".".$NoSubUnitOrganisasi.".".$NoUPB;
 }
 $Bidang = $detailSatker[4][0];
 $UnitOrganisasi = $detailSatker[4][1];
@@ -87,56 +87,56 @@ $UPB = $detailSatker[4][3];
 $ex = explode('.',$skpd_id);
 $hit = count($ex);
 /*if($hit == 1){
-	$header = "<tr>
+  $header = "<tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$Bidang</td>
         </tr>
-		";
+    ";
 }elseif($hit == 2){
-	$header = "<tr>
+  $header = "<tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$Bidang</td>
         </tr>
-		<tr>
+    <tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">UNIT ORGANISASI</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$UnitOrganisasi</td>
         </tr>";
 }elseif($hit == 3){
-	$header = "<tr>
+  $header = "<tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$Bidang</td>
         </tr>
-		<tr>
+    <tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">UNIT ORGANISASI</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$UnitOrganisasi</td>
         </tr>
-		<tr>
+    <tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">SUB UNIT ORGANISASI</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$SubUnitOrganisasi</td>
         </tr>";
 }elseif($hit == 4){
-	$header = "<tr>
+  $header = "<tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$Bidang</td>
         </tr>
-		<tr>
+    <tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">UNIT ORGANISASI</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$UnitOrganisasi</td>
         </tr>
-		<tr>
+    <tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">SUB UNIT ORGANISASI</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$SubUnitOrganisasi</td>
         </tr>
-		<tr>
+    <tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">UPB</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$UPB</td>
@@ -147,17 +147,17 @@ $header = "<tr>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$Bidang</td>
         </tr>
-		<tr>
+    <tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">UNIT ORGANISASI</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$UnitOrganisasi</td>
         </tr>
-		<tr>
+    <tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">SUB UNIT ORGANISASI</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$SubUnitOrganisasi</td>
         </tr>
-		<tr>
+    <tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">UPB</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
           <td style=\"width: 873px; font-weight: bold;\">$UPB</td>
@@ -166,19 +166,19 @@ $header = "<tr>
 // exit;
 //start
 if($tipeAset == 'all'){
-	$data = array('tanahView','mesin_ori','bangunan_ori','jaringan_ori','asetlain_ori','kdp_ori');
+  $data = array('tanahView','mesin_ori','bangunan_ori','jaringan_ori','asetlain_ori','kdp_ori');
 }elseif($tipeAset == 'tanah'){
-	$data = array('tanahView');
+  $data = array('tanahView');
 }elseif($tipeAset == 'mesin'){
-	$data = array('mesin_ori');
+  $data = array('mesin_ori');
 }elseif($tipeAset == 'bangunan'){
-	$data = array('bangunan_ori');
+  $data = array('bangunan_ori');
 }elseif($tipeAset == 'jaringan'){
-	$data = array('jaringan_ori');
+  $data = array('jaringan_ori');
 }elseif($tipeAset == 'asetlain'){
-	$data = array('asetlain_ori');
+  $data = array('asetlain_ori');
 }elseif($tipeAset == 'kdp'){
-	$data = array('kdp_ori');
+  $data = array('kdp_ori');
 }
 //$data = array('tanahView');
 
@@ -187,50 +187,50 @@ if($tipeAset == 'all'){
 $hit_loop = count($data);
 $i = 0;
 $head ="<head>
-			  <meta content=\"text/html; charset=UTF-8\"http-equiv=\"content-type\">
-			  <title></title>
-			</head>
-			<body>
-			<table style=\"text-align: left; width: 100%;\" border=\"0\"
-			 cellpadding=\"2\" cellspacing=\"2\">
-			  <tbody>
-				<tr>
-				  <td style=\"width: 150px; text-align: LEFT;\">$gmbr</td>
-				  <td style=\"width: 902px; text-align: center;\">
-				  <h3>REKAPITULASI RINCIAN BARANG KE NERACA</h3>
-				  <h3>TAHUN $tahun_neraca</h3>
-				  </td>
-				</tr>
-			  </tbody>
-			</table>
-			<br>
-			<table style=\"text-align: left; width: 100%;\" border=\"0\" cellpadding=\"2\" cellspacing=\"2\">
-			  <tbody>
-				<tr>
-				  <td style=\"width: 200px; font-weight: bold; text-align: left;\">KABUPATEN / KOTA</td>
-				  <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
-				  <td style=\"width: 873px; font-weight: bold;\">$nama_kab </td>
-				</tr>
-				<tr>
-				  <td style=\"width: 200px; font-weight: bold; text-align: left;\">PROVINSI</td>
-				  <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
-				  <td style=\"width: 873px; font-weight: bold;\">$nama_prov</td>
-				</tr>
-				$header
-			  </tbody>
-			</table>
-				<br>";
+        <meta content=\"text/html; charset=UTF-8\"http-equiv=\"content-type\">
+        <title></title>
+      </head>
+      <body>
+      <table style=\"text-align: left; width: 100%;\" border=\"0\"
+       cellpadding=\"2\" cellspacing=\"2\">
+        <tbody>
+        <tr>
+          <td style=\"width: 150px; text-align: LEFT;\">$gmbr</td>
+          <td style=\"width: 902px; text-align: center;\">
+          <h3>REKAPITULASI RINCIAN BARANG KE NERACA</h3>
+          <h3>TAHUN $tahun_neraca</h3>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <br>
+      <table style=\"text-align: left; width: 100%;\" border=\"0\" cellpadding=\"2\" cellspacing=\"2\">
+        <tbody>
+        <tr>
+          <td style=\"width: 200px; font-weight: bold; text-align: left;\">KABUPATEN / KOTA</td>
+          <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
+          <td style=\"width: 873px; font-weight: bold;\">$nama_kab </td>
+        </tr>
+        <tr>
+          <td style=\"width: 200px; font-weight: bold; text-align: left;\">PROVINSI</td>
+          <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
+          <td style=\"width: 873px; font-weight: bold;\">$nama_prov</td>
+        </tr>
+        $header
+        </tbody>
+      </table>
+        <br>";
 $head.=" <table style=\"width: 100%; text-align: left; margin-left: auto; margin-right: auto; border-collapse:collapse\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\; \">
-	<tr>
-		<td rowspan='2' colspan='5' style=\" text-align: center; font-weight: bold; width: \">Kode</td>
-		<td rowspan='2' style=\" text-align: center; font-weight: bold; width: \">Uraian</td>
-		<td colspan='5' style=\" text-align: center; font-weight: bold; width: \">1 Januari $tahun_neraca</td>
+  <tr>
+    <td rowspan='2' colspan='5' style=\" text-align: center; font-weight: bold; width: \">Kode</td>
+    <td rowspan='2' style=\" text-align: center; font-weight: bold; width: \">Uraian</td>
+    <td colspan='5' style=\" text-align: center; font-weight: bold; width: \">1 Januari $tahun_neraca</td>
                 <td colspan='2' style=\" text-align: center; font-weight: bold; width: \">Nilai Perolehan</td>
                 <td colspan='2' style=\" text-align: center; font-weight: bold; width: \">Akumulasi Penyusutan</td>
                 <td rowspan='2' style=\" text-align: center; font-weight: bold; width: \">Beban Penyusutan Tahun Berjalan</td>
                 <td colspan='5' style=\" text-align: center; font-weight: bold; width: \">31 Desember $tahun_neraca</td>
                 
-	</tr>
+  </tr>
         <tr>
             <td  style=\" text-align: center; font-weight: bold; width: \">Jumlah</td>
             <td  style=\" text-align: center; font-weight: bold; width: \">Nilai Perolehan</td>
@@ -249,18 +249,18 @@ $head.=" <table style=\"width: 100%; text-align: left; margin-left: auto; margin
             <td  style=\" text-align: center; font-weight: bold; width: \">Akumulasi Penyusutan</td>
             <td  style=\" text-align: center; font-weight: bold; width: \">Nilai Buku</td>
         </tr>
-	<tr>
-		   <td style=\" text-align: center; font-weight: bold; width: \">1</td>
-		   <td style=\" text-align: center; font-weight: bold; width: \">2</td>
-		   <td style=\" text-align: center; font-weight: bold; width: \">3</td>
-		   <td style=\" text-align: center; font-weight: bold; width: \">4</td>
-		   <td style=\" text-align: center; font-weight: bold; width: \">5</td>
-		   <td style=\" text-align: center; font-weight: bold; width: \">6</td>
-		   <td style=\" text-align: center; font-weight: bold; width: \">7</td>
-		   <td style=\" text-align: center; font-weight: bold; width: \">8</td>
-		   <td style=\" text-align: center; font-weight: bold; width: \">9</td>
-		   <td style=\" text-align: center; font-weight: bold; width: \">10</td>
-		   <td style=\" text-align: center; font-weight: bold; width: \">11</td>
+  <tr>
+       <td style=\" text-align: center; font-weight: bold; width: \">1</td>
+       <td style=\" text-align: center; font-weight: bold; width: \">2</td>
+       <td style=\" text-align: center; font-weight: bold; width: \">3</td>
+       <td style=\" text-align: center; font-weight: bold; width: \">4</td>
+       <td style=\" text-align: center; font-weight: bold; width: \">5</td>
+       <td style=\" text-align: center; font-weight: bold; width: \">6</td>
+       <td style=\" text-align: center; font-weight: bold; width: \">7</td>
+       <td style=\" text-align: center; font-weight: bold; width: \">8</td>
+       <td style=\" text-align: center; font-weight: bold; width: \">9</td>
+       <td style=\" text-align: center; font-weight: bold; width: \">10</td>
+       <td style=\" text-align: center; font-weight: bold; width: \">11</td>
                    <td style=\" text-align: center; font-weight: bold; width: \">12</td>
                    <td style=\" text-align: center; font-weight: bold; width: \">13</td>
                    <td style=\" text-align: center; font-weight: bold; width: \">14</td>
@@ -272,15 +272,15 @@ $head.=" <table style=\"width: 100%; text-align: left; margin-left: auto; margin
                    <td style=\" text-align: center; font-weight: bold; width: \">20</td>
                    <td style=\" text-align: center; font-weight: bold; width: \">21</td>
                    
-	</tr>";	
+  </tr>"; 
 //foreach ($data as $gol) {
 $param_satker = $skpd_id;
 $splitKodeSatker = explode ('.',$param_satker);
-	if(count($splitKodeSatker) == 4){	
-		$paramSatker = "kodeSatker = '$param_satker'";
-	}else{
-		$paramSatker = "kodeSatker like '$param_satker%'";
-	}
+  if(count($splitKodeSatker) == 4){ 
+    $paramSatker = "kodeSatker = '$param_satker'";
+  }else{
+    $paramSatker = "kodeSatker like '$param_satker%'";
+  }
 $param_tgl = $tglakhirperolehan ;
 $tmp_perubahan=explode("-",$param_tgl);
 $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
@@ -288,7 +288,7 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 
         
 
-		/*		$jml_total=0;
+    /*    $jml_total=0;
                 $np_total=0;
                 $pp_total=0;
                 $ap_total=0;
@@ -315,18 +315,18 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 
      foreach ($data as $gol) {
             $q_gol_final=$gol;
-		$kode_golongan = $data_gol;
-		$ps = $param_satker;
-		$pt =$param_tgl;
-		$paramLevelGol = $levelAset;
-		//$data[$i]=$data_gol;
-		/*if($paramLevelGol != 2){
-			$data[$i]['Bidang'] = bidang($kode_golongan,$gol,$ps,$pt,$paramLevelGol);
-		}*/
+    $kode_golongan = $data_gol;
+    $ps = $param_satker;
+    $pt =$param_tgl;
+    $paramLevelGol = $levelAset;
+    //$data[$i]=$data_gol;
+    /*if($paramLevelGol != 2){
+      $data[$i]['Bidang'] = bidang($kode_golongan,$gol,$ps,$pt,$paramLevelGol);
+    }*/
                 $data_awal=  subsub_awal($kode_golongan, $q_gol_final, $ps, $pt);
                 $data_akhir=  subsub($kode_golongan, $q_gol_final, $ps, "$tahun_neraca-12-31");
                 $data_hilang=subsub_hapus($kode_golongan, $q_gol_final, $ps, "$tahun_neraca-12-31",$pt);
-		//exit();
+    //exit();
 
                 $hasil=  group_data($data_awal, $data_akhir,$data_hilang,$tgl_perubahan_aset);
                //echo "<pre>";
@@ -334,21 +334,21 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
               // exit();
                 $data[$i]=$hasil;
                 //head asal
-				
+        
                 
-		foreach($hasil as $gol)
-		{	
-	   
+    foreach($hasil as $gol)
+    { 
+     
                     
                    if($gol[ap]==""||$gol[ap]==0)
-						$gol[nb]=$gol[nilai];
+            $gol[nb]=$gol[nilai];
 
-					if($gol[ap_akhir]==""||$gol[ap_akhir]==0)
-						$gol[nb_akhir]=$gol[nilai_akhir];
-		    
+          if($gol[ap_akhir]==""||$gol[ap_akhir]==0)
+            $gol[nb_akhir]=$gol[nilai_akhir];
+        
                         $jml_total = $jml_total + $gol[jml];
-			$np_total = $np_total + $gol[nilai];
-			
+      $np_total = $np_total + $gol[nilai];
+      
                          $mutasi_nilai_tambah+=$gol[mutasi_nilai_tambah];
                          $mutasi_nilai_kurang+=$gol[mutasi_nilai_kurang];
 
@@ -368,61 +368,61 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
                         
                         
                         $pp_total = $pp_total + $gol[pp];
-						$ap_total = $ap_total + $gol[ap];
-						$nb_total = $nb_total + $gol[nb];
+            $ap_total = $ap_total + $gol[ap];
+            $nb_total = $nb_total + $gol[nb];
 
-						$jml_total_akhir += $gol[jml_akhir];
-						$np_total_akhir += $gol[nilai_akhir];
-						
-						$pp_total_akhir += $gol[pp_akhir];
-						$ap_total_akhir += $gol[ap_akhir];
-						$nb_total_akhir += $gol[nb_akhir];
-		
-		$body.="<tr>
-					<td style=\"font-weight: bold;\">{$gol[Kelompok]}</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td style=\"font-weight: bold;\">{$gol[Uraian]}</td>
-					<td style=\"text-align: center; font-weight: bold;\">{$gol[jml]}</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nilai],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[pp],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[ap],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nb],2,",",".")."</td> 
+            $jml_total_akhir += $gol[jml_akhir];
+            $np_total_akhir += $gol[nilai_akhir];
+            
+            $pp_total_akhir += $gol[pp_akhir];
+            $ap_total_akhir += $gol[ap_akhir];
+            $nb_total_akhir += $gol[nb_akhir];
+    
+    $body.="<tr>
+          <td style=\"font-weight: bold;\">{$gol[Kelompok]}</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td style=\"font-weight: bold;\">{$gol[Uraian]}</td>
+          <td style=\"text-align: center; font-weight: bold;\">{$gol[jml]}</td>
+          <td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nilai],2,",",".")."</td>
+          <td style=\"font-weight: bold; text-align: right;\">".number_format($gol[pp],2,",",".")."</td>
+          <td style=\"font-weight: bold; text-align: right;\">".number_format($gol[ap],2,",",".")."</td>
+          <td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nb],2,",",".")."</td> 
                                         
                                         <td style=\"text-align: center; font-weight: bold;\">".number_format($gol[mutasi_nilai_kurang],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[mutasi_nilai_tambah],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[mutasi_ap_kurang],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[mutasi_ap_tambah],2,",",".")."</td>
+          <td style=\"font-weight: bold; text-align: right;\">".number_format($gol[mutasi_nilai_tambah],2,",",".")."</td>
+          <td style=\"font-weight: bold; text-align: right;\">".number_format($gol[mutasi_ap_kurang],2,",",".")."</td>
+          <td style=\"font-weight: bold; text-align: right;\">".number_format($gol[mutasi_ap_tambah],2,",",".")."</td>
                                         
                                          <td style=\"font-weight: bold; text-align: right;\">".number_format($bp,2,",",".")."</td>
-					
+          
                                         <td style=\"text-align: center; font-weight: bold;\">{$gol[jml_akhir]}</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nilai_akhir],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[pp_akhir],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[ap_akhir],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nb_akhir],2,",",".")."</td> 
-				</tr>";	
-				
-			foreach($gol['Bidang'] as $bidang)
-			{	
-			   if($bidang[ap]==""||$bidang[ap]==0)
-					$bidang[nb]=$bidang[nilai];
+          <td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nilai_akhir],2,",",".")."</td>
+          <td style=\"font-weight: bold; text-align: right;\">".number_format($gol[pp_akhir],2,",",".")."</td>
+          <td style=\"font-weight: bold; text-align: right;\">".number_format($gol[ap_akhir],2,",",".")."</td>
+          <td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nb_akhir],2,",",".")."</td> 
+        </tr>"; 
+        
+      foreach($gol['Bidang'] as $bidang)
+      { 
+         if($bidang[ap]==""||$bidang[ap]==0)
+          $bidang[nb]=$bidang[nilai];
 
                            $bp_bidang=0;
                           // $bp_bidang=$bidang[ap_akhir]-$bidang[ap_awal]-$bidang[mutasi_ap_tambah]+$bidang[mutasi_ap_kurang];
                             $bp_bidang=$bidang[bp];
                            
-				if($bidang[ap_akhir]==""||$bidang[ap_akhir]==0)
-					$bidang[nb_akhir]=$bidang[nilai_akhir];
-					$body.="<tr>
-								<td>&nbsp;</td>
-								<td style=\"font-weight: bold;\">{$bidang[Kelompok]}</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td style=\"font-weight: bold;\">{$bidang[Uraian]}</td>
+        if($bidang[ap_akhir]==""||$bidang[ap_akhir]==0)
+          $bidang[nb_akhir]=$bidang[nilai_akhir];
+          $body.="<tr>
+                <td>&nbsp;</td>
+                <td style=\"font-weight: bold;\">{$bidang[Kelompok]}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td style=\"font-weight: bold;\">{$bidang[Uraian]}</td>
                                 <td style=\"text-align: center; font-weight: bold;\">{$bidang[jml]}</td>
                                 <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nilai],2,",",".")."</td>
                                 <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[pp],2,",",".")."</td>
@@ -431,191 +431,191 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
                                     
                                 <td style=\"text-align: center; font-weight: bold;\">".number_format($bidang[mutasi_nilai_kurang],2,",",".")."</td>
                                 <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[mutasi_nilai_tambah],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[mutasi_ap_kurang],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[mutasi_ap_tambah],2,",",".")."</td>
-				
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[mutasi_ap_kurang],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[mutasi_ap_tambah],2,",",".")."</td>
+        
                                 <td style=\"text-align: center; font-weight: bold;\">".number_format($bp_bidang,2,",",".")."</td>
                                 
                                 <td style=\"text-align: center; font-weight: bold;\">{$bidang[jml_akhir]}</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nilai_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[pp_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[ap_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nb_akhir],2,",",".")."</td> 
-							</tr>";	
-				foreach($bidang['Kel'] as $Kelompok)
-				{	
-				   if($Kelompok[ap]==""||$Kelompok[ap]==0)
-							$Kelompok[nb]=$Kelompok[nilai];
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nilai_akhir],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[pp_akhir],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[ap_akhir],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nb_akhir],2,",",".")."</td> 
+              </tr>"; 
+        foreach($bidang['Kel'] as $Kelompok)
+        { 
+           if($Kelompok[ap]==""||$Kelompok[ap]==0)
+              $Kelompok[nb]=$Kelompok[nilai];
 
-					if($Kelompok[ap_akhir]==""||$Kelompok[ap_akhir]==0)
-							$Kelompok[nb_akhir]=$Kelompok[nilai_akhir];	
+          if($Kelompok[ap_akhir]==""||$Kelompok[ap_akhir]==0)
+              $Kelompok[nb_akhir]=$Kelompok[nilai_akhir]; 
 
                                         $bp_kelompok=0;
                                         //$bp_kelompok=$Kelompok[ap_akhir]-$Kelompok[ap_awal]-$Kelompok[mutasi_ap_tambah]+$Kelompok[mutasi_ap_kurang];
                                         $bp_kelompok=$Kelompok[bp];
                                         
-					$body.="<tr>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>{$Kelompok[Kelompok]}</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>{$Kelompok[Uraian]}</td>
+          $body.="<tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>{$Kelompok[Kelompok]}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>{$Kelompok[Uraian]}</td>
                                 <td style=\"text-align: center;\">{$Kelompok[jml]}</td>
-								<td style=\"text-align: right;\">".number_format($Kelompok[nilai],2,",",".")."</td>
-								<td style=\"text-align: right;\">".number_format($Kelompok[pp],2,",",".")."</td>
-								<td style=\"text-align: right;\">".number_format($Kelompok[ap],2,",",".")."</td>
-								<td style=\"text-align: right;\">".number_format($Kelompok[nb],2,",",".")."</td>
-		   	        <td style=\"text-align: center; font-weight: bold;\">".number_format($Kelompok[mutasi_nilai_kurang],2,",",".")."</td>
+                <td style=\"text-align: right;\">".number_format($Kelompok[nilai],2,",",".")."</td>
+                <td style=\"text-align: right;\">".number_format($Kelompok[pp],2,",",".")."</td>
+                <td style=\"text-align: right;\">".number_format($Kelompok[ap],2,",",".")."</td>
+                <td style=\"text-align: right;\">".number_format($Kelompok[nb],2,",",".")."</td>
+                <td style=\"text-align: center; font-weight: bold;\">".number_format($Kelompok[mutasi_nilai_kurang],2,",",".")."</td>
                                 <td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[mutasi_nilai_tambah],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[mutasi_ap_kurang],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[mutasi_ap_tambah],2,",",".")."</td>
-					
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[mutasi_ap_kurang],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[mutasi_ap_tambah],2,",",".")."</td>
+          
                                 <td style=\"text-align: center; font-weight: bold;\">".number_format($bp_kelompok,2,",",".")."</td>
 
                                 <td style=\"text-align: center; font-weight: bold;\">{$Kelompok[jml_akhir]}</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[nilai_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[pp_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[ap_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[nb_akhir],2,",",".")."</td> 
-						
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[nilai_akhir],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[pp_akhir],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[ap_akhir],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[nb_akhir],2,",",".")."</td> 
+            
                                         </tr>";
-					foreach($Kelompok['Sub'] as $Sub)
-					{	
-						if($Sub[ap]==""||$Sub[ap]==0)
-							$Sub[nb]=$Sub[nilai];
+          foreach($Kelompok['Sub'] as $Sub)
+          { 
+            if($Sub[ap]==""||$Sub[ap]==0)
+              $Sub[nb]=$Sub[nilai];
 
-						if($Sub[ap_akhir]==""||$Sub[ap_akhir]==0)
-							$Sub[nb_akhir]=$Sub[nilai_akhir];
+            if($Sub[ap_akhir]==""||$Sub[ap_akhir]==0)
+              $Sub[nb_akhir]=$Sub[nilai_akhir];
 
                                                 $bp_sub=0;
                                                 //$bp_sub=$Sub[ap_akhir]-$Sub[ap_awal]-$Sub[mutasi_ap_tambah]+$Sub[mutasi_ap_kurang];
                                                 $bp_sub=$Sub[bp];
                                                 
-							$body.="<tr>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-										<td>{$Sub[Kelompok]}</td>
-										<td>&nbsp;</td>
-										<td>{$Sub[Uraian]}</td>
-										<td style=\"text-align: center;\">{$Sub[jml]}</td>
-										<td style=\"text-align: right;\">".number_format($Sub[nilai],2,",",".")."</td>
-										<td style=\"text-align: right;\">".number_format($Sub[pp],2,",",".")."</td>
-										<td style=\"text-align: right;\">".number_format($Sub[ap],2,",",".")."</td>
-										<td style=\"text-align: right;\">".number_format($Sub[nb],2,",",".")."</td>
+              $body.="<tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>{$Sub[Kelompok]}</td>
+                    <td>&nbsp;</td>
+                    <td>{$Sub[Uraian]}</td>
+                    <td style=\"text-align: center;\">{$Sub[jml]}</td>
+                    <td style=\"text-align: right;\">".number_format($Sub[nilai],2,",",".")."</td>
+                    <td style=\"text-align: right;\">".number_format($Sub[pp],2,",",".")."</td>
+                    <td style=\"text-align: right;\">".number_format($Sub[ap],2,",",".")."</td>
+                    <td style=\"text-align: right;\">".number_format($Sub[nb],2,",",".")."</td>
                                                                                     
                                 <td style=\"text-align: center; font-weight: bold;\">".number_format($Sub[mutasi_nilai_kurang],2,",",".")."</td>
                                 <td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[mutasi_nilai_tambah],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[mutasi_ap_kurang],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[mutasi_ap_tambah],2,",",".")."</td>
-				
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[mutasi_ap_kurang],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[mutasi_ap_tambah],2,",",".")."</td>
+        
                                 <td style=\"text-align: center; font-weight: bold;\">".number_format($bp_sub,2,",",".")."</td>
                                     
                                 <td style=\"text-align: center; font-weight: bold;\">{$Sub[jml_akhir]}</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[nilai_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[pp_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[ap_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[nb_akhir],2,",",".")."</td> 
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[nilai_akhir],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[pp_akhir],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[ap_akhir],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[nb_akhir],2,",",".")."</td> 
 
-									</tr>";
-						foreach($Sub['SubSub'] as $SubSub)
-						{	 
-							if($SubSub[ap]==""||$SubSub[ap]==0)
-								$SubSub[nb]=$SubSub[nilai];
+                  </tr>";
+            foreach($Sub['SubSub'] as $SubSub)
+            {  
+              if($SubSub[ap]==""||$SubSub[ap]==0)
+                $SubSub[nb]=$SubSub[nilai];
 
-							if($SubSub[ap_akhir]==""||$SubSub[ap_akhir]==0)
-								$SubSub[nb_akhir]=$SubSub[nilai_akhir];
+              if($SubSub[ap_akhir]==""||$SubSub[ap_akhir]==0)
+                $SubSub[nb_akhir]=$SubSub[nilai_akhir];
                                                         
                                                         $bp_subsub=0;
                                                         //$bp_subsub=$SubSub[ap_akhir]-$SubSub[ap_awal]-$SubSub[mutasi_ap_tambah]+$SubSub[mutasi_ap_kurang];
                                                        $bp_subsub=$SubSub[bp];
                                                         //$SubSub[mutasi_ap_tambah]-$SubSub[mutasi_ap_kurang];
                                                         
-								$body.="<tr>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>&nbsp;</td>
-											<td>{$SubSub[Kelompok]}</td>
-											<td>{$SubSub[Uraian]}</td>
+                $body.="<tr>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>{$SubSub[Kelompok]}</td>
+                      <td>{$SubSub[Uraian]}</td>
                                             <td style=\"text-align: center;\">{$SubSub[jml]}</td>
-											<td style=\"text-align: right;\">".number_format($SubSub[nilai],2,",",".")."</td>
-											<td style=\"text-align: right;\">".number_format($SubSub[pp],2,",",".")."</td>
-											<td style=\"text-align: right;\">".number_format($SubSub[ap],2,",",".")."</td>
-											<td style=\"text-align: right;\">".number_format($SubSub[nb],2,",",".")."</td>
+                      <td style=\"text-align: right;\">".number_format($SubSub[nilai],2,",",".")."</td>
+                      <td style=\"text-align: right;\">".number_format($SubSub[pp],2,",",".")."</td>
+                      <td style=\"text-align: right;\">".number_format($SubSub[ap],2,",",".")."</td>
+                      <td style=\"text-align: right;\">".number_format($SubSub[nb],2,",",".")."</td>
                                                                                             
 <td style=\"text-align: center; font-weight: bold;\">".number_format($SubSub[mutasi_nilai_kurang],2,",",".")."</td>
                                 <td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[mutasi_nilai_tambah],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[mutasi_ap_kurang],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[mutasi_ap_tambah],2,",",".")."</td>
-				
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[mutasi_ap_kurang],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[mutasi_ap_tambah],2,",",".")."</td>
+        
                                 <td style=\"font-weight: bold; text-align: right;\">".number_format($bp_subsub,2,",",".")."</td>
     
 
                                 <td style=\"text-align: center; font-weight: bold;\">{$SubSub[jml_akhir]}</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[nilai_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[pp_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[ap_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[nb_akhir],2,",",".")."</td> 
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[nilai_akhir],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[pp_akhir],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[ap_akhir],2,",",".")."</td>
+        <td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[nb_akhir],2,",",".")."</td> 
 
-										</tr>";
-						}
-					}
-				}
-			
-			}
-		}
+                    </tr>";
+            }
+          }
+        }
+      
+      }
+    }
                 $i++;
-	
-	}
-	
-	
-	if($i == $hit_loop){
-		$foot="<tr>
-				<td colspan = \"6\" style=\"text-align: center; font-weight: bold;\">Total</td>
-				<td style=\"text-align: center; font-weight: bold;\">".number_format($jml_total,0,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($np_total,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($pp_total,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($ap_total,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($nb_total,2,",",".")."</td>
+  
+  }
+  
+  
+  if($i == $hit_loop){
+    $foot="<tr>
+        <td colspan = \"6\" style=\"text-align: center; font-weight: bold;\">Total</td>
+        <td style=\"text-align: center; font-weight: bold;\">".number_format($jml_total,0,",",".")."</td>
+        <td style=\"text-align: right; font-weight: bold;\">".number_format($np_total,2,",",".")."</td>
+        <td style=\"text-align: right; font-weight: bold;\">".number_format($pp_total,2,",",".")."</td>
+        <td style=\"text-align: right; font-weight: bold;\">".number_format($ap_total,2,",",".")."</td>
+        <td style=\"text-align: right; font-weight: bold;\">".number_format($nb_total,2,",",".")."</td>
 
-				<td style=\"text-align: center; font-weight: bold;\">".number_format($mutasi_nilai_kurang,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($mutasi_nilai_tambah,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($mutasi_ap_kurang,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($mutasi_ap_tambah,2,",",".")."</td>
+        <td style=\"text-align: center; font-weight: bold;\">".number_format($mutasi_nilai_kurang,2,",",".")."</td>
+        <td style=\"text-align: right; font-weight: bold;\">".number_format($mutasi_nilai_tambah,2,",",".")."</td>
+        <td style=\"text-align: right; font-weight: bold;\">".number_format($mutasi_ap_kurang,2,",",".")."</td>
+        <td style=\"text-align: right; font-weight: bold;\">".number_format($mutasi_ap_tambah,2,",",".")."</td>
 
                                 <td style=\"text-align: center; font-weight: bold;\">".number_format($bp_total,2,",",".")."</td>
     
-				<td style=\"text-align: center; font-weight: bold;\">".number_format($jml_total_akhir,0,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($np_total_akhir,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($pp_total_akhir,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($ap_total_akhir,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($nb_total_akhir,2,",",".")."</td>
-			</tr>
-		</table>";
-	}else{
-		$foot= '';
-	}
-	$html =$head.$body.$foot;
-	
+        <td style=\"text-align: center; font-weight: bold;\">".number_format($jml_total_akhir,0,",",".")."</td>
+        <td style=\"text-align: right; font-weight: bold;\">".number_format($np_total_akhir,2,",",".")."</td>
+        <td style=\"text-align: right; font-weight: bold;\">".number_format($pp_total_akhir,2,",",".")."</td>
+        <td style=\"text-align: right; font-weight: bold;\">".number_format($ap_total_akhir,2,",",".")."</td>
+        <td style=\"text-align: right; font-weight: bold;\">".number_format($nb_total_akhir,2,",",".")."</td>
+      </tr>
+    </table>";
+  }else{
+    $foot= '';
+  }
+  $html =$head.$body.$foot;
+  
   
 //}
 
 function subsub_awal($kode,$gol,$ps,$pt) {
 $param_satker = $ps;
 $splitKodeSatker = explode ('.',$param_satker);
-if(count($splitKodeSatker) == 4){	
-	$paramSatker = "kodeSatker = '$param_satker'";
+if(count($splitKodeSatker) == 4){ 
+  $paramSatker = "kodeSatker = '$param_satker'";
 }else{
-	$paramSatker = "kodeSatker like '$param_satker%'";
+  $paramSatker = "kodeSatker like '$param_satker%'";
 }
 $param_tgl = $pt;   
 if($gol == 'mesin_ori'){
-	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
-				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=1000000 or kodeKa=1)))
-				 and $paramSatker";
+  $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi not in (3,4)  and 
+        ( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
+          (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=1000000 or kodeKa=1)))
+         and $paramSatker";
  
       $sql = "select  kodeKelompok as kelompok,Aset_ID,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
@@ -629,12 +629,12 @@ if($gol == 'mesin_ori'){
                  $param_where    
                order by kelompok asc";
 }elseif($gol == 'bangunan_ori'){
-	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
-				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=20000000  or kodeKa=1)))
-				 and $paramSatker";
-	 
-	$sql = "select  kodeKelompok as kelompok,Aset_ID,
+  $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi not in (3,4)  and 
+        ( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
+          (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=20000000  or kodeKa=1)))
+         and $paramSatker";
+   
+  $sql = "select  kodeKelompok as kelompok,Aset_ID,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
                PenyusutanPerTahun as PP,Tahun as Tahun, noRegister as noRegister,
                AkumulasiPenyusutan as AP, NilaiBuku as NB,
@@ -646,22 +646,22 @@ if($gol == 'mesin_ori'){
                  $param_where    
                order by kelompok asc";
 }else{
-	if($gol!="tanahView")
-		  $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
-					 and TglPerolehan <= '$param_tgl' 
-					 and TglPembukuan <='$param_tgl' 
-					 and kodeLokasi like '12%' 
-					 and kondisi != '3'					 
-					 and $paramSatker";
-		else
-		    $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
-					 and TglPerolehan <= '$param_tgl' 
-					 and TglPembukuan <='$param_tgl' 
-					 and kodeLokasi like '12%' 
-					 and $paramSatker";
-	 
-	 if($gol == 'jaringan_ori'){
-		$sql = "select  kodeKelompok as kelompok,Aset_ID,
+  if($gol!="tanahView")
+      $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
+           and TglPerolehan <= '$param_tgl' 
+           and TglPembukuan <='$param_tgl' 
+           and kodeLokasi like '12%' 
+           and kondisi not in (3,4)          
+           and $paramSatker";
+    else
+        $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
+           and TglPerolehan <= '$param_tgl' 
+           and TglPembukuan <='$param_tgl' 
+           and kodeLokasi like '12%' 
+           and $paramSatker";
+   
+   if($gol == 'jaringan_ori'){
+    $sql = "select  kodeKelompok as kelompok,Aset_ID,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
                PenyusutanPerTahun as PP,Tahun as Tahun, noRegister as noRegister,
                AkumulasiPenyusutan as AP, NilaiBuku as NB,
@@ -672,8 +672,8 @@ if($gol == 'mesin_ori'){
                 where kodeKelompok like '$kode_sub%' and
                  $param_where    
                order by kelompok asc";
-	 }else{
-		$sql = "select  kodeKelompok as kelompok,Tahun as Tahun, noRegister as noRegister,Aset_ID,
+   }else{
+    $sql = "select  kodeKelompok as kelompok,Tahun as Tahun, noRegister as noRegister,Aset_ID,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
               (select Uraian from kelompok 
                where kode= kodeKelompok 
@@ -682,9 +682,9 @@ if($gol == 'mesin_ori'){
                 where kodeKelompok like '$kode_sub%' and
                  $param_where    
                order by kelompok asc";
-	 }
+   }
 }
-	 //echo "$gol == $sql";
+   //echo "$gol == $sql";
      $resultparentSubSub = mysql_query($sql) or die(mysql_error());
      $data = array();
      while ($data_subsub = mysql_fetch_array($resultparentSubSub,MYSQL_ASSOC)) {
@@ -697,18 +697,18 @@ if($gol == 'mesin_ori'){
 function subsub($kode,$gol,$ps,$pt) {
 $param_satker = $ps;
 $splitKodeSatker = explode ('.',$param_satker);
-if(count($splitKodeSatker) == 4){	
-	$paramSatker = "kodeSatker = '$param_satker'";
+if(count($splitKodeSatker) == 4){ 
+  $paramSatker = "kodeSatker = '$param_satker'";
 }else{
-	$paramSatker = "kodeSatker like '$param_satker%'";
+  $paramSatker = "kodeSatker like '$param_satker%'";
 }
 $param_tgl = $pt;   
 if($gol == 'mesin_ori'){
     $gol="mesin";
-	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
-				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=1000000 or kodeKa=1)))
-				 and $paramSatker";
+  $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi not in (3,4)  and 
+        ( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
+          (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=1000000 or kodeKa=1)))
+         and $paramSatker";
  
       $sql = "select  kodeKelompok as kelompok,Aset_ID,TahunPenyusutan,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
@@ -723,12 +723,12 @@ if($gol == 'mesin_ori'){
                order by kelompok asc";
 }elseif($gol == 'bangunan_ori'){
     $gol="bangunan";
-	$param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
-				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=20000000  or kodeKa=1)))
-				 and $paramSatker";
-	 
-	$sql = "select  kodeKelompok as kelompok,Aset_ID,TahunPenyusutan,
+  $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi not in (3,4)  and 
+        ( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
+          (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=20000000  or kodeKa=1)))
+         and $paramSatker";
+   
+  $sql = "select  kodeKelompok as kelompok,Aset_ID,TahunPenyusutan,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
                PenyusutanPerTahun as PP,Tahun as Tahun, noRegister as noRegister,
                AkumulasiPenyusutan as AP, NilaiBuku as NB,
@@ -740,24 +740,24 @@ if($gol == 'mesin_ori'){
                  $param_where    
                order by kelompok asc";
 }else{
-	if($gol!="tanahView")
-		  $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
-					 and TglPerolehan <= '$param_tgl' 
-					 and TglPembukuan <='$param_tgl' 
-					 and kodeLokasi like '12%' 
-					 and kondisi != '3'					 
-					 and $paramSatker";
-		else
-		    $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
-					 and TglPerolehan <= '$param_tgl' 
-					 and TglPembukuan <='$param_tgl' 
-					 and kodeLokasi like '12%' 
-					 and kondisi != '3'	
-					 and $paramSatker";
-	 
-	 if($gol == 'jaringan_ori'){
+  if($gol!="tanahView")
+      $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
+           and TglPerolehan <= '$param_tgl' 
+           and TglPembukuan <='$param_tgl' 
+           and kodeLokasi like '12%' 
+           and kondisi not in (3,4)          
+           and $paramSatker";
+    else
+        $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
+           and TglPerolehan <= '$param_tgl' 
+           and TglPembukuan <='$param_tgl' 
+           and kodeLokasi like '12%' 
+           and kondisi not in (3,4) 
+           and $paramSatker";
+   
+   if($gol == 'jaringan_ori'){
              $gol="jaringan";
-		$sql = "select  kodeKelompok as kelompok,Aset_ID,TahunPenyusutan,
+    $sql = "select  kodeKelompok as kelompok,Aset_ID,TahunPenyusutan,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
                PenyusutanPerTahun as PP,Tahun as Tahun, noRegister as noRegister,
                AkumulasiPenyusutan as AP, NilaiBuku as NB,
@@ -768,14 +768,14 @@ if($gol == 'mesin_ori'){
                 where kodeKelompok like '$kode_sub%' and
                  $param_where    
                order by kelompok asc";
-	 }else{
+   }else{
              if($gol=="kdp_ori")
                  $gol="kdp";
              else if($gol=="tanahView")
                  $gol="tanah";
              else  $gol="asetlain";
              
-		$sql = "select  kodeKelompok as kelompok,Tahun as Tahun, noRegister as noRegister,Aset_ID,
+    $sql = "select  kodeKelompok as kelompok,Tahun as Tahun, noRegister as noRegister,Aset_ID,
                NilaiPerolehan as nilai,Status_Validasi_barang as jml,
                 (select Uraian from kelompok 
                where kode= kodeKelompok 
@@ -784,9 +784,9 @@ if($gol == 'mesin_ori'){
                 where kodeKelompok like '$kode_sub%' and
                  $param_where    
                order by kelompok asc";
-	 }
+   }
 }
-	 
+   
 //echo "$gol == $sql";
      $resultparentSubSub = mysql_query($sql) or die(mysql_error());
      $data = array();
@@ -800,10 +800,10 @@ if($gol == 'mesin_ori'){
 function subsub_hapus($kode,$gol,$ps,$pt,$tgl_pem) {
 $param_satker = $ps;
 $splitKodeSatker = explode ('.',$param_satker);
-if(count($splitKodeSatker) == 4){	
-	$paramSatker = "m.kodeSatker = '$param_satker'";
+if(count($splitKodeSatker) == 4){ 
+  $paramSatker = "m.kodeSatker = '$param_satker'";
 }else{
-	$paramSatker = "m.kodeSatker like '$param_satker%'";
+  $paramSatker = "m.kodeSatker like '$param_satker%'";
 }
 $param_tgl = $pt;   
 if($gol == 'mesin_ori'){
@@ -811,10 +811,10 @@ if($gol == 'mesin_ori'){
     //cek kapitalisasi
     $kapitalisasi_kondisi=" and m.Aset_ID not in(select Aset_ID from log_$gol where  `action` LIKE 'Sukses kapitalisasi Mutasi%') ";
 
-    $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi != '3'  and 
-				( (m.TglPerolehan < '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and m.kodeKa=1) or 
-				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl'  and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=1000000 or m.kodeKa=1)))
-				 and $paramSatker";
+    $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi not in (3,4)  and 
+        ( (m.TglPerolehan < '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and m.kodeKa=1) or 
+          (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl'  and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=1000000 or m.kodeKa=1)))
+         and $paramSatker";
         
      
         
@@ -836,12 +836,12 @@ if($gol == 'mesin_ori'){
      //cek kapitalisasi
     $kapitalisasi_kondisi=" and m.Aset_ID not in(select Aset_ID from log_$gol where  `action` LIKE 'Sukses kapitalisasi Mutasi%') ";
 
-	$param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi != '3'  and 
-				( (m.TglPerolehan < '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and m.kodeKa=1) or 
-				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=20000000  or m.kodeKa=1)))
-				 and $paramSatker";
-	 
-	$sql = "select  m.kodeKelompok as kelompok,m.Aset_ID,m.TahunPenyusutan,
+  $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi not in (3,4)  and 
+        ( (m.TglPerolehan < '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and m.kodeKa=1) or 
+          (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=20000000  or m.kodeKa=1)))
+         and $paramSatker";
+   
+  $sql = "select  m.kodeKelompok as kelompok,m.Aset_ID,m.TahunPenyusutan,
                l.NilaiPerolehan as nilai,m.Status_Validasi_barang as jml,
                m.PenyusutanPerTahun as PP,m.Tahun as Tahun, m.noRegister as noRegister,
                m.AkumulasiPenyusutan as AP, m.NilaiBuku as NB,
@@ -854,27 +854,27 @@ if($gol == 'mesin_ori'){
                  $param_where   $kapitalisasi_kondisi 
                order by kelompok asc";
 }else{
-	if($gol!="tanahView")
-		  $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1  
-					 and m.TglPerolehan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and l.kd_riwayat=3 and `action` like 'Sukses Mutasi%' 
-					 and m.TglPembukuan <='$param_tgl' 
-					 and m.kodeLokasi like '12%' 
-					 and m.kondisi != '3'					 
-					 and $paramSatker";
-		else
-		    $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1  
-					 and m.TglPerolehan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and l.kd_riwayat=3 and `action` like 'Sukses Mutasi%' 
-					 and m.TglPembukuan <='$param_tgl' 
-					 and m.kodeLokasi like '12%' 
-					 and $paramSatker";
-	 
-	 if($gol == 'jaringan_ori'){
+  if($gol!="tanahView")
+      $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1  
+           and m.TglPerolehan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and l.kd_riwayat=3 and `action` like 'Sukses Mutasi%' 
+           and m.TglPembukuan <='$param_tgl' 
+           and m.kodeLokasi like '12%' 
+           and m.kondisi not in (3,4)          
+           and $paramSatker";
+    else
+        $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1  
+           and m.TglPerolehan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and l.kd_riwayat=3 and `action` like 'Sukses Mutasi%' 
+           and m.TglPembukuan <='$param_tgl' 
+           and m.kodeLokasi like '12%' 
+           and $paramSatker";
+   
+   if($gol == 'jaringan_ori'){
              
              $gol="jaringan";
               //cek kapitalisasi
     $kapitalisasi_kondisi=" and m.Aset_ID not in(select Aset_ID from log_$gol where  `action` LIKE 'Sukses kapitalisasi Mutasi%') ";
 
-		$sql = "select  m.kodeKelompok as kelompok,m.Aset_ID,m.TahunPenyusutan,
+    $sql = "select  m.kodeKelompok as kelompok,m.Aset_ID,m.TahunPenyusutan,
                l.NilaiPerolehan as nilai,m.Status_Validasi_barang as jml,
                m.PenyusutanPerTahun as PP,m.Tahun as Tahun, m.noRegister as noRegister,
                m.AkumulasiPenyusutan as AP, m.NilaiBuku as NB,
@@ -886,7 +886,7 @@ if($gol == 'mesin_ori'){
                 where m.kodeKelompok like '$kode_sub%' and
                  $param_where    $kapitalisasi_kondisi
                order by kelompok asc";
-	 }else{
+   }else{
              if($gol=="kdp_ori")
                  $gol="kdp";
              else if($gol=="tanahView")
@@ -896,7 +896,7 @@ if($gol == 'mesin_ori'){
                  //cek kapitalisasi
     $kapitalisasi_kondisi=" and m.Aset_ID not in(select Aset_ID from log_$gol where  `action` LIKE 'Sukses kapitalisasi Mutasi%') ";
 
-		$sql = "select  m.kodeKelompok as kelompok,m.Tahun as Tahun, m.noRegister as noRegister,
+    $sql = "select  m.kodeKelompok as kelompok,m.Tahun as Tahun, m.noRegister as noRegister,
                     m.Aset_ID,
                m.NilaiPerolehan as nilai,m.Status_Validasi_barang as jml,
                 (select Uraian from kelompok 
@@ -907,9 +907,9 @@ if($gol == 'mesin_ori'){
                 where m.kodeKelompok like '$kode_sub%' and
                  $param_where    $kapitalisasi_kondisi
                order by kelompok asc";
-	 }
+   }
 }
-	 
+   
 //echo "$gol == $sql";
      $resultparentSubSub = mysql_query($sql) or die(mysql_error());
      $data = array();
@@ -921,8 +921,8 @@ if($gol == 'mesin_ori'){
 
 // exit;
 if($tipe=="3"){
-	echo $serviceJson;
-	exit;
+  echo $serviceJson;
+  exit;
 }elseif($tipe!="2"){
 $REPORT->show_status_download_kib();
 $mpdf=new mPDF('','','','',15,15,16,16,9,9,'L');
@@ -937,16 +937,16 @@ $mpdf->hyphenate = true;
 //print output pdf
 $mpdf->WriteHTML($html);
 $count = count($html);
-	for ($i = 0; $i < $count; $i++) {
-		 if($i==0)
-			  $mpdf->WriteHTML($html[$i]);
-		 else
-		 {
-			   $mpdf->AddPage('L','','','','',15,15,16,16,9,9);
-			   $mpdf->WriteHTML($html[$i]);
-			   
-		 }
-	}
+  for ($i = 0; $i < $count; $i++) {
+     if($i==0)
+        $mpdf->WriteHTML($html[$i]);
+     else
+     {
+         $mpdf->AddPage('L','','','','',15,15,16,16,9,9);
+         $mpdf->WriteHTML($html[$i]);
+         
+     }
+  }
 $waktu=date("d-m-y_h-i-s");
 $namafile="$path/report/output/Rekapitulasi-Detail-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca-$waktu.pdf";
 $mpdf->Output("$namafile",'F');
@@ -956,11 +956,11 @@ exit;
 }
 else
 {
-	$waktu=date("d-m-y_h:i:s");
-	$filename ="Rekapitulasi-Detail-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca-$waktu.xls";
-	header('Content-type: application/ms-excel');
-	header('Content-Disposition: attachment; filename='.$filename);
-	echo $html; 
+  $waktu=date("d-m-y_h:i:s");
+  $filename ="Rekapitulasi-Detail-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca-$waktu.xls";
+  header('Content-type: application/ms-excel');
+  header('Content-Disposition: attachment; filename='.$filename);
+  echo $html; 
 }
 
 function group_data($data_awal_perolehan,$data_akhir_perolehan,$data_hapus_awal,$tgl_perubahan_aset){
@@ -1234,15 +1234,15 @@ foreach ($data_akhir_alone as $tipe => $value) {
     //echo "$Aset_ID||==$tahun_aset==$TahunPenyusutan <br/>";
 
     if($tahun_aset==$TahunPenyusutan)
-	{
+  {
     //echo "masuk===$Aset_ID | Thn=$Tahun |TahunPenyusutan=$TahunPenyusutan|$nb_sblm<br/>";
-		if($nb_sblm!=0)
-		{	$data_akhir[$tipe]['bp']=$value['PP'];//$bp;//$value['AP'];
+    if($nb_sblm!=0)
+    { $data_akhir[$tipe]['bp']=$value['PP'];//$bp;//$value['AP'];
       //echo "bp={$value['PP']}<br/>";
     }
-		else
-			$data_akhir[$tipe]['bp']=0;
-	}        
+    else
+      $data_akhir[$tipe]['bp']=0;
+  }        
     else{
         if($nb_sblm!=0)
             $data_akhir[$tipe]['bp']=0;
@@ -1566,21 +1566,21 @@ function get_nb_penyusutan_sblm($Aset_ID,$TahunPenyusutan,$kelompok){
     if($gol[0]!="2" && $gol[0]!="3" && $gol[0]!="4"){
         $NilaiBuku=0;
     }else{
-		    $TahunPenyusutan=$TahunPenyusutan-1;
-		    $query = "select NilaiBuku from $nama_log where TahunPenyusutan='$TahunPenyusutan' and "
-		        . "kd_riwayat in(50,51,52) and TglPerubahan!='0000-00-00 00:00:00' and TglPerubahan is not null "
-		        . " and Aset_ID='$Aset_ID' ";
+        $TahunPenyusutan=$TahunPenyusutan-1;
+        $query = "select NilaiBuku from $nama_log where TahunPenyusutan='$TahunPenyusutan' and "
+            . "kd_riwayat in(50,51,52) and TglPerubahan!='0000-00-00 00:00:00' and TglPerubahan is not null "
+            . " and Aset_ID='$Aset_ID' ";
 
-		   /* echo $query;
-		    echo "<br/>";*/
-		    $status = 0;
-		    $result = mysql_query($query) or die(mysql_error());
-		    $AkumulasiPenyusutan = 0;
-		    while ($row = mysql_fetch_array($result)) {
-		        $NilaiBuku = $row['NilaiBuku'];
-		     $status = 1;
-		    }
-	}
+       /* echo $query;
+        echo "<br/>";*/
+        $status = 0;
+        $result = mysql_query($query) or die(mysql_error());
+        $AkumulasiPenyusutan = 0;
+        while ($row = mysql_fetch_array($result)) {
+            $NilaiBuku = $row['NilaiBuku'];
+         $status = 1;
+        }
+  }
     
 
 
