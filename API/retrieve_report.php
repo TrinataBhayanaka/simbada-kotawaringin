@@ -99,15 +99,26 @@ class RETRIEVE_REPORT extends DB {
      }
      
      public function daftar_pengadaan_berdasarkan_skpd($skpd,$tglPerolehanAwal,$tglPerolehanAkhir){
-          $query="select K.Uraian, A.info,A.kodeKelompok,A.kodeSatker, A.noKontrak,A.StatusValidasi,"
+          /*$query="select K.Uraian, A.info,A.kodeKelompok,A.kodeSatker, A.noKontrak,A.StatusValidasi,"
                   . "  Sum(NilaiPerolehan) as Total,Sum(Kuantitas) as Jumlah,NilaiPerolehan as Satuan"
                   . "    from aset A  inner join kelompok K on K.Kode=A.kodeKelompok "
                   . "where A.kodeSatker like '$skpd%' and A.TglPerolehan>='$tglPerolehanAwal'"
                               . " and TglPerolehan<='$tglPerolehanAkhir'  and A.noKontrak is not null and A.StatusValidasi=1 "
-                              . " group by A.kodeSatker,A.kodeKelompok,A.noKontrak";
+                              . " group by A.kodeSatker,A.kodeKelompok,A.noKontrak";*/
+          
+          //custom kontrak aset baru                         
+          $query = "select K.Uraian, A.info,A.kodeKelompok,A.kodeSatker, A.noKontrak,A.StatusValidasi, Sum(NilaiPerolehan) as Total,
+                    Sum(Kuantitas) as Jumlah,NilaiPerolehan as Satuan from aset A 
+                      inner join kelompok K on K.Kode = A.kodeKelompok 
+                      inner join kontrak Ka on Ka.noKontrak = A.noKontrak
+                    where A.kodeSatker like '$skpd%' and A.TglPerolehan>='$tglPerolehanAwal' and TglPerolehan<='$tglPerolehanAkhir' 
+                          and A.noKontrak is not null and A.StatusValidasi=1 and Ka.n_status = 1 and Ka.tipeAset = 1
+                      group by A.kodeSatker,A.kodeKelompok,A.noKontrak";    
+                                          
          //echo $query;
+         //echo "<br>";
           $result = $this->query($query) or die($this->error());
-          $check = $this->num_rows($result);
+          //$check = $this->num_rows($result);
           while ($data = $this->fetch_array($result)) {
               
                list($tglKontrak,$keterangan,$nosp2d,$tglsp2d)=  $this->get_kontrak($data[noKontrak]);
@@ -123,13 +134,23 @@ class RETRIEVE_REPORT extends DB {
     }
 
     public function daftar_pengadaan_kapitalisasi_berdasarkan_skpd($skpd,$tglPerolehanAwal,$tglPerolehanAkhir){
-          $query="select K.Uraian, A.info,A.kodeKelompok,A.kodeSatker, A.noKontrak,A.StatusValidasi,"
+          /*$query="select K.Uraian, A.info,A.kodeKelompok,A.kodeSatker, A.noKontrak,A.StatusValidasi,"
                   . "  Sum(NilaiPerolehan) as Total,Sum(Kuantitas) as Jumlah,NilaiPerolehan as Satuan"
                   . "    from aset A  inner join kelompok K on K.Kode=A.kodeKelompok "
                   . "where A.kodeSatker like '$skpd%' and A.TglPerolehan>='$tglPerolehanAwal'"
                               . " and TglPerolehan<='$tglPerolehanAkhir'  and A.noKontrak is not null and A.StatusValidasi is null"
-                              . " group by A.kodeSatker,A.kodeKelompok,A.noKontrak";
-         //echo $query;
+                              . " group by A.kodeSatker,A.kodeKelompok,A.noKontrak";*/
+          //custom kontrak kapitalisasi                    
+          $query="select K.Uraian, A.info,A.kodeKelompok,A.kodeSatker, A.noKontrak,A.StatusValidasi, Sum(NilaiPerolehan) as Total,
+                  Sum(Kuantitas) as Jumlah,NilaiPerolehan as Satuan from aset A 
+                    inner join kelompok K on K.Kode=A.kodeKelompok 
+                    inner join kontrak Ka on Ka.noKontrak = A.noKontrak 
+                  where A.kodeSatker like '$skpd%' and ka.tglKontrak>='$tglPerolehanAwal' and ka.tglKontrak<='$tglPerolehanAkhir' 
+                  and A.noKontrak is not null and A.StatusValidasi is null 
+                  and Ka.n_status = 1 and Ka.tipeAset = 2 
+                    group by A.kodeSatker,A.kodeKelompok,A.noKontrak";                       
+          //echo $query;
+          //echo "<br>";
           $result = $this->query($query) or die($this->error());
           $check = $this->num_rows($result);
           while ($data = $this->fetch_array($result)) {
