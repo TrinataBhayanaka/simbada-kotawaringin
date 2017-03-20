@@ -36,7 +36,7 @@ $menu_id = 10;
 			$("select").select2({
 			});
 			   
-			$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen" ).datepicker({ format: 'yyyy-mm-dd' });
+			$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#datepicker" ).datepicker({ format: 'yyyy-mm-dd' });
 			$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#datepicker" ).mask('0000-00-00');
 		});	
 
@@ -106,6 +106,55 @@ $menu_id = 10;
 								</div>
 							</li>
 						</ul>
+
+<div id="tanah_bangunan" style="display:none">                                     
+                        <ul >
+                            <li>
+								<span class="span2">Data Tanah</span>
+								<button type="button" 
+                                      id="load-data-tanah" class="btn btn-info btn-lg" data-toggle="modal" 
+                                     data-target="#myModal">Open</button>
+                                 <input type="hidden" name="data_satker" id="data_satker" value="">
+                                 <input type="hidden" name="tanah_id" id="tanah_id" value="">
+
+							</li>
+                        </ul>
+                        <ul id="detail_tanah_bangunan" style="display:none">
+                        	<li>
+							    <span class="span2">Kelompok Tanah</span>
+                                <input type="text" name="kelompok_tanah" id="kelompok_tanah"
+                                	 value="" readonly/>
+
+							</li>
+                        </ul>
+                        <ul >
+                        	<li>
+							    <span class="span2">Luas Total (Tanah)</span>
+                                <input type="text" name="luas_total" id="luas_total"
+                                	 value="" />
+
+							</li>
+                        </ul>
+                        <ul >
+                        	<li>
+							    <span class="span2">Status Tanah</span>
+                                <select id="status_tanah" name="status_tanah" style="width:255px">
+									<option value="">--</option>
+									<option value="Tanah Milik Pemda">Tanah Milik Pemda</option>
+									<option value="Tanah Milik Negara">Tanah Milik Negara</option>
+									<option value="Tanah Milik Ulayat">Tanah Milik Negara</option>
+									<option value="Tanah Hak Guna Bangunan">Tanah Hak Guna Bangunan</option>
+									<option value="Tanah Hak Pakai">Tanah Hak Pakai</option>
+									<option value="Tanah Hak Pengelolaan">Tanah Hak Pengelolaan</option>
+									<option value="Tanah Hak Lainnya">Tanah Hak Lainnya</option>
+									
+								</select>
+
+							</li>
+                        </ul>
+
+
+</div>
 					</div>
 
 					<div style="height:5px;width:100%;clear:both"></div>
@@ -137,8 +186,10 @@ $menu_id = 10;
 							<li>
 								<span class="span2">Nilai Perolehan</span>
 								<!-- <input type="text" class="span3" name="NilaiPerolehan" id="total" value="<?=($kontrak[0]['tipeAset'] == 3)? $aset[0]['NilaiPerolehan'] : ''?>" readonly/> -->
-								<input type="text" class="span3" name="NilaiPerolehan" data-a-sign="Rp " data-a-dec="," data-a-sep="." id="total" value="<?=($kontrak[0]['tipeAset'] == 3)? $aset[0]['NilaiPerolehan'] : ''?>" readonly/>
-								<input type="hidden" name="NilaiPerolehan" id="nilaiPerolehan" value="<?=($kontrak[0]['tipeAset'] == 3)? $aset[0]['NilaiPerolehan'] : ''?>" >
+								<!--<input type="text" class="span3" name="NilaiPerolehan" data-a-sign="Rp " data-a-dec="," data-a-sep="." id="total" value="<?=($kontrak[0]['tipeAset'] == 3)? $aset[0]['NilaiPerolehan'] : ''?>" readonly/>
+								<input type="hidden" name="NilaiPerolehan" id="nilaiPerolehan" value="<?=($kontrak[0]['tipeAset'] == 3)? $aset[0]['NilaiPerolehan'] : ''?>" >-->
+
+								<input type="text" class="span3" name="tes" id="tes" value="<?=($kontrak[0]['tipeAset'] == 3)? $aset[0]['NilaiPerolehan'] : ''?>" readonly>
 							</li>
 							<li>
 								<span class="span2">Info</span>
@@ -147,6 +198,7 @@ $menu_id = 10;
 						</ul>
 							
 					</div>
+
 					<div class="detailLeft">
 						<ul class="tanah" style="display:none">
 							<li>
@@ -358,6 +410,8 @@ $menu_id = 10;
 								<input type="text" class="span3" name="LuasLantai" disabled/>
 							</li>
 						</ul>
+
+
 					</div>
 					<!-- hidden -->
 					<input type="hidden" name="UserNm" value="<?=$_SESSION['ses_uoperatorid']?>">
@@ -373,6 +427,51 @@ $menu_id = 10;
 					
 			
 		</form>
+                            <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog" style=" width: 90%;max-width:900px;left:40%">
+  <div class="modal-dialog modal-lg" >
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Data Tanah <p id="hasil_pilihan_tanah"></p></h4>
+      </div>
+      <div class="modal-body">
+          <table cellpadding="0" cellspacing="0" border="0" class="display table-checkable" id="daftar_tanah_bangunan">
+				<thead>
+					<tr>
+						
+						<th>Pilihan</th>
+                                                <th>No Register</th>
+						<th>Kode Kelompok</th>
+						<th>Satker</th>
+						<th>Tgl Perolehan</th>
+						<th>Nilai Perolehan</th>
+						<th>Luas Total</th>
+					</tr>
+				</thead>
+				<tbody>		
+							 
+				<tr>
+                    <td colspan="10">Data Tidak di temukkan</td>
+               	</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+					</tr>
+				</tfoot>
+			</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 		</div>  
 			    
 		</section> 
@@ -384,6 +483,7 @@ $menu_id = 10;
 ?>
 
 <script type="text/javascript">
+       
 	$(document).on('change','#kodeKelompok', function(){
 
 		var kode = $('#kodeKelompok').val();
@@ -391,6 +491,7 @@ $menu_id = 10;
 
 		if(gol[0] == '01')
 		{
+                         $("#tanah_bangunan,#detail_tanah_bangunan").hide('');
 			$("#TipeAset").val('A');
 			$(".mesin,.bangunan,.jaringan,.asetlain,.kdp").hide('');
 			$(".mesin li > input,.bangunan li > input,.jaringan li > input,.asetlain li > input,.kdp li > input").attr('disabled','disabled');
@@ -399,6 +500,7 @@ $menu_id = 10;
 			$(".tanah").show('');
 		} else if(gol[0] == '02')
 		{
+                         $("#tanah_bangunan,#detail_tanah_bangunan").hide('');
 			$("#TipeAset").val('B');
 			$(".tanah,.bangunan,.jaringan,.asetlain,.kdp").hide('');
 			$(".tanah li > input,.bangunan li > input,.jaringan li > input,.asetlain li > input,.kdp li > input").attr('disabled','disabled');
@@ -407,6 +509,7 @@ $menu_id = 10;
 			$(".mesin").show('');
 		} else if(gol[0] == '03')
 		{
+                        $("#tanah_bangunan,#detail_tanah_bangunan").show('');
 			$("#TipeAset").val('C');
 			$(".tanah,.mesin,.jaringan,.asetlain,.kdp").hide('');
 			$(".tanah li > input,.mesin li > input,.jaringan li > input,.asetlain li > input,.kdp li > input").attr('disabled','disabled');
@@ -416,6 +519,7 @@ $menu_id = 10;
 		} else if(gol[0] == '04')
 		{
 			$("#TipeAset").val('D');
+                         $("#tanah_bangunan,#detail_tanah_bangunan").hide('');
 			$(".tanah,.mesin,.bangunan,.asetlain,.kdp").hide('');
 			$(".tanah li > input,.mesin li > input,.bangunan li > input,.asetlain li > input,.kdp li > input").attr('disabled','disabled');
 			$(".tanah li > select,.mesin li > select,.bangunan li > select,.asetlain li > select,.kdp li > select").attr('disabled','disabled');
@@ -425,6 +529,7 @@ $menu_id = 10;
 		{
 			$("#TipeAset").val('E');
 			$(".tanah,.mesin,.bangunan,.jaringan,.kdp").hide('');
+                         $("#tanah_bangunan,#detail_tanah_bangunan").hide('');
 			$(".tanah li > input,.mesin li > input,.bangunan li > input,.jaringan li > input,.kdp li > input").attr('disabled','disabled');
 			$(".tanah li > select,.mesin li > select,.bangunan li > select,.jaringan li > select,.kdp li > select").attr('disabled','disabled');
 			$(".asetlain li > input,.asetlain li > select").removeAttr('disabled');
@@ -433,6 +538,7 @@ $menu_id = 10;
 		{
 			$("#TipeAset").val('F');
 			$(".tanah,.mesin,.bangunan,.asetlain,.jaringan").hide('');
+                         $("#tanah_bangunan,#detail_tanah_bangunan").hide('');
 			$(".tanah li > input,.mesin li > input,.bangunan li > input,.asetlain li > input,.jaringan li > input").attr('disabled','disabled');
 			$(".tanah li > select,.mesin li > select,.bangunan li > select,.asetlain li > select,.jaringan li > select").attr('disabled','disabled');
 			$(".kdp li > input,.kdp li > select").removeAttr('disabled');
@@ -440,6 +546,7 @@ $menu_id = 10;
 		} else {
 			$("#TipeAset").val('G');
 			$(".tanah,.mesin,.bangunan,.asetlain,.jaringan,.kdp").hide('');
+                         $("#tanah_bangunan,#detail_tanah_bangunan").hide('');
 			$(".tanah li > input,.mesin li > input,.bangunan li > input,.asetlain li > input,.jaringan li > input,.kdp li > input").attr('disabled','disabled');
 			$(".tanah li > select,.mesin li > select,.bangunan li > select,.asetlain li > select,.jaringan li > select,.kdp li > select").attr('disabled','disabled');
 		}			
@@ -466,5 +573,152 @@ $menu_id = 10;
 		var hrgSatuan = $("#hrgSatuan").val();
 		var total = jml*hrgSatuan;
 		$("#total").val(total);
+		var format = total.toFixed(2);
+		//var format2 = numberWithCommas(format);
+		var fix = total.toLocaleString(['ban', 'id']);
+		var ext = "Rp ";
+		var format = ext.concat(fix); 
+		$("#tes").val(format);
 	}
+
+	/*function numberWithCommas(x) {
+		console.log("here");
+    	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	function numberWithCommas(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+	}*/
 </script>
+
+<script>
+            
+                    $.fn.dataTableExt.oApi.fnReloadAjax = function(oSettings, sNewSource, fnCallback, bStandingRedraw)
+                    {
+                         // DataTables 1.10 compatibility - if 1.10 then versionCheck exists.
+                         // 1.10s API has ajax reloading built in, so we use those abilities
+                         // directly.
+                         if ($.fn.dataTable.versionCheck) {
+                              var api = new $.fn.dataTable.Api(oSettings);
+
+                              if (sNewSource) {
+                                   api.ajax.url(sNewSource).load(fnCallback, !bStandingRedraw);
+                              }
+                              else {
+                                   api.ajax.reload(fnCallback, !bStandingRedraw);
+                              }
+                              return;
+                         }
+
+                         if (sNewSource !== undefined && sNewSource !== null) {
+                              oSettings.sAjaxSource = sNewSource;
+                         }
+
+                         // Server-side processing should just call fnDraw
+                         if (oSettings.oFeatures.bServerSide) {
+                              this.fnDraw();
+                              return;
+                         }
+
+                         this.oApi._fnProcessingDisplay(oSettings, true);
+                         var that = this;
+                         var iStart = oSettings._iDisplayStart;
+                         var aData = [];
+
+                         this.oApi._fnServerParams(oSettings, aData);
+
+                         oSettings.fnServerData.call(oSettings.oInstance, oSettings.sAjaxSource, aData, function(json) {
+                              /* Clear the old information from the table */
+                              that.oApi._fnClearTable(oSettings);
+
+                              /* Got the data - add it to the table */
+                              var aData = (oSettings.sAjaxDataProp !== "") ?
+                                      that.oApi._fnGetObjectDataFn(oSettings.sAjaxDataProp)(json) : json;
+
+                              for (var i = 0; i < aData.length; i++)
+                              {
+                                   that.oApi._fnAddData(oSettings, aData[i]);
+                              }
+
+                              oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
+
+                              that.fnDraw();
+
+                              if (bStandingRedraw === true)
+                              {
+                                   oSettings._iDisplayStart = iStart;
+                                   that.oApi._fnCalculateEnd(oSettings);
+                                   that.fnDraw(false);
+                              }
+
+                              that.oApi._fnProcessingDisplay(oSettings, false);
+
+                              /* Callback user function - for event handlers etc */
+                              if (typeof fnCallback == 'function' && fnCallback !== null)
+                              {
+                                   fnCallback(oSettings);
+                              }
+                         }, oSettings);
+                    };
+                    var oTable;
+                    $(document).on('click','#load-data-tanah',function() {
+                         var satker = $('#kodeSatker').val();
+                                var kelompok = $('#kodeKelompok').val();
+                         var data_satker=$('#data_satker').val();
+                         if(data_satker!="")
+                         {
+                         	oTable.fnReloadAjax("<?=$url_rewrite?>/api_list/api_bangunan_tanah.php?kodeSatker="+satker+"&kodeKelompok="+kelompok);
+                         }else{
+	                         oTable = $('#daftar_tanah_bangunan').dataTable({
+	                              "aoColumns": [
+	                                   {"bSortable": false},
+	                                   {"bSortable": true},
+	                                   {"bSortable": true},
+	                                   {"bSortable": true},
+	                                   {"bSortable": true},
+	                                   {"bSortable": true},
+	                                   
+	                                   {"bSortable": true}],
+	 
+	                              "bProcessing": true,
+	                              "bServerSide": true,
+	                              "sAjaxSource": "<?=$url_rewrite?>/api_list/api_bangunan_tanah.php?kodeSatker="+satker
+
+	                         });
+	                         $('#data_satker').val(satker);
+	                      }
+
+
+                      
+                    });
+                   function set_tanah(id){
+                   		var hasil=$("#nilai_tanah_id"+id).val();
+                   		var final_hasil=hasil.split("|");
+                   		//value=\"{$aRow['tanah_id']}|$kodeKelompok|$Uraian|$noRegister|$LuasTotal|$Tahun\" 
+                   		var tanah_id=final_hasil[0];
+                   		var kodeKelompok=final_hasil[1];
+                   		var Uraian=final_hasil[2];
+                   		var noRegister=final_hasil[3];
+                   		var LuasTotal=final_hasil[4];
+                   		var Tahun=final_hasil[5];
+                   		$("#tanah_id").val(tanah_id);
+                   		$("#kelompok_tanah").val(kodeKelompok);
+                   		$("#luas_total").val(LuasTotal);
+                   		$("#myModal").modal('hide');_
+
+
+
+
+
+	
+
+                   }
+                    /* $(document).on('click','#load-data-tanah', function(){
+                                var satker = $('#kodeSatker').val();
+                                var kelompok = $('#kodeKelompok').val();
+                                $('#hasil_pilihan_tanah').html(satker);
+                                oTable.fnReloadAjax("<?=$url_rewrite?>/api_list/api_bangunan_tanah.php?kodeSatker="+satker+"&kodeKelompok="+kelompok);
+                            })*/
+                  
+               </script>

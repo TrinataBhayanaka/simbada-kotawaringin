@@ -1,0 +1,8 @@
+1. Cari data berdasarkan query ini 
+select log_id,Aset_ID,kd_riwayat,umurekonomis,(NilaiBuku/PenyusutanPertahun)as cek,(UmurEkonomis-(NilaiBuku/PenyusutanPertahun))as selisih from log_bangunan where kd_riwayat=51 and tahunpenyusutan=2015 and (UmurEkonomis-(NilaiBuku/PenyusutanPertahun))>0.5 ORDER BY `selisih` DESC
+
+2. masukan data ke folder data di dalam folder ini sesuai dengan tipe Aset
+
+3. batalkan penyusutan dengan menggunakan program ini
+
+4. hapus data AkumulasiPenyusutan_Awal, PenyusutanPertahun_Awal, NilaiBuku_Awal 

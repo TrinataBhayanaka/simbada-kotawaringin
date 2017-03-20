@@ -1,0 +1,5 @@
+update `log_mesin` set TglPerolehan='2012-10-11',tahun=2012 WHERE `Aset_ID` = 133485;
+update `mesin` set TglPerolehan='2012-10-11',tahun=2012 WHERE `Aset_ID` = 133485;
+update `aset` set TglPerolehan='2012-10-11',tahun=2012 WHERE `Aset_ID` = 133485;
+
+ 

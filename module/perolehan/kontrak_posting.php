@@ -9,7 +9,7 @@ $menu_id = 10;
   if($tahun=="")
             	$tahun=$TAHUN_AKTIF;
 $get_data_filter = $RETRIEVE->retrieve_kontrak($tahun);
-// pr($get_data_filter);
+//pr($SessionUser);
 ?>
 
 <?php
@@ -122,7 +122,7 @@ $get_data_filter = $RETRIEVE->retrieve_kontrak($tahun);
 						<td><?=$val['tglKontrak']?></td>
 						<td><?=($val['tipe_kontrak'] == 2) ? 'Pembelian Langsung' : 'Kontrak'?></td>
 						<td><?=$val['tipeAset']?></td>
-						<td><?=number_format($val['nilai'])?></td>
+						<td><?=number_format($val['nilai'],2)?></td>
 						<td class="center"><?=($val['n_status']==1) ? '<span class="label label-success">SUDAH</span>' : '<span class="label label-Default">BELUM</span>'?></td>
 						<td class="center">
 						<?php
@@ -131,6 +131,25 @@ $get_data_filter = $RETRIEVE->retrieve_kontrak($tahun);
 							<a href="kontrak_postingRincian.php?id=<?=$val['id']?>" class="btn btn-default btn-small"><i class="fa fa-book"></i>&nbsp;Posting</a>
 						<?php
 						} else {
+						?>
+						<?php
+						$hak_akses_admin=$SessionUser['ses_uaksesadmin'];
+						if($hak_akses_admin==1){
+							//if($val['tipeAset']=="Aset Baru")
+						//	{
+								$noKontrak=$val['noKontrak'];
+								$nama_satker=$val['NamaSatker'];
+								$tmp_kontrak=explode("-",$val['tglKontrak']);
+								$tahun_kontrak=$tmp_kontrak[0];
+								$id_kontrak=$val['id'];
+								if($tahun_kontrak==$TAHUN_AKTIF){
+											$batal_kontrak="<a href=\"batal_kontrak.php?id_kontrak=$id_kontrak\" class=\"btn btn-danger btn-small\" onclick=\"return confirm('Apakah anda akan membatalkan kontrak =$noKontrak pada $nama_satker')\">
+										<i class=\"fa fa-delete\"></i>&nbsp;Batal Kontrak</a>";
+											echo "$batal_kontrak<br/>";
+								}
+				
+						//	}
+						}
 						?>
 							<a href="kontrak_postingView.php?id=<?=$val['id']?>" class="btn btn-default btn-small"><i class="fa fa-eye"></i>&nbsp;View</a>
 						<?php

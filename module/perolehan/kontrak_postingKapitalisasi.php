@@ -19,7 +19,7 @@ while ($dataSP2D = mysql_fetch_assoc($sql)){
     $sumsp2d = $dataSP2D;
   }
 
-  $sql = mysql_query("SELECT * FROM aset WHERE noKontrak = '{$noKontrak[noKontrak]}' AND (StatusValidasi != 9 OR StatusValidasi IS NULL) AND (Status_Validasi_Barang != 9 OR Status_Validasi_Barang IS NULL)");
+  $sql = mysql_query("SELECT * FROM aset WHERE noKontrak = '{$noKontrak[noKontrak]}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL)");
   while ($dataAset = mysql_fetch_assoc($sql)){
               $aset[] = $dataAset;
           }
@@ -33,14 +33,15 @@ while ($dataSP2D = mysql_fetch_assoc($sql)){
     if(count($aset) == $counter){
       $bop = $bopsisa;
     } else{
-      $bopsisa = $bopsisa - ceil($data['NilaiPerolehan']/$noKontrak['nilai']*$sumsp2d['total']);  
-      $bop = ceil($data['NilaiPerolehan']/$noKontrak['nilai']*$sumsp2d['total']);
+      $bopsisa = $bopsisa - ($data['NilaiPerolehan']/$noKontrak['nilai']*$sumsp2d['total']);  
+      $bop = ($data['NilaiPerolehan']/$noKontrak['nilai']*$sumsp2d['total']);
     }
 
-    $NilaiPerolehan = ceil($data['NilaiPerolehan'] + $bop);
-    $satuan = ceil(intval($data['Satuan']) + ($bop/$data['Kuantitas']));
+    $NilaiPerolehan = ($data['NilaiPerolehan'] + $bop);
+    $satuan = (($data['Satuan']) + ($bop/$data['Kuantitas']));
 
     $tglKontrak=$noKontrak['tglKontrak'];
+ 
     $updateAset = mysql_query("UPDATE aset SET NilaiPerolehan = '{$NilaiPerolehan}', Satuan = '{$satuan}' WHERE Aset_ID = '{$data['Aset_ID']}'");
     $updateKapital = mysql_query("UPDATE kapitalisasi SET n_status = '1', nilai = if(nilai is null,0,nilai)+{$bop}  WHERE idKontrak = '{$noKontrak['id']}' AND asetKapitalisasi = '{$data['Aset_ID']}'");
   }  

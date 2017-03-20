@@ -75,19 +75,25 @@ class RETRIEVE_PENYUSUTAN extends RETRIEVE{
 			   return $dataArr;
                  
           }
-          public function getStatusPenyusutansatker_berjalan($par=NULL){
+          public function getStatusPenyusutansatker_berjalan($par=NULL,$tahun){
 				// pr($par);
                if ($par!=""){
                  $count =explode('.',$par);
 				 $hit = count($count);
 				 if($hit == 4){
-					 $par="where KodeSatker='$par'";
+					 $par="where KodeSatker='$par'  ";
 				 }else{
-					 $par = "where KodeSatker like '$par%'";
+					 $par = "where KodeSatker like '$par%' ";
 				 }
 			   }else{
 				$par = '';
 			   }		 
+			   if($par==""){
+			   		$par="where  Tahun='$tahun'";
+			   }else{
+			   	$par="$par and  Tahun='$tahun'";
+			   }
+
                $query="select * from penyusutan_tahun_berjalan $par";
                
 			   $result = $this->query($query) or die(mysql_error());//die($this->error());

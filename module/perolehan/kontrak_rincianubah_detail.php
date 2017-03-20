@@ -33,7 +33,7 @@ $dataArr = $RETRIEVE->get_rincianBarangDetail($_GET);
 		    }
 		  	
 		//sum total 
-		$sqlsum = mysql_query("SELECT SUM(NilaiPerolehan) as total FROM aset WHERE noKontrak = '{$kontrak[0]['noKontrak']}' AND (StatusValidasi != 9 OR StatusValidasi IS NULL) AND (Status_Validasi_Barang != 9 OR Status_Validasi_Barang IS NULL)");
+		$sqlsum = mysql_query("SELECT SUM(NilaiPerolehan) as total FROM aset WHERE noKontrak = '{$kontrak[0]['noKontrak']}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL)");
 		while ($sum = mysql_fetch_array($sqlsum)){
 					$sumTotal = $sum;
 				}
@@ -470,10 +470,10 @@ $dataArr = $RETRIEVE->get_rincianBarangDetail($_GET);
 		var perolehan = $("#nilaiPerolehan").val();
 		var total = $("#totalRB").val();
 		var spk = $("#spk").val();
-		var str = parseInt(spk.replace(/[^0-9\.]+/g, ""));
-		var rb = parseInt(total.replace(/[^0-9\.]+/g, ""));
+		var str = (spk.replace(/[^0-9\.]+/g, ""));
+		var rb = (total.replace(/[^0-9\.]+/g, ""));
 
-		var diff = parseInt(perolehan) + parseInt(rb);
+		var diff = (perolehan) + (rb);
 
 		if(diff > str) {
 			console.log(diff+" = "+str);

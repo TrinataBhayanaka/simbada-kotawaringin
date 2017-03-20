@@ -144,11 +144,11 @@ $menu_id = 1;
 						<ul>
 							<li>
 								<span class="labelInfo">Nilai Kontrak</span>
-								<input type="text" value="<?=number_format($kontrak[0]['nilai'])?>" disabled/>
+								<input type="text" value="<?=number_format($kontrak[0]['nilai'],2)?>" disabled/>
 							</li>
 							<li>
 								<span  class="labelInfo">Total SP2D Penunjang</span>
-								<input type="text" value="<?=isset($sumTotal) ? number_format($sumTotal['total']) : '0'?>" disabled/>
+								<input type="text" value="<?=isset($sumTotal) ? number_format($sumTotal['total'],2) : '0'?>" disabled/>
 							</li>
 						</ul>
 							
@@ -180,7 +180,7 @@ $menu_id = 1;
 						<td><?=$i?></td>
 						<td><?=$value['kdRekening']?></td>
 						<td><?=$value['uraian']?></td>
-						<td class="center"><?=number_format($value['jumlah'])?></td>
+						<td class="center"><?=number_format($value['jumlah'],2)?></td>
 						<td class="center">
 						<a href="<?=$url_rewrite?>/module/perolehan/sp2dpenunjang_rincedit.php/?id=<?=$value['id']?>&idsp2d=<?=$idsp2d?>&idkontrak=<?=$idKontrak?>" class="btn btn-warning btn-small"><i class="icon-pencil icon-white"></i>&nbsp;Edit</a>
 						<a href="<?=$url_rewrite?>/module/perolehan/sp2dpenunjang_rinc_hapus.php/?id=<?=$value['id']?>&idsp2d=<?=$idsp2d?>&idkontrak=<?=$idKontrak?>" class="btn btn-danger btn-small" onclick="return confirm('Hapus data?')"><i class="icon-trash icon-white"></i>&nbsp;Hapus</a>

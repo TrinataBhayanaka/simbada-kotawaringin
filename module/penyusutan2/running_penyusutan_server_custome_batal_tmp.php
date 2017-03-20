@@ -154,10 +154,10 @@ and t.Aset_ID is not null and t.Aset_ID != 0
     $ExeQuery = $DBVAR->query($queryLog) or die($DBVAR->error());
 
     $flagKelompok = '02';
-    $AddCondtn_1 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND a.kodeKA = '1'
+    $AddCondtn_1 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND a.kondisi !='4' AND a.kodeKA = '1'
 					AND a.TglPerolehan >='0000-00-00' AND a.TglPerolehan <= '2008-01-01'";
 
-    $AddCondtn_2 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND (a.NilaiPerolehan >=0 OR kodeKA = '1') 
+    $AddCondtn_2 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND a.kondisi !='4' AND (a.NilaiPerolehan >=0 OR kodeKA = '1') 
 					AND a.TglPerolehan >='2008-01-01' AND a.TglPerolehan <= '$TglPerubahan_temp'";
 } elseif ($kib == 'C') {
     $queryKib = "create temporary table aset_tmp  as
@@ -276,10 +276,10 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
     $ExeQuery = $DBVAR->query($queryLog) or die($DBVAR->error());
 
     $flagKelompok = '03';
-    $AddCondtn_1 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND a.kodeKA = '1'
+    $AddCondtn_1 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND a.kondisi !='4' AND a.kodeKA = '1'
 					AND a.TglPerolehan >='0000-00-00' AND a.TglPerolehan <= '2008-01-01'";
 
-    $AddCondtn_2 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND (a.NilaiPerolehan >=0 OR kodeKA = '1') 
+    $AddCondtn_2 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND a.kondisi !='4' AND (a.NilaiPerolehan >=0 OR kodeKA = '1') 
 					AND a.TglPerolehan >='2008-01-01' AND a.TglPerolehan <= '$TglPerubahan_temp'";
 } elseif ($kib == 'D') {
     $queryKib = "create temporary table aset_tmp as
@@ -338,7 +338,7 @@ where a.TglPerolehan <='$TglPerubahan_temp' AND a.TglSKKDH >'$TglPerubahan_temp'
     $ExeQuery = $DBVAR->query($queryLog) or die($DBVAR->error());
 
     $flagKelompok = '04';
-    $AddCondtn_1 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3'
+    $AddCondtn_1 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND a.kondisi !='4'
 							AND a.TglPerolehan <= '$TglPerubahan_temp'";
     $AddCondtn_2 = "";
 }
@@ -419,7 +419,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 			$QueryAset	  = "UPDATE aset SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTaun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                      TahunPenyusutan=NULL
 							WHERE Aset_ID = '$Aset_ID'";
@@ -433,7 +433,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$QueryKib	  = "UPDATE $tableKib SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTahun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID'";
@@ -443,7 +443,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$QueryKib	  = "UPDATE $tableLog SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTahun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
@@ -455,7 +455,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$QueryKib	  = "UPDATE $tableKib SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTahun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID'";
@@ -465,7 +465,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$QueryKib	  = "UPDATE $tableLog SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTahun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
@@ -478,7 +478,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$QueryKib	  = "UPDATE $tableKib SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTahun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID'";
@@ -489,7 +489,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$QueryKib	  = "UPDATE $tableLog SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTahun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 								WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
@@ -502,14 +502,14 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 			
 			//insert log
 			// $QueryLog ="DELETE FROM $tableLog WHERE  Aset_ID = '{$Aset_ID}' and Kd_Riwayat = '50' and kodeSatker = '{$Data[kodeSatker]}' and action ='{$action}' and YEAR(TglPerubahan) = {$tahun}";
-			$QueryLog ="DELETE FROM $tableLog WHERE  Aset_ID = '{$Aset_ID}' and Kd_Riwayat  IN ('49','50') and kodeSatker = '{$Data[kodeSatker]}' and action ='{$action}'";
+			$QueryLog ="DELETE FROM $tableLog WHERE  Aset_ID = '{$Aset_ID}' and Kd_Riwayat  IN ('49','50') and kodeSatker = '{$Data[kodeSatker]}' and action ='{$action}' ";
 			$exeQueryLog = $DBVAR->query($QueryLog);
                   
                   //update untuk mereset akumulasi penyusutan untuk diatas tanggal penyusutan
 						$QueryKib	  = "UPDATE $tableLog SET MasaManfaat = NULL,
 											 AkumulasiPenyusutan = NULL,	
 											 PenyusutanPerTahun = NULL,
-											 NilaiBuku = NULL,
+											 NilaiBuku = '$NilaiPerolehan',
 											 UmurEkonomis = NULL,
                                                                    TahunPenyusutan=NULL
 										WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
@@ -519,7 +519,7 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 				$QueryLogSelect = "select kodeKelompok,PenyusutanPerTahun_Awal,AkumulasiPenyusutan_Awal,NilaiBuku_Awal,"
                                         . "MasaManfaat,UmurEkonomis,NilaiBuku,AkumulasiPenyusutan,PenyusutanPerTahun "
                                         . " from $tableLog where Aset_ID = {$Aset_ID} "
-                                . " and TahunPenyusutan='$tahun_sblm' and Kd_Riwayat=50 order by log_id desc limit 1";
+                                . " and TahunPenyusutan='$tahun_sblm' and Kd_Riwayat in (50,51,52) and (tglperubahan!='0000-00-00 00:00:00' or  tglperubahan is not null) order by log_id desc limit 1";
 				$exeQueryLogSelect = $DBVAR->query($QueryLogSelect) or die($DBVAR->error());
 				$resultQueryLogSelect = $DBVAR->fetch_array($exeQueryLogSelect);
 			

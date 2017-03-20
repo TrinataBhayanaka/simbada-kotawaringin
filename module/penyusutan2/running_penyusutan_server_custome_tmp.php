@@ -61,9 +61,9 @@ if ($kib == 'B') {
                                                        a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran, a.Silinder, a.MerkMesin, a.JumlahMesin,a.Material, a.NoSeri,
                                                        a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar, 
                                                        a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, 
-                                                       if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), 
-                                                       if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), 
-                                                       if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan
+                                                       if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), 
+                                                       if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0,a.NilaiBuku_Awal,a.NilaiBuku), 
+                                                       if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan
                                                  from log_mesin a
                                                  inner join mesin t on t.Aset_ID=a.Aset_ID
                                                  inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -119,8 +119,8 @@ and t.Aset_ID is not null and t.Aset_ID != 0
                                                        a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Merk, a.Model, a.Ukuran, a.Silinder, a.MerkMesin, a.JumlahMesin,a.Material, a.NoSeri,
                                                        a.NoRangka, a.NoMesin, a.NoSTNK, a.TglSTNK, a.NoBPKB, a.TglBPKB, a.NoDokumen, a.TglDokumen, a.Pabrik, a.TahunBuat, a.BahanBakar, 
                                                        a.NegaraAsal, a.NegaraRakit, a.Kapasitas, a.Bobot, a.GUID, a.MasaManfaat, 
-                                                       if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), 
-                                                       if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan 
+                                                       if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0,a.NilaiBuku_Awal,a.NilaiBuku), 
+                                                       if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan 
                                                  from log_mesin a
                                                  inner join mesin t on t.Aset_ID=a.Aset_ID
                                                  inner join mesin t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -151,10 +151,10 @@ and t.Aset_ID is not null and t.Aset_ID != 0
     $ExeQuery = $DBVAR->query($queryLog) or die($DBVAR->error());
 
     $flagKelompok = '02';
-    $AddCondtn_1 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND a.kodeKA = '1'
+    $AddCondtn_1 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND a.kondisi !='4' AND a.kodeKA = '1'
 					AND a.TglPerolehan >='0000-00-00' AND a.TglPerolehan <= '2008-01-01'";
 
-    $AddCondtn_2 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND (a.NilaiPerolehan >=0 OR kodeKA = '1') 
+    $AddCondtn_2 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND a.kondisi !='4' AND (a.NilaiPerolehan >=0 OR kodeKA = '1') 
 					AND a.TglPerolehan >='2008-01-01' AND a.TglPerolehan <= '$TglPerubahan_temp'";
 } elseif ($kib == 'C') {
     $queryKib = "create temporary table aset_tmp  as
@@ -184,7 +184,7 @@ and t.Aset_ID is not null and t.Aset_ID != 0
                                                   a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, 
                                                   a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas, 
                                                   a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, 
-                                                  if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan  
+                                                  if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan  
                                             from log_bangunan a
                                             inner join bangunan t on t.Aset_ID=a.Aset_ID
                                             inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -243,7 +243,7 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
                                                   a.CaraPerolehan, a.TglPakai, a.Konstruksi, a.Beton, a.JumlahLantai, a.LuasLantai, a.Dinding, a.Lantai, a.LangitLangit, a.Atap, 
                                                   a.NoSurat, a.TglSurat, a.NoIMB, a.TglIMB, a.StatusTanah, a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.Tmp_Tingkat, a.Tmp_Beton, a.Tmp_Luas, 
                                                   a.KelompokTanah_ID, a.GUID, a.TglPembangunan, a.MasaManfaat, 
-                                                  if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis  ,a.TahunPenyusutan
+                                                  if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis  ,a.TahunPenyusutan
                                             from log_bangunan a
                                             inner join bangunan t on t.Aset_ID=a.Aset_ID
                                             inner join bangunan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -273,10 +273,10 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
     $ExeQuery = $DBVAR->query($queryLog) or die($DBVAR->error());
 
     $flagKelompok = '03';
-    $AddCondtn_1 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND a.kodeKA = '1'
+    $AddCondtn_1 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND a.kondisi !='4' AND a.kodeKA = '1'
 					AND a.TglPerolehan >='0000-00-00' AND a.TglPerolehan <= '2008-01-01'";
 
-    $AddCondtn_2 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND (a.NilaiPerolehan >=0 OR kodeKA = '1') 
+    $AddCondtn_2 = "AND a.kodeLokasi like '12%' AND a.kondisi !='3' AND a.kondisi !='4' AND (a.NilaiPerolehan >=0 OR kodeKA = '1') 
 					AND a.TglPerolehan >='2008-01-01' AND a.TglPerolehan <= '$TglPerubahan_temp'";
 } elseif ($kib == 'D') {
     $queryKib = "create temporary table aset_tmp as
@@ -306,7 +306,7 @@ where a.TglPerolehan <='$tgl_perubahan' AND a.TglSKKDH >'$TglPerubahan_temp' AND
                                             a.kodeKA, a.kodeRuangan, a.Status_Validasi_Barang, a.StatusTampil, a.Tahun, if(a.NilaiPerolehan_Awal!=0,a.NilaiPerolehan_Awal,a.NilaiPerolehan), a.Alamat, a.Info, 
                                             a.AsalUsul, a.kondisi, a.CaraPerolehan, a.Konstruksi, a.Panjang, a.Lebar, a.NoDokumen, a.TglDokumen, a.StatusTanah, 
                                             a.NoSertifikat, a.TglSertifikat, a.Tanah_ID, a.KelompokTanah_ID, a.GUID, a.TanggalPemakaian, a.LuasJaringan, a.MasaManfaat, 
-                                            if(a.AkumulasiPenyusutan_Awal is not null,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan
+                                            if(a.AkumulasiPenyusutan_Awal is not null and a.AkumulasiPenyusutan_Awal!=0,a.AkumulasiPenyusutan_Awal,a.AkumulasiPenyusutan), if(a.NilaiBuku_Awal is not null and a.NilaiBuku_Awal!=0,a.NilaiBuku_Awal,a.NilaiBuku), if(a.PenyusutanPerTahun_Awal is not null and a.PenyusutanPerTahun_Awal!=0,a.PenyusutanPerTahun_Awal,a.PenyusutanPerTahun),a.UmurEkonomis,a.TahunPenyusutan
                                       from log_jaringan a
                                       inner join jaringan t on t.Aset_ID=a.Aset_ID
                                       inner join jaringan t_2 on t_2.Aset_ID=t.Aset_ID and t.Aset_ID is not null and t.Aset_ID != 0
@@ -476,7 +476,7 @@ for($i=0;$i<2;$i++){
                                                                                                                  NilaiBuku = '$NilaiBuku',
                                                                                                                  UmurEkonomis = '$UmurEkonomis',
                                                                                               TahunPenyusutan='$tahun'
-                                                                                        WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
+                                                                                        WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan_temp' ";
                     $ExeQueryKib = $DBVAR->query($QueryKib);
                 } elseif ($Data['TipeAset'] == 'C') {
                     $tableKib = 'bangunan';
@@ -496,7 +496,7 @@ for($i=0;$i<2;$i++){
                                                                                                                  PenyusutanPerTahun = '$penyusutan_per_tahun',
                                                                                                                  NilaiBuku = '$NilaiBuku',
                                                                                                                  UmurEkonomis = '$UmurEkonomis'
-                                                                                        WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
+                                                                                        WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan_temp' ";
                     $ExeQueryKib = $DBVAR->query($QueryKib);
                 } elseif ($Data['TipeAset'] == 'D') {
                     $tableKib = 'jaringan';
@@ -517,7 +517,7 @@ for($i=0;$i<2;$i++){
                                                                                                                  NilaiBuku = '$NilaiBuku',
                                                                                                                  UmurEkonomis = '$UmurEkonomis',
                                                                                               TahunPenyusutan='$tahun'
-                                                                                        WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
+                                                                                        WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan_temp' ";
                     $ExeQueryKib = $DBVAR->query($QueryKib);
                 }
 
@@ -641,7 +641,7 @@ for($i=0;$i<2;$i++){
            $query_log_sblm="select log_id,kodeKelompok,kodeSatker,Aset_ID,NilaiPerolehan,NilaiPerolehan_Awal,Tahun,Kd_Riwayat,"
                      . "(NilaiPerolehan-NilaiPerolehan_Awal) as selisih,"
                    . " AkumulasiPenyusutan_Awal,NilaiBuku_Awal,PenyusutanPerTahun_Awal,MasaManfaat,UmurEkonomis,TahunPenyusutan "
-                     . " from $tableLog where TahunPenyusutan='$TahunPenyusutan_log' and kd_riwayat in (50) "
+                     . " from $tableLog where TahunPenyusutan='$TahunPenyusutan_log' and kd_riwayat in (50,51,52) "
                      . "and Aset_ID='$Aset_ID' order by log_id desc limit 1 ";
             $qlog_sblm=$DBVAR->query($query_log_sblm) or die($DBVAR->error());
             $AkumulasiPenyusutan_Awal=0;
@@ -802,8 +802,7 @@ for($i=0;$i<2;$i++){
                                 $NilaiBuku_hasil=$NP-$AkumulasiPenyusutan_hasil;
                                 $Sisa_Masa_Manfaat=$Umur_Ekonomis_Final-1;
 
-                                if($status_awal_karena_melebihi_masa_manfaat!=1)
-                                        $Sisa_Masa_Manfaat=$Umur_Ekonomis_Final;
+                               
 
                                 if($Sisa_Masa_Manfaat<=0){
                                     $NilaiBuku_hasil=0;
@@ -1143,38 +1142,35 @@ function overhaul($kd_aset1, $kd_aset2, $kd_aset3,$persen, $DBVAR) {
     }
     //echo "<pre> ";
    // print($prosentase3);
-    if($prosentase4!=0){
-        echo "masuk11";
-      if($persen >$prosentase4){
-          echo "0 =4";
-          $hasil=$penambahan4;
-      }else if($persen>$prosentase2 && $persen <=$prosentase3) {
-          echo "0 =3";
-          $hasil=$penambahan3;
-      }
-      else if($persen>$prosentase1 && $persen <=$prosentase2) {
-           echo "0 =2";
-          $hasil=$penambahan2;
-      }
-      else if($persen<=$prosentase1) {
-           echo "0 =1";
-          $hasil=$penambahan1;
-      }
-    }else{
-        echo " $prosentase1 $prosentase2 $prosentase3 $prosentase4 ";
-         if($persen >$prosentase3){
-              echo "1 =3";
-              
-          $hasil=$penambahan3;
-      }else if($persen>$prosentase1 && $persen <=$prosentase2) {
-          echo "1 =2 ";
-          $hasil=$penambahan2;
-      }
-    else if($persen<=$prosentase1 ) {
-          //echo "1 = 5 ";
-          $hasil=$penambahan1;
-      }
-        
+    if($prosentase4 != 0) {
+        echo " masuk 11 $persen====$prosentase1 $prosentase2 $prosentase3 $prosentase4 \n";
+        if($persen > $prosentase4) {
+            echo "0 =4";
+            $hasil = $penambahan4;
+        } else if($persen > $prosentase2 && $persen <= $prosentase3) {
+            echo "0 =3";
+            $hasil = $penambahan3;
+        } else if($persen > $prosentase1 && $persen <= $prosentase2) {
+            echo "0 =2";
+            $hasil = $penambahan2;
+        } else if($persen <= $prosentase1) {
+            echo "0 =1";
+            $hasil = $penambahan1;
+        }
+    } else {
+        echo " masuk 22 $persen====$prosentase1 $prosentase2 $prosentase3 $prosentase4 \n";
+        if($persen > $prosentase3) {
+            echo "1 =3";
+
+            $hasil = $penambahan3;
+        } else if($persen > $prosentase1 && $persen <= $prosentase2) {
+            echo "1 =2 ";
+            $hasil = $penambahan2;
+        } else if($persen <= $prosentase1) {
+            echo "1 = 5 ";
+            $hasil = $penambahan1;
+        }
+
     }
     echo "\n hasill == $hasil == \n";
     if($hasil=="")

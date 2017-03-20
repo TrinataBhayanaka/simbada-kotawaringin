@@ -523,7 +523,8 @@ while($Data = $DBVAR->fetch_array($ExeQuery)){
 													 AkumulasiPenyusutan = '$AkumulasiPenyusutan',	
 													 PenyusutanPerTahun = '$penyusutan_per_tahun',
 													 NilaiBuku = '$NilaiBuku',
-													 UmurEkonomis = '$UmurEkonomis'
+													 UmurEkonomis = '$UmurEkonomis',
+                                                                                                         TahunPenyusutan='$tahun'
 										WHERE Aset_ID = '$Aset_ID' and TglPerubahan > '$TglPerubahan' ";
 						$ExeQueryKib = $DBVAR->query($QueryKib);
 

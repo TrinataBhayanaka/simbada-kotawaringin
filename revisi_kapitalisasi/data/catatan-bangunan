@@ -1,0 +1,6 @@
+UPDATE `log_bangunan` SET `tglperubahan` = NULL WHERE `log_bangunan`.`log_id` = 19217; 
+
+
+untuk yang aset_id 140954
+
+nilai perolehannya semula nol sekarang sudah memiliki nilai

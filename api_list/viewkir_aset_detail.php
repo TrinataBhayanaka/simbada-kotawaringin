@@ -27,8 +27,10 @@ $id=$_SESSION['user_id'];//Nanti diganti
  // echo "masuk aja dulu";
  // pr($_GET);
  // exit;
+/*$aColumns = array('a.Aset_ID','a.kodeKelompok','k.Uraian','a.Tahun','a.kodeSatker',
+				 'a.StatusValidasi','a.Status_Validasi_Barang','a.NilaiPerolehan','a.noRegister','a.kodeRuangan','a.TipeAset');*/
 $aColumns = array('a.Aset_ID','a.kodeKelompok','k.Uraian','a.Tahun','a.kodeSatker',
-				 'a.StatusValidasi','a.Status_Validasi_Barang','a.NilaiPerolehan','a.noRegister','a.kodeRuangan','a.TipeAset');
+				 'a.kodeLokasi','a.Status_Validasi_Barang','a.NilaiPerolehan','a.noRegister','a.kodeRuangan','a.TipeAset');				 
 $test = count($aColumns);
   
 // echo $aColumns; 
@@ -41,7 +43,8 @@ $sTable_inner_join_kelompok = "kelompok as k";
 // $sTable_inner_join_satker ="satker as s";
 $cond_kelompok ="k.Kode = a.kodeKelompok ";
 // $cond_satker ="s.kode = a.kodeSatker";
-$status = "a.StatusValidasi = 1 AND a.Status_Validasi_Barang = 1 AND";
+//$status = "a.StatusValidasi = 1 AND a.Status_Validasi_Barang = 1 AND";
+$status = "a.Status_Validasi_Barang = 1 AND";
 //variabel ajax
 $kodeSatker 		= $_GET['kodeSatker'];
 $kodeRuangan 		= $_GET['kodeRuangan'];
@@ -136,7 +139,7 @@ $sQuery = "
 		$sOrder
 		$sLimit
 		";
-// echo $sQuery;
+ //echo $sQuery;
 // $rResult = $DBVAR->query($sQuery) or fatal_error('MySQL Error: ' . mysql_errno());
 //get data all
 $rResultGetDataApluserlist = $DBVAR->fetch($sQuery,1);
@@ -213,6 +216,7 @@ if (!empty($data)){
 		$Kd_Satker = $aRow['kodeSatker'];
 		$NamaSatker = $aRow['NamaSatker'];
 		$Kd_Kelompok = $aRow['kodeKelompok'];
+		$kodeLokasi = $aRow['kodeLokasi'];
 		$Uraian = $aRow['Uraian'];
 		$noRegister = $aRow['noRegister'];
 		$NilaiPerolehan = $aRow['NilaiPerolehan'];
@@ -245,6 +249,7 @@ if (!empty($data)){
 		  $row[] ="<center>".$no."</center>";
 		  $row[] ="<center>".$checkbox."</center>";
 		  $row[] =$Kd_Satker;
+		  $row[] =$kodeLokasi;
 		  $row[] =$Kd_Kelompok;
 		  $row[] =$Uraian;
 		  $row[] =$Merk;

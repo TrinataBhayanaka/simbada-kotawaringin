@@ -9848,10 +9848,11 @@ $offset = @$_POST['record'];
     function retrieve_koreksi_aset($data)
     {
         // pr($data);exit;
-        $sql = "SELECT * FROM aset WHERE kodeKelompok = '{$data['kdkel']}' AND kodeLokasi = '{$data['kdlok']}' AND noRegister = '{$data['reg']}' LIMIT 1";
+        $sql = "SELECT * FROM aset WHERE kodeKelompok = '{$data['kdkel']}' AND kodeLokasi = '{$data['kdlok']}' AND noRegister = '{$data['reg']}' and statusvalidasi=1 and status_validasi_barang=1 LIMIT 1";
+       // echo $sql;
         $aset = $this->fetch($sql);
 
-        $sql = "SELECT * FROM {$data['tbl']} WHERE kodeKelompok = '{$data['kdkel']}' AND kodeLokasi = '{$data['kdlok']}' AND noRegister = '{$data['reg']}' LIMIT 1";
+        $sql = "SELECT * FROM {$data['tbl']} WHERE kodeKelompok = '{$data['kdkel']}' AND kodeLokasi = '{$data['kdlok']}' AND noRegister = '{$data['reg']}' and statusvalidasi=1 and status_validasi_barang=1 LIMIT 1";
         $kib = $this->fetch($sql);
 
         $sql = "SELECT Uraian FROM kelompok WHERE kode = '{$aset['kodeKelompok']}' LIMIT 1";

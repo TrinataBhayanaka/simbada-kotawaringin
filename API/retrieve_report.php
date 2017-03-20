@@ -31,17 +31,18 @@ class RETRIEVE_REPORT extends DB {
      }
 
      public function  get_kontrak($noKontrak){
-          $query="select K.noKontrak,K.tglKontrak,K.keterangan, S.nosp2d, S.tglsp2d from kontrak K "
+          $query="select K.noKontrak,K.tglKontrak,K.keterangan, K.n_status, S.nosp2d, S.tglsp2d from kontrak K "
                   . " left join sp2d S on K.id=S.idKontrak where K.noKontrak='$noKontrak'";
           $result = $this->query($query) or die($this->error());
           $check = $this->num_rows($result);
           while ($data = $this->fetch_array($result)) {
                $tglKontrak = $this->format_tanggal($data[tglKontrak]);
+               $status_kontrak=$data[n_status];
                $keterangan=$data[keterangan];
                $nosp2d.=$data[nosp2d]."<br/>";
                $tglsp2d.=  $this->format_tanggal($data[tglsp2d])."<br/>";
           }
-          return array($tglKontrak,$keterangan,$nosp2d,$tglsp2d);//array('dataArr' => $dataArr, 'count' => $check);
+          return array($tglKontrak,$keterangan,$nosp2d,$tglsp2d,$status_kontrak);//array('dataArr' => $dataArr, 'count' => $check);
           
      }
 
@@ -121,12 +122,13 @@ class RETRIEVE_REPORT extends DB {
           //$check = $this->num_rows($result);
           while ($data = $this->fetch_array($result)) {
               
-               list($tglKontrak,$keterangan,$nosp2d,$tglsp2d)=  $this->get_kontrak($data[noKontrak]);
+               list($tglKontrak,$keterangan,$nosp2d,$tglsp2d,$status_kontrak)=  $this->get_kontrak($data[noKontrak]);
                $data['tglkontrak'] = $tglKontrak;
                $data['Satker']=  $this->get_skpd($data['kodeSatker']);
                $data['keterangan'] = $keterangan;
                $data['nosp2d'] = $nosp2d;
                $data['tglsp2d'] = $tglsp2d;
+               if($status_kontrak==1)
                 $dataArr[] = $data;
           }
          // pr($dataArr);
@@ -155,12 +157,13 @@ class RETRIEVE_REPORT extends DB {
           $check = $this->num_rows($result);
           while ($data = $this->fetch_array($result)) {
               
-               list($tglKontrak,$keterangan,$nosp2d,$tglsp2d)=  $this->get_kontrak($data[noKontrak]);
+               list($tglKontrak,$keterangan,$nosp2d,$tglsp2d,$status_kontrak)=  $this->get_kontrak($data[noKontrak]);
                $data['tglkontrak'] = $tglKontrak;
                $data['Satker']=  $this->get_skpd($data['kodeSatker']);
                $data['keterangan'] = $keterangan;
                $data['nosp2d'] = $nosp2d;
                $data['tglsp2d'] = $tglsp2d;
+               if($status_kontrak==1)
                 $dataArr[] = $data;
           }
          // pr($dataArr);

@@ -29,7 +29,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 
 		  $dataArr['aset']['kodepemilik'] = substr($dataArr['aset']['kodeLokasi'], 0,2);
 
-		  // pr($dataArr);exit;
+		   //pr($dataArr);
 	?>
 	<!-- End Sql -->
 	<script type="text/javascript">
@@ -157,6 +157,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 									<option value="1" <?=$dataArr['kib']['kondisi'] == '1' ? 'selected' : ''?>>Baik</option>
 									<option value="2" <?=$dataArr['kib']['kondisi'] == '2' ? 'selected' : ''?>>Rusak Ringan</option>
 									<option value="3" <?=$dataArr['kib']['kondisi'] == '3' ? 'selected' : ''?>>Rusak Berat</option>
+									<option value="4" <?=$dataArr['kib']['kondisi'] == '4' ? 'selected' : ''?>>Dalam Penelusuran</option>
 								</select>
 							</li>
 						</ul>
@@ -347,7 +348,7 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 							</li>
 							<li>
 								<span class="span2">Tgl. Dokumen</span>
-								<input type="text" class="span2" name="tglDokumen" id="tglDokumen" value="<?=$dataArr['kib']['tglDokumen']?>" disabled/>
+								<input type="text" class="span2" name="tglDokumen" id="tglDokumen" value="<?=$dataArr['kib']['TglDokumen']?>" disabled/>
 							</li>
 						</ul>
 						<ul class="asetlain" style="display:none">
@@ -575,7 +576,13 @@ $dataArr = $RETRIEVE->retrieve_koreksi_aset($_GET);
 		var jml = $("#jumlah").val();
 		var hrgSatuan = $("#hrgSatuan").val();
 		var total = jml*hrgSatuan;
-		$("#total").val(total);
+		//$("#total").val(total);
+		var format = total.toFixed(2);
+		//var format2 = numberWithCommas(format);
+		var fix = total.toLocaleString(['ban', 'id']);
+		var ext = "Rp ";
+		var format = ext.concat(fix); 
+		$("#total").val(format);
 	}
 
 	function option(item){

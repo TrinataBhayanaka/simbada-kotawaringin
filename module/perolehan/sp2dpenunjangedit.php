@@ -87,15 +87,15 @@ $menu_id = 1;
 						<ul>
 							<li>
 								<span class="labelInfo">Nilai Kontrak</span>
-								<input type="text" value="<?=number_format($kontrak[0]['nilai'])?>" disabled/>
+								<input type="text" value="<?=number_format($kontrak[0]['nilai'],2)?>" disabled/>
 							</li>
 							<li>
 								<span class="labelInfo">Total SP2D Penunjang</span>
-								<input type="text" value="<?=isset($totalsp2d) ? number_format($totalsp2d[0]['total']-$sp2d['nilai']) : '0'?>" disabled/>
+								<input type="text" value="<?=isset($totalsp2d) ? number_format($totalsp2d[0]['total']-$sp2d['nilai'],2) : '0'?>" disabled/>
 							</li>
 							<li style="display:none">
 								<span  class="labelInfo">Sisa Kontrak</span>
-								<input type="text" id="sisaKontrak" value="<?=isset($sisaKontrak) ? number_format($sisaKontrak+$sp2d['nilai']) : 0?>" disabled/>
+								<input type="text" id="sisaKontrak" value="<?=isset($sisaKontrak) ? number_format($sisaKontrak+$sp2d['nilai'],2) : 0?>" disabled/>
 							</li>
 						</ul>
 							

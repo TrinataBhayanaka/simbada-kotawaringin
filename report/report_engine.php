@@ -10147,7 +10147,26 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 								$beton = $this->get_beton($data->Beton);
 								
 								$perolehan = number_format($data->NilaiPerolehan,0,",",".");
-								$luas = number_format($data->LuasTotal,0,",",".");
+								//$luas = number_format($data->LuasTotal,0,",",".");
+								//$luas = number_format($data->Tmp_Luas,0,",",".");
+								//revisi
+								if($data->Tanah_ID != '' && $data->Tanah_ID != 0){
+									//get from tabel tanah
+									$luas = $this->get_Luas($data->Tanah_ID);
+									$luas = number_format($luas,0,",",".");
+
+									$kodeTanah = $this->get_KodeTanah($data->Tanah_ID);
+									
+								}else{
+									$luas = number_format($data->Tmp_Luas,0,",",".");
+									if($data->KelompokTanah_ID != '' || $data->KelompokTanah_ID != 0){
+										$kodeTanah = $data->KelompokTanah_ID;
+									}else{
+										$kodeTanah = '';
+									}
+								}
+
+
 								$luaslantai= number_format($data->LuasLantai,0,",",".");
 								$total_luaslantai= $total_luaslantai + $data->LuasLantai;
 								$luasTotal = $luasTotal + $data->LuasTotal;
@@ -10192,7 +10211,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 									<td style=\"width: 66px;\">$data->NoSurat</td>
 									<td style=\"width: 50px; text-align: right;\">$luas</td>
 									<td style=\"width: 70px; text-align: center;\">$data->StatusTanah</td>
-									<td style=\"width: 67px;\"></td>
+									<td style=\"width: 67px;\">$kodeTanah</td>
 									<td style=\"width: 65px; text-align: center;\">$data->AsalUsul</td>
 									<td style=\"width: 50px; text-align: right;\">$perolehan</td>
 									<td style=\"width: 60px;\">$data->Info</td>
@@ -13129,7 +13148,26 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												$beton = $this->get_beton($row->Beton);
 												
 												$perolehan = number_format($row->NilaiPerolehan,0,",",".");
-												$luas = number_format($row->LuasTotal,0,",",".");
+												//$luas = number_format($row->LuasTotal,0,",",".");
+												//$luas = number_format($row->Tmp_Luas,0,",",".");
+												
+												//revisi
+												if($row->Tanah_ID != '' && $row->Tanah_ID != 0){
+													//get from tabel tanah
+													$luas = $this->get_Luas($row->Tanah_ID);
+													$luas = number_format($luas,0,",",".");
+
+													$kodeTanah = $this->get_KodeTanah($row->Tanah_ID);
+													
+												}else{
+													$luas = number_format($row->Tmp_Luas,0,",",".");
+													if($row->KelompokTanah_ID != '' || $row->KelompokTanah_ID != 0){
+														$kodeTanah = $row->KelompokTanah_ID;
+													}else{
+														$kodeTanah = '';
+													}
+												}
+
 												$luaslantai= number_format($row->LuasLantai,0,",",".");
 												$total_luaslantai= $total_luaslantai + $row->LuasLantai;
 												$luasTotal = $luasTotal + $row->LuasTotal;
@@ -13174,7 +13212,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																	<td style=\"width: 66px;\">$row->NoSurat</td>
 																	<td style=\"width: 50px; text-align: right;\">$luas</td>
 																	<td style=\"width: 70px; text-align: center;\">$row->StatusTanah</td>
-																	<td style=\"width: 67px;\"></td>
+																	<td style=\"width: 67px;\">$kodeTanah</td>
 																	<td style=\"width: 65px; text-align: center;\">$row->AsalUsul</td>
 																	<td style=\"width: 50px; text-align: right;\">$perolehan</td>
 																	<td style=\"width: 60px;\">$row->Info</td>
@@ -17534,7 +17572,26 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												$beton = $this->get_beton($row->Beton);
 												
 												$perolehan = number_format($row->NilaiPerolehan,0,",",".");
-												$luas = number_format($row->LuasTotal,0,",",".");
+												//$luas = number_format($row->LuasTotal,0,",",".");
+												//$luas = number_format($row->Tmp_Luas,0,",",".");
+												//revisi
+												if($row->Tanah_ID != '' && $row->Tanah_ID != 0){
+													//get from tabel tanah
+													$luas = $this->get_Luas($row->Tanah_ID);
+													$luas = number_format($luas,0,",",".");
+
+													$kodeTanah = $this->get_KodeTanah($row->Tanah_ID);
+													
+												}else{
+													$luas = number_format($row->Tmp_Luas,0,",",".");
+													if($row->KelompokTanah_ID != '' || $row->KelompokTanah_ID != 0){
+														$kodeTanah = $row->KelompokTanah_ID;
+													}else{
+														$kodeTanah = '';
+													}
+												}
+
+
 												$luaslantai= number_format($row->LuasLantai,0,",",".");
 												$total_luaslantai= $total_luaslantai + $row->LuasLantai;
 												$luasTotal = $luasTotal + $row->LuasTotal;
@@ -17585,7 +17642,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																	<td style=\"width: 66px;\">$row->NoSurat</td>
 																	<td style=\"width: 50px; text-align: right;\">$luas</td>
 																	<td style=\"width: 70px; text-align: center;\">$row->StatusTanah</td>
-																	<td style=\"width: 67px;\"></td>
+																	<td style=\"width: 67px;\">$kodeTanah</td>
 																	<td style=\"width: 65px; text-align: center;\">$row->AsalUsul</td>
 																	<td style=\"width: 65px; text-align: center;\">$tglPrlhn</td>
 																	<td style=\"width: 50px; text-align: right;\">$perolehan</td>
@@ -21991,7 +22048,26 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 												$beton = $this->get_beton($row->Beton);
 												
 												$perolehan = number_format($row->NilaiPerolehan,0,",",".");
-												$luas = number_format($row->LuasTotal,0,",",".");
+												//$luas = number_format($row->LuasTotal,0,",",".");
+												//$luas = number_format($row->Tmp_Luas,0,",",".");
+												
+												//revisi
+												if($row->Tanah_ID != '' && $row->Tanah_ID != 0){
+													//get from tabel tanah
+													$luas = $this->get_Luas($row->Tanah_ID);
+													$luas = number_format($luas,0,",",".");
+
+													$kodeTanah = $this->get_KodeTanah($row->Tanah_ID);
+													
+												}else{
+													$luas = number_format($row->Tmp_Luas,0,",",".");
+													if($row->KelompokTanah_ID != '' || $row->KelompokTanah_ID != 0){
+														$kodeTanah = $row->KelompokTanah_ID;
+													}else{
+														$kodeTanah = '';
+													}
+												}
+
 												$luaslantai= number_format($row->LuasLantai,0,",",".");
 												$total_luaslantai= $total_luaslantai + $row->LuasLantai;
 												$luasTotal = $luasTotal + $row->LuasTotal;
@@ -22036,7 +22112,7 @@ public function retrieve_html_rencana_pemeliharaan_barang($dataArr,$gambar,$skpd
 																	<td style=\"width: 66px;\">$row->NoSurat</td>
 																	<td style=\"width: 50px; text-align: right;\">$luas</td>
 																	<td style=\"width: 70px; text-align: center;\">$row->StatusTanah</td>
-																	<td style=\"width: 67px;\"></td>
+																	<td style=\"width: 67px;\">$kodeTanah</td>
 																	<td style=\"width: 65px; text-align: center;\">$row->AsalUsul</td>
 																	<td style=\"width: 50px; text-align: right;\">$perolehan</td>
 																	<td style=\"width: 60px;\">$row->Info</td>
@@ -37922,7 +37998,32 @@ return $hasil_html;
 	}	
 	return array($KodeSektor,$KodeSatker,$KodeUnit,$Gudang,$NamaSatker);
 }
-     	 
+    public function get_Luas($Tanah_ID){
+    	$query = "select LuasTotal from tanah where Tanah_ID = '$Tanah_ID'";
+    	//pr($query);
+		$resultData=$this->retrieve_query($query);
+		if($resultData!=""){
+			foreach($resultData as $value){
+				$getData=$value->LuasTotal;
+			}
+		}
+		//pr($getData);
+		return $getData;
+    }	 
+	
+	public function get_KodeTanah($Tanah_ID){
+    	$query = "select kodeKelompok from tanah where Tanah_ID = '$Tanah_ID'";
+    	//pr($query);
+		$resultData=$this->retrieve_query($query);
+		if($resultData!=""){
+			foreach($resultData as $value){
+				$getData=$value->kodeKelompok;
+			}
+		}
+		//pr($getData);
+		return $getData;
+    }
+
 	public function get_konstruksi($konstruksi_tanah){
         if($konstruksi_tanah == 'P')
 		$konstruksi = "Permanen";

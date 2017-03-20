@@ -118,15 +118,15 @@ $menu_id = 1;
 						<ul>
 							<li>
 								<span class="labelInfo">Nilai Kontrak</span>
-								<input type="text" value="<?=number_format($kontrak[0]['nilai'])?>" disabled/>
+								<input type="text" value="<?=number_format($kontrak[0]['nilai'],2)?>" disabled/>
 							</li>
 							<li>
 								<span class="labelInfo">Total SP2D</span>
-								<input type="text" value="<?=isset($totalsp2d) ? number_format($totalsp2d[0]['total']) : '0'?>" disabled/>
+								<input type="text" value="<?=isset($totalsp2d) ? number_format($totalsp2d[0]['total'],2) : '0'?>" disabled/>
 							</li>
 							<li>
-								<span  class="labelInfo">Sisa Kontrak</span>
-								<input type="text" value="<?=isset($sisaKontrak) ? number_format($sisaKontrak) : 0?>" disabled/>
+								<span  class="labelInfo">Sisa Kontrak <?=$sisaKontrak?></span>
+								<input type="text" value="<?=isset($sisaKontrak) ? number_format($sisaKontrak,2) : 0?>" disabled/>
 							</li>
 						</ul>
 							
@@ -167,7 +167,7 @@ $menu_id = 1;
 						<td><?=$i?></td>
 						<td><?=$value['nosp2d']?></td>
 						<td><?=$value['tglsp2d']?></td>
-						<td class="center"><?=number_format($value['nilai'])?></td>
+						<td class="center"><?=number_format($value['nilai'],2)?></td>
 						<td class="center"><?=$value['keterangan']?></td>
 						<td class="center">
 						<?php

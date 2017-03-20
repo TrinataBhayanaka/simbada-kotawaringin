@@ -27,6 +27,8 @@ $menu_id = 1;
 	//post
 	if(isset($_POST['nosp2d'])){
 		if($_POST['id'] == ""){
+		//	pr($_POST);
+			//exit();
 			$dataArr = $STORE->store_sp2d($_POST,$idKontrak);
 		} else {
 			$dataArr = $STORE->store_edit_sp2d($_POST,$idKontrak);
@@ -92,15 +94,15 @@ $menu_id = 1;
 						<ul>
 							<li>
 								<span class="labelInfo">Nilai Kontrak</span>
-								<input type="text" value="<?=number_format($kontrak[0]['nilai'])?>" disabled/>
+								<input type="text" value="<?=number_format($kontrak[0]['nilai'],2)?>" disabled/>
 							</li>
 							<li>
 								<span class="labelInfo">Total SP2D</span>
-								<input type="text" value="<?=isset($totalsp2d) ? number_format($totalsp2d[0]['total']-$sp2d['nilai']) : '0'?>" disabled/>
+								<input type="text" value="<?=isset($totalsp2d) ? number_format($totalsp2d[0]['total']-$sp2d['nilai'],2) : '0'?>" disabled/>
 							</li>
 							<li style="display:none">
 								<span  class="labelInfo">Sisa Kontrak</span>
-								<input type="text" id="sisaKontrak" value="<?=isset($sisaKontrak) ? number_format($sisaKontrak+$sp2d['nilai']) : 0?>" disabled/>
+								<input type="text" id="sisaKontrak" value="<?=isset($sisaKontrak) ? number_format($sisaKontrak+$sp2d['nilai'],2) : 0?>" disabled/>
 							</li>
 						</ul>
 							
@@ -150,8 +152,8 @@ $menu_id = 1;
 		$(document).on('submit', function(){
 		var perolehan = $("#total").val();
 		var sisaKontrak = $("#sisaKontrak").val();
-		var sk = parseInt(sisaKontrak.replace(/[^0-9\.]+/g, ""));
-
+		perolehan=parseFloat(perolehan.replace(/[^0-9\.]+/g, ""));
+		var sk = parseFloat(sisaKontrak.replace(/[^0-9\.]+/g, ""));
 		if(perolehan > sk) {
 			alert("Total SP2D barang melebihi nilai Kontrak");
 			return false;	
