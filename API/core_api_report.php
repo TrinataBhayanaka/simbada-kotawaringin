@@ -6387,6 +6387,9 @@ class core_api_report extends DB {
 		}else{
 			$paramSatker = "kodeSatker like '$skpd_id%'";
 			// $paramSatker_mts_tr = "SatkerAwal like '$skpd_id%'";
+			if($skpd_id=="")
+				$skpd_id="xxxx";//mematikan fungsi view mutasi aset untuk satu kota
+
 			$paramSatker_mts_tr = "SatkerTujuan like '$skpd_id%'";
 			$paramSatker_mts_rc = "SatkerTujuan like '$skpd_id%'";
 			
