@@ -60,8 +60,8 @@ $exeTempTable = $REPORT->TempTable($hit,$flag,$TypeRprtr,$Info,$tglawalperolehan
 $skpd_id);
 // exit;
 $resultParamGol = $REPORT->ceckneraca($skpd_id,$tglawalperolehan,$tglakhirperolehan);	
-// pr($resultParamGol);
-// exit;	
+//pr($resultParamGol);
+//exit;	
 
 $serviceJson=json_encode($resultParamGol);
 //retrieve html

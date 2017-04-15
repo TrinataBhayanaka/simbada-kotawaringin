@@ -48,11 +48,11 @@ $skpd_id);
 // exit;
 $result = $REPORT->barangskpd($skpd_id,$tglawalperolehan,$tglakhirperolehan);	
 // pr($result);
-// exit;	
+//exit;	
 //retrieve html
 $html=$REPORT->retrieve_html_rekap_barang_skpd($result,$gambar,$skpd_id,$tglawalperolehan,$tglakhirperolehan);
-/*$count = count($html);
-	for ($i = 0; $i < $count; $i++) {
+$count = count($html);
+/*	for ($i = 0; $i < $count; $i++) {
 		 
 		 echo $html[$i];     
 	}

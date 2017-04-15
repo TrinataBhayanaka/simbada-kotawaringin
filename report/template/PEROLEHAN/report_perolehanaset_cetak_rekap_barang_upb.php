@@ -36,9 +36,11 @@ $data=array(
 );
 
 $REPORT->set_data($data);
+//new function 
+$tes = $REPORT->custome($skpd_id,$tglawalperolehan,$tglakhirperolehan);	
+exit;
 
 $gambar = $FILE_GAMBAR_KABUPATEN;
-
 $hit = 2;
 $flag = '';
 $TypeRprtr = 'upb';
@@ -51,12 +53,12 @@ $result = $REPORT->barangupb($skpd_id,$tglawalperolehan,$tglakhirperolehan);
 // exit;	
 //retrieve html
 $html=$REPORT->retrieve_html_rekap_barang_upb($result,$gambar,$skpd_id,$tglawalperolehan,$tglakhirperolehan);
-/*$count = count($html);
+$count = count($html);
 	for ($i = 0; $i < $count; $i++) {
 		 
 		 echo $html[$i];     
 	}
-exit;*/
+exit;
 
 if($tipe!="2"){
 $REPORT->show_status_download_kib();
