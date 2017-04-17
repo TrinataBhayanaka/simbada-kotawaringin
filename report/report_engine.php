@@ -38781,11 +38781,13 @@ return $hasil_html;
 		
 		if($satker_id != ''){
 			$splitKodeSatker = explode ('.',$satker_id);
-				if(count($splitKodeSatker) == 4){	
-					$paramSatker = "kodeSatker = '$satker_id'";
-				}else{
-					$paramSatker = "kodeSatker like '$satker_id%'";
-				}
+			if(count($splitKodeSatker) == 4){	
+				$paramSatker = "kodeSatker = '$satker_id'";
+			}else{
+				$paramSatker = "kodeSatker like '$satker_id%'";
+			}
+		}else{
+				$paramSatker = "kodeSatker like '%'";
 		}
 		
 		if($gol == '01'){
