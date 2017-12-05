@@ -75,11 +75,36 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker'");
 				}
 				$("#output").html(template);
 				$("#output").select2();
+				validate();
 
 			}
 		},"JSON")
 
 	}
+	function validate(){
+		var programid 	= $("#program").val();
+		var kegiatanid 	= $("#kegiatan").val();
+		var outputid 	= $("#output").val();
+		var tahun 		= $("#tahun").val();
+		var satker 		= $("#satker").val();	
+
+		$.post('../../function/api/usulanExist.php', {programid:programid,kegiatanid:kegiatanid,outputid:outputid,tahun:tahun,satker:satker}, function(result){
+			if(result == 1){
+				//alert('Kode Program Telah Tersedia');
+				$("#message").show();
+				$('#info').html('Usulan dengan Program, Kegiatan dan Output telah digunakan');
+	            $('#info').css("color","red");
+				$('#simpan').attr('disabled','disabled');
+	            $('#simpan').css("background","grey");
+			}else{
+				$("#message").show();
+				$('#info').html('Usulan dengan Program, Kegiatan dan Output dapat digunakan'); 
+				$('#info').css("color","green");
+				$('#simpan').removeAttr('disabled');
+			    $('#simpan').css("background","#04c");
+			}
+		})
+	 }
 
 	$('.program').on('change', function(){
    		hierachy();
@@ -123,6 +148,13 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker'");
 			    </span>
 				<span class="text">Validasi</span>
 			</a>
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/print_perencanaan_pengadaan.php">
+					<span class="fa-stack fa-lg">
+				      <i class="fa fa-circle fa-stack-2x"></i>
+				      <i class="fa fa-inverse fa-stack-1x">4</i>
+				    </span>
+					<span class="text">Cetak Dokumen Perencanaan Pengadaan</span>
+				</a>
 		</div>	
 		<section class="formLegend">
 		<form name="myform" method="post" action="add_usulan.php">
@@ -171,6 +203,12 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker'");
 				</li>
 				<br/>
 				<br/>
+				<li style="display:none" id="message">
+                	<span  class="span2">&nbsp;</span>
+                		<div class="checkbox">
+                  	<em id="info"></em>
+                </div>
+                </li>
 				<li>
 					<span class="span2">&nbsp;</span>
 					<input type="submit" class="btn btn-primary " id="simpan" value="simpan" name="submit"/ >

@@ -41,7 +41,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 		
 
 	   var kodeKelompok = $('#paramkodekelompok').val();
-	    console.log(kodeKelompok);
+	    //console.log(kodeKelompok);
 	    var KodeSatker = $('#satker').val();
 		console.log(KodeSatker);
 	    
@@ -88,6 +88,13 @@ $data = mysql_fetch_assoc($dataUsulan);
 			    </span>
 				<span class="text">Validasi</span>
 			</a>
+		<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/print_perencanaan_pemeliharaan.php">
+				<span class="fa-stack fa-lg">
+			      <i class="fa fa-circle fa-stack-2x"></i>
+			      <i class="fa fa-inverse fa-stack-1x">4</i>
+			    </span>
+				<span class="text"> Cetak Dokumen Perencanaan Pemeliharaan</span>
+			</a>	
 		</div>	
 		<section class="formLegend">
 		<form name="myform" method="post" action="<?=$url_rewrite?>/module/rencana_pemeliharaan/update_penetapan_aset.php">

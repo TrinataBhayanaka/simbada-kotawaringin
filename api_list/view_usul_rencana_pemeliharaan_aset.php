@@ -20,7 +20,8 @@ $id=$_SESSION['user_id'];//Nanti diganti
  * you want to insert a non-database field (for example a counter or static image)
  */
 
-$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_optml','status_penetapan');
+//$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_optml','status_penetapan');
+$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_optml','status_usulan');
 //$test = count($aColumns);
   
 // echo $aColumns; 
@@ -181,7 +182,8 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
     $jml_max 		= $aRow['jml_max'];
     $jml_optml 		 = $aRow['jml_optml'];
     $jml_rill 		  = $aRow['jml_rill'];
-   	$status_penetapan = $aRow['status_penetapan'];
+    //$status_penetapan = $aRow['status_penetapan'];
+   	$status_usulan = $aRow['status_usulan'];
    	$ketKodeKelompok = mysql_query("select Uraian from kelompok where Kode = '{$kodeKelompok}'");
    	$ket = mysql_fetch_assoc($ketKodeKelompok);
 
@@ -200,7 +202,7 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
 	  $row[] ="[".$kodeKelompok."]"."<br/>".$ket['Uraian'];
       $row[] ="<center>".$jml_usul."<center>";
       $row[] ="<center>".$jml_optml."<center>";
-      if($status_penetapan == 0){
+      if($status_usulan == 0){
         $row[] ="<center>".$edit."&nbsp;".$delete."<center>";
       }else{
         $row[] ='';

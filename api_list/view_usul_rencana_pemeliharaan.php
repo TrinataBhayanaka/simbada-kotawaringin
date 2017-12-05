@@ -21,7 +21,7 @@ $id=$_SESSION['user_id'];//Nanti diganti
  */
 
 $aColumns = array('idus','kodeSatker','no_usul','tgl_usul','status_usulan','status_penetapan',
-				'status_validasi');
+				'status_validasi','status_verifikasi');
 //$test = count($aColumns);
   
 // echo $aColumns; 
@@ -177,6 +177,7 @@ $output = array(
 $no=$_GET['iDisplayStart']+1;
 
 while ($aRow = $DBVAR->fetch_array($rResult)) {
+	//pr($aRow);
     $row 			= array();
 	$idus 			= $aRow['idus'];
     $kodeSatker 	= $aRow['kodeSatker'];
@@ -187,7 +188,7 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
     $status_usulan  = $aRow['status_usulan'];
     $status_penetapan  = $aRow['status_penetapan'];
     $status_validasi  = $aRow['status_validasi'];
-
+    $status_verifikasi = $aRow['status_verifikasi'];
 
 
 	$detail="<a style=\"display:display\"  
@@ -205,11 +206,34 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
 			 
 			<i class=\"fa fa-pencil\" align=\"center\"></i>&nbsp;&nbsp;Edit</a>";
 
+	//add tombol proses
+	//handler jika list aset usulan kosong		
+	$ceck = "SELECT COUNT(idr) as jml from usulan_rencana_pemeliharaan_aset 
+		 	WHERE idus = '$idus'";
+	$Exec = $DBVAR->query($ceck) or fatal_error('MySQL Error: ' . mysql_errno());
+	$data = $DBVAR->fetch_array($Exec);	
+	if($data['jml'] > 0){
+		$proses="<a style=\"display:display\"  
+		href=\"proses_usulan.php?idus={$idus}&tgl_usul={$param_tgl_usul}&satker={$kodeSatker}&flag=1\"	class=\"btn btn-success btn-small proses\" id=\"\" value=\"\" >
+			<i class=\"fa fa-spinner\" align=\"center\"></i>&nbsp;&nbsp;Proses</a>";
+	}else{
+		$proses="";
+	}
+
+	//handler untuk unproses usulan, bisa dilakukan jika status_penetapan = 0
+	if($status_verifikasi == 0){
+		$unproses="<a style=\"display:display\"  
+		href=\"proses_usulan.php?idus={$idus}&tgl_usul={$param_tgl_usul}&satker={$kodeSatker}&flag=2\"	class=\"btn btn-danger btn-small proses\" id=\"\" value=\"\" >
+			<i class=\"fa fa-spinner\" align=\"center\"></i>&nbsp;&nbsp;Batal Proses</a>";
+	}else{
+		$unproses="";
+	}
+			
 	  $row[] ="<center>".$no."<center>";
 	  $row[] =$format_tgl;
       $row[] =$no_usul;
 
-      if($status_penetapan == '1'){
+      /*if($status_usulan == '1'){
       	$wrd = "Usulan Diproses";
 		$label ="label-success";
 		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
@@ -219,6 +243,35 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
 		$label ="label-warning";	
 		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
       	$row[] ="<center>".$detail."&nbsp;".$edit."&nbsp;".$delete.".<center>";
+      }*/
+       if($status_usulan == 1 && $status_verifikasi == 1 && $status_penetapan == 1 && 
+      	$status_validasi == 1){
+
+      	$wrd = "Usulan Divalidasi";
+		$label ="label-success";
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+      	$row[] ="<center>".$detail."<center>";
+      }elseif($status_usulan == 1 && $status_verifikasi == 1 && $status_penetapan == 1 && $status_validasi == 0){
+
+      	$wrd = "Usulan Ditetapkan";
+		$label ="label-success";
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+      	$row[] ="<center>".$detail."<center>";
+      }elseif($status_usulan == 1 && $status_verifikasi == 1 && $status_penetapan == 0 && $status_validasi == 0){
+      	$wrd = "Usulan Diverifikasi";
+		$label ="label-success";
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+      	$row[] ="<center>".$unproses."&nbsp;".$detail."<center>";
+      }elseif($status_usulan == 1 && $status_verifikasi == 0 && $status_penetapan == 0 && $status_validasi == 0){
+      	$wrd = "Pengajuan Usulan";
+		$label ="label-success";
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+      	$row[] ="<center>".$unproses."&nbsp;".$detail."<center>";
+      }elseif($status_usulan == 0 && $status_verifikasi == 0 && $status_penetapan == 0 && $status_validasi == 0){
+      	$wrd = "Usulan Belum Diajukan";
+		$label ="label-warning";	
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+      	$row[] ="<center>".$proses."<br/><br/>".$detail."&nbsp;".$edit."&nbsp;".$delete.".<center>";
       }
       
 	$no++;

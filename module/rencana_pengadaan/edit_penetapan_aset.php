@@ -41,7 +41,8 @@ $data = mysql_fetch_assoc($dataUsulan);
    				$("#jml_usul_rev").prop("readonly", true);
 				$("#satuan_usul_rev").prop("readonly", true);
 				$('.infoTolak').show();
-      		$('#infoTolak').html('Optimalisasi BMD (Revisi Jml Maksimal < Jml Optimal)');
+      		//$('#infoTolak').html('Optimalisasi BMD (Revisi Jml Maksimal < Jml Optimal)');
+      		$('#infoTolak').html('Optimalisasi BMD');
             	$('#infoTolak').css("color","red");
             	//$("#simpan").prop("disabled", true);
 		    }else{
@@ -68,9 +69,10 @@ $data = mysql_fetch_assoc($dataUsulan);
 				$("#jml_usul_rev").prop("readonly", true);
 				$("#satuan_usul_rev").prop("readonly", true);
 				$('.infoTolak').show();
-      		$('#infoTolak').html('Optimalisasi BMD (Revisi Jml Maksimal < Jml Optimal)');
+      		//$('#infoTolak').html('Optimalisasi BMD (Revisi Jml Maksimal < Jml Optimal)');
+      		$('#infoTolak').html('Optimalisasi BMD');
             $('#infoTolak').css("color","red");
-            	$("#simpan").prop("disabled", true);
+            	//$("#simpan").prop("disabled", true);	
 			}else{
 				document.getElementById('jml_rill_rev').value = hasil;
 				//unreadonly jml dan satuan rencana
@@ -83,7 +85,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 	   $('#jml_usul_rev').on('change', function(){
 	   	var jml_usul_rev = $('#jml_usul_rev').val();
 	   	var jml_rill_rev = $('#jml_rill_rev').val();
-	   		if(jml_usul_rev > jml_rill_rev){
+	   		if(parseInt(jml_usul_rev) > parseInt(jml_rill_rev)){
 	   			$('.infoReklas').show();
           		$('#infoReklas').html('Jumlah Rencana > Revisi Jumlah Riil');
             	$('#infoReklas').css("color","red");
@@ -125,19 +127,26 @@ $data = mysql_fetch_assoc($dataUsulan);
 				<span class="text">Usulan Rencana Pengadaan</span>
 			</a>
 			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_penetapan.php">
-					<span class="fa-stack fa-lg">
-				      <i class="fa fa-circle fa-stack-2x"></i>
-				      <i class="fa fa-inverse fa-stack-1x">2</i>
-				    </span>
-					<span class="text">Penetapan Rencana Pengadaan</span>
-				</a>
-		<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
+			<span class="fa-stack fa-lg">
+		      <i class="fa fa-circle fa-stack-2x"></i>
+		      <i class="fa fa-inverse fa-stack-1x">2</i>
+		    </span>
+			<span class="text">Penetapan Rencana Pengadaan</span>
+			</a>
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">3</i>
 			    </span>
 				<span class="text">Validasi</span>
 			</a>
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/print_perencanaan_pengadaan.php">
+				<span class="fa-stack fa-lg">
+			      <i class="fa fa-circle fa-stack-2x"></i>
+			      <i class="fa fa-inverse fa-stack-1x">4</i>
+			    </span>
+				<span class="text">Cetak Dokumen Perencanaan Pengadaan</span>
+			</a>	
 		</div>	
 		<section class="formLegend">
 		<form name="myform" method="post" action="update_penetapan_aset.php">

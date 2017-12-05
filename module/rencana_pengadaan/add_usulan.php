@@ -7,14 +7,39 @@ include "../../config/config.php";
 			VALUES ('$_POST[program]','$_POST[kegiatan]','$_POST[output]',
 					'$_POST[KodeSatker]','".addslashes(html_entity_decode($_POST[no_usul]))."',
 					'$_POST[tgl_usul]','1')";*/
+//program					
+$queryProgram ="SELECT kd_program,program FROM program WHERE idp='{$_POST[program]}'";
+$row = mysql_fetch_assoc(mysql_query($queryProgram));
+$dataProgram = $row;
+$KDPROGRAM = $dataProgram['kd_program'];
+$NMPROGRAM = $dataProgram['program'];
+
+//kegiatan
+$queryKegiatan ="SELECT kd_kegiatan,kegiatan FROM kegiatan WHERE idk='{$_POST[kegiatan]}'";
+$row2 = mysql_fetch_assoc(mysql_query($queryKegiatan));
+$dataKegiatan = $row2;
+$KDGIAT = $dataKegiatan['kd_kegiatan'];
+$NMGIAT = $dataKegiatan['kegiatan'];
+
+//output
+$queryKegiatan ="SELECT kd_output,output FROM output WHERE idot='{$_POST[output]}'";
+$row3 = mysql_fetch_assoc(mysql_query($queryKegiatan));
+$dataOutput = $row3;
+$KDOUTPUT = $dataOutput['kd_output'];
+$NMOUTPUT = $dataOutput['output'];
+
+/*pr($KDPROGRAM);
+pr($NMPROGRAM);
+
+pr($KDKEGIATAN);
+pr($NMKEGIATAN);*/
 
 $query	  = "INSERT INTO usulan_rencana_pengadaaan (idp,idk,idot,kodeSatker,
-						 no_usul,tgl_usul) 
+						 no_usul,tgl_usul,KDPROGRAM,NMPROGRAM,KDGIAT,NMGIAT,KDOUTPUT,NMOUTPUT) 
 			VALUES ('$_POST[program]','$_POST[kegiatan]','$_POST[output]',
 					'$_POST[KodeSatker]','".addslashes(html_entity_decode($_POST[no_usul]))."',
-					'$_POST[tgl_usul]')";					
-//pr($query);
-//exit;
+					'$_POST[tgl_usul]','{$KDPROGRAM}','{$NMPROGRAM}','{$KDGIAT}','{$NMGIAT}','{$KDOUTPUT}','{$NMOUTPUT}')";					
+
 $exec =  mysql_query($query);
   	echo "<script>
 			alert('Data Berhasil Disimpan');

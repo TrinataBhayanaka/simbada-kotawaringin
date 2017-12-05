@@ -32,22 +32,49 @@ $tahun  = $TAHUN_AKTIF;
 	   $('#kodeKelompok').on('change', function(){
 		var kodeKelompok = $('#kodeKelompok').val();
 		var KodeSatker = $('#satker').val();
-			
-			if(kodeKelompok !='' && KodeSatker !='' ){
-			$.post('../../function/api/asetOptml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
-					document.getElementById('jml_optml').value = result; 
-				})
-	 	 	}
+		var idus = $('#idus').val();
+		/*console.log(kodeKelompok);
+		console.log(KodeSatker);
+		console.log(idus);*/
+		
+		//validate jenis aset
+		if(kodeKelompok !='' && idus !='' ){
+		$.post('../../function/api/kodeKelompokexist.php', {kodeKelompok:kodeKelompok,idus:idus}, function(result){
+			//console.log(result);
+			if(result == 1){
+				//alert('Kode Program Telah Tersedia');
+				$("#message2").show();
+				$('#info2').html('Jenis Aset telah digunakan');
+	            $('#info2').css("color","red");
+				$('#simpan').attr('disabled','disabled');
+	            $('#simpan').css("background","grey");
+			}else{
+				//console.log("here");
+				$("#message2").show();
+				$('#info2').html('Jenis Aset dapat digunakan'); 
+				$('#info2').css("color","green");
+				$('#simpan').removeAttr('disabled');
+			    $('#simpan').css("background","#04c");
+			}
+		})	
+		}	
+		//kebutuhan optimal
+		if(kodeKelompok !='' && KodeSatker !='' ){
+		$.post('../../function/api/asetOptml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
+				document.getElementById('jml_optml').value = result; 
+			})
+ 	 	}
 		});
 
 	   $('#jml_max').on('change', function(){
 		var jml_max = $('#jml_max').val();
 		var jml_optml = $('#jml_optml').val();
 		var hasil = parseInt(jml_max) - parseInt(jml_optml);
-			if(parseInt(hasil) <= 0){
+			//if(parseInt(hasil) <= 0){
+			if(parseInt(hasil) < 0){
 				//document.getElementById('jml_rill').value = 0; 
 				$('#jml_rill').val('0');
-				alert("Kebutuhan Barang Optimal > Kebutuhan Maksimal");
+				alert("Kebutuhan Barang Maksimal > Kebutuhan Optimal");
 				$('#simpan').attr('disabled','disabled');
             	$('#simpan').css("background","grey");
 			}else{
@@ -100,6 +127,13 @@ $tahun  = $TAHUN_AKTIF;
 			    </span>
 				<span class="text">Validasi</span>
 			</a>
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/print_perencanaan_pengadaan.php">
+					<span class="fa-stack fa-lg">
+				      <i class="fa fa-circle fa-stack-2x"></i>
+				      <i class="fa fa-inverse fa-stack-1x">4</i>
+				    </span>
+					<span class="text">Cetak Dokumen Perencanaan Pengadaan</span>
+				</a>
 		</div>	
 		<section class="formLegend">
 		<form name="myform" method="post" action="add_usulan_aset.php">
@@ -108,6 +142,12 @@ $tahun  = $TAHUN_AKTIF;
 					<?php selectAset('kodeKelompok','255',true,false,'required'); ?>
 				</li>
 				<br/>
+				<li style="display:none" id="message2">
+                	<span  class="span2">&nbsp;</span>
+                		<div class="">
+                  	<em id="info2"></em>
+                </div>
+                </li>
 				<li>
 					<p><b>Usulan Barang Milik Daerah</b></p>
 				</li>

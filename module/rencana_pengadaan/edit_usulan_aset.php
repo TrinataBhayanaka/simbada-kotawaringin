@@ -113,12 +113,19 @@ $data = mysql_fetch_assoc($dataUsulan);
 				    </span>
 					<span class="text">Penetapan Rencana Pengadaan</span>
 				</a>
-		<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">3</i>
 			    </span>
 				<span class="text">Validasi</span>
+			</a>
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/print_perencanaan_pengadaan.php">
+					<span class="fa-stack fa-lg">
+				      <i class="fa fa-circle fa-stack-2x"></i>
+				      <i class="fa fa-inverse fa-stack-1x">4</i>
+				    </span>
+					<span class="text">Cetak Dokumen Perencanaan Pengadaan</span>
 			</a>
 		</div>	
 		<section class="formLegend">

@@ -7,7 +7,10 @@ if($_GET['flag'] == 1){
 					status_usulan 	= '1'
 				WHERE idus 	= '$_GET[idus]'";
 	$exec =  mysql_query($query);
-	  	
+	$query2 = "UPDATE usulan_rencana_pemeliharaan_aset SET 
+					status_usulan 	= '1'
+				WHERE idus 	= '$_GET[idus]'";
+	$exec2 =  mysql_query($query2);  	
 	echo "<script>
 				alert('Pengajuan Usulan Diproses');
 		</script>";
@@ -22,6 +25,11 @@ if($_GET['flag'] == 1){
 					status_usulan 	= '0'
 				WHERE idus 	= '$_GET[idus]'";
 	$exec =  mysql_query($query);
+
+	$query2 = "UPDATE usulan_rencana_pemeliharaan_aset SET 
+					status_usulan 	= '0'
+				WHERE idus 	= '$_GET[idus]'";
+	$exec2 =  mysql_query($query2);
 	  	
 	echo "<script>
 				alert('Pengajuan Usulan Dibatalkan');
