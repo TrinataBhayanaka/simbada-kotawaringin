@@ -142,6 +142,15 @@ $hit = count($ex);
           <td style=\"width: 873px; font-weight: bold;\">$UPB</td>
         </tr>";
 }*/
+if($hit == 1){
+	$head_csv="$Bidang";
+}elseif($hit == 2){
+	$head_csv="$Bidang\n$UnitOrganisasi";
+}elseif($hit == 3){
+	$head_csv="$Bidang\n$UnitOrganisasi\n$SubUnitOrganisasi";
+}elseif($hit == 4){
+	$head_csv="$Bidang\n$UnitOrganisasi\n$SubUnitOrganisasi\n$UPB";
+}
 $header = "<tr>
           <td style=\"width: 200px; font-weight: bold; text-align: left;\">BIDANG</td>
           <td style=\"text-align: center; font-weight: bold; width: 10px;\">:</td>
@@ -186,6 +195,8 @@ if($tipeAset == 'all'){
 //exit();
 $hit_loop = count($data);
 $i = 0;
+$csv.= "REKAPITULASI RINCIAN BARANG KE NERACA
+    \n$tahun_neraca\n$nama_kab\n$nama_prov\n$head_csv\n";
 $head ="<head>
 			  <meta content=\"text/html; charset=UTF-8\"http-equiv=\"content-type\">
 			  <title></title>
@@ -220,6 +231,28 @@ $head ="<head>
 			  </tbody>
 			</table>
 				<br>";
+
+				$csv.="Kode|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=Uraian."|";
+		$csv.="Jumlah Awal|";
+		$csv.="Nilai Awal|";
+		$csv.="Penyusutan Pertahun|";
+		$csv.="Akumulasi Penyusutan"."|";
+		$csv.="Nilai Buku Awal "."|";
+		$csv.="Mutasi Nilai Kurang"."|";
+		$csv.="Mutasi Nilai Tambah"."|";
+		$csv.="Mutasi Akumulasi Kurang"."|";
+		$csv.="Mutasi Akumulasi Tambah"."|";
+		$csv.="Beban Penyusutan|";
+		$csv.="Jml Akhir"."|";
+		$csv.="Nilai Akhir"."|";
+		$csv.="Penyusutan Pertahun Akhir"."|";
+		$csv.="Akumulasi Penyusutan Akhir"."|";
+		$csv.="Nilai Buku Akhir"."\n";
 $head.=" <table style=\"width: 100%; text-align: left; margin-left: auto; margin-right: auto; border-collapse:collapse\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\; \">
 	<tr>
 		<td rowspan='2' colspan='5' style=\" text-align: center; font-weight: bold; width: \">Kode</td>
@@ -377,6 +410,27 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 						$pp_total_akhir += $gol[pp_akhir];
 						$ap_total_akhir += $gol[ap_akhir];
 						$nb_total_akhir += $gol[nb_akhir];
+                $csv.=$gol[Kelompok]."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=$gol[Uraian]."|";
+		$csv.=$gol[jml]."|";
+		$csv.=$gol[nilai]."|";
+		$csv.=$gol[pp]."|";
+		$csv.=$gol[ap]."|";
+		$csv.=$gol[nb]."|";
+		$csv.=$gol[mutasi_nilai_kurang]."|";
+		$csv.=$gol[mutasi_nilai_tambah]."|";
+		$csv.=$gol[mutasi_ap_kurang]."|";
+		$csv.=$gol[mutasi_ap_tambah]."|";
+		$csv.=$bp."|";
+		$csv.=$gol[jml_akhir]."|";
+		$csv.=$gol[nilai_akhir]."|";
+		$csv.=$gol[pp_akhir]."|";
+		$csv.=$gol[ap_akhir]."|";
+		$csv.=$gol[nb_akhir]."\n";
 		
 		$body.="<tr>
 					<td style=\"font-weight: bold;\">{$gol[Kelompok]}</td>
@@ -404,7 +458,8 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[ap_akhir],2,",",".")."</td>
 					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nb_akhir],2,",",".")."</td> 
 				</tr>";	
-				
+			
+      if($levelAset >= 3 || $levelAset == 1)
 			foreach($gol['Bidang'] as $bidang)
 			{	
 			   if($bidang[ap]==""||$bidang[ap]==0)
@@ -416,6 +471,28 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
                            
 				if($bidang[ap_akhir]==""||$bidang[ap_akhir]==0)
 					$bidang[nb_akhir]=$bidang[nilai_akhir];
+                                
+                                $csv.=""."|";
+		$csv.=$bidang[Kelompok]."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=$bidang[Uraian]."|";
+		$csv.=$bidang[jml]."|";
+		$csv.=$bidang[nilai]."|";
+		$csv.=$bidang[pp]."|";
+		$csv.=$bidang[ap]."|";
+		$csv.=$bidang[nb]."|";
+		$csv.=$bidang[mutasi_nilai_kurang]."|";
+		$csv.=$bidang[mutasi_nilai_tambah]."|";
+		$csv.=$bidang[mutasi_ap_kurang]."|";
+		$csv.=$bidang[mutasi_ap_tambah]."|";
+		$csv.=$bp_bidang."|";
+		$csv.=$bidang[jml_akhir]."|";
+		$csv.=$bidang[nilai_akhir]."|";
+		$csv.=$bidang[pp_akhir]."|";
+		$csv.=$bidang[ap_akhir]."|";
+		$csv.=$bidang[nb_akhir]."\n";
 					$body.="<tr>
 								<td>&nbsp;</td>
 								<td style=\"font-weight: bold;\">{$bidang[Kelompok]}</td>
@@ -442,6 +519,7 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[ap_akhir],2,",",".")."</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nb_akhir],2,",",".")."</td> 
 							</tr>";	
+        if($levelAset >= 4 || $levelAset == 1)
 				foreach($bidang['Kel'] as $Kelompok)
 				{	
 				   if($Kelompok[ap]==""||$Kelompok[ap]==0)
@@ -454,6 +532,27 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
                                         //$bp_kelompok=$Kelompok[ap_akhir]-$Kelompok[ap_awal]-$Kelompok[mutasi_ap_tambah]+$Kelompok[mutasi_ap_kurang];
                                         $bp_kelompok=$Kelompok[bp];
                                         
+                                        $csv.=""."|";
+		$csv.=""."|";
+		$csv.=$Kelompok[Kelompok]."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=$Kelompok[Uraian]."|";
+		$csv.=$Kelompok[jml]."|";
+		$csv.=$Kelompok[nilai]."|";
+		$csv.=$Kelompok[pp]."|";
+		$csv.=$Kelompok[ap]."|";
+		$csv.=$Kelompok[nb]."|";
+		$csv.=$Kelompok[mutasi_nilai_kurang]."|";
+		$csv.=$Kelompok[mutasi_nilai_tambah]."|";
+		$csv.=$Kelompok[mutasi_ap_kurang]."|";
+		$csv.=$Kelompok[mutasi_ap_tambah]."|";
+		$csv.=$bp_kelompok."|";
+		$csv.=$Kelompok[jml_akhir]."|";
+		$csv.=$Kelompok[nilai_akhir]."|";
+		$csv.=$Kelompok[pp_akhir]."|";
+		$csv.=$Kelompok[ap_akhir]."|";
+		$csv.=$Kelompok[nb_akhir]."\n";      
 					$body.="<tr>
 								<td>&nbsp;</td>
 								<td>&nbsp;</td>
@@ -480,6 +579,7 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[nb_akhir],2,",",".")."</td> 
 						
                                         </tr>";
+          if($levelAset >= 5 || $levelAset == 1)
 					foreach($Kelompok['Sub'] as $Sub)
 					{	
 						if($Sub[ap]==""||$Sub[ap]==0)
@@ -492,6 +592,28 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
                                                 //$bp_sub=$Sub[ap_akhir]-$Sub[ap_awal]-$Sub[mutasi_ap_tambah]+$Sub[mutasi_ap_kurang];
                                                 $bp_sub=$Sub[bp];
                                                 
+                                                
+                                                $csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=$Sub[Kelompok]."|";
+		$csv.=""."|";
+		$csv.=$Sub[Uraian]."|";
+		$csv.=$Sub[jml]."|";
+		$csv.=$Sub[nilai]."|";
+		$csv.=$Sub[pp]."|";
+		$csv.=$Sub[ap]."|";
+		$csv.=$Sub[nb]."|";
+		$csv.=$Sub[mutasi_nilai_kurang]."|";
+		$csv.=$Sub[mutasi_nilai_tambah]."|";
+		$csv.=$Sub[mutasi_ap_kurang]."|";
+		$csv.=$Sub[mutasi_ap_tambah]."|";
+		$csv.=$bp_sub."|";
+		$csv.=$Sub[jml_akhir]."|";
+		$csv.=$Sub[nilai_akhir]."|";
+		$csv.=$Sub[pp_akhir]."|";
+		$csv.=$Sub[ap_akhir]."|";
+		$csv.=$Sub[nb_akhir]."\n"; 
 							$body.="<tr>
 										<td>&nbsp;</td>
 										<td>&nbsp;</td>
@@ -519,6 +641,7 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[nb_akhir],2,",",".")."</td> 
 
 									</tr>";
+            if($levelAset >= 6 || $levelAset == 1)
 						foreach($Sub['SubSub'] as $SubSub)
 						{	 
 							if($SubSub[ap]==""||$SubSub[ap]==0)
@@ -531,6 +654,28 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
                                                         //$bp_subsub=$SubSub[ap_akhir]-$SubSub[ap_awal]-$SubSub[mutasi_ap_tambah]+$SubSub[mutasi_ap_kurang];
                                                        $bp_subsub=$SubSub[bp];
                                                         //$SubSub[mutasi_ap_tambah]-$SubSub[mutasi_ap_kurang];
+                                                       
+                                                       $csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.=$SubSub[Kelompok]."|";
+		$csv.=$SubSub[Uraian]."|";
+		$csv.=$SubSub[jml]."|";
+		$csv.=$SubSub[nilai]."|";
+		$csv.=$SubSub[pp]."|";
+		$csv.=$SubSub[ap]."|";
+		$csv.=$SubSub[nb]."|";
+		$csv.=$SubSub[mutasi_nilai_kurang]."|";
+		$csv.=$SubSub[mutasi_nilai_tambah]."|";
+		$csv.=$SubSub[mutasi_ap_kurang]."|";
+		$csv.=$SubSub[mutasi_ap_tambah]."|";
+		$csv.=$bp_sub."|";
+		$csv.=$SubSub[jml_akhir]."|";
+		$csv.=$SubSub[nilai_akhir]."|";
+		$csv.=$SubSub[pp_akhir]."|";
+		$csv.=$SubSub[ap_akhir]."|";
+		$csv.=$SubSub[nb_akhir]."\n";
                                                         
 								$body.="<tr>
 											<td>&nbsp;</td>
@@ -572,6 +717,29 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 	
 	
 	if($i == $hit_loop){
+            
+            	$csv.=""."|";
+		$csv.=""."|";
+		$csv.=""."|";
+		$csv.="'"."|";
+		$csv.=""."|";
+		$csv.="|";
+		$csv.=$jml_total."|";
+		$csv.=$np_total."|";
+		$csv.=$pp_total."|";
+		$csv.=$ap_total."|";
+		$csv.=$nb_total."|";
+		$csv.=$mutasi_nilai_kurang."|";
+		$csv.=$mutasi_nilai_tambah."|";
+		$csv.=$mutasi_ap_kurang."|";
+		$csv.=$mutasi_ap_tambah."|";
+		$csv.=$bp_total."|";
+		$csv.=$jml_total_akhir."|";
+		$csv.=$nilai_total_akhir."|";
+		$csv.=$pp_total_akhir."|";
+		$csv.=$ap_total_akhir."|";
+		$csv.=$nb_total_akhir."\n";
+                
 		$foot="<tr>
 				<td colspan = \"6\" style=\"text-align: center; font-weight: bold;\">Total</td>
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($jml_total,0,",",".")."</td>
@@ -923,7 +1091,7 @@ if($gol == 'mesin_ori'){
 if($tipe=="3"){
 	echo $serviceJson;
 	exit;
-}elseif($tipe!="2"){
+}elseif($tipe=="1"){
 $REPORT->show_status_download_kib();
 $mpdf=new mPDF('','','','',15,15,16,16,9,9,'L');
 $mpdf->AddPage('L','','','','',15,15,16,16,9,9);
@@ -953,6 +1121,15 @@ $mpdf->Output("$namafile",'F');
 $namafile_web="$url_rewrite/report/output/Rekapitulasi-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca$waktu.pdf";
 echo "<script>window.location.href='$namafile_web';</script>";
 exit;
+}
+elseif($tipe=="4")
+{
+
+	$waktu=date("d-m-y_h:i:s");
+	$filename ="Rekapitulasi-Detail-Rincian-Mutasi-Barang-Ke-Neraca_$skpd_id-$tahun_neraca-$waktu.csv";
+	header('Content-type: text/csv');
+	header('Content-Disposition: attachment; filename='.$filename);
+	echo $csv; 
 }
 else
 {
