@@ -4982,7 +4982,7 @@ class core_api_report extends DB {
 							$queryok="SELECT a.kodeKelompok, count(a.Aset_ID) as jml, sum(a.NilaiPerolehan) as Nilai,k.Uraian 
 										FROM aset_lain_3 as a, kelompok as k 
 										WHERE a.kodeKelompok = k.Kode and a.kodeSatker LIKE '$Satker_ID' 
-										AND (a.kondisi = 3 or a.kondisi = 4) AND a.kodeKelompok like '$data%' and a.TglPerolehan >= '$tglAwalDefault' and a.TglPerolehan <= '$tglAkhirDefault' and a.TglPembukuan >= '$tglAwalDefault' and a.TglPembukuan <= '$tglAkhirDefault' and a.	Status_Validasi_Barang = 1 and a.kodeLokasi like '12%' 
+										AND (a.kondisi = 3 or a.kondisi = 4 or a.kondisi = 5) AND a.kodeKelompok like '$data%' and a.TglPerolehan >= '$tglAwalDefault' and a.TglPerolehan <= '$tglAkhirDefault' and a.TglPembukuan >= '$tglAwalDefault' and a.TglPembukuan <= '$tglAkhirDefault' and a.	Status_Validasi_Barang = 1 and a.kodeLokasi like '12%' 
 										$KodeKa_lain
 										group by a.kodeKelompok";
 							//	Status_Validasi_Barang = 1		
@@ -5158,7 +5158,7 @@ class core_api_report extends DB {
 								}elseif($data2 == '06.01' || $data2 == '06.20'){
 									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM kdp_ori WHERE kodeKelompok like '$data2%' and $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1";
 								}elseif($data2 == '07.21'){
-									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM aset_lain_3 WHERE $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and (kondisi ='3' or kondisi ='4') and Status_Validasi_Barang =1 $KodeKaCondt1 and kodeKelompok not like '07.24%'";
+									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM aset_lain_3 WHERE $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and (kondisi ='3' or kondisi ='4' or kondisi ='5') and Status_Validasi_Barang =1 $KodeKaCondt1 and kodeKelompok not like '07.24%'";
 								}elseif($data2 == '07.24'){
 									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM aset_lain_3 WHERE kodeKelompok like '$data2%'  and $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and kondisi ='3' and Status_Validasi_Barang =1  $KodeKaCondt1";
 									//	Status_Validasi_Barang = 1
@@ -5187,7 +5187,7 @@ class core_api_report extends DB {
 								}elseif($data2 == '06.01' || $data2 == '06.20'){
 									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM kdp_ori WHERE kodeKelompok like '$data2%' and $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1";
 								}elseif($data2 == '07.21'){
-									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM aset_lain_3 WHERE $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and (kondisi ='3' or kondisi ='4') and Status_Validasi_Barang =1  
+									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM aset_lain_3 WHERE $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and (kondisi ='3' or kondisi ='4' or kondisi ='5') and Status_Validasi_Barang =1  
 												   $KodeKaCondt1 and kodeKelompok not like '07.24%'";
 								}elseif($data2 == '07.24'){
 									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM aset_lain_3 WHERE kodeKelompok like '$data2%'  and $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and kondisi ='3' and Status_Validasi_Barang =1  
@@ -5233,7 +5233,7 @@ class core_api_report extends DB {
 									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM kdp_ori WHERE kodeKelompok like '$data2%' and $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' and Status_Validasi_Barang =1 and StatusTampil = 1 ";
 								}elseif($data2 == '07.21'){
 									$queryresult ="SELECT sum(NilaiPerolehan) as nilai, count(Aset_ID) as jumlah FROM aset_lain_3 WHERE $paramSatker and kodeLokasi like '12%' and TglPerolehan >='$tglAwalDefault' and TglPerolehan <='$tglAkhirDefault' and TglPembukuan >='$tglAwalDefault' and TglPembukuan <='$tglAkhirDefault' 
-												   and (kondisi ='3' or kondisi ='4') and Status_Validasi_Barang =1  $KodeKaCondt1
+												   and (kondisi ='3' or kondisi ='4' or kondisi ='5') and Status_Validasi_Barang =1  $KodeKaCondt1
 												   and kodeKelompok not like '07.24%'";
 									//	Status_Validasi_Barang = 1
 								}elseif($data2 == '07.24'){
@@ -5651,7 +5651,7 @@ class core_api_report extends DB {
 				WHERE $paramSatkr
 				and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault'
 				and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan < '$tglAkhirDefault' 
-				and Status_Validasi_Barang =1 and kodeLokasi like '12%' and (kondisi = 3 or kondisi = 4)  $KodeKaCondt1 ";
+				and Status_Validasi_Barang =1 and kodeLokasi like '12%' and (kondisi = 3 or kondisi = 4 or kondisi = 5)  $KodeKaCondt1 ";
 
 			$query_extra_02= "SELECT sum(NilaiPerolehan) as nilai FROM mesin_extra
 							WHERE $paramSatkr 
@@ -5898,7 +5898,7 @@ class core_api_report extends DB {
 				WHERE kodeSatker = '$satker_id' 
 				and TglPerolehan >= '$tglAwalDefault' AND TglPerolehan <= '$tglAkhirDefault'
 				and TglPembukuan >= '$tglAwalDefault' AND TglPembukuan < '$tglAkhirDefault' 
-				and Status_Validasi_Barang =1 and (kondisi = 3 or kondisi = 4) and kodeLokasi like '12%' $KodeKaCondt1";	
+				and Status_Validasi_Barang =1 and (kondisi = 3 or kondisi = 4 or kondisi = 5) and kodeLokasi like '12%' $KodeKaCondt1";	
 			
 			//edit upb untuk extra
 			$query_extra_02= "SELECT sum(NilaiPerolehan) as nilai FROM mesin_extra

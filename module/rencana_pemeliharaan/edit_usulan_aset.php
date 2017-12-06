@@ -33,11 +33,9 @@ $data = mysql_fetch_assoc($dataUsulan);
 		    }
 		});
 
-	    var kodeKelompok = $('#paramkodekelompok').val();
-	    //console.log(kodeKelompok);
+	    /*var kodeKelompok = $('#paramkodekelompok').val();
 	    var KodeSatker = $('#satker').val();
-		//console.log(KodeSatker);
-	    
+		
 		if(kodeKelompok !='' && KodeSatker !='' ){
 			$.post('../../function/api/asetOptmlPml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
 					//console.log(result);
@@ -46,7 +44,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 					document.getElementById('kondisi_rusak_ringan').value = result[0].RR;
 
 				},"JSON")
-	 	 	}
+	 	 	}*/
 		
 
 	   $('#kodeKelompok').on('change', function(){
@@ -117,7 +115,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 		<form name="myform" method="post" action="update_usulan_aset.php">
 			<ul>
 				<li>
-					<?php selectAset('kodeKelompok','255',true,(isset($data[kodeKelompok])) ? $data[kodeKelompok]: false,'required'); ?>
+					<?php selectAset('kodeKelompok','255',true,(isset($data[kodeKelompok])) ? $data[kodeKelompok]: false,'readonly'); ?>
 				</li>
 				<br/>
 				<li><span class="span2">&nbsp;</span>
@@ -146,16 +144,24 @@ $data = mysql_fetch_assoc($dataUsulan);
 				</li>
 				<li>
 					<span class="span2">Jml Kondisi Baik</span>
-					<input type="text" class="span1" name="kondisi_baik" id="kondisi_baik" value="" readonly=""/>
+					<input type="text" class="span1" name="kondisi_baik" id="kondisi_baik" value="<?=$data[jml_baik]?>" readonly=""/>
 				</li>
 				<li>
 					<span class="span2">Jml Kondisi Rusak Ringan</span>
-					<input type="text" class="span1" name="kondisi_rusak_ringan" id="kondisi_rusak_ringan" value="" readonly=""/>
+					<input type="text" class="span1" name="kondisi_rusak_ringan" id="kondisi_rusak_ringan" value="<?=$data[jml_rusak_ringan]?>" readonly=""/>
 				</li>
 				<li>
 					<span class="span2">Satuan Optimal</span>
 					<input type="text" name="satuan_optml" id="satuan_optml" 
 					value="<?=$data[satuan_optml]?>" readonly=""/>
+				</li>
+				<li>
+					<span class="span2">Status Barang</span>
+					<input type="text" name="status_barang" id="status_barang" value="<?=$data[status_barang]?>" />
+				</li>
+				<li>
+					<span class="span2">Nama Pemelihara</span>
+					<input type="text" name="pemeliharaan" id="pemeliharaan" value="<?=$data[pemeliharaan]?>" />
 				</li>
 				<li>
 					<span class="span2">Keterangan</span>

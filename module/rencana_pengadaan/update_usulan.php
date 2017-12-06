@@ -2,14 +2,23 @@
 include "../../config/config.php";
 //update pejabat
 //pr($_POST);
-$query	  = "UPDATE usulan_rencana_pengadaaan SET 
+/*$query	  = "UPDATE usulan_rencana_pengadaaan SET 
 				no_usul 	= '$_POST[no_usul]',
 				tgl_usul 	= '$_POST[tgl_usul]',
 				kodeSatker 		= '$_POST[KodeSatker]',
 				idp 			= '$_POST[program]',
 				idk 			= '$_POST[kegiatan]',
-				idot 			= '$_POST[output]'
+				idot 			= '$_POST[output]',
+				tahun			= '$_POST[tahun]'
+			WHERE idus 	= '$_POST[idus]'";*/
+
+$query	  = "UPDATE usulan_rencana_pengadaaan SET 
+				no_usul 	= '$_POST[no_usul]',
+				tgl_usul 	= '$_POST[tgl_usul]',
+				kodeSatker 		= '$_POST[KodeSatker]',
+				tahun			= '$_POST[tahun]'
 			WHERE idus 	= '$_POST[idus]'";
+
 //pr($query);
 //exit;			
 $exec =  mysql_query($query);

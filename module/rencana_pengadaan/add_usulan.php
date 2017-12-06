@@ -35,10 +35,10 @@ pr($KDKEGIATAN);
 pr($NMKEGIATAN);*/
 
 $query	  = "INSERT INTO usulan_rencana_pengadaaan (idp,idk,idot,kodeSatker,
-						 no_usul,tgl_usul,KDPROGRAM,NMPROGRAM,KDGIAT,NMGIAT,KDOUTPUT,NMOUTPUT) 
+						 no_usul,tgl_usul,KDPROGRAM,NMPROGRAM,KDGIAT,NMGIAT,KDOUTPUT,NMOUTPUT,tahun) 
 			VALUES ('$_POST[program]','$_POST[kegiatan]','$_POST[output]',
 					'$_POST[KodeSatker]','".addslashes(html_entity_decode($_POST[no_usul]))."',
-					'$_POST[tgl_usul]','{$KDPROGRAM}','{$NMPROGRAM}','{$KDGIAT}','{$NMGIAT}','{$KDOUTPUT}','{$NMOUTPUT}')";					
+					'$_POST[tgl_usul]','{$KDPROGRAM}','{$NMPROGRAM}','{$KDGIAT}','{$NMGIAT}','{$KDOUTPUT}','{$NMOUTPUT}','$_POST[tahun]')";					
 
 $exec =  mysql_query($query);
   	echo "<script>

@@ -39,12 +39,22 @@ $data = mysql_fetch_assoc($dataUsulan);
 			document.getElementById('satuan_optml').value = satuan_usul_rev; 
 		});
 		
+	   $('#jml_usul_rev').on('change', function(){
+	   	
+	   		var jml_usul_rev = $('#jml_usul_rev').val();
+	   		var jml_optml = $('#jml_optml').val();
+	   		if(parseInt(jml_usul_rev) > parseInt(jml_optml)){
+	   			alert("jumlah rencana > jumlah optimal");
+	   			$('#simpan').attr('disabled','disabled');
+		        $('#simpan').css("background","grey");
+	   		}else{
+	   			$('#simpan').removeAttr('disabled');
+				$('#simpan').css("background","#04c");
+	   		}
 
-	   var kodeKelompok = $('#paramkodekelompok').val();
-	    //console.log(kodeKelompok);
+	   	});
+	   	/*var kodeKelompok = $('#paramkodekelompok').val();
 	    var KodeSatker = $('#satker').val();
-		console.log(KodeSatker);
-	    
 		if(kodeKelompok !='' && KodeSatker !='' ){
 			$.post('../../function/api/asetOptmlPml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
 					//console.log(result);
@@ -53,7 +63,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 					document.getElementById('kondisi_rusak_ringan').value = result[0].RR;
 
 				},"JSON")
-	 	 	}
+	 	 	}*/
 	});
 	</script>
 	<section id="main">
@@ -129,11 +139,11 @@ $data = mysql_fetch_assoc($dataUsulan);
 				</li>
 				<li>
 					<span class="span2">Jml Kondisi Baik</span>
-					<input type="text" class="span1" name="kondisi_baik" id="kondisi_baik" value="" readonly=""/>
+					<input type="text" class="span1" name="kondisi_baik" id="kondisi_baik" value="<?=$data[jml_baik]?>" readonly=""/>
 				</li>
 				<li>
 					<span class="span2">Jml Kondisi Rusak Ringan</span>
-					<input type="text" class="span1" name="kondisi_rusak_ringan" id="kondisi_rusak_ringan" value="" readonly=""/>
+					<input type="text" class="span1" name="kondisi_rusak_ringan" id="kondisi_rusak_ringan" value="<?=$data[jml_rusak_ringan]?>" readonly=""/>
 				</li>
 				<li>
 					<span class="span2">Satuan Optimal</span>
@@ -154,12 +164,16 @@ $data = mysql_fetch_assoc($dataUsulan);
 					value="<?=$data[satuan_usul_rev]?>" required />
 				</li>
 				<li>
-					<span class="span2">Keterangan</span>
-					<textarea rows="3" cols="30" name="ket" ><?=$data[ket]?></textarea>
+					<span class="span2">Status Barang</span>
+					<textarea rows="3" cols="30" name="status_barang" ><?=$data[status_barang]?></textarea>
 				</li>
 				<li>
-					<span class="span2">Nama Pemeliharaan</span>
+					<span class="span2">Nama Pemelihara</span>
 					<textarea rows="3" cols="30" name="pemeliharaan" ><?=$data[pemeliharaan]?></textarea>
+				</li>
+				<li>
+					<span class="span2">Keterangan</span>
+					<textarea rows="3" cols="30" name="ket" ><?=$data[ket]?></textarea>
 				</li>
 				<br/>
 				<li>

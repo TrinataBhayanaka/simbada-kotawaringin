@@ -96,7 +96,7 @@ $dataKetkegiatan = mysql_fetch_assoc($ketkegiatan);
 					<span class="span2">Tahun</span>
 					<input name="tahun" id="tahun" class="span1"  type="text" value="<?=$tahun;?>" readonly>
 				</li>
-				<?=selectSatker('kodeSatker','257',true,(isset($satker)) ? $satker: false,'readonly');?>
+				<?=selectSatker('kodeSatker','470',true,(isset($satker)) ? $satker: false,'readonly');?>
 				<br/>
               	<li>
 					<span class="span2">Program</span>
@@ -124,7 +124,7 @@ $dataKetkegiatan = mysql_fetch_assoc($ketkegiatan);
               	</li>
 				<li>
 					<span class="span2">Kode Kegiatan</span>
-					<input name="kd_kegiatan" id="kd_kegiatan" class="span1"  type="text" value="<?=$dataKetkegiatan['kd_kegiatan']?>">
+					<input name="kd_kegiatan" id="kd_kegiatan" class="span2"  type="text" value="<?=$dataKetkegiatan['kd_kegiatan']?>">
 				</li>
 				<li>
 					<span class="span2">Kegiatan</span>

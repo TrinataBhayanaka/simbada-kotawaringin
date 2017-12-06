@@ -21,7 +21,7 @@ $satker = $_GET['satker'];
 $program = mysql_query("select * from program where KodeSatker = '$satker'");
 $output = mysql_query("select * from output where idot = '$idot'");
 $getOutput = mysql_fetch_assoc($output);
-pr($getOutput);
+//pr($getOutput);
 ?>
 	<script>
 	jQuery(function($){
@@ -171,7 +171,7 @@ pr($getOutput);
               	</li>
 				<li>
 					<span class="span2">Kode Output</span>
-					<input name="kd_output" id="kd_output" class="span1"  type="text" value="<?=$getOutput[kd_output]?>" 
+					<input name="kd_output" id="kd_output" class="span2"  type="text" value="<?=$getOutput[kd_output]?>" 
 					>
 				</li>
 				<li>

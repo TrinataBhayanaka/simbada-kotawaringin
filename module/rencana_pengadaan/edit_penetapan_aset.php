@@ -69,16 +69,17 @@ $data = mysql_fetch_assoc($dataUsulan);
 				$("#jml_usul_rev").prop("readonly", true);
 				$("#satuan_usul_rev").prop("readonly", true);
 				$('.infoTolak').show();
-      		//$('#infoTolak').html('Optimalisasi BMD (Revisi Jml Maksimal < Jml Optimal)');
-      		$('#infoTolak').html('Optimalisasi BMD');
-            $('#infoTolak').css("color","red");
-            	//$("#simpan").prop("disabled", true);	
+      			//$('#infoTolak').html('Optimalisasi BMD (Revisi Jml Maksimal < Jml Optimal)');
+      			$('#infoTolak').html('Optimalisasi BMD (Revisi Jml Maksimal < Jml Optimal)');
+            	$('#infoTolak').css("color","red");
+            	$("#simpan").prop("disabled", true);	
 			}else{
 				document.getElementById('jml_rill_rev').value = hasil;
 				//unreadonly jml dan satuan rencana
 				$("#jml_usul_rev").prop("readonly", false);
 				$("#satuan_usul_rev").prop("readonly", false); 
 				$('.infoTolak').hide();
+				$("#simpan").prop("disabled", false);	
 			}	
 		});
 
@@ -95,6 +96,35 @@ $data = mysql_fetch_assoc($dataUsulan);
 	   			$("#simpan").prop("disabled", false);
 	      		
 	   		}
+	   	});
+
+	   $('#jml_ekstra_rev').on('change', function(){
+	   		//jml_intra
+	   		var jml_intra = $('#jml_intra').val();
+	   		var jml_ekstra = $('#jml_ekstra_rev').val();
+	   		var hasil = parseInt(jml_intra) + parseInt(jml_ekstra);
+	   		document.getElementById('jml_optml').value = hasil; 
+
+	   		//validate
+	   		var jml_optml = $('#jml_optml').val();
+	   		var jml_max = $('#jml_max_rev').val();
+	   		if(jml_max){
+	   			var hasil2 = parseInt(jml_max) - parseInt(jml_optml);
+		   		if(parseInt(hasil2) <= 0){
+					document.getElementById('jml_rill').value = 0;
+					alert("Kebutuhan Barang Maksimal < Kebutuhan Optimal");
+					$('#simpan').attr('disabled','disabled');
+	            	$('#simpan').css("background","grey"); 
+				}else{
+					document.getElementById('jml_rill').value = hasil2; 
+					$('#simpan').removeAttr('disabled');
+					$('#simpan').css("background","#04c");
+				}	
+	   		}else{
+	   			//nothing todo
+	   		}
+	   		
+
 	   	});
 
 	   $('#satuan_usul_rev').on('change', function(){
@@ -170,6 +200,31 @@ $data = mysql_fetch_assoc($dataUsulan);
 					value="<?=$data[satuan_usul]?>" readonly/>
 				</li>
 				<li>
+					<p><b>Data Daftar Barang yang dapat di optimalkan</b></p>
+				</li>
+				<li>
+					<span class="span2">Jml Optimal</span>
+					<input type="text" class="span1" name="jml_optml" id="jml_optml" 
+					value="<?=$data[jml_optml]?>" readonly=""/>
+				</li>
+				<li>
+					<span class="span2">Aset Intra Kompatabel</span>
+					<input type="text" class="span1" name="jml_intra" id="jml_intra" value="<?=$data[jml_intra]?>" readonly=""/>
+				</li>
+				<li>
+					<span class="span2">Aset Ekstra Kompatabel</span>
+					<input type="text" class="span1 numbersOnly" name="jml_ekstra" id="jml_ekstra" value="<?=$data[jml_ekstra]?>" readonly=""/>
+				</li>
+				<li>
+					<span class="span2">Revisi Aset Ekstra Kompatabel</span>
+					<input type="text" class="span1 numbersOnly" name="jml_ekstra_rev" id="jml_ekstra_rev" value="<?=$data[jml_ekstra_rev]?>"/>
+				</li>
+				<li>
+					<span class="span2">Satuan Optimal</span>
+					<input type="text" name="satuan_optml" id="satuan_optml" 
+					value="<?=$data[satuan_optml]?>" readonly=""/>
+				</li>
+				<li>
 					<p><b>Kebutuhan Maksimal</b></p>
 				</li>
 				<li>
@@ -186,19 +241,6 @@ $data = mysql_fetch_assoc($dataUsulan);
 					<span class="span2">Satuan Maksimal</span>
 					<input type="text" name="satuan_max" id="satuan_max" 
 					value="<?=$data[satuan_max]?>"  readonly="" />
-				</li>
-				<li>
-					<p><b>Data Daftar Barang yang dapat di optimalkan</b></p>
-				</li>
-				<li>
-					<span class="span2">Jml Optimal</span>
-					<input type="text" class="span1" name="jml_optml" id="jml_optml" 
-					value="<?=$data[jml_optml]?>" readonly=""/>
-				</li>
-				<li>
-					<span class="span2">Satuan Optimal</span>
-					<input type="text" name="satuan_optml" id="satuan_optml" 
-					value="<?=$data[satuan_optml]?>" readonly=""/>
 				</li>
 				<li>
 					<p><b>Kebutuhan Riil Barang Milik Daerah</b></p>

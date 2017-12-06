@@ -19,7 +19,7 @@ $id=$_SESSION['user_id'];//Nanti diganti
 /* Array of database columns which should be read and sent back to DataTables. Use a space where
  * you want to insert a non-database field (for example a counter or static image)
  */
-
+//pr($_GET);
 $aColumns = array('idus','kodeSatker','no_usul','tgl_usul','status_usulan','status_penetapan','status_validasi','status_verifikasi');
 //$test = count($aColumns);
   
@@ -32,7 +32,7 @@ $sTable = "usulan_rencana_pengadaaan";
 //variabel ajax
 $tgl_usul=$_GET['tgl_usul'];
 $satker=$_GET['satker'];
-
+//pr($tgl_usul);
 $param_tgl_usul = $_GET['tgl_usul'];
 // echo $tahun;
 /* REMOVE THIS LINE (it just includes my SQL connection user/pass) */
@@ -47,7 +47,7 @@ $param_tgl_usul = $_GET['tgl_usul'];
 /*
  * Local functions
  */
-
+//pr($_GET);
 function fatal_error($sErrorMessage = '') {
      header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error');
      
@@ -92,7 +92,7 @@ if (isset($_GET['iSortCol_0'])) {
  * on very large tables, and MySQL's regex functionality is very limited
  */
 $sWhere = "";
-if($satker != ''){
+if($satker != '' AND $tgl_usul == ''){
 	$sWhere=" WHERE kodeSatker='$satker'";
 }elseif($satker != '' AND $tgl_usul != ''){
 	$sWhere=" WHERE tgl_usul='$tgl_usul' AND kodeSatker='$satker'";

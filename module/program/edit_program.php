@@ -94,7 +94,7 @@ while ($data = mysql_fetch_assoc($exe)) {
 					<span class="span2">Tahun</span>
 					<input name="tahun" id="tahun" class="span1"  type="text" value="<?=$dataProgram['tahun'];?>" readonly>
 				</li>
-				<?=selectSatker('KodeSatker','257',true,(isset($dataProgram)) ? $dataProgram['kodeSatker'] : false,'readonly');?>
+				<?=selectSatker('KodeSatker','470',true,(isset($dataProgram)) ? $dataProgram['kodeSatker'] : false,'readonly');?>
 				<br/>
 				<li style="display:none" id="message">
                 	<span  class="span2">&nbsp;</span>

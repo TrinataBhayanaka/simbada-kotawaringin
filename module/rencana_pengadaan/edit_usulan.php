@@ -16,11 +16,11 @@ include"$path/menu.php";
 
 $tgl_usul = $_GET['tgl_usul'];
 $satker = $_GET['satker'];
-$tahun  = $TAHUN_AKTIF;
+$tahun  = $TAHUN_AKTIF + 1;
 $idus   = $_GET['idus'];
 //sql temp
 //get program
-$program = mysql_query("select * from program where KodeSatker = '$satker'");
+$program = mysql_query("select * from program where KodeSatker = '$satker' and tahun = '$tahun'");
 
 //get usulan perencanaan
 $usul = mysql_query("select * from usulan_rencana_pengadaaan where idus = '$idus'");
@@ -160,15 +160,15 @@ $usulan = mysql_fetch_assoc($usul);
 					<span class="span2">Tanggal Usulan</span>
 					<input type="text" placeholder="yyyy-mm-dd" name="tgl_usul" id="datepicker" value="<?=$usulan[tgl_usul]?>" />
 				</li>
-				<?=selectSatker('KodeSatker','257',true,(isset($usulan[kodeSatker])) ? $usulan[kodeSatker]: false,'readonly');?>
+				<?=selectSatker('KodeSatker','470',true,(isset($usulan[kodeSatker])) ? $usulan[kodeSatker]: false,'readonly');?>
 				<br/>
 				<li>
-					<span class="span2">Tahun</span>
+					<span class="span2">Tahun Aktif + 1</span>
 					<input type="text" class="span1" name="tahun" id="tahun" value="<?=$tahun;?>" readonly>
 				</li>
 				<li>
 					<span class="span2">Program</span>
-					<select name="program" class="span5 program" id="program" required="">
+					<select name="program" class="span5 program" id="program" required="" disabled="">
 					<!--<option value="" >Pilih Program</option>-->	
         			<?php
         			while($get_program = mysql_fetch_assoc($program)){
@@ -186,7 +186,7 @@ $usulan = mysql_fetch_assoc($usul);
 				<br/>
 				<li>
 					<span class="span2">Kegiatan</span>
-					<select name="kegiatan" class="span5 kegiatan " id="kegiatan" required="">
+					<select name="kegiatan" class="span5 kegiatan " id="kegiatan" required="" disabled="">
 						<option value="" ></option>	
         			</select>
 				</li>
@@ -194,7 +194,7 @@ $usulan = mysql_fetch_assoc($usul);
 				<br/>
 				<li>
 					<span class="span2">Output</span>
-					<select name="output" class="span5 output" id="output" required="">
+					<select name="output" class="span5 output" id="output" required="" disabled="">
         				<option value="" ></option>	
         			</select>
 				</li>

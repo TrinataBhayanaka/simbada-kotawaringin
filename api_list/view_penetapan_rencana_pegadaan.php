@@ -93,7 +93,7 @@ if (isset($_GET['iSortCol_0'])) {
  * on very large tables, and MySQL's regex functionality is very limited
  */
 $sWhere = "";
-if($satker != ''){
+if($satker != '' AND $tgl_usul == ''){
 	$sWhere=" WHERE kodeSatker='$satker' AND status_usulan = 1";
 }elseif($satker != '' AND $tgl_usul != ''){
 	$sWhere=" WHERE tgl_usul='$tgl_usul' AND kodeSatker='$satker' AND status_usulan = 1";

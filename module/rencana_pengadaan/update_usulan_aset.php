@@ -2,6 +2,7 @@
 include "../../config/config.php";
 //update pejabat
 //pr($_POST);
+//exit();
 $query	  = "UPDATE usulan_rencana_pengadaaan_aset SET 
 				kodeKelompok 		= '$_POST[kodeKelompok]',
 				jml_usul 			= '$_POST[jml_usul]',
@@ -10,6 +11,8 @@ $query	  = "UPDATE usulan_rencana_pengadaaan_aset SET
 				satuan_max 			= '$_POST[satuan_max]',
 				jml_optml 			= '$_POST[jml_optml]',
 				satuan_optml 		= '$_POST[satuan_optml]',
+				jml_intra			= '$_POST[jml_intra]',
+				jml_ekstra			= '$_POST[jml_ekstra]',
 				jml_rill 			= '$_POST[jml_rill]',
 				satuan_rill 		= '$_POST[satuan_rill]',
 				ket 				= '".addslashes(html_entity_decode($_POST[ket]))."'

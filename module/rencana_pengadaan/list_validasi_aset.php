@@ -8,7 +8,6 @@ $menu_id = 73;
 $SessionUser = $SESSION->get_session_user();
 $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
 session_start();
-
 //pr($_GET);
 if($_GET){
 	$tgl_usul = $_GET['tgl_usul'];
@@ -214,11 +213,13 @@ include"$path/menu.php";
 						</li>
 					<?php	
 					}else{
+						if($SessionUser['ses_uaksesadmin'] == 1){
 						?>
 						<li>
 						<p style='color:red'><a href="<?=$url?>" class="btn btn-danger btn-small" <?=$disabled?> onclick="return confirm('Data validasi akan dibatalkan. Yakin?');"><i class="icon-upload icon-white"></i>&nbsp;&nbsp;Unposting Validasi Usulan</a></p>
 						</li>
 					<?php	
+						}
 					}
 					?>
 					

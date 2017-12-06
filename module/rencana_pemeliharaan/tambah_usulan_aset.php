@@ -160,6 +160,14 @@ $tahun  = $TAHUN_AKTIF;
 					<input type="text" name="satuan_optml" id="satuan_optml" value="" readonly=""/>
 				</li>
 				<li>
+					<span class="span2">Status Barang</span>
+					<input type="text" name="status_barang" id="status_barang" value="" />
+				</li>
+				<li>
+					<span class="span2">Nama Pemelihara</span>
+					<input type="text" name="pemeliharaan" id="pemeliharaan" value="" />
+				</li>
+				<li>
 					<span class="span2">Keterangan</span>
 					<textarea rows="3" cols="30" name="ket"></textarea>
 				</li>

@@ -152,7 +152,7 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker'");
               	</li>
 				<li>
 					<span class="span2">Kode Output</span>
-					<input name="kd_output" id="kd_output" class="span1"  type="text"
+					<input name="kd_output" id="kd_output" class="span2"  type="text"
 					>
 				</li>
 				<li>

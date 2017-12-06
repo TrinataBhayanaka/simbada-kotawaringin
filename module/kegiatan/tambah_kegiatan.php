@@ -93,7 +93,7 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker'");
 					<span class="span2">Tahun</span>
 					<input name="tahun" id="tahun" class="span1"  type="text" value="<?=$tahun;?>" readonly>
 				</li>
-				<?=selectSatker('kodeSatker','257',true,(isset($satker)) ? $satker: false,'readonly');?>
+				<?=selectSatker('kodeSatker','470',true,(isset($satker)) ? $satker: false,'readonly');?>
 				<br/>
               	<li>
 					<span class="span2">Program</span>
@@ -116,7 +116,7 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker'");
               	</li>
 				<li>
 					<span class="span2">Kode Kegiatan</span>
-					<input name="kd_kegiatan" id="kd_kegiatan" class="span1"  type="text"
+					<input name="kd_kegiatan" id="kd_kegiatan" class="span2"  type="text"
 					>
 				</li>
 				<li>

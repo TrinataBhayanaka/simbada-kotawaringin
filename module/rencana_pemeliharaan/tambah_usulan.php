@@ -15,10 +15,10 @@ include"$path/menu.php";
 //pr($_GET);
 $tgl_usul = $_GET['tgl_usul'];
 $satker = $_GET['satker'];
-$tahun  = $TAHUN_AKTIF;
+$tahun  = $TAHUN_AKTIF + 1;
 
 //sql temp
-$program 	 = mysql_query("select * from program where KodeSatker = '$satker'");
+$program 	 = mysql_query("select * from program where KodeSatker = '$satker' and tahun = '$tahun'");
 //pr($get_program);
 ?>
 	<script>
@@ -103,7 +103,7 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker'");
 					$("#message").show();
 					$('#info').html('Usulan dengan Program, Kegiatan dan Output dapat digunakan'); 
 					$('#info').css("color","green");
-					$('#simpan').removeAttr('disabled');
+					$('#simpan').removeAttr('disabled');	
 				    $('#simpan').css("background","#04c");
 				}
 			})
@@ -169,10 +169,10 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker'");
 					<span class="span2">Tanggal Usulan</span>
 					<input type="text" placeholder="yyyy-mm-dd" name="tgl_usul" id="datepicker" value="" required=""/>
 				</li>
-				<?=selectSatker('KodeSatker','257',true,(isset($satker)) ? $satker: false,'readonly');?>
+				<?=selectSatker('KodeSatker','470',true,(isset($satker)) ? $satker: false,'readonly');?>
 				<br/>
 				<li>
-					<span class="span2">Tahun</span>
+					<span class="span2">Tahun Aktif + 1</span>
 					<input type="text" class="span1" name="tahun" id="tahun" value="<?=$tahun;?>" readonly>
 					
 				</li>

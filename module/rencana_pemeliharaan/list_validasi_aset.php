@@ -212,12 +212,14 @@ include"$path/menu.php";
 						</li>
 					<?php	
 					}else{
+						if($SessionUser['ses_uaksesadmin'] == 1){
 						?>
 						<li>
 						<p style='color:red'><a href="<?=$url?>" class="btn btn-danger btn-small" <?=$disabled?> onclick="return confirm('Data validasi akan dibatalkan. Yakin?');"><i class="icon-upload icon-white"></i>&nbsp;&nbsp;Unposting Validasi Usulan</a></p>
 						</li>
 					<?php	
-					}
+						}
+					}	
 					?>
 					
 					

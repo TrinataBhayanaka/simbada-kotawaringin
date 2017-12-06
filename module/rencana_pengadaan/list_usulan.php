@@ -122,7 +122,7 @@ include"$path/menu.php";
 				<ul>
 					<li>
 						<span class="labelInfo">Satker</span>
-						<input type="text" class="span3" value="<?='['.$satker.'] '.$dataKetkodeSatker['NamaSatker']?>" disabled/>
+						<input type="text" class="span6" value="<?='['.$satker.'] '.$dataKetkodeSatker['NamaSatker']?>" disabled/>
 					</li>
 					<li>
 						<a style="display:display"  href="tambah_usulan.php?tgl_usul=<?=$tgl_usul?>&satker=<?=$satker?>" class="btn btn-info btn-small" id="addruangan"><i class="icon-plus-sign icon-white" align="center"></i>&nbsp;&nbsp;Tambah Usulan</a>

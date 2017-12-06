@@ -57,7 +57,7 @@ include"$path/menu.php";
 			<ul>
 				<li>
 					<span class="span2">Tahun</span>
-					<input name="tahun" id="tahun" class="span1"  type="text">
+					<input name="tahun" id="tahun" class="span1"  type="text" required="">
 				</li>
 				<?=selectSatker('kodeSatker','235',true,false,'required');?>
 				<br>

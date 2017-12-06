@@ -98,7 +98,7 @@ include"$path/menu.php";
 					</li>
 					<li>
 						<span class="labelInfo">Satker</span>
-						<input type="text" class="span4" value="<?="[".$satker."] ".$dataKetkodeSatker['NamaSatker']?>" disabled/>
+						<input type="text" class="span5" value="<?="[".$satker."] ".$dataKetkodeSatker['NamaSatker']?>" disabled/>
 					</li>
 					<li>
 						<a style="display:display"  href="tambah_program.php?tahun=<?=$tahun?>&satker=<?=$satker?>" class="btn btn-info btn-small" id="addruangan"><i class="icon-plus-sign icon-white" align="center"></i>&nbsp;&nbsp;Tambah Program</a>

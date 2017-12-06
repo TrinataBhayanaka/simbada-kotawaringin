@@ -99,7 +99,7 @@ $satker = $_GET['satker'];
               	</li>
 				<li>
 					<span class="span2">Kode Program</span>
-					<input name="kd_program" id="kd_program" class="span1"  type="text"
+					<input name="kd_program" id="kd_program" class="span2"  type="text"
 					>
 				</li>
 				<li>

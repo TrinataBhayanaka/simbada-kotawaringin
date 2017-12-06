@@ -62,6 +62,7 @@ $tahun  = $TAHUN_AKTIF;
 		if(kodeKelompok !='' && KodeSatker !='' ){
 		$.post('../../function/api/asetOptml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
 				document.getElementById('jml_optml').value = result; 
+				document.getElementById('jml_intra').value = result; 
 			})
  	 	}
 		});
@@ -71,10 +72,10 @@ $tahun  = $TAHUN_AKTIF;
 		var jml_optml = $('#jml_optml').val();
 		var hasil = parseInt(jml_max) - parseInt(jml_optml);
 			//if(parseInt(hasil) <= 0){
-			if(parseInt(hasil) < 0){
+			if(parseInt(hasil) <= 0){
 				//document.getElementById('jml_rill').value = 0; 
 				$('#jml_rill').val('0');
-				alert("Kebutuhan Barang Maksimal > Kebutuhan Optimal");
+				alert("Kebutuhan Barang Maksimal < Kebutuhan Optimal");
 				$('#simpan').attr('disabled','disabled');
             	$('#simpan').css("background","grey");
 			}else{
@@ -84,6 +85,33 @@ $tahun  = $TAHUN_AKTIF;
 		    	$('#simpan').css("background","#04c");
 			}	
 		});
+
+	   $('#jml_ekstra').on('change', function(){
+	   		//jml_intra
+	   		var jml_intra = $('#jml_intra').val();
+	   		var jml_ekstra = $('#jml_ekstra').val();
+	   		var hasil = parseInt(jml_intra) + parseInt(jml_ekstra);
+	   		document.getElementById('jml_optml').value = hasil; 
+	   		//validate
+	   		var jml_optml = $('#jml_optml').val();
+	   		var jml_max = $('#jml_max').val();
+	   		if(jml_max){
+	   			var hasil2 = parseInt(jml_max) - parseInt(jml_optml);
+		   		if(parseInt(hasil2) <= 0){
+					document.getElementById('jml_rill').value = 0;
+					alert("Kebutuhan Barang Maksimal < Kebutuhan Optimal");
+					$('#simpan').attr('disabled','disabled');
+	            	$('#simpan').css("background","grey"); 
+				}else{
+					document.getElementById('jml_rill').value = hasil2; 
+					$('#simpan').removeAttr('disabled');
+					$('#simpan').css("background","#04c");
+				}	
+	   		}else{
+	   			//nothing
+	   		}
+	   		
+	   	});
 
 	   $('#satuan_usul').on('change', function(){
 		var satuan_usul = $('#satuan_usul').val();
@@ -161,6 +189,25 @@ $tahun  = $TAHUN_AKTIF;
 					<input type="text" name="satuan_usul" id="satuan_usul" value="" required/>
 				</li>
 				<li>
+					<p><b>Data Daftar Barang yang dapat di optimalkan</b></p>
+				</li>
+				<li>
+					<span class="span2">Jml Optimal</span>
+					<input type="text" class="span1" name="jml_optml" id="jml_optml" value="" readonly=""/>
+				</li>
+				<li>
+					<span class="span2">Aset Intra Kompatabel</span>
+					<input type="text" class="span1" name="jml_intra" id="jml_intra" value="" readonly=""/>
+				</li>
+				<li>
+					<span class="span2">Aset Ekstra Kompatabel</span>
+					<input type="text" class="span1 numbersOnly" name="jml_ekstra" id="jml_ekstra" value="" />
+				</li>
+				<li>
+					<span class="span2">Satuan Optimal</span>
+					<input type="text" name="satuan_optml" id="satuan_optml" value="" readonly=""/>
+				</li>
+				<li>
 					<p><b>Kebutuhan Maksimal</b></p>
 				</li>
 				<li>
@@ -170,17 +217,6 @@ $tahun  = $TAHUN_AKTIF;
 				<li>
 					<span class="span2">Satuan Maksimal</span>
 					<input type="text" name="satuan_max" id="satuan_max" value=""  readonly="" />
-				</li>
-				<li>
-					<p><b>Data Daftar Barang yang dapat di optimalkan</b></p>
-				</li>
-				<li>
-					<span class="span2">Jml Optimal</span>
-					<input type="text" class="span1" name="jml_optml" id="jml_optml" value="" readonly=""/>
-				</li>
-				<li>
-					<span class="span2">Satuan Optimal</span>
-					<input type="text" name="satuan_optml" id="satuan_optml" value="" readonly=""/>
 				</li>
 				<li>
 					<p><b>Kebutuhan Riil Barang Milik Daerah</b></p>

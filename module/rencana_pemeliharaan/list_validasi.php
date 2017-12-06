@@ -104,7 +104,7 @@ include"$path/menu.php";
 				<ul>
 					<li>
 						<span class="labelInfo">Satker</span>
-						<input type="text" class="span3" value="<?='['.$satker.'] '.$dataKetkodeSatker['NamaSatker']?>" disabled/>
+						<input type="text" class="span5" value="<?='['.$satker.'] '.$dataKetkodeSatker['NamaSatker']?>" disabled/>
 					</li>
 				</ul>
 			</div>	

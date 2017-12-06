@@ -15,6 +15,8 @@ $query	  = "UPDATE usulan_rencana_pemeliharaan_aset SET
 				satuan_usul_rev 	= '$_POST[satuan_usul_rev]',
 				ket 	= '".addslashes(html_entity_decode($_POST[ket]))."',
 				pemeliharaan 	= '".addslashes(html_entity_decode($_POST[pemeliharaan]))."',
+				status_barang 	= '".addslashes(html_entity_decode($_POST[status_barang]))."',
+
 				status_verifikasi	= '$flag'
 			WHERE idr 	= '$_POST[idr]'";		
 $exec =  mysql_query($query);

@@ -59,6 +59,30 @@ $data = mysql_fetch_assoc($dataUsulan);
 	 	 	}
 
 		});
+	   
+	   $('#jml_ekstra').on('change', function(){
+	   		//jml_intra
+	   		var jml_intra = $('#jml_intra').val();
+	   		var jml_ekstra = $('#jml_ekstra').val();
+	   		var hasil = parseInt(jml_intra) + parseInt(jml_ekstra);
+	   		document.getElementById('jml_optml').value = hasil; 
+
+	   		//validate
+	   		var jml_optml = $('#jml_optml').val();
+	   		var jml_max = $('#jml_max').val();
+	   		var hasil2 = parseInt(jml_max) - parseInt(jml_optml);
+	   		if(parseInt(hasil2) <= 0){
+				document.getElementById('jml_rill').value = 0;
+				alert("Kebutuhan Barang Maksimal < Kebutuhan Optimal");
+				$('#simpan').attr('disabled','disabled');
+            	$('#simpan').css("background","grey"); 
+			}else{
+				document.getElementById('jml_rill').value = hasil2; 
+				$('#simpan').removeAttr('disabled');
+				$('#simpan').css("background","#04c");
+			}	
+
+	   	});
 
 	   $('#jml_max').on('change', function(){
 		var jml_max = $('#jml_max').val();
@@ -67,7 +91,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 			if(parseInt(hasil) <= 0){
 				//document.getElementById('jml_rill').value = 0; 
 				$('#jml_rill').val('0');
-				alert("Kebutuhan Barang Optimal > Kebutuhan Maksimal");
+				alert("Kebutuhan Barang Maksimal < Kebutuhan Optimal");
 				$('#simpan').attr('disabled','disabled');
             	$('#simpan').css("background","grey");
 			}else{
@@ -132,7 +156,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 		<form name="myform" method="post" action="update_usulan_aset.php">
 			<ul>
 				<li>
-					<?php selectAset('kodeKelompok','255',true,(isset($data[kodeKelompok])) ? $data[kodeKelompok]: false,'required'); ?>
+					<?php selectAset('kodeKelompok','255',true,(isset($data[kodeKelompok])) ? $data[kodeKelompok]: false,'readonly'); ?>
 				</li>
 				<br/>
 				<li>
@@ -150,6 +174,27 @@ $data = mysql_fetch_assoc($dataUsulan);
 					value="<?=$data[satuan_usul]?>" required/>
 				</li>
 				<li>
+					<p><b>Data Daftar Barang yang dapat di optimalkan</b></p>
+				</li>
+				<li>
+					<span class="span2">Jml Optimal</span>
+					<input type="text" class="span1" name="jml_optml" id="jml_optml" 
+					value="<?=$data[jml_optml]?>" readonly=""/>
+				</li>
+				<li>
+					<span class="span2">Aset Intra Kompatabel</span>
+					<input type="text" class="span1" name="jml_intra" id="jml_intra" value="<?=$data[jml_intra]?>" readonly=""/>
+				</li>
+				<li>
+					<span class="span2">Aset Ekstra Kompatabel</span>
+					<input type="text" class="span1 numbersOnly" name="jml_ekstra" id="jml_ekstra" value="<?=$data[jml_ekstra]?>" />
+				</li>
+				<li>
+					<span class="span2">Satuan Optimal</span>
+					<input type="text" name="satuan_optml" id="satuan_optml" 
+					value="<?=$data[satuan_optml]?>" readonly=""/>
+				</li>
+				<li>
 					<p><b>Kebutuhan Maksimal</b></p>
 				</li>
 				<li>
@@ -161,19 +206,6 @@ $data = mysql_fetch_assoc($dataUsulan);
 					<span class="span2">Satuan Maksimal</span>
 					<input type="text" name="satuan_max" id="satuan_max" 
 					value="<?=$data[satuan_max]?>"  readonly="" />
-				</li>
-				<li>
-					<p><b>Data Daftar Barang yang dapat di optimalkan</b></p>
-				</li>
-				<li>
-					<span class="span2">Jml Optimal</span>
-					<input type="text" class="span1" name="jml_optml" id="jml_optml" 
-					value="<?=$data[jml_optml]?>" readonly=""/>
-				</li>
-				<li>
-					<span class="span2">Satuan Optimal</span>
-					<input type="text" name="satuan_optml" id="satuan_optml" 
-					value="<?=$data[satuan_optml]?>" readonly=""/>
 				</li>
 				<li>
 					<p><b>Kebutuhan Riil Barang Milik Daerah</b></p>

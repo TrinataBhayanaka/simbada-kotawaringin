@@ -8,7 +8,9 @@ $query	  = "UPDATE usulan_rencana_pemeliharaan_aset SET
 				satuan_usul 		= '$_POST[satuan_usul]',
 				jml_optml 			= '$_POST[jml_optml]',
 				satuan_optml 		= '$_POST[satuan_optml]',
-				ket 				= '".addslashes(html_entity_decode($_POST[ket]))."'
+				ket 				= '".addslashes(html_entity_decode($_POST[ket]))."',
+				status_barang		= '".addslashes(html_entity_decode($_POST[status_barang]))."',
+				pemeliharaan		= '".addslashes(html_entity_decode($_POST[pemeliharaan]))."'
 			WHERE idr 	= '$_POST[idr]'";
 $exec =  mysql_query($query);
   	echo "<script>
