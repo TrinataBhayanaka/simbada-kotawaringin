@@ -22,7 +22,6 @@ $program = mysql_query("select * from program where tahun = '{$tahun}'
 
 $ketkegiatan = mysql_query("select * from kegiatan where idk ='{$idk}'");
 $dataKetkegiatan = mysql_fetch_assoc($ketkegiatan);
-pr($dataKetkegiatan);
 ?>
 	<script>
 	jQuery(function($){
@@ -135,7 +134,7 @@ pr($dataKetkegiatan);
 				<li>
 					<span class="span2">&nbsp;</span>
 					<input type="submit" class="btn btn-primary " id="simpan" value="simpan" name="submit"/ >
-					<input type="hidden" name="idk" id="idk" value="<?=$dataKetkegiatan['idk']?>">
+					<input type="hidden" name="idk" id="idp" value="<?=$dataKetkegiatan['idk']?>">
 					<!--<input type="reset" name="reset" class="btn" value="Bersihkan Data">-->
 				</li>
 			</ul>
