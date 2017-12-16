@@ -117,7 +117,7 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker' and
 		});
 		
 		$('.output').on('change', function(){
-	   		secondhierachy();
+	   		validate();
 		});
 
 	});
