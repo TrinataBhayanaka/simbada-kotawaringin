@@ -22,7 +22,7 @@ $satker = $_GET['satker'];
 	   $("select").select2();
 	   $("message").hide();
 
-	   $('#kd_program').on('change', function(){
+	   $('#kd_program').on('keyup', function(){
 		var kd_program = $('#kd_program').val();
 		var tahun = $('#tahun').val();
 		var KodeSatker = $('#KodeSatker').val();
@@ -89,7 +89,7 @@ $satker = $_GET['satker'];
 					<span class="span2">Tahun</span>
 					<input name="tahun" id="tahun" class="span1"  type="text" value="<?=$tahun;?>" readonly>
 				</li>
-				<?=selectSatker('KodeSatker','257',true,(isset($satker)) ? $satker: false,'readonly');?>
+				<?=selectSatker('KodeSatker','470',true,(isset($satker)) ? $satker: false,'readonly');?>
 				<br/>
 				<li style="display:none" id="message">
                 	<span  class="span2">&nbsp;</span>
@@ -99,13 +99,11 @@ $satker = $_GET['satker'];
               	</li>
 				<li>
 					<span class="span2">Kode Program</span>
-					<input name="kd_program" id="kd_program" class="span2"  type="text"
-					>
+					<input name="kd_program" id="kd_program" class="span2"  type="text" required="">
 				</li>
 				<li>
 					<span class="span2">Program</span>
-					<input name="program" id="program" class="span7"  type="text"
-					>
+					<input name="program" id="program" class="span7"  type="text" required="">
 				</li>
 				<li>
 					<span class="span2">&nbsp;</span>

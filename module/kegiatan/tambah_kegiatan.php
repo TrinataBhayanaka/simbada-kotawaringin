@@ -25,7 +25,7 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker'");
 	   $("select").select2();
 	   $("message").hide();
 
-	    $('#kd_kegiatan').on('change', function(){
+	    $('#kd_kegiatan').on('keyup', function(){
 		var kd_kegiatan = $('#kd_kegiatan').val();
 		var idp = $('#idp').val();
 		var tahun = $('#tahun').val();
