@@ -27,29 +27,52 @@ while ($data = mysql_fetch_assoc($exe)) {
 	   $("select").select2();
 	   $("message").hide();
 
-	   $('#kd_program').on('change', function(){
+	   $('#kd_program').on('keyup', function(){
 		var kd_program = $('#kd_program').val();
 		var tahun = $('#tahun').val();
 		var KodeSatker = $('#KodeSatker').val();
-		
+		var kd_program = $('#kd_program').val();
+		var kd_program_old = $('#kd_program_old').val();		
 		if(kd_program !=''){
-		$.post('../../function/api/programExist.php', {kd_program:kd_program,tahun:tahun,KodeSatker:KodeSatker}, function(result){
-		if(result == 1){
-			//alert('Kode Program Telah Tersedia');
-			$("#message").show();
-			$('#info').html('kode Program tidak dapat digunakan');
-            $('#info').css("color","red");
-			$('#simpan').attr('disabled','disabled');
-            $('#simpan').css("background","grey");
-		}else{
-			$("#message").show();
-			$('#info').html('kode Program dapat digunakan'); 
-			$('#info').css("color","green");
-			$('#simpan').removeAttr('disabled');
-		    $('#simpan').css("background","#04c");
-		}
-		})
-	 	 }
+			/*$.post('../../function/api/programExist.php', {kd_program:kd_program,tahun:tahun,KodeSatker:KodeSatker}, function(result){
+			if(result > 1){
+				$("#message").show();
+				$('#info').html('kode Program tidak dapat digunakan');
+	            $('#info').css("color","red");
+				$('#simpan').attr('disabled','disabled');
+	            $('#simpan').css("background","grey");
+			}else{
+				$("#message").show();
+				$('#info').html('kode Program dapat digunakan'); 
+				$('#info').css("color","green");
+				$('#simpan').removeAttr('disabled');
+			    $('#simpan').css("background","#04c");
+			}
+			})*/
+			if(kd_program == kd_program_old){
+				$("#message").show();
+				$('#info').html('kode Program dapat digunakan'); 
+				$('#info').css("color","green");
+				$('#simpan').removeAttr('disabled');
+			    $('#simpan').css("background","#04c");
+			}else{
+				$.post('../../function/api/programExist.php', {kd_program:kd_program,tahun:tahun,KodeSatker:KodeSatker}, function(result){
+			    	if(result == 1){
+						$("#message").show();
+						$('#info').html('kode Program tidak dapat digunakan');
+			            $('#info').css("color","red");
+						$('#simpan').attr('disabled','disabled');
+			            $('#simpan').css("background","grey");
+					}else{
+						$("#message").show();
+						$('#info').html('kode Program dapat digunakan'); 
+						$('#info').css("color","green");
+						$('#simpan').removeAttr('disabled');
+					    $('#simpan').css("background","#04c");
+					}
+				})
+			}
+	 	}
 	});
 
 	});
@@ -104,8 +127,8 @@ while ($data = mysql_fetch_assoc($exe)) {
               	</li>
 				<li>
 					<span class="span2">Kode Program</span>
-					<input name="kd_program" id="kd_program" class="span1"  type="text" value="<?=$dataProgram['kd_program']?>" 
-					>
+					<input name="kd_program" id="kd_program" class="span2"  type="text" value="<?=$dataProgram['kd_program']?>">
+					<input name="kd_program_old" id="kd_program_old" class="span1"  type="hidden" value="<?=$dataProgram['kd_program']?>">
 				</li>
 				<li>
 					<span class="span2">Program</span>

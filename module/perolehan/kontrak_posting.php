@@ -155,6 +155,7 @@ $get_data_filter = $RETRIEVE->retrieve_kontrak($tahun);
 						<?php
 						}
 						?>
+                            <a href="kontrak_rekap.php?id=<?=$val['id']?>" class="btn btn-info btn-small"><i class="fa fa-print"></i> Rekap</a>
 						</td>
 						
 					</tr>

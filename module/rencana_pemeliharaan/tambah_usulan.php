@@ -115,6 +115,10 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker' and
 		$('.kegiatan').on('change', function(){
 	   		secondhierachy();
 		});
+		
+		$('.output').on('change', function(){
+	   		validate();
+		});
 
 	});
 	</script>
