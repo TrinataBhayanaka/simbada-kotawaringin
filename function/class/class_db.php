@@ -133,7 +133,8 @@ class DB
 	public function error()
 	{
 
-		$message = 'Your query error, please check again';
+		//$message = 'Your query error, please check again';
+		$message =mysql_error();
 		return $message;
 	}
 	
@@ -351,7 +352,7 @@ class DB
 	        if ($mergeField){
 	        	foreach ($mergeField as $key => $val) {
 	        		$tmpField[] = $key;
-	        		$tmpValue[] = "'".$val."'";
+	        		$tmpValue[] = "'".addslashes($val)."'";
 
 	        		if ($key == 'NilaiPerolehan') $NilaiPerolehan_Awal = "'".$val."'";
 	        	}
