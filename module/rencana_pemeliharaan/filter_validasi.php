@@ -71,10 +71,10 @@ include"$path/menu.php";
 				<li>
 					<span class="span2">&nbsp;</span>
 					<?php
-					if($SessionUser['ses_uaksesadmin'] == 1){
+					//if($SessionUser['ses_uaksesadmin'] == 1){
 				echo "<input type=\"submit\" class=\"btn btn-primary\" value=\"Filter\" name=\"submit\">";
 				echo "<input type=\"reset\" name=\"reset\" class=\"btn\" value=\"Bersihkan Data\">";
-					}
+					//}
 					?>
 				</li>
 			</ul>

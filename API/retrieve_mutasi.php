@@ -794,7 +794,7 @@ class RETRIEVE_MUTASI extends RETRIEVE{
                         $nodok = $_POST['noDokumen'];
                         $olah_tgl =  $_POST['TglSKKDH'];
 
-                        $info = "{$resultAwal[0]['Info']} ex {$dataSatkerAwalKib[0]['NamaSatker']}";                     
+                        $info = addslashes("{$resultAwal[0]['Info']} ex {$dataSatkerAwalKib[0]['NamaSatker']}");                     
                         $this->db->logIt($tabel=array($table['listTableOri']), $Aset_ID=$data['aset_id'][$key], $kd_riwayat=3, $noDokumen=$nodok, $tglProses =$olah_tgl, $text="Data Mutasi sebelum diubah");
 
                         $sql = array(

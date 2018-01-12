@@ -825,6 +825,7 @@ if($gol == 'mesin_ori'){
         $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
            and TglPerolehan <= '$param_tgl' 
            and TglPembukuan <='$param_tgl' 
+           and kondisi not in (3,4) 
            and kodeLokasi like '12%' 
            and $paramSatker";
    
