@@ -81,14 +81,30 @@ header("Content-Type: application/vnd.ms-excel");
                     }
                     ?>
                     <tr class="">
-                        <td><?=$i?></td>
-                        <td><?=$value['kodeKelompok']?></td>
-                        <td><?=$value['uraian']?></td>
-                        <td><?=$value['noRegister']?></td>
-                        <td><?=number_format($value['Satuan']-$bop,2)?></td>
-                        <td><?=number_format($bop,2)?></td>
-                        <td><?=number_format($value['satuan'],2)?></td>
-                    </tr>
+                        <?php
+                        if ($value['StatusValidasi'] == 1) {
+                            ?>
+                            <td><?= $i ?></td>
+                            <td><?= $value['kodeKelompok'] ?></td>
+                            <td><?= $value['uraian'] ?></td>
+                            <td><?= $value['noRegister'] ?></td>
+                            <td><?= number_format($value['Satuan'] - $bop, 2) ?></td>
+                            <td><?= number_format($bop, 2) ?></td>
+                            <td><?= number_format($value['satuan'], 2) ?></td>
+                            <?php
+                                } else {
+                            ?>
+                            <td><?= $i ?></td>
+                            <td><?= $value['kodeKelompok'] ?></td>
+                            <td><?= $value['uraian'] ?></td>
+                            <td><?= $value['noRegister'] ?></td>
+                            <td><?= number_format($value['Satuan'], 2) ?></td>
+                            <td><?= number_format($bop, 2) ?></td>
+                            <td><?= number_format($value['NilaiPerolehan']+$bop, 2) ?></td>
+                            <?php
+                                }
+                            ?>
+                                </tr>
                     <?php
                     $totSatuan += $value['Satuan'];
                     $totPenunjang += $bop;
