@@ -85,9 +85,9 @@ header("Content-Type: application/vnd.ms-excel");
                         <td><?=$value['kodeKelompok']?></td>
                         <td><?=$value['uraian']?></td>
                         <td><?=$value['noRegister']?></td>
-                        <td><?=number_format($value['Satuan'],2)?></td>
+                        <td><?=number_format($value['Satuan']-$bop,2)?></td>
                         <td><?=number_format($bop,2)?></td>
-                        <td><?=number_format($value['NilaiPerolehan']+$bop,2)?></td>
+                        <td><?=number_format($value['satuan'],2)?></td>
                     </tr>
                     <?php
                     $totSatuan += $value['Satuan'];
