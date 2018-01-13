@@ -85,9 +85,25 @@ header("Content-Type: application/vnd.ms-excel");
                         <td><?=$value['kodeKelompok']?></td>
                         <td><?=$value['uraian']?></td>
                         <td><?=$value['noRegister']?></td>
-                        <td><?=number_format($value['Satuan']-$bop,2)?></td>
+                        <td>
+                            <?php
+                            if ($kontrak['n_status'] == 0) {
+                                echo number_format($value['Satuan'],2);
+                            } else {
+                                echo number_format($value['Satuan']-$bop,2);
+                            }
+                            ?>
+                        </td>
                         <td><?=number_format($bop,2)?></td>
-                        <td><?=number_format($value['satuan'],2)?></td>
+                        <td>
+                            <?php
+                            if ($kontrak['n_status'] == 0) {
+                                echo number_format($value['Satuan']+$bop,2);
+                            } else {
+                                echo number_format($value['Satuan'],2);
+                            }
+                            ?>
+                        </td>
                     </tr>
                     <?php
                     $totSatuan += $value['Satuan'];
@@ -139,6 +155,6 @@ header("Content-Type: application/vnd.ms-excel");
 </HTML>
 
 <?php
-header("Content-disposition: attachment; filename=spreadsheet.xls");
+header("Content-disposition: attachment; filename=Rekap-Kontrak.xls");
 
 
