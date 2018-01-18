@@ -8,7 +8,7 @@ skenario
 */
 // include "../../../config/database.php";
 //connect db
-$hostname = '10.10.100.3';
+$hostname = '10.10.200.3';
 $username = 'simbada';
 $password = 'burg3rk1ng';
 $conn = mysql_connect($hostname,$username,$password);
@@ -45,9 +45,20 @@ while($row = mysql_fetch_assoc($exe_select)) {
 	$KodeUnit		= $row[KodeUnit];
 	$Gudang			= $row[Gudang];
 	$kode			= $row[kode];
-	$Kd_Ruang 		= trim($row[Kd_Ruang]);
+	$temp1 			= trim($row[Kd_Ruang])
+	if($temp1){
+		$Kd_Ruang  = $temp1; 
+	}else{
+		$Kd_Ruang 	= null;	
+	}
 	$NamaSatker 	= trim($row[NamaSatker]);
-	$tahun     		= $row[Tahun];
+	$temp2 			= $row[Tahun];
+	if($temp2){
+		$tahun     	= $temp2;
+	}else{
+		$Kd_Ruang 	= null;	
+	}
+	
 	//update ruangan 
 	$QuerySatker	  = "INSERT INTO $db2.satker(
 							Tahun,KodeSektor,KodeSatker,KodeUnit,Gudang, kode,
