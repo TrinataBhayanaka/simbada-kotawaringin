@@ -85,9 +85,25 @@ header("Content-Type: application/vnd.ms-excel");
                         <td><?=$value['kodeKelompok']?></td>
                         <td><?=$value['uraian']?></td>
                         <td><?=$value['noRegister']?></td>
-                        <td><?=number_format($value['Satuan'],2)?></td>
+                        <td>
+                            <?php
+                            if ($kontrak['n_status'] == 0) {
+                                echo number_format($value['Satuan'],2);
+                            } else {
+                                echo number_format($value['Satuan']-$bop,2);
+                            }
+                            ?>
+                        </td>
                         <td><?=number_format($bop,2)?></td>
-                        <td><?=number_format($value['NilaiPerolehan']+$bop,2)?></td>
+                        <td>
+                            <?php
+                            if ($kontrak['n_status'] == 0) {
+                                echo number_format($value['Satuan']+$bop,2);
+                            } else {
+                                echo number_format($value['Satuan'],2);
+                            }
+                            ?>
+                        </td>
                     </tr>
                     <?php
                     $totSatuan += $value['Satuan'];
@@ -101,7 +117,15 @@ header("Content-Type: application/vnd.ms-excel");
         <tfoot>
         <tr>
             <th colspan="4">Total Harga Satuan</th>
-            <th><?=number_format($totSatuan, 2)?></th>
+            <th>
+                <?php
+                if ($kontrak['n_status'] == 0) {
+                    echo number_format($totSatuan, 2);
+                } else {
+                    echo number_format($totSatuan-$totPenunjang, 2);
+                }
+                ?>
+            </th>
             <th>&nbsp;</th>
             <th>&nbsp;</th>
         </tr>
@@ -115,7 +139,15 @@ header("Content-Type: application/vnd.ms-excel");
             <th colspan="4">Total Perolehan</th>
             <th>&nbsp;</th>
             <th>&nbsp;</th>
-            <th><?=number_format($totPerolehan, 2)?></th>
+            <th>
+                <?php
+                if ($kontrak['n_status'] == 0) {
+                    echo number_format($totPerolehan, 2);
+                } else {
+                    echo number_format($totSatuan, 2);
+                }
+                ?>
+            </th>
         </tr>
         </tfoot>
     </table>
@@ -123,6 +155,6 @@ header("Content-Type: application/vnd.ms-excel");
 </HTML>
 
 <?php
-header("Content-disposition: attachment; filename=spreadsheet.xls");
+header("Content-disposition: attachment; filename=Rekap-Kontrak.xls");
 
 

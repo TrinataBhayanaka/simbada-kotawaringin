@@ -357,6 +357,9 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 			$data[$i]['Bidang'] = bidang($kode_golongan,$gol,$ps,$pt,$paramLevelGol);
 		}*/
                 $data_awal=  subsub_awal($kode_golongan, $q_gol_final, $ps, $pt);
+                // echo "<pre>";
+                // print_r($data_awal);
+                // exit();
                 $data_akhir=  subsub($kode_golongan, $q_gol_final, $ps, "$tahun_neraca-12-31");
                 $data_hilang=subsub_hapus($kode_golongan, $q_gol_final, $ps, "$tahun_neraca-12-31",$pt);
 		//exit();
@@ -826,6 +829,7 @@ if($gol == 'mesin_ori'){
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%' 
+					 and kondisi not in (3,4) 
 					 and $paramSatker";
 	 
 	 if($gol == 'jaringan_ori'){
@@ -852,7 +856,8 @@ if($gol == 'mesin_ori'){
                order by kelompok asc";
 	 }
 }
-	 //echo "$gol == $sql";
+	 // echo "$gol == $sql";
+	 // exit();
      $resultparentSubSub = mysql_query($sql) or die(mysql_error());
      $data = array();
      while ($data_subsub = mysql_fetch_array($resultparentSubSub,MYSQL_ASSOC)) {

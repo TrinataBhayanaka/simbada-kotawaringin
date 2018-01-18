@@ -37848,7 +37848,8 @@ return $hasil_html;
 									AND KodeSektor = '$KodeSektor'
 									AND KodeSatker IS NULL
 									AND KodeUnit IS NULL
-									AND Gudang IS NULL 
+									AND Gudang IS NULL
+									GROUP BY KodeSektor,KodeSatker,KodeUnit,Gudang 
 									ORDER BY Satker_ID ASC";	
 						}
 						$result2=$this->retrieve_query($query2);
@@ -37888,7 +37889,8 @@ return $hasil_html;
 									where KodeSektor = '$KodeSektor'
 									AND (KodeSatker = '$KodeSatker' OR KodeSatker IS NULL)
 									AND KodeUnit IS NULL
-									AND Gudang IS NULL 		
+									AND Gudang IS NULL
+									GROUP BY KodeSektor,KodeSatker,KodeUnit,Gudang 		
 									ORDER BY Satker_ID ASC";	
 						}
 						$result2=$this->retrieve_query($query2);
@@ -37930,7 +37932,8 @@ return $hasil_html;
 									where KodeSektor = '$KodeSektor'
 									AND (KodeSatker = '$KodeSatker' OR KodeSatker IS NULL) 
 									AND (KodeUnit = '$KodeUnit' OR KodeUnit IS NULL)
-									AND Gudang IS NULL		
+									AND Gudang IS NULL
+									GROUP BY KodeSektor,KodeSatker,KodeUnit,Gudang		
 									ORDER BY Satker_ID ASC";	
 						}
 						// pr($query2);
@@ -37976,7 +37979,8 @@ return $hasil_html;
 									AND (KodeSatker = '$KodeSatker' OR KodeSatker IS NULL) 
 									AND (KodeUnit = '$KodeUnit' OR KodeUnit IS NULL)
 									AND (Gudang = '$Gudang' OR Gudang IS NULL)
-									AND Kd_Ruang is null										
+									AND Kd_Ruang is null
+									GROUP BY KodeSektor,KodeSatker,KodeUnit,Gudang										
 									ORDER BY Satker_ID ASC";	
 						}
 						// pr($query2);
