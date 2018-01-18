@@ -47,7 +47,7 @@ while($row = mysql_fetch_assoc($exe_select)) {
 	$kode			= $row[kode];
 	$Kd_Ruang 		= trim($row[Kd_Ruang]);
 	$NamaSatker 	= trim($row[NamaSatker]);
-
+	$tahun     		= $row[Tahun];
 	//update ruangan 
 	$QuerySatker	  = "INSERT INTO $db2.satker(
 							Tahun,KodeSektor,KodeSatker,KodeUnit,Gudang, kode,
