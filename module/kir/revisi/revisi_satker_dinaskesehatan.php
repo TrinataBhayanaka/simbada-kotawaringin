@@ -45,7 +45,7 @@ while($row = mysql_fetch_assoc($exe_select)) {
 	$KodeUnit		= $row[KodeUnit];
 	$Gudang			= $row[Gudang];
 	$kode			= $row[kode];
-	$temp1 			= trim($row[Kd_Ruang])
+	$temp1 			= trim($row[Kd_Ruang]);
 	if($temp1){
 		$Kd_Ruang  = $temp1; 
 	}else{
