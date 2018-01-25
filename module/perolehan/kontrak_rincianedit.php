@@ -579,6 +579,15 @@ $menu_id = 10;
 		var spk = $("#spk").val();
 		var str = (spk.replace(/[^0-9\.]+/g, ""));
 		var rb = (total.replace(/[^0-9\.]+/g, ""));
+        var tgl= $("#TglPerolehan").val();
+
+        if (tgl == "") {
+            alert("Tgl Perolehan tidak boleh kosong");
+            return false;
+        } else if (tgl == "0000-00-00") {
+            alert("Tgl Perolehan tidak boleh kosong");
+            return false;
+        }
 		
 		perolehan=perolehan.replace(/[^0-9\.]+/g, "");
 		var diff = parseFloat(perolehan) + parseFloat(rb);
@@ -725,11 +734,6 @@ $menu_id = 10;
 	
 
                    }
-                    /* $(document).on('click','#load-data-tanah', function(){
-                                var satker = $('#kodeSatker').val();
-                                var kelompok = $('#kodeKelompok').val();
-                                $('#hasil_pilihan_tanah').html(satker);
-                                oTable.fnReloadAjax("<?=$url_rewrite?>/api_list/api_bangunan_tanah.php?kodeSatker="+satker+"&kodeKelompok="+kelompok);
-                            })*/
+
                   
                </script>
