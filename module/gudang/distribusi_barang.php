@@ -57,3 +57,17 @@ $resetDataView = $DBVAR->is_table_exists('filter_distribusi_barang_'.$SessionUse
 <?php
 	include"$path/footer.php";
 ?>
+
+<script>
+    $(document).on('submit', function(){
+        var tgl= $("#tanggalDistribusi").val();
+
+        if (tgl == "") {
+            alert("Tgl Perolehan tidak boleh kosong");
+            return false;
+        } else if (tgl == "0000-00-00") {
+            alert("Tgl Perolehan tidak boleh kosong");
+            return false;
+        }
+    })
+</script>
