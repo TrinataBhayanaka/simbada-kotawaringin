@@ -55,7 +55,7 @@ $menu_id = 10;
     jQuery(function($) {
         $('#hrgmask,#total').autoNumeric('init');
         $("select").select2({});
-        $( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen" ).datepicker({ format: 'yyyy-mm-dd' });
+        $( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#tglSertifikat" ).datepicker({ format: 'yyyy-mm-dd' });
 		$( "#tglPerolehan,#tglPembukuan,#tglSurat,#tglDokumen,#datepicker" ).mask('0000-00-00');    
     });
 
@@ -184,7 +184,7 @@ $menu_id = 10;
 							</li>
 							<li>
 								<span class="span2">Tgl. Sertifikat</span>
-								<input type="text" class="span2" name="TglSertifikat" id="datepicker" disabled/>
+								<input type="text" class="span2" name="TglSertifikat" id="tglSertifikat" disabled/>
 							</li>
 							<li>
 								<span class="span2">Penggunaan</span>
