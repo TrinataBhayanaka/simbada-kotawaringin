@@ -1018,7 +1018,7 @@ for($i=0;$i<2;$i++){
                  echo "tidak masuk log \n";
                  //bila tidak ada transaksi
                  //$PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;
-                 $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
+                 $rentang_tahun_penyusutan = 1;//($newTahun-$Tahun)+1;
                  //$AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
                  $AkumulasiPenyusutan=$AkumulasiPenyusutan+$PenyusutanPerTahun;
                  $NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;
@@ -1026,6 +1026,7 @@ for($i=0;$i<2;$i++){
                  if($Sisa_Masa_Manfaat<=0){
                     $AkumulasiPenyusutan=$NilaiPerolehan;
                     $NilaiBuku=0;
+                    $Sisa_Masa_Manfaat=0;
                  }
                 
                          
@@ -1142,7 +1143,7 @@ function overhaul($kd_aset1, $kd_aset2, $kd_aset3,$persen, $DBVAR) {
     }
     //echo "<pre> ";
    // print($prosentase3);
-    if($prosentase4 != 0) {
+/*    if($prosentase4 != 0) {
         echo " masuk 11 $persen====$prosentase1 $prosentase2 $prosentase3 $prosentase4 \n";
         if($persen > $prosentase4) {
             echo "0 =4";
@@ -1158,20 +1159,20 @@ function overhaul($kd_aset1, $kd_aset2, $kd_aset3,$persen, $DBVAR) {
             $hasil = $penambahan1;
         }
     } else {
-        echo " masuk 22 $persen====$prosentase1 $prosentase2 $prosentase3 $prosentase4 \n";
+      */  echo " masuk 22 $persen====$prosentase1 $prosentase2 $prosentase3 $prosentase4 \n";
         if($persen > $prosentase3) {
             echo "1 =3";
 
             $hasil = $penambahan3;
-        } else if($persen > $prosentase1 && $persen <= $prosentase2) {
+        } else if($persen > $prosentase2 && $persen <= $prosentase3) {
             echo "1 =2 ";
             $hasil = $penambahan2;
-        } else if($persen <= $prosentase1) {
+        } else if($persen <= $prosentase2) {
             echo "1 = 5 ";
             $hasil = $penambahan1;
         }
 
-    }
+    //}
     echo "\n hasill == $hasil == \n";
     if($hasil=="")
         $hasil=0;
