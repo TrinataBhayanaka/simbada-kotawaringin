@@ -114,8 +114,14 @@ foreach ($kapital as $key => $value) {
         unset($tmpField);
         unset($tmpValue);
         foreach ($kib as $key => $val) {
-          $tmpField[] = $key;
-          $tmpValue[] = "'".$val."'";
+          if($key=="StatusValidasi"||$key=="Status_Validasi_Barang"||$key="StatusTampil"){
+              $tmpField[] = $key;
+            $tmpValue[] = "1";
+
+          }else{
+            $tmpField[] = $key;
+            $tmpValue[] = "'".$val."'";
+             }
         }
          
         $fileldImp = implode(',', $tmpField);
