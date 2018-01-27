@@ -1023,13 +1023,20 @@ for($i=0;$i<2;$i++){
                  echo "tidak masuk log \n";
                  //bila tidak ada transaksi
                  //$PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;
-                 $rentang_tahun_penyusutan = 1;//($newTahun-$Tahun)+1;
-                 //$AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
-                 $AkumulasiPenyusutan=$AkumulasiPenyusutan+$PenyusutanPerTahun;
-                 $NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;
-
-                 //$Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
-                 $Sisa_Masa_Manfaat=$UmurEkonomis-$rentang_tahun_penyusutan;
+                 if($AkumulasiPenyusutan==0||$AkumulasiPenyusutan='NULL'){
+                    $PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;
+                    $MasaManfaat=$masa_manfaat;
+                    $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
+                    $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
+                    $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
+                 }else
+                 {
+                    $rentang_tahun_penyusutan = 1;//($newTahun-$Tahun)+1;
+                    $AkumulasiPenyusutan=$AkumulasiPenyusutan+$PenyusutanPerTahun;
+                    $Sisa_Masa_Manfaat=$UmurEkonomis-$rentang_tahun_penyusutan;
+                 }
+                     $NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;
+   
                  if($Sisa_Masa_Manfaat<=0){
                     $AkumulasiPenyusutan=$NilaiPerolehan;
                     $NilaiBuku=0;
