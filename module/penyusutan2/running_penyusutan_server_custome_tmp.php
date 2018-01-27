@@ -656,9 +656,14 @@ for($i=0;$i<2;$i++){
                  
                  
              }
-             $data_log=array("NilaiPerolehan_Awal"=>$NilaiPerolehan,
+             //ganti pakai data dari tabel master per 27 januari 2018
+            /* $data_log=array("NilaiPerolehan_Awal"=>$NilaiPerolehan,
                     "AkumulasiPenyusutan_Awal"=>$AkumulasiPenyusutan_Awal,
                     "PenyusutanPerTahun_Awal"=>$PenyusutanPerTahun_Awal,
+                     "kodeSatker"=>$kodeSatker);*/
+              $data_log=array("NilaiPerolehan_Awal"=>$NilaiPerolehan,
+                    "AkumulasiPenyusutan_Awal"=>$AkumulasiPenyusutan,
+                    "PenyusutanPerTahun_Awal"=>$PenyusutanPerTahun,
                      "kodeSatker"=>$kodeSatker);
              log_penyusutan($Aset_ID, $tableKib, 49,$newTahun, $data_log, $DBVAR);
             //akhir untuk log sblm penyusutan
