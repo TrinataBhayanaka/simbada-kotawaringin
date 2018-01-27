@@ -1022,7 +1022,9 @@ for($i=0;$i<2;$i++){
                  //$AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
                  $AkumulasiPenyusutan=$AkumulasiPenyusutan+$PenyusutanPerTahun;
                  $NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;
-                 $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
+
+                 //$Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
+                 $Sisa_Masa_Manfaat=$UmurEkonomis-$rentang_tahun_penyusutan;
                  if($Sisa_Masa_Manfaat<=0){
                     $AkumulasiPenyusutan=$NilaiPerolehan;
                     $NilaiBuku=0;
