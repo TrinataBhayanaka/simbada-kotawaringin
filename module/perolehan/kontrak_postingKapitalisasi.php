@@ -75,7 +75,7 @@ foreach ($kapital as $key => $value) {
         unset($tmpValue);
         foreach ($kib as $key => $val) {
           $tmpField[] = $key;
-          $tmpValue[] = "'".$val."'";
+          $tmpValue[] = "'".trim(addslashes($val))."'";
         }
          
         $fileldImp = implode(',', $tmpField);
