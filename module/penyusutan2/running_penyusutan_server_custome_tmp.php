@@ -1023,8 +1023,8 @@ for($i=0;$i<2;$i++){
                  echo "tidak masuk log \n";
                  //bila tidak ada transaksi
                  //$PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;
-                 if($AkumulasiPenyusutan==0||$AkumulasiPenyusutan='NULL'){
-                    $PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;
+                 if($AkumulasiPenyusutan==0||$AkumulasiPenyusutan=='NULL'){
+                    $PenyusutanPerTahun=round($NilaiPerolehan/$MasaManfaat);
                     $MasaManfaat=$masa_manfaat;
                     $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
                     $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
