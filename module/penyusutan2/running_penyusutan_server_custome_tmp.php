@@ -24,7 +24,7 @@ $id = $argv[4];
 
 $newTahun = $tahun;
 // $newTahun = $tahun - 1; 
-$aColumns = array('a.Aset_ID', 'a.kodeKelompok', 'k.Uraian', 'a.Tahun', 'a.Info', 'a.NilaiPerolehan', 'a.noRegister', 'a.PenyusutanPerTahun', 'a.AkumulasiPenyusutan', 'a.TipeAset', 'a.kodeSatker', 'a.Status_Validasi_Barang','a.MasaManfaat');
+$aColumns = array('a.Aset_ID', 'a.kodeKelompok', 'k.Uraian', 'a.Tahun', 'a.Info', 'a.NilaiPerolehan', 'a.noRegister', 'a.PenyusutanPerTahun', 'a.AkumulasiPenyusutan', 'a.TipeAset', 'a.kodeSatker', 'a.Status_Validasi_Barang','a.MasaManfaat','a.UmurEkonomis');
 $fieldCustom = str_replace(" , ", " ", implode(", ", $aColumns));
 $sTable = "aset_tmp as a";
 $sTable2 = "aset_tmp2 as a";
@@ -686,7 +686,8 @@ for($i=0;$i<2;$i++){
                      . " from $tableLog where TglPerubahan>'$TglPerubahan_awal' and kd_riwayat in (2,21,28,7) "
                      . "and Aset_ID='$Aset_ID' order by log_id asc";
              
-             echo $query_perubahan;
+             echo $query_perubahan. "2132132131\n";
+
              $count=0;
              $qlog=$DBVAR->query($query_perubahan) or die($DBVAR->error());
              $kapitalisasi=0;
@@ -1020,10 +1021,11 @@ for($i=0;$i<2;$i++){
              }
              
              if($status_transaksi!=1){
-                 echo "tidak masuk log \n";
+                 echo "\n \n 1231321 tidak123132 masuk log \n";
                  //bila tidak ada transaksi
                  //$PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;
                  if($AkumulasiPenyusutan==0||$AkumulasiPenyusutan=='NULL'){
+                     echo "Ini masuk tahap1  $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;\n";
                     $PenyusutanPerTahun=round($NilaiPerolehan/$MasaManfaat);
                     $MasaManfaat=$masa_manfaat;
                     $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
@@ -1031,9 +1033,12 @@ for($i=0;$i<2;$i++){
                     $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
                  }else
                  {
+
                     $rentang_tahun_penyusutan = 1;//($newTahun-$Tahun)+1;
                     $AkumulasiPenyusutan=$AkumulasiPenyusutan+$PenyusutanPerTahun;
                     $Sisa_Masa_Manfaat=$UmurEkonomis-$rentang_tahun_penyusutan;
+                     echo "Ini masuk tahap2 --xas $Sisa_Masa_Manfaat = $UmurEkonomis - $rentang_tahun_penyusutan;\n";
+                     echo "Umur Ekonomis: $UmurEkonomis\n";
                  }
                      $NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;
    
