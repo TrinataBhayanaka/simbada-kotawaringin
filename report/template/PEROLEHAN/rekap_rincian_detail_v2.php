@@ -262,6 +262,8 @@ $head.=" <table style=\"width: 100%; text-align: left; margin-left: auto; margin
                 <td colspan='2' style=\" text-align: center; font-weight: bold; width: \">Akumulasi Penyusutan</td>
                 <td rowspan='2' style=\" text-align: center; font-weight: bold; width: \">Beban Penyusutan Tahun Berjalan</td>
                 <td colspan='5' style=\" text-align: center; font-weight: bold; width: \">31 Desember $tahun_neraca</td>
+                <td rowspan='2'  style=\" text-align: center; font-weight: bold; width: \">Keterangan Belanja</td>
+                <td rowspan='2'  style=\" text-align: center; font-weight: bold; width: \">Keterangan SK</td>
                 
 	</tr>
         <tr>
@@ -304,6 +306,8 @@ $head.=" <table style=\"width: 100%; text-align: left; margin-left: auto; margin
                    <td style=\" text-align: center; font-weight: bold; width: \">19</td>
                    <td style=\" text-align: center; font-weight: bold; width: \">20</td>
                    <td style=\" text-align: center; font-weight: bold; width: \">21</td>
+                   <td style=\" text-align: center; font-weight: bold; width: \">22</td>
+                   <td style=\" text-align: center; font-weight: bold; width: \">23</td>
                    
 	</tr>";	
 //foreach ($data as $gol) {
@@ -705,7 +709,10 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[nilai_akhir],2,",",".")."</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[pp_akhir],2,",",".")."</td>
 				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[ap_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[nb_akhir],2,",",".")."</td> 
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[nb_akhir],2,",",".")."</td>
+				 <td>{$SubSub[ket_kontrak]}</td>
+				 <td>{$SubSub[noKontrak]}</td>
+				 
 
 										</tr>";
 						}
@@ -1338,7 +1345,9 @@ foreach ($data_awal_alone as $tipe => $value) {
     $data_awal[$tipe]['ap_akhir']=0;
     $data_awal[$tipe]['pp_akhir']=0;
     $data_awal[$tipe]['nb_akhir']=0;
-    
+    list($noKontrak,$ket_kontrak)=get_detail_kontrak($value['Aset_ID']);
+    $data_awal[$tipe]['noKontrak']=$noKontrak;
+    $data_awal[$tipe]['ket_kontrak']=$ket_kontrak;
     
 }
 
@@ -1436,6 +1445,9 @@ foreach ($data_akhir_alone as $tipe => $value) {
     $data_akhir[$tipe]['ap_akhir']=round($value['AP'],2);
     $data_akhir[$tipe]['pp_akhir']=round($value['PP'],2);
     $data_akhir[$tipe]['nb_akhir']=round($value['NB'],2);
+    list($noKontrak,$ket_kontrak)=get_detail_kontrak($value['Aset_ID']);
+    $data_akhir[$tipe]['noKontrak']=$noKontrak;
+    $data_akhir[$tipe]['ket_kontrak']=$ket_kontrak;
     
     
 }
@@ -1469,6 +1481,9 @@ foreach ($data_hapus_tmp as $tipe => $value) {
     $data_hapus[$tipe]['ap_akhir']=0;
     $data_hapus[$tipe]['pp_akhir']=0;
     $data_hapus[$tipe]['nb_akhir']=0;
+    list($noKontrak,$ket_kontrak)=get_detail_kontrak($value['Aset_ID']);
+    $data_hapus[$tipe]['noKontrak']=$noKontrak;
+    $data_hapus[$tipe]['ket_kontrak']=$ket_kontrak;
     
     
 }
@@ -1719,6 +1734,8 @@ function get_uraian($kode,$level){
     return $Uraian;
 }
 
+
+
 function get_nb_penyusutan_sblm($Aset_ID,$TahunPenyusutan,$kelompok){
     $gol=  explode(".", $kelompok);
     switch ($gol[0]) {
@@ -1864,5 +1881,24 @@ function get_akumulasi_sblm($Aset_ID,$TahunPenyusutan,$kelompok){
    
     
     return $AkumulasiPenyusutan;
+}
+
+function get_detail_kontrak($Aset_ID){
+
+    $query="select noKontrak,Tahun from aset where Aset_ID='$Aset_ID' limit 1";
+    $result=  mysql_query($query) or die(mysql_error());
+    $noKontrak="";
+    $Ket="";
+
+    while($row=  mysql_fetch_array($result)){
+
+        $noKontrak=$row[noKontrak];
+        $Ket="Belanja Modal Tahun ".$row[Tahun];
+        if($noKontrak==""||$noKontrak=="NULL"){
+            $noKontrak="";
+            $Ket="";
+        }
+    }
+    return array($noKontrak,$Ket);
 }
 ?>
