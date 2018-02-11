@@ -60,7 +60,7 @@ $resetDataView = $DBVAR->is_table_exists('filter_distribusi_barang_'.$SessionUse
 
 <script>
     $(document).on('submit', function(){
-        var tgl= $("#tanggalDistribusi").val();
+        var tgl= $("#datepicker-other").val();
 
         if (tgl == "") {
             alert("Tgl Perolehan tidak boleh kosong");

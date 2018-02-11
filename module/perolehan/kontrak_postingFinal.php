@@ -88,7 +88,7 @@ while ($dataSP2D = mysql_fetch_assoc($sql)){
           $tampil = "";
       } 
 
-      $sql = "UPDATE {$tabel} SET NilaiPerolehan = '{$satuan}' {$tampil}, StatusValidasi = '1' WHERE Aset_ID = '{$data['Aset_ID']}'";
+      $sql = "UPDATE {$tabel} SET NilaiPerolehan = '{$NilaiPerolehan}' {$tampil}, StatusValidasi = '1' WHERE Aset_ID = '{$data['Aset_ID']}'";
       $execquery = mysql_query($sql);
       logFile($sql);
       if(!$execquery){
