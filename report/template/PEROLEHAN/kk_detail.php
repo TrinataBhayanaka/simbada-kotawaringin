@@ -52,12 +52,12 @@ $url3 = "rekap_kk_background.php?$paramater_url";
                <tr>
                     <td><p style="font-size: 12px; color: blue">1. <a href="<?php echo "$url"."2"?>" target="_blank">Micorosoft Excel(Long proses)</a></p></td>
                 </tr>
-                <tr>
-                    <td><p style="font-size: 12px; color: blue">1. <a href="<?php echo "$url2"."2"?>" target="_blank">Micorosoft Excel(Speed proses)</a></p></td>
-                </tr>
-                <tr>
-                    <td><p style="font-size: 12px; color: blue">1. <a href="<?php echo "$url3"."2"?>" target="_blank">Background Proses</a></p></td>
-                </tr>
+<!--                <tr>-->
+<!--                    <td><p style="font-size: 12px; color: blue">1. <a href="--><?php //echo "$url2"."2"?><!--" target="_blank">Micorosoft Excel(Speed proses)</a></p></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td><p style="font-size: 12px; color: blue">1. <a href="--><?php //echo "$url3"."2"?><!--" target="_blank">Background Proses</a></p></td>-->
+<!--                </tr>-->
                 
                 <tr>
                     <td><p style="font-size: 12px; color: red">Cat : Bila file tidak bisa di download, kemungkinan data tidak ditemukan</p></td>
