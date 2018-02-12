@@ -50,7 +50,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
 					$("#tglPerolehan_awal_intra,#tglPerolehan_akhir_intra,#tglPerolehan_awal_ekstra,#tglPerolehan_akhir_ekstra,#tglPerolehanAwalTanah,#tglPerolehanAkhirTanah,#tglPerolehanAwalMesin,#tglPerolehanAkhirMesin,#tglPerolehanAwalGedung,#tglPerolehanAkhirGedung,#tglPerolehanAwalJIJ,#tglPerolehanAkhirJIJ,#tglPerolehanAwalAst,#tglPerolehanAkhirAst,#tglPerolehanAwalKdp,#tglPerolehanAkhirKdp,#tglPerolehanAwalLainnya,#tglPerolehanAkhirLainnya,#tglPerolehanAwalNeraca,#tglPerolehanAkhirNeraca,#tglCetakIntra,#tglCetakEkstra,#tglPerolehanAwalrbp,#tglPerolehanAkhirrbp,#tglPerolehanAwalrbupb,#tglPerolehanAkhirrbupb,#tglCetakMutasi,#tglPerolehanAwalPengadaan,#tglPerolehanAkhirPengadaan,#tglCetakPengadaan,#tglCetakMutasiskpd,#tglPerolehanAwalRekapLapMutasi,#tglPerolehanAkhirRekapLapMutasi,#tglPerolehanAwalNonAset,#tglPerolehanAkhirNonAset").mask('0000-00-00');
 					$( "#tglPerolehan_awal_intra,#tglPerolehan_akhir_intra,#tglPerolehan_awal_ekstra,#tglPerolehan_akhir_ekstra,#tglPerolehanAwalTanah,#tglPerolehanAkhirTanah,#tglPerolehanAwalMesin,#tglPerolehanAkhirMesin,#tglPerolehanAwalGedung,#tglPerolehanAkhirGedung,#tglPerolehanAwalJIJ,#tglPerolehanAkhirJIJ,#tglPerolehanAwalAst,#tglPerolehanAkhirAst,#tglPerolehanAwalKdp,#tglPerolehanAkhirKdp,#tglPerolehanAwalLainnya,#tglPerolehanAkhirLainnya,#tglPerolehanAwalNeraca,#tglPerolehanAkhirNeraca,#tglCetakIntra,#tglCetakEkstra,#tglPerolehanAwalrbp,#tglPerolehanAkhirrbp,#tglPerolehanAwalrbupb,#tglPerolehanAkhirrbupb,#tglCetakMutasi,#tglPerolehanAwalPengadaan,#tglPerolehanAkhirPengadaan,#tglCetakPengadaan,#tglCetakMutasiskpd,#tglPerolehanAwalRekapLapMutasi,#tglPerolehanAkhirRekapLapMutasi,#tglPerolehanAwalNonAset,#tglPerolehanAkhirNonAset,#tglPerolehanAwalRekapNeraca3,#tglPerolehanAkhirRekapNeraca3" ).datepicker({ dateFormat: 'yy-mm-dd' });
 
-					$("#tglPerolehanAwalLapMutasi,#tglPerolehanAwalLapMutasiSkpd,#tglPerolehanAwalRekapNeraca,#tglPerolehanAwalRekapNeraca1,#tglPerolehanAkhirRekapNeraca,#tglPerolehanAkhirRekapNeraca1").mask('9999-01-01');	
+					$("#tglPerolehanAwalLapMutasi,#tglPerolehanAwalLapMutasiSkpd,#tglPerolehanAwalRekapNeraca,#tglPerolehanAwalRekapNeraca1,#tglPerolehanAkhirRekapNeraca,#tglPerolehanAkhirRekapNeraca1,#tglPerolehanAkhirKK_detail").mask('9999-01-01');
 					$("#tglPerolehanAkhirLapMutasi,#tglPerolehanAkhirLapMutasiSkpd").mask('9999-12-31');	
 					
 				});
@@ -80,7 +80,7 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
                                           <li><a href="#rekapdetailrincianbarangmutasi" data-toggle="tab">Rekapitulasi Detail Rincian Mutasi Barang </a></li>
                                           <li><a href="#rekaprincianbarangmutasi-lain" data-toggle="tab">Rekapitulasi Rincian Mutasi Barang As.Lain</a></li>
                                           <li><a href="#rekapdetailrincianbarangmutasi-lain" data-toggle="tab">Rekapitulasi Detail Rincian Mutasi Barang As.Lain</a></li>
-
+                          <li><a href="#kk_detail" data-toggle="tab">Kerta Kerja Detail </a></li>
 					  </ul>
 					  
 					  <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
@@ -1122,6 +1122,73 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
 						</form>                                         
                                           
                                      </div>
+
+                          <!-- Kertas Kerja-->
+                          <div class="tab-pane" id="kk_detail">
+                              <div class="breadcrumb">
+                                  <div class="titleTab">Kertas Kerja</div>
+                              </div>
+                              <form method="post" name="form" action="<?php echo "$url_rewrite/report/template/PEROLEHAN/kk_detail.php"; ?>">
+                                  <ul>
+                                      <li>
+                                          <span class="span2">Tanggal Awal</span>
+                                          <div class="control">
+                                              <div class="input-prepend">
+                                                  <span class="add-on"><i class="fa fa-calendar"></i></span>
+                                                  <input type="text" class="span2 full" name="tglPerolehanAwalRekapNeraca" id="tglPerolehanAwalKK_detail" value="" readonly="1"/>
+                                              </div>
+                                          </div>
+                                      </li>
+                                      <li>
+                                          <span class="span2">Tanggal Akhir</span>
+                                          <div class="control">
+                                              <div class="input-prepend">
+                                                  <span class="add-on"><i class="fa fa-calendar"></i></span>
+                                                  <input type="text" class="span2 full" name="tglPerolehanAkhirRekapNeraca" id="tglPerolehanAkhirKK_detail" value="" required/>
+                                              </div>
+                                          </div>
+                                      </li>
+                                      <li>
+                                          <span class="span2">Jenis Aset</span>
+                                          <select name="tipeAset" id="tipeAset" style="width:170px">
+                                              <option value="all">Semua Aset</option>
+                                              <option value="tanah">Tanah</option>
+                                              <option value="mesin">Mesin</option>
+                                              <option value="bangunan">Bangunan</option>
+                                              <option value="jaringan">Jaringan</option>
+                                              <option value="asetlain">Aset Lain</option>
+                                              <option value="kdp">KDP</option>
+                                          </select>
+                                      </li>
+                                      <li>
+                                          <span class="span2">Level</span>
+                                          <select  name="levelAset" id="levelAset" style="width:170px">
+                                              <option value="7">Semua Level</option>
+                                              <option value="2">Golongan</option>
+                                              <option value="3">Bidang</option>
+                                              <option value="4">Kelompok</option>
+                                              <option value="5">Sub Kelompok</option>
+                                              <option value="6">Sub Sub Kelompok</option>
+                                              <option value="7">Detail Per Aset</option>
+                                              <option value="1">Detail Per Aset dan Per Riwayat</option>
+                                          </select>
+                                      </li>
+                                      <?php //selectAllSatker('kodeSatker8','255',true,false);
+
+                                      selectAllSatker( 'kodeSatkerRincianKK', '255', true, false, false, true );
+
+                                      ?>
+                                      <br>
+                                      <li>
+                                          <span class="span2">&nbsp;</span>
+                                          <input type="submit" name="pengadaanbmd" class="btn btn-primary" value="Lanjut" />&nbsp;
+                                          <input type="reset" name="reset" class="btn" value="Bersihkan Filter" />
+                                      </li>
+                                  </ul>
+                              </form>
+
+                          </div>
+                          <!-- Akhir Kertas Kerja -->
                                      
 
 						</div>
