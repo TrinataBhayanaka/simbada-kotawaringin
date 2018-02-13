@@ -589,7 +589,7 @@ for($i=0;$i<2;$i++){
 
                     $Kd_Riwayat = '50';
                     //insert log
-                    $QueryLog = "INSERT INTO $tableLog ($implodeField,$AddField) VALUES ($implodeVal,'$action','$changeDate','$TglPerubahan','$NilaiPerolehan_Awal','$AkumulasiPenyusutan_Awal','$NilaiBuku_Awal','$PenyusutanPerTahun_Awal','$Kd_Riwayat')";
+                    $QueryLog = "INSERT INTO $tableLog ($implodeField,$AddField) VALUES ($implodeVal,'$action','$changeDate','$TglPerubahan_temp','$NilaiPerolehan_Awal','$AkumulasiPenyusutan_Awal','$NilaiBuku_Awal','$PenyusutanPerTahun_Awal','$Kd_Riwayat')";
                     // echo $QueryLog; 
                     // pr($QueryLog);
                     // exit;
