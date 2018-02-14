@@ -1547,7 +1547,7 @@ function history_log($kode, $gol, $ps, $tglawalperolehan, $tglakhirperolehan, $T
                 $data[ 'Saldo_akhir_jml' ] = 0;
             }
         }  
-        else if(($Kd_Riwayat == "26" || $Kd_Riwayat == "27")&& $counter_penghapusan==0) {
+        else if(($Kd_Riwayat == "26" || $Kd_Riwayat == "27") /*&& $counter_penghapusan==0*/) {
             // code... PENGHAPUSAN DAN PEMINDAHTANGANAN
             if($kodeKa == 1) {
                 $status_masuk = 1;
