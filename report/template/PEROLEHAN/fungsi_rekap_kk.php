@@ -91,10 +91,11 @@ function history_log($kode, $gol, $ps, $tglawalperolehan, $tglakhirperolehan, $T
     }
     // echo " data kode riwayat <br/>";
     // pr($data_kode_riwayat);
-    $counter_penghapusan=0;
+    $counter_penghapusan=array();
     while ($data = mysql_fetch_array ($result, MYSQL_ASSOC)) {
         $log_id = $data[ 'log_id' ];
         $Aset_ID = $data[ 'Aset_ID' ];
+
         $kodeKelompok = $data[ 'kodeKelompok' ];
         $kodeSatker = $data[ 'kodeSatker' ];
         $kodeLokasi = $data[ 'kodeLokasi' ];
@@ -1547,11 +1548,11 @@ function history_log($kode, $gol, $ps, $tglawalperolehan, $tglakhirperolehan, $T
                 $data[ 'Saldo_akhir_jml' ] = 0;
             }
         }  
-        else if(($Kd_Riwayat == "26" || $Kd_Riwayat == "27") ) {
+        else if($Kd_Riwayat == "26" || $Kd_Riwayat == "27") {
             // code... PENGHAPUSAN DAN PEMINDAHTANGANAN
-            if($kodeKa == 1 && $counter_penghapusan==0) {
+            $counter_penghapusan[$Aset_ID]=$counter_penghapusan[$Aset_ID]+1;
+            if($kodeKa == 1 && $counter_penghapusan[$Aset_ID]<=1) {
                 $status_masuk = 1;
-                $counter_penghapusan++;
                 /** ----------------------------MUTASI TAMBAH---------------------------------- */
                 if($Tahun == $TAHUN_AKTIF) {
                     $data[ 'saldo_awal_nilai' ] = 0;
