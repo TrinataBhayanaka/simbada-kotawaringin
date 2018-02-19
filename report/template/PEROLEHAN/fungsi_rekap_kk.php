@@ -2580,7 +2580,7 @@ function subsub_awal($kode, $gol, $ps, $pt)
     }
     $param_tgl = $pt;
     if($gol == 'mesin_ori') {
-        $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and
+        $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and and kondisi not in (3,4)  and
         ( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or
           (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=300000 or kodeKa=1)))
          and $paramSatker";
@@ -2597,7 +2597,7 @@ function subsub_awal($kode, $gol, $ps, $pt)
                  $param_where
                order by kelompok asc";
     } elseif($gol == 'bangunan_ori') {
-        $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and
+        $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and and kondisi not in (3,4)  and
         ( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or
           (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=10000000  or kodeKa=1)))
          and $paramSatker";
@@ -2619,7 +2619,7 @@ function subsub_awal($kode, $gol, $ps, $pt)
            and TglPerolehan <= '$param_tgl'
            and TglPembukuan <='$param_tgl'
            and kodeLokasi like '12%'
-           and kondisi != '3'
+           and and kondisi not in (3,4)
            and $paramSatker";
         else
             $param_where = "Status_Validasi_barang=1 and StatusTampil = 1
