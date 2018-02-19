@@ -312,7 +312,7 @@ function history_log($kode, $gol, $ps, $tglawalperolehan, $tglakhirperolehan, $T
         }
         // echo "$Aset_ID --$kodeKa( $noKontrak, $kondisi_aset )Kd_Riwayat==$Kd_Riwayat && Status_Validasi_Barang=$Status_Validasi_Barang && StatusValidasi==$StatusValidasi && StatusTampil==$StatusTampil<br/>";
         //if($Kd_Riwayat == "0" && $Status_Validasi_Barang == 1 && $StatusValidasi == 1 && $StatusTampil == 1 && $TglPembukuan != 0) {
-        echo "masuk $Aset_ID -- $Kd_Riwayat && $cek_status_validasi_barang && $cek_status_validasi && {$counter_data_baru[$Aset_ID]}<br/>";
+        //echo "masuk $Aset_ID -- $Kd_Riwayat && $cek_status_validasi_barang && $cek_status_validasi && {$counter_data_baru[$Aset_ID]}<br/>";
         if(($Kd_Riwayat == "0" || $Kd_Riwayat == "20") && $cek_status_validasi_barang==1 && $cek_status_validasi==1 && $counter_data_baru[$Aset_ID]<=1) {
             $counter_data_baru[$Aset_ID]=$counter_data_baru[$Aset_ID]+1;
             $status_masuk = 1;
