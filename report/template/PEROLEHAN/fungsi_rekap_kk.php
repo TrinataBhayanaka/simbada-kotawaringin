@@ -2625,7 +2625,8 @@ function subsub_awal($kode, $gol, $ps, $pt)
             $param_where = "Status_Validasi_barang=1 and StatusTampil = 1
            and TglPerolehan <= '$param_tgl'
            and TglPembukuan <='$param_tgl'
-           and kodeLokasi like '12%'
+           and kodeLokasi like '12%' 
+           and kondisi not in (3,4)
            and $paramSatker";
 
         if($gol == 'jaringan_ori') {
