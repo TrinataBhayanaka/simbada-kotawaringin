@@ -59,7 +59,7 @@ function history_log($kode, $gol, $ps, $tglawalperolehan, $tglakhirperolehan, $T
     }
 
     $paramLog = "(l.TglPerubahan >='$tglawalperolehan' and l.TglPerubahan <='$tglakhirperolehan'
-       and $paramSatker) or (l.TglPembukuan >='$tglawalperolehan' and TglPerubahan=TglPerolehan)
+       and $paramSatker) or (l.TglPembukuan >='$tglawalperolehan' and TglPerubahan=TglPerolehan and $paramSatker)
          AND l.Kd_Riwayat in (0,1,2,3,7,21,26,27,28,30,50,51,29,35,36,37,281,29,291,77,20)
          order by l.tglPerubahan,l.log_id DESC";
 
