@@ -1898,7 +1898,8 @@ function history_log($kode, $gol, $ps, $tglawalperolehan, $tglakhirperolehan, $T
                 }
 
             }
-        } else if(($Kd_Riwayat == "50" || $Kd_Riwayat == "51" || $Kd_Riwayat == "52")&& $cek_status_validasi_barang==1 && $cek_status_validasi==1 && $kondisi!="4" && $kondisi!="3") {
+        } else if(($Kd_Riwayat == "50" || $Kd_Riwayat == "51" || $Kd_Riwayat == "52")&& $cek_status_validasi_barang==1 && $kondisi!="4" && $kondisi!="3") {
+            //&& $cek_status_validasi==1 
             // code... PENYUSUTAN TAHUN PERTAMA, KEDUA (KOREKSI DAN KAPITALISASI)
             $PenyusutanPerTahun_Awal = get_penyusutan_awal ($tabel_log, $log_id);
             if($kodeKa == 1) {
