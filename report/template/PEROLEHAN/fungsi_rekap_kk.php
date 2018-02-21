@@ -2388,7 +2388,7 @@ function history_log($kode, $gol, $ps, $tglawalperolehan, $tglakhirperolehan, $T
             $data[ 'Saldo_akhir_jml' ] = 0;
             $data[ 'bp_berjalan' ] = 0;
             //}
-        } else if($Kd_Riwayat == "35" && $cek_status_validasi_barang==1) {
+        } else if($Kd_Riwayat == "35" ) {
             // code  REKLAS kontrak KURANG
             //echo "Aset_ID=$Aset_ID kodeKa $kodeKa <br/>";
             $status_masuk = 1;
@@ -2512,8 +2512,8 @@ function history_log($kode, $gol, $ps, $tglawalperolehan, $tglakhirperolehan, $T
             } else {
                 $data[ 'Saldo_akhir_jml' ] = 1;
             }*/
-            $data[ 'NilaiPerolehan' ] = $NilaiPerolehan;
-                $data[ 'NilaiBuku' ] = $NilaiBuku;
+            $data[ 'NilaiPerolehan' ] = 0;//cek nilai
+                $data[ 'NilaiBuku' ] = 0;//cek nilai
                 $data[ 'PenyusutanPerTahun' ] = 0;
                 $data[ 'Saldo_akhir_jml' ] = 0;
                 $data[ 'bp_berjalan' ] = 0;
