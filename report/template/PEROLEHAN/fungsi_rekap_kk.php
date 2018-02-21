@@ -138,7 +138,7 @@ function history_log($kode, $gol, $ps, $tglawalperolehan, $tglakhirperolehan, $T
         //echo "00$Aset_ID --$kodeKa $Tahun $kodeKelompok<br/>";
         //echo "sblm $final_gol -----log_id $log_id aset_id $Aset_ID kodeKa $kodeKa <br/> ";
         if($Kd_Riwayat == "1" || $Kd_Riwayat == "35" || $Kd_Riwayat == "36" || $Kd_Riwayat == "0" ||$Kd_Riwayat == "50"||$Kd_Riwayat == "51"||$Kd_Riwayat == "20") {
-            list($noKontrak, $kondisi_aset, $kodeKa, $TipeAset,$cek_status_validasi,$cek_status_validasi_barang) = get_aset ($Aset_ID);
+            list($noKontrak, $kondisi_aset, $kodeKa, $TipeAset,$cek_status_validasi,$cek_status_validasi_barang) = get_aset ($Aset_ID,$final_gol);
         }
         //echo "11$Aset_ID --$kodeKa $Tahun $kodeKelompok<br/>";
         if($final_gol == "tanah" || $final_gol == "kdp" || $final_gol == "asetlain" || $final_gol == "jaringan") {
@@ -2531,15 +2531,19 @@ function history_log($kode, $gol, $ps, $tglawalperolehan, $tglakhirperolehan, $T
  * @param $aset_id
  * @return array
  */
-function get_aset($aset_id)
+function get_aset($aset_id,$final_gol)
 {
     $sql = "select noKontrak,kondisi,kodeKA,TipeAset,status_validasi_barang,statusvalidasi from aset where aset_id='$aset_id' limit 1";
     $result = mysql_query ($sql) or die("masuk sini" . mysql_error ());
     while ($data = mysql_fetch_array ($result, MYSQL_ASSOC)) {
-        $nokontrak = $data[ 'noKontrak' ];
+        $nokontrak = $data['noKontrak'];
+        $TipeAset = $data['TipeAset'];
+    }
+
+    $sql = "select kodeKA,status_validasi_barang,statusvalidasi from $final_gol where aset_id='$aset_id' limit 1";
+    $result = mysql_query ($sql) or die("masuk sini" . mysql_error ());
+    while ($data = mysql_fetch_array ($result, MYSQL_ASSOC)) {
         $kondisi = $data[ 'kondisi' ];
-        $kodeKa = $data[ 'kodeKA' ];
-        $TipeAset = $data[ 'TipeAset' ];
         $status_validasi_barang=$data['status_validasi_barang'];
         $statusvalidasi=$data['statusvalidasi'];
     }
