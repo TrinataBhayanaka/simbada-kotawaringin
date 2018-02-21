@@ -2388,7 +2388,7 @@ function history_log($kode, $gol, $ps, $tglawalperolehan, $tglakhirperolehan, $T
             $data[ 'Saldo_akhir_jml' ] = 0;
             $data[ 'bp_berjalan' ] = 0;
             //}
-        } else if($Kd_Riwayat == "35") {
+        } else if($Kd_Riwayat == "35" && $cek_status_validasi_barang==1) {
             // code  REKLAS kontrak KURANG
             //echo "Aset_ID=$Aset_ID kodeKa $kodeKa <br/>";
             $status_masuk = 1;
