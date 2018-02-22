@@ -91,8 +91,8 @@ foreach ($kapital as $key => $value) {
 	    $idkey = "Aset_ID";
 	}
 
-  $sql = mysql_query("UPDATE {$tabel} SET NilaiPerolehan = NilaiPerolehan + {$kib['NilaiPerolehan']}, StatusTampil = '1' WHERE Aset_ID = '{$value['asetKapitalisasi']}'");
-  $sql = mysql_query("UPDATE aset SET NilaiPerolehan = NilaiPerolehan + {$kib['NilaiPerolehan']}, Satuan = Satuan + {$kib['NilaiPerolehan']} WHERE Aset_ID = '{$value['asetKapitalisasi']}'");
+  $sql = mysql_query("UPDATE {$tabel} SET NilaiPerolehan = {$NilaiPerolehan} + {$kib['NilaiPerolehan']}, StatusTampil = '1' WHERE Aset_ID = '{$value['asetKapitalisasi']}'");
+  $sql = mysql_query("UPDATE aset SET NilaiPerolehan = {$NilaiPerolehan} + {$kib['NilaiPerolehan']}, Satuan = Satuan + {$kib['NilaiPerolehan']} WHERE Aset_ID = '{$value['asetKapitalisasi']}'");
   $sql = mysql_query("UPDATE kdp SET StatusTampil = '0', StatusValidasi = '0', Status_Validasi_Barang = '0' WHERE Aset_ID = '{$value['Aset_ID']}'");
   $sql = mysql_query("UPDATE aset SET StatusValidasi = '0', Status_Validasi_Barang = '0' WHERE Aset_ID = '{$value['Aset_ID']}'");
 
@@ -114,8 +114,14 @@ foreach ($kapital as $key => $value) {
         unset($tmpField);
         unset($tmpValue);
         foreach ($kib as $key => $val) {
-          $tmpField[] = $key;
-          $tmpValue[] = "'".$val."'";
+          if($key=="StatusValidasi"||$key=="Status_Validasi_Barang"||$key="StatusTampil"){
+              $tmpField[] = $key;
+            $tmpValue[] = "1";
+
+          }else{
+            $tmpField[] = $key;
+            $tmpValue[] = "'".$val."'";
+             }
         }
          
         $fileldImp = implode(',', $tmpField);

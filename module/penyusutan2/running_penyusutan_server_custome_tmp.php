@@ -24,7 +24,7 @@ $id = $argv[4];
 
 $newTahun = $tahun;
 // $newTahun = $tahun - 1; 
-$aColumns = array('a.Aset_ID', 'a.kodeKelompok', 'k.Uraian', 'a.Tahun', 'a.Info', 'a.NilaiPerolehan', 'a.noRegister', 'a.PenyusutanPerTahun', 'a.AkumulasiPenyusutan', 'a.TipeAset', 'a.kodeSatker', 'a.Status_Validasi_Barang','a.MasaManfaat');
+$aColumns = array('a.Aset_ID', 'a.kodeKelompok', 'k.Uraian', 'a.Tahun', 'a.Info', 'a.NilaiPerolehan', 'a.noRegister', 'a.PenyusutanPerTahun', 'a.AkumulasiPenyusutan', 'a.TipeAset', 'a.kodeSatker', 'a.Status_Validasi_Barang','a.MasaManfaat','a.UmurEkonomis');
 $fieldCustom = str_replace(" , ", " ", implode(", ", $aColumns));
 $sTable = "aset_tmp as a";
 $sTable2 = "aset_tmp2 as a";
@@ -589,7 +589,7 @@ for($i=0;$i<2;$i++){
 
                     $Kd_Riwayat = '50';
                     //insert log
-                    $QueryLog = "INSERT INTO $tableLog ($implodeField,$AddField) VALUES ($implodeVal,'$action','$changeDate','$TglPerubahan','$NilaiPerolehan_Awal','$AkumulasiPenyusutan_Awal','$NilaiBuku_Awal','$PenyusutanPerTahun_Awal','$Kd_Riwayat')";
+                    $QueryLog = "INSERT INTO $tableLog ($implodeField,$AddField) VALUES ($implodeVal,'$action','$changeDate','$TglPerubahan_temp','$NilaiPerolehan_Awal','$AkumulasiPenyusutan_Awal','$NilaiBuku_Awal','$PenyusutanPerTahun_Awal','$Kd_Riwayat')";
                     // echo $QueryLog; 
                     // pr($QueryLog);
                     // exit;
@@ -656,9 +656,14 @@ for($i=0;$i<2;$i++){
                  
                  
              }
-             $data_log=array("NilaiPerolehan_Awal"=>$NilaiPerolehan,
+             //ganti pakai data dari tabel master per 27 januari 2018
+            /* $data_log=array("NilaiPerolehan_Awal"=>$NilaiPerolehan,
                     "AkumulasiPenyusutan_Awal"=>$AkumulasiPenyusutan_Awal,
                     "PenyusutanPerTahun_Awal"=>$PenyusutanPerTahun_Awal,
+                     "kodeSatker"=>$kodeSatker);*/
+              $data_log=array("NilaiPerolehan_Awal"=>$NilaiPerolehan,
+                    "AkumulasiPenyusutan_Awal"=>$AkumulasiPenyusutan,
+                    "PenyusutanPerTahun_Awal"=>$PenyusutanPerTahun,
                      "kodeSatker"=>$kodeSatker);
              log_penyusutan($Aset_ID, $tableKib, 49,$newTahun, $data_log, $DBVAR);
             //akhir untuk log sblm penyusutan
@@ -681,7 +686,8 @@ for($i=0;$i<2;$i++){
                      . " from $tableLog where TglPerubahan>'$TglPerubahan_awal' and kd_riwayat in (2,21,28,7) "
                      . "and Aset_ID='$Aset_ID' order by log_id asc";
              
-             echo $query_perubahan;
+             echo $query_perubahan. "2132132131\n";
+
              $count=0;
              $qlog=$DBVAR->query($query_perubahan) or die($DBVAR->error());
              $kapitalisasi=0;
@@ -1015,17 +1021,31 @@ for($i=0;$i<2;$i++){
              }
              
              if($status_transaksi!=1){
-                 echo "tidak masuk log \n";
+                 echo "\n \n 1231321 tidak123132 masuk log \n";
                  //bila tidak ada transaksi
                  //$PenyusutanPerTahun=$NilaiPerolehan/$MasaManfaat;
-                 $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
-                 //$AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
-                 $AkumulasiPenyusutan=$AkumulasiPenyusutan+$PenyusutanPerTahun;
-                 $NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;
-                 $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
+                 if($AkumulasiPenyusutan==0||$AkumulasiPenyusutan=='NULL'){
+                     echo "Ini masuk tahap1  $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;\n";
+                    $PenyusutanPerTahun=round($NilaiPerolehan/$MasaManfaat);
+                    $MasaManfaat=$masa_manfaat;
+                    $rentang_tahun_penyusutan = ($newTahun-$Tahun)+1;
+                    $Sisa_Masa_Manfaat=$MasaManfaat-$rentang_tahun_penyusutan;
+                    $AkumulasiPenyusutan=$rentang_tahun_penyusutan*$PenyusutanPerTahun;
+                 }else
+                 {
+
+                    $rentang_tahun_penyusutan = 1;//($newTahun-$Tahun)+1;
+                    $AkumulasiPenyusutan=$AkumulasiPenyusutan+$PenyusutanPerTahun;
+                    $Sisa_Masa_Manfaat=$UmurEkonomis-$rentang_tahun_penyusutan;
+                     echo "Ini masuk tahap2 --xas $Sisa_Masa_Manfaat = $UmurEkonomis - $rentang_tahun_penyusutan;\n";
+                     echo "Umur Ekonomis: $UmurEkonomis\n";
+                 }
+                     $NilaiBuku=$NilaiPerolehan-$AkumulasiPenyusutan;
+   
                  if($Sisa_Masa_Manfaat<=0){
                     $AkumulasiPenyusutan=$NilaiPerolehan;
                     $NilaiBuku=0;
+                    $Sisa_Masa_Manfaat=0;
                  }
                 
                          
@@ -1142,7 +1162,7 @@ function overhaul($kd_aset1, $kd_aset2, $kd_aset3,$persen, $DBVAR) {
     }
     //echo "<pre> ";
    // print($prosentase3);
-    if($prosentase4 != 0) {
+/*    if($prosentase4 != 0) {
         echo " masuk 11 $persen====$prosentase1 $prosentase2 $prosentase3 $prosentase4 \n";
         if($persen > $prosentase4) {
             echo "0 =4";
@@ -1158,20 +1178,20 @@ function overhaul($kd_aset1, $kd_aset2, $kd_aset3,$persen, $DBVAR) {
             $hasil = $penambahan1;
         }
     } else {
-        echo " masuk 22 $persen====$prosentase1 $prosentase2 $prosentase3 $prosentase4 \n";
+      */  echo " masuk 22 $persen====$prosentase1 $prosentase2 $prosentase3 $prosentase4 \n";
         if($persen > $prosentase3) {
             echo "1 =3";
 
             $hasil = $penambahan3;
-        } else if($persen > $prosentase1 && $persen <= $prosentase2) {
+        } else if($persen > $prosentase2 && $persen <= $prosentase3) {
             echo "1 =2 ";
             $hasil = $penambahan2;
-        } else if($persen <= $prosentase1) {
+        } else if($persen <= $prosentase2) {
             echo "1 = 5 ";
             $hasil = $penambahan1;
         }
 
-    }
+    //}
     echo "\n hasill == $hasil == \n";
     if($hasil=="")
         $hasil=0;
