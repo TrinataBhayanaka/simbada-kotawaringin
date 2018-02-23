@@ -33,6 +33,8 @@ class RETRIEVE_REPORT extends DB {
      public function  get_kontrak($noKontrak){
           $query="select K.noKontrak,K.tglKontrak,K.keterangan, K.n_status, S.nosp2d, S.tglsp2d from kontrak K "
                   . " left join sp2d S on K.id=S.idKontrak where K.noKontrak='$noKontrak'";
+          echo  $query;
+          echo "<br/>";
           $result = $this->query($query) or die($this->error());
           $check = $this->num_rows($result);
           while ($data = $this->fetch_array($result)) {
@@ -116,8 +118,8 @@ class RETRIEVE_REPORT extends DB {
                           and A.noKontrak is not null and A.StatusValidasi=1 and Ka.n_status = 1 and Ka.tipeAset = 1
                       group by A.kodeSatker,A.kodeKelompok,A.noKontrak";    
                                           
-         //echo $query;
-         //echo "<br>";
+         echo $query;
+         echo "<br>";
           $result = $this->query($query) or die($this->error());
           //$check = $this->num_rows($result);
           while ($data = $this->fetch_array($result)) {
@@ -212,7 +214,114 @@ class RETRIEVE_REPORT extends DB {
     }
     else return "";
 }
+  public function test($skpd,$tglPerolehanAwal,$tglPerolehanAkhir){
+    /*pr($skpd);
+    pr($tglPerolehanAwal);
+    pr($tglPerolehanAkhir);*/
 
+    //get list satker kontrak
+    $sqlkontrakSatker = mysql_query("SELECT kodeSatker FROM kontrak WHERE kodeSatker like '$skpd%' and tglKontrak >='$tglPerolehanAwal' and tglKontrak <='$tglPerolehanAkhir' AND (tipeAset = 1 or tipeAset = 2)  group by kodeSatker");
+    //pr($sql);
+    
+    while ($dataKontrakSatker = mysql_fetch_assoc($sqlkontrakSatker)){
+        $satker[] = $dataKontrakSatker;
+    }    
+    sort($satker);
+    //exit();
+    foreach ($satker as $ky => $valSatker) {
+      //pr($valSatker['kodeSatker']);
+      
+      //get list kontrak
+      $sqlkontrak= mysql_query("SELECT * FROM kontrak WHERE kodeSatker = '$valSatker[kodeSatker]' and tglKontrak >='$tglPerolehanAwal' and tglKontrak <='$tglPerolehanAkhir' AND (tipeAset = 1 or tipeAset = 2)");
+      
+      while ($dataKontrak = mysql_fetch_assoc($sqlkontrak)){
+        
+        $kontrak = $dataKontrak;
+        //pr($kontrak);
+        //get sp2d penunjang
+        $sqlsp2dp = mysql_query("SELECT SUM(nilai) as total FROM sp2d WHERE idKontrak='{$kontrak['id']}' AND type = '2'");
+        while ($dataSP2D = mysql_fetch_assoc($sqlsp2dp)){
+            $sumsp2d = $dataSP2D;
+          }
+
+        //get total nilai all aset
+        $sqlsum = mysql_query("SELECT SUM(NilaiPerolehan) as total FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL)");
+         while ($sum = mysql_fetch_assoc($sqlsum)){
+            $sumTotal = $sum;
+          }
+
+        //get list barang by nokontrak
+        $RKsql = mysql_query("SELECT noKOntrak,Aset_ID, noRegister, Satuan, kodeLokasi, kodeKelompok, NilaiPerolehan FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL)");
+        $rKontrak = array();
+        $list = array();
+        while ($dataRKontrak = mysql_fetch_assoc($RKsql)){
+              $rKontrak[] = $dataRKontrak;
+        }
+        foreach ($rKontrak as $key => $value) {
+          $sqlnmBrg = mysql_query("SELECT Uraian FROM kelompok WHERE Kode = '{$value['kodeKelompok']}' LIMIT 1");
+          while ($uraian = mysql_fetch_assoc($sqlnmBrg)){
+              $tmp = $uraian;
+              $rKontrak[$key]['uraian'] = $tmp['Uraian'];
+            }
+        }
+        $i = 1;
+        $j = 0;
+        $tmp = 0;
+        foreach ($rKontrak as $key => $value) {
+           # code...
+            $list[]= $value; 
+            $bopsisa = $sumsp2d['total'];
+            $j++;
+            if(count($rKontrak) != $j){
+                $bop = ceil($value['NilaiPerolehan']/$sumTotal['total']*$sumsp2d['total']);
+                $tmp+= $bop;
+            }else{
+                $bop = $bopsisa - $tmp;
+            }
+            /*echo "bop  = ".$bop;echo "<br/>";
+            echo "bop sisa = ".$bopsisa;echo "<br/>";*/
+            
+            $satuan = $value['NilaiPerolehan']-$bop;
+            $list[$key]['bop'] = $bop;
+            $list[$key]['satuan'] = $satuan;
+            $list[$key]['NilaiKontrak'] = $kontrak['nilai'];
+            $list[$key]['TglKontrak'] = $kontrak['tglKontrak'];
+            if($kontrak['tipeAset'] == 1){
+              $list[$key]['tipeKontrak'] = 'Aset Baru';
+            }elseif($kontrak['tipeAset'] == 2){
+              $list[$key]['tipeKontrak'] = 'Kapitalisasi';
+            }else{
+              $list[$key]['tipeKontrak'] = '-';
+            }
+             
+            //get list sp2dpenunjang
+            $sp2dpRincian=array();
+            $sqlsp2dpRincian = mysql_query("SELECT * from sp2d where idKontrak = '{$kontrak['id']}' AND type = '2'");
+            while ($rincian = mysql_fetch_assoc($sqlsp2dpRincian)){
+              $sp2dpRincian[] = $rincian;
+            }
+            $list[$key]['sp2dpenunjang'] = $sp2dpRincian;
+            
+            //get list sp2dpenunjang
+            $sp2dRincian=array();
+            $sqlsp2dRincian = mysql_query("SELECT * from sp2d where idKontrak = '{$kontrak['id']}' AND type = '1'");
+            while ($rincian2 = mysql_fetch_assoc($sqlsp2dRincian)){
+              $sp2dRincian[] = $rincian2;
+            }
+            $list[$key]['sp2d'] = $sp2dRincian;
+        
+        $i++;
+                 
+        }  
+        //pr($list);
+        //exit();
+        $dataFix[$valSatker['kodeSatker']][$kontrak['noKontrak']]['data'] = $list;         
+      }
+    }
+    return $dataFix;     
+    //pr($dataFix); 
+    //exit();
+  }
 }
 
 ?>

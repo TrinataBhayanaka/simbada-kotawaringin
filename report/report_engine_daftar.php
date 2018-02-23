@@ -466,6 +466,180 @@ $head = "
      }
 
 
+     public function report_daftar_pengadaan_rev($dataArr, $gambar, $tglawalperolehan, $tglakhirperolehan,$tglcetak) {
+         // pr($dataArr); 
+          //exit();
+           if($dataArr!="")
+          {
+               $head = "<html>
+                         <head>
+                              <style>
+                                   table
+                                   {
+                                        font-size:10pt;
+                                        font-family:Arial;
+                                        border-collapse: collapse;                                                      
+                                        border-spacing:0;
+                                   }
+                                   h3
+                                   {
+                                        font-family:Arial;  
+                                        font-size:13pt;
+                                        color:#000;
+                                             
+                                   }
+                                   p
+                                   {
+                                        font-size:10pt;
+                                        font-family:Arial;
+                                        font-weight:bold;
+                                   }
+                                   </style>
+                              </head>
+                               ";
+
+                                        
+               $no=1;
+               $skpdeh="";
+               $thn="";
+               $status_print=0;
+               $perolehanTotal=0;
+               $kodePemilik= '';
+               $temp =  array();
+               $html="<table style=\"text-align: left; width: 100%;\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">
+                              <tr>
+                                   <td style=\"width: 10%;\"><img style=\"width: 80px; height: 85px;\" alt=\"\" src=\"$gambar\"></td>
+                                   <td colspan=\"2\" style=\"width: 70%; text-align: center;\">
+                                        <h3>Daftar Pengadaan Barang</h3>
+                                        <h3>Periode $tglawalperolehan s/d $tglakhirperolehan</h3>
+                                   </td>
+                              </tr>
+                              <tr>
+                                   <td>&nbsp;</td>
+                                   <td>&nbsp;</td>
+                                   <td>&nbsp;</td>
+                              </tr>
+                              <tr>
+                                   <td>&nbsp;</td>
+                                   <td>&nbsp;</td>
+                                   <td>&nbsp;</td>
+                              </tr>
+                              <tr>
+                                   <td colspan='2' style=\"width: 20%;text-align:left;font-weight:bold;\">KABUPATEN / KOTA</td>
+                                   <td style=\"width: 80%;text-align:left;font-weight:bold;\">: $this->NAMA_KABUPATEN</td>
+
+                              </tr>
+                               <tr>
+                                   <td colspan='2' style=\"width: 20%;text-align:left;font-weight:bold;\">PROVINSI</td>
+                                   <td style=\"width: 80%;text-align:left;font-weight:bold;\">: $this->NAMA_PROVINSI</td>
+
+                              </tr>
+                         </table><br/>";
+               $html.="<table style=\"text-align: left; width: 100%; border-collapse: collapse;\" border=\"1\" cellpadding=\"0\" cellspacing=\"0\">
+                    <tr style=\"text-align:center;font-weight:bold;\">
+                         <td rowspan='2' style=\"width:30px;text-align:center;font-weight:bold;\">No<br/> Urut </td>
+                         <td rowspan='2' style=\"width:180px;text-align:center;font-weight:bold;\">Nama / Jenis Barang</td>
+                         <td colspan='2' style=\"width:200px;text-align:center;font-weight:bold;\">Kuitansi/Kontrak</td>
+                         <td colspan='2'  style=\"width:200px;text-align:center;font-weight:bold;\">SP2D</td>
+                         <td colspan='2'  style=\"width:200px;text-align:center;font-weight:bold;\">SP2D Penunjang</td>
+                         <td rowspan='2' style=\"width:120px;text-align:center;font-weight:bold;\">Nilai <br/>Perolehan</td>
+                         <td rowspan='2' style=\"width:120px;text-align:center;font-weight:bold;\">Nilai <br/>Penunjang</td>
+                         <td rowspan='2' style=\"width:120px;text-align:center;font-weight:bold;\">Nilai <br/>Perolehan Total</td>
+                         <td rowspan='2' style=\"width:180px;text-align:center;font-weight:bold;\">Jenis Kontrak</td>
+                    </tr>
+                    <tr>
+                         <td style=\"width:80px;text-align:center;font-weight:bold;\">Tanggal</td>
+                         <td style=\"width:120px;text-align:center;font-weight:bold;\">Nomor</td>
+                         <td style=\"width:80px;text-align:center;font-weight:bold;\">Tanggal</td>
+                         <td style=\"width:120px;text-align:center;font-weight:bold;\">Nomor</td>
+                         <td style=\"width:80px;text-align:center;font-weight:bold;\">Tanggal</td>
+                         <td style=\"width:120px;text-align:center;font-weight:bold;\">Nomor</td>
+                    </tr>";
+
+               foreach ($dataArr as $key1 => $value1) {
+                    // satker
+                    $tmpSatker=$this->getNamaSatker($key1);
+                    $Satker = "[".$key1."] ".$tmpSatker[0]->NamaSatker;
+                    //pr($tmpSatker); 
+                    $html.="<tr style=\"text-align:left;font-weight:bold; \">
+                              <td style=\"text-align:left;font-weight:bold; \" colspan=\"12\">$Satker</td>
+                         </tr>";
+                    $num = 1;     
+                    foreach ($value1 as $key2 => $value2) {
+                              # code...
+                              $html.="<tr style=\"text-align:left;font-weight:bold;\">
+                                   <td style=\"text-align:center;font-weight:bold;\" >$num</td>
+                                   <td style=\"text-align:left;font-weight:bold;\" colspan=\"11\">No Kontrak : $key2</td>
+                              </tr>";
+                         $no=1;   
+                         $totalSatuan = 0;  
+                         $totalBop = 0;  
+                         $totalNP = 0;  
+                         foreach ($value2['data'] as $key3 => $value3) {
+                              # code...
+                              $html.="
+                                   <tr>
+                                        <td style=\"text-align:center;\">$no</td>
+                                        <td>$value3[uraian]</td>
+                                        <td>$value3[TglKontrak]</td>
+                                        <td>$value3[noKOntrak]</td>";
+                                        $tmp_nosp2dp = array();
+                                        foreach ($value3['sp2dpenunjang'] as $key4 => $value4) {
+                                             $tmp_nosp2dp[] = $value4['nosp2d'];
+                                        }
+                                        $nosp2dp = implode('<br/>', $tmp_nosp2dp);
+                                        
+                                        $tmp2_tglsp2dp = array();
+                                        foreach ($value3['sp2dpenunjang'] as $key5 => $value5) {
+                                             $exp = explode('-', $value5['tglsp2d']);
+                                             $tmp2_tglsp2dp[] = $exp[2]."/".$exp[1]."/".$exp[0];
+                                        }
+                                        $tglsp2dp = implode('<br/>', $tmp2_tglsp2dp);
+                                        
+                                        $tmp_nosp2d = array();
+                                        foreach ($value3['sp2d'] as $key6 => $value6) {
+                                             $tmp_nosp2d[] = $value6['nosp2d'];
+                                        }
+                                        $nosp2d = implode('<br/>', $tmp_nosp2d);
+                                        
+                                        $tmp_tglsp2d = array();
+                                        foreach ($value3['sp2d'] as $key7 => $value7) {
+                                             $exp2 = explode('-', $value7['tglsp2d']);
+                                             $tmp_tglsp2d[] = $exp2[2]."/".$exp2[1]."/".$exp2[0];
+                                        }
+                                        $tglsp2d = implode('<br/>', $tmp_tglsp2d);
+                                        
+                                        $html.="<td>$tglsp2d</td>
+                                        <td>$nosp2d</td>
+                                        <td>$tglsp2dp</td>
+                                        <td>$nosp2dp</td>
+                                        <td style=\"text-align:right;\">".number_format($value3[satuan],0,",",".")."</td>
+                                        <td style=\"text-align:right;\">".number_format($value3[bop],0,",",".")."</td>
+                                        <td style=\"text-align:right;\">".number_format($value3[NilaiPerolehan],0,",",".")."</td>
+                                        <td>$value3[tipeKontrak]</td>
+                                        ";
+                              $totalSatuan+= $value3[satuan];
+                              $totalBop+= $value3[bop];
+                              $totalNP+= $value3[NilaiPerolehan];
+                              $no++;           
+                         }
+
+                         $html.="</tr>
+                                   <tr>
+                                        <td style=\"text-align: center; font-weight:bold;\" colspan=\"8\">Total</td>
+                                        <td style=\"text-align: right;\">".number_format($totalSatuan,0,",",".")."</td>
+                                        <td style=\"text-align: right;\">".number_format($totalBop,0,",",".")."</td>
+                                        <td style=\"text-align: right;\">".number_format($totalNP,0,",",".")."</td>
+                                        <td>&nbsp;</td>
+                                   </tr>";
+                         $num++;              
+                    }
+               }
+          $html.="</table>";      
+          $datHt[]=$html;
+          return $datHt;
+          }
+     }
 
 public function get_jabatan($satker,$jabatan){
 	if($jabatan=="1")
