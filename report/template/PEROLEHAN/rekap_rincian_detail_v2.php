@@ -1168,9 +1168,9 @@ foreach($data_awal_perolehan as $arg)
     
     $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Uraian']= $arg['Uraian'];
     $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['nilai']+= $arg['nilai'];
-    $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['PP']+= $arg['PP'];
-    $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['AP']+= $arg['AP'];
-    $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['NB']+= $arg['NB'];
+    $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['PP']+= round($arg['PP'],2);
+    $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['AP']+= round($arg['AP'],2);
+    $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['NB']+= round($arg['NB'],2);
     $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['jml']+= 1;
 }
 
@@ -1186,9 +1186,9 @@ foreach($data_akhir_perolehan as $arg)
     
     $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Uraian']= $arg['Uraian'];
     $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['nilai']+= $arg['nilai'];
-    $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['PP']+= $arg['PP'];
-    $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['AP']+= $arg['AP'];
-    $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['NB']+= $arg['NB'];
+    $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['PP']+= round($arg['PP'],2);
+    $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['AP']+= round($arg['AP'],2);
+    $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['NB']+= round($arg['NB'],2);
     $data_akhir[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['jml']+= 1;
 }
 
@@ -1199,9 +1199,9 @@ foreach($data_hapus_awal as $arg)
      $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Kelompok']+= $arg['kelompok'];
     $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Uraian']+= $arg['Uraian'];
     $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['nilai']+= $arg['nilai'];
-    $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['PP']+= $arg['PP'];
-    $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['AP']+= $arg['AP'];
-    $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['NB']+= $arg['NB'];
+    $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['PP']+= round($arg['PP'],2);
+    $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['AP']+= round($arg['AP'],2);
+    $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['NB']+= round($arg['NB'],2);
     $data_hapus_tmp[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['jml']+= 1;
 }
    
