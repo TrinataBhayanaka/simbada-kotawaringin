@@ -1167,7 +1167,7 @@ foreach($data_awal_perolehan as $arg)
     $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Tahun']= $arg['Tahun'];
     
     $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['Uraian']= $arg['Uraian'];
-    $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['nilai']+= round($arg['nilai'],2);
+    $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['nilai']+= $arg['nilai'];
     $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['PP']+= round($arg['PP'],2);
     $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['AP']+= round($arg['AP'],2);
     $data_awal[$arg['kelompok'].'.'.$arg['Tahun'].'-'.$arg['noRegister'].'-'.$arg['Aset_ID']]['NB']+= round($arg['NB'],2);
