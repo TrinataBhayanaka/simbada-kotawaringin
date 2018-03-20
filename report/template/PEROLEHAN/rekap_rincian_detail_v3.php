@@ -233,12 +233,13 @@ $head .= " <table style=\"width: 100%; text-align: left; margin-left: auto; marg
 		<td rowspan='2' colspan='5' style=\" text-align: center; font-weight: bold; width: \">Kode</td>
 		<td rowspan='2' style=\" text-align: center; font-weight: bold; width: \">Uraian</td>
 		<td colspan='4' style=\" text-align: center; font-weight: bold; width: \">1 Januari $tahun_neraca</td>
-                <td colspan='8' style=\" text-align: center; font-weight: bold; width: \">Nilai Perolehan</td>
+                <td colspan='12' style=\" text-align: center; font-weight: bold; width: \">Nilai Perolehan</td>
                 <td colspan='2' style=\" text-align: center; font-weight: bold; width: \">Akumulasi Penyusutan</td>
                 <td rowspan='2' style=\" text-align: center; font-weight: bold; width: \">Beban Penyusutan Tahun Berjalan</td>
                 <td colspan='4' style=\" text-align: center; font-weight: bold; width: \">31 Desember $tahun_neraca</td>
      <td rowspan='2' style=\" text-align: center; font-weight: bold; width: \">Keterangan</td>  
-              <td rowspan='2' style=\" text-align: center; font-weight: bold; width: \">Kode Satker</td> 
+              <td rowspan='2' style=\" text-align: center; font-weight: bold; width: \">Kode Satker</td>
+              <td rowspan='2' style=\" text-align: center; font-weight: bold; width: \">Dokumen(Kontrak/Dokumen Lain)</td>
 	</tr>
         <tr>
             <td  style=\" text-align: center; font-weight: bold; width: \">Jumlah</td>
@@ -247,14 +248,18 @@ $head .= " <table style=\"width: 100%; text-align: left; margin-left: auto; marg
             <td  style=\" text-align: center; font-weight: bold; width: \">Akumulasi Penyusutan</td>
             <td  style=\" text-align: center; font-weight: bold; width: \">Nilai Buku</td>
             
-            <td  style=\" text-align: center; font-weight: bold; width: \">Transfer Keluar</td>
-            <td  style=\" text-align: center; font-weight: bold; width: \">Koreksi</td>
-            <td  style=\" text-align: center; font-weight: bold; width: \">Penghapusan</td>
+            <td  style=\" text-align: center; font-weight: bold; width: \">Transfer Antar SKPD (-)</td>
+            <td  style=\" text-align: center; font-weight: bold; width: \">Penghapusan Pemindahtangan</td>
+            <td  style=\" text-align: center; font-weight: bold; width: \">Penghapusan Pemusnahan</td>
+            <td  style=\" text-align: center; font-weight: bold; width: \">Penghapusan Sebagian</td>
+            <td  style=\" text-align: center; font-weight: bold; width: \">Koreksi Nilai</td>
             <td  style=\" text-align: center; font-weight: bold; width: \">Total Berkurang</td>
             
+            <td  style=\" text-align: center; font-weight: bold; width: \">Aset Baru</td>
+            <td  style=\" text-align: center; font-weight: bold; width: \">Kapitalisasi</td>
             <td  style=\" text-align: center; font-weight: bold; width: \">Inventarisasi</td>
-            <td  style=\" text-align: center; font-weight: bold; width: \">Pengadaan</td>
-            <td  style=\" text-align: center; font-weight: bold; width: \">Transfer Masuk</td>
+            <td  style=\" text-align: center; font-weight: bold; width: \">Transfer Antar SKPD (+)</td>
+            <td  style=\" text-align: center; font-weight: bold; width: \">Koreksi Nilai</td>
             <td  style=\" text-align: center; font-weight: bold; width: \">Total Bertambah</td>
             
             <td  style=\" text-align: center; font-weight: bold; width: \">Berkurang</td>
@@ -297,6 +302,12 @@ $head .= " <table style=\"width: 100%; text-align: left; margin-left: auto; marg
                     <td style=\" text-align: center; font-weight: bold; width: \">25</td>
                     <td style=\" text-align: center; font-weight: bold; width: \">26</td>
                     <td style=\" text-align: center; font-weight: bold; width: \">27</td>
+                    <td style=\" text-align: center; font-weight: bold; width: \">28</td>
+                    <td style=\" text-align: center; font-weight: bold; width: \">29</td>
+                    <td style=\" text-align: center; font-weight: bold; width: \">30</td>
+                    <td style=\" text-align: center; font-weight: bold; width: \">31</td>
+                    <td style=\" text-align: center; font-weight: bold; width: \">32</td>
+                    
                    
 	</tr>";
 //foreach ($data as $gol) {
@@ -408,12 +419,18 @@ foreach ($data as $gol) {
         $mutasi_nilai_tambah += $gol[ mutasi_nilai_tambah ];
         $mutasi_nilai_kurang += $gol[ mutasi_nilai_kurang ];
 
-        $mutasi_invetariasi     += $gol[total_invetarisasi];
-        $mutasi_transfer_masuk  += $gol[total_transfer_masuk];
-        $mutasi_pengadaan       += $gol[total_pengadaan];
-        $mutasi_transfer_keluar += $gol[total_transfer_keluar];
-        $mutasi_penghapusan     += $gol[total_penghapusan];
-        $mutasi_koreksi         += $gol[total_koreksi];
+        $mutasi_aset_baru        +=$gol[total_aset_baru];
+        $mutasi_aset_kapitalisasi        +=$gol[total_aset_kapitalisasi];
+        $mutasi_invetarisasi     +=$gol[total_invetarisasi];
+        $mutasi_transfer_masuk       +=$gol[total_transfer_masuk];
+        $mutasi_koreksi_tambah       +=$gol[total_koreksi_tambah];
+        $mutasi_transfer_keluar      +=$gol[total_transfer_keluar];
+        $mutasi_penghapusan_pemindahtanganan     +=$gol[total_penghapusan_pemindahtanganan];
+        $mutasi_penghapusan_pemusnahan       +=$gol[total_penghapusan_pemusnahan];
+        $mutasi_penghapusan_sebagian     +=$gol[total_penghapusan_sebagian];
+        $mutasi_koreksi_kurang       +=$gol[total_koreksi_kurang];
+        
+        
 
 
         $mutasi_jml_tambah += $gol[ mutasi_jml_tambah ];
@@ -455,12 +472,17 @@ foreach ($data as $gol) {
     $csv.=$gol[nb]."|";
 
     $csv.=$gol[total_transfer_keluar]."|";
-    $csv.=$gol[total_koreksi]."|";
-    $csv.=$gol[total_penghapusan]."|";
+    $csv.=$gol[total_penghapusan_pemindahtanganan]."|";
+    $csv.=$gol[total_penghapusan_pemusnahan]."|";
+    $csv.=$gol[total_penghapusan_sebagian]."|";
+    $csv.=$gol[total_koreksi_kurang]."|";
     $csv.=$gol[mutasi_nilai_kurang]."|";
+
+    $csv.=$gol[total_aset_baru]."|";
+    $csv.=$gol[total_aset_kapitalisasi]."|";
     $csv.=$gol[total_invetarisasi]."|";
-    $csv.=$gol[total_pengadaan]."|";
     $csv.=$gol[total_transfer_masuk]."|";
+    $csv.=$gol[total_koreksi_tambah]."|";
 
     $csv.=$gol[mutasi_nilai_tambah]."|";
     $csv.=$gol[mutasi_ap_kurang]."|";
@@ -486,14 +508,17 @@ foreach ($data as $gol) {
 					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ nb ], 2, ",", ".") . "</td> 
                     
                     <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_transfer_keluar ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_koreksi ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_penghapusan ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_penghapusan_pemindahtanganan ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_penghapusan_pemusnahan ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_penghapusan_sebagian ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_koreksi_kurang ], 2, ",", ".") . "</td>
                     <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ mutasi_nilai_kurang ], 2, ",", ".") . "</td>
                     
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_invetarisasi ], 2, ",", ".") . "</td>					
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_pengadaan ], 2, ",", ".") . "</td>
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_transfer_keluar ], 2, ",", ".") . "</td>
-					
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_aset_baru ], 2, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_aset_kapitalisasi ], 2, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_invetarisasi ], 2, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_transfer_masuk ], 2, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_koreksi_tambah ], 2, ",", ".") . "</td>
 					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ mutasi_nilai_tambah ], 2, ",", ".") . "</td>
 					
 					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ mutasi_ap_kurang ], 2, ",", ".") . "</td>
@@ -532,13 +557,18 @@ foreach ($data as $gol) {
     $csv.=$bidang[ap]."|";
     $csv.=$bidang[nb]."|";
 
-    $csv.=$bidang[total_transfer_keluar]."|";
-    $csv.=$bidang[total_koreksi]."|";
-    $csv.=$bidang[total_penghapusan]."|";
-    $csv.=$bidang[mutasi_nilai_kurang]."|";
-    $csv.=$bidang[total_invetarisasi]."|";
-    $csv.=$bidang[total_pengadaan]."|";
-    $csv.=$bidang[total_transfer_masuk]."|";
+                $csv.=$bidang[total_transfer_keluar]."|";
+                $csv.=$bidang[total_penghapusan_pemindahtanganan]."|";
+                $csv.=$bidang[total_penghapusan_pemusnahan]."|";
+                $csv.=$bidang[total_penghapusan_sebagian]."|";
+                $csv.=$bidang[total_koreksi_kurang]."|";
+                $csv.=$bidang[mutasi_nilai_kurang]."|";
+
+                $csv.=$bidang[total_aset_baru]."|";
+                $csv.=$bidang[total_aset_kapitalisasi]."|";
+                $csv.=$bidang[total_invetarisasi]."|";
+                $csv.=$bidang[total_transfer_masuk]."|";
+                $csv.=$bidang[total_koreksi_tambah]."|";
 
                 $csv.=$bidang[mutasi_nilai_tambah]."|";
     $csv.=$bidang[mutasi_ap_kurang]."|";
@@ -564,13 +594,18 @@ foreach ($data as $gol) {
                                 <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ nb ], 2, ",", ".") . "</td>
                                     
                                 <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_transfer_keluar ], 2, ",", ".") . "</td>
-                                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_koreksi ], 2, ",", ".") . "</td>
-                                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_penghapusan ], 2, ",", ".") . "</td>
-                                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ mutasi_nilai_kurang ], 2, ",", ".") . "</td>
-                                
-                                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_invetarisasi ], 2, ",", ".") . "</td>					
-                                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_pengadaan ], 2, ",", ".") . "</td>
-                                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_transfer_keluar ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_penghapusan_pemindahtanganan ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_penghapusan_pemusnahan ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_penghapusan_sebagian ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_koreksi_kurang ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ mutasi_nilai_kurang ], 2, ",", ".") . "</td>
+                    
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_aset_baru ], 2, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_aset_kapitalisasi ], 2, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_invetarisasi ], 2, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_transfer_masuk ], 2, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_koreksi_tambah ], 2, ",", ".") . "</td>
+					
 					
 					            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ mutasi_nilai_tambah ], 2, ",", ".") . "</td>
                                 <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ mutasi_ap_kurang ], 2, ",", ".") . "</td>
@@ -610,13 +645,18 @@ foreach ($data as $gol) {
     $csv.=$Kelompok[ap]."|";
     $csv.=$Kelompok[nb]."|";
 
-    $csv.=$Kelompok[total_transfer_keluar]."|";
-    $csv.=$Kelompok[total_koreksi]."|";
-    $csv.=$Kelompok[total_penghapusan]."|";
-    $csv.=$Kelompok[mutasi_nilai_kurang]."|";
-    $csv.=$Kelompok[total_invetarisasi]."|";
-    $csv.=$Kelompok[total_pengadaan]."|";
-    $csv.=$Kelompok[total_transfer_masuk]."|";
+                        $csv.=$Kelompok[total_transfer_keluar]."|";
+                        $csv.=$Kelompok[total_penghapusan_pemindahtanganan]."|";
+                        $csv.=$Kelompok[total_penghapusan_pemusnahan]."|";
+                        $csv.=$Kelompok[total_penghapusan_sebagian]."|";
+                        $csv.=$Kelompok[total_koreksi_kurang]."|";
+                        $csv.=$Kelompok[mutasi_nilai_kurang]."|";
+
+                        $csv.=$Kelompok[total_aset_baru]."|";
+                        $csv.=$Kelompok[total_aset_kapitalisasi]."|";
+                        $csv.=$Kelompok[total_invetarisasi]."|";
+                        $csv.=$Kelompok[total_transfer_masuk]."|";
+                        $csv.=$Kelompok[total_koreksi_tambah]."|";
 
     $csv.=$Kelompok[mutasi_nilai_tambah]."|";
     $csv.=$Kelompok[mutasi_ap_kurang]."|";
@@ -640,15 +680,20 @@ foreach ($data as $gol) {
                                     <td style=\"text-align: right;\">" . number_format ($Kelompok[ ap ], 2, ",", ".") . "</td>
                                     <td style=\"text-align: right;\">" . number_format ($Kelompok[ nb ], 2, ",", ".") . "</td>
                                     
-                                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_transfer_keluar ], 2, ",", ".") . "</td>
-                                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_koreksi ], 2, ",", ".") . "</td>
-                                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_penghapusan ], 2, ",", ".") . "</td>
-                                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ mutasi_nilai_kurang ], 2, ",", ".") . "</td>
-                                    
-                                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_invetarisasi ], 2, ",", ".") . "</td>					
-                                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_pengadaan ], 2, ",", ".") . "</td>
-                                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_transfer_keluar ], 2, ",", ".") . "</td>
-
+                                                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_transfer_keluar ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_penghapusan_pemindahtanganan ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_penghapusan_pemusnahan ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_penghapusan_sebagian ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_koreksi_kurang ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ mutasi_nilai_kurang ], 2, ",", ".") . "</td>
+                    
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_aset_baru ], 2, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_aset_kapitalisasi ], 2, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_invetarisasi ], 2, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_transfer_masuk ], 2, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_koreksi_tambah ], 2, ",", ".") . "</td>
+					
+					
                                     <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ mutasi_nilai_tambah ], 2, ",", ".") . "</td>
                                     <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ mutasi_ap_kurang ], 2, ",", ".") . "</td>
                                     <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ mutasi_ap_tambah ], 2, ",", ".") . "</td>
@@ -684,13 +729,18 @@ foreach ($data as $gol) {
     $csv.=$Sub[ap]."|";
     $csv.=$Sub[nb]."|";
 
-    $csv.=$Sub[total_transfer_keluar]."|";
-    $csv.=$Sub[total_koreksi]."|";
-    $csv.=$Sub[total_penghapusan]."|";
-    $csv.=$Sub[mutasi_nilai_kurang]."|";
-    $csv.=$Sub[total_invetarisasi]."|";
-    $csv.=$Sub[total_pengadaan]."|";
-    $csv.=$Sub[total_transfer_masuk]."|";
+                                $csv.=$Sub[total_transfer_keluar]."|";
+                                $csv.=$Sub[total_penghapusan_pemindahtanganan]."|";
+                                $csv.=$Sub[total_penghapusan_pemusnahan]."|";
+                                $csv.=$Sub[total_penghapusan_sebagian]."|";
+                                $csv.=$Sub[total_koreksi_kurang]."|";
+                                $csv.=$Sub[mutasi_nilai_kurang]."|";
+
+                                $csv.=$Sub[total_aset_baru]."|";
+                                $csv.=$Sub[total_aset_kapitalisasi]."|";
+                                $csv.=$Sub[total_invetarisasi]."|";
+                                $csv.=$Sub[total_transfer_masuk]."|";
+                                $csv.=$Sub[total_koreksi_tambah]."|";
 
     $csv.=$Sub[mutasi_nilai_tambah]."|";
     $csv.=$Sub[mutasi_ap_kurang]."|";
@@ -714,15 +764,19 @@ foreach ($data as $gol) {
                                             <td style=\"text-align: right;\">" . number_format ($Sub[ ap ], 2, ",", ".") . "</td>
                                             <td style=\"text-align: right;\">" . number_format ($Sub[ nb ], 2, ",", ".") . "</td>
                                            
-                                             <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_transfer_keluar ], 2, ",", ".") . "</td>
-                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_koreksi ], 2, ",", ".") . "</td>
-                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_penghapusan ], 2, ",", ".") . "</td>
-                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ mutasi_nilai_kurang ], 2, ",", ".") . "</td>
-                                            
-                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_invetarisasi ], 2, ",", ".") . "</td>					
-                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_pengadaan ], 2, ",", ".") . "</td>
-                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_transfer_keluar ], 2, ",", ".") . "</td>
-
+                                              <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_transfer_keluar ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_penghapusan_pemindahtanganan ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_penghapusan_pemusnahan ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_penghapusan_sebagian ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_koreksi_kurang ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ mutasi_nilai_kurang ], 2, ",", ".") . "</td>
+                    
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_aset_baru ], 2, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_aset_kapitalisasi ], 2, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_invetarisasi ], 2, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_transfer_masuk ], 2, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_koreksi_tambah ], 2, ",", ".") . "</td>
+					
                                            
                                             <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Sub[ mutasi_nilai_tambah ], 2, ",", ".") . "</td>
                                             <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Sub[ mutasi_ap_kurang ], 2, ",", ".") . "</td>
@@ -759,13 +813,18 @@ $csv.=""."|";
     $csv.=$SubSub[ap]."|";
     $csv.=$SubSub[nb]."|";
 
-    $csv.=$SubSub[total_transfer_keluar]."|";
-    $csv.=$SubSub[total_koreksi]."|";
-    $csv.=$SubSub[total_penghapusan]."|";
-    $csv.=$SubSub[mutasi_nilai_kurang]."|";
-    $csv.=$SubSub[total_invetarisasi]."|";
-    $csv.=$SubSub[total_pengadaan]."|";
-    $csv.=$SubSub[total_transfer_masuk]."|";
+                                        $csv.=$SubSub[total_transfer_keluar]."|";
+                                        $csv.=$SubSub[total_penghapusan_pemindahtanganan]."|";
+                                        $csv.=$SubSub[total_penghapusan_pemusnahan]."|";
+                                        $csv.=$SubSub[total_penghapusan_sebagian]."|";
+                                        $csv.=$SubSub[total_koreksi_kurang]."|";
+                                        $csv.=$SubSub[mutasi_nilai_kurang]."|";
+
+                                        $csv.=$SubSub[total_aset_baru]."|";
+                                        $csv.=$SubSub[total_aset_kapitalisasi]."|";
+                                        $csv.=$SubSub[total_invetarisasi]."|";
+                                        $csv.=$SubSub[total_transfer_masuk]."|";
+                                        $csv.=$SubSub[total_koreksi_tambah]."|";
 
     $csv.=$SubSub[mutasi_nilai_tambah]."|";
     $csv.=$SubSub[mutasi_ap_kurang]."|";
@@ -793,14 +852,18 @@ $csv.=""."|";
 											<td style=\"text-align: right;\">" . number_format ($SubSub[ nb ], 2, ",", ".") . "</td>
                                             
                                             <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_transfer_keluar ], 2, ",", ".") . "</td>
-                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_koreksi ], 2, ",", ".") . "</td>
-                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_penghapusan ], 2, ",", ".") . "</td>
-                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ mutasi_nilai_kurang ], 2, ",", ".") . "</td>
-                                            
-                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_invetarisasi ], 2, ",", ".") . "</td>					
-                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_pengadaan ], 2, ",", ".") . "</td>
-                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_transfer_keluar ], 2, ",", ".") . "</td>
-
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_penghapusan_pemindahtanganan ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_penghapusan_pemusnahan ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_penghapusan_sebagian ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_koreksi_kurang ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ mutasi_nilai_kurang ], 2, ",", ".") . "</td>
+                    
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_aset_baru ], 2, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_aset_kapitalisasi ], 2, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_invetarisasi ], 2, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_transfer_masuk ], 2, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_koreksi_tambah ], 2, ",", ".") . "</td>
+					
                                             
                                             <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ mutasi_nilai_tambah ], 2, ",", ".") . "</td>
                                             <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ mutasi_ap_kurang ], 2, ",", ".") . "</td>
@@ -812,6 +875,7 @@ $csv.=""."|";
                                             <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ nb_akhir ], 2, ",", ".") . "</td> 
                                             <td>{$SubSub[riwayat]}</td>
                                             <td>{$SubSub[kodeSatker]}</td>
+                                             <td>{$SubSub[noKontrak]}</td>
 										</tr>";
                                     }
                             }
@@ -838,12 +902,17 @@ if($i == $hit_loop) {
     $csv.=$nb_total."|";
 
     $csv.=$mutasi_transfer_keluar."|";
-    $csv.=$mutasi_koreksi."|";
-    $csv.=$mutasi_penghapusan."|";
+    $csv.=$mutasi_penghapusan_pemindahtanganan."|";
+    $csv.=$mutasi_penghapusan_pemusnahan."|";
+    $csv.=$mutasi_penghapusan_sebagian."|";
+    $csv.=$mutasi_koreksi_kurang."|";
     $csv.=$mutasi_nilai_kurang."|";
+
+    $csv.=$mutasi_aset_baru."|";
+    $csv.=$mutasi_aset_kapitalisasi."|";
     $csv.=$mutasi_invetarisasi."|";
-    $csv.=$mutasi_pengadaan."|";
     $csv.=$mutasi_transfer_masuk."|";
+    $csv.=$mutasi_koreksi_tambah."|";
 
 
     $csv.=$mutasi_nilai_tambah."|";
@@ -863,15 +932,19 @@ if($i == $hit_loop) {
 				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($ap_total, 2, ",", ".") . "</td>
 				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($nb_total, 2, ",", ".") . "</td>
 				
-				<td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_transfer_keluar , 2, ",", ".") . "</td>
-                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_koreksi , 2, ",", ".") . "</td>
-                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_penghapusan , 2, ",", ".") . "</td>
-                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_nilai_kurang , 2, ",", ".") . "</td>
-                                            
-                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_invetarisasi , 2, ",", ".") . "</td>					
-                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_pengadaan , 2, ",", ".") . "</td>
-                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_transfer_keluar , 2, ",", ".") . "</td>
-
+				    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_transfer_keluar , 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_penghapusan_pemindahtanganan , 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_penghapusan_pemusnahan , 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_penghapusan_sebagian , 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_koreksi_kurang , 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_nilai_kurang , 2, ",", ".") . "</td>
+                    
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_aset_baru , 2, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_aset_kapitalisasi , 2, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_invetarisasi , 2, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_transfer_masuk , 2, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_koreksi_tambah , 2, ",", ".") . "</td>
+					
 				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($mutasi_nilai_tambah, 2, ",", ".") . "</td>
 				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($mutasi_ap_kurang, 2, ",", ".") . "</td>
 				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($mutasi_ap_tambah, 2, ",", ".") . "</td>
@@ -982,9 +1055,9 @@ function subsub_awal($kode, $gol, $ps, $pt)
     }
     $param_tgl = $pt;
     if($gol == 'mesin_ori') {
-        $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
+        $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi not in (3,4)  and 
 				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=300000 or kodeKa=1)))
+				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=1000000 or kodeKa=1)))
 				 and $paramSatker";
 
         $sql = "select  kodeKelompok as kelompok,Aset_ID,TglPembukuan,kodeSatker,
@@ -999,9 +1072,9 @@ function subsub_awal($kode, $gol, $ps, $pt)
                  $param_where    
                order by kelompok asc";
     } elseif($gol == 'bangunan_ori') {
-        $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
+        $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi not in (3,4)  and 
 				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=10000000  or kodeKa=1)))
+				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=20000000  or kodeKa=1)))
 				 and $paramSatker";
 
         $sql = "select  kodeKelompok as kelompok,Aset_ID,TglPembukuan,kodeSatker,
@@ -1021,7 +1094,7 @@ function subsub_awal($kode, $gol, $ps, $pt)
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%' 
-					 and kondisi != '3'					 
+					 and kondisi not in (3,4)					 
 					 and $paramSatker";
         else
             $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
@@ -1083,9 +1156,9 @@ function subsub($kode, $gol, $ps, $pt)
     $param_tgl = $pt;
     if($gol == 'mesin_ori') {
         $gol = "mesin";
-        $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
+        $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi not in (3,4)  and 
 				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=300000 or kodeKa=1)))
+				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl'  and kodeLokasi like '12%' and (NilaiPerolehan >=1000000 or kodeKa=1)))
 				 and $paramSatker";
 
         $sql = "select  kodeKelompok as kelompok,Aset_ID,TglPembukuan,kodeSatker,TahunPenyusutan,
@@ -1101,9 +1174,9 @@ function subsub($kode, $gol, $ps, $pt)
                order by kelompok asc";
     } elseif($gol == 'bangunan_ori') {
         $gol = "bangunan";
-        $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi != '3'  and 
+        $param_where = "Status_Validasi_barang=1 and StatusTampil = 1 and kondisi not in (3,4)  and 
 				( (TglPerolehan < '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and kodeKa=1) or 
-				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=10000000  or kodeKa=1)))
+				  (TglPerolehan >= '2008-01-01' and TglPembukuan <= '$param_tgl' and kodeLokasi like '12%' and (NilaiPerolehan >=20000000  or kodeKa=1)))
 				 and $paramSatker";
 
         $sql = "select  kodeKelompok as kelompok,Aset_ID,TglPembukuan,kodeSatker,TahunPenyusutan,
@@ -1123,7 +1196,7 @@ function subsub($kode, $gol, $ps, $pt)
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%' 
-					 and kondisi != '3'					 
+					 and kondisi not in (3,4)					 
 					 and $paramSatker";
         else
             $param_where = "Status_Validasi_barang=1 and StatusTampil = 1  
@@ -1196,9 +1269,9 @@ function subsub_hapus($kode, $gol, $ps, $pt, $tgl_pem)
         //cek kapitalisasi
         $kapitalisasi_kondisi = " and m.Aset_ID not in(select Aset_ID from log_$gol where  `action` LIKE 'Sukses kapitalisasi Mutasi%') ";
 
-        $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi != '3'  and 
+        $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi not in (3,4)  and 
 				( (m.TglPerolehan < '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and m.kodeKa=1) or 
-				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl'  and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=300000 or m.kodeKa=1)))
+				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl'  and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=1000000 or m.kodeKa=1)))
 				 and $paramSatker";
 
 
@@ -1219,9 +1292,9 @@ function subsub_hapus($kode, $gol, $ps, $pt, $tgl_pem)
         //cek kapitalisasi
         $kapitalisasi_kondisi = " and m.Aset_ID not in(select Aset_ID from log_$gol where  `action` LIKE 'Sukses kapitalisasi Mutasi%') ";
 
-        $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi != '3'  and 
+        $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1 and m.kondisi not in (3,4)  and 
 				( (m.TglPerolehan < '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and m.kodeKa=1) or 
-				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=10000000  or m.kodeKa=1)))
+				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=20000000  or m.kodeKa=1)))
 				 and $paramSatker";
 
         $sql = "select  m.kodeKelompok as kelompok,m.Aset_ID,m.TahunPenyusutan,
@@ -1242,7 +1315,7 @@ function subsub_hapus($kode, $gol, $ps, $pt, $tgl_pem)
 					 and m.TglPerolehan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and l.kd_riwayat=3 and `action` like 'Sukses Mutasi%' 
 					 and m.TglPembukuan <='$param_tgl' 
 					 and m.kodeLokasi like '12%' 
-					 and m.kondisi != '3'					 
+					 and m.kondisi not in (3,4)					 
 					 and $paramSatker";
         else
             $param_where = "m.Status_Validasi_barang!=1 and m.StatusTampil != 1  
@@ -1327,9 +1400,9 @@ function subsub_hapus_v2($kode, $gol, $ps, $pt, $tgl_pem,$q_data_awal,$q_data_ak
         //cek kapitalisasi
         $kondisi_transfer = " and m.Aset_ID not in($not_in_aset_hapus) ";
 
-        $param_where = "m.Status_Validasi_barang=1 and m.StatusTampil =1 and m.kondisi != '3'  and 
+        $param_where = "m.Status_Validasi_barang=1 and m.StatusTampil =1 and m.kondisi not in (3,4)  and 
 				( (m.TglPerolehan < '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and m.kodeKa=1) or 
-				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl'  and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=300000 or m.kodeKa=1)))
+				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl'  and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=1000000 or m.kodeKa=1)))
 				 and $paramSatker";
 
 
@@ -1350,9 +1423,9 @@ function subsub_hapus_v2($kode, $gol, $ps, $pt, $tgl_pem,$q_data_awal,$q_data_ak
         //cek kapitalisasi
         $kondisi_transfer = " and m.Aset_ID not in($not_in_aset_hapus) ";
 
-        $param_where = "m.Status_Validasi_barang=1 and m.StatusTampil =1 and m.kondisi != '3'  and 
+        $param_where = "m.Status_Validasi_barang=1 and m.StatusTampil =1 and m.kondisi not in (3,4)  and 
 				( (m.TglPerolehan < '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and m.kodeKa=1) or 
-				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=10000000  or m.kodeKa=1)))
+				  (m.TglPerolehan >= '2008-01-01' and m.TglPembukuan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kodeLokasi like '12%' and (m.NilaiPerolehan >=20000000  or m.kodeKa=1)))
 				 and $paramSatker";
 
         $sql = "select  m.kodeKelompok as kelompok,m.Aset_ID,m.TahunPenyusutan,
@@ -1372,7 +1445,7 @@ function subsub_hapus_v2($kode, $gol, $ps, $pt, $tgl_pem,$q_data_awal,$q_data_ak
 					 and m.TglPerolehan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kd_riwayat=3 and `action` like 'Sukses Mutasi%' 
 					 and m.TglPembukuan <='$param_tgl' 
 					 and m.kodeLokasi like '12%' 
-					 and m.kondisi != '3'					 
+					 and m.kondisi not in (3,4)					 
 					 and $paramSatker";
         else
             $param_where = "m.Status_Validasi_barang=1 and m.StatusTampil =1  
@@ -1561,7 +1634,9 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
 
             $tglpembukuan = $data_selisih[ $tipe ][ 'TglPembukuan' ];
             list($bp, $selisih_nilai_tambah, $selisih_nilai_kurang, $selisih_ap_tambah, $selisih_ap_kurang,$text_riwayat,
-                $total_invetarisasi,$total_transfer_masuk,$total_pengadaan,$total_transfer_keluar,$total_penghapusan,$total_koreksi) =
+                $TOTAL_ASET_BARU,$TOTAL_ASET_KAPITALISASI,$TOTAL_INVENTARISASI,$TOTAL_TRANSFER_MASUK,$TOTAL_KOREKSI_TAMBAH,
+                $TOTAL_TRANSFER_KELUAR,$TOTAL_PENGHAPUSAN_PEMINDAHTANGANAN,$TOTAL_PENGHAPUSAN_PEMUSNAHAN,
+                $TOTAL_PENGHAPUSAN_SEBAGIAN,$TOTAL_KOREKSI_KURANG,$noKontrak) =
                 history_aset ($ps, $aset_id, $tglperolehan, $tgl_awal, $tglpembukuan, $kodeKelompok,1);
         }
 
@@ -1631,12 +1706,23 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
         $data_gabungan[ $tipe ][ 'nb_akhir' ] = round($data_akhir[ $tipe ][ 'NB' ],2);
         $data_gabungan[ $tipe ][ 'riwayat' ] = $text_riwayat;
         $data_gabungan[ $tipe ][ 'kodeSatker' ] = $value['kodeSatker'];
-        $data_gabungan[ $tipe ][ 'total_invetariasi' ] = $total_invetarisasi;
-        $data_gabungan[ $tipe ][ 'total_transfer_masuk' ] = $total_transfer_masuk;
-        $data_gabungan[ $tipe ][ 'total_pengadaan' ] = $total_pengadaan;
-        $data_gabungan[ $tipe ][ 'total_transfer_keluar' ] = $total_transfer_keluar;
-        $data_gabungan[ $tipe ][ 'total_penghapusan' ] = $total_penghapusan;
-        $data_gabungan[ $tipe ][ 'total_koreksi' ] = $total_koreksi;
+
+
+        $data_gabungan[ $tipe ][ 'total_aset_baru' ] = $TOTAL_ASET_BARU;
+        $data_gabungan[ $tipe ][ 'total_aset_kapitalisasi' ] = $TOTAL_ASET_KAPITALISASI;
+        $data_gabungan[ $tipe ][ 'total_invetarisasi' ] = $TOTAL_INVENTARISASI;
+        $data_gabungan[ $tipe ][ 'total_transfer_masuk' ] = $TOTAL_TRANSFER_MASUK;
+        $data_gabungan[ $tipe ][ 'total_koreksi_tambah' ] = $TOTAL_KOREKSI_TAMBAH;
+        $data_gabungan[ $tipe ][ 'total_transfer_keluar' ] = $TOTAL_TRANSFER_KELUAR;
+        $data_gabungan[ $tipe ][ 'total_penghapusan_pemindahtanganan' ] = $TOTAL_PENGHAPUSAN_PEMINDAHTANGANAN;
+        $data_gabungan[ $tipe ][ 'total_penghapusan_pemusnahan' ] = $TOTAL_PENGHAPUSAN_PEMUSNAHAN;
+        $data_gabungan[ $tipe ][ 'total_penghapusan_sebagian' ] = $TOTAL_PENGHAPUSAN_SEBAGIAN;
+        $data_gabungan[ $tipe ][ 'total_koreksi_kurang' ] = $TOTAL_KOREKSI_KURANG;
+        $data_gabungan[ $tipe ][ 'noKontrak' ] = $noKontrak;
+
+
+
+
 
 
 
@@ -1709,17 +1795,24 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
         $kodekelompok = $value[ 'kodeKelompok' ];
 
         list($bp, $selisih_nilai_tambah, $selisih_nilai_kurang, $selisih_ap_tambah, $selisih_ap_kurang,$text_riwayat,
-            $total_invetarisasi,$total_transfer_masuk,$total_pengadaan,$total_transfer_keluar,$total_penghapusan,$total_koreksi) =
+            $TOTAL_ASET_BARU,$TOTAL_ASET_KAPITALISASI,$TOTAL_INVENTARISASI,$TOTAL_TRANSFER_MASUK,$TOTAL_KOREKSI_TAMBAH,
+            $TOTAL_TRANSFER_KELUAR,$TOTAL_PENGHAPUSAN_PEMINDAHTANGANAN,$TOTAL_PENGHAPUSAN_PEMUSNAHAN,
+            $TOTAL_PENGHAPUSAN_SEBAGIAN,$TOTAL_KOREKSI_KURANG,$noKontrak) =
             history_aset ($ps, $aset_id, $tglperolehan, $tgl_awal, $tglpembukuan, $kodekelompok,"$kodekelompok");
         $data_awal[ $tipe ][ 'riwayat' ] = $text_riwayat;
         $data_awal[ $tipe ][ 'kodeSatker' ] = $value['kodeSatker'];
 
-        $data_awal[ $tipe ][ 'total_invetariasi' ] = $total_invetarisasi;
-        $data_awal[ $tipe ][ 'total_transfer_masuk' ] = $total_transfer_masuk;
-        $data_awal[ $tipe ][ 'total_pengadaan' ] = $total_pengadaan;
-        $data_awal[ $tipe ][ 'total_transfer_keluar' ] = $total_transfer_keluar;
-        $data_awal[ $tipe ][ 'total_penghapusan' ] = $total_penghapusan;
-        $data_awal[ $tipe ][ 'total_koreksi' ] = $total_koreksi;
+        $data_awal[ $tipe ][ 'total_aset_baru' ] = $TOTAL_ASET_BARU;
+        $data_awal[ $tipe ][ 'total_aset_kapitalisasi' ] = $TOTAL_ASET_KAPITALISASI;
+        $data_awal[ $tipe ][ 'total_invetarisasi' ] = $TOTAL_INVENTARISASI;
+        $data_awal[ $tipe ][ 'total_transfer_masuk' ] = $TOTAL_TRANSFER_MASUK;
+        $data_awal[ $tipe ][ 'total_koreksi_tambah' ] = $TOTAL_KOREKSI_TAMBAH;
+        $data_awal[ $tipe ][ 'total_transfer_keluar' ] = $TOTAL_TRANSFER_KELUAR;
+        $data_awal[ $tipe ][ 'total_penghapusan_pemindahtanganan' ] = $TOTAL_PENGHAPUSAN_PEMINDAHTANGANAN;
+        $data_awal[ $tipe ][ 'total_penghapusan_pemusnahan' ] = $TOTAL_PENGHAPUSAN_PEMUSNAHAN;
+        $data_awal[ $tipe ][ 'total_penghapusan_sebagian' ] = $TOTAL_PENGHAPUSAN_SEBAGIAN;
+        $data_awal[ $tipe ][ 'total_koreksi_kurang' ] = $TOTAL_KOREKSI_KURANG;
+        $data_awal[ $tipe ][ 'noKontrak' ] = $noKontrak;
 
 
     }
@@ -1792,7 +1885,9 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
        echo "Aset=$tglperolehan==$tipe==$Aset_ID==$tglpembukuan==$kodekelompok<br/>";
        // exit();*/
         list($bp, $selisih_nilai_tambah, $selisih_nilai_kurang, $selisih_ap_tambah, $selisih_ap_kurang,$text_riwayat,
-            $total_invetarisasi,$total_transfer_masuk,$total_pengadaan,$total_transfer_keluar,$total_penghapusan,$total_koreksi)=
+            $TOTAL_ASET_BARU,$TOTAL_ASET_KAPITALISASI,$TOTAL_INVENTARISASI,$TOTAL_TRANSFER_MASUK,$TOTAL_KOREKSI_TAMBAH,
+            $TOTAL_TRANSFER_KELUAR,$TOTAL_PENGHAPUSAN_PEMINDAHTANGANAN,$TOTAL_PENGHAPUSAN_PEMUSNAHAN,
+            $TOTAL_PENGHAPUSAN_SEBAGIAN,$TOTAL_KOREKSI_KURANG,$noKontrak)=
             history_aset ($ps, $Aset_ID, $tglperolehan, $tgl_awal, $tglpembukuan, $kodekelompok,3);
         if($bp == 0) {
             $selisih_jml_tambah = $value[ 'jml' ];
@@ -1844,12 +1939,17 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
         $data_akhir[ $tipe ][ 'riwayat' ] = $text_riwayat;
         $data_akhir[ $tipe ][ 'kodeSatker' ] = $value['kodeSatker'];
 
-        $data_akhir[ $tipe ][ 'total_invetariasi' ] = $total_invetarisasi;
-        $data_akhir[ $tipe ][ 'total_transfer_masuk' ] = $total_transfer_masuk;
-        $data_akhir[ $tipe ][ 'total_pengadaan' ] = $total_pengadaan;
-        $data_akhir[ $tipe ][ 'total_transfer_keluar' ] = $total_transfer_keluar;
-        $data_akhir[ $tipe ][ 'total_penghapusan' ] = $total_penghapusan;
-        $data_akhir[ $tipe ][ 'total_koreksi' ] = $total_koreksi;
+        $data_akhir[ $tipe ][ 'total_aset_baru' ] = $TOTAL_ASET_BARU;
+        $data_akhir[ $tipe ][ 'total_aset_kapitalisasi' ] = $TOTAL_ASET_KAPITALISASI;
+        $data_akhir[ $tipe ][ 'total_invetarisasi' ] = $TOTAL_INVENTARISASI;
+        $data_akhir[ $tipe ][ 'total_transfer_masuk' ] = $TOTAL_TRANSFER_MASUK;
+        $data_akhir[ $tipe ][ 'total_koreksi_tambah' ] = $TOTAL_KOREKSI_TAMBAH;
+        $data_akhir[ $tipe ][ 'total_transfer_keluar' ] = $TOTAL_TRANSFER_KELUAR;
+        $data_akhir[ $tipe ][ 'total_penghapusan_pemindahtanganan' ] = $TOTAL_PENGHAPUSAN_PEMINDAHTANGANAN;
+        $data_akhir[ $tipe ][ 'total_penghapusan_pemusnahan' ] = $TOTAL_PENGHAPUSAN_PEMUSNAHAN;
+        $data_akhir[ $tipe ][ 'total_penghapusan_sebagian' ] = $TOTAL_PENGHAPUSAN_SEBAGIAN;
+        $data_akhir[ $tipe ][ 'total_koreksi_kurang' ] = $TOTAL_KOREKSI_KURANG;
+        $data_akhir[ $tipe ][ 'noKontrak' ] = $noKontrak;
 
 
     }
@@ -1887,7 +1987,9 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
         $tglperolehan = $tgl_akhir;
         $tglpembukuan = $value[ 'TglPembukuan' ];
         list($bp, $selisih_nilai_tambah, $selisih_nilai_kurang, $selisih_ap_tambah, $selisih_ap_kurang,$text_riwayat,
-            $total_invetarisasi,$total_transfer_masuk,$total_pengadaan,$total_transfer_keluar,$total_penghapusan,$total_koreksi)=
+            $TOTAL_ASET_BARU,$TOTAL_ASET_KAPITALISASI,$TOTAL_INVENTARISASI,$TOTAL_TRANSFER_MASUK,$TOTAL_KOREKSI_TAMBAH,
+            $TOTAL_TRANSFER_KELUAR,$TOTAL_PENGHAPUSAN_PEMINDAHTANGANAN,$TOTAL_PENGHAPUSAN_PEMUSNAHAN,
+            $TOTAL_PENGHAPUSAN_SEBAGIAN,$TOTAL_KOREKSI_KURANG,$noKontrak)=
             history_aset ($ps, $Aset_ID, $tglperolehan, $tgl_awal, $tglpembukuan, $kodekelompok,0);
 
 
@@ -1929,12 +2031,17 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
         $data_hapus[ $tipe ][ 'riwayat' ] = $text_riwayat;
         $data_hapus[ $tipe ][ 'kodeSatker' ] = $value['kodeSatker'];
 
-        $data_hapus[ $tipe ][ 'total_invetariasi' ] = $total_invetarisasi;
-        $data_hapus[ $tipe ][ 'total_transfer_masuk' ] = $total_transfer_masuk;
-        $data_hapus[ $tipe ][ 'total_pengadaan' ] = $total_pengadaan;
-        $data_hapus[ $tipe ][ 'total_transfer_keluar' ] = $total_transfer_keluar;
-        $data_hapus[ $tipe ][ 'total_penghapusan' ] = $total_penghapusan;
-        $data_hapus[ $tipe ][ 'total_koreksi' ] = $total_koreksi;
+        $data_hapus[ $tipe ][ 'total_aset_baru' ] = $TOTAL_ASET_BARU;
+        $data_hapus[ $tipe ][ 'total_aset_kapitalisasi' ] = $TOTAL_ASET_KAPITALISASI;
+        $data_hapus[ $tipe ][ 'total_invetarisasi' ] = $TOTAL_INVENTARISASI;
+        $data_hapus[ $tipe ][ 'total_transfer_masuk' ] = $TOTAL_TRANSFER_MASUK;
+        $data_hapus[ $tipe ][ 'total_koreksi_tambah' ] = $TOTAL_KOREKSI_TAMBAH;
+        $data_hapus[ $tipe ][ 'total_transfer_keluar' ] = $TOTAL_TRANSFER_KELUAR;
+        $data_hapus[ $tipe ][ 'total_penghapusan_pemindahtanganan' ] = $TOTAL_PENGHAPUSAN_PEMINDAHTANGANAN;
+        $data_hapus[ $tipe ][ 'total_penghapusan_pemusnahan' ] = $TOTAL_PENGHAPUSAN_PEMUSNAHAN;
+        $data_hapus[ $tipe ][ 'total_penghapusan_sebagian' ] = $TOTAL_PENGHAPUSAN_SEBAGIAN;
+        $data_hapus[ $tipe ][ 'total_koreksi_kurang' ] = $TOTAL_KOREKSI_KURANG;
+        $data_hapus[ $tipe ][ 'noKontrak' ] = $noKontrak;
 
     }
 
@@ -1987,6 +2094,18 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
         $data_level5[ $key_baru ][ 'total_penghapusan' ] += $data_gabungan[ $key ]['total_penghapusan'];
         $data_level5[ $key_baru ][ 'total_koreksi' ] += $data_gabungan[ $key ]['total_koreksi'];
 
+        $data_level5[ $key_baru ][ 'total_aset_baru' ] += $data_gabungan[ $key][ 'total_aset_baru' ];
+        $data_level5[ $key_baru ][ 'total_aset_kapitalisasi' ] += $data_gabungan[ $key][ 'total_aset_kapitalisasi' ];
+        $data_level5[ $key_baru ][ 'total_invetarisasi' ] += $data_gabungan[ $key][ 'total_invetarisasi' ];
+        $data_level5[ $key_baru ][ 'total_transfer_masuk' ] += $data_gabungan[ $key][ 'total_transfer_masuk' ];
+        $data_level5[ $key_baru ][ 'total_koreksi_tambah' ] += $data_gabungan[ $key][ 'total_koreksi_tambah' ];
+        $data_level5[ $key_baru ][ 'total_transfer_keluar' ] += $data_gabungan[ $key][ 'total_transfer_keluar' ];
+        $data_level5[ $key_baru ][ 'total_penghapusan_pemindahtanganan' ] += $data_gabungan[ $key][ 'total_penghapusan_pemindahtanganan' ];
+        $data_level5[ $key_baru ][ 'total_penghapusan_pemusnahan' ] += $data_gabungan[ $key][ 'total_penghapusan_pemusnahan' ];
+        $data_level5[ $key_baru ][ 'total_penghapusan_sebagian' ] += $data_gabungan[ $key][ 'total_penghapusan_sebagian' ];
+        $data_level5[ $key_baru ][ 'total_koreksi_kurang' ] += $data_gabungan[ $key][ 'total_koreksi_kurang' ];
+        $data_level5[ $key_baru ][ 'noKontrak' ] = $noKontrak;
+
 
     }
     $data_level5 = $data_gabungan;
@@ -2025,12 +2144,17 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
         $data_level4[ $key_baru ][ 'nb_akhir' ] += $data_level5[ $key ][ 'nb_akhir' ];
         $data_level4[ $key_baru ][ 'SubSub' ][ $key ] = $data_level5[ $key ];
 
-        $data_level4[ $key_baru ][ 'total_invetariasi' ] += $data_level5[ $key ]['total_invetarisasi'];
-        $data_level4[ $key_baru ][ 'total_transfer_masuk' ] += $data_level5[ $key ]['total_transfer_masuk'];
-        $data_level4[ $key_baru ][ 'total_pengadaan' ] += $data_level5[ $key ]['total_pengadaan'];
-        $data_level4[ $key_baru ][ 'total_transfer_keluar' ] += $data_level5[ $key ]['total_transfer_keluar'];
-        $data_level4[ $key_baru ][ 'total_penghapusan' ] += $data_level5[ $key ]['total_penghapusan'];
-        $data_level4[ $key_baru ][ 'total_koreksi' ] += $data_level5[ $key ]['total_koreksi'];
+        $data_level4[ $key_baru ][ 'total_aset_baru' ] += $data_level5[ $key][ 'total_aset_baru' ];
+        $data_level4[ $key_baru ][ 'total_aset_kapitalisasi' ] += $data_level5[ $key][ 'total_aset_kapitalisasi' ];
+        $data_level4[ $key_baru ][ 'total_invetarisasi' ] += $data_level5[ $key][ 'total_invetarisasi' ];
+        $data_level4[ $key_baru ][ 'total_transfer_masuk' ] += $data_level5[ $key][ 'total_transfer_masuk' ];
+        $data_level4[ $key_baru ][ 'total_koreksi_tambah' ] += $data_level5[ $key][ 'total_koreksi_tambah' ];
+        $data_level4[ $key_baru ][ 'total_transfer_keluar' ] += $data_level5[ $key][ 'total_transfer_keluar' ];
+        $data_level4[ $key_baru ][ 'total_penghapusan_pemindahtanganan' ] += $data_level5[ $key][ 'total_penghapusan_pemindahtanganan' ];
+        $data_level4[ $key_baru ][ 'total_penghapusan_pemusnahan' ] += $data_level5[ $key][ 'total_penghapusan_pemusnahan' ];
+        $data_level4[ $key_baru ][ 'total_penghapusan_sebagian' ] += $data_level5[ $key][ 'total_penghapusan_sebagian' ];
+        $data_level4[ $key_baru ][ 'total_koreksi_kurang' ] += $data_level5[ $key][ 'total_koreksi_kurang' ];
+        $data_level4[ $key_baru ][ 'noKontrak' ] = "";
 
     }
 
@@ -2075,12 +2199,17 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
         $data_level3[ $key_baru ][ 'nb_akhir' ] += $data_level4[ $key ][ 'nb_akhir' ];
         $data_level3[ $key_baru ][ 'Sub' ][ $key ] = $data_level4[ $key ];
 
-        $data_level3[ $key_baru ][ 'total_invetariasi' ] += $data_level4[ $key ]['total_invetarisasi'];
-        $data_level3[ $key_baru ][ 'total_transfer_masuk' ] += $data_level4[ $key ]['total_transfer_masuk'];
-        $data_level3[ $key_baru ][ 'total_pengadaan' ] += $data_level4[ $key ]['total_pengadaan'];
-        $data_level3[ $key_baru ][ 'total_transfer_keluar' ] += $data_level4[ $key ]['total_transfer_keluar'];
-        $data_level3[ $key_baru ][ 'total_penghapusan' ] += $data_level4[ $key ]['total_penghapusan'];
-        $data_level3[ $key_baru ][ 'total_koreksi' ] += $data_level4[ $key ]['total_koreksi'];
+        $data_level3[ $key_baru ][ 'total_aset_baru' ] += $data_level4[ $key][ 'total_aset_baru' ];
+        $data_level3[ $key_baru ][ 'total_aset_kapitalisasi' ] += $data_level4[ $key][ 'total_aset_kapitalisasi' ];
+        $data_level3[ $key_baru ][ 'total_invetarisasi' ] += $data_level4[ $key][ 'total_invetarisasi' ];
+        $data_level3[ $key_baru ][ 'total_transfer_masuk' ] += $data_level4[ $key][ 'total_transfer_masuk' ];
+        $data_level3[ $key_baru ][ 'total_koreksi_tambah' ] += $data_level4[ $key][ 'total_koreksi_tambah' ];
+        $data_level3[ $key_baru ][ 'total_transfer_keluar' ] += $data_level4[ $key][ 'total_transfer_keluar' ];
+        $data_level3[ $key_baru ][ 'total_penghapusan_pemindahtanganan' ] += $data_level4[ $key][ 'total_penghapusan_pemindahtanganan' ];
+        $data_level3[ $key_baru ][ 'total_penghapusan_pemusnahan' ] += $data_level4[ $key][ 'total_penghapusan_pemusnahan' ];
+        $data_level3[ $key_baru ][ 'total_penghapusan_sebagian' ] += $data_level4[ $key][ 'total_penghapusan_sebagian' ];
+        $data_level3[ $key_baru ][ 'total_koreksi_kurang' ] += $data_level4[ $key][ 'total_koreksi_kurang' ];
+        $data_level3[ $key_baru ][ 'noKontrak' ] = "";
 
     }
 
@@ -2125,12 +2254,17 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
         $data_level2[ $key_baru ][ 'Kel' ][ $key ] = $data_level3[ $key ];
 
 
-        $data_level2[ $key_baru ][ 'total_invetariasi' ] += $data_level3[ $key ]['total_invetarisasi'];
-        $data_level2[ $key_baru ][ 'total_transfer_masuk' ] += $data_level3[ $key ]['total_transfer_masuk'];
-        $data_level2[ $key_baru ][ 'total_pengadaan' ] += $data_level3[ $key ]['total_pengadaan'];
-        $data_level2[ $key_baru ][ 'total_transfer_keluar' ] += $data_level3[ $key ]['total_transfer_keluar'];
-        $data_level2[ $key_baru ][ 'total_penghapusan' ] += $data_level3[ $key ]['total_penghapusan'];
-        $data_level2[ $key_baru ][ 'total_koreksi' ] += $data_level3[ $key ]['total_koreksi'];
+        $data_level2[ $key_baru ][ 'total_aset_baru' ] += $data_level3[ $key][ 'total_aset_baru' ];
+        $data_level2[ $key_baru ][ 'total_aset_kapitalisasi' ] += $data_level3[ $key][ 'total_aset_kapitalisasi' ];
+        $data_level2[ $key_baru ][ 'total_invetarisasi' ] += $data_level3[ $key][ 'total_invetarisasi' ];
+        $data_level2[ $key_baru ][ 'total_transfer_masuk' ] += $data_level3[ $key][ 'total_transfer_masuk' ];
+        $data_level2[ $key_baru ][ 'total_koreksi_tambah' ] += $data_level3[ $key][ 'total_koreksi_tambah' ];
+        $data_level2[ $key_baru ][ 'total_transfer_keluar' ] += $data_level3[ $key][ 'total_transfer_keluar' ];
+        $data_level2[ $key_baru ][ 'total_penghapusan_pemindahtanganan' ] += $data_level3[ $key][ 'total_penghapusan_pemindahtanganan' ];
+        $data_level2[ $key_baru ][ 'total_penghapusan_pemusnahan' ] += $data_level3[ $key][ 'total_penghapusan_pemusnahan' ];
+        $data_level2[ $key_baru ][ 'total_penghapusan_sebagian' ] += $data_level3[ $key][ 'total_penghapusan_sebagian' ];
+        $data_level2[ $key_baru ][ 'total_koreksi_kurang' ] += $data_level3[ $key][ 'total_koreksi_kurang' ];
+        $data_level2[ $key_baru ][ 'noKontrak' ] = "";
         // echo "<pre>";print_r($data_level3[$key]);
     }
 
@@ -2175,12 +2309,17 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
         $data_level[ $key_baru ][ 'Bidang' ][ $key ] = $data_level2[ $key ];
 
 
-        $data_level[ $key_baru ][ 'total_invetariasi' ] += $data_level2[ $key ]['total_invetarisasi'];
-        $data_level[ $key_baru ][ 'total_transfer_masuk' ] += $data_level2[ $key ]['total_transfer_masuk'];
-        $data_level[ $key_baru ][ 'total_pengadaan' ] += $data_level2[ $key ]['total_pengadaan'];
-        $data_level[ $key_baru ][ 'total_transfer_keluar' ] += $data_level2[ $key ]['total_transfer_keluar'];
-        $data_level[ $key_baru ][ 'total_penghapusan' ] += $data_level2[ $key ]['total_penghapusan'];
-        $data_level[ $key_baru ][ 'total_koreksi' ] += $data_level2[ $key ]['total_koreksi'];
+        $data_level[ $key_baru ][ 'total_aset_baru' ] += $data_level2[ $key][ 'total_aset_baru' ];
+        $data_level[ $key_baru ][ 'total_aset_kapitalisasi' ] += $data_level2[ $key][ 'total_aset_kapitalisasi' ];
+        $data_level[ $key_baru ][ 'total_invetarisasi' ] += $data_level2[ $key][ 'total_invetarisasi' ];
+        $data_level[ $key_baru ][ 'total_transfer_masuk' ] += $data_level2[ $key][ 'total_transfer_masuk' ];
+        $data_level[ $key_baru ][ 'total_koreksi_tambah' ] += $data_level2[ $key][ 'total_koreksi_tambah' ];
+        $data_level[ $key_baru ][ 'total_transfer_keluar' ] += $data_level2[ $key][ 'total_transfer_keluar' ];
+        $data_level[ $key_baru ][ 'total_penghapusan_pemindahtanganan' ] += $data_level2[ $key][ 'total_penghapusan_pemindahtanganan' ];
+        $data_level[ $key_baru ][ 'total_penghapusan_pemusnahan' ] += $data_level2[ $key][ 'total_penghapusan_pemusnahan' ];
+        $data_level[ $key_baru ][ 'total_penghapusan_sebagian' ] += $data_level2[ $key][ 'total_penghapusan_sebagian' ];
+        $data_level[ $key_baru ][ 'total_koreksi_kurang' ] += $data_level2[ $key][ 'total_koreksi_kurang' ];
+        $data_level[ $key_baru ][ 'noKontrak' ] = "";
 
     }
 
@@ -2319,15 +2458,38 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
         $TEXT_RIWAYAT="";
         $tambahan_keterangan_riwayat="";
 
+
+
+        $TOTAL_ASET_BARU=0;
+        $TOTAL_ASET_KAPITALISASI=0;
         $TOTAL_INVENTARISASI=0;
         $TOTAL_TRANSFER_MASUK=0;
-        $TOTAL_PENGADAAN=0;
+        $TOTAL_KOREKSI_TAMBAH=0;
+
         $TOTAL_TRANSFER_KELUAR=0;
-        $TOTAL_PENGAHAPUSAN=0;
+        $TOTAL_PENGHAPUSAN_PEMINDAHTANGANAN=0;
+        $TOTAL_PENGHAPUSAN_PEMUSNAHAN=0;
+        $TOTAL_PENGHAPUSAN_SEBAGIAN=0;
+        $TOTAL_KOREKSI_KURANG=0;
+
+
+
         $TOTAL_KOREKSI=0;
 
         foreach ($getdataRwyt as $valRwyt) {
 
+
+            $ASET_BARU=0;
+            $ASET_KAPITALISASI=0;
+            $INVENTARISASI=0;
+            $TRANSFER_MASUK=0;
+            $KOREKSI_TAMBAH=0;
+
+            $TRANSFER_KELUAR=0;
+            $PENGHAPUSAN_PEMINDAHTANGANAN=0;
+            $PENGHAPUSAN_PEMUSNAHAN=0;
+            $PENGHAPUSAN_SEBAGIAN=0;
+            $KOREKSI_KURANG=0;
 
             $tglFormat = $new_date = date ('d-m-Y ', strtotime ($valRwyt->TglPerubahan));
             $tahun_penyusutan = $valRwyt->TahunPenyusutan;
@@ -2492,9 +2654,28 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                     }
                     else{
                        $nilaiPrlhnMutasiTambah = $valAdd;
-                       $pengadaan+=$nilaiPrlhnMutasiTambah;
+
                     }
                     $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
+
+                    switch ($paramKd_Rwyt){
+                        case 0:
+                            $ASET_BARU=$nilaiPrlhnMutasiTambahFix;
+                            break;
+                        case 2:
+                            $ASET_KAPITALISASI=$nilaiPrlhnMutasiTambahFix;
+                            break;
+                        case 21:
+                            $KOREKSI_TAMBAH=$nilaiPrlhnMutasiTambahFix;
+                            break;
+                        case 281:
+                            $TRANSFER_MASUK=$nilaiPrlhnMutasiTambahFix;
+                            break;
+                        case 291:
+                            $TRANSFER_MASUK=$nilaiPrlhnMutasiTambahFix;
+                            break;
+
+                    }
 
                     //MUTASI ASET (Berkurang)
                     $valSubst = 0;
@@ -2563,6 +2744,16 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                     $nilaiPrlhnMutasiKurang = $valSubst;
                     $nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
                     $koreksi=$valSubst;
+
+                    switch ($paramKd_Rwyt){
+                        case 7:
+                            $PENGHAPUSAN_SEBAGIAN=$nilaiPrlhnMutasiKurangFix;
+                            break;
+                        case 21:
+                            $KOREKSI_KURANG=$nilaiPrlhnMutasiTambahFix;
+                            break;
+
+                    }
                     //MUTASI PENYUSUTAN (Berkurang )
                     //revisi mutasi penyusutan berkurang
 
@@ -2670,7 +2861,8 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                     //MUTASI ASET (Berkurang)
                     $nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
                     $nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
-                    $koreksi=$nilaiPrlhnMutasiKurang;
+                    $KOREKSI_KURANG=$nilaiPrlhnMutasiKurang;
+
                     //MUTASI PENYUSUTAN (Berkurang)
                     $penyusutanBerkurang = $AkumulasiPenyusutan;
                     $penyusutanBerkurangFix = ($penyusutanBerkurang);
@@ -2720,7 +2912,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                    // echo "{$valRwyt->Aset_ID}==={$valRwyt->NilaiPerolehan}<br/>";
                     $nilaiPrlhnMutasiTambah = $valRwyt->NilaiPerolehan;
                     $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
-                    $transfer_masuk=$nilaiPrlhnMutasiTambah;
+                    $TRANSFER_MASUK=$nilaiPrlhnMutasiTambah;
                     //echo "nilaiPrlhnMutasiTambahFix==$nilaiPrlhnMutasiTambahFix<br/>";
                     $status_mutasi_masuk=1;
                     //MUTASI ASET (Berkurang)
@@ -2783,7 +2975,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                     $nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
                     $nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
                     $tambahan_keterangan_riwayat="(-)";
-                    $transfer_keluar=$nilaiPrlhnMutasiKurangFix;
+                    $TRANSFER_KELUAR=$nilaiPrlhnMutasiKurangFix;
                     //MUTASI PENYUSUTAN (Berkurang)
                     $penyusutanBerkurang = $AkumulasiPenyusutan;
                     $penyusutanBerkurangFix = ($penyusutanBerkurang);
@@ -2831,7 +3023,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 $addValueKptls = $valRwyt->NilaiPerolehan - $valRwyt->NilaiPerolehan_Awal;
                 $nilaiPrlhnMutasiTambah = $addValueKptls;
                 $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
-                $transfer_masuk=$nilaiPrlhnMutasiTambah;
+                $KOREKSI_TAMBAH=$nilaiPrlhnMutasiTambah;
 
                 //MUTASI ASET (Berkurang)
                 $nilaiPrlhnMutasiKurang = 0;
@@ -2890,7 +3082,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 //MUTASI PENYUSUTAN (Berkurang)
                 $penyusutanBerkurang = $AkumulasiPenyusutan;
                 $penyusutanBerkurangFix = ($penyusutanBerkurang);
-
+                $KOREKSI_KURANG=$penyusutanBerkurangFix ;
                 //MUTASI PENYUSUTAN (Bertambah)
                 $penyusutanBertambah = 0;
                 $penyusutanBertambahFix = ($penyusutanBertambah);
@@ -2935,6 +3127,15 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 //MUTASI ASET (Berkurang)
                 $nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
                 $nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
+                switch ($paramKd_Rwyt){
+                    case 26:
+                        $PENGHAPUSAN_PEMINDAHTANGANAN=$nilaiPrlhnMutasiKurangFix;
+                        break;
+                    case 27:
+                        $PENGHAPUSAN_PEMUSNAHAN=$nilaiPrlhnMutasiTambahFix;
+                        break;
+
+                }
                 $penghapusan=$nilaiPrlhnMutasiKurang;
                 //MUTASI PENYUSUTAN (Berkurang)
                 $penyusutanBerkurang = $AkumulasiPenyusutan;
@@ -2980,7 +3181,8 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 //MUTASI ASET (Berkurang)
                 $nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
                 $nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
-                $penghapusan=$nilaiPrlhnMutasiKurang;
+                //$penghapusan=$nilaiPrlhnMutasiKurang;
+                $PENGHAPUSAN_PEMUSNAHAN=$nilaiPrlhnMutasiKurang;
                 //MUTASI PENYUSUTAN (Berkurang)
                 $penyusutanBerkurang = 0;
                 $penyusutanBerkurangFix = ($penyusutanBerkurang);
@@ -3090,12 +3292,19 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 $MUTASI_AKM_PENAMBAHAN += $penyusutanBertambahFix;
                 $MUTASI_AKM_PENGURANG += $penyusutanBerkurangFix;
 
-                $TOTAL_INVENTARISASI+=$inventarisasi;
-                $TOTAL_TRANSFER_MASUK+=$transfer_masuk;
-                $TOTAL_PENGADAAN+=$pengadaan;
-                $TOTAL_TRANSFER_KELUAR+=$transfer_keluar;
-                $TOTAL_PENGAHAPUSAN+=$penghapusan;
-                $TOTAL_KOREKSI+=$koreksi;
+
+                $TOTAL_ASET_BARU +=$ASET_BARU;
+                $TOTAL_ASET_KAPITALISASI +=$ASET_KAPITALISASI;
+                $TOTAL_INVENTARISASI +=$INVENTARISASI;
+                $TOTAL_TRANSFER_MASUK +=$TRANSFER_MASUK;
+                $TOTAL_KOREKSI_TAMBAH +=$KOREKSI_TAMBAH;
+
+                $TOTAL_TRANSFER_KELUAR +=$TRANSFER_KELUAR;
+                $TOTAL_PENGHAPUSAN_PEMINDAHTANGANAN +=$PENGHAPUSAN_PEMINDAHTANGANAN;
+                $TOTAL_PENGHAPUSAN_PEMUSNAHAN +=$PENGHAPUSAN_PEMUSNAHAN;
+                $TOTAL_PENGHAPUSAN_SEBAGIAN +=$PENGHAPUSAN_SEBAGIAN;
+                $TOTAL_KOREKSI_KURANG += $KOREKSI_KURANG;
+                $NO_KONTRAK.=$noKontrak;
 
                 $sejarah=$RIWAYAT[$paramKd_Rwyt];
                 if($TEXT_RIWAYAT!="")
@@ -3110,12 +3319,19 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 $MUTASI_AKM_PENAMBAHAN += $penyusutanBertambahFix;
                 $MUTASI_AKM_PENGURANG += $penyusutanBerkurangFix;
 
-                $TOTAL_INVENTARISASI+=$inventarisasi;
-                $TOTAL_TRANSFER_MASUK+=$transfer_masuk;
-                $TOTAL_PENGADAAN+=$pengadaan;
-                $TOTAL_TRANSFER_KELUAR+=$transfer_keluar;
-                $TOTAL_PENGAHAPUSAN+=$penghapusan;
-                $TOTAL_KOREKSI+=$koreksi;
+                $TOTAL_ASET_BARU +=$ASET_BARU;
+                $TOTAL_ASET_KAPITALISASI +=$ASET_KAPITALISASI;
+                $TOTAL_INVENTARISASI +=$INVENTARISASI;
+                $TOTAL_TRANSFER_MASUK +=$TRANSFER_MASUK;
+                $TOTAL_KOREKSI_TAMBAH +=$KOREKSI_TAMBAH;
+
+                $TOTAL_TRANSFER_KELUAR +=$TRANSFER_KELUAR;
+                $TOTAL_PENGHAPUSAN_PEMINDAHTANGANAN +=$PENGHAPUSAN_PEMINDAHTANGANAN;
+                $TOTAL_PENGHAPUSAN_PEMUSNAHAN +=$PENGHAPUSAN_PEMUSNAHAN;
+                $TOTAL_PENGHAPUSAN_SEBAGIAN +=$PENGHAPUSAN_SEBAGIAN;
+                $TOTAL_KOREKSI_KURANG += $KOREKSI_KURANG;
+                $NO_KONTRAK.=$noKontrak;
+
                 $sejarah=$RIWAYAT[$paramKd_Rwyt];
                  if($TEXT_RIWAYAT!="")
                   $TEXT_RIWAYAT.=",$sejarah($paramKd_Rwyt) $tambahan_keterangan_riwayat ";
@@ -3142,8 +3358,11 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
         }
 
     }
+
     return array( $BEBAN_PENYUSUTAN, $MUTASI_ASET_PENAMBAHAN, $MUTASI_ASET_KURANG, $MUTASI_AKM_PENAMBAHAN, $MUTASI_AKM_PENGURANG,$TEXT_RIWAYAT,
-    $TOTAL_INVENTARISASI,$TOTAL_TRANSFER_MASUK,$TOTAL_PENGADAAN,$TOTAL_TRANSFER_KELUAR,$TOTAL_PENGAHAPUSAN,$TOTAL_KOREKSI);
+        $TOTAL_ASET_BARU,$TOTAL_ASET_KAPITALISASI,$TOTAL_INVENTARISASI,$TOTAL_TRANSFER_MASUK,$TOTAL_KOREKSI_TAMBAH,
+        $TOTAL_TRANSFER_KELUAR,$TOTAL_PENGHAPUSAN_PEMINDAHTANGANAN,$TOTAL_PENGHAPUSAN_PEMUSNAHAN,
+        $TOTAL_PENGHAPUSAN_SEBAGIAN,$TOTAL_KOREKSI_KURANG,$NO_KONTRAK);
 }
 
 /** Menampilkan data alur sejarah aset per satuan
