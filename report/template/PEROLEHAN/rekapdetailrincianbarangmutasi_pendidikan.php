@@ -5,7 +5,7 @@ include "../../report_engine.php";
 $modul = $_REQUEST['menuID'];
 $mode = $_REQUEST['mode'];
 $tab = $_REQUEST['tab'];
-$skpd_id = $_REQUEST['kodeSatkerRincian20'];
+$skpd_id = $_REQUEST['kodeSatkerRincian203'];
 $tipeAset = $_REQUEST['tipeAset'];
 $levelAset = $_REQUEST['levelAset'];
 $tglawalperolehan = $_REQUEST['tglPerolehanAwalRekapNeraca'];
@@ -16,7 +16,7 @@ $paramater_url="menuID=$modul&mode=$mode&tab=$tab&skpd_id=$skpd_id&levelAset=$le
 // echo $paramater_url;
 // exit;
 $REPORT=new report_engine();
-$url = "rekap_rincian_detail_v3.php?$paramater_url";
+$url = "rekap_rincian_detail_v2_dinaspendidikan.php?$paramater_url";
 $REPORT->show_pilih_download_detail($url);  
 
 

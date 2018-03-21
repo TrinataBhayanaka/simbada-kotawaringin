@@ -1,7 +1,7 @@
 
 <?php
 
-function selectSatker($name,$size=300,$br=false,$upd=false,$status=false){
+function selectSatker($name,$size=300,$br=false,$upd=false,$status=false,$ParamNamaSatker=false){
 
 	global $url_rewrite;
 	// pr($status);
@@ -72,7 +72,8 @@ function selectSatker($name,$size=300,$br=false,$upd=false,$status=false){
 	} );
 	</script>
 	<li>
-		<span class="<?=$span?>">Kode Satker </span><?=$enter?>
+		<!--<span class="<?=$span?>">Kode Satker </span><?=$enter?>-->
+		<span class="<?=$span?>"><?=($ParamNamaSatker) ? $ParamNamaSatker : 'Kode Satker' ?></span><?=$enter?>
 		<input id="<?=$name?>" name="<?=$name?>" type="hidden" style="width:<?=$size?>px" <?=$status?> onchange="return newruangan();"/>
 	</li>
 	
@@ -81,7 +82,7 @@ function selectSatker($name,$size=300,$br=false,$upd=false,$status=false){
 
 }
 
-function selectAllSatker($name,$size=300,$br=false,$upd=false,$status=false,$sess=true,$free=0){
+function selectAllSatker($name,$size=300,$br=false,$upd=false,$status=false,$sess=true,$free=0,$ParamNamaSatker=false){
 
 	global $url_rewrite;
 	// pr($_SESSION);
@@ -146,7 +147,7 @@ function selectAllSatker($name,$size=300,$br=false,$upd=false,$status=false,$ses
 	} );
 	</script>
 	<li>
-		<span class="<?=$span?>">Kode Satker </span><?=$enter?>
+		<span class="<?=$span?>"><?=($ParamNamaSatker) ? $ParamNamaSatker : 'Kode Satker' ?></span><?=$enter?>
 		<input id="<?=$name?>" name="<?=$name?>" type="hidden" style="width:<?=$size?>px" <?=$status?>/>
 	</li>
 	
@@ -155,7 +156,7 @@ function selectAllSatker($name,$size=300,$br=false,$upd=false,$status=false,$ses
 
 }
 
-function selectAset($name,$size=300,$br=false,$upd=false,$status=false){
+function selectAset($name,$size=300,$br=false,$upd=false,$status=false,$judul="JenisAset"){
 
 	global $url_rewrite;
 	if($br) $span = "span2"; else {$span="";$enter="<br>";}
@@ -215,18 +216,22 @@ function selectAset($name,$size=300,$br=false,$upd=false,$status=false){
 
 	} );
 	
-	function tesst()
-	{
-		var kode = $("#<?=$name?>").val();
+	function tesst_<?=$name?>()
+	{   
+                
+            	var kode = $("#<?=$name?>").val();
+            //    alert("<?=$name?>");
+            //alert(kode);
+	
 		$.post('<?=$url_rewrite?>/function/api/asetget.php', {term:kode}, function(data){
-			$('#info').data('popover').options.content = '<p><b>Golongan</b> : '+data[0]['Golongan']+'<br><b>Bidang</b> : '+data[0]['Bidang']+'<br><b>Kelompok</b> : '+data[0]['Kelompok']+'<br><b>Sub</b> : '+data[0]['Sub']+'<br><b>Sub Sub</b> : '+data[0]['SubSub']+' </p>';	
+			$('#info<?=$name?>').data('popover').options.content = '<p><b>Golongan</b> : '+data[0]['Golongan']+'<br><b>Bidang</b> : '+data[0]['Bidang']+'<br><b>Kelompok</b> : '+data[0]['Kelompok']+'<br><b>Sub</b> : '+data[0]['Sub']+'<br><b>Sub Sub</b> : '+data[0]['SubSub']+' </p>';	
 		}, "JSON")
 	}
 	</script>
 	<li>
-		<span class="<?=$span?>">Jenis Aset </span><?=$enter?>
-		<input id="<?=$name?>" name="<?=$name?>" type="hidden" style="width:<?=$size?>px" <?=$status?> onchange="return tesst()"/>
-		<button type="button" id="info" class="btn btn-info btn-active-success add-popover" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="right" data-original-title="Detail Jenis Aset" data-content="Silahkan pilih terlebih dahulu"><i class="fa fa-search"></i> Info</button>
+		<span class="<?=$span?>"><?=$judul?> </span><?=$enter?>
+		<input id="<?=$name?>" name="<?=$name?>" type="hidden" style="width:<?=$size?>px" <?=$status?> onchange="return tesst_<?=$name?>()"/>
+		<button type="button" id="info<?=$name?>" class="btn btn-info btn-active-success add-popover" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="right" data-original-title="Detail Jenis Aset" data-content="Silahkan pilih terlebih dahulu"><i class="fa fa-search"></i> Info</button>
 	</li>
 	
 	

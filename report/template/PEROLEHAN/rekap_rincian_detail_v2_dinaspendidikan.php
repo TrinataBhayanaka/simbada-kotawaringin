@@ -447,23 +447,23 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 					<td>&nbsp;</td>
 					<td style=\"font-weight: bold;\">{$gol[Uraian]}</td>
 					<td style=\"text-align: center; font-weight: bold;\">{$gol[jml]}</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nilai],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[pp],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[ap],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nb],2,",",".")."</td> 
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nilai],4,",",".")."</td>
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[pp],4,",",".")."</td>
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[ap],4,",",".")."</td>
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nb],4,",",".")."</td> 
                                         
-                                        <td style=\"text-align: center; font-weight: bold;\">".number_format($gol[mutasi_nilai_kurang],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[mutasi_nilai_tambah],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[mutasi_ap_kurang],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[mutasi_ap_tambah],2,",",".")."</td>
+                                        <td style=\"text-align: center; font-weight: bold;\">".number_format($gol[mutasi_nilai_kurang],4,",",".")."</td>
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[mutasi_nilai_tambah],4,",",".")."</td>
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[mutasi_ap_kurang],4,",",".")."</td>
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[mutasi_ap_tambah],4,",",".")."</td>
                                         
-                                         <td style=\"font-weight: bold; text-align: right;\">".number_format($bp,2,",",".")."</td>
+                                         <td style=\"font-weight: bold; text-align: right;\">".number_format($bp,4,",",".")."</td>
 					
                                         <td style=\"text-align: center; font-weight: bold;\">{$gol[jml_akhir]}</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nilai_akhir],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[pp_akhir],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[ap_akhir],2,",",".")."</td>
-					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nb_akhir],2,",",".")."</td> 
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nilai_akhir],4,",",".")."</td>
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[pp_akhir],4,",",".")."</td>
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[ap_akhir],4,",",".")."</td>
+					<td style=\"font-weight: bold; text-align: right;\">".number_format($gol[nb_akhir],4,",",".")."</td> 
 				</tr>";	
 			
       if($levelAset >= 3 || $levelAset == 1)
@@ -508,23 +508,23 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 								<td>&nbsp;</td>
 								<td style=\"font-weight: bold;\">{$bidang[Uraian]}</td>
                                 <td style=\"text-align: center; font-weight: bold;\">{$bidang[jml]}</td>
-                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nilai],2,",",".")."</td>
-                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[pp],2,",",".")."</td>
-                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[ap],2,",",".")."</td>
-                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nb],2,",",".")."</td>
+                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nilai],4,",",".")."</td>
+                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[pp],4,",",".")."</td>
+                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[ap],4,",",".")."</td>
+                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nb],4,",",".")."</td>
                                     
-                                <td style=\"text-align: center; font-weight: bold;\">".number_format($bidang[mutasi_nilai_kurang],2,",",".")."</td>
-                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[mutasi_nilai_tambah],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[mutasi_ap_kurang],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[mutasi_ap_tambah],2,",",".")."</td>
+                                <td style=\"text-align: center; font-weight: bold;\">".number_format($bidang[mutasi_nilai_kurang],4,",",".")."</td>
+                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[mutasi_nilai_tambah],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[mutasi_ap_kurang],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[mutasi_ap_tambah],4,",",".")."</td>
 				
-                                <td style=\"text-align: center; font-weight: bold;\">".number_format($bp_bidang,2,",",".")."</td>
+                                <td style=\"text-align: center; font-weight: bold;\">".number_format($bp_bidang,4,",",".")."</td>
                                 
                                 <td style=\"text-align: center; font-weight: bold;\">{$bidang[jml_akhir]}</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nilai_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[pp_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[ap_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nb_akhir],2,",",".")."</td> 
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nilai_akhir],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[pp_akhir],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[ap_akhir],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($bidang[nb_akhir],4,",",".")."</td> 
 							</tr>";	
         if($levelAset >= 4 || $levelAset == 1)
 				foreach($bidang['Kel'] as $Kelompok)
@@ -568,22 +568,22 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 								<td>&nbsp;</td>
 								<td>{$Kelompok[Uraian]}</td>
                                 <td style=\"text-align: center;\">{$Kelompok[jml]}</td>
-								<td style=\"text-align: right;\">".number_format($Kelompok[nilai],2,",",".")."</td>
-								<td style=\"text-align: right;\">".number_format($Kelompok[pp],2,",",".")."</td>
-								<td style=\"text-align: right;\">".number_format($Kelompok[ap],2,",",".")."</td>
-								<td style=\"text-align: right;\">".number_format($Kelompok[nb],2,",",".")."</td>
-		   	        <td style=\"text-align: center; font-weight: bold;\">".number_format($Kelompok[mutasi_nilai_kurang],2,",",".")."</td>
-                                <td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[mutasi_nilai_tambah],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[mutasi_ap_kurang],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[mutasi_ap_tambah],2,",",".")."</td>
+								<td style=\"text-align: right;\">".number_format($Kelompok[nilai],4,",",".")."</td>
+								<td style=\"text-align: right;\">".number_format($Kelompok[pp],4,",",".")."</td>
+								<td style=\"text-align: right;\">".number_format($Kelompok[ap],4,",",".")."</td>
+								<td style=\"text-align: right;\">".number_format($Kelompok[nb],4,",",".")."</td>
+		   	        <td style=\"text-align: center; font-weight: bold;\">".number_format($Kelompok[mutasi_nilai_kurang],4,",",".")."</td>
+                                <td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[mutasi_nilai_tambah],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[mutasi_ap_kurang],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[mutasi_ap_tambah],4,",",".")."</td>
 					
-                                <td style=\"text-align: center; font-weight: bold;\">".number_format($bp_kelompok,2,",",".")."</td>
+                                <td style=\"text-align: center; font-weight: bold;\">".number_format($bp_kelompok,4,",",".")."</td>
 
                                 <td style=\"text-align: center; font-weight: bold;\">{$Kelompok[jml_akhir]}</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[nilai_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[pp_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[ap_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[nb_akhir],2,",",".")."</td> 
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[nilai_akhir],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[pp_akhir],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[ap_akhir],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($Kelompok[nb_akhir],4,",",".")."</td> 
 						
                                         </tr>";
           if($levelAset >= 5 || $levelAset == 1)
@@ -629,23 +629,23 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 										<td>&nbsp;</td>
 										<td>{$Sub[Uraian]}</td>
 										<td style=\"text-align: center;\">{$Sub[jml]}</td>
-										<td style=\"text-align: right;\">".number_format($Sub[nilai],2,",",".")."</td>
-										<td style=\"text-align: right;\">".number_format($Sub[pp],2,",",".")."</td>
-										<td style=\"text-align: right;\">".number_format($Sub[ap],2,",",".")."</td>
-										<td style=\"text-align: right;\">".number_format($Sub[nb],2,",",".")."</td>
+										<td style=\"text-align: right;\">".number_format($Sub[nilai],4,",",".")."</td>
+										<td style=\"text-align: right;\">".number_format($Sub[pp],4,",",".")."</td>
+										<td style=\"text-align: right;\">".number_format($Sub[ap],4,",",".")."</td>
+										<td style=\"text-align: right;\">".number_format($Sub[nb],4,",",".")."</td>
                                                                                     
-                                <td style=\"text-align: center; font-weight: bold;\">".number_format($Sub[mutasi_nilai_kurang],2,",",".")."</td>
-                                <td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[mutasi_nilai_tambah],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[mutasi_ap_kurang],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[mutasi_ap_tambah],2,",",".")."</td>
+                                <td style=\"text-align: center; font-weight: bold;\">".number_format($Sub[mutasi_nilai_kurang],4,",",".")."</td>
+                                <td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[mutasi_nilai_tambah],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[mutasi_ap_kurang],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[mutasi_ap_tambah],4,",",".")."</td>
 				
-                                <td style=\"text-align: center; font-weight: bold;\">".number_format($bp_sub,2,",",".")."</td>
+                                <td style=\"text-align: center; font-weight: bold;\">".number_format($bp_sub,4,",",".")."</td>
                                     
                                 <td style=\"text-align: center; font-weight: bold;\">{$Sub[jml_akhir]}</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[nilai_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[pp_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[ap_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[nb_akhir],2,",",".")."</td> 
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[nilai_akhir],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[pp_akhir],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[ap_akhir],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($Sub[nb_akhir],4,",",".")."</td> 
 
 									</tr>";
             if($levelAset >= 6 || $levelAset == 1)
@@ -692,24 +692,24 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 											<td>{$SubSub[Kelompok]}</td>
 											<td>{$SubSub[Uraian]}</td>
                                             <td style=\"text-align: center;\">{$SubSub[jml]}</td>
-											<td style=\"text-align: right;\">".number_format($SubSub[nilai],2,",",".")."</td>
-											<td style=\"text-align: right;\">".number_format($SubSub[pp],2,",",".")."</td>
-											<td style=\"text-align: right;\">".number_format($SubSub[ap],2,",",".")."</td>
-											<td style=\"text-align: right;\">".number_format($SubSub[nb],2,",",".")."</td>
+											<td style=\"text-align: right;\">".number_format($SubSub[nilai],4,",",".")."</td>
+											<td style=\"text-align: right;\">".number_format($SubSub[pp],4,",",".")."</td>
+											<td style=\"text-align: right;\">".number_format($SubSub[ap],4,",",".")."</td>
+											<td style=\"text-align: right;\">".number_format($SubSub[nb],4,",",".")."</td>
                                                                                             
-<td style=\"text-align: center; font-weight: bold;\">".number_format($SubSub[mutasi_nilai_kurang],2,",",".")."</td>
-                                <td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[mutasi_nilai_tambah],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[mutasi_ap_kurang],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[mutasi_ap_tambah],2,",",".")."</td>
+<td style=\"text-align: center; font-weight: bold;\">".number_format($SubSub[mutasi_nilai_kurang],4,",",".")."</td>
+                                <td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[mutasi_nilai_tambah],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[mutasi_ap_kurang],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[mutasi_ap_tambah],4,",",".")."</td>
 				
-                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bp_subsub,2,",",".")."</td>
+                                <td style=\"font-weight: bold; text-align: right;\">".number_format($bp_subsub,4,",",".")."</td>
     
 
                                 <td style=\"text-align: center; font-weight: bold;\">{$SubSub[jml_akhir]}</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[nilai_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[pp_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[ap_akhir],2,",",".")."</td>
-				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[nb_akhir],2,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[nilai_akhir],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[pp_akhir],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[ap_akhir],4,",",".")."</td>
+				<td style=\"font-weight: bold; text-align: right;\">".number_format($SubSub[nb_akhir],4,",",".")."</td>
 				 <td>{$SubSub[ket_kontrak]}</td>
 				 <td>{$SubSub[noKontrak]}</td>
 				 
@@ -753,23 +753,23 @@ $tgl_perubahan_aset=$tmp_perubahan[0]."-01-01";
 		$foot="<tr>
 				<td colspan = \"6\" style=\"text-align: center; font-weight: bold;\">Total</td>
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($jml_total,0,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($np_total,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($pp_total,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($ap_total,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($nb_total,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($np_total,4,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($pp_total,4,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($ap_total,4,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($nb_total,4,",",".")."</td>
 
-				<td style=\"text-align: center; font-weight: bold;\">".number_format($mutasi_nilai_kurang,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($mutasi_nilai_tambah,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($mutasi_ap_kurang,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($mutasi_ap_tambah,2,",",".")."</td>
+				<td style=\"text-align: center; font-weight: bold;\">".number_format($mutasi_nilai_kurang,4,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($mutasi_nilai_tambah,4,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($mutasi_ap_kurang,4,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($mutasi_ap_tambah,4,",",".")."</td>
 
-                                <td style=\"text-align: center; font-weight: bold;\">".number_format($bp_total,2,",",".")."</td>
+                                <td style=\"text-align: center; font-weight: bold;\">".number_format($bp_total,4,",",".")."</td>
     
 				<td style=\"text-align: center; font-weight: bold;\">".number_format($jml_total_akhir,0,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($np_total_akhir,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($pp_total_akhir,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($ap_total_akhir,2,",",".")."</td>
-				<td style=\"text-align: right; font-weight: bold;\">".number_format($nb_total_akhir,2,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($np_total_akhir,4,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($pp_total_akhir,4,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($ap_total_akhir,4,",",".")."</td>
+				<td style=\"text-align: right; font-weight: bold;\">".number_format($nb_total_akhir,4,",",".")."</td>
 			</tr>
 		</table>";
 	}else{
@@ -1213,9 +1213,9 @@ foreach ($result as $key =>$value){
     $tipe=  $key;
     $selisih_nilai=$data_akhir[$tipe]['nilai']-$data_awal[$tipe]['nilai'];
     $selisih_jml=$data_akhir[$tipe]['jml']-$data_awal[$tipe]['jml'];
-    $selisih_ap=round($data_akhir[$tipe]['AP']-$data_awal[$tipe]['AP'],2);
-    $selisih_pp=round($data_akhir[$tipe]['PP']-$data_awal[$tipe]['PP'],2);
-    $selisih_nb=round($data_akhir[$tipe]['NB']-$data_awal[$tipe]['NB'],2);
+    $selisih_ap=round($data_akhir[$tipe]['AP']-$data_awal[$tipe]['AP'],4);
+    $selisih_pp=round($data_akhir[$tipe]['PP']-$data_awal[$tipe]['PP'],4);
+    $selisih_nb=round($data_akhir[$tipe]['NB']-$data_awal[$tipe]['NB'],4);
     
     
     
@@ -1288,11 +1288,11 @@ foreach ($result as $key =>$value){
     $data_gabungan[$tipe]['mutasi_nilai_tambah']=$selisih_nilai_tambah;
     $data_gabungan[$tipe]['mutasi_nilai_kurang']=$selisih_nilai_kurang;
     
-    $data_gabungan[$tipe]['nilai_akhir']=round($data_akhir[$tipe]['nilai'],2);
-    $data_gabungan[$tipe]['jml_akhir']=round($data_akhir[$tipe]['jml'],2);
-    $data_gabungan[$tipe]['ap_akhir']=round($data_akhir[$tipe]['AP'],2);
-    $data_gabungan[$tipe]['pp_akhir']=round($data_akhir[$tipe]['PP'],2);
-    $data_gabungan[$tipe]['nb_akhir']=round($data_akhir[$tipe]['NB'],2);
+    $data_gabungan[$tipe]['nilai_akhir']=round($data_akhir[$tipe]['nilai'],4);
+    $data_gabungan[$tipe]['jml_akhir']=round($data_akhir[$tipe]['jml'],4);
+    $data_gabungan[$tipe]['ap_akhir']=round($data_akhir[$tipe]['AP'],4);
+    $data_gabungan[$tipe]['pp_akhir']=round($data_akhir[$tipe]['PP'],4);
+    $data_gabungan[$tipe]['nb_akhir']=round($data_akhir[$tipe]['NB'],4);
 
     
     
@@ -1442,9 +1442,9 @@ foreach ($data_akhir_alone as $tipe => $value) {
  }
     $data_akhir[$tipe]['nilai_akhir']=$value['nilai'];
     $data_akhir[$tipe]['jml_akhir']=$value['jml'];
-    $data_akhir[$tipe]['ap_akhir']=round($value['AP'],2);
-    $data_akhir[$tipe]['pp_akhir']=round($value['PP'],2);
-    $data_akhir[$tipe]['nb_akhir']=round($value['NB'],2);
+    $data_akhir[$tipe]['ap_akhir']=round($value['AP'],4);
+    $data_akhir[$tipe]['pp_akhir']=round($value['PP'],4);
+    $data_akhir[$tipe]['nb_akhir']=round($value['NB'],4);
     list($noKontrak,$ket_kontrak)=get_detail_kontrak($value['Aset_ID']);
     $data_akhir[$tipe]['noKontrak']=$noKontrak;
     $data_akhir[$tipe]['ket_kontrak']=$ket_kontrak;
