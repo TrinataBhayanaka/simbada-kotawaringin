@@ -2472,7 +2472,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
         $TOTAL_PENGHAPUSAN_SEBAGIAN=0;
         $TOTAL_KOREKSI_KURANG=0;
 
-
+        $CEK_DATA_BARU=array();
 
         $TOTAL_KOREKSI=0;
 
@@ -2658,9 +2658,19 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                     }
                     $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
 
+
                     switch ($paramKd_Rwyt){
                         case 0:
-                            $ASET_BARU=$nilaiPrlhnMutasiTambahFix;
+                            $ASET_ID_CEK=$valRwyt->Aset_ID;
+                            $key="$ASET_ID_CEK-$paramKd_Rwyt";
+                            $CEK_DATA_BARU[$key]+=1;
+                            if($CEK_DATA_BARU[$key]>1){
+                                $nilaiPrlhnMutasiTambahFix=0;
+                                $ASET_BARU=0;
+                            }else{
+                                $ASET_BARU=$nilaiPrlhnMutasiTambahFix;
+                            }
+
                             break;
                         case 2:
                             $ASET_KAPITALISASI=$nilaiPrlhnMutasiTambahFix;
@@ -2698,6 +2708,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                     // menghilangkan nilai akumulasi penyusutan bertambah
                     if($paramKd_Rwyt == 2 ||$paramKd_Rwyt == 0)
                         $penyusutanBertambahFix=0;
+
 
                     //SALDO AKHIR
                     $nilaiPerolehanHasilMutasi = $valRwyt->NilaiPerolehan;
