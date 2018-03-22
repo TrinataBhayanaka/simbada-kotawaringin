@@ -62,7 +62,7 @@ $menu_id = 1;
 	        }
 	    }
 	}
-	$RKsql = mysql_query("SELECT Aset_ID, noRegister, Satuan, kodeLokasi, kodeKelompok, NilaiPerolehan FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL)");
+	$RKsql = mysql_query("SELECT Aset_ID, noRegister, Satuan, kodeLokasi, kodeKelompok, NilaiPerolehan, tglPerolehan FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL)");
 	while ($dataRKontrak = mysql_fetch_assoc($RKsql)){
 				$rKontrak[] = $dataRKontrak;
 			}
@@ -225,6 +225,7 @@ $menu_id = 1;
 								<th>Kode Satker</th>
 								<th>Kode Lokasi</th>
 								<th>NoReg</th>
+								<th>Tgl Perolehan</th>
 								<th>Nilai</th>
 								<th>Nilai Setelah Kapitalisasi</th>
 							</tr>
@@ -258,6 +259,7 @@ $menu_id = 1;
 								<td align="center"><?=$aset[0]['kodeSatker']?></td>
 								<td align="center"><?=$aset[0]['kodeLokasi']?></td>
 								<td align="center"><?=$aset[0]['noRegister']?>  </td>
+								<td align="center"><?=date_format(date_create($aset[0]['tglPerolehan']), 'm D Y')?>  </td>
 								<td align="center">
 									<?php
 										if($kontrak['tipeAset'] == 3) {
@@ -309,6 +311,7 @@ $menu_id = 1;
 						<th>Kode Barang</th>
 						<th>Nama Barang</th>
 						<th>No. Register</th>
+						<th>Tgl Perolehan</th>
 						<th>Harga Satuan</th>
 						<th>Penunjang</th>
 						<th>Total Perolehan</th>
@@ -338,6 +341,7 @@ $menu_id = 1;
 						<td><?=$value['kodeKelompok']?></td>
 						<td><?=$value['uraian']?></td>
 						<td><?=$value['noRegister']?></td>
+						<td><?=date_format(date_create($value['tglPerolehan']), 'd M Y')?></td>
 						<td>
 						<?php
 							if($kontrak['tipeAset'] == 3) {
