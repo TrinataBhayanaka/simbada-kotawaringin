@@ -1101,6 +1101,7 @@ function subsub_awal($kode, $gol, $ps, $pt)
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%' 
+					 and kondisi not in (3,4)
 					 and $paramSatker";
 
         if($gol == 'jaringan_ori') {
@@ -1203,6 +1204,7 @@ function subsub($kode, $gol, $ps, $pt)
 					 and TglPerolehan <= '$param_tgl' 
 					 and TglPembukuan <='$param_tgl' 
 					 and kodeLokasi like '12%' 
+					 and kondisi not in (3,4)
 					 and $paramSatker";
 
         if($gol == 'jaringan_ori') {
@@ -1452,6 +1454,7 @@ function subsub_hapus_v2($kode, $gol, $ps, $pt, $tgl_pem,$q_data_awal,$q_data_ak
 					 and m.TglPerolehan <= '$param_tgl' and m.TglPembukuan > '$tgl_pem' and m.kd_riwayat=3 and `action` like 'Sukses Mutasi%' 
 					 and m.TglPembukuan <='$param_tgl' 
 					 and m.kodeLokasi like '12%' 
+					 and kondisi not in (3,4)
 					 and $paramSatker";
 
         if($gol == 'jaringan_ori') {
