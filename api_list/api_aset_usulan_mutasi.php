@@ -39,6 +39,7 @@ $dataParam['jenisaset']=$_GET['jenisaset'];
 $dataParam['kodeSatker']=$_GET['kodeSatker'];
 $dataParam['kodeKelompok']=$_GET['kodeKelompok'];
 $dataParam['kodepemilik']=$_GET['kodepemilik'];
+$dataParam['TAHUN_AKTIF']=$TAHUN_AKTIF;
 //pr($dataParam);
 
 $MUTASI = new RETRIEVE_MUTASI;
@@ -198,7 +199,7 @@ foreach ($data as $key => $value)
                  $row[]="[{$value[kodeKelompok]}]<br/>{$value[Uraian]}";
                  $row[]="[".$value[kodeSatker] ."]<br/>". $NamaSatker[0]['NamaSatker'];
                  $row[]="<center>".$TglPerolehan."</center>";
-                 $row[]=number_format($value[NilaiPerolehan],4);
+                 $row[]=number_format($value[NilaiPerolehan],2,",",".");
                  $row[]=$kondisi. ' - ' .$value[AsalUsul];
                  $row[]="{$value[Merk]}$value[Model] ";
                  
