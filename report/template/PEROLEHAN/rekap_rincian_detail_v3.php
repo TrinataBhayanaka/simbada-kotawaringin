@@ -2667,8 +2667,12 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                             if($CEK_DATA_BARU[$key]>1){
                                 $nilaiPrlhnMutasiTambahFix=0;
                                 $ASET_BARU=0;
+                                $INVENTARISASI=0;
                             }else{
-                                $ASET_BARU=$nilaiPrlhnMutasiTambahFix;
+                                if($noKontrak!="")
+                                    $ASET_BARU=$nilaiPrlhnMutasiTambahFix;
+                                else
+                                    $INVENTARISASI=$nilaiPrlhnMutasiTambahFix;
                             }
 
                             break;
