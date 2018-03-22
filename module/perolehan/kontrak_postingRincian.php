@@ -19,7 +19,7 @@ $menu_id = 1;
 
 	//getdata
 	// $RKsql = mysql_query("SELECT Satuan, kodeLokasi, kodeKelompok,SUM(Kuantitas) as Kuantitas, SUM(NilaiPerolehan) as NilaiPerolehan FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' GROUP BY kodeKelompok, kodeLokasi");
-	$RKsql = mysql_query("SELECT Aset_ID, Satuan, kodeLokasi, kodeKelompok, noRegister, NilaiPerolehan FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL)");
+	$RKsql = mysql_query("SELECT Aset_ID, Satuan, kodeLokasi, kodeKelompok, noRegister, NilaiPerolehan, tglPerolehan FROM aset WHERE noKontrak = '{$kontrak['noKontrak']}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL)");
 	while ($dataRKontrak = mysql_fetch_assoc($RKsql)){
 				$rKontrak[] = $dataRKontrak;
 			}
@@ -173,6 +173,7 @@ $menu_id = 1;
 								<th>Kode Satker</th>
 								<th>Kode Lokasi</th>
 								<th>NoReg</th>
+								<th>Tgl Perolehan</th>
 								<th>Nilai</th>
 								<th>Nilai Setelah Kapitalisasi</th>
 							</tr>
@@ -182,6 +183,7 @@ $menu_id = 1;
 								<td align="center"><?=$aset[0]['kodeSatker']?></td>
 								<td align="center"><?=$aset[0]['kodeLokasi']?></td>
 								<td align="center"><?=$aset[0]['noRegister']?></td>
+								<td align="center"><?=date_format(date_create($aset[0]['noRegister']), 'd M Y')?></td>
 								<td align="center"><?=number_format($aset[0]['NilaiPerolehan'],2)?></td>
 								<td align="center"><?=number_format($aset[0]['NilaiPerolehan']+$sumsp2d['total']+$sumTotal['total'],2)?></td>
 							</tr>	
@@ -227,6 +229,7 @@ $menu_id = 1;
 						<th>Nama Barang</th>
 						<!-- <th>Jumlah</th> -->
 						<th>No. Register</th>
+						<th>Tgl Perolehan</th>
 						<th>Harga Satuan</th>
 						<!-- <th>Total</total> -->
 						<th>Penunjang</th>
@@ -258,6 +261,7 @@ $menu_id = 1;
 						<td><?=$value['uraian']?></td>
 						<!-- <td><?=$value['Kuantitas']?></td> -->
 						<td><?=$value['noRegister']?></td>
+						<td><?=date_format(date_create($value['tglPerolehan']), 'd M Y')?></td>
 						<td><?=number_format($value['Satuan'],2)?></td>
 						<!-- <td><?=number_format($value['Satuan']*$value['Kuantitas'],2)?></td> -->
 						<td><?=number_format($bop,2)?></td>
