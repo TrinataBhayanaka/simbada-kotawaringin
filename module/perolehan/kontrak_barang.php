@@ -23,7 +23,7 @@ $menu_id = 10;
 			}
 
 	//get data
-	$RKsql = mysql_query("SELECT Aset_ID,kodeLokasi, kodeKelompok,TipeAset,MIN(noRegister) as minreg, MAX(noRegister) as maxreg,SUM(Kuantitas) as Kuantitas, SUM(NilaiPerolehan) as NilaiPerolehan FROM aset WHERE noKontrak = '{$kontrak[0]['noKontrak']}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL) GROUP BY kodeKelompok, kodeLokasi");
+	$RKsql = mysql_query("SELECT Aset_ID,kodeLokasi, kodeKelompok,TipeAset,MIN(noRegister) as minreg, MAX(noRegister) as maxreg,SUM(Kuantitas) as Kuantitas, SUM(NilaiPerolehan) as NilaiPerolehan, tglPerolehan FROM aset WHERE noKontrak = '{$kontrak[0]['noKontrak']}' AND ((StatusValidasi != 9 and StatusValidasi != 13) OR StatusValidasi IS NULL) AND ((Status_Validasi_Barang != 9 and Status_Validasi_Barang != 13) OR Status_Validasi_Barang IS NULL) GROUP BY kodeKelompok, kodeLokasi");
 	while ($dataRKontrak = mysql_fetch_assoc($RKsql)){
 				$rKontrak[] = $dataRKontrak;
 			}
@@ -174,6 +174,7 @@ $menu_id = 10;
 						<th>Kode Barang</th>
 						<th>Nama Barang</th>
 						<th>No. Register</th>
+						<th>Tgl Perolehan</th>
 						<th>Jumlah</th>
 						<th>Total</th>
 						<th>Aksi</th>
@@ -192,6 +193,7 @@ $menu_id = 10;
 						<td><?=$value['kodeKelompok']?></td>
 						<td><?=$value['uraian']?></td>
 						<td class="center"><?=$value['minreg']?> s/d <?=$value['maxreg']?></td>
+                        <td><?=date_format(date_create($value['tglPerolehan']), 'd M Y')?></td>
 						<td class="center"><?=$value['Kuantitas']?></td>
 						<td class="center"><?=number_format($value['NilaiPerolehan'],2)?></td>
 						<td class="center">
