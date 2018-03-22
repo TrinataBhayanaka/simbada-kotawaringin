@@ -48,6 +48,7 @@ header("Content-Type: application/vnd.ms-excel");
 <body>
     <span style="font-size: 25px;">Rekap Data Nilai Kontrak</span><br>
     <span><strong>No Kontrak</strong> : <?=$kontrak['noKontrak']?></span><br>
+    <span><strong>Tanggal Perolehan</strong> : <?=date_format(date_create($kontrak['tglKontrak']), 'd M Y')?></span><br>
     <span><strong>Nilai Kontrak</strong> : <?=number_format($kontrak['nilai'], 2)?></span>
     <br>
     <table border="1">
