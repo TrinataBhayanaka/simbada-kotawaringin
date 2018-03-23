@@ -2542,7 +2542,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
              $jenis_hapus = $valRwyt->jenis_hapus;
              $AsalUsul = $valRwyt->AsalUsul;
 
-            if($paramKd_Rwyt == 20||$paramKd_Rwyt == 0 ||$paramKd_Rwyt == 30|| $paramKd_Rwyt == 2||$paramKd_Rwyt == 281 ||$paramKd_Rwyt == 291 || $paramKd_Rwyt == 7 || $paramKd_Rwyt == 21 || $paramKd_Rwyt == 29) {
+            if($paramKd_Rwyt == 0 ||$paramKd_Rwyt == 30|| $paramKd_Rwyt == 2||$paramKd_Rwyt == 281 ||$paramKd_Rwyt == 291 || $paramKd_Rwyt == 7 || $paramKd_Rwyt == 21 || $paramKd_Rwyt == 29) {
                 /*
                 Kode Riwayat
                 0 = Data baru
@@ -2679,22 +2679,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                             }
 
                             break;
-                        case 20:
-                            $ASET_ID_CEK=$valRwyt->Aset_ID;
-                            $key="$ASET_ID_CEK-$paramKd_Rwyt";
-                            $CEK_DATA_BARU[$key]+=1;
-                            if($CEK_DATA_BARU[$key]>1){
-                                $nilaiPrlhnMutasiTambahFix=0;
-                                $ASET_BARU=0;
-                                $INVENTARISASI=0;
-                            }else{
-                                if($noKontrak!="")
-                                    $ASET_BARU=$nilaiPrlhnMutasiTambahFix;
-                                else
-                                    $INVENTARISASI=$nilaiPrlhnMutasiTambahFix;
-                            }
 
-                            break;
                         case 2:
                             $ASET_KAPITALISASI=$nilaiPrlhnMutasiTambahFix;
                             break;
@@ -2784,6 +2769,9 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                             $PENGHAPUSAN_SEBAGIAN=$nilaiPrlhnMutasiKurangFix;
                             break;
                         case 21:
+                            $KOREKSI_KURANG=$nilaiPrlhnMutasiTambahFix;
+                            break;
+                        case 35:
                             $KOREKSI_KURANG=$nilaiPrlhnMutasiTambahFix;
                             break;
 
@@ -3195,8 +3183,117 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
 
                 $umurEkonomis = $valRwyt->UmurEkonomis;
             } //tambahan
-            elseif($paramKd_Rwyt == 36 ) {
+
+            elseif($paramKd_Rwyt == 35) {
                 $flag = "(-)";
+                //SALDO AWAL
+                $nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
+                $nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
+
+                $AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+                $AkumulasiPenyusutanFix = ($AkumulasiPenyusutan);
+
+                if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan != '') {
+                    $NilaiBuku = $valRwyt->NilaiBuku;
+                    $NilaiBukuFix = ($NilaiBuku);
+                } else {
+                    $NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
+                    $NilaiBukuFix = ($NilaiBuku);
+                }
+
+
+                //MUTASI ASET (Bertambah)
+                $nilaiPrlhnMutasiTambah = 0;
+                $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
+
+                //MUTASI ASET (Berkurang)
+                $nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan_Awal;
+                $nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
+                $KOREKSI_KURANG=$nilaiPrlhnMutasiKurangFix;
+
+                //MUTASI PENYUSUTAN (Berkurang)
+                $penyusutanBerkurang = $AkumulasiPenyusutan;
+                $penyusutanBerkurangFix = ($penyusutanBerkurang);
+
+                //MUTASI PENYUSUTAN (Bertambah)
+                $penyusutanBertambah = 0;
+                $penyusutanBertambahFix = ($penyusutanBertambah);
+
+                //SALDO AKHIR
+                $nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn - $nilaiPrlhnMutasiKurang;
+                $nilaiPerolehanHasilMutasiFix = ($nilaiPerolehanHasilMutasi);
+
+                $AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan - $penyusutanBerkurang;
+                $AkumulasiPenyusutanHasilMutasiFix = ($AkumulasiPenyusutanHasilMutasi);
+
+                $nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
+                $nilaibukuHasilMutasiFix = ($nilaibukuHasilMutasi);
+
+                //PENYUSUTAN
+                $PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
+                $PenyusutanPerTahunFix = ($PenyusutanPerTahun);
+
+                $umurEkonomis = $valRwyt->UmurEkonomis;
+            } //tambahan
+
+
+            elseif($paramKd_Rwyt == 20 ) {
+                $flag = "(+)";
+                //SALDO AWAL
+                $nilaiAwalPrlhn = 0;
+                $nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
+
+                $AkumulasiPenyusutan = 0;
+                $AkumulasiPenyusutanFix = ($AkumulasiPenyusutan);
+
+                $NilaiBuku = 0;
+                $NilaiBukuFix = ($NilaiBuku);
+
+                /*if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan != '') {
+                    $NilaiBuku = $valRwyt->NilaiBuku;
+                    $NilaiBukuFix = ($NilaiBuku);
+                } else {
+                    $NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
+                    $NilaiBukuFix = ($NilaiBuku);
+                }*/
+
+
+                //MUTASI ASET (Bertambah)
+                $nilaiPrlhnMutasiTambah = $valRwyt->NilaiPerolehan;
+                $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
+
+                //MUTASI ASET (Berkurang)
+                $nilaiPrlhnMutasiKurang = 0;
+                $nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
+                $ASET_BARU=$nilaiPrlhnMutasiKurangFix;
+
+
+                //MUTASI PENYUSUTAN (Berkurang)
+                $penyusutanBerkurang = 0;
+                $penyusutanBerkurangFix = ($penyusutanBerkurang);
+
+                //MUTASI PENYUSUTAN (Bertambah)
+                $penyusutanBertambah = 0;
+                $penyusutanBertambahFix = ($penyusutanBertambah);
+
+                //SALDO AKHIR
+                $nilaiPerolehanHasilMutasi = $valRwyt->NilaiPerolehan;
+                $nilaiPerolehanHasilMutasiFix = ($nilaiPerolehanHasilMutasi);
+
+                $AkumulasiPenyusutanHasilMutasi = 0;
+                $AkumulasiPenyusutanHasilMutasiFix = ($AkumulasiPenyusutanHasilMutasi);
+
+                $nilaibukuHasilMutasi = $valRwyt->NilaiPerolehan;
+                $nilaibukuHasilMutasiFix = ($nilaibukuHasilMutasi);
+
+                //PENYUSUTAN
+                $PenyusutanPerTahun = 0;
+                $PenyusutanPerTahunFix = ($PenyusutanPerTahun);
+
+                $umurEkonomis = $valRwyt->UmurEkonomis;
+            }
+            elseif($paramKd_Rwyt == 36 ) {
+                $flag = "(+)";
                 //SALDO AWAL
                 $nilaiAwalPrlhn = 0;
                 $nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
@@ -3207,16 +3304,20 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                  $NilaiBuku = 0;
                  $NilaiBukuFix = ($NilaiBuku);
 
-
+                $NP_akhir=get_ubahstatus($valRwyt->Aset_ID);
+                $ASET_BARU=$valRwyt->NilaiPerolehan-$valRwyt->NilaiPerolehan_Awal;
+                $KOREKSI_TAMBAH=$NP_akhir-$ASET_BARU;
+                $nilaiPrlhnMutasiTambah=$NP_akhir;
+                $nilaiPrlhnMutasiTambahFix=($nilaiPrlhnMutasiTambah);
                 //MUTASI ASET (Bertambah)
-                $nilaiPrlhnMutasiTambah = $valRwyt->NilaiPerolehan;
-                $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
+//                $nilaiPrlhnMutasiTambah = $valRwyt->NilaiPerolehan;
+//                $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
+//                $KOREKSI_TAMBAH=$valRwyt->NilaiPerolehan-$valRwyt->NilaiPerolehan_Awal;
 
                 //MUTASI ASET (Berkurang)
-                $nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
+                $nilaiPrlhnMutasiKurang = 0;
                 $nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
                 //$penghapusan=$nilaiPrlhnMutasiKurang;
-                $PENGHAPUSAN_PEMUSNAHAN=$nilaiPrlhnMutasiKurang;
                 //MUTASI PENYUSUTAN (Berkurang)
                 $penyusutanBerkurang = 0;
                 $penyusutanBerkurangFix = ($penyusutanBerkurang);
@@ -3454,7 +3555,7 @@ function getdataRwyt($skpd_id, $AsetId, $tglakhirperolehan, $tglawalperolehan, $
 				 order by l.Aset_ID ASC";*/
 
     $paramLog = "l.TglPerubahan >'$tglawalperolehan' and l.TglPerubahan <='$tglakhirperolehan'  
-				 AND l.Kd_Riwayat in (0,1,2,3,7,21,26,27,28,50,51,29,30,281,291,36,55,20) and l.Kd_Riwayat != 77 
+				 AND l.Kd_Riwayat in (0,1,2,3,7,21,26,27,28,50,51,29,30,281,291,36,55,20,35) and l.Kd_Riwayat != 77 
 				 and l.Aset_ID = '{$AsetId}' 
 				 order by l.log_id ASC";
    // echo "$status--$AsetId <br/>";
@@ -3532,6 +3633,18 @@ function get_aset($aset_id)
         $TipeAset = $data[ 'TipeAset' ];
     }
     return array( $nokontrak, $kondisi, $kodeKa, $TipeAset );
+
+}
+
+function get_ubahstatus($aset_id)
+{
+    $sql = "select NilaiPerolehan from aset where aset_id='$aset_id' limit 1";
+    $result = mysql_query ($sql) or die("masuk sini" . mysql_error ());
+    while ($data = mysql_fetch_array ($result, MYSQL_ASSOC)) {
+        $NilaiPerolehan = $data[ 'NilaiPerolehan' ];
+
+    }
+    return $NilaiPerolehan;
 
 }
 
