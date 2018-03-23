@@ -896,15 +896,30 @@ $head = "
                                         $html.="<td>$tglsp2d</td>
                                         <td>$nosp2d</td>
                                         <td>$tglsp2dp</td>
-                                        <td>$nosp2dp</td>
-                                        <td style=\"text-align:right;\">".number_format($value3[satuan],2,",",".")."</td>
-                                        <td style=\"text-align:right;\">".number_format($value3[bop],2,",",".")."</td>
-                                        <td style=\"text-align:right;\">".number_format($value3[NilaiPerolehan],2,",",".")."</td>
-                                        <td>$value3[tipeKontrak]</td>
-                                        ";
-                              $totalSatuan+= $value3[satuan];
-                              $totalBop+= $value3[bop];
-                              $totalNP+= $value3[NilaiPerolehan];
+                                        <td>$nosp2dp</td>";
+                                        if($value3[tipeAset] == 3){
+                                          $html.="
+                                          <td style=\"text-align:right;\">".number_format($value3[NilaiKontrak],2,",",".")."</td>
+                                          <td style=\"text-align:right;\">".number_format($value3[totalsp2dpenunjang],2,",",".")."</td>
+                                          <td style=\"text-align:right;\">".number_format($value3[totalPerolehan],2,",",".")."</td>
+                                          <td>$value3[tipeKontrak]</td>
+                                          "; 
+                                          $totalSatuan+= $value3[NilaiKontrak];
+                                          $totalBop+= $value3[totalsp2dpenunjang];
+                                          $totalNP+= $value3[totalPerolehan];
+                                        }else{
+                                          $html.="
+                                          <td style=\"text-align:right;\">".number_format($value3[satuan],2,",",".")."</td>
+                                          <td style=\"text-align:right;\">".number_format($value3[bop],2,",",".")."</td>
+                                          <td style=\"text-align:right;\">".number_format($value3[NilaiPerolehan],2,",",".")."</td>
+                                          <td>$value3[tipeKontrak]</td>
+                                          ";  
+                                          $totalSatuan+= $value3[satuan];
+                                          $totalBop+= $value3[bop];
+                                          $totalNP+= $value3[NilaiPerolehan];
+                                        }
+                                        
+                              
                               $no++;           
                          }
 
