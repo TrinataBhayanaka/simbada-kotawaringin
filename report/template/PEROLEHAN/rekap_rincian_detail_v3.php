@@ -2542,7 +2542,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
              $jenis_hapus = $valRwyt->jenis_hapus;
              $AsalUsul = $valRwyt->AsalUsul;
 
-            if($paramKd_Rwyt == 35||$paramKd_Rwyt == 0 ||$paramKd_Rwyt == 30|| $paramKd_Rwyt == 2||$paramKd_Rwyt == 281 ||$paramKd_Rwyt == 291 || $paramKd_Rwyt == 7 || $paramKd_Rwyt == 21 || $paramKd_Rwyt == 29) {
+            if($paramKd_Rwyt == 0 ||$paramKd_Rwyt == 30|| $paramKd_Rwyt == 2||$paramKd_Rwyt == 281 ||$paramKd_Rwyt == 291 || $paramKd_Rwyt == 7 || $paramKd_Rwyt == 21 || $paramKd_Rwyt == 29) {
                 /*
                 Kode Riwayat
                 0 = Data baru
@@ -3183,6 +3183,59 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
 
                 $umurEkonomis = $valRwyt->UmurEkonomis;
             } //tambahan
+
+            elseif($paramKd_Rwyt == 35) {
+                $flag = "(-)";
+                //SALDO AWAL
+                $nilaiAwalPrlhn = $valRwyt->NilaiPerolehan;
+                $nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
+
+                $AkumulasiPenyusutan = $valRwyt->AkumulasiPenyusutan;
+                $AkumulasiPenyusutanFix = ($AkumulasiPenyusutan);
+
+                if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan != '') {
+                    $NilaiBuku = $valRwyt->NilaiBuku;
+                    $NilaiBukuFix = ($NilaiBuku);
+                } else {
+                    $NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
+                    $NilaiBukuFix = ($NilaiBuku);
+                }
+
+
+                //MUTASI ASET (Bertambah)
+                $nilaiPrlhnMutasiTambah = 0;
+                $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
+
+                //MUTASI ASET (Berkurang)
+                $nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
+                $nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
+                $KOREKSI_KURANG=$nilaiPrlhnMutasiKurangFix;
+              
+                //MUTASI PENYUSUTAN (Berkurang)
+                $penyusutanBerkurang = $AkumulasiPenyusutan;
+                $penyusutanBerkurangFix = ($penyusutanBerkurang);
+
+                //MUTASI PENYUSUTAN (Bertambah)
+                $penyusutanBertambah = 0;
+                $penyusutanBertambahFix = ($penyusutanBertambah);
+
+                //SALDO AKHIR
+                $nilaiPerolehanHasilMutasi = $nilaiAwalPrlhn - $nilaiPrlhnMutasiKurang;
+                $nilaiPerolehanHasilMutasiFix = ($nilaiPerolehanHasilMutasi);
+
+                $AkumulasiPenyusutanHasilMutasi = $AkumulasiPenyusutan - $penyusutanBerkurang;
+                $AkumulasiPenyusutanHasilMutasiFix = ($AkumulasiPenyusutanHasilMutasi);
+
+                $nilaibukuHasilMutasi = $nilaiPerolehanHasilMutasi - $AkumulasiPenyusutanHasilMutasi;
+                $nilaibukuHasilMutasiFix = ($nilaibukuHasilMutasi);
+
+                //PENYUSUTAN
+                $PenyusutanPerTahun = $valRwyt->PenyusutanPerTahun;
+                $PenyusutanPerTahunFix = ($PenyusutanPerTahun);
+
+                $umurEkonomis = $valRwyt->UmurEkonomis;
+            } //tambahan
+
 
             elseif($paramKd_Rwyt == 20 ) {
                 $flag = "(+)";
