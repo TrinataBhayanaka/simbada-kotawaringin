@@ -3293,7 +3293,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 $umurEkonomis = $valRwyt->UmurEkonomis;
             }
             elseif($paramKd_Rwyt == 36 ) {
-                $flag = "(-)";
+                $flag = "(+)";
                 //SALDO AWAL
                 $nilaiAwalPrlhn = 0;
                 $nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
@@ -3304,16 +3304,19 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                  $NilaiBuku = 0;
                  $NilaiBukuFix = ($NilaiBuku);
 
-
+                $NP_akhir=get_ubahstatus($valRwyt->Aset_ID);
+                $ASET_BARU=$valRwyt->NilaiPerolehan-$valRwyt->NilaiPerolehan_Awal;
+                $KOREKSI_TAMBAH=$NP_akhir-$ASET_BARU;
+                $nilaiPrlhnMutasiTambah=$NP_akhir;
                 //MUTASI ASET (Bertambah)
-                $nilaiPrlhnMutasiTambah = $valRwyt->NilaiPerolehan;
-                $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
+//                $nilaiPrlhnMutasiTambah = $valRwyt->NilaiPerolehan;
+//                $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
+//                $KOREKSI_TAMBAH=$valRwyt->NilaiPerolehan-$valRwyt->NilaiPerolehan_Awal;
 
                 //MUTASI ASET (Berkurang)
-                $nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
+                $nilaiPrlhnMutasiKurang = 0;
                 $nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
                 //$penghapusan=$nilaiPrlhnMutasiKurang;
-                $PENGHAPUSAN_PEMUSNAHAN=$nilaiPrlhnMutasiKurang;
                 //MUTASI PENYUSUTAN (Berkurang)
                 $penyusutanBerkurang = 0;
                 $penyusutanBerkurangFix = ($penyusutanBerkurang);
@@ -3629,6 +3632,18 @@ function get_aset($aset_id)
         $TipeAset = $data[ 'TipeAset' ];
     }
     return array( $nokontrak, $kondisi, $kodeKa, $TipeAset );
+
+}
+
+function get_ubahstatus($aset_id)
+{
+    $sql = "select NilaiPerolehan from aset where aset_id='$aset_id' limit 1";
+    $result = mysql_query ($sql) or die("masuk sini" . mysql_error ());
+    while ($data = mysql_fetch_array ($result, MYSQL_ASSOC)) {
+        $NilaiPerolehan = $data[ 'NilaiPerolehan' ];
+
+    }
+    return $NilaiPerolehan;
 
 }
 
