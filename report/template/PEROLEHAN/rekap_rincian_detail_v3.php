@@ -2667,7 +2667,15 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                             $ASET_ID_CEK=$valRwyt->Aset_ID;
                             $key="$ASET_ID_CEK-$paramKd_Rwyt";
                             $CEK_DATA_BARU[$key]+=1;
-                            if($CEK_DATA_BARU[$key]>1){
+                            if($noKontrak!="") {
+                                $ASET_BARU = $nilaiPrlhnMutasiTambahFix;
+                            }else
+                            {
+                                $INVENTARISASI=$nilaiPrlhnMutasiTambahFix;
+                            }
+
+
+                          /*  if($CEK_DATA_BARU[$key]>1){
                                 $ASET_BARU=$nilaiPrlhnMutasiTambahFix;
                                 $INVENTARISASI=$nilaiPrlhnMutasiTambahFix;
                             }else{
@@ -2675,7 +2683,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                                     $ASET_BARU=$nilaiPrlhnMutasiTambahFix;
                                 else
                                     $INVENTARISASI=$nilaiPrlhnMutasiTambahFix;
-                            }
+                            }*/
 
                             break;
 
@@ -3422,21 +3430,28 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
             if(($paramKd_Rwyt == 50 || $paramKd_Rwyt == 51) && $status_masuk_penyusutan != 1) {
                  $BEBAN_PENYUSUTAN += $beban_penyusutanFix;
                 $MUTASI_ASET_KURANG += $nilaiPrlhnMutasiKurangFix;
-                $MUTASI_AKM_PENAMBAHAN += $penyusutanBertambahFix;
                 $MUTASI_AKM_PENGURANG += $penyusutanBerkurangFix;
 
                 if($CEK_DATA_BARU[$key]>1) {
-                    $TOTAL_ASET_BARU = $ASET_BARU;
+                    if($noKontrak!=""){
+                        $TOTAL_ASET_BARU = $ASET_BARU;
+                    }else{
+                        $TOTAL_INVENTARISASI =$INVENTARISASI;
+                    }
                     $MUTASI_ASET_PENAMBAHAN = $nilaiPrlhnMutasiTambahFix;
 
                 }else{
-                    $TOTAL_ASET_BARU += $ASET_BARU;
+                    if($noKontrak!=""){
+                        $TOTAL_ASET_BARU += $ASET_BARU;
+                    }else{
+                        $TOTAL_INVENTARISASI +=$INVENTARISASI;
+                    }
                     $MUTASI_ASET_PENAMBAHAN += $nilaiPrlhnMutasiTambahFix;
 
                 }
 
                 $TOTAL_ASET_KAPITALISASI +=$ASET_KAPITALISASI;
-                $TOTAL_INVENTARISASI +=$INVENTARISASI;
+
                 $TOTAL_TRANSFER_MASUK +=$TRANSFER_MASUK;
                 $TOTAL_KOREKSI_TAMBAH +=$KOREKSI_TAMBAH;
 
@@ -3461,17 +3476,25 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 $MUTASI_AKM_PENGURANG += $penyusutanBerkurangFix;
 
                 if($CEK_DATA_BARU[$key]>1) {
-                    $TOTAL_ASET_BARU = $ASET_BARU;
+                    if($noKontrak!=""){
+                        $TOTAL_ASET_BARU = $ASET_BARU;
+                    }else{
+                        $TOTAL_INVENTARISASI =$INVENTARISASI;
+                    }
                     $MUTASI_ASET_PENAMBAHAN = $nilaiPrlhnMutasiTambahFix;
 
                 }else{
-                    $TOTAL_ASET_BARU += $ASET_BARU;
+                    if($noKontrak!=""){
+                        $TOTAL_ASET_BARU += $ASET_BARU;
+                    }else{
+                        $TOTAL_INVENTARISASI +=$INVENTARISASI;
+                    }
                     $MUTASI_ASET_PENAMBAHAN += $nilaiPrlhnMutasiTambahFix;
 
                 }
 
                 $TOTAL_ASET_KAPITALISASI +=$ASET_KAPITALISASI;
-                $TOTAL_INVENTARISASI +=$INVENTARISASI;
+
                 $TOTAL_TRANSFER_MASUK +=$TRANSFER_MASUK;
                 $TOTAL_KOREKSI_TAMBAH +=$KOREKSI_TAMBAH;
 
