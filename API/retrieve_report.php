@@ -280,9 +280,9 @@ class RETRIEVE_REPORT extends DB {
     pr($tglPerolehanAkhir);*/
 
     //get list satker kontrak
-    $sqlkontrakSatker = mysql_query("SELECT kodeSatker FROM kontrak WHERE kodeSatker like '$skpd%' and tglKontrak >='$tglPerolehanAwal' and tglKontrak <='$tglPerolehanAkhir' AND (tipeAset = 1 or tipeAset = 2)  group by kodeSatker");
+    $sqlkontrakSatker = mysql_query("SELECT kodeSatker FROM kontrak WHERE kodeSatker like '$skpd%' and tglKontrak >='$tglPerolehanAwal' and tglKontrak <='$tglPerolehanAkhir' AND (tipeAset = 1 or tipeAset = 2 or tipeAset = 3)  group by kodeSatker");
     //pr($sql);
-    
+    //tipeAset = 1 or tipeAset = 2 or tipeAset = 3
     while ($dataKontrakSatker = mysql_fetch_assoc($sqlkontrakSatker)){
         $satker[] = $dataKontrakSatker;
     }    
@@ -292,7 +292,7 @@ class RETRIEVE_REPORT extends DB {
       //pr($valSatker['kodeSatker']);
       
       //get list kontrak
-      $sqlkontrak= mysql_query("SELECT * FROM kontrak WHERE kodeSatker = '$valSatker[kodeSatker]' and tglKontrak >='$tglPerolehanAwal' and tglKontrak <='$tglPerolehanAkhir' AND (tipeAset = 1 or tipeAset = 2)");
+      $sqlkontrak= mysql_query("SELECT * FROM kontrak WHERE kodeSatker = '$valSatker[kodeSatker]' and tglKontrak >='$tglPerolehanAwal' and tglKontrak <='$tglPerolehanAkhir' AND (tipeAset = 1 or tipeAset = 2 or tipeAset = 3)");
       
       while ($dataKontrak = mysql_fetch_assoc($sqlkontrak)){
         
@@ -346,21 +346,34 @@ class RETRIEVE_REPORT extends DB {
             $list[$key]['satuan'] = $satuan;
             $list[$key]['NilaiKontrak'] = $kontrak['nilai'];
             $list[$key]['TglKontrak'] = $kontrak['tglKontrak'];
+            $list[$key]['tipeAset'] = $kontrak['tipeAset'];
             if($kontrak['tipeAset'] == 1){
               $list[$key]['tipeKontrak'] = 'Aset Baru';
             }elseif($kontrak['tipeAset'] == 2){
               $list[$key]['tipeKontrak'] = 'Kapitalisasi';
+            }elseif($kontrak['tipeAset'] == 3){
+              $list[$key]['tipeKontrak'] = 'Ubah Status';
             }else{
               $list[$key]['tipeKontrak'] = '-';
             }
              
             //get list sp2dpenunjang
             $sp2dpRincian=array();
+            $totalsp2dpenunjang = 0;
             $sqlsp2dpRincian = mysql_query("SELECT * from sp2d where idKontrak = '{$kontrak['id']}' AND type = '2'");
             while ($rincian = mysql_fetch_assoc($sqlsp2dpRincian)){
               $sp2dpRincian[] = $rincian;
+              if($kontrak['tipeAset'] == 3){
+                $totalsp2dpenunjang+=$rincian['nilai'];
+              }
             }
-            $list[$key]['sp2dpenunjang'] = $sp2dpRincian;
+            if($kontrak['tipeAset'] == 3){
+              $list[$key]['sp2dpenunjang'] = $sp2dpRincian;
+              $list[$key]['totalsp2dpenunjang'] = $totalsp2dpenunjang;
+              $totalFix = $totalsp2dpenunjang + $kontrak['nilai'];
+              $list[$key]['totalPerolehan'] = $totalFix;
+            }
+            
             
             //get list sp2dpenunjang
             $sp2dRincian=array();
@@ -378,6 +391,7 @@ class RETRIEVE_REPORT extends DB {
         $dataFix[$valSatker['kodeSatker']][$kontrak['noKontrak']]['data'] = $list;         
       }
     }
+    //pr($dataFix); 
     return $dataFix;     
     //pr($dataFix); 
     //exit();
