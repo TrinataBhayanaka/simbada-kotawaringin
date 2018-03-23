@@ -3308,6 +3308,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 $ASET_BARU=$valRwyt->NilaiPerolehan-$valRwyt->NilaiPerolehan_Awal;
                 $KOREKSI_TAMBAH=$NP_akhir-$ASET_BARU;
                 $nilaiPrlhnMutasiTambah=$NP_akhir;
+                $nilaiPrlhnMutasiTambahFix=($nilaiPrlhnMutasiTambah);
                 //MUTASI ASET (Bertambah)
 //                $nilaiPrlhnMutasiTambah = $valRwyt->NilaiPerolehan;
 //                $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
