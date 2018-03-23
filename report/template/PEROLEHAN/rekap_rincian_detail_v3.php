@@ -2542,7 +2542,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
              $jenis_hapus = $valRwyt->jenis_hapus;
              $AsalUsul = $valRwyt->AsalUsul;
 
-            if($paramKd_Rwyt == 0 ||$paramKd_Rwyt == 30|| $paramKd_Rwyt == 2||$paramKd_Rwyt == 281 ||$paramKd_Rwyt == 291 || $paramKd_Rwyt == 7 || $paramKd_Rwyt == 21 || $paramKd_Rwyt == 29) {
+            if($paramKd_Rwyt == 20||$paramKd_Rwyt == 0 ||$paramKd_Rwyt == 30|| $paramKd_Rwyt == 2||$paramKd_Rwyt == 281 ||$paramKd_Rwyt == 291 || $paramKd_Rwyt == 7 || $paramKd_Rwyt == 21 || $paramKd_Rwyt == 29) {
                 /*
                 Kode Riwayat
                 0 = Data baru
@@ -2664,6 +2664,22 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
 
                     switch ($paramKd_Rwyt){
                         case 0:
+                            $ASET_ID_CEK=$valRwyt->Aset_ID;
+                            $key="$ASET_ID_CEK-$paramKd_Rwyt";
+                            $CEK_DATA_BARU[$key]+=1;
+                            if($CEK_DATA_BARU[$key]>1){
+                                $nilaiPrlhnMutasiTambahFix=0;
+                                $ASET_BARU=0;
+                                $INVENTARISASI=0;
+                            }else{
+                                if($noKontrak!="")
+                                    $ASET_BARU=$nilaiPrlhnMutasiTambahFix;
+                                else
+                                    $INVENTARISASI=$nilaiPrlhnMutasiTambahFix;
+                            }
+
+                            break;
+                        case 20:
                             $ASET_ID_CEK=$valRwyt->Aset_ID;
                             $key="$ASET_ID_CEK-$paramKd_Rwyt";
                             $CEK_DATA_BARU[$key]+=1;
@@ -3438,7 +3454,7 @@ function getdataRwyt($skpd_id, $AsetId, $tglakhirperolehan, $tglawalperolehan, $
 				 order by l.Aset_ID ASC";*/
 
     $paramLog = "l.TglPerubahan >'$tglawalperolehan' and l.TglPerubahan <='$tglakhirperolehan'  
-				 AND l.Kd_Riwayat in (0,1,2,3,7,21,26,27,28,50,51,29,30,281,291,36,55) and l.Kd_Riwayat != 77 
+				 AND l.Kd_Riwayat in (0,1,2,3,7,21,26,27,28,50,51,29,30,281,291,36,55,20) and l.Kd_Riwayat != 77 
 				 and l.Aset_ID = '{$AsetId}' 
 				 order by l.log_id ASC";
    // echo "$status--$AsetId <br/>";
