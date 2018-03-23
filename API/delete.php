@@ -639,6 +639,9 @@ class DELETE extends DB
             $query = "UPDATE {$tabel} SET StatusTampil = 9, StatusValidasi = 9, Status_Validasi_Barang = 9 WHERE Aset_ID = '{$val['Aset_ID']}'";
             $result = $this->query($query) or die ($this->error());
             // pr($query);
+            //log kib
+            $query = "DELETE FROM {$logtabel} WHERE Aset_ID = '{$val['Aset_ID']}'";
+            $this->query($query) or die ($this->error());
             //kapitalisasi and kdp
             $query = "DELETE FROM kapitalisasi WHERE asetKapitalisasi = '{$val['Aset_ID']}'";
             $result = $this->query($query) or die ($this->error());
