@@ -29147,6 +29147,7 @@ $body="
                 <td colspan=\"1\" rowspan=\"3\" style=\"text-align:center; font-weight: bold; width: 70px;\">Tahun Perolehan</td>
                 <td colspan=\"1\" rowspan=\"3\" style=\"text-align:center; font-weight: bold; width: 72px;\">Ukuran / Konstruksi (P,S,D)</td>
                 <td colspan=\"1\" rowspan=\"3\" style=\"text-align:center; font-weight: bold; width: 81px;\">Kondisi</td>
+                <td colspan=\"1\" rowspan=\"3\" style=\"text-align:center; font-weight: bold; width: 81px;\"> SKPD Asal/Tujuan</td>
                 <td colspan=\"1\" rowspan=\"3\" style=\"text-align:center; font-weight: bold;  width: 60px;\">Keterangan</td>
                 <td colspan=\"2\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Jumlah Awal</td>
                 <td colspan=\"4\" rowspan=\"1\" style=\"text-align:center; font-weight: bold;\">Mutasi</td>
@@ -29186,15 +29187,16 @@ $body="
                 <td style=\"text-align:center; font-weight: bold; width: 70px;\">9</td>
                 <td style=\"text-align:center; font-weight: bold; width: 72px;\">10</td>
                 <td style=\"text-align:center; font-weight: bold; width: 60px;\">11</td>
-                <td style=\"text-align:center; font-weight: bold; width: 81px;\">12</td>
-                <td style=\"text-align:center; font-weight: bold;\">13</td>
+                <td style=\"text-align:center; font-weight: bold; width: 60px;\">12</td>
+                <td style=\"text-align:center; font-weight: bold; width: 81px;\">13</td>
                 <td style=\"text-align:center; font-weight: bold;\">14</td>
-                <td style=\"text-align:center; font-weight: bold; width: 60px;\">15</td>
+                <td style=\"text-align:center; font-weight: bold;\">15</td>
                 <td style=\"text-align:center; font-weight: bold; width: 60px;\">16</td>
                 <td style=\"text-align:center; font-weight: bold; width: 60px;\">17</td>
                 <td style=\"text-align:center; font-weight: bold; width: 60px;\">18</td>
                 <td style=\"text-align:center; font-weight: bold; width: 60px;\">19</td>
                 <td style=\"text-align:center; font-weight: bold; width: 60px;\">20</td>
+                <td style=\"text-align:center; font-weight: bold; width: 60px;\">21</td>
             </tr></thead>";
 																					  
 		}
@@ -29254,7 +29256,7 @@ $body="
 							$jmlHasilMutasi = 1;	
 							$nilaiPerolehanHasilMutasi = $nilaiPrlhnMutasiKurang + $nilaiPrlhnMutasiTambah;
 							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
-							
+							$KetSatkerAsalTujuan = $this->get_NamaSatker($row->SatkerAwal);
 						}else{
 							$flag = "(-)";
 							$kuantitas = 1;
@@ -29272,6 +29274,7 @@ $body="
 							$jmlHasilMutasi = 0;	
 							$nilaiPerolehanHasilMutasi = 0;
 							$nilaiPerolehanHasilMutasiFix = number_format($nilaiPerolehanHasilMutasi,2,",",".");
+							$KetSatkerAsalTujuan = $this->get_NamaSatker($row->SatkerTujuan);
 						}
 						
 						
@@ -29498,6 +29501,7 @@ $body="
 									<td style=\"width: 71px; text-align:center;\">$row->Tahun</td>
 									<td style=\"width: 71px;\">$konstruksi</td>
 									<td style=\"width: 81px;\">$ketKondisi</td>
+									<td style=\"width: 81px;\">$KetSatkerAsalTujuan</td>
 									<td style=\"width: 60px; text-align:center;\">$Ket_Riwayat $flag</td>
 									<td style=\"width: 71px; text-align:center;\">$kuantitas</td>
 									<td style=\"width: 80px; text-align:right;\">$nilaiAwalPerolehan</td>
