@@ -81,7 +81,8 @@ if (isset($_GET['iSortCol_0'])) {
 
      $sOrder = substr_replace($sOrder, "", -2);
      if ($sOrder == "ORDER BY") {
-          $sOrder = "ORDER BY p.kd_program,k.kd_kegiatan";
+          //$sOrder = "ORDER BY p.kd_program,k.kd_kegiatan";
+          $sOrder = "ORDER BY k.idk";
      }
 }
 // ECHO $sOrder;

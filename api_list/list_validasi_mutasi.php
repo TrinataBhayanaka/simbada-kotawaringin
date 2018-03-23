@@ -149,8 +149,11 @@ foreach ($data as $key => $value)
             {
               //pr($value);
               $NamaSatker = $MUTASI->getNamaSatker($value['SatkerUsul']); 
-              //pr($NamaSatker);
               $Satker="[".$value[SatkerUsul]."]"."<br/>".$NamaSatker['0']['NamaSatker'];
+
+              $NamaSatker2 = $MUTASI->getNamaSatker($value['SatkerTujuan']); 
+              $Satker2="[".$value[SatkerTujuan]."]"."<br/>".$NamaSatker2['0']['NamaSatker'];
+
               $change=$value[TglSKKDH]; 
               $change2=  format_tanggal_db3($change); 
               $row = array();
@@ -162,10 +165,11 @@ foreach ($data as $key => $value)
               /*<a href="<?php echo "$url_rewrite/module/penghapusan/"; ?>dftr_review_edit_penetapan_usulan_validasi_pmd.php?id=<?php echo "$row[Penghapusan_ID]";?>" class="btn btn-success"><i class="fa fa-pencil-square-o"></i> View</a>&nbsp;*/
               $tindakan = "<a href=\"{$url_rewrite}/module/mutasiSkpd/dftr_review_edit_penetapan_validasi.php?id={$value[Mutasi_ID]}\" class=\"btn btn-success btn-small\" \"style=\"margin-top:3px\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;View</a>";
 
-              $row[]=$no;
+              $row[]="<center>".$no."</center>";
               $row[]=$value['NoSKKDH'];
               $row[]=$Satker;
-              $row[]="<center>".$value['SatkerTujuan']."</center>";
+              //$row[]="<center>".$value['SatkerTujuan']."</center>";
+              $row[]=$Satker2;
               $row[]="<center>".$fixCount."</center>";
               $row[]="<center>".$change2."</center>";
               $row[]=$value['Keterangan'];

@@ -115,24 +115,27 @@ $data = $MUTASI->retrieve_daftar_penetapan($dataParam);
 //exit;
 //$rResult = $DBVAR->query($sQuery);
 
-// /* Data set length after filtering */
-$sQuery = "
-		SELECT FOUND_ROWS()
-	";
-$rResultFilterTotal = $DBVAR->query($sQuery);
-$aResultFilterTotal = $DBVAR->fetch_array($rResultFilterTotal);
-$iFilteredTotal = $aResultFilterTotal[0];
-
 // echo $iFilteredTotal ;
 if(trim($dataParam['tahun'])){
   $cond = " WHERE FixMutasi=1 AND YEAR(TglSKKDH) ='{$dataParam[tahun]}'";
 }else{
   $cond = " WHERE FixMutasi=1 ";
 }
+
+// /* Data set length after filtering */
+$sQuery = "
+		SELECT FOUND_ROWS() from $sTable {$cond}
+	";
+//pr($sQuery);  
+$rResultFilterTotal = $DBVAR->query($sQuery);
+$aResultFilterTotal = $DBVAR->fetch_array($rResultFilterTotal);
+$iFilteredTotal = $aResultFilterTotal[0];
+
+
 /* Total data set length */
 $sQuery = "
     SELECT COUNT(`" . $sIndexColumn . "`)
-    FROM   $sTable {$cond}
+    FROM   $sTable {$cond} AND SatkerUsul is not null
   ";
 
 //echo "$sQuery";

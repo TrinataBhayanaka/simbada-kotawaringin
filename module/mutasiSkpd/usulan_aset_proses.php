@@ -3,7 +3,7 @@ include "../../config/config.php";
 
 $MUTASI = new RETRIEVE_MUTASI;
 
-$menu_id = 78;
+$menu_id = 79;
 ($SessionUser['ses_uid']!='') ? $Session = $SessionUser : $Session = $SESSION->get_session(array('title'=>'GuestMenu', 'ses_name'=>'menu_without_login')); 
 $SessionUser = $SESSION->get_session_user();
 $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
@@ -32,8 +32,8 @@ if($_POST['cekAll'] == 1){
 	
 	$data_delete=$MUTASI->apl_userasetlistHPS_del("RVWUSPMD");
 	$data_delete=$MUTASI->apl_userasetlistHPS_del("DELUSMTS");
-
-	$status=exec("php usulan_aset_mts_helper_all.php $id $filterkontrak > ../../log/$log.txt 2>&1 &");
+	
+	$status=exec("php usulan_aset_mts_helper_all.php $id $filterkontrak $TAHUN_AKTIF > ../../log/$log.txt 2>&1 &");
 echo "<meta http-equiv=\"Refresh\" content=\"0; url={$url_rewrite}/module/mutasiSkpd/list_usulan.php\">";    
     exit;
 }else{	
@@ -44,7 +44,7 @@ echo "<meta http-equiv=\"Refresh\" content=\"0; url={$url_rewrite}/module/mutasi
 	*/
 	$id = $_POST['usulanID'];
 	$log = "usulan_aset_mts_".$id;
-
+	
 	$apl_userasetlistHPS = $MUTASI->apl_userasetlistHPS("RVWUSMTS");
 	$addExplode = explode(",",$apl_userasetlistHPS[0]['aset_list']);
 	$cleanArray = array_filter($addExplode);

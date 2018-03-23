@@ -166,7 +166,7 @@ $no=$_GET['iDisplayStart']+1;
           {
 foreach ($data as $key => $value)
             {
-              pr($value);
+              //pr($value);
               // //pr($get_data_filter);
               $NamaSatker=$MUTASI->getNamaSatker($value[kodeSatker]);
               //pr($NamaSatker);
@@ -206,7 +206,7 @@ foreach ($data as $key => $value)
                  $row[]="{$value['kodeKelompok']}<br/>{$value['Uraian']}";
                  $row[]="[".$value['kodeSatker'] ."]<br/>". $NamaSatker['0']['NamaSatker'];
                  $row[]="<center>".$TglPerolehan."</center>";
-                 $row[]= number_format($value['NilaiPerolehan'],0,",",".");
+                 $row[]= number_format($value['NilaiPerolehan'],2,",",".");
                  $row[]=$kondisi. ' - ' .$value['AsalUsul'];
                  //$row[]="{$SelectKIB[0][Merk]}-{$SelectKIB[0][Model]}";
                  $row[]=$ext;

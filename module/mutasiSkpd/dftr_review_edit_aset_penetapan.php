@@ -1,7 +1,7 @@
 <?php
 include "../../config/config.php";
 $MUTASI = new RETRIEVE_MUTASI;
-$menu_id = 78;
+$menu_id = 79;
 
 $SessionUser = $SESSION->get_session_user();
 ($SessionUser['ses_uid']!='') ? $Session = $SessionUser : $Session = $SESSION->get_session(array('title'=>'GuestMenu', 'ses_name'=>'menu_without_login')); 
@@ -156,10 +156,10 @@ if (isset($id)){
 						</li>
 						<li>
 							<span  class="labelInfo">Tanggal Penetapan</span>
-								<div class="input-prepend">
-									<span class="add-on"><i class="fa fa-calendar"></i></span>
+								<!--<div class="input-prepend">
+									<span class="add-on"><i class="fa fa-calendar"></i></span>-->
 									<input name="TglSKKDH" type="text" id="tanggal1" <?=$disabled?>  value="<?=$row['TglSKKDH']?>" required/>
-								</div>
+								<!--</div>-->
 							
 						</li>
 						<li>
