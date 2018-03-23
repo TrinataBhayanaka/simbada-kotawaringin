@@ -3426,7 +3426,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
 
             
                 //echo  "{$valRwyt->Aset_ID}Riwayat $paramKd_Rwyt=$MUTASI_ASET_PENAMBAHAN==$nilaiPrlhnMutasiTambahFix<br/>";
-            
+            $DATA_TAMBAH=0;
             if(($paramKd_Rwyt == 50 || $paramKd_Rwyt == 51) && $status_masuk_penyusutan != 1) {
                  $BEBAN_PENYUSUTAN += $beban_penyusutanFix;
                 $MUTASI_ASET_KURANG += $nilaiPrlhnMutasiKurangFix;
@@ -3435,10 +3435,11 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 if($CEK_DATA_BARU[$key]>1) {
                     if($noKontrak!=""){
                         $TOTAL_ASET_BARU = $ASET_BARU;
+                        $MUTASI_ASET_PENAMBAHAN = $ASET_BARU;
                     }else{
                         $TOTAL_INVENTARISASI =$INVENTARISASI;
+                        $MUTASI_ASET_PENAMBAHAN = $INVENTARISASI;
                     }
-                    $MUTASI_ASET_PENAMBAHAN = $nilaiPrlhnMutasiTambahFix;
 
                 }else{
                     if($noKontrak!=""){
@@ -3478,10 +3479,12 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 if($CEK_DATA_BARU[$key]>1) {
                     if($noKontrak!=""){
                         $TOTAL_ASET_BARU = $ASET_BARU;
+                        $MUTASI_ASET_PENAMBAHAN = $ASET_BARU;
                     }else{
                         $TOTAL_INVENTARISASI =$INVENTARISASI;
+                        $MUTASI_ASET_PENAMBAHAN = $INVENTARISASI;
                     }
-                    $MUTASI_ASET_PENAMBAHAN = $nilaiPrlhnMutasiTambahFix;
+
 
                 }else{
                     if($noKontrak!=""){
