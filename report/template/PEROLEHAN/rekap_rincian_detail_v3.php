@@ -3207,10 +3207,10 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
 
                 //MUTASI ASET (Berkurang)
-                $nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
+                $nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan_Awal;
                 $nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
                 $KOREKSI_KURANG=$nilaiPrlhnMutasiKurangFix;
-              
+
                 //MUTASI PENYUSUTAN (Berkurang)
                 $penyusutanBerkurang = $AkumulasiPenyusutan;
                 $penyusutanBerkurangFix = ($penyusutanBerkurang);
