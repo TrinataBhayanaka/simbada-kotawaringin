@@ -2542,7 +2542,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
              $jenis_hapus = $valRwyt->jenis_hapus;
              $AsalUsul = $valRwyt->AsalUsul;
 
-            if($paramKd_Rwyt == 20||$paramKd_Rwyt == 0 ||$paramKd_Rwyt == 30|| $paramKd_Rwyt == 2||$paramKd_Rwyt == 281 ||$paramKd_Rwyt == 291 || $paramKd_Rwyt == 7 || $paramKd_Rwyt == 21 || $paramKd_Rwyt == 29) {
+            if($paramKd_Rwyt == 0 ||$paramKd_Rwyt == 30|| $paramKd_Rwyt == 2||$paramKd_Rwyt == 281 ||$paramKd_Rwyt == 291 || $paramKd_Rwyt == 7 || $paramKd_Rwyt == 21 || $paramKd_Rwyt == 29) {
                 /*
                 Kode Riwayat
                 0 = Data baru
@@ -2679,22 +2679,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                             }
 
                             break;
-                        case 20:
-                            $ASET_ID_CEK=$valRwyt->Aset_ID;
-                            $key="$ASET_ID_CEK-$paramKd_Rwyt";
-                            $CEK_DATA_BARU[$key]+=1;
-                            if($CEK_DATA_BARU[$key]>1){
-                                $nilaiPrlhnMutasiTambahFix=0;
-                                $ASET_BARU=0;
-                                $INVENTARISASI=0;
-                            }else{
-                                if($noKontrak!="")
-                                    $ASET_BARU=$nilaiPrlhnMutasiTambahFix;
-                                else
-                                    $INVENTARISASI=$nilaiPrlhnMutasiTambahFix;
-                            }
 
-                            break;
                         case 2:
                             $ASET_KAPITALISASI=$nilaiPrlhnMutasiTambahFix;
                             break;
@@ -3195,6 +3180,62 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
 
                 $umurEkonomis = $valRwyt->UmurEkonomis;
             } //tambahan
+
+            elseif($paramKd_Rwyt == 20 ) {
+                $flag = "(+)";
+                //SALDO AWAL
+                $nilaiAwalPrlhn = 0;
+                $nilaiAwalPerolehanFix = ($nilaiAwalPrlhn);
+
+                $AkumulasiPenyusutan = 0;
+                $AkumulasiPenyusutanFix = ($AkumulasiPenyusutan);
+
+                $NilaiBuku = 0;
+                $NilaiBukuFix = ($NilaiBuku);
+
+                /*if($AkumulasiPenyusutan != 0 && $AkumulasiPenyusutan != '') {
+                    $NilaiBuku = $valRwyt->NilaiBuku;
+                    $NilaiBukuFix = ($NilaiBuku);
+                } else {
+                    $NilaiBuku = $valRwyt->NilaiPerolehan_Awal;
+                    $NilaiBukuFix = ($NilaiBuku);
+                }*/
+
+
+                //MUTASI ASET (Bertambah)
+                $nilaiPrlhnMutasiTambah = $valRwyt->NilaiPerolehan;
+                $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
+
+                //MUTASI ASET (Berkurang)
+                $nilaiPrlhnMutasiKurang = 0;
+                $nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
+                $ASET_BARU=$nilaiPrlhnMutasiKurangFix;
+
+
+                //MUTASI PENYUSUTAN (Berkurang)
+                $penyusutanBerkurang = 0;
+                $penyusutanBerkurangFix = ($penyusutanBerkurang);
+
+                //MUTASI PENYUSUTAN (Bertambah)
+                $penyusutanBertambah = 0;
+                $penyusutanBertambahFix = ($penyusutanBertambah);
+
+                //SALDO AKHIR
+                $nilaiPerolehanHasilMutasi = $valRwyt->NilaiPerolehan;
+                $nilaiPerolehanHasilMutasiFix = ($nilaiPerolehanHasilMutasi);
+
+                $AkumulasiPenyusutanHasilMutasi = 0;
+                $AkumulasiPenyusutanHasilMutasiFix = ($AkumulasiPenyusutanHasilMutasi);
+
+                $nilaibukuHasilMutasi = $valRwyt->NilaiPerolehan;
+                $nilaibukuHasilMutasiFix = ($nilaibukuHasilMutasi);
+
+                //PENYUSUTAN
+                $PenyusutanPerTahun = 0;
+                $PenyusutanPerTahunFix = ($PenyusutanPerTahun);
+
+                $umurEkonomis = $valRwyt->UmurEkonomis;
+            }
             elseif($paramKd_Rwyt == 36 ) {
                 $flag = "(-)";
                 //SALDO AWAL
