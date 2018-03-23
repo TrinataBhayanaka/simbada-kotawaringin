@@ -28,6 +28,11 @@ foreach ($clearList as $val) {
             
     $exec = $link->query($query);
 }
+//update usulan
+$quertUS = "UPDATE usulan SET Jenis_Usulan = 'MTS'
+            WHERE Usulan_ID = '{$idUsulan}'"
+            or die("Error in the consult.." . mysqli_error($link));  
+$execUS = $link->query($quertUS);   
 
 $time_end = microtime(true);
 

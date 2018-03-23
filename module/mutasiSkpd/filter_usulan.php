@@ -1,6 +1,6 @@
 <?php
 include "../../config/config.php";
-$menu_id = 78;
+$menu_id = 79;
             $SessionUser = $SESSION->get_session_user();
             ($SessionUser['ses_uid']!='') ? $Session = $SessionUser : $Session = $SESSION->get_session(array('title'=>'GuestMenu', 'ses_name'=>'menu_without_login')); 
             $USERAUTH->FrontEnd_check_akses_menu($menu_id, $Session);
@@ -65,7 +65,8 @@ $menu_id = 78;
                     <li>&nbsp;</li>
 					
 					<?php //selectAllSatker('kodeSatker','255',true,false,'required'); 
-						selectAllSatker('kodeSatker','255',true,false,false,true);
+						//selectAllSatker('kodeSatker','255',true,false,false,true);
+						selectSatker('kodeSatker','255',true,false,'required','Kode Satker');
 					?>
 					
 					<li>&nbsp;</li>

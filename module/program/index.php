@@ -52,6 +52,13 @@ include"$path/menu.php";
 			    </span>
 				<span class="text">Output</span>
 			</a>
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/program/import.php">
+				<span class="fa-stack fa-lg">
+			      <i class="fa fa-circle fa-stack-2x"></i>
+			      <i class="fa fa-inverse fa-stack-1x">4</i>
+			    </span>
+				<span class="text">Import Program dan Kegiatan</span>
+			</a>
 		</div>	
 
 		<section class="formLegend">

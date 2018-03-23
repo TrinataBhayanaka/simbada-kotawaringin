@@ -77,25 +77,10 @@ foreach ($clearList as $val) {
 	$resultAset = $link->query($sqlAset);
 	$detailAset = mysqli_fetch_assoc($resultAset);
 	$NomorRegAwal = $detailAset['noRegister'];
-	
-	$kodeSatker = explode('.', $SatkerTujuan);
-
-	$kodeLokasi = "12.11.33.".$kodeSatker[0].".".$kodeSatker[1].".".substr($detailAset['Tahun'],-2).".".$kodeSatker[2].".".$kodeSatker[3];
-
-	//NomorRegBaru
-	$sqlAsetNew = "SELECT noRegister FROM aset WHERE kodeKelompok = '{$detailAset['kodeKelompok']}' AND kodeLokasi = '{$kodeLokasi}' ORDER BY noRegister DESC LIMIT 1";
-	$resultAsetNew = $link->query($sqlAsetNew);
-	$detailAsetNew = mysqli_fetch_assoc($resultAsetNew);
-	if($detailAsetNew['noRegister'] == ''){
-        $startreg = 0; 
-        $NomorRegBaru = $startreg + 1;
-    }else{
-    	$NomorRegBaru = $detailAsetNew['noRegister'] + 1;
-    }
 
     //insert mutasi aset			
-	$fieldPA = "Mutasi_ID,Aset_ID,Status,NamaSatkerAwal,SatkerAwal,SatkerTujuan,NomorRegAwal,NomorRegBaru";
-    $valuePA = "'{$Mutasi_ID}','{$val}','0','{$NamaSatkerAwal}','{$SatkerAwal}','{$SatkerTujuan}','{$NomorRegAwal}','{$NomorRegBaru}'";
+	$fieldPA = "Mutasi_ID,Aset_ID,Status,NamaSatkerAwal,SatkerAwal,SatkerTujuan,NomorRegAwal";
+    $valuePA = "'{$Mutasi_ID}','{$val}','0','{$NamaSatkerAwal}','{$SatkerAwal}','{$SatkerTujuan}','{$NomorRegAwal}'";
     $queryPA = "INSERT INTO mutasiaset ({$fieldPA}) VALUES ({$valuePA})" or die("Error in the consult.." . mysqli_error($link));	
    	//echo "queryPA : ".$queryPA."\n\n";
     $execPA = $link->query($queryPA);	

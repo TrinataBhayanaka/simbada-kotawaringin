@@ -12,6 +12,10 @@ echo "Id Usulan : ".$idUsulan."\n\n";
 $param = $argv[2];
 echo "param : ".$param."\n\n";
 
+//revisi
+$TAHUN_AKTIF = $argv[3];
+echo "TAHUN_AKTIF : ".$TAHUN_AKTIF."\n\n";
+
 $condition = '';
     //get param filter
     $exp = explode('-', $param);
@@ -26,6 +30,8 @@ $condition = '';
             $ext ='';
             $val1 = "ast.".$exp2['0'];
             $val2 = $exp2['1'];
+            //revisi
+            $kodeSatker = $exp2['1'];
         }elseif($exp2['0'] == 'kodeLokasi'){
             $param = "like";
             $ext ="%";
@@ -94,8 +100,19 @@ $quertUS = "UPDATE usulan SET FixUsulan = '0'
 $execUS = $link->query($quertUS);   
 //echo "quertUS : ".$quertUS."\n\n";
 
+//list usulan perTahunAktif dan perSatker
+$sqlListIdUsulan = "SELECT Usulan_ID FROM usulan where Jenis_Usulan='MTS' AND SatkerUsul= '{$kodeSatker}' AND YEAR(TglUpdate) = '{$TAHUN_AKTIF}'";
+
+$exeListIdUsulan = $link->query($sqlListIdUsulan);
+$dataListIdUsul = array(); 
+while($rows = mysqli_fetch_assoc($exeListIdUsulan)) {
+  $dataListIdUsul[] = $rows['Usulan_ID'];
+} 
+if(!empty($dataListIdUsul)){
+    $usulanList = implode(',', $dataListIdUsul);        
+}
 //get list aset dari usulan aset
-$sql = "SELECT Aset_ID FROM usulanaset where Jenis_Usulan='MTS' AND StatusValidasi='0' AND (StatusKonfirmasi='0' OR StatusKonfirmasi='1') ORDER BY Usulan_ID DESC";
+$sql = "SELECT Aset_ID FROM usulanaset where Jenis_Usulan='MTS' AND StatusValidasi='0' AND (StatusKonfirmasi='0' OR StatusKonfirmasi='1') AND Usulan_ID in ($usulanList) ORDER BY Usulan_ID";
 
 $result = $link->query($sql);
 $resUsul = array(); 
@@ -181,7 +198,7 @@ if($resAset){
     }    
 }
 //update usulan
-$quertUS = "UPDATE usulan SET FixUsulan = '1'
+$quertUS = "UPDATE usulan SET FixUsulan = '1', Jenis_Usulan = 'MTS'
             WHERE Usulan_ID = '{$idUsulan}'"
             or die("Error in the consult.." . mysqli_error($link));  
 $execUS = $link->query($quertUS);   

@@ -293,6 +293,7 @@ class RETRIEVE_MUTASI extends RETRIEVE{
         $kodePemilik = $data['kodepemilik'].'%';
         $kodeKelompok = $data['kodeKelompok'];
         $tahun = $data['bup_tahun'];
+        $TAHUN_AKTIF= $data['TAHUN_AKTIF'];
         $kondisi= trim($data['condition']);
         $limit= $data['limit'];
         $order= $data['order'];
@@ -317,7 +318,22 @@ class RETRIEVE_MUTASI extends RETRIEVE{
             foreach ($jenisaset as $values) {
                 //pr($value);
                 
+                //list usulan perTahunAktif dan perSatker
+                $sqlListIdUsulan = array(
+                        'table'=>'usulan',
+                        'field'=>"Usulan_ID",
+                        'condition' => "SatkerUsul= '{$kodeSatker}' AND YEAR(TglUpdate) = '{$TAHUN_AKTIF}' AND Jenis_Usulan='MTS' ORDER BY Usulan_ID",
+                        );
                 
+                $resListIdUsulan = $this->db->lazyQuery($sqlListIdUsulan,$debug);
+                $dataListIdUsul =array();
+                if(!empty($resListIdUsulan)){
+                    foreach ($resListIdUsulan as $k => $vl) {
+                        # code...
+                        $dataListIdUsul[] = $vl['Usulan_ID'];
+                    }
+                    $usulanList = implode(',', $dataListIdUsul);
+                }
                 //define array
                 $dataArrListUsul = array();
                 $ListUsul = array();
@@ -326,7 +342,7 @@ class RETRIEVE_MUTASI extends RETRIEVE{
                 $sql1 = array(
                         'table'=>'usulanaset',
                         'field'=>"Aset_ID",
-                        'condition' => "Jenis_Usulan='MTS' AND StatusValidasi='0' AND (StatusKonfirmasi='0' OR StatusKonfirmasi='1') ORDER BY Usulan_ID DESC",
+                        'condition' => "Jenis_Usulan='MTS' AND StatusValidasi='0' AND (StatusKonfirmasi='0' OR StatusKonfirmasi='1') AND Usulan_ID in ($usulanList) ORDER BY Usulan_ID DESC",
                         );
                 
                 $resUsul = $this->db->lazyQuery($sql1,$debug);
