@@ -2476,7 +2476,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
         $TOTAL_KOREKSI_KURANG=0;
 
         $CEK_DATA_BARU=array();
-
+        $CEK_DATA_PENGHAPUSAN=array();
         $TOTAL_KOREKSI=0;
 
         foreach ($getdataRwyt as $valRwyt) {
@@ -3152,9 +3152,16 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 //MUTASI ASET (Bertambah)
                 $nilaiPrlhnMutasiTambah = 0;
                 $nilaiPrlhnMutasiTambahFix = ($nilaiPrlhnMutasiTambah);
-
+                $ASET_ID_CEK_PENGHAPUSAN=$valRwyt->Aset_ID;
+                $key_penghapusan="$ASET_ID_CEK_PENGHAPUSAN-$paramKd_Rwyt";
+                $CEK_DATA_PENGHAPUSAN[$ASET_ID_CEK_PENGHAPUSAN]+=1;
+                if($CEK_DATA_BARU[$key]>1){
+                    $nilaiPrlhnMutasiKurang = 0;
+                }else{
+                    $nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
+                }
                 //MUTASI ASET (Berkurang)
-                $nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
+               // $nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
                 $nilaiPrlhnMutasiKurangFix = ($nilaiPrlhnMutasiKurang);
                 switch ($paramKd_Rwyt){
                     case 26:
