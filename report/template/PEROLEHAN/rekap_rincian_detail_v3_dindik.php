@@ -3155,7 +3155,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 $ASET_ID_CEK_PENGHAPUSAN=$valRwyt->Aset_ID;
                 $key_penghapusan="$ASET_ID_CEK_PENGHAPUSAN-$paramKd_Rwyt";
                 $CEK_DATA_PENGHAPUSAN[$key_penghapusan]+=1;
-                if($CEK_DATA_PENGHAPUSAN[$key]>1){
+                if($CEK_DATA_PENGHAPUSAN[$key_penghapusan]>1){
                     $nilaiPrlhnMutasiKurang = 0;
                 }else{
                     $nilaiPrlhnMutasiKurang = $valRwyt->NilaiPerolehan;
