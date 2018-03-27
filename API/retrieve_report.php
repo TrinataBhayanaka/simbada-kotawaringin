@@ -396,6 +396,40 @@ class RETRIEVE_REPORT extends DB {
     //pr($dataFix); 
     //exit();
   }
+
+   public function tdkberwujud($skpd,$tglPerolehanAwal,$tglPerolehanAkhir){
+    /*pr($skpd);
+    pr($tglPerolehanAwal);
+    pr($tglPerolehanAkhir);*/
+
+    //get list satker kontrak
+    $sqlkontrakSatker = mysql_query("SELECT kodeSatker FROM aset WHERE kodeSatker like '$skpd%' and TglPembukuan >='$tglPerolehanAwal' and TglPembukuan <='$tglPerolehanAkhir' AND kodeKelompok like '07%'  group by kodeSatker");
+    //pr($sql);
+    while ($dataKontrakSatker = mysql_fetch_assoc($sqlkontrakSatker)){
+        $satker[] = $dataKontrakSatker;
+    }    
+    sort($satker);
+    foreach ($satker as $ky => $valSatker) {
+        $RKsql = mysql_query("SELECT kodeKelompok,kodeSatker, noRegister, TglPerolehan, TglPembukuan, kondisi, Info,NilaiPerolehan FROM aset WHERE Status_Validasi_Barang = 1 AND kodeSatker = '{$valSatker[kodeSatker]}' AND kodeKelompok like '07%'");
+        $rAset = array();
+        while ($dataAset = mysql_fetch_assoc($RKsql)){
+              $rAset[] = $dataAset;
+        }
+        foreach ($rAset as $key => $value) {
+          $sqlnmBrg = mysql_query("SELECT Uraian FROM kelompok WHERE Kode = '{$value['kodeKelompok']}' LIMIT 1");
+          while ($uraian = mysql_fetch_assoc($sqlnmBrg)){
+              $tmp = $uraian;
+              $rAset[$key]['uraian'] = $tmp['Uraian'];
+            }
+        }
+      $dataFix[$valSatker['kodeSatker']]['data'] = $rAset; 
+    }
+    if($dataFix){
+      return $dataFix;
+    }else{
+      return false;
+    }
+  }
 }
 
 ?>
