@@ -29526,7 +29526,7 @@ $body="
 						
 						$tabletotal="
 						<tr>
-							<td colspan=\"13\" style=\"text-align: center;\">Jumlah</td>
+							<td colspan=\"14\" style=\"text-align: center;\">Jumlah</td>
 							<td style=\"text-align: right;\">$printperolehanTotal</td>
                             <td>&nbsp;</td>
                             <td  style=\"text-align: right;\">$printperolehanTotalKurang</td>
