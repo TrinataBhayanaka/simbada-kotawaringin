@@ -2448,7 +2448,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
         $ex = explode ('.', $kodeKelompok);
         $param = $ex[ '0' ];
 
-        echo "$tglakhirperolehan ==$tglawalperolehan<br/>";
+        //echo "$tglakhirperolehan ==$tglawalperolehan<br/>";
         $getdataRwyt = getdataRwyt ($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperolehan, $param, $tglpembukuan,$status);
         //pr($getdataRwyt);
 
