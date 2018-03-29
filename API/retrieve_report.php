@@ -367,8 +367,9 @@ class RETRIEVE_REPORT extends DB {
                 $totalsp2dpenunjang+=$rincian['nilai'];
               }
             }
+            $list[$key]['sp2dpenunjang'] = $sp2dpRincian;
+              
             if($kontrak['tipeAset'] == 3){
-              $list[$key]['sp2dpenunjang'] = $sp2dpRincian;
               $list[$key]['totalsp2dpenunjang'] = $totalsp2dpenunjang;
               $totalFix = $totalsp2dpenunjang + $kontrak['nilai'];
               $list[$key]['totalPerolehan'] = $totalFix;
