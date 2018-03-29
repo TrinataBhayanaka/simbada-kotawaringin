@@ -504,32 +504,32 @@ foreach ($data as $gol) {
 					<td style=\"text-align: center; font-weight: bold;\">{$gol[jml]}</td>
 					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ nilai ], 2, ",", ".") . "</td>
 					
-					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ ap ], 2, ",", ".") . "</td>
-					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ nb ], 2, ",", ".") . "</td> 
+					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ ap ], 4, ",", ".") . "</td>
+					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ nb ], 4, ",", ".") . "</td> 
                     
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_transfer_keluar ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_penghapusan_pemindahtanganan ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_penghapusan_pemusnahan ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_penghapusan_sebagian ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_koreksi_kurang ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ mutasi_nilai_kurang ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_transfer_keluar ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_penghapusan_pemindahtanganan ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_penghapusan_pemusnahan ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_penghapusan_sebagian ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_koreksi_kurang ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ mutasi_nilai_kurang ], 4, ",", ".") . "</td>
                     
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_aset_baru ], 2, ",", ".") . "</td>					
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_aset_kapitalisasi ], 2, ",", ".") . "</td>
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_invetarisasi ], 2, ",", ".") . "</td>					
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_transfer_masuk ], 2, ",", ".") . "</td>
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_koreksi_tambah ], 2, ",", ".") . "</td>
-					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ mutasi_nilai_tambah ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_aset_baru ], 4, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_aset_kapitalisasi ], 4, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_invetarisasi ], 4, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_transfer_masuk ], 4, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($gol[ total_koreksi_tambah ], 4, ",", ".") . "</td>
+					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ mutasi_nilai_tambah ], 4, ",", ".") . "</td>
 					
-					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ mutasi_ap_kurang ], 2, ",", ".") . "</td>
-					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ mutasi_ap_tambah ], 2, ",", ".") . "</td>
+					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ mutasi_ap_kurang ], 4, ",", ".") . "</td>
+					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ mutasi_ap_tambah ], 4, ",", ".") . "</td>
                                         
-                    <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bp, 2, ",", ".") . "</td>
+                    <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bp, 4, ",", ".") . "</td>
 					<td style=\"text-align: center; font-weight: bold;\">{$gol[jml_akhir]}</td>
-					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ nilai_akhir ], 2, ",", ".") . "</td>
+					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ nilai_akhir ], 4, ",", ".") . "</td>
 					
-					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ ap_akhir ], 2, ",", ".") . "</td>
-					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ nb_akhir ], 2, ",", ".") . "</td> 
+					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ ap_akhir ], 4, ",", ".") . "</td>
+					<td style=\"font-weight: bold; text-align: right;\">" . number_format ($gol[ nb_akhir ], 4, ",", ".") . "</td> 
 				</tr>";
         if($levelAset >= 3 || $levelAset == 1)
             $bidang_sort=$gol[ 'Bidang' ];
@@ -588,36 +588,36 @@ foreach ($data as $gol) {
 								<td>&nbsp;</td>
 								<td style=\"font-weight: bold;\">{$bidang[Uraian]}</td>
                                 <td style=\"text-align: center; font-weight: bold;\">{$bidang[jml]}</td>
-                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ nilai ], 2, ",", ".") . "</td>
+                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ nilai ], 4, ",", ".") . "</td>
  
-                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ ap ], 2, ",", ".") . "</td>
-                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ nb ], 2, ",", ".") . "</td>
+                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ ap ], 4, ",", ".") . "</td>
+                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ nb ], 4, ",", ".") . "</td>
                                     
-                                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_transfer_keluar ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_penghapusan_pemindahtanganan ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_penghapusan_pemusnahan ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_penghapusan_sebagian ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_koreksi_kurang ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ mutasi_nilai_kurang ], 2, ",", ".") . "</td>
+                                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_transfer_keluar ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_penghapusan_pemindahtanganan ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_penghapusan_pemusnahan ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_penghapusan_sebagian ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_koreksi_kurang ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ mutasi_nilai_kurang ], 4, ",", ".") . "</td>
                     
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_aset_baru ], 2, ",", ".") . "</td>					
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_aset_kapitalisasi ], 2, ",", ".") . "</td>
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_invetarisasi ], 2, ",", ".") . "</td>					
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_transfer_masuk ], 2, ",", ".") . "</td>
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_koreksi_tambah ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_aset_baru ], 4, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_aset_kapitalisasi ], 4, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_invetarisasi ], 4, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_transfer_masuk ], 4, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($bidang[ total_koreksi_tambah ], 4, ",", ".") . "</td>
 					
 					
-					            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ mutasi_nilai_tambah ], 2, ",", ".") . "</td>
-                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ mutasi_ap_kurang ], 2, ",", ".") . "</td>
-                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ mutasi_ap_tambah ], 2, ",", ".") . "</td>
+					            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ mutasi_nilai_tambah ], 4, ",", ".") . "</td>
+                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ mutasi_ap_kurang ], 4, ",", ".") . "</td>
+                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ mutasi_ap_tambah ], 4, ",", ".") . "</td>
 				
-                                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bp_bidang, 2, ",", ".") . "</td>
+                                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bp_bidang, 4, ",", ".") . "</td>
                                 
                                 <td style=\"text-align: center; font-weight: bold;\">{$bidang[jml_akhir]}</td>
-                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ nilai_akhir ], 2, ",", ".") . "</td>
+                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ nilai_akhir ], 4, ",", ".") . "</td>
                                 
-                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ ap_akhir ], 2, ",", ".") . "</td>
-                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ nb_akhir ], 2, ",", ".") . "</td> 
+                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ ap_akhir ], 4, ",", ".") . "</td>
+                                <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bidang[ nb_akhir ], 4, ",", ".") . "</td> 
 							</tr>";
                 if($levelAset >= 4 || $levelAset == 1)
                     $kel_sort=$bidang[ 'Kel' ];
@@ -676,32 +676,32 @@ foreach ($data as $gol) {
                                     <td>&nbsp;</td>
                                     <td>{$Kelompok[Uraian]}</td>
                                     <td style=\"text-align: center;\">{$Kelompok[jml]}</td>
-                                    <td style=\"text-align: right;\">" . number_format ($Kelompok[ nilai ], 2, ",", ".") . "</td>
-                                    <td style=\"text-align: right;\">" . number_format ($Kelompok[ ap ], 2, ",", ".") . "</td>
-                                    <td style=\"text-align: right;\">" . number_format ($Kelompok[ nb ], 2, ",", ".") . "</td>
+                                    <td style=\"text-align: right;\">" . number_format ($Kelompok[ nilai ], 4, ",", ".") . "</td>
+                                    <td style=\"text-align: right;\">" . number_format ($Kelompok[ ap ], 4, ",", ".") . "</td>
+                                    <td style=\"text-align: right;\">" . number_format ($Kelompok[ nb ], 4, ",", ".") . "</td>
                                     
-                                                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_transfer_keluar ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_penghapusan_pemindahtanganan ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_penghapusan_pemusnahan ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_penghapusan_sebagian ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_koreksi_kurang ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ mutasi_nilai_kurang ], 2, ",", ".") . "</td>
+                                                <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_transfer_keluar ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_penghapusan_pemindahtanganan ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_penghapusan_pemusnahan ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_penghapusan_sebagian ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_koreksi_kurang ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ mutasi_nilai_kurang ], 4, ",", ".") . "</td>
                     
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_aset_baru ], 2, ",", ".") . "</td>					
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_aset_kapitalisasi ], 2, ",", ".") . "</td>
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_invetarisasi ], 2, ",", ".") . "</td>					
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_transfer_masuk ], 2, ",", ".") . "</td>
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_koreksi_tambah ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_aset_baru ], 4, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_aset_kapitalisasi ], 4, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_invetarisasi ], 4, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_transfer_masuk ], 4, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Kelompok[ total_koreksi_tambah ], 4, ",", ".") . "</td>
 					
 					
-                                    <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ mutasi_nilai_tambah ], 2, ",", ".") . "</td>
-                                    <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ mutasi_ap_kurang ], 2, ",", ".") . "</td>
-                                    <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ mutasi_ap_tambah ], 2, ",", ".") . "</td>
-                                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bp_kelompok, 2, ",", ".") . "</td>
+                                    <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ mutasi_nilai_tambah ], 4, ",", ".") . "</td>
+                                    <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ mutasi_ap_kurang ], 4, ",", ".") . "</td>
+                                    <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ mutasi_ap_tambah ], 4, ",", ".") . "</td>
+                                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bp_kelompok, 4, ",", ".") . "</td>
                                     <td style=\"text-align: center; font-weight: bold;\">{$Kelompok[jml_akhir]}</td>
-                                    <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ nilai_akhir ], 2, ",", ".") . "</td>
-                                    <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ ap_akhir ], 2, ",", ".") . "</td>
-                                    <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ nb_akhir ], 2, ",", ".") . "</td> 
+                                    <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ nilai_akhir ], 4, ",", ".") . "</td>
+                                    <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ ap_akhir ], 4, ",", ".") . "</td>
+                                    <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Kelompok[ nb_akhir ], 4, ",", ".") . "</td> 
                                 </tr>";
                         if($levelAset >= 5 || $levelAset == 1)
                         $sub_sort=$Kelompok[ 'Sub' ];
@@ -760,32 +760,32 @@ foreach ($data as $gol) {
                                             <td>&nbsp;</td>
                                             <td>{$Sub[Uraian]}</td>
                                             <td style=\"text-align: center;\">{$Sub[jml]}</td>
-                                            <td style=\"text-align: right;\">" . number_format ($Sub[ nilai ], 2, ",", ".") . "</td>
-                                            <td style=\"text-align: right;\">" . number_format ($Sub[ ap ], 2, ",", ".") . "</td>
-                                            <td style=\"text-align: right;\">" . number_format ($Sub[ nb ], 2, ",", ".") . "</td>
+                                            <td style=\"text-align: right;\">" . number_format ($Sub[ nilai ], 4, ",", ".") . "</td>
+                                            <td style=\"text-align: right;\">" . number_format ($Sub[ ap ], 4, ",", ".") . "</td>
+                                            <td style=\"text-align: right;\">" . number_format ($Sub[ nb ], 4, ",", ".") . "</td>
                                            
-                                              <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_transfer_keluar ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_penghapusan_pemindahtanganan ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_penghapusan_pemusnahan ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_penghapusan_sebagian ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_koreksi_kurang ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ mutasi_nilai_kurang ], 2, ",", ".") . "</td>
+                                              <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_transfer_keluar ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_penghapusan_pemindahtanganan ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_penghapusan_pemusnahan ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_penghapusan_sebagian ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_koreksi_kurang ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ mutasi_nilai_kurang ], 4, ",", ".") . "</td>
                     
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_aset_baru ], 2, ",", ".") . "</td>					
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_aset_kapitalisasi ], 2, ",", ".") . "</td>
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_invetarisasi ], 2, ",", ".") . "</td>					
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_transfer_masuk ], 2, ",", ".") . "</td>
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_koreksi_tambah ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_aset_baru ], 4, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_aset_kapitalisasi ], 4, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_invetarisasi ], 4, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_transfer_masuk ], 4, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($Sub[ total_koreksi_tambah ], 4, ",", ".") . "</td>
 					
                                            
-                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Sub[ mutasi_nilai_tambah ], 2, ",", ".") . "</td>
-                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Sub[ mutasi_ap_kurang ], 2, ",", ".") . "</td>
-                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Sub[ mutasi_ap_tambah ], 2, ",", ".") . "</td>
-                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bp_sub, 2, ",", ".") . "</td>
+                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Sub[ mutasi_nilai_tambah ], 4, ",", ".") . "</td>
+                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Sub[ mutasi_ap_kurang ], 4, ",", ".") . "</td>
+                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Sub[ mutasi_ap_tambah ], 4, ",", ".") . "</td>
+                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bp_sub, 4, ",", ".") . "</td>
                                             <td style=\"text-align: center; font-weight: bold;\">{$Sub[jml_akhir]}</td>
-                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Sub[ nilai_akhir ], 2, ",", ".") . "</td>
-                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Sub[ ap_akhir ], 2, ",", ".") . "</td>
-                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Sub[ nb_akhir ], 2, ",", ".") . "</td> 
+                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Sub[ nilai_akhir ], 4, ",", ".") . "</td>
+                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Sub[ ap_akhir ], 4, ",", ".") . "</td>
+                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($Sub[ nb_akhir ], 4, ",", ".") . "</td> 
     									</tr>";
                                 if($levelAset == 6 || $levelAset == 1)
                                     $subsub_sort=$Sub[ 'SubSub' ];
@@ -847,32 +847,32 @@ $csv.=""."|";
 											<td>{$SubSub[Kelompok]}</td>
 											<td>{$SubSub[Uraian]}</td>
                                             <td style=\"text-align: center;\">{$SubSub[jml]}</td>
-											<td style=\"text-align: right;\">" . number_format ($SubSub[ nilai ], 2, ",", ".") . "</td>
-											<td style=\"text-align: right;\">" . number_format ($SubSub[ ap ], 2, ",", ".") . "</td>
-											<td style=\"text-align: right;\">" . number_format ($SubSub[ nb ], 2, ",", ".") . "</td>
+											<td style=\"text-align: right;\">" . number_format ($SubSub[ nilai ], 4, ",", ".") . "</td>
+											<td style=\"text-align: right;\">" . number_format ($SubSub[ ap ], 4, ",", ".") . "</td>
+											<td style=\"text-align: right;\">" . number_format ($SubSub[ nb ], 4, ",", ".") . "</td>
                                             
-                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_transfer_keluar ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_penghapusan_pemindahtanganan ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_penghapusan_pemusnahan ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_penghapusan_sebagian ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_koreksi_kurang ], 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ mutasi_nilai_kurang ], 2, ",", ".") . "</td>
+                                            <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_transfer_keluar ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_penghapusan_pemindahtanganan ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_penghapusan_pemusnahan ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_penghapusan_sebagian ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_koreksi_kurang ], 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ mutasi_nilai_kurang ], 4, ",", ".") . "</td>
                     
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_aset_baru ], 2, ",", ".") . "</td>					
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_aset_kapitalisasi ], 2, ",", ".") . "</td>
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_invetarisasi ], 2, ",", ".") . "</td>					
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_transfer_masuk ], 2, ",", ".") . "</td>
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_koreksi_tambah ], 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_aset_baru ], 4, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_aset_kapitalisasi ], 4, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_invetarisasi ], 4, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_transfer_masuk ], 4, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($SubSub[ total_koreksi_tambah ], 4, ",", ".") . "</td>
 					
                                             
-                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ mutasi_nilai_tambah ], 2, ",", ".") . "</td>
-                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ mutasi_ap_kurang ], 2, ",", ".") . "</td>
-                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ mutasi_ap_tambah ], 2, ",", ".") . "</td>
-				                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bp_subsub, 2, ",", ".") . "</td>
+                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ mutasi_nilai_tambah ], 4, ",", ".") . "</td>
+                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ mutasi_ap_kurang ], 4, ",", ".") . "</td>
+                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ mutasi_ap_tambah ], 4, ",", ".") . "</td>
+				                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($bp_subsub, 4, ",", ".") . "</td>
                                             <td style=\"text-align: center; font-weight: bold;\">{$SubSub[jml_akhir]}</td>
-                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ nilai_akhir ], 2, ",", ".") . "</td>
-                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ ap_akhir ], 2, ",", ".") . "</td>
-                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ nb_akhir ], 2, ",", ".") . "</td> 
+                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ nilai_akhir ], 4, ",", ".") . "</td>
+                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ ap_akhir ], 4, ",", ".") . "</td>
+                                            <td style=\"font-weight: bold; text-align: right;\">" . number_format ($SubSub[ nb_akhir ], 4, ",", ".") . "</td> 
                                             <td>{$SubSub[riwayat]}</td>
                                             <td>{$SubSub[kodeSatker]}</td>
                                              <td>{$SubSub[noKontrak]}</td>
@@ -928,31 +928,31 @@ if($i == $hit_loop) {
     $foot = "<tr>
 				<td colspan = \"6\" style=\"text-align: center; font-weight: bold;\">Total</td>
 				<td style=\"text-align: center; font-weight: bold;\">" . number_format ($jml_total, 0, ",", ".") . "</td>
-				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($np_total, 2, ",", ".") . "</td>
-				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($ap_total, 2, ",", ".") . "</td>
-				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($nb_total, 2, ",", ".") . "</td>
+				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($np_total, 4, ",", ".") . "</td>
+				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($ap_total, 4, ",", ".") . "</td>
+				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($nb_total, 4, ",", ".") . "</td>
 				
-				    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_transfer_keluar , 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_penghapusan_pemindahtanganan , 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_penghapusan_pemusnahan , 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_penghapusan_sebagian , 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_koreksi_kurang , 2, ",", ".") . "</td>
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_nilai_kurang , 2, ",", ".") . "</td>
+				    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_transfer_keluar , 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_penghapusan_pemindahtanganan , 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_penghapusan_pemusnahan , 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_penghapusan_sebagian , 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_koreksi_kurang , 4, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_nilai_kurang , 4, ",", ".") . "</td>
                     
-                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_aset_baru , 2, ",", ".") . "</td>					
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_aset_kapitalisasi , 2, ",", ".") . "</td>
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_invetarisasi , 2, ",", ".") . "</td>					
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_transfer_masuk , 2, ",", ".") . "</td>
-					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_koreksi_tambah , 2, ",", ".") . "</td>
+                    <td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_aset_baru , 4, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_aset_kapitalisasi , 4, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_invetarisasi , 4, ",", ".") . "</td>					
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_transfer_masuk , 4, ",", ".") . "</td>
+					<td style=\"text-align: center; font-weight: bold;\">" . number_format ($mutasi_koreksi_tambah , 4, ",", ".") . "</td>
 					
-				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($mutasi_nilai_tambah, 2, ",", ".") . "</td>
-				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($mutasi_ap_kurang, 2, ",", ".") . "</td>
-				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($mutasi_ap_tambah, 2, ",", ".") . "</td>
-                 <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bp_total, 2, ",", ".") . "</td>
+				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($mutasi_nilai_tambah, 4, ",", ".") . "</td>
+				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($mutasi_ap_kurang, 4, ",", ".") . "</td>
+				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($mutasi_ap_tambah, 4, ",", ".") . "</td>
+                 <td style=\"text-align: center; font-weight: bold;\">" . number_format ($bp_total, 4, ",", ".") . "</td>
                 <td style=\"text-align: center; font-weight: bold;\">" . number_format ($jml_total_akhir, 0, ",", ".") . "</td>
-				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($np_total_akhir, 2, ",", ".") . "</td>
-				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($ap_total_akhir, 2, ",", ".") . "</td>
-				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($nb_total_akhir, 2, ",", ".") . "</td>
+				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($np_total_akhir, 4, ",", ".") . "</td>
+				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($ap_total_akhir, 4, ",", ".") . "</td>
+				<td style=\"text-align: right; font-weight: bold;\">" . number_format ($nb_total_akhir, 4, ",", ".") . "</td>
 			</tr>
 		</table>";
 } else {
@@ -1704,9 +1704,9 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
 
         $data_gabungan[ $tipe ][ 'nilai_akhir' ] = $data_akhir[ $tipe ][ 'nilai' ];
         $data_gabungan[ $tipe ][ 'jml_akhir' ] = $data_akhir[ $tipe ][ 'jml' ];
-        $data_gabungan[ $tipe ][ 'ap_akhir' ] = round($data_akhir[ $tipe ][ 'AP' ],2);
-        $data_gabungan[ $tipe ][ 'pp_akhir' ] = round($data_akhir[ $tipe ][ 'PP' ],2);
-        $data_gabungan[ $tipe ][ 'nb_akhir' ] = round($data_akhir[ $tipe ][ 'NB' ],2);
+        $data_gabungan[ $tipe ][ 'ap_akhir' ] = round($data_akhir[ $tipe ][ 'AP' ],4);
+        $data_gabungan[ $tipe ][ 'pp_akhir' ] = round($data_akhir[ $tipe ][ 'PP' ],4);
+        $data_gabungan[ $tipe ][ 'nb_akhir' ] = round($data_akhir[ $tipe ][ 'NB' ],4);
         $data_gabungan[ $tipe ][ 'riwayat' ] = $text_riwayat;
         $data_gabungan[ $tipe ][ 'kodeSatker' ] = $value['kodeSatker'];
 
@@ -1797,7 +1797,6 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
         $cek_data_awal[$aset_id]=1; // untuk menandakan data awal telah ada
         $kodekelompok = $value[ 'kodeKelompok' ];
 
-        $tglperolehan = $tgl_akhir;
         list($bp, $selisih_nilai_tambah, $selisih_nilai_kurang, $selisih_ap_tambah, $selisih_ap_kurang,$text_riwayat,
             $TOTAL_ASET_BARU,$TOTAL_ASET_KAPITALISASI,$TOTAL_INVENTARISASI,$TOTAL_TRANSFER_MASUK,$TOTAL_KOREKSI_TAMBAH,
             $TOTAL_TRANSFER_KELUAR,$TOTAL_PENGHAPUSAN_PEMINDAHTANGANAN,$TOTAL_PENGHAPUSAN_PEMUSNAHAN,
@@ -1937,9 +1936,9 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
 
         $data_akhir[ $tipe ][ 'nilai_akhir' ] = $value[ 'nilai' ];
         $data_akhir[ $tipe ][ 'jml_akhir' ] = $value[ 'jml' ];
-        $data_akhir[ $tipe ][ 'ap_akhir' ] = round($value[ 'AP' ],2);
-        $data_akhir[ $tipe ][ 'pp_akhir' ] = round($value[ 'PP' ],2);
-        $data_akhir[ $tipe ][ 'nb_akhir' ] = round($value[ 'NB' ],2);
+        $data_akhir[ $tipe ][ 'ap_akhir' ] = round($value[ 'AP' ],4);
+        $data_akhir[ $tipe ][ 'pp_akhir' ] = round($value[ 'PP' ],4);
+        $data_akhir[ $tipe ][ 'nb_akhir' ] = round($value[ 'NB' ],4);
         $data_akhir[ $tipe ][ 'riwayat' ] = $text_riwayat;
         $data_akhir[ $tipe ][ 'kodeSatker' ] = $value['kodeSatker'];
 
@@ -2066,11 +2065,11 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
 
         $data_level5[ $key_baru ][ 'Uraian' ] = $URAIAN;
         $data_level5[ $key_baru ][ 'Kelompok' ] = $key_baru;
-        $data_level5[ $key_baru ][ 'nilai' ] += round($data_gabungan[ $key ][ 'nilai' ],2);
-        $data_level5[ $key_baru ][ 'jml' ] += round($data_gabungan[ $key ][ 'jml' ],2);
-        $data_level5[ $key_baru ][ 'ap' ] += round($data_gabungan[ $key ][ 'ap' ],2);
-        $data_level5[ $key_baru ][ 'pp' ] += round($data_gabungan[ $key ][ 'pp' ],2);
-        $data_level5[ $key_baru ][ 'nb' ] += round($data_gabungan[ $key ][ 'nb' ],2);
+        $data_level5[ $key_baru ][ 'nilai' ] += round($data_gabungan[ $key ][ 'nilai' ],4);
+        $data_level5[ $key_baru ][ 'jml' ] += round($data_gabungan[ $key ][ 'jml' ],4);
+        $data_level5[ $key_baru ][ 'ap' ] += round($data_gabungan[ $key ][ 'ap' ],4);
+        $data_level5[ $key_baru ][ 'pp' ] += round($data_gabungan[ $key ][ 'pp' ],4);
+        $data_level5[ $key_baru ][ 'nb' ] += round($data_gabungan[ $key ][ 'nb' ],4);
         $data_level5[ $key_baru ][ 'mutasi_jml_tambah' ] += $data_gabungan[ $key ][ 'mutasi_jml_tambah' ];
         $data_level5[ $key_baru ][ 'mutasi_nilai_tambah' ] += $data_gabungan[ $key ][ 'mutasi_nilai_tambah' ];
         $data_level5[ $key_baru ][ 'mutasi_ap_tambah' ] += $data_gabungan[ $key ][ 'mutasi_ap_tambah' ];
@@ -2085,11 +2084,11 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
         $data_level5[ $key_baru ][ 'mutasi_pp_kurang' ] += $data_gabungan[ $key ][ 'mutasi_pp_kurang' ];
         $data_level5[ $key_baru ][ 'mutasi_nb_kurang' ] += $data_gabungan[ $key ][ 'mutasi_nb_kurang' ];
 
-        $data_level5[ $key_baru ][ 'nilai_akhir' ] += round($data_gabungan[ $key ][ 'nilai_akhir' ],2);
-        $data_level5[ $key_baru ][ 'jml_akhir' ] += round($data_gabungan[ $key ][ 'jml_akhir' ],2);
-        $data_level5[ $key_baru ][ 'ap_akhir' ] += round($data_gabungan[ $key ][ 'ap_akhir' ],2);
-        $data_level5[ $key_baru ][ 'pp_akhir' ] += round($data_gabungan[ $key ][ 'pp_akhir' ],2);
-        $data_level5[ $key_baru ][ 'nb_akhir' ] += round($data_gabungan[ $key ][ 'nb_akhir' ],2);
+        $data_level5[ $key_baru ][ 'nilai_akhir' ] += round($data_gabungan[ $key ][ 'nilai_akhir' ],4);
+        $data_level5[ $key_baru ][ 'jml_akhir' ] += round($data_gabungan[ $key ][ 'jml_akhir' ],4);
+        $data_level5[ $key_baru ][ 'ap_akhir' ] += round($data_gabungan[ $key ][ 'ap_akhir' ],4);
+        $data_level5[ $key_baru ][ 'pp_akhir' ] += round($data_gabungan[ $key ][ 'pp_akhir' ],4);
+        $data_level5[ $key_baru ][ 'nb_akhir' ] += round($data_gabungan[ $key ][ 'nb_akhir' ],4);
 
         $data_level5[ $key_baru ][ 'total_invetariasi' ] += $data_gabungan[ $key ]['total_invetarisasi'];
         $data_level5[ $key_baru ][ 'total_transfer_masuk' ] += $data_gabungan[ $key ]['total_transfer_masuk'];
@@ -2448,7 +2447,6 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
         $ex = explode ('.', $kodeKelompok);
         $param = $ex[ '0' ];
 
-        //echo "$tglakhirperolehan ==$tglawalperolehan<br/>";
         $getdataRwyt = getdataRwyt ($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperolehan, $param, $tglpembukuan,$status);
         //pr($getdataRwyt);
 
@@ -3626,7 +3624,7 @@ function getdataRwyt($skpd_id, $AsetId, $tglakhirperolehan, $tglawalperolehan, $
 						where l.kodesatker  like '$skpd_id%' and $paramLog ";
 
 //
- //   pr($log_data);
+//    pr($log_data);
 //    exit();
     $splitKodeSatker = explode ('.', $skpd_id);
     if(count ($splitKodeSatker) == 4) {
