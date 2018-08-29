@@ -1796,7 +1796,7 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
 
         $cek_data_awal[$aset_id]=1; // untuk menandakan data awal telah ada
         $kodekelompok = $value[ 'kodeKelompok' ];
-
+        $tglperolehan = $tgl_akhir;
         list($bp, $selisih_nilai_tambah, $selisih_nilai_kurang, $selisih_ap_tambah, $selisih_ap_kurang,$text_riwayat,
             $TOTAL_ASET_BARU,$TOTAL_ASET_KAPITALISASI,$TOTAL_INVENTARISASI,$TOTAL_TRANSFER_MASUK,$TOTAL_KOREKSI_TAMBAH,
             $TOTAL_TRANSFER_KELUAR,$TOTAL_PENGHAPUSAN_PEMINDAHTANGANAN,$TOTAL_PENGHAPUSAN_PEMUSNAHAN,
