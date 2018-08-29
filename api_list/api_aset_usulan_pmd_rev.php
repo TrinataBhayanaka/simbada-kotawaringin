@@ -180,7 +180,9 @@ foreach ($data as $key => $value)
 								$kondisi="Rusak Berat";
 							}elseif($value[kondisi]==1){
 								$kondisi="Baik";
-							}
+							}else{
+                $kondisi="Dalam Penelusuran";
+              }
 							// ////pr($value[TglPerolehan]);
 							$TglPerolehanTmp=explode("-", $value[TglPerolehan]);
 							// ////pr($TglPerolehanTmp);

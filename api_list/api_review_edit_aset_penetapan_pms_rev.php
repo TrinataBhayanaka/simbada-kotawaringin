@@ -179,6 +179,8 @@ foreach ($data as $key => $value)
                 $kondisi="Rusak Berat";
               }elseif($value[kondisi]==1){
                 $kondisi="Baik";
+              }elseif($value[kondisi]==4){
+                $kondisi="Dalam Penelusuran";
               }
               
               $TglPerolehanTmp=explode("-", $value[TglPerolehan]);

@@ -661,9 +661,9 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
                         $ListUsul[$v] = 1;
                     }
                    
-                    $condition="ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";    
+                    $condition="ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3 OR ast.kondisi=4)";    
                 }else{
-                    $condition="ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
+                    $condition="ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3 OR ast.kondisi=4)";
                 }
                 
                 //query asetid
@@ -822,9 +822,9 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
                         $ListUsul[$v] = 1;
                     }
                    
-                    $condition="ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";    
+                    $condition="ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3 OR ast.kondisi=4)";    
                 }else{
-                    $condition="ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3)";
+                    $condition="ast.fixPenggunaan=1 AND ast.StatusValidasi=1 AND ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3 OR ast.kondisi=4)";
                 }
                 
                 //query aset
