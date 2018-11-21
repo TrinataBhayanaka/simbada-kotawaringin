@@ -70,9 +70,9 @@ $data = mysql_fetch_assoc($dataUsulan);
 				$("#satuan_usul_rev").prop("readonly", true);
 				$('.infoTolak').show();
       			//$('#infoTolak').html('Optimalisasi BMD (Revisi Jml Maksimal < Jml Optimal)');
-      			$('#infoTolak').html('Optimalisasi BMD (Revisi Jml Maksimal < Jml Optimal)');
+      			$('#infoTolak').html('Optimalisasi BMD (Revisi Jml Maksimal <= Jml Optimal)');
             	$('#infoTolak').css("color","red");
-            	$("#simpan").prop("disabled", true);	
+            	//$("#simpan").prop("disabled", true);	
 			}else{
 				document.getElementById('jml_rill_rev').value = hasil;
 				//unreadonly jml dan satuan rencana
