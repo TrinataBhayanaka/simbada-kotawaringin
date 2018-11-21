@@ -6,8 +6,8 @@ $tgl_usul = $_GET['tgl_usul'];
 $satker = $_GET['satker'];
 
 //delete program
-$query ="delete from usulan_rencana_pengadaan_aset where idr = '$idr'"; 
-$exec =  mysql_query($query);
+$query ="delete from usulan_rencana_pengadaaan_aset where idr = '$idr'"; 
+$exec =  mysql_query($query) or die(mysql_error());
   	echo "<script>
 			alert('Data Berhasil Dihapus');
 		</script>";
