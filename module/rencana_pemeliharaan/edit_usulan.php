@@ -16,7 +16,7 @@ include"$path/menu.php";
 
 $tgl_usul = $_GET['tgl_usul'];
 $satker = $_GET['satker'];
-$tahun  = $TAHUN_AKTIF;
+$tahun  = $TAHUN_AKTIF + 1;
 $idus   = $_GET['idus'];
 //sql temp
 //get program
@@ -168,7 +168,7 @@ $usulan = mysql_fetch_assoc($usul);
 				</li>
 				<li>
 					<span class="span2">Program</span>
-					<select name="program" class="span5 program" id="program" required="">
+					<select name="program" class="span5 program" id="program" required="" disabled="">
 					<!--<option value="" >Pilih Program</option>-->	
         			<?php
         			while($get_program = mysql_fetch_assoc($program)){
@@ -186,7 +186,7 @@ $usulan = mysql_fetch_assoc($usul);
 				<br/>
 				<li>
 					<span class="span2">Kegiatan</span>
-					<select name="kegiatan" class="span5 kegiatan " id="kegiatan" required="">
+					<select name="kegiatan" class="span5 kegiatan " id="kegiatan" required="" disabled="">
 						<option value="" ></option>	
         			</select>
 				</li>
@@ -194,7 +194,7 @@ $usulan = mysql_fetch_assoc($usul);
 				<br/>
 				<li>
 					<span class="span2">Output</span>
-					<select name="output" class="span5 output" id="output" required="">
+					<select name="output" class="span5 output" id="output" required="" disabled="">
         				<option value="" ></option>	
         			</select>
 				</li>

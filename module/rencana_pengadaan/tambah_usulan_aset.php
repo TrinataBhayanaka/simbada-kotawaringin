@@ -32,10 +32,14 @@ $tahun  = $TAHUN_AKTIF;
 	   $('#kodeKelompok').on('change', function(){
 		var kodeKelompok = $('#kodeKelompok').val();
 		var KodeSatker = $('#satker').val();
-		var idus = $('#idus').val();
-		/*console.log(kodeKelompok);
-		console.log(KodeSatker);
-		console.log(idus);*/
+		var idus = $('#idus').val(); 
+		$('#jml_usul').val('');
+		$('#satuan_usul').val('');
+		$('#satuan_optml').val('');
+		$('#jml_max').val('');
+		$('#satuan_max').val('');
+		$('#jml_rill').val('');
+		$('#satuan_rill').val('');
 		
 		//validate jenis aset
 		if(kodeKelompok !='' && idus !='' ){
@@ -67,7 +71,7 @@ $tahun  = $TAHUN_AKTIF;
  	 	}
 		});
 
-	   $('#jml_max').on('change', function(){
+	   $('#jml_max').on('keyup', function(){
 		var jml_max = $('#jml_max').val();
 		var jml_optml = $('#jml_optml').val();
 		var hasil = parseInt(jml_max) - parseInt(jml_optml);
@@ -75,18 +79,22 @@ $tahun  = $TAHUN_AKTIF;
 			if(parseInt(hasil) <= 0){
 				//document.getElementById('jml_rill').value = 0; 
 				$('#jml_rill').val('0');
-				alert("Kebutuhan Barang Maksimal < Kebutuhan Optimal");
+				//alert("Kebutuhan Barang Maksimal < Kebutuhan Optimal");
+				$("#message3").show();
+				$('#info3').html('Kebutuhan Barang Maksimal < Kebutuhan Optimal');
+	            $('#info3').css("color","red");
 				$('#simpan').attr('disabled','disabled');
             	$('#simpan').css("background","grey");
 			}else{
 				//document.getElementById('jml_rill').value = hasil; 
+				$("#message3").hide();
 				$('#jml_rill').val(hasil);
 				$('#simpan').removeAttr('disabled');
 		    	$('#simpan').css("background","#04c");
 			}	
 		});
 
-	   $('#jml_ekstra').on('change', function(){
+	   $('#jml_ekstra').on('keyup', function(){
 	   		//jml_intra
 	   		var jml_intra = $('#jml_intra').val();
 	   		var jml_ekstra = $('#jml_ekstra').val();
@@ -99,10 +107,14 @@ $tahun  = $TAHUN_AKTIF;
 	   			var hasil2 = parseInt(jml_max) - parseInt(jml_optml);
 		   		if(parseInt(hasil2) <= 0){
 					document.getElementById('jml_rill').value = 0;
-					alert("Kebutuhan Barang Maksimal < Kebutuhan Optimal");
+					//alert("Kebutuhan Barang Maksimal < Kebutuhan Optimal");
+					$("#message3").show();
+					$('#info3').html('Kebutuhan Barang Maksimal < Kebutuhan Optimal');
+		            $('#info3').css("color","red");
 					$('#simpan').attr('disabled','disabled');
 	            	$('#simpan').css("background","grey"); 
 				}else{
+					$("#message3").hide();
 					document.getElementById('jml_rill').value = hasil2; 
 					$('#simpan').removeAttr('disabled');
 					$('#simpan').css("background","#04c");
@@ -113,7 +125,7 @@ $tahun  = $TAHUN_AKTIF;
 	   		
 	   	});
 
-	   $('#satuan_usul').on('change', function(){
+	   $('#satuan_usul').on('keyup', function(){
 		var satuan_usul = $('#satuan_usul').val();
 			document.getElementById('satuan_max').value = satuan_usul; 
 			document.getElementById('satuan_optml').value = satuan_usul; 
@@ -218,6 +230,12 @@ $tahun  = $TAHUN_AKTIF;
 					<span class="span2">Satuan Maksimal</span>
 					<input type="text" name="satuan_max" id="satuan_max" value=""  readonly="" />
 				</li>
+				<li style="display:none" id="message3">
+                	<span  class="span2">&nbsp;</span>
+                		<div class="">
+                  			<em id="info3"></em>
+                		</div>
+                </li>
 				<li>
 					<p><b>Kebutuhan Riil Barang Milik Daerah</b></p>
 				</li>

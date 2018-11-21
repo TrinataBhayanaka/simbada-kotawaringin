@@ -36,7 +36,14 @@ $data = mysql_fetch_assoc($dataUsulan);
 	   $('#kodeKelompok').on('change', function(){
 		var kodeKelompok = $('#kodeKelompok').val();
 		var KodeSatker = $('#satker').val();
-			
+		$('#jml_usul').val('');
+		$('#satuan_usul').val('');
+		$('#satuan_optml').val('');
+		$('#jml_max').val('');
+		$('#satuan_max').val('');
+		$('#jml_rill').val('');
+		$('#satuan_rill').val('');
+
 			if(kodeKelompok !='' && KodeSatker !='' ){
 			$.post('../../function/api/asetOptml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
 					document.getElementById('jml_optml').value = result; 
@@ -60,7 +67,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 
 		});
 	   
-	   $('#jml_ekstra').on('change', function(){
+	   $('#jml_ekstra').on('keyup', function(){
 	   		//jml_intra
 	   		var jml_intra = $('#jml_intra').val();
 	   		var jml_ekstra = $('#jml_ekstra').val();
@@ -73,10 +80,14 @@ $data = mysql_fetch_assoc($dataUsulan);
 	   		var hasil2 = parseInt(jml_max) - parseInt(jml_optml);
 	   		if(parseInt(hasil2) <= 0){
 				document.getElementById('jml_rill').value = 0;
-				alert("Kebutuhan Barang Maksimal < Kebutuhan Optimal");
+				//alert("Kebutuhan Barang Maksimal < Kebutuhan Optimal");
+				$("#message3").show();
+				$('#info3').html('Kebutuhan Barang Maksimal < Kebutuhan Optimal');
+	            $('#info3').css("color","red");
 				$('#simpan').attr('disabled','disabled');
             	$('#simpan').css("background","grey"); 
 			}else{
+				$("#message3").hide();
 				document.getElementById('jml_rill').value = hasil2; 
 				$('#simpan').removeAttr('disabled');
 				$('#simpan').css("background","#04c");
@@ -84,17 +95,21 @@ $data = mysql_fetch_assoc($dataUsulan);
 
 	   	});
 
-	   $('#jml_max').on('change', function(){
+	   $('#jml_max').on('keyup', function(){
 		var jml_max = $('#jml_max').val();
 		var jml_optml = $('#jml_optml').val();
 		var hasil = parseInt(jml_max) - parseInt(jml_optml);
 			if(parseInt(hasil) <= 0){
 				//document.getElementById('jml_rill').value = 0; 
 				$('#jml_rill').val('0');
-				alert("Kebutuhan Barang Maksimal < Kebutuhan Optimal");
+				//alert("Kebutuhan Barang Maksimal < Kebutuhan Optimal");
+				$("#message3").show();
+				$('#info3').html('Kebutuhan Barang Maksimal < Kebutuhan Optimal');
+	            $('#info3').css("color","red");
 				$('#simpan').attr('disabled','disabled');
             	$('#simpan').css("background","grey");
 			}else{
+				$("#message3").hide();
 				//document.getElementById('jml_rill').value = hasil; 
 				$('#jml_rill').val(hasil);
 				$('#simpan').removeAttr('disabled');
@@ -102,7 +117,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 			}	
 		});
 
-	   $('#satuan_usul').on('change', function(){
+	   $('#satuan_usul').on('keyup', function(){
 		var satuan_usul = $('#satuan_usul').val();
 			document.getElementById('satuan_max').value = satuan_usul; 
 			document.getElementById('satuan_optml').value = satuan_usul; 
@@ -207,6 +222,12 @@ $data = mysql_fetch_assoc($dataUsulan);
 					<input type="text" name="satuan_max" id="satuan_max" 
 					value="<?=$data[satuan_max]?>"  readonly="" />
 				</li>
+				<li style="display:none" id="message3">
+                	<span  class="span2">&nbsp;</span>
+                		<div class="">
+                  			<em id="info3"></em>
+                		</div>
+                </li>
 				<li>
 					<p><b>Kebutuhan Riil Barang Milik Daerah</b></p>
 				</li>

@@ -25,34 +25,79 @@ $dataKetkegiatan = mysql_fetch_assoc($ketkegiatan);
 ?>
 	<script>
 	jQuery(function($){
-	   $("select").select2();
-	   $("message").hide();
+	   	$("select").select2();
+	   	$("message").hide();
 
-	    $('#kd_kegiatan').on('change', function(){
-		var kd_kegiatan = $('#kd_kegiatan').val();
-		var idp = $('#idp').val();
-		var tahun = $('#tahun').val();
-		var KodeSatker = $('#kodeSatker').val();
-		
-		if(kd_kegiatan !='' && idp !='' && tahun !='' && KodeSatker !=''){
-		$.post('../../function/api/kegiatanExist.php', {kd_kegiatan:kd_kegiatan,idp:idp,tahun:tahun,KodeSatker:KodeSatker}, function(result){
-		if(result == 1){
-			//alert('Kode Program Telah Tersedia');
-			$("#message").show();
-			$('#info').html('kode Kegiatan tidak dapat digunakan');
-            $('#info').css("color","red");
-			$('#simpan').attr('disabled','disabled');
-            $('#simpan').css("background","grey");
-		}else{
-			$("#message").show();
-			$('#info').html('kode Kegiatan dapat digunakan'); 
-			$('#info').css("color","green");
-			$('#simpan').removeAttr('disabled');
-		    $('#simpan').css("background","#04c");
-		}
-		})
-	 	 }
-	});
+	    $('#kd_kegiatan').on('keyup', function(){
+			var kd_kegiatan = $('#kd_kegiatan').val();
+			var idp = $('#idp').val();
+			var tahun = $('#tahun').val();
+			var KodeSatker = $('#kodeSatker').val();
+			var kd_kegiatan_old = $('#kd_kegiatan_old').val();
+			if(kd_kegiatan !='' && idp !='' && tahun !='' && KodeSatker !=''){
+
+				if(kd_kegiatan == kd_kegiatan_old){
+					$("#message").show();
+					$('#info').html('kode Kegiatan dapat digunakan'); 
+					$('#info').css("color","green");
+					$('#simpan').removeAttr('disabled');
+				    $('#simpan').css("background","#04c");
+				}else{
+					$.post('../../function/api/kegiatanExist.php', {kd_kegiatan:kd_kegiatan,idp:idp,tahun:tahun,KodeSatker:KodeSatker}, function(result){
+					if(result == 1){
+						//alert('Kode Program Telah Tersedia');
+						$("#message").show();
+						$('#info').html('kode Kegiatan tidak dapat digunakan');
+			            $('#info').css("color","red");
+						$('#simpan').attr('disabled','disabled');
+			            $('#simpan').css("background","grey");
+					}else{
+						$("#message").show();
+						$('#info').html('kode Kegiatan dapat digunakan'); 
+						$('#info').css("color","green");
+						$('#simpan').removeAttr('disabled');
+					    $('#simpan').css("background","#04c");
+					}
+				  })
+				}
+		 	}
+		});
+
+	    $('#idp').on('change', function(){
+			var kd_kegiatan = $('#kd_kegiatan').val();
+			var idp = $('#idp').val();
+			var idp_old = $('#idp_old').val();
+			var tahun = $('#tahun').val();
+			var KodeSatker = $('#kodeSatker').val();
+			var kd_kegiatan_old = $('#kd_kegiatan_old').val();
+			if(kd_kegiatan !='' && idp !='' && tahun !='' && KodeSatker !=''){
+
+				if(kd_kegiatan == kd_kegiatan_old  && idp == idp_old){
+					$("#message").show();
+					$('#info').html('kode Kegiatan dapat digunakan'); 
+					$('#info').css("color","green");
+					$('#simpan').removeAttr('disabled');
+				    $('#simpan').css("background","#04c");
+				}else{
+					$.post('../../function/api/kegiatanExist.php', {kd_kegiatan:kd_kegiatan,idp:idp,tahun:tahun,KodeSatker:KodeSatker}, function(result){
+					if(result == 1){
+						//alert('Kode Program Telah Tersedia');
+						$("#message").show();
+						$('#info').html('kode Kegiatan tidak dapat digunakan');
+			            $('#info').css("color","red");
+						$('#simpan').attr('disabled','disabled');
+			            $('#simpan').css("background","grey");
+					}else{
+						$("#message").show();
+						$('#info').html('kode Kegiatan dapat digunakan'); 
+						$('#info').css("color","green");
+						$('#simpan').removeAttr('disabled');
+					    $('#simpan').css("background","#04c");
+					}
+				  })
+				}
+		 	}
+		});
 
 	});
 	</script>
@@ -125,6 +170,8 @@ $dataKetkegiatan = mysql_fetch_assoc($ketkegiatan);
 				<li>
 					<span class="span2">Kode Kegiatan</span>
 					<input name="kd_kegiatan" id="kd_kegiatan" class="span2"  type="text" value="<?=$dataKetkegiatan['kd_kegiatan']?>">
+					<input name="kd_kegiatan_old" id="kd_kegiatan_old" class="span2"  type="hidden" value="<?=$dataKetkegiatan['kd_kegiatan']?>">
+					<input name="idp_old" id="idp_old" class="span2"  type="hidden" value="<?=$dataKetkegiatan[idp]?>">
 				</li>
 				<li>
 					<span class="span2">Kegiatan</span>

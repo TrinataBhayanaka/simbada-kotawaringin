@@ -63,7 +63,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 
 		});
 
-	   $('#satuan_usul').on('change', function(){
+	   $('#satuan_usul').on('keyup', function(){
 		var satuan_usul = $('#satuan_usul').val();
 			document.getElementById('satuan_optml').value = satuan_usul; 
 		});

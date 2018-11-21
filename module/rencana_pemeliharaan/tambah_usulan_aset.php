@@ -33,6 +33,15 @@ $tahun  = $TAHUN_AKTIF;
 		var kodeKelompok = $('#kodeKelompok').val();
 		var KodeSatker = $('#satker').val();
 		var idus = $('#idus').val();	
+		
+		$('#jml_usul').val('');
+		$('#satuan_usul').val('');
+		$('#jml_optml').val('');
+		$('#kondisi_baik').val('');
+		$('#kondisi_rusak_ringan').val('');
+		$('#satuan_optml').val('');
+
+
 			//validate jenis aset
 			if(kodeKelompok !='' && idus !='' ){
 			$.post('../../function/api/kodeKelompokexistPemeliharaan.php', {kodeKelompok:kodeKelompok,idus:idus}, function(result){
@@ -65,7 +74,7 @@ $tahun  = $TAHUN_AKTIF;
 	 	 	}
 		});
 
-	   $('#satuan_usul').on('change', function(){
+	   $('#satuan_usul').on('keyup', function(){
 		var satuan_usul = $('#satuan_usul').val();
 			document.getElementById('satuan_optml').value = satuan_usul; 
 		});

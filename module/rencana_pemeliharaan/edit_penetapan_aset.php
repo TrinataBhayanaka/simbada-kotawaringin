@@ -33,13 +33,13 @@ $data = mysql_fetch_assoc($dataUsulan);
 		    }
 		});
 
-	   $('#satuan_usul_rev').on('change', function(){
+	   $('#satuan_usul_rev').on('keyup', function(){
 		var satuan_usul_rev = $('#satuan_usul_rev').val();
 			document.getElementById('satuan_usul').value = satuan_usul_rev; 
 			document.getElementById('satuan_optml').value = satuan_usul_rev; 
 		});
 		
-	   $('#jml_usul_rev').on('change', function(){
+	   $('#jml_usul_rev').on('keyup', function(){
 	   	
 	   		var jml_usul_rev = $('#jml_usul_rev').val();
 	   		var jml_optml = $('#jml_optml').val();

@@ -18,7 +18,7 @@ $query	  = "INSERT INTO usulan_rencana_pengadaaan_aset (
 					'$_POST[jml_rill]','$_POST[satuan_rill]',
 					'".addslashes(html_entity_decode($_POST[ket]))."')";
 
-$exec =  mysql_query($query);
+$exec =  mysql_query($query) or die(mysql_error());
   	echo "<script>
 			alert('Data Berhasil Disimpan');
 		</script>";

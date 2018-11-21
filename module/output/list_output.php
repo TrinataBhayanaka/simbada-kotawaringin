@@ -112,7 +112,7 @@ include"$path/menu.php";
 						<input class="span5" type="text" value="<?="[".$satker."] ".$dataKetkodeSatker['NamaSatker']?>" disabled/>
 					</li>
 					<li>
-						<a style="display:display"  href="tambah_output.php?tahun=<?=$tahun?>&satker=<?=$satker?>" class="btn btn-info btn-small" id="addruangan"><i class="icon-plus-sign icon-white" align="center"></i>&nbsp;&nbsp;Tambah Kegiatan</a>
+						<a style="display:display"  href="tambah_output.php?tahun=<?=$tahun?>&satker=<?=$satker?>" class="btn btn-info btn-small" id="addruangan"><i class="icon-plus-sign icon-white" align="center"></i>&nbsp;&nbsp;Tambah Output</a>
 					</li>
 				</ul>
 			</div>

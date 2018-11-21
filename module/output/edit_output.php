@@ -29,35 +29,44 @@ $getOutput = mysql_fetch_assoc($output);
 	    $("message").hide();
 	    hierachy();
 
-	    $('#kd_output').on('change', function(){
-	    var program = $('#idp').val();
-		var kegiatan = $('#kegiatan').val();
-	    var kd_output = $('#kd_output').val();
-	    
-		var tahun = $('#tahun').val();
-		var kodeSatker = $('#kodeSatker').val();
-		
-		if(kd_output !='' && kegiatan !='' && program !='' && tahun !='' && kodeSatker !=''){
-		$.post('../../function/api/outputExist.php', {kd_output:kd_output,kegiatan:kegiatan,program:program,tahun:tahun,kodeSatker:kodeSatker}, function(result){
-		if(result == 1){
-			//alert('Kode Program Telah Tersedia');
-			$("#message").show();
-			$('#info').html('kode Output tidak dapat digunakan');
-            $('#info').css("color","red");
-			$('#simpan').attr('disabled','disabled');
-            $('#simpan').css("background","grey");
-		}else{
-			$("#message").show();
-			$('#info').html('kode Output dapat digunakan'); 
-			$('#info').css("color","green");
-			$('#simpan').removeAttr('disabled');
-		    $('#simpan').css("background","#04c");
-		}
-		})
-	 	 }
-	});
+	    $('#kd_output').on('keyup', function(){
+		    var program = $('#idp').val();
+			var kegiatan = $('#kegiatan').val();
+		    var kd_output = $('#kd_output').val();
+		    
+		    var programOld = $('#idpOld').val();
+			var kegiatanOld = $('#idkOld').val();
+		    var kd_outputOld = $('#outOld').val();
 
-	   function hierachy(){
+			var tahun = $('#tahun').val();
+			var kodeSatker = $('#kodeSatker').val();
+			
+			if(kd_output !='' && kegiatan !='' && program !='' && tahun !='' && kodeSatker !=''){
+				
+				if(program == programOld && kegiatan == kegiatanOld && kd_output == kd_outputOld){
+					//no ceck
+				}else{
+					$.post('../../function/api/outputExist.php', {kd_output:kd_output,kegiatan:kegiatan,program:program,tahun:tahun,kodeSatker:kodeSatker}, function(result){
+						if(result == 1){
+							//alert('Kode Program Telah Tersedia');
+							$("#message").show();
+							$('#info').html('kode Output tidak dapat digunakan');
+				            $('#info').css("color","red");
+							$('#simpan').attr('disabled','disabled');
+				            $('#simpan').css("background","grey");
+						}else{
+							$("#message").show();
+							$('#info').html('kode Output dapat digunakan'); 
+							$('#info').css("color","green");
+							$('#simpan').removeAttr('disabled');
+						    $('#simpan').css("background","#04c");
+						}
+					})
+				}
+		 	}
+		});
+
+	   	function hierachy(){
 	   		var i =0;
 			var template 	= "";
 			var programid 	= $("#idp").val();
@@ -86,12 +95,90 @@ $getOutput = mysql_fetch_assoc($output);
 				$("#kegiatan").html(template);
 				$("#kegiatan").select2();
 			}
-			},"JSON")
-	   }
+			},"JSON");
+			//validate
+				var kd_output = $('#kd_output').val();
+			    var program = $('#idp').val();
+			    var programOld = $('#idpOld').val();
+				var kegiatanOld = $('#idkOld').val();
+			    var kd_outputOld = $('#outOld').val();
+				var kodeSatker = $('#kodeSatker').val();
+			    if(kd_output){
+			    	//ceck
+			    	//alert("ceck");
+			    	$.post('../../function/api/selectkegiatanFirst.php', {programid:programid,tahun:tahun,satker:satker}, function(data){
+					
+						var kegiatan = data[0].idk;
+						if(kd_output !='' && kegiatan !='' && program !='' && tahun !='' && kodeSatker !=''){
+							
+							if(program == programOld && kegiatan == kegiatanOld && kd_output == kd_outputOld){
+								//no ceck
+								//alert("here");
+							}else{
+								$.post('../../function/api/outputExist.php', {kd_output:kd_output,kegiatan:kegiatan,program:program,tahun:tahun,kodeSatker:kodeSatker}, function(result){
+									if(result == 1){
+										//alert('Kode Program Telah Tersedia');
+										$("#message").show();
+										$('#info').html('kode Output tidak dapat digunakan');
+							            $('#info').css("color","red");
+										$('#simpan').attr('disabled','disabled');
+							            $('#simpan').css("background","grey");
+									}else{
+										$("#message").show();
+										$('#info').html('kode Output dapat digunakan'); 
+										$('#info').css("color","green");
+										$('#simpan').removeAttr('disabled');
+									    $('#simpan').css("background","#04c");
+									}
+								})
+							}
+				 		}
+					},"JSON");
+			    }else{
+			    	//nothing
+			    	//alert("nothing");
+			    }
+	   	}
 
-	$('.program').on('change', function(){
-	   		hierachy();
-	   }); 
+		$('.program').on('change', function(){
+			hierachy();
+		}); 
+
+		$('.kegiatan').on('change', function(){
+		   		//alert("ceck kegiatan");
+		   		var kd_output = $('#kd_output').val();
+			    var kegiatan = $('#kegiatan').val();
+			    var program = $('#idp').val();
+				var tahun = $('#tahun').val();
+				var kodeSatker = $('#kodeSatker').val();
+				
+				var programOld = $('#idpOld').val();
+				var kegiatanOld = $('#idkOld').val();
+			    var kd_outputOld = $('#outOld').val();
+
+				if(kd_output !='' && kegiatan !='' && program !='' && tahun !='' && kodeSatker !=''){
+					if(program == programOld && kegiatan == kegiatanOld && kd_output == kd_outputOld){
+						//no ceck
+					}else{
+						$.post('../../function/api/outputExist.php', {kd_output:kd_output,kegiatan:kegiatan,program:program,tahun:tahun,kodeSatker:kodeSatker}, function(result){
+							if(result == 1){
+								//alert('Kode Program Telah Tersedia');
+								$("#message").show();
+								$('#info').html('kode Output tidak dapat digunakan');
+					            $('#info').css("color","red");
+								$('#simpan').attr('disabled','disabled');
+					            $('#simpan').css("background","grey");
+							}else{
+								$("#message").show();
+								$('#info').html('kode Output dapat digunakan'); 
+								$('#info').css("color","green");
+								$('#simpan').removeAttr('disabled');
+							    $('#simpan').css("background","#04c");
+							}
+						})
+					}
+		 		}
+		});
 
 	});
 	</script>
@@ -183,7 +270,9 @@ $getOutput = mysql_fetch_assoc($output);
 					<span class="span2">&nbsp;</span>
 					<input type="submit" class="btn btn-primary " id="simpan" value="simpan" name="submit"/ >
 					<input type="hidden" name="idot" id="idot" value="<?=$getOutput['idot']?>">
-					<input type="hidden" name="idk" id="idk" value="<?=$getOutput['idk']?>">
+					<input type="hidden" name="idk" id="idkOld" value="<?=$getOutput['idk']?>">
+					<input type="hidden" name="idp" id="idpOld" value="<?=$getOutput['idp']?>">
+					<input type="hidden" name="idp" id="outOld" value="<?=$getOutput['kd_output']?>">
 					<input type="hidden" name="satker" id="satker" value="<?=$getOutput['kodeSatker']?>">
 					<!--<input type="reset" name="reset" class="btn" value="Bersihkan Data">-->
 				</li>

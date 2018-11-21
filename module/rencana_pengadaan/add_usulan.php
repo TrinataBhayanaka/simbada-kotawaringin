@@ -39,8 +39,9 @@ $query	  = "INSERT INTO usulan_rencana_pengadaaan (idp,idk,idot,kodeSatker,
 			VALUES ('$_POST[program]','$_POST[kegiatan]','$_POST[output]',
 					'$_POST[KodeSatker]','".addslashes(html_entity_decode($_POST[no_usul]))."',
 					'$_POST[tgl_usul]','{$KDPROGRAM}','{$NMPROGRAM}','{$KDGIAT}','{$NMGIAT}','{$KDOUTPUT}','{$NMOUTPUT}','$_POST[tahun]')";					
-
-$exec =  mysql_query($query);
+//echo $query;
+//exit();
+$exec =  mysql_query($query) or die(mysql_error());
   	echo "<script>
 			alert('Data Berhasil Disimpan');
 		</script>";

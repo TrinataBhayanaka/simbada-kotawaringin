@@ -58,7 +58,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 	   }
 	   
 
-	   $('#jml_max_rev').on('change', function(){
+	   $('#jml_max_rev').on('keyup', function(){
 		var jml_max = $('#jml_max_rev').val();
 		var jml_optml = $('#jml_optml').val();
 		var hasil = parseInt(jml_max) - parseInt(jml_optml);
@@ -83,7 +83,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 			}	
 		});
 
-	   $('#jml_usul_rev').on('change', function(){
+	   $('#jml_usul_rev').on('keyup', function(){
 	   	var jml_usul_rev = $('#jml_usul_rev').val();
 	   	var jml_rill_rev = $('#jml_rill_rev').val();
 	   		if(parseInt(jml_usul_rev) > parseInt(jml_rill_rev)){
@@ -98,7 +98,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 	   		}
 	   	});
 
-	   $('#jml_ekstra_rev').on('change', function(){
+	   $('#jml_ekstra_rev').on('keyup', function(){
 	   		//jml_intra
 	   		var jml_intra = $('#jml_intra').val();
 	   		var jml_ekstra = $('#jml_ekstra_rev').val();
@@ -127,7 +127,7 @@ $data = mysql_fetch_assoc($dataUsulan);
 
 	   	});
 
-	   $('#satuan_usul_rev').on('change', function(){
+	   $('#satuan_usul_rev').on('keyup', function(){
 		var satuan_usul_rev = $('#satuan_usul_rev').val();
 			document.getElementById('satuan_usul').value = satuan_usul_rev; 
 			document.getElementById('satuan_max').value = satuan_usul_rev; 

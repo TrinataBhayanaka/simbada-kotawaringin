@@ -91,22 +91,27 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker' and
 			var tahun 		= $("#tahun").val();
 			var satker 		= $("#satker").val();	
 
-			$.post('../../function/api/usulanPemeliharaanExist.php', {programid:programid,kegiatanid:kegiatanid,outputid:outputid,tahun:tahun,satker:satker}, function(result){
-				if(result == 1){
-					//alert('Kode Program Telah Tersedia');
-					$("#message").show();
-					$('#info').html('Usulan dengan Program, Kegiatan dan Output telah digunakan');
-		            $('#info').css("color","red");
-					$('#simpan').attr('disabled','disabled');
-		            $('#simpan').css("background","grey");
-				}else{
-					$("#message").show();
-					$('#info').html('Usulan dengan Program, Kegiatan dan Output dapat digunakan'); 
-					$('#info').css("color","green");
-					$('#simpan').removeAttr('disabled');	
-				    $('#simpan').css("background","#04c");
-				}
-			})
+			if(programid != '' && kegiatanid != '' && outputid != ''){
+				$.post('../../function/api/usulanPemeliharaanExist.php', {programid:programid,kegiatanid:kegiatanid,outputid:outputid,tahun:tahun,satker:satker}, function(result){
+					if(result == 1){
+						//alert('Kode Program Telah Tersedia');
+						$("#message").show();
+						$('#info').html('Usulan dengan Program, Kegiatan dan Output telah digunakan');
+			            $('#info').css("color","red");
+						$('#simpan').attr('disabled','disabled');
+			            $('#simpan').css("background","grey");
+					}else{
+						$("#message").show();
+						$('#info').html('Usulan dengan Program, Kegiatan dan Output dapat digunakan'); 
+						$('#info').css("color","green");
+						$('#simpan').removeAttr('disabled');	
+					    $('#simpan').css("background","#04c");
+					}
+				})
+			}else{
+				$('#simpan').attr('disabled','disabled');
+	            $('#simpan').css("background","grey");
+			}
 	 	}
 		$('.program').on('change', function(){
 	   		hierachy();

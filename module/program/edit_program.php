@@ -34,21 +34,6 @@ while ($data = mysql_fetch_assoc($exe)) {
 		var kd_program = $('#kd_program').val();
 		var kd_program_old = $('#kd_program_old').val();		
 		if(kd_program !=''){
-			/*$.post('../../function/api/programExist.php', {kd_program:kd_program,tahun:tahun,KodeSatker:KodeSatker}, function(result){
-			if(result > 1){
-				$("#message").show();
-				$('#info').html('kode Program tidak dapat digunakan');
-	            $('#info').css("color","red");
-				$('#simpan').attr('disabled','disabled');
-	            $('#simpan').css("background","grey");
-			}else{
-				$("#message").show();
-				$('#info').html('kode Program dapat digunakan'); 
-				$('#info').css("color","green");
-				$('#simpan').removeAttr('disabled');
-			    $('#simpan').css("background","#04c");
-			}
-			})*/
 			if(kd_program == kd_program_old){
 				$("#message").show();
 				$('#info').html('kode Program dapat digunakan'); 
