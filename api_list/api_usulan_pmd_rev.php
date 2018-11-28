@@ -18,7 +18,7 @@ $id=$_SESSION['user_id'];//Nanti diganti
 /* Array of database columns which should be read and sent back to DataTables. Use a space where
  * you want to insert a non-database field (for example a counter or static image)
  */
-$aColumns = array('Usl.Usulan_ID','Usl.NoUsulan','Usl.TglUpdate','Usl.SatkerUsul','Usl.KetUsulan','s.NamaSatker');
+$aColumns = array('Usl.Usulan_ID','Usl.NoUsulan','Usl.TglUpdate','Usl.SatkerUsul','Usl.KetUsulan','Usl.path_file','s.NamaSatker');
 
 /* Indexed column (used for fast and accurate table cardinality) */
 $sIndexColumn = "Usulan_ID";
@@ -145,7 +145,7 @@ $no=$_GET['iDisplayStart']+1;
 					{
 foreach ($data as $key => $value)
 						{
-							
+							$path_file = $value['path_file'];
               $Satker="[".$value[SatkerUsul]."]"."&nbsp;".$value[NamaSatker];
               
               //countUsulan
@@ -179,26 +179,55 @@ foreach ($data as $key => $value)
                    }
                 }
 							
-              if($value['StatusPenetapan']==0){
-              
+              if($value['StatusPenetapan']==0 && $value['StatusGenerate']==0){
+                
                   
               $tindakan="<a href=\"{$url_rewrite}/module/penghapusanv2/penghapusan_usulan_daftar_proses_hapus_pmd.php?id={$value[Usulan_ID]}\" class=\"btn btn-danger btn-small\" onclick=\"return confirm('Hapus Data');\" style=\"margin-top:3px\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</a>
-              <a href=\"{$url_rewrite}/module/penghapusanv2/dftr_review_edit_aset_usulan_pmd.php?id={$value[Usulan_ID]}\" class=\"btn btn-success btn-small\" onclick=\"return confirm('View Data');\"style=\"margin-top:3px\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;View</a>
+              <a href=\"{$url_rewrite}/module/penghapusanv2/dftr_review_edit_aset_usulan_pmd.php?id={$value[Usulan_ID]}\" class=\"btn btn-success btn-small\" onclick=\"return confirm('View Data');\"style=\"margin-top:3px\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;View</a>";
+                if($jumlahAset != 0){
+                  $tindakan.="<a style=\"display:display\" data-toggle=\"modal\" href=\"#ttd\" class=\"btn btn-warning btn-small\" id=\"editTTD\" value=\"{$value[Usulan_ID]}\" ><i class=\"fa fa-spinner\" align=\"center\"></i>Generate</a>";
+                }else{
 
-            <a target=\"_blank\" href=\"{$url_rewrite}/report/template/PENGHAPUSAN/cetak_usulan_penghapusan.php?idusulan={$value[Usulan_ID]}&noUsul={$value[NoUsulan]}&tglHapus={$value[TglUpdate]}\" class=\"btn btn-info btn-small\" style=\"margin-top:3px\"><i class=\"fa fa-file-pdf-o\"></i> Pdf</a>&nbsp
-             <a target=\"_blank\" href=\"{$url_rewrite}/report/template/PENGHAPUSAN/cetak_usulan_penghapusan.php?idusulan={$value[Usulan_ID]}&noUsul={$value[NoUsulan]}&tglHapus={$value[TglUpdate]}&tipe_file=2\" class=\"btn btn-info btn-small\" style=\"margin-top:3px\"><i class=\"fa fa-file-excel-o\"></i> Excel</a>&nbsp";
-                  
+                }
+
+             /*
+            <a style=\"display:display\" data-toggle=\"modal\" href=\"#editruang\" class=\"btn btn-warning btn-small\" id=\"editruangkir\" value=\"{$id}\" ><i class=\"fa fa-spinner\" align=\"center\"></i>Generate</a>
+             
+             <a target=\"_blank\" href=\"{$url_rewrite}/report/template/PENGHAPUSAN/cetak_usulan_penghapusan.php?idusulan={$value[Usulan_ID]}&noUsul={$value[NoUsulan]}&tglHapus={$value[TglUpdate]}\" class=\"btn btn-info btn-small\" style=\"margin-top:3px\"><i class=\"fa fa-file-pdf-o\"></i> Pdf</a>&nbsp<a target=\"_blank\" href=\"{$url_rewrite}/report/template/PENGHAPUSAN/cetak_usulan_penghapusan.php?idusulan={$value[Usulan_ID]}&noUsul={$value[NoUsulan]}&tglHapus={$value[TglUpdate]}&tipe_file=2\" class=\"btn btn-info btn-small\" style=\"margin-top:3px\"><i class=\"fa fa-file-excel-o\"></i> Excel</a>&nbsp*/     
                  
                     
-                    
-              }elseif($value['StatusPenetapan']==1){
+              }elseif($value['StatusPenetapan']==0 && $value['StatusGenerate']==1){
                
                  $tindakan="<a href=\"{$url_rewrite}/module/penghapusanv2/dftr_review_edit_aset_usulan_pmd.php?id={$value[Usulan_ID]}\" class=\"btn btn-success btn-small\" onclick=\"return confirm('View Data');\" style=\"margin-top:3px\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;View</a>
-                  <a target=\"_blank\" href=\"{$url_rewrite}/report/template/PENGHAPUSAN/cetak_usulan_penghapusan.php?idusulan={$value[Usulan_ID]}&noUsul={$value[NoUsulan]}&tglHapus={$value[TglUpdate]}\" class=\"btn btn-info btn-small\" style=\"margin-top:3px\"><i class=\"fa fa-file-pdf-o\"></i> Pdf</a>&nbsp
-                   <a target=\"_blank\" href=\"{$url_rewrite}/report/template/PENGHAPUSAN/cetak_usulan_penghapusan.php?idusulan={$value[Usulan_ID]}&noUsul={$value[NoUsulan]}&tglHapus={$value[TglUpdate]}&tipe_file=2\" class=\"btn btn-info btn-small\" style=\"margin-top:3px\"><i class=\"fa fa-file-excel-o\"></i> Excel</a>&nbsp";
-              
-             
-              }  
+                   ";
+                   if($path_file){
+                      $tindakan.="<a href=\"{$url_rewrite}/report/output/{$path_file}\" class=\"btn btn-info btn-small\" style=\"margin-top:3px\" download><i class=\"fa fa-file-pdf-o\" ></i> Pdf</a>&nbsp
+                    ";  
+                   }
+                  
+              }elseif($value['StatusPenetapan']==1 && $value['StatusGenerate']==1){
+               
+                 $tindakan="<a href=\"{$url_rewrite}/module/penghapusanv2/dftr_review_edit_aset_usulan_pmd.php?id={$value[Usulan_ID]}\" class=\"btn btn-success btn-small\" onclick=\"return confirm('View Data');\" style=\"margin-top:3px\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;View</a>
+                   ";
+                   
+                if($path_file){
+                      $tindakan.="<a href=\"{$url_rewrite}/report/output/{$path_file}\" class=\"btn btn-info btn-small\" style=\"margin-top:3px\" download><i class=\"fa fa-file-pdf-o\" ></i> Pdf</a>&nbsp
+                    ";  
+                   }   
+              }elseif($value['StatusPenetapan']==1 && $value['StatusGenerate']==0){
+               
+                $tindakan="<a href=\"{$url_rewrite}/module/penghapusanv2/dftr_review_edit_aset_usulan_pmd.php?id={$value[Usulan_ID]}\" class=\"btn btn-success btn-small\" onclick=\"return confirm('View Data');\" style=\"margin-top:3px\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;View</a>
+                   ";
+                if($path_file){
+                      $tindakan.="<a href=\"{$url_rewrite}/report/output/{$path_file}\" class=\"btn btn-info btn-small\" style=\"margin-top:3px\" download><i class=\"fa fa-file-pdf-o\" ></i> Pdf</a>&nbsp
+                    ";  
+                   }
+              }else{
+                $tindakan= "";
+              }    
+
+              /*<a target=\"_blank\" href=\"{$url_rewrite}/report/template/PENGHAPUSAN/cetak_usulan_penghapusan.php?idusulan={$value[Usulan_ID]}&noUsul={$value[NoUsulan]}&tglHapus={$value[TglUpdate]}&tipe_file=2\" class=\"btn btn-info btn-small\" style=\"margin-top:3px\"><i class=\"fa fa-file-excel-o\"></i> Excel</a>&nbsp
+              */
                 
               $NoUsulan=explode("/", $value['NoUsulan']);
 

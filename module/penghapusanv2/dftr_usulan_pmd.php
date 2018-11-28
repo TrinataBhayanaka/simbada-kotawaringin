@@ -78,8 +78,14 @@ $par_data_table="tahun=$tahun";
                     "bServerSide": true,
                     "sAjaxSource": "<?=$url_rewrite?>/api_list/api_usulan_pmd_rev.php?<?php echo $par_data_table?>"
                }
-                  );
+                  );  
       });
+
+    	$(document).on('click','#editTTD', function (){
+			var id = $(this).attr("value");
+			$("#idusulan").val(id);
+		});
+
     </script>
     		<p><a href="<?=$url_rewrite?>/module/penghapusanv2/tambah_usulan_pmd.php" class="btn btn-info btn-small"><i class="icon-plus-sign icon-white"></i>&nbsp;&nbsp;Tambah Usulan</a>
 			<p>Tahun Usulan:
@@ -132,7 +138,24 @@ $par_data_table="tahun=$tahun";
 			</table>
 			</div>
 			<div class="spacer"></div>
-			    
+			 <!-- EDIT RUANGAN-->
+			<div id="ttd" class="modal hide fade  login myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div id="titleForm" class="modal-header" >
+				  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				  <h3 id="myModalLabel">Digital Signature</h3>
+				</div>
+				<div class="modal-body">
+					<form id="contact_form" action="<?php echo "$url_rewrite/report/template/PENGHAPUSAN/tes.php"; ?>" method="POST">
+                        <span >passphrase</span>
+							<input type="password" class="span3" name="passphrase" required="" />
+							<input type="hidden" name="idusulan" id="idusulan" />
+                   
+				</div>
+				<div class="modal-footer">
+				  <input type="submit" value="Generate" name="Generate" class="btn btn-default" id="" />
+				</div>
+			</form>
+			</div>  
 		</section> 
 	</section>
 	

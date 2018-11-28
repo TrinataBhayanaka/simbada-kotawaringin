@@ -431,6 +431,20 @@ class RETRIEVE_REPORT extends DB {
       return false;
     }
   }
+
+  public function TTD($id,$Updtpath){
+    $query = "UPDATE usulan SET StatusGenerate = '1', path_file = '$Updtpath' WHERE Usulan_ID = '$id'";
+    mysql_query($query) or die(mysql_error());
+  }
+
+  public function usulan($id){
+    $query = "select NoUsulan from usulan where Usulan_ID = '$id'";
+    //echo $query;
+    $exe = mysql_query($query) or die(mysql_error());
+    $data = mysql_fetch_assoc($exe);
+    return $data;
+  }
+
 }
 
 ?>
