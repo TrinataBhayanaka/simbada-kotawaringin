@@ -185,7 +185,10 @@ foreach ($data as $key => $value)
               $tindakan="<a href=\"{$url_rewrite}/module/penghapusanv2/penghapusan_usulan_daftar_proses_hapus_pmd.php?id={$value[Usulan_ID]}\" class=\"btn btn-danger btn-small\" onclick=\"return confirm('Hapus Data');\" style=\"margin-top:3px\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</a>
               <a href=\"{$url_rewrite}/module/penghapusanv2/dftr_review_edit_aset_usulan_pmd.php?id={$value[Usulan_ID]}\" class=\"btn btn-success btn-small\" onclick=\"return confirm('View Data');\"style=\"margin-top:3px\"><i class=\"fa fa-pencil-square-o\"></i>&nbsp;View</a>";
                 if($jumlahAset != 0){
-                  $tindakan.="<a style=\"display:display\" data-toggle=\"modal\" href=\"#ttd\" class=\"btn btn-warning btn-small\" id=\"editTTD\" value=\"{$value[Usulan_ID]}\" ><i class=\"fa fa-spinner\" align=\"center\"></i>Generate</a>";
+                  if($_SESSION['ses_uaksesadmin'] == 1){
+                      $tindakan.="<a style=\"display:display\" data-toggle=\"modal\" href=\"#ttd\" class=\"btn btn-warning btn-small\" id=\"editTTD\" value=\"{$value[Usulan_ID]}\" ><i class=\"fa fa-spinner\" align=\"center\"></i>Generate</a>";  
+                  }
+                  
                 }else{
 
                 }
