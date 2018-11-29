@@ -11,20 +11,31 @@ $menuPath = $USERAUTH->FrontEnd_show_menu($SessionUser);
 // pr($menuPath);
 ?>
 
-<aside>
-	
+<aside style="background:#003c1d ">
+
 		<nav>
 			<ul>
 				<?php
 				if(isset($_SESSION['ses_utoken'])){
 				?>
-				<li  align="center">
-					<ul>
-						<a href="<?php echo "$url_rewrite";?>" class="iconHOme">
-						<li class="icohome"><i class="fa fa-home fa-fw fa-3x"></i></li>
-						</a>
-					</ul>
-				</li>
+                    <li  align="center">
+                        <ul>
+
+                            <li class="icohome">
+                                <div style="float:left;width:50%;background-color:#003c1d ">
+                                    <a href="<?php echo "$url_rewrite";?>" style="background-color:#003c1d">
+                                        <i class="fa fa-home fa-fw fa-3x"></i>
+                                    </a>
+                                </div>
+                                <div style="float:left;width:50%;background-color:#003c1d ">
+                                    <a href="<?=$url_rewrite?>/persediaan">
+                                        <h5><i class="fa fa-mail-forward"></i> SIMSEDIA</h5>
+                                    </a>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </li>
 				<li  align="center">
 					<ul>
 							<li class="home">
@@ -51,9 +62,20 @@ $menuPath = $USERAUTH->FrontEnd_show_menu($SessionUser);
 
 				<li  align="center">
 					<ul>
-						<a href="<?php echo "$url_rewrite";?>" class="iconHOme">
-						<li class="icohome" style="border-bottom-color:#fff"><i class="fa fa-home fa-fw fa-3x"></i></li>
-						</a>
+
+						<li class="icohome">
+                            <div style="float:left;width:50%;background-color:#003c1d ">
+                                <a href="<?php echo "$url_rewrite";?>" style="background-color:#003c1d">
+                                    <i class="fa fa-home fa-fw fa-3x"></i>
+                                </a>
+                            </div>
+                            <div style="float:left;width:50%;background-color:#003c1d ">
+                                <a href="<?=$url_rewrite?>/persediaan">
+                                    <h5><i class="fa fa-mail-forward"></i> SIMSEDIA</h5>
+                                </a>
+                            </div>
+
+                        </li>
 					</ul>
 				</li>
 					<?php
