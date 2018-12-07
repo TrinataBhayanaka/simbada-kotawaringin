@@ -1,6 +1,13 @@
 	
-	<footer>
-		
+	<footer style="height:100px">
+		<div>
+            <center>
+                <span style="color:white">Supported By : </span><br>
+                <img src="<?=$url_rewrite?>/img/logo-gunadarma.png" width="70px">
+                <img src="<?=$url_rewrite?>/img/logo-bssn.png" width="60px">
+                <img src="<?=$url_rewrite?>/img/logo_bsre.png" width="130px">
+            </center>
+        </div>
 	</footer>
 </div>
 <?php session_write_close();?>
