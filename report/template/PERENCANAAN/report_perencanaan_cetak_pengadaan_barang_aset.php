@@ -247,7 +247,8 @@ if($hit == 1){
 
 //begin
 $paramSql = "u.tgl_usul >='$tglawalUsulan' AND u.tgl_usul <='$tglakhirUsulan'";
-$paramStatus =" AND u.status_usulan = 1 AND u.status_verifikasi = 1 AND u.status_penetapan = 1 AND u.status_validasi = 1";
+$paramStatus =" AND u.status_usulan = 1 AND u.status_verifikasi = 1 AND u.status_penetapan = 1 AND u.status_validasi = 1
+				AND a.status_verifikasi = 1 AND a.status_penetapan = 1 AND a.status_validasi = 1";
 
 $sql = "SELECT u.*,a.*,k.Kode,k.Uraian FROM `usulan_rencana_pengadaaan` as u 
 				INNER JOIN usulan_rencana_pengadaaan_aset as a on a.idus = u.idus 
@@ -255,6 +256,7 @@ $sql = "SELECT u.*,a.*,k.Kode,k.Uraian FROM `usulan_rencana_pengadaaan` as u
 				WHERE $paramSql $paramStatus
 				ORDER BY u.KDPROGRAM asc";	
 //pr($sql);				
+//exit();
 $result = mysql_query($sql) or die(mysql_error());
 while ($data = mysql_fetch_assoc($result)) {
 	$list[] = $data;
