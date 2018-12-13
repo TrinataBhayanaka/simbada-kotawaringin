@@ -2,12 +2,15 @@
 include "../../../config/config.php";
 include "../../report_engine.php";
 
-$tanggalAwal = $_REQUEST['tgl_usul_awal'];
-$tanggalAkhir = $_REQUEST['tgl_usul_akhir'];
+/*$tanggalAwal = $_REQUEST['tgl_usul_awal'];
+$tanggalAkhir = $_REQUEST['tgl_usul_akhir'];*/
+
+$tahun = $_REQUEST['tahun'];
 $skpd_id = $_REQUEST['kodeSatker'];
 
 //pr($_REQUEST);
-$paramater_url="skpd_id=$skpd_id&tanggalAwal=$tanggalAwal&tanggalAkhir=$tanggalAkhir&tipe_file=$tipe";
+//$paramater_url="skpd_id=$skpd_id&tanggalAwal=$tanggalAwal&tanggalAkhir=$tanggalAkhir&tipe_file=$tipe";
+$paramater_url="skpd_id=$skpd_id&tahun=$tahun&tipe_file=$tipe";
 $REPORT=new report_engine();
 $url = "report_perencanaan_cetak_pemeliharaan_barang_aset.php?$paramater_url";
 $REPORT->show_pilih_download($url);  

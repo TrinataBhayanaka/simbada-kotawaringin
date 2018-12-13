@@ -14,13 +14,14 @@ $JpgUseSVGFormat = true;
 define('_MPDF_URI',"$url_rewrite/function/mpdf/"); 	// must be  a relative or absolute URI - not a file system path
 include "../../report_engine.php";
 require ('../../../function/mpdf/mpdf.php');
-$tglawal = $_GET['tanggalAwal'];
+/*$tglawal = $_GET['tanggalAwal'];
 if($tglawal != ''){
 	$tglawalUsulan = $tglawal;
 }else{
 	$tglawalUsulan = '0000-00-00';
 }
-$tglakhirUsulan = $_GET['tanggalAkhir'];
+$tglakhirUsulan = $_GET['tanggalAkhir'];*/
+$tahun = $_GET['tahun'];
 $skpd_id = $_GET['skpd_id'];
 $tipe=$_GET['tipe_file'];
 $tglcetak = date("Y-m-d");
@@ -77,8 +78,7 @@ if($tipe == 1){
 				<tr>
 				  <td style=\"width: 150px; text-align: LEFT;\">$gmbr</td>
 				  <td style=\"width: 902px; text-align: center;\">
-				  <h3>USULAN KEBUTUHAN PENGGUNA BARANG MILIK DAERAH</h3>
-				  <h3>(RENCANA PENGADAAN)</h3>
+				  <h3>RENCANA KEBUTUHAN BARANG MILIK DAERAH</h3>
 				  <h3>PENGGUNA BARANG $UPB</h3>
 				  <h3>TAHUN $tahun_neraca</h3>
 				  </td>
@@ -91,10 +91,7 @@ if($tipe == 1){
 			 cellpadding=\"0\" cellspacing=\"0\">
 			  <tbody>
 				<tr>
-					<td><p>USULAN KEBUTUHAN PENGGUNA BARANG MILIK DAERAH</p></td>
-				</tr>
-				<tr>
-					<td><p>(RENCANA PENGADAAN)</p></td>
+					<td><p>RENCANA KEBUTUHAN BARANG MILIK DAERAH</p></td>
 				</tr>
 				<tr>
 					<td><p>PENGGUNA BARANG $UPB</p></td>
@@ -246,7 +243,8 @@ if($hit == 1){
 }*/
 
 //begin
-$paramSql = "u.tgl_usul >='$tglawalUsulan' AND u.tgl_usul <='$tglakhirUsulan'";
+//$paramSql = "u.tgl_usul >='$tglawalUsulan' AND u.tgl_usul <='$tglakhirUsulan'";
+$paramSql = "YEAR(u.tgl_usul) = '$tahun'";
 $paramStatus =" AND u.status_usulan = 1 AND u.status_verifikasi = 1 AND u.status_penetapan = 1 AND u.status_validasi = 1
 				AND a.status_verifikasi = 1 AND a.status_penetapan = 1 AND a.status_validasi = 1";
 
