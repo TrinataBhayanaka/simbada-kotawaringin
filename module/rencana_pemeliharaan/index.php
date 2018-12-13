@@ -12,6 +12,11 @@ $USERAUTH->FrontEnd_check_akses_menu($menu_id, $SessionUser);
 include"$path/meta.php";
 include"$path/header.php";
 include"$path/menu.php";
+
+$tahun= $_GET['tahun'];
+if($tahun=="") $tahun=$TAHUN_AKTIF;
+$par_data_table="tahun=$tahun";
+$satker = $_SESSION['ses_satkerkode'];
 ?>
 	<script>
 	jQuery(function($){
@@ -37,14 +42,14 @@ include"$path/menu.php";
 				    </span>
 					<span class="text">Usulan Rencana Pemeliharaan</span>
 				</a>
-				<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/filter_penetapan.php">
+				<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/list_penetapan.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">2</i>
 				    </span>
 					<span class="text">Penetapan Rencana Pemeliharaan</span>
 				</a>
-				<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/filter_validasi.php">
+				<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/list_validasi.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">3</i>
@@ -61,21 +66,77 @@ include"$path/menu.php";
 			</div>		
 		
 		<section class="formLegend">
-		<form name="myform" method="post" action="list_usulan.php">
-			<ul>
-				<li>
-					<span class="span2">Tanggal Usulan</span>
-					<input type="text" placeholder="yyyy-mm-dd" name="tgl_usul" id="datepicker" value="" />
-				</li>
-				<?=selectSatker('kodeSatker','235',true,false,'required');?>
-				<br>
-				<li>
-					<span class="span2">&nbsp;</span>
-					<input type="submit" class="btn btn-primary" value="Filter" name="submit"/>
-					<input type="reset" name="reset" class="btn" value="Bersihkan Data">
-				</li>
-			</ul>
-		</form>
+		<script>
+	    $(document).ready(function() {
+	         $('#list_usulan_rkpbmd').dataTable(
+	                   {
+	                   	"aoColumnDefs": [
+	                         { "aTargets": [2] }
+	                    ],
+	                    "aoColumns":[
+	                         {"bSortable": false, "sWidth": "5%"},
+	                         {"bSortable": true, "sWidth": "25%"},
+	                         {"bSortable": false, "sWidth": "25%"},
+	                         {"bSortable": true, "sWidth": "10%"},
+	                         {"bSortable": false, "sWidth": "10%"},
+	                         {"bSortable": false, "sWidth": "25%"}],
+	                    "sPaginationType": "full_numbers",
+
+	                    "bProcessing": true,
+	                    "bServerSide": true,
+	                    "sAjaxSource": "<?=$url_rewrite?>/api_list/list_usulan_rkpbmd.php?<?php echo $par_data_table?>"
+	               }
+	        );  
+	    });
+	    </script>	
+		<?php
+	    if($_SESSION['ses_uaksesadmin'] !=1){
+	    	echo "<p><a href='$url_rewrite/module/rencana_pemeliharaan/tambah_usulan.php?satker=$satker' class=\"btn btn-info btn-small\"><i class=\"icon-plus-sign icon-white\"></i>&nbsp;&nbsp;Tambah Usulan</a>";
+	    }
+	    ?>
+		<h4>Tahun Usulan :
+			<?=$tahun?>
+		</h4>
+		<?php
+		//$tahun_akhir=date("Y");
+		$tahun_akhir=$tahun;
+		for($tahun=2017;$tahun<=$tahun_akhir;$tahun++){
+		?><a href="?tahun=<?=$tahun?>" class="btn btn-info btn-small"><i class="icon-plus-sign icon-white"></i>&nbsp;&nbsp;<?=$tahun?></a>
+		&nbsp;
+		<?php
+		}
+		?>
+		</p>
+		<div id="demo">
+			<table cellpadding="0" cellspacing="0" border="0" class="display" id="list_usulan_rkpbmd">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>No Usulan</th>
+						<th>Satker</th>
+						<th>Tgl Usulan</th>
+						<th>Status</th>
+						<th>Aksi</th>
+					</tr>
+				</thead>
+				<tbody>			
+					<tr>
+                        <td colspan="6">Data Tidak di temukan</td>
+                    </tr>
+                    
+				</tbody>
+				<tfoot>
+					<tr>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
 
 		</section>     
 	</section>

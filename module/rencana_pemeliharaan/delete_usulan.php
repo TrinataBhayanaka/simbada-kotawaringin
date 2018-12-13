@@ -23,8 +23,12 @@ $exec =  mysql_query($query);
 			alert('Data Berhasil Dihapus');
 		</script>";
 	
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_usulan.php?tgl_usul={$tgl_usul}&satker={$satker}'
+	</script>";	*/
+
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/index.php'
 	</script>";	
 }
 		

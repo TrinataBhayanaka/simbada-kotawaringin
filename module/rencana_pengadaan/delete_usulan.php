@@ -12,8 +12,11 @@ if($hit['jml'] > 0 ){
 			alert('Data Usulan sedang Digunakan');
 		</script>";
 	
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_usulan.php?tgl_usul={$tgl_usul}&satker={$satker}'
+	</script>";*/
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pengadaan/index.php'
 	</script>";	
 }else{
 //delete program
@@ -23,9 +26,12 @@ $exec =  mysql_query($query);
 			alert('Data Berhasil Dihapus');
 		</script>";
 	
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_usulan.php?tgl_usul={$tgl_usul}&satker={$satker}'
-	</script>";	
+	</script>";*/	
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pengadaan/index.php'
+	</script>";
 }
 		
 ?>

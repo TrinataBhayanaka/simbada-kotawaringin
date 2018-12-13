@@ -18,7 +18,10 @@ $exe =  mysql_query($up_status_penetapan);
 			alert('Data Berhasil Divalidasi');
 		</script>";
 	
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_validasi_aset.php?idus={$_GET['idus']}&tgl_usul={$_GET['tgl_usul']}&satker={$_GET['satker']}'
-	</script>";	
+	</script>";	*/
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_validasi_aset.php?idus={$_GET['idus']}&satker={$_GET['satker']}'
+	</script>";
 ?>

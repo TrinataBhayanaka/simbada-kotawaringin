@@ -156,14 +156,14 @@ $data = mysql_fetch_assoc($dataUsulan);
 			    </span>
 				<span class="text">Usulan Rencana Pengadaan</span>
 			</a>
-			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_penetapan.php">
+			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pengadaan/list_penetapan.php">
 			<span class="fa-stack fa-lg">
 		      <i class="fa fa-circle fa-stack-2x"></i>
 		      <i class="fa fa-inverse fa-stack-1x">2</i>
 		    </span>
 			<span class="text">Penetapan Rencana Pengadaan</span>
 			</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/list_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">3</i>

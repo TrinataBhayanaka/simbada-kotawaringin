@@ -84,7 +84,7 @@ include"$path/menu.php";
 				<li>
 					<span class="span2">Jabatan</span>
 					<!--<input name="NamaJabatan" id="NamaJabatan" class="span3"  type="text" value="<?=$res['NamaJabatan']?>">-->
-					<select  name="NamaJabatan" class="span3" disabled>
+					<select  name="NamaJabatan" class="span3" readonly>
 					  <option value="Pengguna Barang" <?=$a?>>Pengguna Barang</option>
 					  <option value="Pengurus Barang" <?=$b?>>Pengurus Barang</option>
 					  <option value="Atasan Langsung" <?=$c?>>Atasan Langsung</option>

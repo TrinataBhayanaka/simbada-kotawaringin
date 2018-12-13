@@ -94,14 +94,14 @@ include"$path/menu.php";
 			    </span>
 				<span class="text">Usulan Rencana Pengadaan</span>
 			</a>
-			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_penetapan.php">
+			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pengadaan/list_penetapan.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">2</i>
 				    </span>
 					<span class="text">Penetapan Rencana Pengadaan</span>
 				</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/list_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">3</i>
@@ -222,7 +222,8 @@ include"$path/menu.php";
 			<div class="detailRight">
 				<ul>
 					<li>
-						<a id="" class="btn btn-small" href="list_penetapan.php?tgl_usul=<?=$tgl_usul?>&satker=<?=$satker?>" >
+						<!--<a id="" class="btn btn-small" href="list_penetapan.php?tgl_usul=<?=$tgl_usul?>&satker=<?=$satker?>" >-->
+						<a id="" class="btn btn-small" href="list_penetapan.php" >
 						<i class="" align="center"></i>
 						  Kembali ke halaman Sebelumnya : List Usulan
 						</a>

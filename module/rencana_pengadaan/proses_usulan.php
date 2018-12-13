@@ -17,9 +17,12 @@ if($_GET['flag'] == 1){
 				alert('Pengajuan Usulan Diproses');
 		</script>";
 		
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_usulan.php?tgl_usul={$_GET['tgl_usul']}&satker={$_GET['satker']}'
-	</script>";	
+	</script>";*/	
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pengadaan/index.php'
+	</script>";
 
 }elseif($_GET['flag'] == 2){
 	//batal proses pengajuan usulan
@@ -37,9 +40,12 @@ if($_GET['flag'] == 1){
 				alert('Pengajuan Usulan Dibatalkan');
 		</script>";
 		
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_usulan.php?tgl_usul={$_GET['tgl_usul']}&satker={$_GET['satker']}'
-	</script>";	
+	</script>";*/	
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pengadaan/index.php'
+	</script>";
 }elseif($_GET['flag'] == 3){
 	//batal proses verifikasi
 	$query = "UPDATE usulan_rencana_pengadaaan SET 
@@ -56,8 +62,11 @@ if($_GET['flag'] == 1){
 				alert('Verifikasi Usulan Dibatalkan');
 		</script>";
 		
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_penetapan.php?tgl_usul={$_GET['tgl_usul']}&satker={$_GET['satker']}'
+	</script>";*/	
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_penetapan.php'
 	</script>";	
 }elseif($_GET['flag'] == 4){
 	//batal proses penetapan
@@ -76,7 +85,7 @@ if($_GET['flag'] == 1){
 		</script>";
 		
 	echo "<script>
-	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_penetapan.php?tgl_usul={$_GET['tgl_usul']}&satker={$_GET['satker']}'
+	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_penetapan.php'
 	</script>";	
 }elseif($_GET['flag'] == 5){
 	//proses penetapan
@@ -94,9 +103,12 @@ if($_GET['flag'] == 1){
 				alert('Penetapan Usulan');
 		</script>";
 		
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_penetapan.php?tgl_usul={$_GET['tgl_usul']}&satker={$_GET['satker']}'
-	</script>";	
+	</script>";	*/
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_penetapan.php'
+	</script>";
 }
 
 ?>

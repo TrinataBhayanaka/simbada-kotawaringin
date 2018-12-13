@@ -15,8 +15,11 @@ if($_GET['flag'] == 1){
 				alert('Pengajuan Usulan Diproses');
 		</script>";
 		
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_usulan.php?tgl_usul={$_GET['tgl_usul']}&satker={$_GET['satker']}'
+	</script>";*/
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/index.php'
 	</script>";	
 
 }elseif($_GET['flag'] == 2){
@@ -35,8 +38,11 @@ if($_GET['flag'] == 1){
 				alert('Pengajuan Usulan Dibatalkan');
 		</script>";
 		
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_usulan.php?tgl_usul={$_GET['tgl_usul']}&satker={$_GET['satker']}'
+	</script>";*/	
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/index.php'
 	</script>";	
 }elseif($_GET['flag'] == 3){
 	//batal proses verifikasi
@@ -54,9 +60,13 @@ if($_GET['flag'] == 1){
 				alert('Verifikasi Usulan Dibatalkan');
 		</script>";
 		
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_penetapan.php?tgl_usul={$_GET['tgl_usul']}&satker={$_GET['satker']}'
-	</script>";	
+	</script>";	*/
+	
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_penetapan.php'
+	</script>";
 }elseif($_GET['flag'] == 4){
 	//batal proses penetapan
 	$query = "UPDATE usulan_rencana_pemeliharaan SET 
@@ -73,8 +83,11 @@ if($_GET['flag'] == 1){
 				alert('Penetapan Usulan Dibatalkan');
 		</script>";
 		
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_penetapan.php?tgl_usul={$_GET['tgl_usul']}&satker={$_GET['satker']}'
+	</script>";*/
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_penetapan.php'
 	</script>";	
 }elseif($_GET['flag'] == 5){
 	//proses penetapan
@@ -92,9 +105,12 @@ if($_GET['flag'] == 1){
 				alert('Penetapan Usulan');
 		</script>";
 		
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_penetapan.php?tgl_usul={$_GET['tgl_usul']}&satker={$_GET['satker']}'
-	</script>";	
+	</script>";	*/
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_penetapan.php'
+	</script>";
 }
 
 ?>

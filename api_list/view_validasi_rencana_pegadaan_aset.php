@@ -217,6 +217,10 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
         $wrd = "Barang"."<br>"."ditolak";
         $label ="label-default";
         $row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+      }else{
+        $wrd = "Barang"."<br>"."belom proses";
+        $label ="label-warning";
+        $row[] = "<center><span class=\"label $label\">$wrd </span></center>"; 
       }
       $row[] ="$keterangan";
       

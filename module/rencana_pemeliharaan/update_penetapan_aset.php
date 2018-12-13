@@ -15,8 +15,6 @@ $query	  = "UPDATE usulan_rencana_pemeliharaan_aset SET
 				satuan_usul_rev 	= '$_POST[satuan_usul_rev]',
 				ket 	= '".addslashes(html_entity_decode($_POST[ket]))."',
 				pemeliharaan 	= '".addslashes(html_entity_decode($_POST[pemeliharaan]))."',
-				status_barang 	= '".addslashes(html_entity_decode($_POST[status_barang]))."',
-
 				status_verifikasi	= '$flag'
 			WHERE idr 	= '$_POST[idr]'";		
 $exec =  mysql_query($query);
@@ -31,6 +29,6 @@ $exe =  mysql_query($up_status_penetapan);
 		</script>";
 	
 	echo "<script>
-	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_penetapan_aset.php?idus={$_POST['idus']}&tgl_usul={$_POST['tgl_usul_param']}&satker={$_POST['satker']}'
+	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_penetapan_aset.php?idus={$_POST['idus']}&satker={$_POST['satker']}'
 	</script>";	
 ?>

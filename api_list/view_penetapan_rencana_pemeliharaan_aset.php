@@ -21,7 +21,7 @@ $id=$_SESSION['user_id'];//Nanti diganti
  * you want to insert a non-database field (for example a counter or static image)
  */
 
-$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_optml','jml_usul_rev','status_penetapan','ket','status_validasi','status_verifikasi');
+$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_optml','jml_usul_rev','status_barang','status_penetapan','status_validasi','status_verifikasi');
 //$test = count($aColumns);
   
 // echo $aColumns; 
@@ -105,9 +105,9 @@ if($idus != ''){
 if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
      //$sWhere = "WHERE (";
 	if($idus != ''){
-		$sWhere .=" WHERE idus='{$idus}' AND (";
+		$sWhere =" WHERE idus='{$idus}' AND (";
 	}else{
-		$sWhere .="(";
+		$sWhere ="(";
 	}
 	
      // $sWhere.="(";
@@ -206,6 +206,8 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
 	  $row[] ="[".$kodeKelompok."] "."<br/>".$ket['Uraian'];
       $row[] ="<center>".$jml_usul."<center>";
       $row[] ="<center>".$jml_optml."<center>";
+      $row[] =$aRow['status_barang'];
+      
       
       if($aRow['status_verifikasi'] == 0 ){
         $wrd = "Barang"."<br>"."belom proses";
@@ -220,7 +222,6 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
         $label ="label-default";
         $row[] = "<center><span class=\"label $label\">$wrd </span></center>";
       }
-      $row[] ="$keterangan";
       if($aRow['status_validasi'] == 1){
           //nothing
         $row[] ="";

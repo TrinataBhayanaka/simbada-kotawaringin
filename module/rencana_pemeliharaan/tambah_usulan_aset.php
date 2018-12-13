@@ -31,9 +31,19 @@ $tahun  = $TAHUN_AKTIF;
 
 	   $('#kodeKelompok').on('change', function(){
 		var kodeKelompok = $('#kodeKelompok').val();
-		var KodeSatker = $('#satker').val();
+		var KodeSatkerAsal = $('#satker').val();
+		var KodeSatkerTujuan = $('#satkerTujuanHide').val();
 		var idus = $('#idus').val();	
+		var status_barang = $('#status_barang').val();
 		
+		var KodeSatker = '';
+		if(status_barang == 'Milik Sendiri'){
+			KodeSatker = KodeSatkerAsal;
+		}else{
+			KodeSatker = KodeSatkerTujuan;	
+		}
+
+
 		$('#jml_usul').val('');
 		$('#satuan_usul').val('');
 		$('#jml_optml').val('');
@@ -44,7 +54,7 @@ $tahun  = $TAHUN_AKTIF;
 
 			//validate jenis aset
 			if(kodeKelompok !='' && idus !='' ){
-			$.post('../../function/api/kodeKelompokexistPemeliharaan.php', {kodeKelompok:kodeKelompok,idus:idus}, function(result){
+			$.post('../../function/api/kodeKelompokexistPemeliharaan.php', {kodeKelompok:kodeKelompok,idus:idus,status_barang:status_barang}, function(result){
 				//console.log(result);
 				if(result == 1){
 					//alert('Kode Program Telah Tersedia');
@@ -60,23 +70,101 @@ $tahun  = $TAHUN_AKTIF;
 					$('#info2').css("color","green");
 					$('#simpan').removeAttr('disabled');
 				    $('#simpan').css("background","#04c");
+
+				    if(kodeKelompok !='' && KodeSatker !='' ){
+						$.post('../../function/api/asetOptmlPml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
+								//console.log(result);
+								document.getElementById('jml_optml').value = result[0].total; 
+								if(result[0].total > 0){
+			            			$('#simpan').removeAttr('disabled');
+					    			$('#simpan').css("background","#04c");
+								}else{
+									$('#simpan').attr('disabled','disabled');
+			            			$('#simpan').css("background","grey");
+								}
+								document.getElementById('kondisi_baik').value = result[0].Baik; 
+								document.getElementById('kondisi_rusak_ringan').value = result[0].RR;
+
+						},"JSON")
+			 	 	}
+
 				}
 			})	
 			}	
-			if(kodeKelompok !='' && KodeSatker !='' ){
-			$.post('../../function/api/asetOptmlPml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
-					//console.log(result);
-					document.getElementById('jml_optml').value = result[0].total; 
-					document.getElementById('kondisi_baik').value = result[0].Baik; 
-					document.getElementById('kondisi_rusak_ringan').value = result[0].RR;
 
-				},"JSON")
-	 	 	}
+			
 		});
 
 	   $('#satuan_usul').on('keyup', function(){
-		var satuan_usul = $('#satuan_usul').val();
-			document.getElementById('satuan_optml').value = satuan_usul; 
+			document.getElementById('satuan_optml').value = $('#satuan_usul').val();
+		});
+
+	   $('#status_barang').on('change', function(){
+		var status_barang = $('#status_barang').val();
+			if(status_barang == 'Milik Sendiri'){
+				$('#satkerTujuan').hide();
+			}else{
+ 				$('#satkerTujuan').show();	
+			}
+		});
+
+	   $('#SatkerTujuan').on('change', function(){
+			document.getElementById('satkerTujuanHide').value = $('#SatkerTujuan').val(); 
+			var kodeKelompok = $('#kodeKelompok').val();
+			var KodeSatkerAsal = $('#satker').val();
+			var KodeSatkerTujuan = $('#SatkerTujuan').val();
+			var idus = $('#idus').val();	
+			var status_barang = $('#status_barang').val();
+			
+			var KodeSatker = '';
+			if(status_barang == 'Milik Sendiri'){
+				KodeSatker = KodeSatkerAsal;
+			}else{
+				KodeSatker = KodeSatkerTujuan;	
+			}
+
+			if(kodeKelompok !=''){
+				//validate jenis aset
+				if(kodeKelompok !='' && idus !='' ){
+				$.post('../../function/api/kodeKelompokexistPemeliharaan.php', {kodeKelompok:kodeKelompok,idus:idus,status_barang:status_barang}, function(result){
+					//console.log(result);
+					if(result == 1){
+						//alert('Kode Program Telah Tersedia');
+						$("#message2").show();
+						$('#info2').html('Jenis Aset telah digunakan');
+			            $('#info2').css("color","red");
+						$('#simpan').attr('disabled','disabled');
+			            $('#simpan').css("background","grey");
+					}else{
+						//console.log("here");
+						$("#message2").show();
+						$('#info2').html('Jenis Aset dapat digunakan'); 
+						$('#info2').css("color","green");
+						$('#simpan').removeAttr('disabled');
+					    $('#simpan').css("background","#04c");
+
+					    if(kodeKelompok !='' && KodeSatker !='' ){
+							$.post('../../function/api/asetOptmlPml.php', {kodeKelompok:kodeKelompok,KodeSatker:KodeSatker}, function(result){
+								//console.log(result);
+								document.getElementById('jml_optml').value = result[0].total; 
+								if(result[0].total > 0){
+			            			$('#simpan').removeAttr('disabled');
+					    			$('#simpan').css("background","#04c");
+								}else{
+									$('#simpan').attr('disabled','disabled');
+			            			$('#simpan').css("background","grey");
+								}
+								document.getElementById('kondisi_baik').value = result[0].Baik; 
+								document.getElementById('kondisi_rusak_ringan').value = result[0].RR;
+
+							},"JSON")
+				 	 	}
+					}	
+				})	
+				}	
+
+				
+			}
 		});
 		
 
@@ -100,14 +188,14 @@ $tahun  = $TAHUN_AKTIF;
 			    </span>
 				<span class="text">Usulan Rencana Pemeliharaan</span>
 			</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/filter_penetapan.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/list_penetapan.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">2</i>
 				    </span>
 					<span class="text">Penetapan Rencana Pemeliharaan</span>
 				</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/filter_validasi.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/list_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">3</i>
@@ -125,6 +213,18 @@ $tahun  = $TAHUN_AKTIF;
 		<section class="formLegend">
 		<form name="myform" method="post" action="add_usulan_aset.php">
 			<ul>
+				<li>
+					<span class="span2">Status Barang</span>
+					<select name="status_barang" required="" id="status_barang">
+					  <option value="Milik Sendiri">Milik Sendiri</option>
+					  <option value="Pinjam Pakai">Pinjam Pakai</option>
+					</select>
+				</li>
+				<br/>
+				<div style="display:none" id="satkerTujuan">
+					<?=selectAllSatker('SatkerTujuan','260',true,false,false,false,1,'Kode Satker Tujuan');?>
+				</div>
+				<br>
 				<li>
 					<?php selectAset('kodeKelompok','255',true,false,'required'); ?>
 				</li>
@@ -168,10 +268,10 @@ $tahun  = $TAHUN_AKTIF;
 					<span class="span2">Satuan Optimal</span>
 					<input type="text" name="satuan_optml" id="satuan_optml" value="" readonly=""/>
 				</li>
-				<li>
+				<!--<li>
 					<span class="span2">Status Barang</span>
 					<input type="text" name="status_barang" id="status_barang" value="" />
-				</li>
+				</li>-->
 				<li>
 					<span class="span2">Nama Pemelihara</span>
 					<input type="text" name="pemeliharaan" id="pemeliharaan" value="" />
@@ -186,6 +286,7 @@ $tahun  = $TAHUN_AKTIF;
 					<input type="submit" class="btn btn-primary " id="simpan" value="simpan" name="submit"/ >
 					<input type="hidden" name="idus" id="idus" value="<?=$idus;?>">
 					<input type="hidden" name="satker" id="satker" value="<?=$satker;?>">
+					<input type="hidden" name="satkerTujuanHide" id="satkerTujuanHide" value="">
 					<input type="hidden" name="tgl_usul_param" id="tgl_usul" value="<?=$tgl_usul;?>">
 					<!--<input type="reset" name="reset" class="btn" value="Bersihkan Data">-->
 				</li>

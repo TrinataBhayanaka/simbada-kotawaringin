@@ -19,24 +19,30 @@ $id=$_SESSION['user_id'];//Nanti diganti
 /* Array of database columns which should be read and sent back to DataTables. Use a space where
  * you want to insert a non-database field (for example a counter or static image)
  */
-
-//$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_optml','status_penetapan');
-$aColumns = array('idr','idus','kodeKelompok','jml_usul','jml_optml','status_usulan','status_barang');
+//pr($_GET);
+$aColumns = array('a.idus','a.kodeSatker','a.no_usul','a.tgl_usul','s.NamaSatker','a.status_usulan','a.status_penetapan','a.status_validasi','a.status_verifikasi','a.status_verifikasi');
 //$test = count($aColumns);
   
 // echo $aColumns; 
 /* Indexed column (used for fast and accurate table cardinality) */
-$sIndexColumn = "idr";
+$sIndexColumn = "idus";
 
 /* DB table to use */
-$sTable = "usulan_rencana_pemeliharaan_aset";
+$sTable = "usulan_rencana_pemeliharaan";
 //variabel ajax
-//$tgl_usul=$_GET['tgl_usul'];
-$satker=$_GET['satker'];
 
-$idus=$_GET['idus'];
+$tahun=$_GET['tahun'];
+if($_SESSION['ses_uaksesadmin']==1){
+    $kodeSatker = $_SESSION['ses_satkerkode'];
+    $sWhere =" WHERE YEAR(a.tgl_usul) ='{$tahun}' AND status_penetapan = 1 ";
+    $condtn =" WHERE YEAR(tgl_usul) ='{$tahun}' AND status_penetapan = 1 ";
+}else{
+    $kodeSatker = $_SESSION['ses_satkerkode'];
+    $sWhere =" WHERE a.kodeSatker='$kodeSatker' AND YEAR(a.tgl_usul) ='{$tahun}' AND status_penetapan = 1 ";
+    $condtn =" WHERE kodeSatker='$kodeSatker' AND YEAR(tgl_usul) ='{$tahun}' AND status_penetapan = 1 ";
+}
 
-$param_tgl_usul = $_GET['tgl_usul'];
+$addSwhere = ' AND s.Kd_Ruang is null' ;
 // echo $tahun;
 /* REMOVE THIS LINE (it just includes my SQL connection user/pass) */
 //include( $_SERVER['DOCUMENT_ROOT'] . "/datatables/mysql.php" );
@@ -50,7 +56,7 @@ $param_tgl_usul = $_GET['tgl_usul'];
 /*
  * Local functions
  */
-
+//pr($_GET);
 function fatal_error($sErrorMessage = '') {
      header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error');
      
@@ -83,7 +89,7 @@ if (isset($_GET['iSortCol_0'])) {
 
      $sOrder = substr_replace($sOrder, "", -2);
      if ($sOrder == "ORDER BY") {
-          $sOrder = "ORDER BY idr desc";
+          $sOrder = "ORDER BY tgl_usul desc, idus desc";
      }
 }
 //ECHO $sOrder;
@@ -94,21 +100,14 @@ if (isset($_GET['iSortCol_0'])) {
  * word by word on any field. It's possible to do here, but concerned about efficiency
  * on very large tables, and MySQL's regex functionality is very limited
  */
-$sWhere = "";
-if($idus != ''){
-	$sWhere=" WHERE idus='{$idus}'";
-}else{
-	$sWhere="";
-}
+//$sWhere = "";
+
 //pr($sWhere);
 //exit;
 if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
-     //$sWhere = "WHERE (";
-	if($idus != ''){
-		$sWhere .=" WHERE idus='{$idus}' AND (";
-	}else{
-		$sWhere .="(";
-	}
+     
+	$sWhere .="AND (";
+	
 	
      // $sWhere.="(";
      for ($i = 0; $i < count($aColumns); $i++) {
@@ -128,8 +127,9 @@ if (isset($_GET['sSearch']) && $_GET['sSearch'] != "") {
  */
 $sQuery = "
 		SELECT SQL_CALC_FOUND_ROWS " . str_replace(" , ", " ", implode(", ", $aColumns)) . "
-		FROM   $sTable 
-		$sWhere
+		FROM   $sTable as a
+		INNER JOIN satker as s on s.kode = a.kodeSatker 
+		$sWhere $addSwhere
 		$sOrder
 		$sLimit
 		";
@@ -146,12 +146,6 @@ $aResultFilterTotal = $DBVAR->fetch_array($rResultFilterTotal);
 $iFilteredTotal = $aResultFilterTotal[0];
 
 /* Total data set length */
-if($idus != ''){
-	$condtn =" WHERE idus='{$idus}' ";
-}else{
-	$condtn="";
-}
-
 $sQuery = "
 		SELECT COUNT(" . $sIndexColumn . ")
 		FROM   $sTable $condtn";
@@ -173,42 +167,35 @@ $output = array(
 $no=$_GET['iDisplayStart']+1;
 
 while ($aRow = $DBVAR->fetch_array($rResult)) {
-    
-	   $row 			= array();
-	   $idr 			= $aRow['idr'];
-	   $idus 			= $aRow['idus'];
-    $kodeKelompok 	= $aRow['kodeKelompok'];
-    $jml_usul 		= $aRow['jml_usul'];
-    $jml_max 		= $aRow['jml_max'];
-    $jml_optml 		 = $aRow['jml_optml'];
-    $jml_rill       = $aRow['jml_rill'];
-    $status_barang 		  = $aRow['status_barang'];
-    //$status_penetapan = $aRow['status_penetapan'];
-   	$status_usulan = $aRow['status_usulan'];
-   	$ketKodeKelompok = mysql_query("select Uraian from kelompok where Kode = '{$kodeKelompok}'");
-   	$ket = mysql_fetch_assoc($ketKodeKelompok);
+	//pr($aRow);
+    $row 			= array();
+	$idus 			= $aRow['idus'];
+    $kodeSatker 	= $aRow['kodeSatker'];
+    $no_usul 		= $aRow['no_usul'];
+    $tgl_usul 		= $aRow['tgl_usul'];
+    $temp = explode("-", $tgl_usul);
+    $format_tgl = $temp['2'].'/'.$temp['1'].'/'.$temp['0']; 
+	$detail="<a style=\"display:display\"  
+		href=\"list_validasi_aset.php?idus={$idus}&satker={$kodeSatker}\"	class=\"btn btn-info btn-small\" id=\"\" value=\"\" >
+			<i class=\"fa fa-eye\" align=\"center\"></i>&nbsp;&nbsp;Detail</a>";
 
-	$delete="<a style=\"display:display\" 
-			href=\"delete_usulan_aset.php?idr={$idr}&idus={$idus}&tgl_usul={$param_tgl_usul}&satker={$satker}\" onclick=\"return confirm('Hapus Data?');\"
-			class=\"btn btn-danger btn-circle\" id=\"\" value=\"\" title=\"Hapus\">
-			
-			<i class=\"fa fa-trash simbol\">&nbsp;Hapus</i></a>";
-	
-	$edit="<a style=\"display:display\"  
-			href=\"edit_usulan_aset.php?idr={$idr}&idus={$idus}&tgl_usul={$param_tgl_usul}&satker={$satker}\"	class=\"btn btn-warning btn-small\" id=\"\" value=\"\" >
-			 
-			<i class=\"fa fa-pencil\" align=\"center\"></i>&nbsp;&nbsp;Edit</a>";
 
 	  $row[] ="<center>".$no."<center>";
-	  $row[] ="[".$kodeKelompok."]"."<br/>".$ket['Uraian'];
-      $row[] ="<center>".$jml_usul."<center>";
-      $row[] ="<center>".$jml_optml."<center>";
-      $row[] ="<center>".$status_barang."<center>";
-      if($status_usulan == 0){
-        $row[] ="<center>".$edit."&nbsp;".$delete."<center>";
+	  $row[] =$no_usul;
+	  $row[] ='['.$kodeSatker.'] '.$aRow['NamaSatker'] ;
+	  $row[] ="<center>".$tgl_usul."<center>";
+
+      $status_validasi = $aRow['status_validasi'];
+      if($status_validasi == 1){
+      	$wrd = "Usulan Sudah Divalidasi";
+		$label ="label-success";
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
       }else{
-        $row[] ='';
-      }
+      	$wrd = "Usulan Sudah Ditetapkan";
+		$label ="label-success";
+		$row[] = "<center><span class=\"label $label\">$wrd </span></center>";
+	  }
+      $row[] ="<center>".$detail."<center>";
       
       
 	$no++;

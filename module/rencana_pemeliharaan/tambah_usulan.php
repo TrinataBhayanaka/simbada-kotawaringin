@@ -145,14 +145,14 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker' and
 			    </span>
 				<span class="text">Usulan Rencana Pemeliharaan</span>
 			</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/filter_penetapan.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/list_penetapan.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">2</i>
 				    </span>
 					<span class="text">Penetapan Rencana Pemeliharaan</span>
 				</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/filter_validasi.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/list_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">3</i>

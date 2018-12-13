@@ -46,7 +46,11 @@ $exec =  mysql_query($query);
 			alert('Data Berhasil Disimpan');
 		</script>";
 	
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_usulan.php?tgl_usul={$_POST['tgl_usul_param']}&satker={$_POST['KodeSatker']}'
+	</script>";*/	
+
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/index.php'
 	</script>";	
 ?>

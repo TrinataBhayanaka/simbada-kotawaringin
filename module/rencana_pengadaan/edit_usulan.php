@@ -93,11 +93,51 @@ $usulan = mysql_fetch_assoc($usul);
 				}
 				$("#output").html(template);
 				$("#output").select2();
-
+				validate();
 			}
 		},"JSON")
 
 	}
+			function validate(){
+			var programid 	= $("#program").val();
+			var kegiatanid 	= $("#kegiatan").val();
+			var outputid 	= $("#output").val();
+			var tahun 		= $("#tahun").val();
+			var satker 		= $("#satker").val();	
+
+			var idp_h = $("#idp_h").val();
+			var idk_h = $("#idk_h").val();
+			var idot_h = $("#idot_h").val();
+			
+			if(programid == idp_h && kegiatanid == idk_h && outputid == idot_h){
+				//no process
+				$("#message").hide();
+				$('#simpan').removeAttr('disabled');	
+			    $('#simpan').css("background","#04c");
+			}else{
+				if(programid != '' && kegiatanid != '' && outputid != ''){
+					$.post('../../function/api/usulanExist.php', {programid:programid,kegiatanid:kegiatanid,outputid:outputid,tahun:tahun,satker:satker}, function(result){
+						if(result == 1){
+							//alert('Kode Program Telah Tersedia');
+							$("#message").show();
+							$('#info').html('Usulan dengan Program, Kegiatan dan Output telah digunakan');
+				            $('#info').css("color","red");
+							$('#simpan').attr('disabled','disabled');
+				            $('#simpan').css("background","grey");
+						}else{
+							$("#message").show();
+							$('#info').html('Usulan dengan Program, Kegiatan dan Output dapat digunakan'); 
+							$('#info').css("color","green");
+							$('#simpan').removeAttr('disabled');	
+						    $('#simpan').css("background","#04c");
+						}
+					})
+				}else{
+					$('#simpan').attr('disabled','disabled');
+		            $('#simpan').css("background","grey");
+				}
+			}
+	 	}
 
 	   $('.program').on('change', function(){
 	   		hierachy();
@@ -127,14 +167,14 @@ $usulan = mysql_fetch_assoc($usul);
 			    </span>
 				<span class="text">Usulan Rencana Pengadaan</span>
 			</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_penetapan.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/list_penetapan.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">2</i>
 				    </span>
 					<span class="text">Penetapan Rencana Pengadaan</span>
 				</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/list_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">3</i>
@@ -168,7 +208,7 @@ $usulan = mysql_fetch_assoc($usul);
 				</li>
 				<li>
 					<span class="span2">Program</span>
-					<select name="program" class="span5 program" id="program" required="" disabled="">
+					<select name="program" class="span5 program" id="program" required="" >
 					<!--<option value="" >Pilih Program</option>-->	
         			<?php
         			while($get_program = mysql_fetch_assoc($program)){
@@ -186,7 +226,7 @@ $usulan = mysql_fetch_assoc($usul);
 				<br/>
 				<li>
 					<span class="span2">Kegiatan</span>
-					<select name="kegiatan" class="span5 kegiatan " id="kegiatan" required="" disabled="">
+					<select name="kegiatan" class="span5 kegiatan " id="kegiatan" required="" >
 						<option value="" ></option>	
         			</select>
 				</li>
@@ -194,17 +234,24 @@ $usulan = mysql_fetch_assoc($usul);
 				<br/>
 				<li>
 					<span class="span2">Output</span>
-					<select name="output" class="span5 output" id="output" required="" disabled="">
+					<select name="output" class="span5 output" id="output" required="" >
         				<option value="" ></option>	
         			</select>
 				</li>
 				<br/>
 				<br/>
+				<li style="display:none" id="message">
+                	<span  class="span2">&nbsp;</span>
+                		<div class="checkbox">
+                  	<em id="info"></em>
+                </div>
+                </li>
 				<li>
 					<span class="span2">&nbsp;</span>
 					<input type="submit" class="btn btn-primary " id="simpan" value="simpan" name="submit"/ >
 					<input type="hidden" name="satker" id="satker" value="<?=$usulan[kodeSatker];?>">
 					<input type="hidden" name="tgl_usul_param" id="tgl_usul" value="<?=$tgl_usul;?>">
+					<input type="hidden" name="idp" id="idp_h" value="<?=$usulan[idp];?>">
 					<input type="hidden" name="idk" id="idk_h" value="<?=$usulan[idk];?>">
 					<input type="hidden" name="idus" id="idus" value="<?=$usulan[idus];?>">
 					<input type="hidden" name="idot" id="idot_h" value="<?=$usulan[idot];?>">

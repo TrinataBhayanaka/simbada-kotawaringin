@@ -13,6 +13,6 @@ $exec =  mysql_query($query);
 		</script>";
 	
 	echo "<script>
-	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_usulan_aset.php?idus={$idus}&tgl_usul={$tgl_usul}&satker={$satker}'
+	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_usulan_aset.php?idus={$idus}&satker={$satker}'
 	</script>";	
 ?>

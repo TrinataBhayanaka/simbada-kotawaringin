@@ -15,8 +15,7 @@ include"$path/menu.php";
 ?>
 	<script>
 	jQuery(function($){
-	   //$(".datepicker").mask("0000-00-00"); 
-	   $("#tahun").mask("9999");   
+	   $("#datepicker").mask("0000-00-00");    
 	   $("select").select2();
 	});
 	</script>
@@ -31,28 +30,28 @@ include"$path/menu.php";
 			<div class="subtitle">Filter Usulan Rencana Pengadaan</div>
 		</div>
 		<div class="grey-container shortcut-wrapper">
-				<a class="shortcut-link " href="<?=$url_rewrite?>/module/rencana_pengadaan/">
+				<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pengadaan/">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">1</i>
 				    </span>
 					<span class="text">Usulan Rencana Pengadaan</span>
 				</a>
-				<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/list_penetapan.php">
+				<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_penetapan.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">2</i>
 				    </span>
 					<span class="text">Penetapan Rencana Pengadaan</span>
 				</a>
-				<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/list_validasi.php">
+				<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">3</i>
 				    </span>
 					<span class="text">Validasi</span>
 				</a>
-				<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pengadaan/print_perencanaan_pengadaan.php">
+				<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/print_perencanaan_pengadaan.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">4</i>
@@ -62,25 +61,17 @@ include"$path/menu.php";
 			</div>		
 		
 		<section class="formLegend">
-		<form name="myform" method="post" action="<?php echo "$url_rewrite/report/template/PERENCANAAN/rencana_pengadaan_aset.php"; ?>">
+		<form name="myform" method="post" action="list_usulan.php">
 			<ul>
-				<!--<li>
-					<span class="span2">Tanggal Awal</span>
-					<input type="text" placeholder="yyyy-mm-dd" name="tgl_usul_awal" class= "datepicker" id="datepicker" value="" required="" />
-				</li>
 				<li>
-					<span class="span2">Tanggal Akhir</span>
-					<input type="text" placeholder="yyyy-mm-dd" name="tgl_usul_akhir" class = "datepicker" id="datepicker" value="" required="" />
-				</li>-->
-				<li>
-					<span class="span2">Tahun Usulan</span>
-					<input name="tahun" id="tahun" class="span1"  type="text" required="">
+					<span class="span2">Tanggal Usulan</span>
+					<input type="text" placeholder="yyyy-mm-dd" name="tgl_usul" id="datepicker" value="" />
 				</li>
 				<?=selectSatker('kodeSatker','235',true,false,'required');?>
 				<br>
 				<li>
 					<span class="span2">&nbsp;</span>
-					<input type="submit" class="btn btn-primary" value="Cetak" name="submit"/>
+					<input type="submit" class="btn btn-primary" value="Filter" name="submit"/>
 					<input type="reset" name="reset" class="btn" value="Bersihkan Data">
 				</li>
 			</ul>

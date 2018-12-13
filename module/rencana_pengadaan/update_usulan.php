@@ -26,7 +26,10 @@ $exec =  mysql_query($query);
 			alert('Data Berhasil Dirubah');
 		</script>";
 	
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_usulan.php?tgl_usul={$_POST['tgl_usul_param']}&satker={$_POST['KodeSatker']}'
-	</script>";	
+	</script>";*/	
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pengadaan/index.php'
+	</script>";
 ?>

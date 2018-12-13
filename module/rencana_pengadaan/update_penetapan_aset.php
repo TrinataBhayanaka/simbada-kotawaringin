@@ -36,7 +36,10 @@ $exe =  mysql_query($up_status_penetapan);
 			alert('Data Telah Diverifikasi');
 		</script>";
 	
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_penetapan_aset.php?idus={$_POST['idus']}&tgl_usul={$_POST['tgl_usul_param']}&satker={$_POST['satker']}'
+	</script>";*/
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pengadaan/list_penetapan_aset.php?idus={$_POST['idus']}&satker={$_POST['satker']}'
 	</script>";	
 ?>

@@ -4,6 +4,7 @@ include "../../config/config.php";
 //pr($_POST);
 $query	  = "UPDATE usulan_rencana_pemeliharaan_aset SET 
 				kodeKelompok 		= '$_POST[kodeKelompok]',
+				SatkerTujuan 		= '$_POST[SatkerTujuan]',
 				jml_usul 			= '$_POST[jml_usul]',
 				satuan_usul 		= '$_POST[satuan_usul]',
 				jml_optml 			= '$_POST[jml_optml]',
@@ -17,7 +18,10 @@ $exec =  mysql_query($query);
 			alert('Data Berhasil Dirubah');
 		</script>";
 	
-	echo "<script>
+	/*echo "<script>
 	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_usulan_aset.php?idus={$_POST['idus']}&tgl_usul={$_POST['tgl_usul_param']}&satker={$_POST['satker']}'
-	</script>";	
+	</script>";	*/
+	echo "<script>
+	window.location = '{$url_rewrite}/module/rencana_pemeliharaan/list_usulan_aset.php?idus={$_POST['idus']}&satker={$_POST['satker']}'
+	</script>";
 ?>

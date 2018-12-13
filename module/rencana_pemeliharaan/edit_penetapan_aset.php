@@ -32,6 +32,12 @@ $data = mysql_fetch_assoc($dataUsulan);
 		       this.value = this.value.replace(/[^0-9\.]/g, '');
 		    }
 		});
+	    var status_barang = $('#status_barangHidden').val();
+	    if(status_barang == 'Milik Sendiri'){
+			$('#satkerTujuan').hide();
+		}else{
+			$('#satkerTujuan').show();	
+		}
 
 	   $('#satuan_usul_rev').on('keyup', function(){
 		var satuan_usul_rev = $('#satuan_usul_rev').val();
@@ -43,14 +49,28 @@ $data = mysql_fetch_assoc($dataUsulan);
 	   	
 	   		var jml_usul_rev = $('#jml_usul_rev').val();
 	   		var jml_optml = $('#jml_optml').val();
-	   		if(parseInt(jml_usul_rev) > parseInt(jml_optml)){
-	   			alert("jumlah rencana > jumlah optimal");
-	   			$('#simpan').attr('disabled','disabled');
-		        $('#simpan').css("background","grey");
+	   		
+	   		if(parseInt(jml_usul_rev) != 0){
+	   			$('.infoTolak').hide();
+	   			if(parseInt(jml_usul_rev) > parseInt(jml_optml)){
+		   			//alert("jumlah rencana > jumlah optimal");
+		   			$('.infoReklas').show();
+          			$('#infoReklas').html('Jumlah Rencana > Revisi Optimal');
+            		$('#infoReklas').css("color","red");
+		   			$('#simpan').attr('disabled','disabled');
+			        $('#simpan').css("background","grey");
+		   		}else{
+		   			$('.infoReklas').hide();
+		   			$('#simpan').removeAttr('disabled');
+					$('#simpan').css("background","#04c");
+		   		}
 	   		}else{
-	   			$('#simpan').removeAttr('disabled');
-				$('#simpan').css("background","#04c");
+	   			$('.infoTolak').show();
+      			$('#infoTolak').html('Optimalisasi BMD');
+            	$('#infoTolak').css("color","red");
 	   		}
+
+	   		
 
 	   	});
 	   	/*var kodeKelompok = $('#paramkodekelompok').val();
@@ -84,14 +104,14 @@ $data = mysql_fetch_assoc($dataUsulan);
 			    </span>
 				<span class="text">Usulan Rencana Pemeliharaan</span>
 			</a>
-			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/filter_penetapan.php">
+			<a class="shortcut-link active" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/list_penetapan.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">2</i>
 				    </span>
 					<span class="text">Penetapan Rencana Pemeliharaan</span>
 				</a>
-		<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/filter_validasi.php">
+		<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pemeliharaan/list_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">3</i>
@@ -109,6 +129,18 @@ $data = mysql_fetch_assoc($dataUsulan);
 		<section class="formLegend">
 		<form name="myform" method="post" action="<?=$url_rewrite?>/module/rencana_pemeliharaan/update_penetapan_aset.php">
 			<ul>
+				<li>
+					<span class="span2">Status Barang</span>
+					<select name="status_barang" disabled="" id="status_barang">
+					  <option value="Milik Sendiri" <?=($data[status_barang] == 'Milik Sendiri') ? 'selected': ''?>>Milik Sendiri</option>
+					  <option value="Pinjam Pakai" <?=($data[status_barang] == 'Pinjam Pakai') ? 'selected': ''?>>Pinjam Pakai</option>
+					</select>
+				</li>
+				<br/>
+				<div style="display:none" id="satkerTujuan">
+					<?=selectAllSatker('SatkerTujuan','260',true,(isset($data[SatkerTujuan])) ? $data[SatkerTujuan]: false,'readonly',false,1,'Kode Satker Tujuan');?>
+				</div>
+				<br/>
 				<li>
 					<?php selectAset('kodeKelompok','255',true,(isset($data[kodeKelompok])) ? $data[kodeKelompok]: false,'readonly'); ?>
 				</li>
@@ -158,15 +190,23 @@ $data = mysql_fetch_assoc($dataUsulan);
 					<input type="text" class="span1 numbersOnly" name="jml_usul_rev" id="jml_usul_rev" 
 					value="<?=$data[jml_usul_rev]?>" required/>
 				</li>
+				<li style="display:none" class="infoTolak">
+					<span class="">&nbsp;</span>
+					 <em id="infoTolak"></em>
+				</li>
+				<li style="display:none" class="infoReklas">
+					<span class="">&nbsp;</span>
+					 <em id="infoReklas"></em>
+				</li>
 				<li>
 					<span class="span2">Satuan Rencana</span>
 					<input type="text" name="satuan_usul_rev" id="satuan_usul_rev" 
 					value="<?=$data[satuan_usul_rev]?>" required />
 				</li>
-				<li>
+				<!--<li>
 					<span class="span2">Status Barang</span>
 					<textarea rows="3" cols="30" name="status_barang" ><?=$data[status_barang]?></textarea>
-				</li>
+				</li>-->
 				<li>
 					<span class="span2">Nama Pemelihara</span>
 					<textarea rows="3" cols="30" name="pemeliharaan" ><?=$data[pemeliharaan]?></textarea>
@@ -184,6 +224,8 @@ $data = mysql_fetch_assoc($dataUsulan);
 					<input type="hidden" name="satker" id="satker" value="<?=$satker;?>">
 					<input type="hidden" name="tgl_usul_param" id="tgl_usul" value="<?=$tgl_usul;?>">
 					<input type="hidden" name="paramkodekelompok" id="paramkodekelompok" value="<?=$data[kodeKelompok];?>">
+					<input type="hidden" name="status_barangHidden" id="status_barangHidden" value="<?=$data[status_barang];?>">
+					
 					
 					<!--<input type="reset" name="reset" class="btn" value="Bersihkan Data">-->
 				</li>

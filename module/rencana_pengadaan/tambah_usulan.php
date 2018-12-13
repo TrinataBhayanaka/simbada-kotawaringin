@@ -144,14 +144,14 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker' and
 			    </span>
 				<span class="text">Usulan Rencana Pengadaan</span>
 			</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_penetapan.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/list_penetapan.php">
 					<span class="fa-stack fa-lg">
 				      <i class="fa fa-circle fa-stack-2x"></i>
 				      <i class="fa fa-inverse fa-stack-1x">2</i>
 				    </span>
 					<span class="text">Penetapan Rencana Pengadaan</span>
 				</a>
-			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/filter_validasi.php">
+			<a class="shortcut-link" href="<?=$url_rewrite?>/module/rencana_pengadaan/list_validasi.php">
 				<span class="fa-stack fa-lg">
 			      <i class="fa fa-circle fa-stack-2x"></i>
 			      <i class="fa fa-inverse fa-stack-1x">3</i>
@@ -177,7 +177,10 @@ $program 	 = mysql_query("select * from program where KodeSatker = '$satker' and
 					<span class="span2">Tanggal Usulan</span>
 					<input type="text" placeholder="yyyy-mm-dd" name="tgl_usul" id="datepicker" value="" required=""/>
 				</li>
-				<?=selectSatker('KodeSatker','470',true,(isset($satker)) ? $satker: false,'readonly');?>
+				<?php
+					selectSatker('KodeSatker','470',true,(isset($satker)) ? $satker: false,'readonly');	
+					
+				?>
 				<br/>
 				<li>
 					<span class="span2">Tahun Aktif + 1</span>
