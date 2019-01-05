@@ -68,7 +68,8 @@ $count = count($html);
 
 $waktu=date("d-m-y_h-i-s");
 $namafile="$path/report/output/sk_penghapusan_barang-$id.pdf";
-$fileDS ="sk_penghapusan_barang_".$id."_signed.pdf";
+$mpdf->Output("$namafile",'F');
+/*$fileDS ="sk_penghapusan_barang_".$id."_signed.pdf";
 
 	// how to save PNG codes to server 
     $tempDir = $path.'/report/output/'; 
@@ -117,10 +118,10 @@ chmod($namafile,0755);
 		exec($command, $output);
 		//pr($path_pdf);
 		//pr($output);
-		//exit();
+		//exit();*/
 
-//$namafile_web="$url_rewrite/report/output/$fileDS";
-//echo "<script>window.location.href='$namafile_web';</script>";
+$namafile_web="$url_rewrite/report/output/sk_penghapusan_barang-$id.pdf";
+echo "<script>window.location.href='$namafile_web';</script>";
 exit;
 }
 else
