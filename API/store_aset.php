@@ -2593,7 +2593,7 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
               while ($dataAset = mysql_fetch_assoc($sqlquery)){
                       $kib = $dataAset;
                   }
-              $kib['TglPerubahan'] = $kib['TglPerolehan'];    
+              $kib['TglPerubahan'] = $kib['TglPembukuan'];
               $kib['changeDate'] = date("Y-m-d");
               $kib['action'] = 1;
               $kib['operator'] = $_SESSION['ses_uoperatorid'];
