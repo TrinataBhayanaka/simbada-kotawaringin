@@ -241,7 +241,7 @@ if($hit == 1){
 // exit;
 //begin 
 //$paramSql = "u.tgl_usul >='$tglawalUsulan' AND u.tgl_usul <='$tglakhirUsulan'";
-$paramSql = "YEAR(u.tgl_usul) ='$tahun'";
+$paramSql = "YEAR(u.tgl_usul) ='$tahun' AND kodeSatker = '$skpd_id'";
 $paramStatus =" AND u.status_usulan = 1 AND u.status_verifikasi = 1 AND u.status_penetapan = 1 AND u.status_validasi = 1
 				AND a.status_verifikasi = 1 AND a.status_penetapan = 1 AND a.status_validasi = 1";
 $sql = "SELECT u.*,a.*,k.Kode,k.Uraian FROM `usulan_rencana_pemeliharaan` as u 
