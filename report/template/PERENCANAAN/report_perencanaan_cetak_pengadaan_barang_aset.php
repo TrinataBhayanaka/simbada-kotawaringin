@@ -38,7 +38,7 @@ $data=array(
     "skpd_id"=>$skpd_id,
 	"tab"=>$tab
 );
-pr($_GET);
+//pr($_GET);
 $REPORT->set_data($data);
 
 $nama_kab = $NAMA_KABUPATEN;

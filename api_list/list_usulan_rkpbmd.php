@@ -202,7 +202,7 @@ while ($aRow = $DBVAR->fetch_array($rResult)) {
 			<i class=\"fa fa-download\" align=\"center\"></i>&nbsp;&nbsp;Cetak</a>";
 	//add tombol proses
 	//handler jika list aset usulan kosong		
-	$ceck = "SELECT COUNT(idr) as jml from usulan_rencana_pengadaaan_aset 
+	$ceck = "SELECT COUNT(idr) as jml from usulan_rencana_pemeliharaan_aset 
 		 	WHERE idus = '$idus'";
 	$Exec = $DBVAR->query($ceck) or fatal_error('MySQL Error: ' . mysql_errno());
 	$data = $DBVAR->fetch_array($Exec);	
