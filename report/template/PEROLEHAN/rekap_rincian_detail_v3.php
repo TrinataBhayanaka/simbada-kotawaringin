@@ -2122,11 +2122,11 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
 
         $data_level4[ $key_baru ][ 'Uraian' ] = $URAIAN;
         $data_level4[ $key_baru ][ 'Kelompok' ] = $key_baru;
-        $data_level4[ $key_baru ][ 'nilai' ] += $data_level5[ $key ][ 'nilai' ];
-        $data_level4[ $key_baru ][ 'jml' ] += $data_level5[ $key ][ 'jml' ];
-        $data_level4[ $key_baru ][ 'ap' ] += $data_level5[ $key ][ 'ap' ];
-        $data_level4[ $key_baru ][ 'pp' ] += $data_level5[ $key ][ 'pp' ];
-        $data_level4[ $key_baru ][ 'nb' ] += $data_level5[ $key ][ 'nb' ];
+        $data_level4[ $key_baru ][ 'nilai' ] += round($data_level5[ $key ][ 'nilai' ],2);
+        $data_level4[ $key_baru ][ 'jml' ] += round($data_level5[ $key ][ 'jml' ],2);
+        $data_level4[ $key_baru ][ 'ap' ] += round($data_level5[ $key ][ 'ap' ],2);
+        $data_level4[ $key_baru ][ 'pp' ] += round($data_level5[ $key ][ 'pp' ],2);
+        $data_level4[ $key_baru ][ 'nb' ] += round($data_level5[ $key ][ 'nb' ],2);
         $data_level4[ $key_baru ][ 'mutasi_jml_tambah' ] += $data_level5[ $key ][ 'mutasi_jml_tambah' ];
         $data_level4[ $key_baru ][ 'mutasi_nilai_tambah' ] += $data_level5[ $key ][ 'mutasi_nilai_tambah' ];
         $data_level4[ $key_baru ][ 'mutasi_ap_tambah' ] += $data_level5[ $key ][ 'mutasi_ap_tambah' ];
@@ -2141,11 +2141,11 @@ function group_data($data_awal_perolehan, $data_akhir_perolehan, $data_hapus_awa
         $data_level4[ $key_baru ][ 'mutasi_pp_kurang' ] += $data_level5[ $key ][ 'mutasi_pp_kurang' ];
         $data_level4[ $key_baru ][ 'mutasi_nb_kurang' ] += $data_level5[ $key ][ 'mutasi_nb_kurang' ];
 
-        $data_level4[ $key_baru ][ 'nilai_akhir' ] += $data_level5[ $key ][ 'nilai_akhir' ];
-        $data_level4[ $key_baru ][ 'jml_akhir' ] += $data_level5[ $key ][ 'jml_akhir' ];
-        $data_level4[ $key_baru ][ 'ap_akhir' ] += $data_level5[ $key ][ 'ap_akhir' ];
-        $data_level4[ $key_baru ][ 'pp_akhir' ] += $data_level5[ $key ][ 'pp_akhir' ];
-        $data_level4[ $key_baru ][ 'nb_akhir' ] += $data_level5[ $key ][ 'nb_akhir' ];
+        $data_level4[ $key_baru ][ 'nilai_akhir' ] += round($data_level5[ $key ][ 'nilai_akhir' ]);
+        $data_level4[ $key_baru ][ 'jml_akhir' ] += round($data_level5[ $key ][ 'jml_akhir' ]);
+        $data_level4[ $key_baru ][ 'ap_akhir' ] += round($data_level5[ $key ][ 'ap_akhir' ]);
+        $data_level4[ $key_baru ][ 'pp_akhir' ] += round($data_level5[ $key ][ 'pp_akhir' ]);
+        $data_level4[ $key_baru ][ 'nb_akhir' ] += round($data_level5[ $key ][ 'nb_akhir' ]);
         $data_level4[ $key_baru ][ 'SubSub' ][ $key ] = $data_level5[ $key ];
 
         $data_level4[ $key_baru ][ 'total_aset_baru' ] += $data_level5[ $key][ 'total_aset_baru' ];
