@@ -64,12 +64,6 @@ foreach ($data as $val) {
 	$execUSA = $link->query($quertUSA);	
 	//echo "quertUS : ".$quertUSA."\n\n";
 
-	//update aset
-	$quertAST = "UPDATE aset SET fixPenggunaan = '0' ,StatusValidasi='0',Status_Validasi_Barang = '0'
-		WHERE Aset_ID = '{$Aset_ID}'" or die("Error in the consult.." . mysqli_error($link));	
-	$execAST = $link->query($quertAST);	
-	//echo "quertAST : ".$quertAST."\n\n";
-
 	//select tipe aset
 	//get all aset
 	$sqlTpAst = "SELECT kodeKelompok FROM aset where 
@@ -101,6 +95,9 @@ foreach ($data as $val) {
 	}elseif ($exp['0'] == '06') {
 		$table = "kdp";
 		$tableLog = "log_kdp";
+	}elseif ($exp['0'] == '07') {
+		$table = "aset";
+		$tableLog = "log_aset";
 	}
 	//echo "table : ".$table."\n\n";
     //echo "tableLog : ".$tableLog."\n\n";
@@ -117,9 +114,24 @@ foreach ($data as $val) {
 	} 
 	//print_r($ListParam);
 	//update tabel kib
-	$quertKIB = "UPDATE {$table} SET StatusTampil = '0' ,StatusValidasi='0',Status_Validasi_Barang = '0'
+	if($table == 'aset'){
+		//no process
+		//update aset
+		$quertAST = "UPDATE aset SET fixPenggunaan = '0' ,StatusValidasi='0',Status_Validasi_Barang = '0'
+			WHERE Aset_ID = '{$Aset_ID}'" or die("Error in the consult.." . mysqli_error($link));	
+		$execAST = $link->query($quertAST);	
+		//echo "quertAST : ".$quertAST."\n\n";
+	}else{
+		//update aset
+		$quertAST = "UPDATE aset SET fixPenggunaan = '0' ,StatusValidasi='0',Status_Validasi_Barang = '0'
+			WHERE Aset_ID = '{$Aset_ID}'" or die("Error in the consult.." . mysqli_error($link));	
+		$execAST = $link->query($quertAST);	
+		//echo "quertAST : ".$quertAST."\n\n";
+
+		$quertKIB = "UPDATE {$table} SET StatusTampil = '0' ,StatusValidasi='0',Status_Validasi_Barang = '0'
 		WHERE Aset_ID = '{$Aset_ID}'" or die("Error in the consult.." . mysqli_error($link));	
-	$execKIB = $link->query($quertKIB);	
+		$execKIB = $link->query($quertKIB);	
+	}
 	//echo "quertKIB : ".$quertKIB."\n\n";
 
 	$tmpField = array();
