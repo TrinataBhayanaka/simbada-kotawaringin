@@ -908,15 +908,24 @@ $head = "
                                           $totalBop+= $value3[totalsp2dpenunjang];
                                           $totalNP+= $value3[totalPerolehan];
                                         }else{
-                                          $html.="
+                                          /*$html.="
                                           <td style=\"text-align:right;\">".number_format($value3[satuan],2,",",".")."</td>
                                           <td style=\"text-align:right;\">".number_format($value3[bop],2,",",".")."</td>
                                           <td style=\"text-align:right;\">".number_format($value3[NilaiPerolehan],2,",",".")."</td>
                                           <td>$value3[tipeKontrak]</td>
-                                          ";  
+                                          ";*/
+
+                                          $html.="
+                                          <td style=\"text-align:right;\">".number_format($value3[satuan],2,",",".")."</td>
+                                          <td style=\"text-align:right;\">".number_format($value3[bop],2,",",".")."</td>
+                                          <td style=\"text-align:right;\">".number_format($value3[satuan]+$value3[bop],2,",",".")."</td>
+                                          <td>$value3[tipeKontrak]</td>
+                                          ";
+
                                           $totalSatuan+= $value3[satuan];
                                           $totalBop+= $value3[bop];
-                                          $totalNP+= $value3[NilaiPerolehan];
+                                          //$totalNP+= $value3[NilaiPerolehan];
+                                          $totalNP+= $value3[satuan] + $value3[bop];
                                         }
                                         
                               

@@ -278,7 +278,7 @@ class RETRIEVE_REPORT extends DB {
     /*pr($skpd);
     pr($tglPerolehanAwal);
     pr($tglPerolehanAkhir);*/
-
+    $tahun = explode('-', $tglPerolehanAkhir);
     //get list satker kontrak
     $sqlkontrakSatker = mysql_query("SELECT kodeSatker FROM kontrak WHERE kodeSatker like '$skpd%' and tglKontrak >='$tglPerolehanAwal' and tglKontrak <='$tglPerolehanAkhir' AND (tipeAset = 1 or tipeAset = 2 or tipeAset = 3)  group by kodeSatker");
     //pr($sql);
@@ -332,8 +332,26 @@ class RETRIEVE_REPORT extends DB {
             $list[]= $value; 
             $bopsisa = $sumsp2d['total'];
             $j++;
+
+            //SELECT k.*,kp.* FROM `kontrak` as k INNER JOIN kapitalisasi as kp on kp.idKontrak = k.id WHERE k.tipeAset = 2 AND i(tglKontrak) = '2018' AND kodeSatker = '12.02.01.01'
+
+            if($kontrak['tipeAset'] == 1){
+              $KptlQr = mysql_query("SELECT k.*,kp.* FROM kontrak as k INNER JOIN kapitalisasi as kp on kp.idKontrak = k.id WHERE k.tipeAset = 2 AND year(tglKontrak) = '$tahun[0]' AND kodeSatker = '$valSatker[kodeSatker]' AND Aset_ID = '$value[Aset_ID]' ");
+                $kptls = mysql_fetch_assoc($KptlQr);
+                if($kptls){
+                  $NP = $value['NilaiPerolehan'] - $kptls['nilai'];
+                }else{
+                  $NP = $value['NilaiPerolehan']; 
+                }
+            }else{
+              $NP = $value['NilaiPerolehan']; 
+            }
+            
+            
+
             if(count($rKontrak) != $j){
-                $bop = ceil($value['NilaiPerolehan']/$sumTotal['total']*$sumsp2d['total']);
+                //$bop = ceil($value['NilaiPerolehan']/$sumTotal['total']*$sumsp2d['total']);
+                $bop = ceil($NP/$sumTotal['total']*$sumsp2d['total']);
                 $tmp+= $bop;
             }else{
                 $bop = $bopsisa - $tmp;
@@ -341,7 +359,8 @@ class RETRIEVE_REPORT extends DB {
             /*echo "bop  = ".$bop;echo "<br/>";
             echo "bop sisa = ".$bopsisa;echo "<br/>";*/
             
-            $satuan = $value['NilaiPerolehan']-$bop;
+            //$satuan = $value['NilaiPerolehan']-$bop;
+            $satuan = $NP-$bop;
             $list[$key]['bop'] = $bop;
             $list[$key]['satuan'] = $satuan;
             $list[$key]['NilaiKontrak'] = $kontrak['nilai'];
