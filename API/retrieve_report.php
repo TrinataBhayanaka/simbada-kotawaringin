@@ -402,7 +402,11 @@ class RETRIEVE_REPORT extends DB {
               $sp2dRincian[] = $rincian2;
             }
             $list[$key]['sp2d'] = $sp2dRincian;
-        
+
+            $KontrakRncn = mysql_query("SELECT * FROM kontrak where year(tglKontrak) = '$tahun[0]' AND kodeSatker = '$valSatker[kodeSatker]' AND id = '{$kontrak['id']}'");
+            $DataKontrakRncn = mysql_fetch_assoc($KontrakRncn);
+            $list[$key]['kontrak'] = $DataKontrakRncn;
+
         $i++;
                  
         }  

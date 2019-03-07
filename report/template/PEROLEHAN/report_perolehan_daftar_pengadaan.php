@@ -46,6 +46,7 @@ revisi
 */
 //pengadaan kontrak aset non kapitalisasi
 $data = $REPORT_RETRIEVE->test($skpd_id,$tglawalperolehan,$tglakhirperolehan);
+//exit();
 /*$data_non_kapitalisasi=$REPORT_RETRIEVE->daftar_pengadaan_berdasarkan_skpd($skpd_id,$tglawalperolehan,$tglakhirperolehan);
 pr($data_non_kapitalisasi);
 
@@ -70,8 +71,7 @@ $tglcetak=  format_tanggal($tglcetak);
 
 $gambar = $FILE_GAMBAR_KABUPATEN;
 $html=$REPORT->report_daftar_pengadaan_rev($data, $gambar,$tglPerolehanAwal,$tglPerolehanAkhir,$tglcetak) ;
-//pr($html);
-//exit();
+
 if($tipe==1){
 $REPORT->show_status_download_kib();
 $mpdf=new mPDF('','','','',15,15,16,16,9,9,'L');
