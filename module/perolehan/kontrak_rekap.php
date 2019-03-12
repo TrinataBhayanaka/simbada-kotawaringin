@@ -50,7 +50,17 @@ header("Content-Type: application/vnd.ms-excel");
     <span><strong>No Kontrak</strong> : <?=$kontrak['noKontrak']?></span><br>
     <span><strong>Tanggal Perolehan</strong> : <?=date_format(date_create($kontrak['tglKontrak']), 'd M Y')?></span><br>
     <span><strong>Nilai Kontrak</strong> : <?=number_format($kontrak['nilai'], 2)?></span>
-    <br>
+    <br>    
+    <span><strong>Perusahaan</strong></span><br> 
+    <span><strong>Nama</strong> : <?=$kontrak['nm_p']?></span><br> 
+    <span><strong>Bentuk</strong> : <?=$kontrak['bentuk']?></span><br> 
+    <span><strong>Alamat</strong> : <?=$kontrak['alamat']?></span><br> 
+    <span><strong>Pimpinan</strong> : <?=$kontrak['pimpinan_p']?></span><br> 
+    <span><strong>NPWP</strong> : <?=$kontrak['npwp_p']?></span><br> 
+    <span><strong>Bank</strong> : <?=$kontrak['bank_p']?></span><br> 
+    <span><strong>Atas Nama</strong> : <?=$kontrak['norek_p']?></span><br> 
+    <span><strong>No Rekening</strong> : <?=$kontrak['norek_pemilik']?></span><br> 
+            
     <table border="1">
         <thead>
             <tr>
