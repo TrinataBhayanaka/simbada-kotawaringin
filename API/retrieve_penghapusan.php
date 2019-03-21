@@ -661,9 +661,11 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
                         $ListUsul[$v] = 1;
                     }
                    
-                    $condition=" ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3 OR ast.kondisi=4)";    
+                    //$condition=" ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3 OR ast.kondisi=4)"; 
+                    $condition=" ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2)";    
                 }else{
-                    $condition=" ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3 OR ast.kondisi=4)";
+                    //$condition=" ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3 OR ast.kondisi=4)";
+                    $condition=" ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2)";
                 }
 
                 if($value == 7){
@@ -809,45 +811,13 @@ class RETRIEVE_PENGHAPUSAN extends RETRIEVE{
                         $ListUsul[$v] = 1;
                     }
                    
-                    $condition=" ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3 OR ast.kondisi=4)";    
+                    //$condition=" ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3 OR ast.kondisi=4)";
+                    $condition=" ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=3 OR ast.kondisi=4)";    
                 }else{
-                    $condition=" ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3 OR ast.kondisi=4)";
+                    //$condition=" ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=1 OR ast.kondisi=2 OR ast.kondisi=3 OR ast.kondisi=4)";
+                    $condition=" ast.Status_Validasi_Barang=1 AND (ast.kondisi=0 OR ast.kondisi=3 OR ast.kondisi=4)";
                 }
-                
-                //query aset
-                /*
-                Info : kekurangan penyajian jumlah menjadi tidak akurat
-                $sql2 = array(
-                        'table'=>"{$listTable},Aset AS ast,kelompok AS k",
-                        'field'=>"SQL_CALC_FOUND_ROWS ast.Aset_ID,ast.KodeSatker,ast.noKontrak,{$listTableField},{$FieltableGeneral},k.Uraian",
-                        'condition' => "ast.TipeAset = '{$listTableAbjad}' AND {$condition} {$filterkontrak} $kondisi  GROUP BY ast.Aset_ID $order",
-                        'limit'=>"{$limit}",
-                        'joinmethod' => ' LEFT JOIN ',
-                        'join' => "{$listTableAlias}.Aset_ID=ast.Aset_ID,ast.kodeKelompok = k.Kode"
-                         );
-                    
-                $resAset = $this->db->lazyQuery($sql2,$debug);
-                if($resAset){
-                    //list Usulan Aset
-                    if($ListUsul){
-                        //pr("here");
-                        //list Aset
-                        foreach($resAset as $asetidAset){
-                            //list Aset_ID yang pernah diusulkan
-                            $needle = $asetidAset[Aset_ID];
-                            //matching
-                            if (!isset($ListUsul[$needle])){
-                                //echo("Method B : needle " . $needle . " not found in haystack<BR>");
-                                $dataArr[] = $asetidAset;
-                            }else{
-                                //echo("Method B : needle " . $needle . " found in haystack<BR>");
-                            }                        
-                        }      
-                    }else{
-                        $dataArr[] = $resAset;
-                    }
-
-                }*/   
+                 
                 //cara ke dua
                 if($value == 7){
                     $TipeAset = 'G';
