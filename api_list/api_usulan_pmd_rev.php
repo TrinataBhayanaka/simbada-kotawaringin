@@ -180,7 +180,7 @@ foreach ($data as $key => $value)
                    }
                 }
 							
-              /*if($value['StatusPenetapan']==0 && $value['StatusGenerate']==0){
+              if($value['StatusPenetapan']==0 && $value['StatusGenerate']==0){
                 
                   
               $tindakan="<a href=\"{$url_rewrite}/module/penghapusanv2/penghapusan_usulan_daftar_proses_hapus_pmd.php?id={$value[Usulan_ID]}\" class=\"btn btn-danger btn-small\" onclick=\"return confirm('Hapus Data');\" style=\"margin-top:3px\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</a>
@@ -222,9 +222,9 @@ foreach ($data as $key => $value)
                    }
               }else{
                 $tindakan= "";
-              }*/    
+              }
               
-              if($value['StatusPenetapan']==0){
+              /*if($value['StatusPenetapan']==0){
               
                   
               $tindakan="<a href=\"{$url_rewrite}/module/penghapusanv2/penghapusan_usulan_daftar_proses_hapus_pmd.php?id={$value[Usulan_ID]}\" class=\"btn btn-danger btn-small\" onclick=\"return confirm('Hapus Data');\" style=\"margin-top:3px\"><i class=\"fa fa-trash\"></i>&nbsp;Hapus</a>
@@ -248,7 +248,7 @@ foreach ($data as $key => $value)
                   <a target=\"_blank\" href=\"{$url_rewrite}/report/template/PENGHAPUSAN/cetak_usulan_penghapusan.php?idusulan={$value[Usulan_ID]}&noUsul={$value[NoUsulan]}&tglHapus={$value[TglUpdate]}&tipe_file=2\" class=\"btn btn-info btn-small\" style=\"margin-top:3px\"><i class=\"fa fa-file-excel-o\"></i> Excel</a>";
               
              
-              }
+              }*/
 
               $NoUsulan=explode("/", $value['NoUsulan']);
 
