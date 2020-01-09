@@ -333,10 +333,10 @@ class RETRIEVE_REPORT extends DB {
             $bopsisa = $sumsp2d['total'];
             $j++;
 
-            //SELECT k.*,kp.* FROM `kontrak` as k INNER JOIN kapitalisasi as kp on kp.idKontrak = k.id WHERE k.tipeAset = 2 AND i(tglKontrak) = '2018' AND kodeSatker = '12.02.01.01'
-
-            if($kontrak['tipeAset'] == 1){
-              $KptlQr = mysql_query("SELECT k.*,kp.* FROM kontrak as k INNER JOIN kapitalisasi as kp on kp.idKontrak = k.id WHERE k.tipeAset = 2 AND year(tglKontrak) = '$tahun[0]' AND kodeSatker = '$valSatker[kodeSatker]' AND Aset_ID = '$value[Aset_ID]' ");
+            /*if($kontrak['tipeAset'] != 1){
+              $KptlQr = mysql_query("SELECT k.*,kp.* FROM kontrak as k 
+                INNER JOIN kapitalisasi as kp on kp.idKontrak = k.id WHERE k.tipeAset = 2 AND year(k.tglKontrak) = '$tahun[0]' 
+                AND k.kodeSatker = '$valSatker[kodeSatker]' AND kp.Aset_ID = '$value[Aset_ID]' ");
                 $kptls = mysql_fetch_assoc($KptlQr);
                 if($kptls){
                   $NP = $value['NilaiPerolehan'] - $kptls['nilai'];
@@ -345,8 +345,8 @@ class RETRIEVE_REPORT extends DB {
                 }
             }else{
               $NP = $value['NilaiPerolehan']; 
-            }
-            
+            }*/
+            $NP = $value['NilaiPerolehan']; 
             
 
             if(count($rKontrak) != $j){
@@ -360,7 +360,12 @@ class RETRIEVE_REPORT extends DB {
             echo "bop sisa = ".$bopsisa;echo "<br/>";*/
             
             //$satuan = $value['NilaiPerolehan']-$bop;
-            $satuan = $NP-$bop;
+            if($kontrak['n_status'] != 1){
+              $satuan = $NP;
+            }else{
+              $satuan = $NP-$bop;
+            }
+            
             $list[$key]['bop'] = $bop;
             $list[$key]['satuan'] = $satuan;
             $list[$key]['NilaiKontrak'] = $kontrak['nilai'];
