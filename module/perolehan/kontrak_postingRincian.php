@@ -30,7 +30,6 @@ $menu_id = 1;
 				$rKontrak[$key]['uraian'] = $tmp['Uraian'];
 			}
 	}
-	
 	$sql = mysql_query("SELECT SUM(nilai) as total FROM sp2d WHERE idKontrak='{$idKontrak}' AND type = '2'");
 		while ($dataSP2D = mysql_fetch_assoc($sql)){
 				$sumsp2d = $dataSP2D;
