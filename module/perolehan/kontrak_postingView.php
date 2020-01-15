@@ -259,7 +259,7 @@ $menu_id = 1;
 								<td align="center"><?=$aset[0]['kodeSatker']?></td>
 								<td align="center"><?=$aset[0]['kodeLokasi']?></td>
 								<td align="center"><?=$aset[0]['noRegister']?>  </td>
-								<td align="center"><?=date_format(date_create($aset[0]['TglPerolehan']), 'm D Y')?>  </td>
+								<td align="center"><?=date_format(date_create($aset[0]['TglPerolehan']), 'd M Y')?>  </td>
 								<td align="center">
 									<?php
 										if($kontrak['tipeAset'] == 3) {
