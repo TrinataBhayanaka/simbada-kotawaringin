@@ -2689,16 +2689,16 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                             break;
 
                         case 2:
-                            $ASET_KAPITALISASI=$ASET_KAPITALISASI+$nilaiPrlhnMutasiTambahFix;
+                            $ASET_KAPITALISASI=$nilaiPrlhnMutasiTambahFix;
                             break;
                         case 21:
-                            $KOREKSI_TAMBAH=$KOREKSI_TAMBAH+$nilaiPrlhnMutasiTambahFix;
+                            $KOREKSI_TAMBAH=$nilaiPrlhnMutasiTambahFix;
                             break;
                         case 281:
-                            $TRANSFER_MASUK=$TRANSFER_MASUK+$nilaiPrlhnMutasiTambahFix;
+                            $TRANSFER_MASUK=$nilaiPrlhnMutasiTambahFix;
                             break;
                         case 291:
-                            $TRANSFER_MASUK=$TRANSFER_MASUK+$nilaiPrlhnMutasiTambahFix;
+                            $TRANSFER_MASUK=$nilaiPrlhnMutasiTambahFix;
                             break;
 
                     }
