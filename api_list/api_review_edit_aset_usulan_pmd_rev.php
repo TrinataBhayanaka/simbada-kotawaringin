@@ -173,7 +173,13 @@ foreach ($data as $key => $value)
               $NamaSatker=$PENGHAPUSAN->getNamaSatker($value[kodeSatker]);
               //pr($NamaSatker);
 
-              $SelectKIB=$PENGHAPUSAN->SelectKIB($value[Aset_ID],$value[TipeAset]);
+              if($value[TipeAset] == 'G'){
+                $ext = '';
+              }else{
+                $SelectKIB=$PENGHAPUSAN->SelectKIB($value[Aset_ID],$value[TipeAset]);
+                $ext = $SelectKIB[0][Merk]."-".$SelectKIB[0][Model];
+                //$ext = '';
+              }
               // pr($SelectKIB);
 							if($value[kondisi]==2){
 								$kondisi="Rusak Ringan";

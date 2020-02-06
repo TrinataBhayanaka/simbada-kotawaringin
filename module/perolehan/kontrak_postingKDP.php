@@ -101,7 +101,10 @@ foreach ($kapital as $key => $value) {
   $sqlquery = mysql_query($sqlkib);
   while ($dataAset = mysql_fetch_assoc($sqlquery)){
           $kib = $dataAset;
-      }    
+      }   
+  $kib['StatusValidasi'] = '1';
+  $kib['Status_Validasi_Barang'] = '1';
+  $kib['StatusTampil'] = '1';     
   $kib['changeDate'] = date("Y-m-d");
   $kib['TglPerubahan'] = $noKontrak['tglKontrak'];//$kib['TglPerolehan'];
   $kib['action'] = "Penghapusan KDP";
@@ -114,14 +117,14 @@ foreach ($kapital as $key => $value) {
         unset($tmpField);
         unset($tmpValue);
         foreach ($kib as $key => $val) {
-          if($key=="StatusValidasi"||$key=="Status_Validasi_Barang"||$key="StatusTampil"){
+          /*if($key=="StatusValidasi"||$key=="Status_Validasi_Barang"||$key="StatusTampil"){
               $tmpField[] = $key;
             $tmpValue[] = "1";
 
-          }else{
+          }else{*/
             $tmpField[] = $key;
             $tmpValue[] = "'".$val."'";
-             }
+             //}
         }
          
         $fileldImp = implode(',', $tmpField);

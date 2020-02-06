@@ -95,6 +95,7 @@ include"$path/menu.php";
 						<option value="4">Jaringan</option>
 						<option value="5">Aset Tetap Lain</option>
 						<option value="6">KDP</option>
+						<option value="7">Aset Lain</option>
 					</select>
 				 </li>  
                 <li>&nbsp;</li>

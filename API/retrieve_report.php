@@ -278,7 +278,7 @@ class RETRIEVE_REPORT extends DB {
     /*pr($skpd);
     pr($tglPerolehanAwal);
     pr($tglPerolehanAkhir);*/
-
+    $tahun = explode('-', $tglPerolehanAkhir);
     //get list satker kontrak
     $sqlkontrakSatker = mysql_query("SELECT kodeSatker FROM kontrak WHERE kodeSatker like '$skpd%' and tglKontrak >='$tglPerolehanAwal' and tglKontrak <='$tglPerolehanAkhir' AND (tipeAset = 1 or tipeAset = 2 or tipeAset = 3)  group by kodeSatker");
     //pr($sql);
@@ -332,8 +332,26 @@ class RETRIEVE_REPORT extends DB {
             $list[]= $value; 
             $bopsisa = $sumsp2d['total'];
             $j++;
+
+            /*if($kontrak['tipeAset'] != 1){
+              $KptlQr = mysql_query("SELECT k.*,kp.* FROM kontrak as k 
+                INNER JOIN kapitalisasi as kp on kp.idKontrak = k.id WHERE k.tipeAset = 2 AND year(k.tglKontrak) = '$tahun[0]' 
+                AND k.kodeSatker = '$valSatker[kodeSatker]' AND kp.Aset_ID = '$value[Aset_ID]' ");
+                $kptls = mysql_fetch_assoc($KptlQr);
+                if($kptls){
+                  $NP = $value['NilaiPerolehan'] - $kptls['nilai'];
+                }else{
+                  $NP = $value['NilaiPerolehan']; 
+                }
+            }else{
+              $NP = $value['NilaiPerolehan']; 
+            }*/
+            $NP = $value['NilaiPerolehan']; 
+            
+
             if(count($rKontrak) != $j){
-                $bop = ceil($value['NilaiPerolehan']/$sumTotal['total']*$sumsp2d['total']);
+                //$bop = ceil($value['NilaiPerolehan']/$sumTotal['total']*$sumsp2d['total']);
+                $bop = ceil($NP/$sumTotal['total']*$sumsp2d['total']);
                 $tmp+= $bop;
             }else{
                 $bop = $bopsisa - $tmp;
@@ -341,7 +359,13 @@ class RETRIEVE_REPORT extends DB {
             /*echo "bop  = ".$bop;echo "<br/>";
             echo "bop sisa = ".$bopsisa;echo "<br/>";*/
             
-            $satuan = $value['NilaiPerolehan']-$bop;
+            //$satuan = $value['NilaiPerolehan']-$bop;
+            if($kontrak['n_status'] != 1){
+              $satuan = $NP;
+            }else{
+              $satuan = $NP-$bop;
+            }
+            
             $list[$key]['bop'] = $bop;
             $list[$key]['satuan'] = $satuan;
             $list[$key]['NilaiKontrak'] = $kontrak['nilai'];
@@ -383,7 +407,11 @@ class RETRIEVE_REPORT extends DB {
               $sp2dRincian[] = $rincian2;
             }
             $list[$key]['sp2d'] = $sp2dRincian;
-        
+
+            $KontrakRncn = mysql_query("SELECT * FROM kontrak where year(tglKontrak) = '$tahun[0]' AND kodeSatker = '$valSatker[kodeSatker]' AND id = '{$kontrak['id']}'");
+            $DataKontrakRncn = mysql_fetch_assoc($KontrakRncn);
+            $list[$key]['kontrak'] = $DataKontrakRncn;
+
         $i++;
                  
         }  

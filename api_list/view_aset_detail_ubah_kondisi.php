@@ -27,8 +27,12 @@ $id=$_SESSION['user_id'];//Nanti diganti
  // echo "masuk aja dulu";
  // pr($_GET);
  // exit;
-$aColumns = array('a.Aset_ID','a.kodeKelompok','k.Uraian','a.Tahun','a.kodeSatker',
-				 'a.StatusValidasi','a.Status_Validasi_Barang','a.NilaiPerolehan','a.noRegister','a.kondisi','a.TipeAset');
+ if($_GET['tipeAset'] == 'mesin'){
+ 	
+ 	$aColumns = array('a.Aset_ID','a.kodeKelompok','k.Uraian','a.Tahun','a.kodeSatker','kb.Merk','a.NilaiPerolehan','a.noRegister','a.kondisi','a.TipeAset');
+ }else{
+	$aColumns = array('a.Aset_ID','a.kodeKelompok','k.Uraian','a.Tahun','a.kodeSatker','a.NilaiPerolehan','a.noRegister','a.kondisi','a.TipeAset');
+ }
 $test = count($aColumns);
   
 // echo $aColumns; 
@@ -49,22 +53,37 @@ $kondisi 			= $_GET['kondisi'];
 
 //variabel ajax
 if($tipeAset == 'tanah'){
-	$tipe = 'A';
+	//$tipe = 'A';
+	$tipe = '01';
+	$sTable_inner_join_kib = "tanah as kb";
 }elseif($tipeAset == 'mesin'){
-	$tipe = 'B';
+	//$tipe = 'B';
+	$tipe = '02';
+	$sTable_inner_join_kib = "mesin as kb";
 }elseif($tipeAset == 'bangunan'){
-	$tipe = 'C';
+	//$tipe = 'C';
+	$tipe = '03';
+	$sTable_inner_join_kib = "bangunan as kb";
 }elseif($tipeAset == 'jaringan'){
-	$tipe = 'D';
+	//$tipe = 'D';
+	$tipe = '04';
+	$sTable_inner_join_kib = "jaringan as kb";
 }elseif($tipeAset == 'asetlain'){
-	$tipe = 'E';
+	//$tipe = 'E';
+	$tipe = '05';
+	$sTable_inner_join_kib = "asetlain as kb";
 }elseif($tipeAset == 'kdp'){
-	$tipe = 'F';
+	//$tipe = 'F';
+	$tipe = '06';
+	$sTable_inner_join_kib = "kdp as kb";
 }
+$cond_kib ="a.Aset_ID = kb.Aset_ID ";
 
-$status = "a.StatusValidasi = 1 AND a.Status_Validasi_Barang = 1 AND";
+
+$status = "a.Status_Validasi_Barang = 1 AND";
 $condtn = "a.Tahun = '$Tahun' AND a.kodeSatker='$kodeSatker' AND A.kondisi = '$kondisi' AND ";
-$condtn_tp_ast = "a.tipeAset like '$tipe%'";
+//$condtn_tp_ast = "a.tipeAset like '$tipe%'";
+$condtn_tp_ast = "a.kodeKelompok like '$tipe%'";
 $condtn_kd_klmp = "a.kodeKelompok='$kodeKelompok'";
 $condtn_no_reg = "a.noRegister <='$noRegister_Akhir'";
 // echo $tahun;
@@ -169,11 +188,12 @@ $sQuery = "
 		SELECT SQL_CALC_FOUND_ROWS " . str_replace(" , ", " ", implode(", ", $aColumns)) . "
 		FROM   $sTable 
 		INNER JOIN $sTable_inner_join_kelompok ON $cond_kelompok
+		INNER JOIN $sTable_inner_join_kib ON $cond_kib
 		$sWhere
 		$sOrder
 		$sLimit
 		";
-// echo $sQuery;
+//echo $sQuery;
 
 // $rResult = $DBVAR->query($sQuery) or fatal_error('MySQL Error: ' . mysql_errno());
 //get data all
@@ -294,6 +314,8 @@ if (!empty($data)){
 			$kondisi = "Rusak Ringan";
 		}elseif($aRow['kondisi'] == 3){
 			$kondisi = "Rusak Berat";
+		}elseif($aRow['kondisi'] == 4){
+			$kondisi = "Non Aktif";
 		}
 		
 		$checkbox   = "<input type=\"checkbox\" class =\"icheck-input checkbox\" name=\"id_aset[]\" value=\"$id\" onchange=\"return AreAnyCheckboxesChecked();\" $aRow[checked]>";

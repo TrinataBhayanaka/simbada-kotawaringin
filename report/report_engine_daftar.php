@@ -830,6 +830,7 @@ $head = "
                          <td rowspan='2' style=\"width:120px;text-align:center;font-weight:bold;\">Nilai <br/>Penunjang</td>
                          <td rowspan='2' style=\"width:120px;text-align:center;font-weight:bold;\">Nilai <br/>Perolehan Total</td>
                          <td rowspan='2' style=\"width:180px;text-align:center;font-weight:bold;\">Jenis Kontrak</td>
+                         <td rowspan='2' style=\"width:180px;text-align:center;font-weight:bold;\">Keterangan</td>
                     </tr>
                     <tr>
                          <td style=\"width:80px;text-align:center;font-weight:bold;\">Tanggal</td>
@@ -846,14 +847,14 @@ $head = "
                     $Satker = "[".$key1."] ".$tmpSatker[0]->NamaSatker;
                     //pr($tmpSatker); 
                     $html.="<tr style=\"text-align:left;font-weight:bold; \">
-                              <td style=\"text-align:left;font-weight:bold; \" colspan=\"12\">$Satker</td>
+                              <td style=\"text-align:left;font-weight:bold; \" colspan=\"13\">$Satker</td>
                          </tr>";
                     $num = 1;     
                     foreach ($value1 as $key2 => $value2) {
                               # code...
                               $html.="<tr style=\"text-align:left;font-weight:bold;\">
                                    <td style=\"text-align:center;font-weight:bold;\" >$num</td>
-                                   <td style=\"text-align:left;font-weight:bold;\" colspan=\"11\">No Kontrak : $key2</td>
+                                   <td style=\"text-align:left;font-weight:bold;\" colspan=\"12\">No Kontrak : $key2</td>
                               </tr>";
                          $no=1;   
                          $totalSatuan = 0;  
@@ -893,6 +894,8 @@ $head = "
                                         }
                                         $tglsp2d = implode('<br/>', $tmp_tglsp2d);
                                         
+                                        $keteranganKontrak = $value3['kontrak']['keterangan'];
+                                        
                                         $html.="<td>$tglsp2d</td>
                                         <td>$nosp2d</td>
                                         <td>$tglsp2dp</td>
@@ -908,15 +911,25 @@ $head = "
                                           $totalBop+= $value3[totalsp2dpenunjang];
                                           $totalNP+= $value3[totalPerolehan];
                                         }else{
-                                          $html.="
+                                          /*$html.="
                                           <td style=\"text-align:right;\">".number_format($value3[satuan],2,",",".")."</td>
                                           <td style=\"text-align:right;\">".number_format($value3[bop],2,",",".")."</td>
                                           <td style=\"text-align:right;\">".number_format($value3[NilaiPerolehan],2,",",".")."</td>
                                           <td>$value3[tipeKontrak]</td>
-                                          ";  
+                                          ";*/
+
+                                          $html.="
+                                          <td style=\"text-align:right;\">".number_format($value3[satuan],2,",",".")."</td>
+                                          <td style=\"text-align:right;\">".number_format($value3[bop],2,",",".")."</td>
+                                          <td style=\"text-align:right;\">".number_format($value3[satuan]+$value3[bop],2,",",".")."</td>
+                                          <td>$value3[tipeKontrak]</td>
+                                          <td>$keteranganKontrak</td>
+                                          ";
+
                                           $totalSatuan+= $value3[satuan];
                                           $totalBop+= $value3[bop];
-                                          $totalNP+= $value3[NilaiPerolehan];
+                                          //$totalNP+= $value3[NilaiPerolehan];
+                                          $totalNP+= $value3[satuan] + $value3[bop];
                                         }
                                         
                               
