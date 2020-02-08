@@ -2449,7 +2449,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
         $param = $ex[ '0' ];
 
         $getdataRwyt = getdataRwyt ($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperolehan, $param, $tglpembukuan,$status);
-        //pr($getdataRwyt);
+        pr($getdataRwyt);
 
         $status_masuk_penyusutan = 0;
         $flag_penyusutan = 0;
