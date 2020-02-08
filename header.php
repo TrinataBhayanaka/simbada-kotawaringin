@@ -21,8 +21,9 @@ $UserSession = $SESSION->get_session_user();
 
 if (isset($_POST['login']))
 {
-	$dataVar = array ('username'=>$_POST['username'], 'password'=>md5($_POST['password']), 'token' => 0);
-					
+	$dataVar = array ('username'=>mysql_real_escape_string($_POST['username']), 'password'=>md5($_POST['password']), 'token' => 0);
+//    pr($dataVar);
+//    exit();
 	$dataValid = $DBVAR->form_validation($dataVar);
 	if (is_array($dataValid))
 	{
