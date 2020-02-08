@@ -2449,7 +2449,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
         $param = $ex[ '0' ];
 
         $getdataRwyt = getdataRwyt ($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperolehan, $param, $tglpembukuan,$status);
-        pr($getdataRwyt);
+        //pr($getdataRwyt);
 
         $status_masuk_penyusutan = 0;
         $flag_penyusutan = 0;
@@ -3507,7 +3507,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 }
 
                 $TOTAL_ASET_KAPITALISASI +=$ASET_KAPITALISASI;
-                echo "$TOTAL_ASET_KAPITALISASI<br/>";
+                //echo "$TOTAL_ASET_KAPITALISASI<br/>";
 
                 $TOTAL_TRANSFER_MASUK +=$TRANSFER_MASUK;
                 $TOTAL_KOREKSI_TAMBAH +=$KOREKSI_TAMBAH;
@@ -3626,7 +3626,7 @@ function getdataRwyt($skpd_id, $AsetId, $tglakhirperolehan, $tglawalperolehan, $
 						where l.kodesatker  like '$skpd_id%' and $paramLog ";
 
 //
-    pr($log_data);
+//    pr($log_data);
 //    exit();
     $splitKodeSatker = explode ('.', $skpd_id);
     if(count ($splitKodeSatker) == 4) {
