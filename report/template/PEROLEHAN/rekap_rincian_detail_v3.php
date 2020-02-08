@@ -3626,7 +3626,7 @@ function getdataRwyt($skpd_id, $AsetId, $tglakhirperolehan, $tglawalperolehan, $
 						where l.kodesatker  like '$skpd_id%' and $paramLog ";
 
 //
-//    pr($log_data);
+    pr($log_data);
 //    exit();
     $splitKodeSatker = explode ('.', $skpd_id);
     if(count ($splitKodeSatker) == 4) {
