@@ -3507,6 +3507,7 @@ function history_aset($kodesatker, $aset_id, $tglakhirperolehan, $tglawalperoleh
                 }
 
                 $TOTAL_ASET_KAPITALISASI +=$ASET_KAPITALISASI;
+                echo "$TOTAL_ASET_KAPITALISASI<br/>";
 
                 $TOTAL_TRANSFER_MASUK +=$TRANSFER_MASUK;
                 $TOTAL_KOREKSI_TAMBAH +=$KOREKSI_TAMBAH;
