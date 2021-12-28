@@ -1539,23 +1539,24 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
         // if(intval($tblAset['Tahun']) < 2008){
         //     $tblAset['kodeKA'] = 1;
         // }else {
-        //     if($data['TipeAset'] == 'B'){
-        //         if($tblAset['NilaiPerolehan'] < 300000){
-        //             $tblAset['kodeKA'] = 0;
-        //         } else {
-        //             $tblAset['kodeKA'] = 1;
-        //         }
-        //     } elseif ($data['TipeAset'] == 'C') {
-        //         if($tblAset['NilaiPerolehan'] < 10000000){
-        //             $tblAset['kodeKA'] = 0;
-        //         } else {
-        //             $tblAset['kodeKA'] = 1;
-        //         }
-        //     } else {
-        //         $tblAset['kodeKA'] = 0;
-        //     }
-        // }
-        $tblAset['kodeKA'] = 1;
+             if($data['TipeAset'] == 'B'){
+                 if($tblAset['NilaiPerolehan'] < 1000000){
+                     $tblAset['kodeKA'] = 0;
+                 } else {
+                     $tblAset['kodeKA'] = 1;
+                 }
+             } elseif ($data['TipeAset'] == 'C') {
+                 if($tblAset['NilaiPerolehan'] < 25000000){
+                     $tblAset['kodeKA'] = 0;
+                 } else {
+                     $tblAset['kodeKA'] = 1;
+                 }
+             } else {
+                 $tblAset['kodeKA'] = 1;
+             }
+
+
+        //$tblAset['kodeKA'] = 1;
         $tblAset['AsalUsul'] = $data['AsalUsul'];
 
         if(isset($data['xls'])) {
@@ -2428,7 +2429,22 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
         //         $tblAset['kodeKA'] = 0;
         //     }
         // }
-        $tblAset['kodeKA'] = 1;
+        if($data['TipeAset'] == 'B'){
+            if($tblAset['NilaiPerolehan'] < 1000000){
+                $tblAset['kodeKA'] = 0;
+            } else {
+                $tblAset['kodeKA'] = 1;
+            }
+        } elseif ($data['TipeAset'] == 'C') {
+            if($tblAset['NilaiPerolehan'] < 25000000){
+                $tblAset['kodeKA'] = 0;
+            } else {
+                $tblAset['kodeKA'] = 1;
+            }
+        } else {
+            $tblAset['kodeKA'] = 1;
+        }
+        //$tblAset['kodeKA'] = 1;
         $tblAset['kodeRuangan'] = $data['kodeRuangan'];
 
 
@@ -2703,7 +2719,8 @@ $id_kapitalisasi_aset=  get_auto_increment("KapitalisasiAset");
   //           }
   //        }  
 
-  		 $tblKib['kodeKA'] = 1;
+  		 //dinonaktifikan kodeKa saat koreksi
+        //$tblKib['kodeKA'] = 1;
         
         if(isset($data['kodeRuangan'])) {
             $pos = strpos($data['kodeRuangan'], "_");
