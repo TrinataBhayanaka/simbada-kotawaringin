@@ -571,6 +571,15 @@ $menu_id = 10;
 			alert("Total rincian barang melebihi nilai SPK");
 			return false;	
 		}
+        var kode = $('#kodeKelompok').val();
+        var gol = kode.split(".");
+        if (gol[0] == "02" && perolehan < 1000000) {
+            alert("Maaf Nilai Perolehan Mesin kurang dari batas kapitalisasi 1.000.000 sehingga akan menjadi ektrakom");
+
+        } else if (gol[0] == "03" && perolehan < 25000000) {
+            alert("Maaf Nilai Perolehan Banguna kurang dari batas kapitalisasi 25.000.000 sehingga akan menjadi ektrakom");
+
+        }
 	})
 
 	function totalHrg(){
@@ -710,7 +719,7 @@ $menu_id = 10;
                    		$("#tanah_id").val(tanah_id);
                    		$("#kelompok_tanah").val(kodeKelompok);
                    		$("#luas_total").val(LuasTotal);
-                   		$("#myModal").modal('hide');_
+                   		$("#myModal").modal('hide');
 
 
 
@@ -719,11 +728,6 @@ $menu_id = 10;
 	
 
                    }
-                    /* $(document).on('click','#load-data-tanah', function(){
-                                var satker = $('#kodeSatker').val();
-                                var kelompok = $('#kodeKelompok').val();
-                                $('#hasil_pilihan_tanah').html(satker);
-                                oTable.fnReloadAjax("<?=$url_rewrite?>/api_list/api_bangunan_tanah.php?kodeSatker="+satker+"&kodeKelompok="+kelompok);
-                            })*/
+
                   
                </script>
