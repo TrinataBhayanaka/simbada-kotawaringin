@@ -63,6 +63,9 @@ $TypeRprtr = 'intra';
 $Info = '';
 $exeTempTable = $REPORT->TempTable ($hit, $flag, $TypeRprtr, $Info, $tglawalperolehan, $tglakhirperolehan,
     $skpd_id);
+echo "<pre>";
+print_r($exeTempTable );
+
 $detailSatker = $REPORT->get_satker ($skpd_id);
 $NoBidang = $detailSatker[ 0 ];
 $NoUnitOrganisasi = $detailSatker[ 1 ];
