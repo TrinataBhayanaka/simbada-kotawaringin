@@ -104,7 +104,7 @@ $get_data_filter = $RETRIEVE->retrieve_kontrak();
                 <span  class="span2">Jenis Posting</span>
         <div class="checkbox">
           <label>
-          <input type="radio" class="add-popover" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="left" data-original-title="<label style='color:red'>Peringatan Batas Intra!!</label>" data-content="Khusus untuk jenis barang : <br> <b>Mesin</b> : Minimal <u>Rp. 1.000.000</u> <br> <b>Bangunan</b> : Minimal <u>Rp. 25.000.000</u> "  required name="tipeAset" value="1" <?=(isset($kontrak)) ? (($kontrak[0]['tipeAset']== "1") ? 'checked' : '') : '' ?>/>&nbsp;Aset Baru
+          <input type="radio"  class="add-popover" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="left" data-original-title="<label style='color:red'>Peringatan Batas Intra!!</label>" data-content="Khusus untuk jenis barang : <br> <b>Mesin</b> : Minimal <u>Rp. 1.000.000</u> <br> <b>Bangunan</b> : Minimal <u>Rp. 25.000.000</u> " required name="tipeAset" value="1" <?=(isset($kontrak)) ? (($kontrak[0]['tipeAset']== "1") ? 'checked' : '') : '' ?>/>&nbsp;Aset Baru
           </label>
         </div>
       </li>
